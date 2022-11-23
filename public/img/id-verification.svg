@@ -1,0 +1,40 @@
+<svg width="337" height="221" viewBox="0 0 337 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_376_7581)">
+<g clip-path="url(#clip0_376_7581)">
+<rect x="30" y="26" width="277" height="161" rx="18" fill="#FFB7AC"/>
+<path d="M255 115C264.6 146.2 296.333 149 311 146.5L311 21L107 21C117 39 142 60 183 58.5C224 57 243 76 255 115Z" fill="url(#paint0_linear_376_7581)"/>
+<path d="M240.292 122.102C250.5 161.5 298.186 168.119 313 169.5L318.712 45.7991L121.664 -7.00003C126.664 12.9748 145.377 39.7297 185.368 48.8924C225.359 58.0551 230.057 82.6023 240.292 122.102Z" fill="url(#paint1_linear_376_7581)"/>
+<g opacity="0.6">
+<rect x="64" y="66" width="60" height="81" rx="8" fill="white" fill-opacity="0.4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M77 125C77 118.75 81.8921 114 87.7626 114H100.237C106.353 114 111 119 111 125" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M101.855 88.9866C106.048 93.2175 106.048 99.9373 101.855 103.919C97.661 107.901 91.0005 108.15 87.0535 103.919C83.1065 99.6884 82.8598 92.9687 87.0535 88.9866C91.2472 85.0045 97.661 85.0045 101.855 88.9866Z" fill="white"/>
+</g>
+<rect x="140" y="83" width="78" height="8" rx="2" fill="white"/>
+<rect x="140" y="108" width="124" height="8" rx="2" fill="white"/>
+<rect x="140" y="126" width="124" height="8" rx="2" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_376_7581" x="0" y="0" width="337" height="221" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="15"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.191667 0 0 0 0 0.0407292 0 0 0 0 0.0407292 0 0 0 0.08 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_376_7581"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_376_7581" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_376_7581" x1="168.5" y1="100.202" x2="284.5" y2="32.7021" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.15"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_376_7581" x1="160.569" y1="85.4207" x2="290.087" y2="50.2437" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.15"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_376_7581">
+<rect x="30" y="26" width="277" height="161" rx="18" fill="white"/>
+</clipPath>
+</defs>
+</svg>

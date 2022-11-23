@@ -1,0 +1,377 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/Inter-Thin.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100;
+  src: url("../fonts/Inter-ThinItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/Inter-ExtraLight.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 200;
+  src: url("../fonts/Inter-ExtraLightItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/Inter-Light.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 300;
+  src: url("../fonts/Inter-LightItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Inter-Regular.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/Inter-Italic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/Inter-Medium.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 500;
+  src: url("../fonts/Inter-MediumItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/Inter-SemiBold.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 600;
+  src: url("../fonts/Inter-SemiBoldItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Inter-Bold.otf");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/Inter-BoldItalic.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/Inter-ExtraBold.otf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 800;
+  src: url("../fonts/Inter-ExtraBoldItalic.otf");
+}
+
+:root {
+  /* --color-main-text: #1f2937; */
+  /* --color-primary: #FFB7AC; */
+  --color-primary-dark: #ffaeae;
+  --color-less-priority: #e5e7eb;
+  /* --color-bg: #F9FAFB; */
+  --color-subtext: #6b7280;
+  /* --color-success: #28b56f; */
+  /* --color-error: #e94e4e; */
+  --color-grey: #65605f;
+  /* --color-secondary: #a60000; */
+  --color-green-100: #e0ffef;
+  --gradient-primary: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.51) 0%,
+    rgba(50, 50, 50, 0) 47.05%
+  );
+  --color-t20: rgba(255, 220, 220, 0.2);
+  --drop-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
+  --drop-shadow-bg: #d9d9d9;
+  --drop-shadow-2: 0px 1px 32px rgba(235, 202, 202, 0.16);
+
+  --bs-primary-rgb: 253, 179, 168;
+  --bs-secondary-rgb: 166, 0, 0;
+  --bs-success-rgb: 40, 181, 111;
+  /* --bs-info-rgb: 13, 202, 240; */
+  /* --bs-warning-rgb: 255, 193, 7; */
+  --bs-danger-rgb: 233, 78, 78;
+  /* --bs-light-rgb: 248, 249, 250; */
+  --bs-dark-rgb: 31, 41, 55;
+  /* --bs-white-rgb: 255, 255, 255; */
+  /* --bs-black-rgb: 0, 0, 0; */
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg-rgb: 249, 250, 251;
+  --bs-font-sans-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+  /* --bs-body-font-family: var(--bs-font-sans-serif); */
+  /* --bs-body-font-size: 1rem; */
+  /* --bs-body-font-weight: 400; */
+  /* --bs-body-line-height: 1.5; */
+  --bs-body-color: #1f2937;
+  --bs-body-bg: #f9fafb; /* TODO: secondary bg for wide screen*/
+  /* --bs-border-color: #dee2e6; */
+  /* --bs-border-color-translucent: rgba(0, 0, 0, 0.175); */
+  --bs-border-radius: 2rem;
+  --bs-border-radius-sm: 1.2rem;
+  --bs-border-radius-lg: 2rem;
+  --bs-border-radius-xl: 2rem;
+  --bs-border-radius-2xl: 4rem;
+  /* --bs-border-radius-pill: 50rem; */
+  --bs-link-color: rgb(var(--bs-primary-rgb));
+  --bs-link-hover-color: rgb(var(--color-primary-dark));
+  /* --bs-code-color: #d63384; */
+  --bs-highlight-bg: #ffcdda;
+}
+
+::-moz-selection {
+  background-color: var(--color-primary-dark);
+}
+
+::selection {
+  background-color: var(--color-primary-dark);
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bs-border-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--bs-primary-rgb));
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--bs-secondary-rgb));
+}
+
+.shadow {
+  /* background: var(--drop-shadow-bg); */
+  box-shadow: var(--drop-shadow) !important;
+}
+
+.shadow-2 {
+  /* background: var(--drop-shadow-bg); */
+  box-shadow: var(--drop-shadow-2) !important;
+}
+
+.position-fill {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.position-top {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: var(--color-subtext) !important;
+}
+
+.mt-n15 {
+  margin-top: -10rem !important;
+}
+
+.mt-n8 {
+  margin-top: -5rem !important;
+}
+
+.mt-6 {
+  margin-top: 4rem !important;
+}
+
+.me-n2 {
+  margin-right: -2rem !important;
+}
+.ms-n2 {
+  margin-left: -2rem !important;
+}
+.object-cover {
+  object-fit: cover !important;
+  -o-object-fit: cover !important;
+}
+
+.bg-dark-transparent {
+  background: rgba(var(--bs-black-rgb), 0.3);
+}
+
+.bg-dark-transparent-gradient {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.5+100 */
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-primary {
+  --bs-btn-bg: rgb(var(--bs-primary-rgb));
+  --bs-btn-border-color: rgb(var(--bs-primary-rgb));
+  --bs-btn-hover-bg: rgb(var(--bs-secondary-rgb));
+  --bs-btn-hover-border-color: rgb(var(--bs-secondary-rgb));
+  --bs-btn-focus-shadow-rgb: var(--bs-secondary-rgb);
+  --bs-btn-active-bg: rgb(var(--bs-secondary-rgb));
+  --bs-btn-active-border-color: rgb(var(--bs-secondary-rgb));
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-bg: var(--bs-highlight-bg);
+  --bs-btn-disabled-border-color: var(--bs-primary-rgb);
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: var(--bs-body-bg);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-border-color: rgb(var(--bs-primary-rgb));
+  --bs-btn-hover-color: var(--bs-body-color);
+  --bs-btn-hover-bg: rgb(var(--bs-primary-rgb));
+  --bs-btn-hover-border-color: rgb(var(--bs-primary-rgb));
+  --bs-btn-focus-shadow-rgb: 161, 116, 109;
+  --bs-btn-active-color: var(--bs-body-color);
+  --bs-btn-active-bg: rgb(var(--bs-primary-rgb));
+  --bs-btn-active-border-color: rgb(var(--bs-primary-rgb));
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: rgb(var(--bs-primary-rgb));
+  --bs-btn-disabled-border-color: rgb(var(--bs-primary-rgb));
+}
+
+.form-control:focus {
+  color: #212529;
+  border-color: rgb(var(--bs-primary-rgb));
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(var(--bs-primary-rgb), 0.25);
+}
+
+a.image-invert > img,
+a.image-saturate > div.position-absolute > img,
+a.image-saturate > img {
+  transition: filter 0.3s;
+}
+
+a.image-invert:hover > img,
+a.image-saturate:hover > div.position-absolute > img {
+  filter: invert(1);
+}
+
+a.image-saturate:hover > img {
+  filter: saturate(14);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.form-check-input {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.form-check-input:focus {
+  border-color: rgb(var(--bs-primary-rgb));
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+.form-check-input:checked {
+  background-color: rgb(var(--bs-primary-rgb));
+  border-color: rgb(var(--bs-primary-rgb));
+}
+.form-check-input:checked[type="radio"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 -5 10 10'%3E%3Ccircle r='5' fill='%23FFB7AC'/%3E%3Ccircle r='4.7' fill='%23FFF'/%3E%3Ccircle r='3.5' fill='%23FFB7AC'/%3E%3C/svg%3E");
+}
+
+.max-width-mobile {
+  max-width: 425px !important;
+}
+
+.rounded-1-top {
+  border-top-left-radius: var(--bs-border-radius-sm) !important;
+  border-top-right-radius: var(--bs-border-radius-sm) !important;
+}
+
+.rounded-1-end {
+  border-top-right-radius: var(--bs-border-radius-sm) !important;
+  border-bottom-right-radius: var(--bs-border-radius-sm) !important;
+}
+
+.rounded-1-bottom {
+  border-bottom-right-radius: var(--bs-border-radius-sm) !important;
+  border-bottom-left-radius: var(--bs-border-radius-sm) !important;
+}
+
+.rounded-1-start {
+  border-bottom-left-radius: var(--bs-border-radius-sm) !important;
+  border-top-left-radius: var(--bs-border-radius-sm) !important;
+}
+
+.row {
+  --bs-gutter-x: 0;
+}
+
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: rgb(var(--bs-primary-rgb));
+}
