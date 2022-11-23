@@ -14,6 +14,8 @@ import RegisterUserType from "../pages/register/RegisterUserType";
 import Tutorial from "../pages/Tutorial";
 import PrivateRoute from "./PrivateRoute";
 import Wellcome from "../pages/Wellcome";
+import Varification from "../pages/register/Varification";
+import RegSuccess from "../pages/register/RegSuccess";
 
 function Routers() {
   return (
@@ -34,6 +36,8 @@ function Routers() {
 
         <Route path="register/ocupation" element={<Ocupation />} />
         <Route path="register/family_info" element={<FamilyInfo />} />
+        <Route path="register/varification" element={<Varification />} />
+        <Route path="register/success" element={<RegSuccess />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/tutorial" element={<Tutorial />} />

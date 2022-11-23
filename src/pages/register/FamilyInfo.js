@@ -1,10 +1,14 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 
 function FamilyInfo() {
+  let navigate = useNavigate();
   let err = "";
-  let onContinueClicked = () => {};
+  let onContinueClicked = () => {
+    navigate("/register/varification");
+  };
   return (
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
