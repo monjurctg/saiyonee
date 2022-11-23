@@ -24,7 +24,7 @@ function GetStarted() {
               Hi there! Let's get <br /> Started.
             </h1>
             <Link
-              to={"/signup/email"}
+              to={"/register/email"}
               className="btn btn-primary w-100 rounded shadow p-3 my-2">
               <strong>Sign Up</strong>
             </Link>
