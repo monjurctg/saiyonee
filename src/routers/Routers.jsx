@@ -1,7 +1,6 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
-import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Education from "../pages/register/Education";
@@ -14,12 +13,13 @@ import RegisterEmail from "../pages/register/RegisterEmail";
 import RegisterUserType from "../pages/register/RegisterUserType";
 import Tutorial from "../pages/Tutorial";
 import PrivateRoute from "./PrivateRoute";
+import Wellcome from "../pages/Wellcome";
 
 function Routers() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Wellcome />} />
         <Route path="/get-start" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
         {/* register process routing */}
@@ -37,7 +37,6 @@ function Routers() {
 
         <Route element={<PrivateRoute />}>
           <Route path="/tutorial" element={<Tutorial />} />
-
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         <Route path="*" element={<NotFound />} />

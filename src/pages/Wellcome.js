@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-function Home() {
+function Wellcome() {
   return (
     <div>
       <div className="text-center min-vh-100 d-flex flex-column max-width-mobile mx-auto rounded-top">
@@ -57,4 +57,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Wellcome;
