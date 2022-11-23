@@ -5,6 +5,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Education from "../pages/register/Education";
+import FamilyInfo from "../pages/register/FamilyInfo";
+import Location from "../pages/register/Location";
+import Ocupation from "../pages/register/Ocupation";
 import PersonalInformation from "../pages/register/PersonalInformation";
 
 import RegisterEmail from "../pages/register/RegisterEmail";
@@ -17,23 +20,25 @@ function Routers() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/get-start" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
         {/* register process routing */}
         <Route path="/register/email" element={<RegisterEmail />} />
         <Route path="/register/usertype" element={<RegisterUserType />} />
-        <Route path="/register/education" element={<Education />} />
-
         <Route
           path="register/personal-info"
           element={<PersonalInformation />}
         />
+        <Route path="/register/education" element={<Education />} />
+        <Route path="/register/location" element={<Location />} />
 
-        <Route path="/get-start" element={<GetStarted />} />
+        <Route path="register/ocupation" element={<Ocupation />} />
+        <Route path="register/family_info" element={<FamilyInfo />} />
 
         <Route element={<PrivateRoute />}>
           <Route path="/tutorial" element={<Tutorial />} />
 
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
