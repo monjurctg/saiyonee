@@ -116,13 +116,14 @@ function PersonalInformation() {
 
           <p className="text-muted mt-4">Select Candidate's religion</p>
           <Link
-            to={"/register/religion"}
+            to={"/register/personalinfo/religion"}
             //   onClick={onEducationSelectorClicked}
           >
             <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {/* {religion} */}
+                  islam
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -136,7 +137,7 @@ function PersonalInformation() {
           </Link>
           <p className="text-muted mt-4">Select Candidate's marital status</p>
           <Link
-            to={"/register/marital_status"}
+            to={"/register/personalinfo/marital_status"}
             //   onClick={onEducationSelectorClicked}
           >
             <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
