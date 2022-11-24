@@ -18,10 +18,11 @@ import Varification from "../pages/register/Varification";
 import RegSuccess from "../pages/register/RegSuccess";
 import Religions from "../pages/register/Religions";
 import MaritalStatus from "../pages/register/MaritalStatus";
+import Index from "../pages/home/Index";
 
 function Routers() {
   return (
-    <div>
+    <div style={{background:"#e9ecef3b"}}>
       <Routes>
         <Route path="/" element={<Wellcome />} />
         <Route path="/get-start" element={<GetStarted />} />
@@ -56,6 +57,7 @@ function Routers() {
           <Route path="/tutorial" element={<Tutorial />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
+        <Route path="/home" element={<Index/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
