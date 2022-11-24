@@ -5,7 +5,9 @@ import HomeLayout from "../../components/layouts/HomeLayout";
 function Index() {
   return (
    <HomeLayout>
-    
+    <div className="body-div">
+
+    </div>
    </HomeLayout>
   );
 }
