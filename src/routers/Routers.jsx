@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -27,14 +27,21 @@ import OcupationTypes from "../pages/register/OcupationTypes";
 import Industry from "../pages/register/Industry";
 import LocationCountry from "../pages/register/LocationCountry";
 import LocationCity from "../pages/register/LocationCity";
+import Settings from "../pages/settings/Settings";
+import EditProfile from "../pages/editProfile/EditProfile";
 
 function Routers() {
   return (
-    <div style={{background:"#e9ecef3b"}}>
+    <div style={{ background: "#e9ecef3b" }}>
       <Routes>
         <Route path="/" element={<Wellcome />} />
         <Route path="/get-start" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
+
+        {/* Sazid */}
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/editProfile" element={<EditProfile />} />
+
 
         {/* register process routing */}
         <Route path="/register/email" element={<RegisterEmail />} />
@@ -92,7 +99,7 @@ function Routers() {
           <Route path="/tutorial" element={<Tutorial />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
-        <Route path="/home" element={<Index/>}/>
+        <Route path="/home" element={<Index />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

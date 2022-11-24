@@ -1,0 +1,34 @@
+.central_items {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h3 {
+    margin-top: 50px;
+}
+
+.btn-primary {
+    margin-top: 50px;
+    width: 120px;
+    height: 50px;
+    background-color: #FFB7AC;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #FFB7AC;
+    border: 1px solid #FFB7AC
+}
+
+.btn-outline-secondary {
+    margin-top: 50px;
+    width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #FFB7AC
+}
+
+.btn-outline-secondary:hover {
+    background-color: #FFB7AC;
+}
