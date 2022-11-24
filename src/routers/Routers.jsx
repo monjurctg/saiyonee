@@ -19,6 +19,10 @@ import RegSuccess from "../pages/register/RegSuccess";
 import Religions from "../pages/register/Religions";
 import MaritalStatus from "../pages/register/MaritalStatus";
 import Index from "../pages/home/Index";
+import EducationTypes1 from "../pages/register/EducationTypes1";
+import EducationTypes2 from "../pages/register/EducationTypes2";
+import EducationTypes4 from "../pages/register/EducationType4";
+import EducationType3 from "../pages/register/EducationType3";
 
 function Routers() {
   return (
@@ -42,7 +46,15 @@ function Routers() {
           element={<MaritalStatus />}
         />
         {/* personal info route end */}
+        {/* education type */}
         <Route path="/register/education" element={<Education />} />
+        <Route path="/register/education/type1" element={<EducationTypes1 />} />
+
+        <Route path="/register/education/type2" element={<EducationTypes2 />} />
+        <Route path="/register/education/type3" element={<EducationType3 />} />
+
+        <Route path="/register/education/type4" element={<EducationTypes4 />} />
+
         <Route path="/register/location" element={<Location />} />
 
         <Route path="register/ocupation" element={<Ocupation />} />
