@@ -14,7 +14,7 @@ function RegisterEmail() {
 
   const checkEmail = async () => {
     setLoading(true);
-    const res = await AuthServices.checkIsEmailUnique(email);
+    const res = await AuthServices.checkIsEmailUnique({email});
     if (res) {
       if (res.status === 200) {
         setLoading(false);
