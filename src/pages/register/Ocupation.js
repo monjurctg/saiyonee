@@ -21,11 +21,11 @@ function Ocupation() {
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  {/* {currentEmploymentTypeOther
-                  ? 'Other'
-                  : current_employment_type
-                  ? current_employment_type
-                  : 'Select current employment type'} */}
+                  {currentEmploymentTypeOther
+                    ? "Other"
+                    : current_employment_type
+                    ? current_employment_type
+                    : "Select current employment type"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -42,7 +42,7 @@ function Ocupation() {
               <input
                 type="text"
                 id="inputEmploymentType"
-                // value={current_employment_type}
+                value={current_employment_type}
                 // onChange={onEmploymentTypeChanged}
                 className="form-control border-0 rounded-1"
                 placeholder="employmentType"
