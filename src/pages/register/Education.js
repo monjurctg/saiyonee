@@ -39,7 +39,7 @@ function Education() {
           <h4 className="mt-5 mb-2">Secondary Education</h4>
           <Link
             // onClick={onEducationSelectorClicked}
-            to={"/register/education1_types"}>
+            to={"/register/education/type1"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -150,7 +150,7 @@ function Education() {
           <h4 className="mt-4 mb-2">Higher Secondary Education</h4>
           <Link
             // onClick={onEducationSelectorClicked}
-            to={"/register/education2_types"}>
+            to={"/register/education/type2"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -258,7 +258,7 @@ function Education() {
           <h4 className="mt-4 mb-2">Graduate Education</h4>
           <Link
             // onClick={onEducationSelectorClicked}
-            to={"/register/education3_types"}>
+            to={"/register/education/type3"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -367,7 +367,7 @@ function Education() {
           <h4 className="mt-4 mb-2">Postgraduate Education (Optional)</h4>
           <Link
             // onClick={onEducationSelectorClicked}
-            to={"/register/education4_types"}>
+            to={"/register/education/type4"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
