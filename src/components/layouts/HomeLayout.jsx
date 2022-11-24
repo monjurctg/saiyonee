@@ -24,7 +24,7 @@ function HomeLayout({ children }) {
       {children}
       <div className="footer">
         <div className="d-flex justify-content-around pt-3">
-          <div className="text-center">
+          <div className="text-center active">
             <img src="img/home.svg" alt="" />
             <p>Home</p>
           </div>
