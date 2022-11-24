@@ -77,7 +77,7 @@ function Routers() {
           element={<LocationCountry />}
         />
 
-        <Route path="/register/location/city " element={<LocationCity />} />
+        <Route path="/register/location/city" element={<LocationCity />} />
 
         {/* location route   end*/}
 

@@ -1,16 +1,53 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import AuthServices from "../../services/authServices";
 
 function RegisterEmail() {
-  let err = true;
+  const [err, setErr] = useState();
   let success = true;
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const onContinueClicked = () => {
+
+  const checkEmail = async () => {
     setLoading(true);
-    setTimeout(() => {
-      navigate("/register/usertype");
-    }, 1000);
+    const res = await AuthServices.checkIsEmailUnique(email);
+    if (res) {
+      if (res.status === 200) {
+        setLoading(false);
+        navigate("/register/usertype");
+      } else {
+        setErr("Something wrong");
+        setLoading(false);
+        return;
+      }
+    } else {
+      setErr("Something is wrong");
+      setLoading(false);
+    }
+  };
+
+  const onContinueClicked = () => {
+    if (!email) {
+      setErr("Email is Required");
+      setLoading(false);
+      return;
+    }
+    if (!password) {
+      setErr("password is Required");
+      setLoading(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErr("password and confirmPassword does not match");
+      setLoading(false);
+      return;
+    }
+    checkEmail();
   };
 
   return (
@@ -52,8 +89,8 @@ function RegisterEmail() {
               <input
                 type="email"
                 id="inputEmail"
-                // value={email}
-                // onChange={onEmailChange}
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
                 aria-describedby="email"
@@ -64,8 +101,8 @@ function RegisterEmail() {
               <input
                 type="password"
                 id="inputPassword"
-                // value={password}
-                // onChange={onPasswordChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="form-control border-0 rounded-1"
                 placeholder="******"
                 aria-describedby="password"
@@ -76,8 +113,8 @@ function RegisterEmail() {
               <input
                 type="password"
                 id="inputConfirmPassword"
-                // value={password_confirmation}
-                // onChange={onConfimPasswordChange}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="form-control border-0 rounded-1"
                 placeholder="******"
                 aria-describedby="confirm-password"

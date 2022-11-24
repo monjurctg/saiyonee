@@ -17,7 +17,7 @@ function Industry() {
           onClick={() => navigator(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
           style={{height: "58px", width: "58px"}}>
-          <img src="img/back-icon.svg" alt="back" />
+          <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
       <div className="container px-4 pb-2 overflow-auto">
