@@ -17,7 +17,7 @@ function Ocupation() {
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1>Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>
-          <Link to={"/register/occupation_types"}>
+          <Link to={"/register/ocupation/type"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -57,7 +57,7 @@ function Ocupation() {
             currentEmploymentTypeOther) && (
             <>
               <p className="text-muted mt-5 mb-2">Industry</p>
-              <Link to={"/register/industry_types"}>
+              <Link to={"/register/ocupation/industry"}>
                 <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
                   <div className="col-10">
                     <label className="form-check-label bg-white px-2 text-body">
