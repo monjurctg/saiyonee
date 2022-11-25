@@ -1,6 +1,10 @@
 import React, {useState} from "react";
+import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
+import {ID_TYPES} from "../../constants/register_constants";
+import {useRegisterMutation} from "../../redux/api/authApi";
+import {initialRegState} from "../../redux/slices/initialRegState";
 
 function Varification() {
   const navigator = useNavigate();
@@ -8,13 +12,119 @@ function Varification() {
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
   const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
   const [redirect, setRedirect] = useState("");
-  let verification_type = "National ID";
-  // let dropdown = "";
-  let ID_TYPES = ["abc", "bcd", "xyz"];
-  let verification_img1 = true;
-  let verification_img2 = true;
-  let onContinueClicked = () => {
-    navigator("/register/success");
+  // let verification_type = "National ID";
+  // // let dropdown = "";
+  // let ID_TYPES = ["abc", "bcd", "xyz"];
+  // let verification_img1 = true;
+  // let verification_img2 = true;
+  const {
+    full_name,
+    email,
+    password,
+    password_confirmation,
+    user_type,
+    gender,
+    date_of_birth,
+    education1,
+    education1_institution,
+    education1_major,
+    education1_passing_year,
+    education2,
+    education2_institution,
+    education2_major,
+    education2_passing_year,
+    education3,
+    education3_institution,
+    education3_major,
+    education3_passing_yea,
+    education4,
+    education4_institution,
+    education4_major,
+    education4_passing_year,
+    current_employment_type,
+    industry,
+    working_since,
+    employer_name,
+    designation,
+    religion,
+    height_feet,
+    height_inches,
+    weight,
+    marital_status,
+    current_country,
+    current_city,
+    father_occupation,
+    father_home_district,
+    mother_occupation,
+    mother_home_district,
+    number_of_brothers,
+    number_of_sisters,
+    verification_type,
+    verification_img1,
+    verification_img2,
+  } = useSelector((state) => state.auth);
+  let data = {
+    full_name: full_name,
+    email: email,
+    password: password,
+    password_confirmation: password_confirmation,
+    user_type: user_type,
+    gender: gender,
+    date_of_birth: date_of_birth,
+    education1: education1,
+    education1_institution: education1_institution,
+    education1_major: education1_major,
+    education1_passing_year: education1_passing_year,
+    education2: education2,
+    education2_institution: education2_passing_year,
+    education2_major: education2_major,
+    education2_passing_year: education2_passing_year,
+    education3: education3,
+    education3_institution: education3_institution,
+    education3_major: education3_major,
+    education3_passing_year: education3_passing_yea,
+    education4: education4,
+    education4_institution: education4_institution,
+    education4_major: education4_major,
+    education4_passing_year: education4_passing_year,
+    current_employment_type: current_employment_type,
+    industry: industry,
+    working_since: working_since,
+    employer_name: employer_name,
+    designation: designation,
+    religion: religion,
+    height_feet: height_feet,
+    height_inches: height_inches,
+    weight: weight,
+    marital_status: marital_status,
+    current_country: current_country,
+    current_city: current_city,
+    father_occupation: father_occupation,
+    father_home_district: father_home_district,
+    mother_occupation: mother_occupation,
+    mother_home_district: mother_home_district,
+    number_of_brothers: number_of_brothers,
+    number_of_sisters: number_of_sisters,
+    verification_type: verification_type,
+    verification_img1: verification_img1,
+    verification_img2: verification_img2,
+  };
+  const [register, {isLoading, isSuccess, isError}] = useRegisterMutation();
+
+  let onContinueClicked = async () => {
+    // const res = await fetch("https://backend.saiyonee.com/api/ApiRegister", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    //   body: JSON.stringify(data),
+    // });
+    // console.log(res, "fetch res");
+    register({data}).then((da) => {
+      // navigator("/register/success");
+      console.log(da);
+    });
   };
   return (
     <>

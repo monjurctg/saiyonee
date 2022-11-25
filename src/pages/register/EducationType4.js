@@ -1,23 +1,24 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION4_TYPES} from "../../constants/register_constants";
+import {setEducation4, setEducation4Other} from "../../redux/slices/authSlices";
 
 function EducationTypes4() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [education4, setEducation4] = useState("");
-  const [education4Other, setEducation4Other] = useState("");
+  const {education4} = useSelector((state) => state.auth);
   const onTypeChange = (e) => {
     if (e.target.value === "Other") {
-      setEducation4Other(true);
-      setEducation4("");
+      dispatch(setEducation4Other(true));
+      dispatch(setEducation4(""));
     } else {
-      setEducation4Other(false);
-      setEducation4(e.target.value);
+      dispatch(setEducation4Other(false));
+      dispatch(setEducation4(e.target.value));
     }
     navigate(-1);
   };
-  console.log(education4);
 
   return (
     <>

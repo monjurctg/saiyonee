@@ -1,12 +1,12 @@
 import "./App.scss";
 import Routers from "./routers/Routers";
 import axios from "axios";
-import { getToken } from "./utils/functions";
+import {getToken} from "./utils/functions";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
     "application/json;charset=utf-8";
-  axios.defaults.baseURL = "https://backend.saiyonee.com/api/";
+  // axios.defaults.baseURL = "";
 
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();

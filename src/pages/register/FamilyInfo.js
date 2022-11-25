@@ -1,14 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
+import {setFamilyInformation} from "../../redux/slices/authSlices";
 
 function FamilyInfo() {
   let navigate = useNavigate();
+  const {
+    father_home_district,
+    father_occupation,
+    mother_home_district,
+    mother_occupation,
+    number_of_brothers,
+    number_of_sisters,
+  } = useSelector((state) => state.auth);
   let err = "";
   let onContinueClicked = () => {
+    dispatch(setFamilyInformation(familyInfo));
     navigate("/register/varification");
   };
+  const dispatch = useDispatch();
+  const [familyInfo, setFamilyInfo] = useState({
+    father_home_district: "",
+    father_occupation: "",
+    mother_home_district: "",
+    mother_occupation: "",
+    number_of_brothers: 1,
+    number_of_sisters: 1,
+  });
+  const handleUserInputChange = (e) => {
+    setFamilyInfo({
+      ...familyInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
@@ -18,8 +45,9 @@ function FamilyInfo() {
             <input
               type="text"
               id="inputFatherOccupation"
-              //   value={father_occupation}
-              //   onChange={onFatherOccupationChanged}
+              name="father_occupation"
+              value={familyInfo.father_occupation}
+              onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
               aria-describedby="occupation"
@@ -32,8 +60,9 @@ function FamilyInfo() {
             <input
               type="text"
               id="inputFatherHomeDistrict"
-              //   value={father_home_district}
-              //   onChange={onFatherHomeDistrictChanged}
+              name="father_home_district"
+              value={familyInfo.father_home_district}
+              onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
               aria-describedby="homedistrict"
@@ -46,8 +75,9 @@ function FamilyInfo() {
             <input
               type="text"
               id="inputMotherOccupation"
-              //   value={mother_occupation}
-              //   onChange={onMotherOccupationChanged}
+              name="mother_occupation"
+              value={familyInfo.mother_occupation ?? mother_occupation}
+              onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
               aria-describedby="occupation"
@@ -59,9 +89,10 @@ function FamilyInfo() {
           <div className="form-floating my-4 text-muted">
             <input
               type="text"
+              name="mother_home_district"
               id="inputMotherHomeDistrict"
-              //   value={mother_home_district}
-              //   onChange={onMotherHomeDistrictChanged}
+              value={familyInfo.mother_home_district ?? mother_home_district}
+              onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
               aria-describedby="homedistrict"
@@ -75,7 +106,13 @@ function FamilyInfo() {
           <div className="row">
             <div className="col-2">
               <button
-                // onClick={decrementBrotherCount}
+                onClick={() => {
+                  if (familyInfo.number_of_brothers <= 0) return;
+                  setFamilyInfo({
+                    ...familyInfo,
+                    number_of_brothers: familyInfo.number_of_brothers - 1,
+                  });
+                }}
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
                 <strong>-</strong>
               </button>
@@ -83,17 +120,23 @@ function FamilyInfo() {
             <div className="col-8 px-4">
               <input
                 type="number"
+                name="number_of_brothers"
                 id="inputBrotherCount"
-                // value={number_of_brothers}
-                // onChange={onNumberOfBrothersChanged}
+                value={familyInfo.number_of_brothers}
+                onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1 p-3 text-center"
-                placeholder="50"
+                // placeholder="50"
                 aria-describedby="BrotherCount"
               />
             </div>
             <div className="col-2">
               <button
-                // onClick={incrementBrotherCount}
+                onClick={() =>
+                  setFamilyInfo({
+                    ...familyInfo,
+                    number_of_brothers: familyInfo.number_of_brothers + 1,
+                  })
+                }
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
                 <strong>+</strong>
               </button>
@@ -105,6 +148,13 @@ function FamilyInfo() {
             <div className="col-2">
               <button
                 // onClick={decrementSisterCount}
+                onClick={() => {
+                  if (familyInfo.number_of_sisters <= 0) return;
+                  setFamilyInfo({
+                    ...familyInfo,
+                    number_of_sisters: familyInfo.number_of_sisters - 1,
+                  });
+                }}
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
                 <strong>-</strong>
               </button>
@@ -112,9 +162,10 @@ function FamilyInfo() {
             <div className="col-8 px-4">
               <input
                 type="number"
+                name="number_of_sisters"
                 id="inputSisterCount"
-                // value={number_of_sisters}
-                // onChange={onNumberOfSistersChanged}
+                value={familyInfo.number_of_sisters}
+                onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1 p-3 text-center"
                 placeholder="50"
                 aria-describedby="SisterCount"
@@ -122,7 +173,12 @@ function FamilyInfo() {
             </div>
             <div className="col-2">
               <button
-                // onClick={incrementSisterCount}
+                onClick={() =>
+                  setFamilyInfo({
+                    ...familyInfo,
+                    number_of_sisters: familyInfo.number_of_sisters + 1,
+                  })
+                }
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
                 <strong>+</strong>
               </button>

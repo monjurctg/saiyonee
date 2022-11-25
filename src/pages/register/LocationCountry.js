@@ -1,19 +1,21 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
+import {setCountry} from "../../redux/slices/authSlices";
 
 function LocationCountry() {
   const navigator = useNavigate();
 
   const [searchedCountry, setSearchedCountry] = useState("");
   const onSearchChange = (e) => setSearchedCountry(e.target.value);
-
-  const [current_country, setCurrentCountry] = useState("");
-  const [current_city, setCurrentCity] = useState("");
-
+  const dispatch = useDispatch();
+  // const [current_country, setCurrentCountry] = useState("");
+  // const [current_city, setCurrentCity] = useState("");
+  const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
-    setCurrentCountry(e.target.value);
-    setCurrentCity(undefined);
+    dispatch(setCountry(e.target.value));
+    // setCurrentCity(undefined);
     navigator(-1);
   };
 

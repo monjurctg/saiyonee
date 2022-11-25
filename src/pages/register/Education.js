@@ -1,28 +1,123 @@
-import React from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
+import {
+  setDegree2,
+  setEducation1,
+  setinstitution1,
+  setinstitution2,
+  setinstitution3,
+  setinstitution4,
+  setMajor1,
+  setMajor2,
+  setMajor3,
+  setMajor4,
+  setPassingYear1,
+  setPassingYear2,
+  setPassingYear3,
+  setPassingYear4,
+} from "../../redux/slices/authSlices";
 
 function Education() {
   const navigate = useNavigate();
-  let education1Other = true;
-  let education2Other = false;
-  let education3Other = false;
+  const {
+    education1Other,
+    education2Other,
+    education3Other,
+    education4Other,
+    education1_passing_year,
+    education2_passing_year,
+    education3_passing_year,
+    education4_passing_year,
+    education1_institution,
+    education2_institution,
+    education3_institution,
+    education4_institution,
 
-  let education4Other = false;
+    education1_major,
+    education2_major,
+    education3_major,
 
-  let education1_passing_year = 2012;
-  let education2_passing_year = 2014;
-  let education3_passing_year = 206;
-  let education4_passing_year = 2018;
-  let err = "";
+    education4_major,
 
-  let passingYears = ["2012", "2013", "2014", "2016", "2018"];
-  let year1Dropdown = true;
-  let year2Dropdown = false;
+    education1,
+    education2,
+    education3,
+    education4,
+  } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  let year3Dropdown = false;
+  // let education1Other = true;
+  // let education2Other = false;
+  // let education3Other = false;
 
-  let year4Dropdown = false;
+  // let education4Other = false;
+
+  // let education1_passing_year = 2012;
+  // let education2_passing_year = 2014;
+  // let education3_passing_year = 206;
+  // let education4_passing_year = 2018;
+  // let err = "";
+
+  // let passingYears = ["2012", "2013", "2014", "2016", "2018"];
+  const [year1Dropdown, setYear1Dropdown] = useState(false);
+  const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
+  const delayedYear1Dismiss = () =>
+    setTimeout(() => setYear1Dropdown(false), 200);
+
+  const [year2Dropdown, setYear2Dropdown] = useState(false);
+  const toggleYear2Dropdown = () => setYear2Dropdown((dropdown) => !dropdown);
+  const delayedYear2Dismiss = () =>
+    setTimeout(() => setYear2Dropdown(false), 200);
+
+  const [year3Dropdown, setYearDropdown] = useState(false);
+  const toggleYear3Dropdown = () => setYearDropdown((dropdown) => !dropdown);
+  const delayedYear3Dismiss = () =>
+    setTimeout(() => setYearDropdown(false), 200);
+
+  const [year4Dropdown, setYear4Dropdown] = useState(false);
+  const toggleYear4Dropdown = () => setYear4Dropdown((dropdown) => !dropdown);
+  const delayedYear4Dismiss = () =>
+    setTimeout(() => setYear4Dropdown(false), 200);
+
+  const [err, setErr] = useState("");
+  // const onContinueClicked = () => {
+  //   let hasError: ""
+  //   hasError = checkEducation(
+  //     education1,
+  //     education1_institution,
+  //     education1_major,
+  //     'Secondary'
+  //   )
+  //   setErr(hasError)
+  //   if (hasError) return
+
+  //   hasError = checkEducation(
+  //     education2,
+  //     education2_institution,
+  //     education2_major,
+  //     'Higher Secondary'
+  //   )
+  //   setErr(hasError)
+  //   if (hasError) return
+
+  //   hasError = checkEducation(
+  //     education3,
+  //     education3_institution,
+  //     education3_major,
+  //     'Undergrad'
+  //   )
+  //   setErr(hasError)
+  //   if (hasError) return
+
+  //   resetScroll()
+  //   history.push(ROUTES.signUp.occupation)
+  // }
+
+  const passingYears = Array.from(
+    new Array(new Date().getFullYear() - 1990 + 1)
+  ).map((_, i) => 1990 + i);
 
   let onContinueClicked = () => {
     navigate("/register/ocupation");
@@ -43,12 +138,11 @@ function Education() {
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  another
-                  {/* {education1Other
+                  {education1Other
                     ? "Other"
                     : education1
                     ? education1
-                    : "Select secondary education"} */}
+                    : "Select secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -66,7 +160,7 @@ function Education() {
               <input
                 type="text"
                 id="inputEducation1"
-                // value={education1}
+                value={education1Other}
                 // onChange={onEducation1Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education1"
@@ -80,8 +174,8 @@ function Education() {
             <input
               type="text"
               id="inputInstitution1"
-              //   value={education1_institution}
-              //   onChange={onInstitution1Change}
+              value={education1_institution}
+              onChange={(e) => dispatch(setinstitution1(e.target.value))}
               className="form-control border-0 rounded-1"
               placeholder="institution1"
               aria-describedby="institution1"
@@ -94,7 +188,8 @@ function Education() {
             <input
               type="text"
               id="inputMajor1"
-              //   value={education1_major}
+              value={education1_major}
+              onChange={(e) => dispatch(setMajor1(e.target.value))}
               //   onChange={onMajor1Change}
               className="form-control border-0 rounded-1"
               placeholder="major1"
@@ -115,12 +210,10 @@ function Education() {
                   type="button"
                   className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
                   data-bs-toggle="dropdown"
-                  //   aria-expanded={year1Dropdown ? "true" : "false"}
-                  //   onClick={toggleYear1Dropdown}
-                  //                   onBlur={delayedYear1Dismiss}
-                >
-                  {/* {education1_passing_year} */}
-                  2012
+                  aria-expanded={year1Dropdown ? "true" : "false"}
+                  onClick={toggleYear1Dropdown}
+                  onBlur={delayedYear1Dismiss}>
+                  {education1_passing_year}
                 </button>
                 <ul
                   data-bs-popper
@@ -129,13 +222,11 @@ function Education() {
                   }`}
                   style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
-                    <li key={i}>
+                    <li key={i} onClick={() => console.log("year", year)}>
                       <div
                         className={`btn btn-primary py-3 dropdown-item${
                           education1_passing_year === year ? " active" : ""
-                        }`}
-                        //   onClick={() => setEducation1PassingYear(year)}
-                      >
+                        }`}>
                         {year}
                       </div>
                     </li>
@@ -154,12 +245,11 @@ function Education() {
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  {/* {education2Other
+                  {education2Other
                     ? "Other"
                     : education2
                     ? education2
-                    : "Select higher secondary education"} */}
-                  other
+                    : "Select higher secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -177,7 +267,7 @@ function Education() {
               <input
                 type="text"
                 id="inputEducation2"
-                // value={education2}
+                value={education2}
                 // onChange={onEducation2Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education2"
@@ -190,7 +280,8 @@ function Education() {
             <input
               type="text"
               id="inputInstitution2"
-              // value={education2_institution}
+              value={education2_institution}
+              onChange={(e) => dispatch(setinstitution2(e.target.value))}
               // onChange={onInstitution2Change}
               className="form-control border-0 rounded-1"
               placeholder="institution2"
@@ -204,7 +295,8 @@ function Education() {
             <input
               type="text"
               id="inputMajor2"
-              // value={education2_major}
+              value={education2_major}
+              onChange={(e) => dispatch(setMajor2(e.target.value))}
               // onChange={onMajor2Change}
               className="form-control border-0 rounded-1"
               placeholder="major2"
@@ -225,9 +317,8 @@ function Education() {
                   className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
                   data-bs-toggle="dropdown"
                   aria-expanded={year2Dropdown ? "true" : "false"}
-                  // onClick={toggleYear2Dropdown}
-                  // onBlur={delayedYear2Dismiss}
-                >
+                  onClick={toggleYear2Dropdown}
+                  onBlur={delayedYear2Dismiss}>
                   {education2_passing_year}
                 </button>
                 <ul
@@ -242,8 +333,7 @@ function Education() {
                         className={`btn btn-primary py-3 dropdown-item${
                           education2_passing_year === year ? " active" : ""
                         }`}
-                        // onClick={() => setEducation2PassingYear(year)}
-                      >
+                        onClick={() => dispatch(setPassingYear2(year))}>
                         {year}
                       </div>
                     </li>
@@ -262,12 +352,11 @@ function Education() {
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  {/* {education3Other
+                  {education3Other
                     ? "Other"
                     : education3
                     ? education3
-                    : "Select graduate education"} */}
-                  another
+                    : "Select graduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -298,7 +387,8 @@ function Education() {
             <input
               type="text"
               id="inputInstitution3"
-              // value={education3_institution}
+              value={education3_institution}
+              onChange={(e) => dispatch(setinstitution3(e.target.value))}
               // onChange={onInstitution3Change}
               className="form-control border-0 rounded-1"
               placeholder="institution3"
@@ -312,7 +402,8 @@ function Education() {
             <input
               type="text"
               id="inputMajor3"
-              // value={education3_major}
+              value={education3_major}
+              onChange={(e) => dispatch(setMajor3(e.target.value))}
               // onChange={onMajor3Change}
               className="form-control border-0 rounded-1"
               placeholder="major3"
@@ -334,9 +425,8 @@ function Education() {
                   className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
                   data-bs-toggle="dropdown"
                   aria-expanded={year3Dropdown ? "true" : "false"}
-                  // onClick={toggleYear3Dropdown}
-                  // onBlur={delayedYear3Dismiss}
-                >
+                  onClick={toggleYear3Dropdown}
+                  onBlur={delayedYear3Dismiss}>
                   {education3_passing_year}
                 </button>
                 <ul
@@ -351,8 +441,7 @@ function Education() {
                         className={`btn btn-primary py-3 dropdown-item${
                           education3_passing_year === year ? " active" : ""
                         }`}
-                        // onClick={() => setEducation3PassingYear(year)}
-                      >
+                        onClick={() => dispatch(setPassingYear3(year))}>
                         {year}
                       </div>
                     </li>
@@ -371,11 +460,11 @@ function Education() {
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  {/* {education4Other
+                  {education4Other
                     ? "Other"
                     : education4
                     ? education4
-                    : "Select postgraduate education"} */}
+                    : "Select postgraduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -395,6 +484,7 @@ function Education() {
                 id="inputEducation4"
                 // value={education4}
                 // onChange={onEducation4Change}
+
                 className="form-control border-0 rounded-1"
                 placeholder="education4"
                 aria-describedby="education4"
@@ -406,7 +496,8 @@ function Education() {
             <input
               type="text"
               id="inputInstitution4"
-              // value={education4_institution}
+              value={education4_institution}
+              onChange={(e) => dispatch(setinstitution4(e.target.value))}
               // onChange={onInstitution4Change}
               className="form-control border-0 rounded-1"
               placeholder="institution4"
@@ -420,7 +511,8 @@ function Education() {
             <input
               type="text"
               id="inputMajor4"
-              // value={education4_major}
+              value={education4_major}
+              onChange={(e) => dispatch(setMajor4(e.target.value))}
               // onChange={onMajor4Change}
               className="form-control border-0 rounded-1"
               placeholder="major4"
@@ -442,9 +534,8 @@ function Education() {
                   className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
                   data-bs-toggle="dropdown"
                   aria-expanded={year4Dropdown ? "true" : "false"}
-                  // onClick={toggleYear4Dropdown}
-                  // onBlur={delayedYear4Dismiss}
-                >
+                  onClick={toggleYear4Dropdown}
+                  onBlur={delayedYear4Dismiss}>
                   {education4_passing_year}
                 </button>
                 <ul
@@ -459,8 +550,7 @@ function Education() {
                         className={`btn btn-primary py-3 dropdown-item${
                           education4_passing_year === year ? " active" : ""
                         }`}
-                        // onClick={() => setEducation4PassingYear(year)}
-                      >
+                        onClick={() => dispatch(setPassingYear4(year))}>
                         {year}
                       </div>
                     </li>

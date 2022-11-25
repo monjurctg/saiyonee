@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import {USER_TYPES} from "../../constants/register_constants";
+import {setGender, setUserType} from "../../redux/slices/authSlices";
 
 function RegisterUserType() {
-  let USER_TYPES = ["mail", "femail"];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {user_type: userType} = useSelector((state) => state.auth);
+  const [err, setErr] = useState("");
+  const [user_type, set_user_type] = useState(userType);
+  const onTypeChange = (e) => {
+    set_user_type(e.target.value);
+  };
+  const onClickNext = () => {
+    // if (!user_type) {
+    //   setErr("Please Select a user type");
+    //   return;
+    // }
+    dispatch(setUserType(user_type));
+    navigate("/register/personal-info");
+  };
   return (
     <>
       <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
@@ -33,8 +50,8 @@ function RegisterUserType() {
                   className="form-check-input"
                   type="radio"
                   name="user_type"
-                  //   checked={user_type === userType}
-                  //   onChange={onTypeChange}
+                  checked={user_type === userType}
+                  onChange={onTypeChange}
                   value={userType}
                   id={userType}
                 />
@@ -42,12 +59,13 @@ function RegisterUserType() {
             </div>
           ))}
         </div>
+
         <div className="container px-4 pb-4 pt-2">
-          <Link
-            to={"/register/personal-info"}
+          <div
+            onClick={onClickNext}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-3">
             <strong>Next</strong>
-          </Link>
+          </div>
         </div>
       </div>
     </>

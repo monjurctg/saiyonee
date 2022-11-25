@@ -1,21 +1,19 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {OCCUPATION_TYPES} from "../../constants/register_constants";
+import {setCurrentEmplyType} from "../../redux/slices/authSlices";
 
 function OcupationTypes() {
   const navigator = useNavigate();
-
-  const [current_employment_type, setCurrentEmploymentType] = useState("");
-  const [CurrentEmploymentTypeOther, setCurrentEmploymentTypeOther] =
-    useState("");
+  const dispatch = useDispatch();
+  const {current_employment_type} = useSelector((state) => state.auth);
 
   const onOccupationChange = (e) => {
     if (e.target.value === "Other") {
-      setCurrentEmploymentTypeOther(true);
-      setCurrentEmploymentType("");
+      dispatch(setCurrentEmplyType("Other"));
     } else {
-      setCurrentEmploymentTypeOther(false);
-      setCurrentEmploymentType(e.target.value);
+      dispatch(setCurrentEmplyType(e.target.value));
     }
     navigator(-1);
   };

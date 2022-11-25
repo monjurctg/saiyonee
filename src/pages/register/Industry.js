@@ -1,12 +1,15 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {INDUSTRY_TYPES} from "../../constants/register_constants";
+import {setIndustry} from "../../redux/slices/authSlices";
 
 function Industry() {
   const navigator = useNavigate();
-  const [industry, setIndustry] = useState("");
+  const dispatch = useDispatch();
+  const {industry} = useSelector((state) => state.auth);
   const onIndustryChange = (e) => {
-    setIndustry(e.target.value);
+    dispatch(setIndustry(e.target.value));
     navigator(-1);
   };
 

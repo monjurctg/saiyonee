@@ -1,15 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {RELIGION_TYPES} from "../../constants/register_constants";
+import {setReligion} from "../../redux/slices/authSlices";
 
 function Religions() {
-  const navigatior = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {religion: Religion} = useSelector((state) => state.auth);
+  const [religion, set_religion] = useState(Religion);
+  let onReligionChange = (e) => {
+    set_religion(e.target.value);
+    dispatch(setReligion(e.target.value));
+    navigate(-1);
+  };
+  // console.log(religion);
+
   return (
     <>
       <div className="vh-100 max-width-mobile mx-auto">
         <div className="container pt-4 px-4">
           <div
-            onClick={() => navigatior(-1)}
+            onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
             style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
@@ -33,8 +45,8 @@ function Religions() {
                   className="form-check-input"
                   type="radio"
                   name="religion_type"
-                  // checked={religion === religionType}
-                  // onChange={onReligionChange}
+                  checked={religion === religionType}
+                  onChange={onReligionChange}
                   value={religionType}
                   id={religionType}
                 />
