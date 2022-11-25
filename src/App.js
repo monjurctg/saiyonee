@@ -6,11 +6,11 @@ function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
     "application/json;charset=utf-8";
+    axios.defaults.withCredentials = true;
   axios.defaults.baseURL = "https://backend.saiyonee.com/api/";
 
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();
-  // axios.defaults.withCredentials = true;
   // axios.defaults.headers.Authorization = access_token
   //   ? `Bearer ${access_token}`
   //   : "";
