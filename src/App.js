@@ -10,7 +10,6 @@ function App() {
 
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();
-  // axios.defaults.withCredentials = true;
   // axios.defaults.headers.Authorization = access_token
   //   ? `Bearer ${access_token}`
   //   : "";

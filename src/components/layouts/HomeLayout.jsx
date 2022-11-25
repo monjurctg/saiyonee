@@ -3,10 +3,14 @@ import React from "react";
 function HomeLayout({ children }) {
   return (
     <div
-      className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative"
-      style={{ background: "#F9FAFB" }}
+    //   className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative mt-2 mb-2"S
+    className="mx-auto max-width-mobile pt-4 "  
+    style={{ background: "#F9FAFB",borderRadius:35
+        
+        // "#F9FAFB"
+     }}
     >
-      <div className="logos ">
+      <div className="logos px-4">
         <div
           className="d-flex justify-content-end align-items-center"
           style={{ gap: 30 }}
@@ -21,8 +25,11 @@ function HomeLayout({ children }) {
           </div>
         </div>
       </div>
+      <div className="px-4">
       {children}
-      <div className="footer">
+
+      </div>
+      <div className="footer rounded-bottom mx-auto max-width-mobile">
         <div className="d-flex justify-content-around pt-3">
           <div className="text-center active">
             <img src="img/home.svg" alt="" />
