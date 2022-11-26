@@ -3,6 +3,12 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
+
+.btn:hover {
+    color: #fff;
+    background-color: #a60000;
+    border-color: #a60000;
+}
 // ::-webkit-scrollbar {
 //     width: 10px;
 //   }

@@ -100,21 +100,29 @@ function RegisterEmail() {
         </div>
         <div className="card border-0 mt-n15 bg-transparent flex-grow-1 overflow-auto">
           <div className="card-body bg-body rounded p-4 overflow-auto">
-            <h1 className="card-title mt-3">Create an account</h1>
-            <p className="card-text text-muted mt-3 mb-2">
+            <h1 className="card-title mt-3" style={{
+              fontFamily: "Inter",
+            }}>Create an account</h1>
+            <p className="card-text text-muted mt-3 mb-2" style={{
+              fontFamily: "Inter",
+            }}>
               Take a step towards finding someone awesome!
             </p>
             <div className="form-floating my-4 text-muted">
               <input
                 type="email"
-                id="inputEmail"
+                id="inputEmail" style={{
+                  fontFamily: "Inter",
+                }}
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
                 aria-describedby="email"
               />
-              <label htmlFor="inputEmail">Email ID</label>
+              <label htmlFor="inputEmail" style={{
+              fontFamily: "Inter",
+            }}>Email ID</label>
             </div>
             <div className="form-floating my-4 text-muted">
               <input
@@ -126,10 +134,14 @@ function RegisterEmail() {
                 placeholder="******"
                 aria-describedby="password"
               />
-              <label htmlFor="inputPassword">Password</label>
+              <label htmlFor="inputPassword" style={{
+              fontFamily: "Inter",
+            }}>Password</label>
             </div>
             <div className="form-floating my-4 text-muted">
-              <input
+              <input style={{
+              fontFamily: "Inter",
+            }}
                 type="password"
                 id="inputConfirmPassword"
                 value={confirmPassword}
@@ -138,17 +150,24 @@ function RegisterEmail() {
                 placeholder="******"
                 aria-describedby="confirm-password"
               />
-              <label htmlFor="inputConfirmPassword">Confirm Password</label>
+              <label htmlFor="inputConfirmPassword" style={{
+              fontFamily: "Inter",
+            }}>Confirm Password</label>
             </div>
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2">
           {err && <p className="text-primary">* {err}</p>}
-          <button
+          <button 
             onClick={onContinueClicked}
             disabled={isLoading}
+            style={{
+              height: 60,}}
+              
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong>Continue</strong>
+            <strong style={{
+              fontFamily: "Inter",
+            }}>Continue</strong>
             {isLoading && (
               <>
                 {" "}

@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 
 function GetStarted() {
   return (
-    <div>
-      <div className="min-vh-100 max-width-mobile mx-auto d-flex flex-column">
+   
+      <div className="min-vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top">
         <div className="position-relative">
           <img
             src="img/bg.svg"
@@ -20,18 +20,26 @@ function GetStarted() {
         </div>
         <div className="card border-0 mt-n15 bg-transparent flex-grow-1">
           <div className="card-body bg-body rounded p-4">
-            <h1 className="card-title mt-3 mb-5">
+            <h1 className="card-title mt-3 mb-5" style={{
+              fontFamily: "Inter",
+            }}>
               Hi there! Let's get <br /> Started.
             </h1>
             <Link
               to={"/register/email"}
               className="btn btn-primary w-100 rounded shadow p-3 my-2">
-              <strong>Sign Up</strong>
+              <strong style={{
+              fontFamily: "Inter",
+            }}>Sign Up</strong>
             </Link>
             <Link
               to={"/login"}
               className="btn btn-outline-primary w-100 rounded shadow p-3 my-2">
-              <strong>Login</strong>
+              <strong
+              style={{
+                fontFamily: "Inter",
+              }}
+              >Login</strong>
             </Link>
           </div>
         </div>
@@ -61,7 +69,7 @@ function GetStarted() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 

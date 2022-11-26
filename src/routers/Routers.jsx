@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -32,8 +32,10 @@ import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
 
 function Routers() {
+ const location = useLocation()
+//  console.log('location', location)
   return (
-    <div style={{ background: "#e9ecef3b" }}>
+    <div style={{ background: location.pathname === "/register/email" ? "": "#e9ecef3b" }}>
       <Routes>
         <Route path="/" element={<Wellcome />} />
         <Route path="/get-start" element={<GetStarted />} />

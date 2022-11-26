@@ -12,10 +12,14 @@ function Wellcome() {
             className="img-fluid w-100 rounded-top"
           />
           <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-fill text-body">
-            <h1>
+            <h1 style={{
+              fontFamily: "Inter",
+            }}>
               <strong>Welcome to</strong>
             </h1>
-            <h1>
+            <h1 style={{
+              fontFamily: "Inter",
+            }}>
               <strong>Saiyonee</strong>
             </h1>
           </div>

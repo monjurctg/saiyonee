@@ -6,7 +6,7 @@ function Login() {
   let err = true;
   return (
     <>
-      <div className="vh-100 max-width-mobile mx-auto d-flex flex-column">
+      <div className="vh-100 max-width-mobile mx-auto d-flex flex-column"  style={{ background: "#e9ecef3b" }}>
         <div className="position-relative">
           <img
             src="img/bg.svg"
