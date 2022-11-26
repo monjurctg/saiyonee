@@ -7,6 +7,8 @@ import { stoteRegisterValues } from "../../utils/functions";
 
 function LocationCountry() {
   const navigator = useNavigate();
+  const [err, setErr] = useState();
+
 
   const [searchedCountry, setSearchedCountry] = useState("");
   const onSearchChange = (e) => setSearchedCountry(e.target.value);
@@ -15,8 +17,11 @@ function LocationCountry() {
   // const [current_city, setCurrentCity] = useState("");
   const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
-    dispatch(setCountry(e.target.value));
-    stoteRegisterValues({current_country: e.target.value})
+    if(current_country === 'Select current country') setErr("Please select a country");
+    else {
+      dispatch(setCountry(e.target.value));
+      stoteRegisterValues({current_country: e.target.value})
+    }
 
     // setCurrentCity(undefined);
     navigator(-1);
