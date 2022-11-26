@@ -4,7 +4,7 @@ export const initialRegState = {
   password: "",
   password_confirmation: "",
   user_type: "",
-  gender: "Male",
+  gender: "",
   date_of_birth: "",
   education1: "",
   education1_institution: "",
