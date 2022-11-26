@@ -40,7 +40,7 @@ export const initialRegState = {
   mother_home_district: "",
   number_of_brothers: 0,
   number_of_sisters: 0,
-  verification_type: "Driving License",
+  verification_type: "National ID",
   verification_img1: null,
   verification_img2: null,
 };

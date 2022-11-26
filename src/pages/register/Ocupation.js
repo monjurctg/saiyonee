@@ -26,9 +26,9 @@ function Ocupation() {
     industry,
     working_since,
   } = useSelector((state) => state.auth);
-  console.log('current_employment_type',current_employment_type)
+  // console.log('current_employment_type',current_employment_type)
 
-  console.log('current_employment_type',current_employment_type !== ("Unemployed" || "Student"))
+  // console.log('current_employment_type',current_employment_type !== ("Unemployed" || "Student"))
   let onContinueClicked = () => {
     if(current_employment_type.length === 0) setErr("Please select employment type");
     else if( current_employment_type !== ("Unemployed" || "Student") && industry === "Select Industry") setErr("Please select Industry");

@@ -1,8 +1,18 @@
-import React from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function RegisterLayout({children, err, onContinueClicked}) {
   const navigate = useNavigate();
+  const location = useLocation()
+  // useEffect(() => {
+  //   // console.log('first')
+  //   if (window.performance) {
+  //     if (performance.navigation.type === 1) {
+  //       navigate('/register/email')
+  //     } 
+  //   }
+  // }, [])
+  
 
   return (
     <>
@@ -20,11 +30,15 @@ function RegisterLayout({children, err, onContinueClicked}) {
 
         <div className="container px-4 pb-4 pt-2">
           {err && <p className="text-primary">* {err}</p>}
+        {location.pathname === "/register/varification"
+        &&
+        <Link to={"/register/email"}>Go back to Refill the Data</Link>
+        } 
           <button style={{height:60}}
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             <strong>Continue</strong>
-          </button>
+          </button> 
         </div>
       </div>
     </>
