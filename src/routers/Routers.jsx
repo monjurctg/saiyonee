@@ -29,6 +29,7 @@ import LocationCountry from "../pages/register/LocationCountry";
 import LocationCity from "../pages/register/LocationCity";
 import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
+import Explore from "../pages/Explore";
 
 function Routers() {
   return (
@@ -100,6 +101,8 @@ function Routers() {
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         <Route path="/home" element={<Index />} />
+        <Route path="/explore" element={<Explore />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

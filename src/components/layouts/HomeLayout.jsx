@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function HomeLayout({ children }) {
   return (
@@ -15,6 +16,22 @@ function HomeLayout({ children }) {
           className="d-flex justify-content-end align-items-center"
           style={{ gap: 30 }}
         >
+             <Link
+                  to="/" // TODO ROUTES.tutorial
+                  className="image-saturate position-relative me-auto">
+                  <img
+                    src="img/back.svg"
+                    alt="next-btn-25-percent.svg"
+                    className="img-fluid"
+                  />
+                  <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
+                    <img
+                      src="img/back-icon.svg"
+                      alt="next-btn-25-percent.svg"
+                      className="img-fluid"
+                    />
+                  </div>
+                </Link>
           <img src={"img/logo.svg"} alt="logo" style={{ height: 50 }} />
           <div className="menu-img">
             <img
