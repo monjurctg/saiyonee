@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -20,9 +20,13 @@ function Varification() {
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
   const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
-  const [redirect, setRedirect] = useState("");
+  // const [redirect, setRedirect] = useState("");
+
   // let verification_type = "National ID";
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!verification_img1) setErr("Photo is blank");
+  }, []);
 
   // // let dropdown = "";
   // let ID_TYPES = ["abc", "bcd", "xyz"];
@@ -128,10 +132,10 @@ function Varification() {
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
     });
-    console.log("data", formd);
+    // console.log("data", formd);
 
     const res = await AuthServices.register(formd);
-    console.log(res, "fetch res");
+    // console.log(res, "fetch res");
     if (res.status === 200) {
       navigator("/register/success");
     } else {
@@ -144,7 +148,7 @@ function Varification() {
   };
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked}>
+      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
             <h1>ID Verification</h1>
@@ -171,7 +175,8 @@ function Varification() {
             >
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
-                  <div style={{width:"100%"}}
+                  <div
+                    style={{ width: "100%" }}
                     className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
