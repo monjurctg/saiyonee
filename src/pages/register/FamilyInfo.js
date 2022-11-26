@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {setFamilyInformation} from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
@@ -20,26 +20,29 @@ function FamilyInfo() {
   } = useSelector((state) => state.auth);
   // console.log('first', father_home_district)
   let onContinueClicked = () => {
-    if(!familyInfo.father_occupation) setErr(" Father's occupation cannot be blank");
-    if(!familyInfo.father_home_district) setErr(" Father's home district cannot be blank");
-    else if(!familyInfo.mother_home_district) setErr("Mother's home district cannot be blank");
-    else if(!familyInfo.mother_occupation) setErr(" Mother's occupation cannot be blank");
-    else{
+    if (!familyInfo.father_occupation)
+      setErr(" Father's occupation cannot be blank");
+    if (!familyInfo.father_home_district)
+      setErr(" Father's home district cannot be blank");
+    else if (!familyInfo.mother_home_district)
+      setErr("Mother's home district cannot be blank");
+    else if (!familyInfo.mother_occupation)
+      setErr(" Mother's occupation cannot be blank");
+    else {
       dispatch(setFamilyInformation(familyInfo));
-      stoteRegisterValues(familyInfo)
-  
-      navigate("/register/varification");
+      stoteRegisterValues(familyInfo);
 
+      navigate("/register/varification");
     }
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
-    father_home_district: "",
-    father_occupation: "",
-    mother_home_district: "",
-    mother_occupation: "",
-    number_of_brothers: 1,
-    number_of_sisters: 1,
+    father_home_district: father_home_district,
+    father_occupation: father_occupation,
+    mother_home_district: mother_home_district,
+    mother_occupation: mother_occupation,
+    number_of_brothers: number_of_brothers,
+    number_of_sisters: number_of_sisters,
   });
   const handleUserInputChange = (e) => {
     setFamilyInfo({
