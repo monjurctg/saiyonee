@@ -1,12 +1,13 @@
 import React from "react";
+import {useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 
 function Location() {
   let navigate = useNavigate();
   let err = "";
-  let current_country = "Bangladesh";
-  let current_city = "Chittagong";
+
+  const {current_city, current_country} = useSelector((state) => state.auth);
 
   const onContinueClicked = () => {
     navigate("/register/family_info");

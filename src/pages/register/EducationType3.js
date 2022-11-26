@@ -1,19 +1,24 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION3_TYPES} from "../../constants/register_constants";
+import {setEducation3, setEducation3Other} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function EducationType3() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [education3, setEducation3] = useState("");
-  const [education1Other, setEducation3Other] = useState("");
+  const {education3} = useSelector((state) => state.auth);
   const onTypeChange = (e) => {
     if (e.target.value === "Other") {
-      setEducation3Other(true);
-      setEducation3("");
+      dispatch(setEducation3Other(true));
+      dispatch(setEducation3(""));
     } else {
-      setEducation3Other(false);
-      setEducation3(e.target.value);
+      dispatch(setEducation3Other(false));
+      dispatch(setEducation3(e.target.value));
+    stoteRegisterValues({education3: e.target.value})
+
     }
     navigate(-1);
   };

@@ -1,17 +1,20 @@
 import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import Countries from "../../libs/cities_countries";
+import {setCity} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function LocationCity() {
   const navigate = useNavigate();
   const [searchedCity, setSearchedCity] = useState("");
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
-  const {current_city, setCurrentCity} = useState("");
-  const {current_country, setCurrentCountry} = useState("");
-
+  const {current_city, current_country} = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const onCityChange = (e) => {
-    setCurrentCity(e.target.value);
+    dispatch(setCity(e.target.value));
+    stoteRegisterValues({current_city: e.target.value})
     navigate(-1);
   };
 
@@ -57,7 +60,7 @@ function LocationCity() {
             />
           </div>
         </div>
-        {(Countries["Bangladesh"] || []).map(
+        {(Countries[current_country] || []).map(
           (city, i) =>
             city.toLowerCase().includes(searchedCity.toLowerCase()) && (
               <div
