@@ -1,16 +1,20 @@
-import React from "react";
-import {useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 
 function Location() {
   let navigate = useNavigate();
-  let err = "";
+  const [err, setErr] = useState();
 
-  const {current_city, current_country} = useSelector((state) => state.auth);
+  const { current_city, current_country } = useSelector((state) => state.auth);
 
   const onContinueClicked = () => {
-    navigate("/register/family_info");
+    if (current_country === "Select current country")
+      setErr("Please select a country");
+    else if (current_city === "Select current city")
+      setErr("Please select a city");
+    else navigate("/register/family_info");
   };
   return (
     <>

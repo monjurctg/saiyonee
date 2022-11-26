@@ -8,6 +8,8 @@ import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
+  const [err, setErr] = useState();
+
   const {
     father_home_district,
     father_occupation,
@@ -16,12 +18,19 @@ function FamilyInfo() {
     number_of_brothers,
     number_of_sisters,
   } = useSelector((state) => state.auth);
-  let err = "";
+  // console.log('first', father_home_district)
   let onContinueClicked = () => {
-    dispatch(setFamilyInformation(familyInfo));
-    stoteRegisterValues(familyInfo)
+    if(!familyInfo.father_occupation) setErr(" Father's occupation cannot be blank");
+    if(!familyInfo.father_home_district) setErr(" Father's home district cannot be blank");
+    else if(!familyInfo.mother_home_district) setErr("Mother's home district cannot be blank");
+    else if(!familyInfo.mother_occupation) setErr(" Mother's occupation cannot be blank");
+    else{
+      dispatch(setFamilyInformation(familyInfo));
+      stoteRegisterValues(familyInfo)
+  
+      navigate("/register/varification");
 
-    navigate("/register/varification");
+    }
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
