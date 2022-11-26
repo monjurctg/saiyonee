@@ -120,9 +120,18 @@ function Education() {
     new Array(new Date().getFullYear() - 1990 + 1)
   ).map((_, i) => 1990 + i);
 
-  console.log("passingYears", passingYears);
+  // console.log("passingYears", passingYears);
   let onContinueClicked = () => {
-    navigate("/register/ocupation");
+    if(!education1) setErr("Please select your Secondary Education")
+    else if(!education1_institution) setErr("Please enter your Secondary Institution")
+    else if(!education1_major) setErr("Please enter your Secondary Major")
+    else if(!education2) setErr("Please select your Secondary Education")
+    else if(!education2_institution) setErr("Please enter your Higher Secondary Institution")
+    else if(!education2_major) setErr("Please enter your Higher Secondary Major")
+    else if(!education3_institution) setErr("Please enter your Higher Secondary Institution")
+    else if(!education3_major) setErr("Please enter your Secondary Major")
+    else if(!education3_passing_year) setErr("Please select your Secondary Passing Year")
+    else navigate("/register/ocupation");
   };
 
   return (

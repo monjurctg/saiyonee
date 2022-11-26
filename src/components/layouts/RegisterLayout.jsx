@@ -20,7 +20,7 @@ function RegisterLayout({children, err, onContinueClicked}) {
 
         <div className="container px-4 pb-4 pt-2">
           {err && <p className="text-primary">* {err}</p>}
-          <button
+          <button style={{height:60}}
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             <strong>Continue</strong>

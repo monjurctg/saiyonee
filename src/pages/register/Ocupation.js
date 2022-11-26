@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -10,12 +10,13 @@ import {
 import { stoteRegisterValues } from "../../utils/functions";
 
 function Ocupation() {
+  const [err, setErr] = useState();
+
   const navigate = useNavigate();
   // let currentEmploymentTypeOther = true;
   // let current_employment_type = "v";
   // let industry = "hello";
 
-  let err = "";
   const dispatch = useDispatch();
 
   const {
@@ -25,8 +26,14 @@ function Ocupation() {
     industry,
     working_since,
   } = useSelector((state) => state.auth);
+  console.log('current_employment_type',current_employment_type.length)
   let onContinueClicked = () => {
-    navigate("/register/location");
+    if(current_employment_type.length === 0) setErr("Please select employment type");
+    else if( (current_employment_type !== "Unemployed" || current_employment_type !== "Student") && industry === "Select Industry") setErr("Please select Industry");
+    else if( (current_employment_type !== "Unemployed" || current_employment_type !== "Student") && !employer_name) setErr("Employer cannot be blank");
+    else if( (current_employment_type !== "Unemployed" || current_employment_type !== "Student") && !designation) setErr("Designation cannot be blank");
+    
+else navigate("/register/location");
   };
   return (
     <>

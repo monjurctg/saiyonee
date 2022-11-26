@@ -23,7 +23,7 @@ export const initialRegState = {
   education4_major: "",
   education4_passing_year: 2018,
   current_employment_type: "",
-  industry: "Bank & Financial Institution",
+  industry: "Select Industry",
   working_since: "enter date",
   employer_name: "",
   designation: "",
