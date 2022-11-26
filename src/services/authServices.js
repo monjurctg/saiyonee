@@ -20,7 +20,7 @@ AuthServices.checkIsEmailUnique = async (data) => {
 };
 
 AuthServices.register = async (data) => {
-  console.log('data', data)
+  // console.log('data', data)
   let url = "/ApiRegister";
   let res = axios
     .post(url, data)
