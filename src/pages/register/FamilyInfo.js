@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {setFamilyInformation} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
@@ -18,6 +19,8 @@ function FamilyInfo() {
   let err = "";
   let onContinueClicked = () => {
     dispatch(setFamilyInformation(familyInfo));
+    stoteRegisterValues(familyInfo)
+
     navigate("/register/varification");
   };
   const dispatch = useDispatch();
@@ -46,7 +49,7 @@ function FamilyInfo() {
               type="text"
               id="inputFatherOccupation"
               name="father_occupation"
-              value={familyInfo.father_occupation}
+              value={familyInfo.father_occupation || father_occupation}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
@@ -61,7 +64,7 @@ function FamilyInfo() {
               type="text"
               id="inputFatherHomeDistrict"
               name="father_home_district"
-              value={familyInfo.father_home_district}
+              value={familyInfo.father_home_district || father_home_district}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
@@ -76,7 +79,7 @@ function FamilyInfo() {
               type="text"
               id="inputMotherOccupation"
               name="mother_occupation"
-              value={familyInfo.mother_occupation ?? mother_occupation}
+              value={familyInfo.mother_occupation || mother_occupation}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
@@ -91,7 +94,7 @@ function FamilyInfo() {
               type="text"
               name="mother_home_district"
               id="inputMotherHomeDistrict"
-              value={familyInfo.mother_home_district ?? mother_home_district}
+              value={familyInfo.mother_home_district || mother_home_district}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
@@ -122,7 +125,7 @@ function FamilyInfo() {
                 type="number"
                 name="number_of_brothers"
                 id="inputBrotherCount"
-                value={familyInfo.number_of_brothers}
+                value={familyInfo.number_of_brothers || number_of_brothers}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1 p-3 text-center"
                 // placeholder="50"

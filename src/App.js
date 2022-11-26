@@ -4,9 +4,15 @@ import axios from "axios";
 import {getToken} from "./utils/functions";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
-  axios.defaults.headers.post["Content-Type"] =
-    "application/json;charset=utf-8";
-  // axios.defaults.baseURL = "";
+
+  axios.defaults.headers["Content-Type"] = "application/json ";
+
+  axios.defaults.headers["Authorization"] = `Bearer ${getToken()}`;
+
+  axios.defaults.headers.post["Content-Type"] = 
+    "multipart/form-data";
+    
+  axios.defaults.baseURL = "https://backend.saiyonee.com/api";
 
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();

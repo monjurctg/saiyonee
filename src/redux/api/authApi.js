@@ -13,7 +13,9 @@ export const authApi = apiSlice.injectEndpoints({
       // invalidatesTags: ["tasks"],
     }),
     register: builder.mutation({
-      query: (data) => ({
+      query: (data) => (
+        
+        {
         url: `/ApiRegister`,
         method: "POST",
         body: data,

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {USER_TYPES} from "../../constants/register_constants";
 import {setGender, setUserType} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function RegisterUserType() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function RegisterUserType() {
     //   return;
     // }
     dispatch(setUserType(user_type));
+    stoteRegisterValues({user_type: user_type})
     navigate("/register/personal-info");
   };
   return (

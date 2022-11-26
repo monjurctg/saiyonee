@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
 import {setCountry} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function LocationCountry() {
   const navigator = useNavigate();
@@ -15,6 +16,8 @@ function LocationCountry() {
   const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
     dispatch(setCountry(e.target.value));
+    stoteRegisterValues({current_country: e.target.value})
+
     // setCurrentCity(undefined);
     navigator(-1);
   };

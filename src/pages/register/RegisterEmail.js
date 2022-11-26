@@ -4,38 +4,37 @@ import {Link, useNavigate} from "react-router-dom";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
 import {setRegEmail_Pass} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function RegisterEmail() {
   const [err, setErr] = useState();
-  let success = true;
+  // let success = true;
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [checkEmail, {isLoading, isSuccess, isError}] = useCheckEmailMutation();
+  // const [checkEmail, {isLoading, isSuccess, isError}] = useCheckEmailMutation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
-  // const checkEmail = async () => {
-  //   setisLoading(true);
-  //   const res = await AuthServices.checkIsEmailUnique({email});
-  //   if (res) {
-  //     if (res.status === 200) {
-  //       setisLoading(false);
-  //       navigate("/register/usertype");
-  //     } else {
-  //       setErr("Something wrong");
-  //       setisLoading(false);
-  //       return;
-  //     }
-  //   } else {
-  //     setErr("Something is wrong");
-  //     setisLoading(false);
-  //   }
-  // };
+  const checkEmail = async () => {
+    setisLoading(true);
+    const res = await AuthServices.checkIsEmailUnique({email});
 
-  const onContinueClicked = () => {
+      if (res.status === 200) {
+        setisLoading(false);
+        stoteRegisterValues({email, password,confirmPassword})
+        dispatch(setRegEmail_Pass({email, password,confirmPassword}));
+        navigate("/register/usertype");
+      } else {
+        setErr(res.data.message);
+        setisLoading(false);
+        return;
+      }
+}
+
+  const onContinueClicked = async() => {
     if (!email) {
       setErr("Email is Required");
 
@@ -50,13 +49,25 @@ function RegisterEmail() {
       setErr("password and confirmPassword does not match");
       return;
     }
-    checkEmail({email})
-      .then(() => {
-        dispatch(setRegEmail_Pass({email, password, confirmPassword}));
-        navigate("/register/usertype");
-      })
-      .catch((err) => console.log(err));
-  };
+    checkEmail()
+    // let res = await AuthServices.checkIsEmailUnique({email});
+    // console.log('res', res)
+    // if (res) {
+    //   if (res.status === 200) {
+    //     dispatch(setRegEmail_Pass({email, password,confirmPassword}));
+    //     navigate("/register/usertype");
+    //   } else {
+    //     setErr(res.data.message);
+    //     return;
+    //   }
+  //   checkEmail({email})
+  //     .then(() => {
+  //       dispatch(setRegEmail_Pass({email, password, confirmPassword}));
+  //       navigate("/register/usertype");
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  }
 
   return (
     <>

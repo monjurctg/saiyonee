@@ -7,6 +7,7 @@ import {
   setEmployName,
   setWorkingSince,
 } from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function Ocupation() {
   const navigate = useNavigate();
@@ -93,7 +94,12 @@ function Ocupation() {
                     type="text"
                     id="inputEmployer"
                     value={employer_name}
-                    onChange={(e) => dispatch(setEmployName(e.target.value))}
+                    onChange={(e) => {
+                      dispatch(setEmployName(e.target.value))
+                      stoteRegisterValues({employer_name: e.target.value})
+                    }
+
+                    }
                     //   onChange={onEmployerNameChanged}
                     className="form-control border-0 rounded-1"
                     placeholder="employer"
@@ -106,7 +112,12 @@ function Ocupation() {
                     type="text"
                     id="inputDesignation"
                     value={designation}
-                    onChange={(e) => dispatch(setDesignation(e.target.value))}
+                    onChange={(e) => {
+                      dispatch(setDesignation(e.target.value))
+                      stoteRegisterValues({designation: e.target.value})
+                    
+                    }
+                  }
                     className="form-control border-0 rounded-1"
                     placeholder="designation"
                     aria-describedby="designation"
@@ -120,7 +131,10 @@ function Ocupation() {
                     className="form-control border-0 rounded-1"
                     placeholder="name@example.com"
                     aria-describedby="workingSinceDate"
-                    onChange={(e) => dispatch(setWorkingSince(e.target.value))}
+                    onChange={(e) => {dispatch(setWorkingSince(e.target.value))
+                      stoteRegisterValues({working_since: e.target.value})
+                    
+                    }}
                     value={working_since}
                     //   onChange={onWorkingSinceDateChange}
                   />

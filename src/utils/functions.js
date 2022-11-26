@@ -5,7 +5,7 @@ const userType = "userType";
 export const getToken = () => window.localStorage.getItem(authToken);
 
 export const setToken = (token) => {
-  console.log("token", token);
+  // console.log("token", token);
   token
     ? window.localStorage.setItem(authToken, token)
     : window.localStorage.removeItem(authToken);
@@ -56,3 +56,16 @@ export const log = (...args) => {
 
   console.log(...args);
 };
+
+export const stoteRegisterValues = (data) => {
+  const pdata = JSON.parse(window.localStorage.getItem("register")) || null
+  console.log('pdata', pdata)
+  if (pdata) {
+    let newData = {
+      ...pdata,
+      ...data,
+    }
+    window.localStorage.setItem("register", JSON.stringify(newData));
+  }
+  else window.localStorage.setItem("register", JSON.stringify(data));
+}

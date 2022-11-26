@@ -69,6 +69,17 @@ const authSlice = createSlice({
     setinstitution4: (state, {payload}) => {
       state.education4_institution = payload;
     },
+    setVerificationType: (state, {payload}) => {
+      state.verification_type = payload;
+    },
+    setVerificationImg1: (state, {payload}) => {
+      state.verification_img1 = payload;
+    },
+    setVerificationImg2: (state, {payload}) => {
+      // console.log('payload', payload)
+      state.verification_img2 = payload;
+    },
+
     // major
     setMajor1: (state, {payload}) => {
       state.education1_major = payload;
@@ -215,7 +226,10 @@ export const {
   setinstitution2,
   setinstitution3,
   setinstitution4,
+  setVerificationType,
   setCity,
   setCountry,
+  setVerificationImg1,
+  setVerificationImg2,
 } = authSlice.actions;
 export default authSlice.reducer;

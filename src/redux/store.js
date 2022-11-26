@@ -14,6 +14,9 @@ const store = configureStore({
 
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares().concat(apiSlice.middleware),
+
+      serializableCheck: false,
+    
 });
 
 export default store;

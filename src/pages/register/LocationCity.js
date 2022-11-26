@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import Countries from "../../libs/cities_countries";
 import {setCity} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function LocationCity() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function LocationCity() {
   const dispatch = useDispatch();
   const onCityChange = (e) => {
     dispatch(setCity(e.target.value));
+    stoteRegisterValues({current_city: e.target.value})
     navigate(-1);
   };
 

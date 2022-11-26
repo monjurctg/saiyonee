@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION3_TYPES} from "../../constants/register_constants";
 import {setEducation3, setEducation3Other} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function EducationType3() {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ function EducationType3() {
     } else {
       dispatch(setEducation3Other(false));
       dispatch(setEducation3(e.target.value));
+    stoteRegisterValues({education3: e.target.value})
+
     }
     navigate(-1);
   };

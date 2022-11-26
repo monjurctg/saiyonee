@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {RELIGION_TYPES} from "../../constants/register_constants";
 import {setReligion} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function Religions() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function Religions() {
   let onReligionChange = (e) => {
     set_religion(e.target.value);
     dispatch(setReligion(e.target.value));
+    stoteRegisterValues({religion: e.target.value})
+
     navigate(-1);
   };
   // console.log(religion);

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {GENDER_TYPES} from "../../constants/register_constants";
 import {setPersonalInfo} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function PersonalInformation() {
   let err = "";
@@ -37,6 +38,7 @@ function PersonalInformation() {
       [e.target.name]: e.target.value,
     });
   };
+  console.log('state', state)
   const onReligionSelectorClicked = () => {
     dispatch(setPersonalInfo(state));
     navigate("/register/personalinfo/religion");
@@ -44,7 +46,7 @@ function PersonalInformation() {
 
   const onContinueClicked = () => {
     dispatch(setPersonalInfo(state));
-
+    stoteRegisterValues(state)
     navigate("/register/education");
   };
 

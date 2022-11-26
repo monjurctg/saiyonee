@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {MARITAL_STATUS_TYPES} from "../../constants/register_constants";
 import {setMaritalStatus} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function MaritalStatus() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function MaritalStatus() {
   let onMaritalStatusChange = (e) => {
     setMarital_status(e.target.value);
     dispatch(setMaritalStatus(e.target.value));
+    stoteRegisterValues({marital_status: e.target.value})
+
     navigate(-1);
   };
   return (

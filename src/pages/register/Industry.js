@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {INDUSTRY_TYPES} from "../../constants/register_constants";
 import {setIndustry} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function Industry() {
   const navigator = useNavigate();
@@ -10,6 +11,10 @@ function Industry() {
   const {industry} = useSelector((state) => state.auth);
   const onIndustryChange = (e) => {
     dispatch(setIndustry(e.target.value));
+    stoteRegisterValues({
+      industry: e.target.value,
+    });
+    
     navigator(-1);
   };
 

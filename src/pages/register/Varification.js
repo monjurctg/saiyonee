@@ -1,10 +1,17 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {ID_TYPES} from "../../constants/register_constants";
-import {useRegisterMutation} from "../../redux/api/authApi";
-import {initialRegState} from "../../redux/slices/initialRegState";
+import { ID_TYPES } from "../../constants/register_constants";
+import { useRegisterMutation } from "../../redux/api/authApi";
+import {
+  setVerificationImg1,
+  setVerificationImg2,
+  setVerificationType,
+} from "../../redux/slices/authSlices";
+import { initialRegState } from "../../redux/slices/initialRegState";
+import AuthServices from "../../services/authServices";
 
 function Varification() {
   const navigator = useNavigate();
@@ -13,6 +20,8 @@ function Varification() {
   const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
   const [redirect, setRedirect] = useState("");
   // let verification_type = "National ID";
+  const dispatch = useDispatch();
+
   // // let dropdown = "";
   // let ID_TYPES = ["abc", "bcd", "xyz"];
   // let verification_img1 = true;
@@ -36,7 +45,7 @@ function Varification() {
     education3,
     education3_institution,
     education3_major,
-    education3_passing_yea,
+    education3_passing_year,
     education4,
     education4_institution,
     education4_major,
@@ -76,13 +85,13 @@ function Varification() {
     education1_major: education1_major,
     education1_passing_year: education1_passing_year,
     education2: education2,
-    education2_institution: education2_passing_year,
+    education2_institution: education2_institution,
     education2_major: education2_major,
     education2_passing_year: education2_passing_year,
     education3: education3,
     education3_institution: education3_institution,
     education3_major: education3_major,
-    education3_passing_year: education3_passing_yea,
+    education3_passing_year: education3_passing_year,
     education4: education4,
     education4_institution: education4_institution,
     education4_major: education4_major,
@@ -109,22 +118,27 @@ function Varification() {
     verification_img1: verification_img1,
     verification_img2: verification_img2,
   };
-  const [register, {isLoading, isSuccess, isError}] = useRegisterMutation();
 
   let onContinueClicked = async () => {
-    // const res = await fetch("https://backend.saiyonee.com/api/ApiRegister", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    //   body: JSON.stringify(data),
-    // });
-    // console.log(res, "fetch res");
-    register({data}).then((da) => {
-      // navigator("/register/success");
-      console.log(da);
+    let d = JSON.stringify(window.localStorage.getItem("register"));
+    // console.log('d', d)
+    let formd = new FormData();
+    Object.keys(data).map((key) => {
+      formd.append(key, data[key]);
     });
+    console.log("data", formd);
+
+    const res = await AuthServices.register(formd);
+    console.log(res, "fetch res");
+    if (res.status === 200) {
+      navigator("/register/success");
+    } else {
+      console.log("error");
+    }
+    // register({data}).then((da) => {
+    //   // navigator("/register/success");
+    //   console.log(da,'das');
+    // });
   };
   return (
     <>
@@ -144,20 +158,22 @@ function Varification() {
               data-bs-toggle="dropdown"
               aria-expanded={dropdown ? "true" : "false"}
               onClick={toggleDropdown}
-              onBlur={delayedDismiss}>
+              onBlur={delayedDismiss}
+            >
               ID Type: {verification_type}
             </button>
             <ul
               className={`dropdown-menu w-100 p-2 shadow border-0 ${
                 dropdown ? " show" : ""
-              }`}>
+              }`}
+            >
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
                   <div
                     className={`btn btn-primary py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
-                    // onClick={() => setVerificationType(idType)}
+                    onClick={() => dispatch(setVerificationType(idType))}
                   >
                     {idType}
                   </div>
@@ -180,14 +196,14 @@ function Varification() {
               <button className="btn btn-outline-primary border-0 shadow p-0 rounded-1">
                 <label htmlFor="fileFrontSide" className="form-label mb-0">
                   <img
-                    // src={
-                    //   verification_img1
-                    //     ? URL.createObjectURL(verification_img1)
-                    //     : DEFAULT_IMG_URL
-                    // }
-                    src="/img/add-photo.svg"
+                    src={
+                      verification_img1
+                        ? URL.createObjectURL(verification_img1)
+                        : "/img/add-photo.svg"
+                    }
+                    // src="/img/add-photo.svg"
                     alt="add id card"
-                    style={{width: 136, height: 172}}
+                    style={{ width: 136, height: 172 }}
                     className="object-cover rounded-1"
                   />
                 </label>
@@ -196,13 +212,16 @@ function Varification() {
                   type="file"
                   accept="image/*"
                   id="fileFrontSide"
-                  //   onChange={onFileChange(true)}
+                  onChange={(e) =>
+                    dispatch(setVerificationImg1(e.target.files[0]))
+                  }
                 />
               </button>
               {!verification_img1 && (
                 <div
                   className="position-absolute text-center"
-                  style={{bottom: "20%", left: 0, right: 0}}>
+                  style={{ bottom: "20%", left: 0, right: 0 }}
+                >
                   Front Side
                 </div>
               )}
@@ -212,14 +231,13 @@ function Varification() {
                 <button className="btn btn-outline-primary border-0 shadow p-0 rounded-1">
                   <label htmlFor="fileBackSide" className="form-label mb-0">
                     <img
-                      //   src={
-                      //     verification_img2
-                      //       ? URL.createObjectURL(verification_img2)
-                      //       : DEFAULT_IMG_URL
-                      //   }
-                      src="/img/add-photo.svg"
+                      src={
+                        verification_img2
+                          ? URL.createObjectURL(verification_img2)
+                          : "/img/add-photo.svg"
+                      }
                       alt="add id card"
-                      style={{width: 136, height: 172}}
+                      style={{ width: 136, height: 172 }}
                       className="object-cover rounded-1"
                     />
                   </label>
@@ -228,13 +246,17 @@ function Varification() {
                     type="file"
                     accept="image/*"
                     id="fileBackSide"
-                    // onChange={onFileChange(false)}
+                    onChange={(e) =>
+                      // console.log('e', e.target.files[0])
+                      dispatch(setVerificationImg2(e.target.files[0]))
+                    }
                   />
                 </button>
                 {!verification_img2 && (
                   <div
                     className="position-absolute text-center"
-                    style={{bottom: "20%", left: 0, right: 0}}>
+                    style={{ bottom: "20%", left: 0, right: 0 }}
+                  >
                     Back Side
                   </div>
                 )}

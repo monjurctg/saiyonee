@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {OCCUPATION_TYPES} from "../../constants/register_constants";
 import {setCurrentEmplyType} from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function OcupationTypes() {
   const navigator = useNavigate();
@@ -12,8 +13,12 @@ function OcupationTypes() {
   const onOccupationChange = (e) => {
     if (e.target.value === "Other") {
       dispatch(setCurrentEmplyType("Other"));
+    stoteRegisterValues({current_employment_type: "Other"})
+
     } else {
       dispatch(setCurrentEmplyType(e.target.value));
+    stoteRegisterValues({current_employment_type: e.target.value})
+
     }
     navigator(-1);
   };
