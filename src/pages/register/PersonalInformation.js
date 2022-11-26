@@ -33,7 +33,7 @@ function PersonalInformation() {
     gender: gender,
   });
 
-  // console.log("gender", gender);
+  console.log("gender", gender);
 
   const handleUserInputChange = (e) => {
     setState({
@@ -45,6 +45,12 @@ function PersonalInformation() {
   const onReligionSelectorClicked = () => {
     dispatch(setPersonalInfo(state));
     navigate("/register/personalinfo/religion");
+  };
+
+  const onMaritalStatusClicked = () => {
+    dispatch(setPersonalInfo(state));
+
+    navigate("/register/personalinfo/marital_status");
   };
 
   const onContinueClicked = () => {
@@ -105,7 +111,7 @@ function PersonalInformation() {
                 style={{fontFamily: "Inter", height: 60}}
                 onClick={() => setState({...state, gender: g})}
                 className={`btn btn-${
-                  g === gender ? "" : "outline-"
+                  g === state.gender ? "" : "outline-"
                 }primary w-100 rounded shadow p-3 my-2 ms-2 fw-semibold`}>
                 {g}
               </button>
@@ -210,10 +216,7 @@ function PersonalInformation() {
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
             Select Candidate's marital status
           </p>
-          <Link
-            to={"/register/personalinfo/marital_status"}
-            //   onClick={onEducationSelectorClicked}
-          >
+          <div onClick={onMaritalStatusClicked}>
             <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -228,7 +231,7 @@ function PersonalInformation() {
                 />
               </div>
             </div>
-          </Link>
+          </div>
         </div>
         <div className="container px-4 pb-4 pt-2">
           {err && <p className="text-primary">* {err}</p>}
