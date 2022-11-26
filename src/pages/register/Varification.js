@@ -171,8 +171,8 @@ function Varification() {
             >
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
-                  <div
-                    className={`btn btn-primary py-3 dropdown-item${
+                  <div style={{width:"100%"}}
+                    className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
                     onClick={() => dispatch(setVerificationType(idType))}
