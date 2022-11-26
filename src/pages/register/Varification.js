@@ -14,6 +14,8 @@ import { initialRegState } from "../../redux/slices/initialRegState";
 import AuthServices from "../../services/authServices";
 
 function Varification() {
+  const [err, setErr] = useState();
+
   const navigator = useNavigate();
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
@@ -169,8 +171,8 @@ function Varification() {
             >
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
-                  <div
-                    className={`btn btn-primary py-3 dropdown-item${
+                  <div style={{width:"100%"}}
+                    className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
                     onClick={() => dispatch(setVerificationType(idType))}
