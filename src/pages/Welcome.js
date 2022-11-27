@@ -3,31 +3,26 @@ import { Link } from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 
 function Wellcome() {
+  let subItem = (
+    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-fill text-body">
+      <h1
+        style={{
+          fontFamily: "Inter",
+        }}
+      >
+        <strong>Welcome to</strong>
+      </h1>
+      <h1
+        style={{
+          fontFamily: "Inter",
+        }}
+      >
+        <strong>Saiyonee</strong>
+      </h1>
+    </div>
+  );
   return (
-    <BasicLayout>
-      <div className="position-relative">
-        <img
-          src="img/bg-star.svg"
-          alt="bg-star"
-          className="img-fluid w-100 rounded-top"
-        />
-        <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-fill text-body">
-          <h1
-            style={{
-              fontFamily: "Inter",
-            }}
-          >
-            <strong>Welcome to</strong>
-          </h1>
-          <h1
-            style={{
-              fontFamily: "Inter",
-            }}
-          >
-            <strong>Saiyonee</strong>
-          </h1>
-        </div>
-      </div>
+    <BasicLayout subItem={subItem}>
       <div className="flex-grow-1">
         <img
           src="img/logo-index.png"
