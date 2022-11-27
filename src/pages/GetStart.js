@@ -1,29 +1,21 @@
 import React from "react";
-import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {setIsRegStart} from "../redux/slices/authSlices";
+import BasicLayout from "../components/layouts/BasicLayout";
 
 function GetStarted() {
-  const dispatch = useDispatch();
-
   const registerStart = () => {
     localStorage.setItem("regStart", true);
   };
+  let subItem = (
+    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
+      {/* <LinkLogo /> */}
+      <Link to={"/"}>
+        <img src="img/logo.svg" alt="" />
+      </Link>
+    </div>
+  );
   return (
-    <div className="min-vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top">
-      <div className="position-relative">
-        <img
-          src="img/bg.svg"
-          alt="bg-star"
-          className="img-fluid w-100 rounded-top"
-        />
-        <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
-          {/* <LinkLogo /> */}
-          <Link to={"/"}>
-            <img src="img/logo.svg" alt="" />
-          </Link>
-        </div>
-      </div>
+    <BasicLayout subItem={subItem}>
       <div className="card border-0 mt-n15 bg-transparent flex-grow-1">
         <div className="card-body bg-body rounded p-4">
           <h1
@@ -56,7 +48,6 @@ function GetStarted() {
           </Link>
         </div>
       </div>
-
       <div className="container p-4">
         <div className="row">
           <div className="col">
@@ -81,7 +72,7 @@ function GetStarted() {
           </div>
         </div>
       </div>
-    </div>
+    </BasicLayout>
   );
 }
 
