@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, {useEffect} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,35 @@ import LocationCity from "../pages/register/LocationCity";
 import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
+import {useSelector} from "react-redux";
 
 function Routers() {
- const location = useLocation()
-//  console.log('location', location)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const {isRegStart} = useSelector((state) => state.auth);
+  useEffect(() => {
+    const registerStart = localStorage.getItem("regStart");
+    console.log(registerStart);
+    if (location.pathname === "/register/email") {
+      console.log(true, "path");
+    } else {
+      localStorage.setItem("regStart", false);
+    }
+    if (registerStart) {
+      console.log("first");
+
+      navigate("/register/email", {replace: true});
+      // navigate(1);
+    } else {
+      return;
+    }
+  }, []);
+  //  console.log('location', location)
   return (
-    <div style={{ background: location.pathname === "/register/email" ? "": "#e9ecef3b" }}>
+    <div
+      style={{
+        background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
+      }}>
       <Routes>
         <Route path="/" element={<Wellcome />} />
         <Route path="/get-start" element={<GetStarted />} />
@@ -44,7 +67,6 @@ function Routers() {
         {/* Sazid */}
         <Route path="/settings" element={<Settings />} />
         <Route path="/editProfile" element={<EditProfile />} />
-
 
         {/* register process routing */}
         <Route path="/register/email" element={<RegisterEmail />} />

@@ -1,22 +1,24 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import { ID_TYPES } from "../../constants/register_constants";
-import { useRegisterMutation } from "../../redux/api/authApi";
+import {ID_TYPES} from "../../constants/register_constants";
+import {useRegisterMutation} from "../../redux/api/authApi";
 import {
+  regSuccessAction,
   setVerificationImg1,
   setVerificationImg2,
   setVerificationType,
 } from "../../redux/slices/authSlices";
-import { initialRegState } from "../../redux/slices/initialRegState";
+import {initialRegState} from "../../redux/slices/initialRegState";
 import AuthServices from "../../services/authServices";
 
 function Varification() {
   const [err, setErr] = useState();
 
   const navigator = useNavigate();
+
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
   const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
@@ -138,6 +140,7 @@ function Varification() {
     // console.log(res, "fetch res");
     if (res.status === 200) {
       navigator("/register/success");
+      dispatch(regSuccessAction());
     } else {
       console.log("error");
     }
@@ -164,24 +167,21 @@ function Varification() {
               data-bs-toggle="dropdown"
               aria-expanded={dropdown ? "true" : "false"}
               onClick={toggleDropdown}
-              onBlur={delayedDismiss}
-            >
+              onBlur={delayedDismiss}>
               ID Type: {verification_type}
             </button>
             <ul
               className={`dropdown-menu w-100 p-2 shadow border-0 ${
                 dropdown ? " show" : ""
-              }`}
-            >
+              }`}>
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
                   <div
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
-                    onClick={() => dispatch(setVerificationType(idType))}
-                  >
+                    onClick={() => dispatch(setVerificationType(idType))}>
                     {idType}
                   </div>
                 </li>
@@ -210,7 +210,7 @@ function Varification() {
                     }
                     // src="/img/add-photo.svg"
                     alt="add id card"
-                    style={{ width: 136, height: 172 }}
+                    style={{width: 136, height: 172}}
                     className="object-cover rounded-1"
                   />
                 </label>
@@ -227,8 +227,7 @@ function Varification() {
               {!verification_img1 && (
                 <div
                   className="position-absolute text-center"
-                  style={{ bottom: "20%", left: 0, right: 0 }}
-                >
+                  style={{bottom: "20%", left: 0, right: 0}}>
                   Front Side
                 </div>
               )}
@@ -244,7 +243,7 @@ function Varification() {
                           : "/img/add-photo.svg"
                       }
                       alt="add id card"
-                      style={{ width: 136, height: 172 }}
+                      style={{width: 136, height: 172}}
                       className="object-cover rounded-1"
                     />
                   </label>
@@ -262,8 +261,7 @@ function Varification() {
                 {!verification_img2 && (
                   <div
                     className="position-absolute text-center"
-                    style={{ bottom: "20%", left: 0, right: 0 }}
-                  >
+                    style={{bottom: "20%", left: 0, right: 0}}>
                     Back Side
                   </div>
                 )}

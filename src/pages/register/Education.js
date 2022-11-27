@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -20,8 +20,21 @@ import {
 } from "../../redux/slices/authSlices";
 import {stoteRegisterValues} from "../../utils/functions";
 
+let scrollPos = 0;
+
 function Education() {
   const navigate = useNavigate();
+  const scrollContainerRef = useRef();
+  const onEducationSelectorClicked = useCallback(() => {
+    scrollPos = scrollContainerRef.current?.scrollTop;
+  }, []);
+  const resetScroll = useCallback(() => {
+    scrollPos = 0;
+  }, []);
+  useEffect(() => {
+    if (typeof scrollPos !== "undefined")
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
+  }, [onEducationSelectorClicked]);
   const {
     education1Other,
     education2Other,
@@ -144,12 +157,11 @@ function Education() {
       <RegisterLayout err={err} onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          // ref={scrollContainerRef}
-        >
+          ref={scrollContainerRef}>
           <h1>Candidate’s Educational Background</h1>
           <h4 className="mt-5 mb-2">Secondary Education</h4>
           <Link
-            // onClick={onEducationSelectorClicked}
+            onClick={onEducationSelectorClicked}
             to={"/register/education/type1"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
@@ -267,7 +279,7 @@ function Education() {
 
           <h4 className="mt-4 mb-2">Higher Secondary Education</h4>
           <Link
-            // onClick={onEducationSelectorClicked}
+            onClick={onEducationSelectorClicked}
             to={"/register/education/type2"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
@@ -385,7 +397,7 @@ function Education() {
 
           <h4 className="mt-4 mb-2">Graduate Education</h4>
           <Link
-            // onClick={onEducationSelectorClicked}
+            onClick={onEducationSelectorClicked}
             to={"/register/education/type3"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">

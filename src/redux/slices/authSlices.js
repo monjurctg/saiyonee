@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   token: null,
   isAuth: false,
+  isRegStart: false,
   isLoading: false,
   education1Other: false,
   education2Other: false,
@@ -169,6 +170,9 @@ const authSlice = createSlice({
       state.education4Other = payload;
     },
     setCurrentEmploymentTypeOther: (state, {payload}) => {},
+    setIsRegStart: (state) => {
+      state.isRegStart = true;
+    },
 
     loginSuccess: (state, action) => {
       state.isLoading = false;
@@ -186,12 +190,14 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuth = false;
     },
+    regSuccessAction: () => initialState,
   },
 });
 
 export const {
   setRegEmail_Pass,
   setGender,
+  regSuccessAction,
   setPersonalInfo,
   setMaritalStatus,
   setReligion,
@@ -231,5 +237,6 @@ export const {
   setCountry,
   setVerificationImg1,
   setVerificationImg2,
+  setIsRegStart,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,17 +1,22 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
 import {setRegEmail_Pass} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function RegisterEmail() {
   const [err, setErr] = useState();
   // let success = true;
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    email: Email,
+    password: Password,
+    password_confirmation,
+  } = useSelector((state) => state.auth);
+  const [email, setemail] = useState(Email);
+  const [password, setPassword] = useState(Password);
+  const [confirmPassword, setConfirmPassword] = useState(password_confirmation);
   // const [checkEmail, {isLoading, isSuccess, isError}] = useCheckEmailMutation();
 
   const navigate = useNavigate();
@@ -22,19 +27,19 @@ function RegisterEmail() {
     setisLoading(true);
     const res = await AuthServices.checkIsEmailUnique({email});
 
-      if (res.status === 200) {
-        setisLoading(false);
-        stoteRegisterValues({email, password,confirmPassword})
-        dispatch(setRegEmail_Pass({email, password,confirmPassword}));
-        navigate("/register/usertype");
-      } else {
-        setErr(res.data.message);
-        setisLoading(false);
-        return;
-      }
-}
+    if (res.status === 200) {
+      setisLoading(false);
+      stoteRegisterValues({email, password, confirmPassword});
+      dispatch(setRegEmail_Pass({email, password, confirmPassword}));
+      navigate("/register/usertype");
+    } else {
+      setErr(res.data.message);
+      setisLoading(false);
+      return;
+    }
+  };
 
-  const onContinueClicked = async() => {
+  const onContinueClicked = async () => {
     if (!email) {
       setErr("Email is Required");
 
@@ -49,7 +54,7 @@ function RegisterEmail() {
       setErr("password and confirmPassword does not match");
       return;
     }
-    checkEmail()
+    checkEmail();
     // let res = await AuthServices.checkIsEmailUnique({email});
     // console.log('res', res)
     // if (res) {
@@ -60,14 +65,14 @@ function RegisterEmail() {
     //     setErr(res.data.message);
     //     return;
     //   }
-  //   checkEmail({email})
-  //     .then(() => {
-  //       dispatch(setRegEmail_Pass({email, password, confirmPassword}));
-  //       navigate("/register/usertype");
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-  }
+    //   checkEmail({email})
+    //     .then(() => {
+    //       dispatch(setRegEmail_Pass({email, password, confirmPassword}));
+    //       navigate("/register/usertype");
+    //     })
+    //     .catch((err) => console.log(err));
+    // };
+  };
 
   return (
     <>
@@ -100,18 +105,25 @@ function RegisterEmail() {
         </div>
         <div className="card border-0 mt-n15 bg-transparent flex-grow-1 overflow-auto">
           <div className="card-body bg-body rounded p-4 overflow-auto">
-            <h1 className="card-title mt-3" style={{
-              fontFamily: "Inter",
-            }}>Create an account</h1>
-            <p className="card-text text-muted mt-3 mb-2" style={{
-              fontFamily: "Inter",
-            }}>
+            <h1
+              className="card-title mt-3"
+              style={{
+                fontFamily: "Inter",
+              }}>
+              Create an account
+            </h1>
+            <p
+              className="card-text text-muted mt-3 mb-2"
+              style={{
+                fontFamily: "Inter",
+              }}>
               Take a step towards finding someone awesome!
             </p>
             <div className="form-floating my-4 text-muted">
               <input
                 type="email"
-                id="inputEmail" style={{
+                id="inputEmail"
+                style={{
                   fontFamily: "Inter",
                 }}
                 value={email}
@@ -120,9 +132,13 @@ function RegisterEmail() {
                 placeholder="name@example.com"
                 aria-describedby="email"
               />
-              <label htmlFor="inputEmail" style={{
-              fontFamily: "Inter",
-            }}>Email ID</label>
+              <label
+                htmlFor="inputEmail"
+                style={{
+                  fontFamily: "Inter",
+                }}>
+                Email ID
+              </label>
             </div>
             <div className="form-floating my-4 text-muted">
               <input
@@ -134,14 +150,19 @@ function RegisterEmail() {
                 placeholder="******"
                 aria-describedby="password"
               />
-              <label htmlFor="inputPassword" style={{
-              fontFamily: "Inter",
-            }}>Password</label>
+              <label
+                htmlFor="inputPassword"
+                style={{
+                  fontFamily: "Inter",
+                }}>
+                Password
+              </label>
             </div>
             <div className="form-floating my-4 text-muted">
-              <input style={{
-              fontFamily: "Inter",
-            }}
+              <input
+                style={{
+                  fontFamily: "Inter",
+                }}
                 type="password"
                 id="inputConfirmPassword"
                 value={confirmPassword}
@@ -150,24 +171,31 @@ function RegisterEmail() {
                 placeholder="******"
                 aria-describedby="confirm-password"
               />
-              <label htmlFor="inputConfirmPassword" style={{
-              fontFamily: "Inter",
-            }}>Confirm Password</label>
+              <label
+                htmlFor="inputConfirmPassword"
+                style={{
+                  fontFamily: "Inter",
+                }}>
+                Confirm Password
+              </label>
             </div>
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2">
           {err && <p className="text-primary">* {err}</p>}
-          <button 
+          <button
             onClick={onContinueClicked}
             disabled={isLoading}
             style={{
-              height: 60,}}
-              
+              height: 60,
+            }}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong style={{
-              fontFamily: "Inter",
-            }}>Continue</strong>
+            <strong
+              style={{
+                fontFamily: "Inter",
+              }}>
+              Continue
+            </strong>
             {isLoading && (
               <>
                 {" "}
