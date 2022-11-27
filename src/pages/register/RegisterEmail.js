@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
+import BasicLayout from "../../components/layouts/BasicLayout";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
 import {setRegEmail_Pass} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
@@ -50,28 +51,11 @@ function RegisterEmail() {
       return;
     }
     checkEmail()
-    // let res = await AuthServices.checkIsEmailUnique({email});
-    // console.log('res', res)
-    // if (res) {
-    //   if (res.status === 200) {
-    //     dispatch(setRegEmail_Pass({email, password,confirmPassword}));
-    //     navigate("/register/usertype");
-    //   } else {
-    //     setErr(res.data.message);
-    //     return;
-    //   }
-  //   checkEmail({email})
-  //     .then(() => {
-  //       dispatch(setRegEmail_Pass({email, password, confirmPassword}));
-  //       navigate("/register/usertype");
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
   }
 
   return (
-    <>
-      <div className="vh-100 max-width-mobile mx-auto d-flex flex-column">
+    
+      <BasicLayout>
         <div className="position-relative">
           <img
             src="/img/bg.svg"
@@ -180,8 +164,8 @@ function RegisterEmail() {
             )}
           </button>
         </div>
-      </div>
-    </>
+      </BasicLayout>
+ 
   );
 }
 

@@ -1,10 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import BasicLayout from "../components/layouts/BasicLayout";
 
 function GetStarted() {
   return (
    
-      <div className="min-vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top">
+      <BasicLayout>
         <div className="position-relative">
           <img
             src="img/bg.svg"
@@ -43,7 +44,6 @@ function GetStarted() {
             </Link>
           </div>
         </div>
-
         <div className="container p-4">
           <div className="row">
             <div className="col">
@@ -68,7 +68,7 @@ function GetStarted() {
             </div>
           </div>
         </div>
-      </div>
+      </BasicLayout>
     
   );
 }

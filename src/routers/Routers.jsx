@@ -13,7 +13,6 @@ import RegisterEmail from "../pages/register/RegisterEmail";
 import RegisterUserType from "../pages/register/RegisterUserType";
 import Tutorial from "../pages/Tutorial";
 import PrivateRoute from "./PrivateRoute";
-import Wellcome from "../pages/Wellcome";
 import Varification from "../pages/register/Varification";
 import RegSuccess from "../pages/register/RegSuccess";
 import Religions from "../pages/register/Religions";
@@ -30,6 +29,7 @@ import LocationCity from "../pages/register/LocationCity";
 import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
+import Welcome from "../pages/Welcome";
 
 function Routers() {
  const location = useLocation()
@@ -37,7 +37,7 @@ function Routers() {
   return (
     <div style={{ background: location.pathname === "/register/email" ? "": "#e9ecef3b" }}>
       <Routes>
-        <Route path="/" element={<Wellcome />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/get-start" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
 
