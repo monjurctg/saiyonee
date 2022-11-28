@@ -37,6 +37,11 @@ import NotVarified from "./NotVarified";
 import {setIsVarified} from "../redux/slices/authSlices";
 
 function Routers() {
+  // console.log("getToken()", getToken());
+  // if(getToken()){
+  //   setRouteToken(getToken())
+  // }
+
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
