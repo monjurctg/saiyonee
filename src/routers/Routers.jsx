@@ -32,8 +32,12 @@ import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
 import {useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
+import { getToken } from "../utils/functions";
+import axios from "axios";
 
 function Routers() {
+  console.log("getToken()", getToken());
+  axios.defaults.headers.common["Authorization"] = `Bearer ${getToken()}`;
   const location = useLocation();
   const navigate = useNavigate();
 
