@@ -1,7 +1,6 @@
 import "./App.scss";
 import Routers from "./routers/Routers";
 import axios from "axios";
-import { getToken } from "./utils/functions";
 function App() {
 
   axios.defaults.headers["Accept"] = "application/json";
