@@ -6,8 +6,10 @@ function PrivateRoute() {
   let auth = getToken();
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
-
-  if (!auth) {
+  if (auth && isVarified == 0) {
+    return <Navigate to="/success" state={{from: location}} />;
+  }
+  if (!auth && isVarified != 1) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }
 

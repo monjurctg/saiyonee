@@ -19,16 +19,17 @@ function RegSuccess() {
   // }, []);
   const onClickLogout = async () => {
     let token = getToken();
+    localStorage.removeItem("saiyonee_auth_token");
+    localStorage.removeItem("isVarified");
+    navigate("/get-start");
+    // if (token) {
+    //   const res = await AuthServices.logout();
+    //   if (res.status === 200) {
 
-    if (token) {
-      const res = await AuthServices.logout();
-      if (res.status === 200) {
-        localStorage.removeItem("saiyonee_auth_token");
-        navigate("/get-start");
-      } else {
-        console.log(res);
-      }
-    }
+    //   } else {
+    //     console.log(res);
+    //   }
+    // }
   };
   return (
     <>
