@@ -9,18 +9,20 @@ function App() {
   axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
   axios.defaults.baseURL = "https://backend.saiyonee.com/api";
+  // console.log('getToken()', getToken())
+  axios.defaults.headers.common["Authorization"] = `Bearer ${getToken()}`;
 
-  if (navigator.onLine) {
-    console.log("online");
-  } else {
-    // localStorage.setItem("regStart", false);
-  }
+  // axios.defaults.headers.Authorization = getToken()  ? `Bearer ${getToken()}`: "";
+
+  // if (navigator.onLine) {
+  //   console.log("online");
+  // } else {
+  //   // localStorage.setItem("regStart", false);
+  // }
 
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();
-  // axios.defaults.headers.Authorization = access_token
-  //   ? `Bearer ${access_token}`
-  //   : "";
+ 
 
   return <Routers />;
 }

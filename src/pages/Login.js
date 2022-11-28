@@ -1,9 +1,57 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { useState } from "react";
+import {Link, useNavigate} from "react-router-dom";
+import AuthServices from "../services/authServices";
+import { setToken } from "../utils/functions";
 
 function Login() {
-  let access = true;
-  let err = true;
+
+  const [loading, setloading] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [err, setErr] = useState(null)
+  const navigator = useNavigate();
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    setloading(true)
+    let data = {
+      email: email,
+      password: password,
+    };
+
+    let formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
+    let res = await AuthServices.login(formData);
+    console.log('res', res.data)
+    if (res.status === 200) {
+      setloading(false)
+      setErr(false)
+      setToken( res.data.auth_token);
+      if(res.data.is_verified  === 0) navigator("/tutorial");
+      else navigator("/question/1");
+      // localStorage.setItem("user", JSON.stringify(res.data.user));
+      // window.location.href = "/";
+    } else {
+      setloading(false)
+      setErr(res.data.message)
+    }
+
+
+
+    console.log('data', data)
+  }
+  // let err = true;
   return (
     <>
       <div className="vh-100 max-width-mobile mx-auto d-flex flex-column"  style={{ background: "#e9ecef3b" }}>
@@ -43,8 +91,9 @@ function Login() {
               <input
                 type="email"
                 id="inputEmail"
-                // value={email}
-                // onChange={onEmailChange}
+                value={email}
+                name="email"
+                onChange={onChange}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
                 aria-describedby="email"
@@ -55,8 +104,9 @@ function Login() {
               <input
                 type="password"
                 id="inputPassword"
-                // value={password}
-                // onChange={onPasswordChange}
+                value={password}
+                name="password"
+                onChange={onChange}
                 className="form-control border-0 rounded-1"
                 placeholder="******"
                 aria-describedby="password"
@@ -69,11 +119,11 @@ function Login() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2">
-          {err && <p className="text-primary">* {err}</p>}
+          {err !== false && <p className="text-primary">* {err}</p>}
           <button
-            // onClick={onLoginClicked}
+            onClick={handleSubmit}
             disabled={
-              access
+              loading
               // status === FetchStatus.LOADING ||
               // verifyingPreviousLogin ||
               // isPrefetchingForms
@@ -84,7 +134,7 @@ function Login() {
               // (status === FetchStatus.LOADING ||
               // verifyingPreviousLogin ||
               //   isPrefetchingForms)
-              access && (
+              loading && (
                 <>
                   <i
                     className="spinner-border spinner-border-sm text-black"

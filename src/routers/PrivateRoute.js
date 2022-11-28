@@ -1,11 +1,12 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
+import { getToken } from "../utils/functions";
 
 function PrivateRoute() {
   // let auth = useAuth();
-  let auth = true;
+  let auth = getToken()
   let location = useLocation();
 
-  if (!auth.user) {
+  if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }
 
