@@ -5,7 +5,7 @@ import "./style.css";
 const EditProfile = () => {
     return (
         <>
-            <div className="vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top rounded-bottom"
+            <div className="editProfile vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top rounded-bottom"
                 style={{
                     backgroundColor: "#F9FAFB"
                 }}>
