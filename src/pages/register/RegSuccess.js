@@ -8,15 +8,15 @@ function RegSuccess() {
   // let token = getToken();
   // let isVarified = localStorage.getItem("isVarified");
 
-  useEffect(() => {
-    let token = getToken();
-    let isVarified = localStorage.getItem("isVarified");
-    if (token && isVarified == 0) {
-      console.log("ok");
-    } else {
-      navigate("/get-start");
-    }
-  }, []);
+  // useEffect(() => {
+  //   let token = getToken();
+  //   let isVarified = localStorage.getItem("isVarified");
+  //   if (token && isVarified == 0) {
+  //     console.log("ok");
+  //   } else {
+  //     navigate("/get-start");
+  //   }
+  // }, []);
   const onClickLogout = async () => {
     let token = getToken();
 

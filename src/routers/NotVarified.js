@@ -5,8 +5,8 @@ function NotVarified() {
   // let auth = getToken()
   let location = useLocation();
 
-  if (isVerified !== 0 || isVerified !== null) {
-    return <Navigate to="/success" state={{from: location}} />;
+  if (isVerified !== 0) {
+    return <Navigate to="/get-start" state={{from: location}} />;
   }
 
   return <Outlet />;

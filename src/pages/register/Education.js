@@ -144,6 +144,7 @@ function Education() {
       setErr("Please enter your Higher Secondary Institution");
     else if (!education2_major)
       setErr("Please enter your Higher Secondary Major");
+    else if (!education3) setErr("Please select your Graduate Education");
     else if (!education3_institution)
       setErr("Please enter your Higher Secondary Institution");
     else if (!education3_major) setErr("Please enter your Secondary Major");

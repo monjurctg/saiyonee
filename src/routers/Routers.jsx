@@ -45,28 +45,28 @@ function Routers() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const isVarified = localStorage.getItem("isVarified");
-  //   if (isVarified === 0) {
-  //     dispatch(setIsVarified(0));
-  //   } else if (isVarified === 1) {
-  //     dispatch(setIsVarified(1));
-  //   }
-  //   // console.log(registerStart);
-  //   if (location.pathname === "/register/email") {
-  //     // console.log(true, "path");
-  //   } else {
-  //     localStorage.setItem("regStart", false);
-  //   }
-  //   // if (registerStart) {
-  //   //   // console.log("first");
+  useEffect(() => {
+    const isVarified = localStorage.getItem("isVarified");
+    if (isVarified === 0) {
+      dispatch(setIsVarified(0));
+    } else if (isVarified === 1) {
+      dispatch(setIsVarified(1));
+    }
+    // console.log(registerStart);
+    if (location.pathname === "/register/email") {
+      // console.log(true, "path");
+    } else {
+      localStorage.setItem("regStart", false);
+    }
+    // if (registerStart) {
+    //   // console.log("first");
 
-  //   //   navigate("/register/email", {replace: true});
-  //   //   // navigate(1);
-  //   // } else {
-  //   //   return;
-  //   // }
-  // }, []);
+    //   navigate("/register/email", {replace: true});
+    //   // navigate(1);
+    // } else {
+    //   return;
+    // }
+  }, []);
   //  console.log('location', location)
   return (
     <div
@@ -150,7 +150,9 @@ function Routers() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/editProfile" element={<EditProfile />} />
         {/* not varified */}
-        <Route path="success" element={<RegSuccess />} />
+        <Route element={<NotVarified />}>
+          <Route path="/success" element={<RegSuccess />} />
+        </Route>
 
         <Route element={<PrivateRoute />}>
           <Route path="/tutorial" element={<Tutorial />} />

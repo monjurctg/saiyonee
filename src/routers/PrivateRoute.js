@@ -1,10 +1,11 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
-import { getToken } from "../utils/functions";
+import {getToken} from "../utils/functions";
 
 function PrivateRoute() {
   // let auth = useAuth();
-  let auth = getToken()
+  let auth = getToken();
   let location = useLocation();
+  const isVarified = localStorage.getItem("isVarified");
 
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;

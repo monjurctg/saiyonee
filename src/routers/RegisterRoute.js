@@ -7,7 +7,11 @@ function RegisterRoute() {
   let isRegister = localStorage.getItem("regStart");
   const {isRegStart} = useSelector((state) => state.auth);
   let location = useLocation();
+  const token = getToken();
 
+  if (!isRegStart && token) {
+    return <Navigate to="/success" state={{from: location}} />;
+  }
   if (!isRegStart) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }

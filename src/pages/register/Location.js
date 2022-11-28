@@ -9,10 +9,14 @@ function Location() {
 
   const {current_city, current_country} = useSelector((state) => state.auth);
 
+  console.log(
+    current_country == "Select candidate's current country",
+    "check current country"
+  );
   const onContinueClicked = () => {
-    if (current_country === "Select current country" || !current_country)
+    if (current_country == "Select candidate's current country")
       setErr("Please select a country");
-    else if (current_city === "Select current city" || !current_city)
+    else if (current_city === "Select candidate's current city")
       setErr("Please select a city");
     else navigate("/register/family_info");
   };
