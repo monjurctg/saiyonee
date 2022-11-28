@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import {USER_TYPES} from "../../constants/register_constants";
 import {setGender, setUserType} from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function RegisterUserType() {
   const navigate = useNavigate();
@@ -15,12 +15,12 @@ function RegisterUserType() {
     set_user_type(e.target.value);
   };
   const onClickNext = () => {
-    // if (!user_type) {
-    //   setErr("Please Select a user type");
-    //   return;
-    // }
+    if (!user_type) {
+      setErr("Please Select a user type");
+      return;
+    }
     dispatch(setUserType(user_type));
-    stoteRegisterValues({user_type: user_type})
+    stoteRegisterValues({user_type: user_type});
     navigate("/register/personal-info");
   };
   return (
@@ -35,9 +35,12 @@ function RegisterUserType() {
           </div>
         </div>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
-          <h1  style={{
+          <h1
+            style={{
               fontFamily: "Inter",
-            }}>I'm searching life partner for</h1>
+            }}>
+            I'm searching life partner for
+          </h1>
           {USER_TYPES.map((userType, i) => (
             <div
               key={i}
@@ -68,11 +71,12 @@ function RegisterUserType() {
         </div>
 
         <div className="container px-4 pb-4 pt-2">
+          {err && <p className="text-primary">* {err}</p>}
           <div
-          style={{height:60, fontFamily: "Inter"}}
+            style={{height: 60, fontFamily: "Inter"}}
             onClick={onClickNext}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-3">
-            <strong >Next</strong>
+            <strong>Next</strong>
           </div>
         </div>
       </div>

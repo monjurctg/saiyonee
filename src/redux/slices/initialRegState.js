@@ -41,6 +41,6 @@ export const initialRegState = {
   number_of_brothers: 0,
   number_of_sisters: 0,
   verification_type: "National ID",
-  verification_img1: null,
-  verification_img2: null,
+  verification_img1: "",
+  verification_img2: "",
 };
