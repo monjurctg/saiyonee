@@ -33,7 +33,7 @@ function PersonalInformation() {
     gender: gender,
   });
 
-  console.log("gender", gender);
+  // console.log("gender", gender);
 
   const handleUserInputChange = (e) => {
     setState({
@@ -52,11 +52,15 @@ function PersonalInformation() {
 
     navigate("/register/personalinfo/marital_status");
   };
+  // console.log(state.gender);
 
   const onContinueClicked = () => {
     if (!state.full_name) {
       setErr("Full name cannot be less than 6 characters long");
 
+      return;
+    } else if (!state.gender) {
+      setErr("Please select male or female");
       return;
     } else if (!state.height_ft || state.height_ft > 8 || state.height_ft < 3) {
       setErr("Height cannot be less than 3 feet or greater than 8 feet");

@@ -44,7 +44,7 @@ function Routers() {
     } else {
       localStorage.setItem("regStart", false);
     }
-    if (registerStart) {
+    if (registerStart === true) {
       console.log("first");
 
       navigate("/register/email", {replace: true});
