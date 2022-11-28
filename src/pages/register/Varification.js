@@ -139,7 +139,7 @@ function Varification() {
     const res = await AuthServices.register(formd);
     // console.log(res, "fetch res");
     if (res.status === 200) {
-      navigator("/register/success");
+      navigator("/success");
       dispatch(regSuccessAction());
     } else {
       console.log("error");

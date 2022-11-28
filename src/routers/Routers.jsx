@@ -31,28 +31,29 @@ import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
 import {useSelector} from "react-redux";
+import Question from "../pages/questions/Question";
 
 function Routers() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const registerStart = localStorage.getItem("regStart");
-    console.log(registerStart);
-    if (location.pathname === "/register/email") {
-      console.log(true, "path");
-    } else {
-      localStorage.setItem("regStart", false);
-    }
-    if (registerStart) {
-      console.log("first");
+  // useEffect(() => {
+  //   const registerStart = localStorage.getItem("regStart");
+  //   // console.log(registerStart);
+  //   if (location.pathname === "/register/email") {
+  //     // console.log(true, "path");
+  //   } else {
+  //     localStorage.setItem("regStart", false);
+  //   }
+  //   if (registerStart) {
+  //     // console.log("first");
 
-      navigate("/register/email", {replace: true});
-      // navigate(1);
-    } else {
-      return;
-    }
-  }, []);
+  //     navigate("/register/email", {replace: true});
+  //     // navigate(1);
+  //   } else {
+  //     return;
+  //   }
+  // }, []);
   //  console.log('location', location)
   return (
     <div
@@ -116,12 +117,14 @@ function Routers() {
         <Route path="register/family_info" element={<FamilyInfo />} />
 
         <Route path="register/varification" element={<Varification />} />
-        <Route path="register/success" element={<RegSuccess />} />
+        <Route path="success" element={<RegSuccess />} />
 
         {/* register process done */}
 
+
         <Route element={<PrivateRoute />}>
-          <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/question/:id" element={<Question />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         <Route path="/home" element={<Index />} />
