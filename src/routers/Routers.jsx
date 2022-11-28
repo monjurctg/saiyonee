@@ -35,12 +35,14 @@ import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
 import {setIsVarified} from "../redux/slices/authSlices";
+import { getToken } from "../utils/functions";
+import setRouteToken from "../utils/tokenSet";
 
 function Routers() {
   // console.log("getToken()", getToken());
-  // if(getToken()){
-  //   setRouteToken(getToken())
-  // }
+  if(getToken()){
+    setRouteToken(getToken())
+  }
 
   const location = useLocation();
   const navigate = useNavigate();
