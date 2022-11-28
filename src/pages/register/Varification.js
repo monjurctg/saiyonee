@@ -139,6 +139,7 @@ function Varification() {
     const res = await AuthServices.register(formd);
     // console.log(res, "fetch res");
     if (res.status === 200) {
+      localStorage.setItem("isVarified", 0);
       navigator("/success");
       dispatch(regSuccessAction());
     } else {

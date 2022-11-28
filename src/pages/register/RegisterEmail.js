@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import BasicLayout from "../../components/layouts/BasicLayout";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
-import {setRegEmail_Pass} from "../../redux/slices/authSlices";
+import {setIsRegStart, setRegEmail_Pass} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -34,6 +34,10 @@ function RegisterEmail() {
       return;
     }
   };
+
+  // useEffect(() => {
+
+  // }, [dispatch]);
 
   const onContinueClicked = async () => {
     if (!email) {

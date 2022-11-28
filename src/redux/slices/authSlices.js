@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   token: null,
   isAuth: false,
+  isVArified: 0,
   isRegStart: false,
   isLoading: false,
   education1Other: false,
@@ -190,6 +191,9 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuth = false;
     },
+    setIsVarified: (state, {payload}) => {
+      state.isVArified = payload;
+    },
     regSuccessAction: () => initialState,
   },
 });
@@ -197,6 +201,7 @@ const authSlice = createSlice({
 export const {
   setRegEmail_Pass,
   setGender,
+  setIsVarified,
   regSuccessAction,
   setPersonalInfo,
   setMaritalStatus,
