@@ -51,21 +51,20 @@ export const setSearchedData = (data) =>
 
 export const getSearchedData = () => localStorage.getItem("searched");
 
-export const log = (...args) => {
-  console.clear();
+// export const log = (...args) => {
+//   console.clear();
 
-  console.log(...args);
-};
+//   console.log(...args);
+// };
 
 export const stoteRegisterValues = (data) => {
-  const pdata = JSON.parse(window.localStorage.getItem("register")) || null
-  console.log('pdata', pdata)
+  const pdata = JSON.parse(window.localStorage.getItem("register")) || null;
+  // console.log("pdata", pdata);
   if (pdata) {
     let newData = {
       ...pdata,
       ...data,
-    }
+    };
     window.localStorage.setItem("register", JSON.stringify(newData));
-  }
-  else window.localStorage.setItem("register", JSON.stringify(data));
-}
+  } else window.localStorage.setItem("register", JSON.stringify(data));
+};

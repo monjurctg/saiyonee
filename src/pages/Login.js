@@ -32,12 +32,12 @@ function Login() {
     formData.append("password", data.password);
 
     let res = await AuthServices.login(formData);
-    console.log("res", res.data);
+    // console.log("res", res.data);
     if (res.status === 200) {
       setloading(false);
       setErr(false);
       setToken(res.data.auth_token);
-      console.log(res.data.is_verified);
+      // console.log(res.data.is_verified);
 
       if (res.data.is_verified == 0) {
         localStorage.setItem("isVarified", 0);
@@ -55,7 +55,7 @@ function Login() {
       setErr(res.data.message);
     }
 
-    console.log("data", data);
+    // console.log("data", data);
   };
   // let err = true;
   return (

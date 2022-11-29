@@ -127,12 +127,10 @@ function Varification() {
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
     });
-    // console.log("data", formd);
 
     const res = await AuthServices.register(formd);
-    // console.log(res, "fetch res");
+
     if (res.status == 200) {
-      console.log(res, "varification");
       setToken(res.data.auth_token);
       localStorage.setItem("isVarified", 0);
       localStorage.setItem("regStart", false);
@@ -143,12 +141,14 @@ function Varification() {
       console.log("error");
     }
   };
-  console.log(verification_img1, "verification_img1");
 
-  // useEffect(() => {
-  //   if (!verification_img1 || !verification_img2) setErr("Image is blank");
-  //   else if (verification_img1 && !verification_img2) setErr("Image");
-  // }, [verification_img1, verification_img2]);
+  useEffect(() => {
+    if (verification_img1.name && verification_img2.name) setErr("");
+
+    if (!verification_img1.name && !verification_img2.name)
+      setErr("Image is blank");
+    // else if (verification_img1 && !verification_img2) setErr("Image");
+  }, []);
 
   const handleImage1 = (e) => {
     dispatch(setVerificationImg1(e.target.files[0]));
