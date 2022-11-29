@@ -1,17 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
+import QuestionServices from "../../services/questionServices";
 
 function AddPhoto() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [image, setimage] = useState(false);
+  const navigate = useNavigate();
+  const [image, setimage] = useState(null);
+  const [image2, setimage2] = useState(null);
+  
+
+  const getImage = async () => {
+    let res = await QuestionServices.getProfileImage();
+    console.log("res", res.data.images);
+    if (res.status === 200) {
+      setimage2(res.data.images);
+    }
+  };
+
+  useEffect(() => {
+    getImage();
+  }, []);
 
   let onSubmit = async (e) => {
     e.preventDefault();
     // console.log("inputs");
+    // console.log("image", image);
+    let data = new FormData();
+    data.append("profile_img", image);
+    let res = await QuestionServices.submitProfilePhoto(data);
+    console.log("res", res);
+    if (res.status === 200) {
+      seterr(false);
+      navigate("/question/selfie-verification");
+    } else {
+      seterr(res.data.message);
+    }
   };
-  console.log("image", image);
   let imageClick = (e) => {
     e.preventDefault();
     document.getElementById("image").click();
@@ -20,10 +47,12 @@ function AddPhoto() {
   let fileChange = (e) => {
     e.preventDefault();
     let file = e.target.files[0];
+    // console.log('file', file)
     if (file) {
       if (file.size > 1000000) {
         seterr("File size is too large");
       } else {
+        // console.log('file', file)
         seterr(null);
         setlength(file.size);
         setimage(file);
@@ -49,14 +78,19 @@ function AddPhoto() {
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{ display:image && "none", cursor: "pointer" }}
+            style={{ display: image && "none", cursor: "pointer" }}
           />
 
           <img
-            src={image && URL.createObjectURL(image)}
+            src={
+              image2?.profile_img
+                ? image2?.profile_img
+                : image
+                ? URL.createObjectURL(image)
+                : null
+            }
             alt=""
             onClick={imageClick}
-
             style={{
               width: image && "100%",
               borderRadius: 24,

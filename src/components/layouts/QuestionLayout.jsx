@@ -9,6 +9,7 @@ function QuestionLayout({
   length,
   title,
   loading,
+  imageClick
 }) {
   // console.log("length", length);
   // let { id } = useParams();
@@ -49,7 +50,7 @@ function QuestionLayout({
           <div>
             <button
               style={{ height: 60 }}
-              onClick={onContinueClicked}
+              onClick={imageClick}
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn"
             >
               <strong>Upload A Photo</strong>
@@ -57,7 +58,8 @@ function QuestionLayout({
 
             <button
               style={{ height: 60 }}
-              onClick={onContinueClicked}
+              onClick={imageClick}
+
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake"
             >
               <strong>Retake</strong>

@@ -19,5 +19,41 @@ QuestionServices.answer = async (data) => {
     .catch((err) => err.response);
   return res;
 };
+QuestionServices.getProfileImage = async () => {
+  let url = "user_images/get_profile_images";
+  let res = axios
+    .get(url)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+}
 
+
+QuestionServices.submitProfilePhoto = async (data) => {
+  // console.log('data', data)
+  let url = "user_images/submit_profile_images";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
+QuestionServices.getSelfieImage = async () => {
+  let url = "user_images/get_selfie_image";
+  let res = axios
+    .get(url)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+}
+
+QuestionServices.submitSelfiePhoto = async (data) => {
+  // console.log('data', data)
+  let url = "user_images/submit_selfie_image";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 export default QuestionServices;
