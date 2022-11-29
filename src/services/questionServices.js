@@ -10,5 +10,14 @@ QuestionServices.getQuestions = async () => {
     .catch((err) => err.response);
   return res;
 }
+QuestionServices.answer = async (data) => {
+  // console.log('data', data)
+  let url = "form_fields/submit_form_field_answer";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 
 export default QuestionServices;
