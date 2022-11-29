@@ -64,6 +64,12 @@ function PersonalInformation() {
       return;
     } else if (!state.height_ft || state.height_ft > 8 || state.height_ft < 3) {
       setErr("Height cannot be less than 3 feet or greater than 8 feet");
+    } else if (
+      !state.height_inc ||
+      state.height_inc >= 11 ||
+      state.height_inc < 0
+    ) {
+      setErr("Height cannot be less than 0 inches or greater than 11 inches");
     } else if (!marital_status || marital_status === "Select marital status") {
       setErr("Please select marital status");
     } else {

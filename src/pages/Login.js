@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import AuthServices from "../services/authServices";
-import { setToken } from "../utils/functions";
+import {setToken} from "../utils/functions";
 
 function Login() {
-
-  const [loading, setloading] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [err, setErr] = useState(null)
+  const [loading, setloading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState(null);
   const navigator = useNavigate();
 
   const onChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
@@ -20,9 +19,9 @@ function Login() {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setloading(true)
+    setloading(true);
     let data = {
       email: email,
       password: password,
@@ -33,28 +32,37 @@ function Login() {
     formData.append("password", data.password);
 
     let res = await AuthServices.login(formData);
-    console.log('res', res.data)
+    console.log("res", res.data);
     if (res.status === 200) {
-      setloading(false)
-      setErr(false)
-      setToken( res.data.auth_token);
-      if(res.data.is_verified  === 0) navigator("/tutorial");
-      else navigator("/question/1");
+      setloading(false);
+      setErr(false);
+      setToken(res.data.auth_token);
+      console.log(res.data.is_verified);
+
+      if (res.data.is_verified == 0) {
+        localStorage.setItem("isVarified", 0);
+
+        navigator("/success");
+      } else {
+        localStorage.setItem("isVarified", 1);
+
+        navigator("/question/1");
+      }
       // localStorage.setItem("user", JSON.stringify(res.data.user));
       // window.location.href = "/";
     } else {
-      setloading(false)
-      setErr(res.data.message)
+      setloading(false);
+      setErr(res.data.message);
     }
 
-
-
-    console.log('data', data)
-  }
+    console.log("data", data);
+  };
   // let err = true;
   return (
     <>
-      <div className="vh-100 max-width-mobile mx-auto d-flex flex-column"  style={{ background: "#e9ecef3b" }}>
+      <div
+        className="vh-100 max-width-mobile mx-auto d-flex flex-column"
+        style={{background: "#e9ecef3b"}}>
         <div className="position-relative">
           <img
             src="img/bg.svg"

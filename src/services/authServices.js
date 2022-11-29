@@ -26,8 +26,8 @@ AuthServices.register = async (data) => {
     .post(url, data)
     .then((response) => response)
     .catch((err) => err.response);
-    return res;
-}
+  return res;
+};
 
 AuthServices.login = async (data) => {
   // console.log('data', data)
@@ -36,8 +36,16 @@ AuthServices.login = async (data) => {
     .post(url, data)
     .then((response) => response)
     .catch((err) => err.response);
-    return res;
-}
-
+  return res;
+};
+AuthServices.logout = async () => {
+  // console.log('data', data)
+  let url = "/ApiLogout";
+  let res = axios
+    .post(url)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 
 export default AuthServices;

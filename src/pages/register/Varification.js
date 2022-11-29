@@ -7,12 +7,14 @@ import {ID_TYPES} from "../../constants/register_constants";
 import {useRegisterMutation} from "../../redux/api/authApi";
 import {
   regSuccessAction,
+  setIsRegStart,
   setVerificationImg1,
   setVerificationImg2,
   setVerificationType,
 } from "../../redux/slices/authSlices";
 import {initialRegState} from "../../redux/slices/initialRegState";
 import AuthServices from "../../services/authServices";
+import {setToken} from "../../utils/functions";
 
 function Varification() {
   const [err, setErr] = useState();
@@ -138,7 +140,12 @@ function Varification() {
 
     const res = await AuthServices.register(formd);
     // console.log(res, "fetch res");
-    if (res.status === 200) {
+    if (res.status == 200) {
+      console.log(res, "varification");
+      setToken(res.data.auth_token);
+      localStorage.setItem("isVarified", 0);
+      localStorage.setItem("regStart", false);
+      dispatch(setIsRegStart(false));
       navigator("/success");
       dispatch(regSuccessAction());
     } else {

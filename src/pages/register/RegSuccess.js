@@ -1,6 +1,36 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import AuthServices from "../../services/authServices";
+import {getToken} from "../../utils/functions";
 
 function RegSuccess() {
+  const navigate = useNavigate();
+  // let token = getToken();
+  // let isVarified = localStorage.getItem("isVarified");
+
+  // useEffect(() => {
+  //   let token = getToken();
+  //   let isVarified = localStorage.getItem("isVarified");
+  //   if (token && isVarified == 0) {
+  //     console.log("ok");
+  //   } else {
+  //     navigate("/get-start");
+  //   }
+  // }, []);
+  const onClickLogout = async () => {
+    let token = getToken();
+    localStorage.removeItem("saiyonee_auth_token");
+    localStorage.removeItem("isVarified");
+    navigate("/get-start");
+    // if (token) {
+    //   const res = await AuthServices.logout();
+    //   if (res.status === 200) {
+
+    //   } else {
+    //     console.log(res);
+    //   }
+    // }
+  };
   return (
     <>
       <div className="text-center min-vh-100 max-width-mobile mx-auto">
@@ -22,7 +52,9 @@ function RegSuccess() {
                   </p>
                 </div>
               </div>
-              <button className="btn btn-primary w-100 rounded shadow p-3 my-4">
+              <button
+                className="btn btn-primary w-100 rounded shadow p-3 my-4"
+                onClick={onClickLogout}>
                 <strong>Logout</strong>
               </button>
             </div>

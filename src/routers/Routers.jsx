@@ -30,10 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
+import RegisterRoute from "./RegisterRoute";
+import NotVarified from "./NotVarified";
+import {setIsVarified} from "../redux/slices/authSlices";
 import { getToken } from "../utils/functions";
-import axios from "axios";
 import setRouteToken from "../utils/tokenSet";
 
 function Routers() {
@@ -44,24 +46,29 @@ function Routers() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const isVarified = localStorage.getItem("isVarified");
+    if (isVarified === 0) {
+      dispatch(setIsVarified(0));
+    } else if (isVarified === 1) {
+      dispatch(setIsVarified(1));
+    }
+    // console.log(registerStart);
+    if (location.pathname === "/register/email") {
+      // console.log(true, "path");
+    } else {
+      localStorage.setItem("regStart", false);
+    }
+    // if (registerStart) {
+    //   // console.log("first");
 
-  // useEffect(() => {
-  //   const registerStart = localStorage.getItem("regStart");
-  //   // console.log(registerStart);
-  //   if (location.pathname === "/register/email") {
-  //     // console.log(true, "path");
-  //   } else {
-  //     localStorage.setItem("regStart", false);
-  //   }
-  //   if (registerStart) {
-  //     // console.log("first");
-
-  //     navigate("/register/email", {replace: true});
-  //     // navigate(1);
-  //   } else {
-  //     return;
-  //   }
-  // }, []);
+    //   navigate("/register/email", {replace: true});
+    //   // navigate(1);
+    // } else {
+    //   return;
+    // }
+  }, []);
   //  console.log('location', location)
   return (
     <div
@@ -73,66 +80,85 @@ function Routers() {
         <Route path="/get-start" element={<GetStarted />} />
         <Route path="/login" element={<Login />} />
 
+        <Route element={<RegisterRoute />}>
+          {/* register process routing */}
+          <Route path="/register/email" element={<RegisterEmail />} />
+          <Route path="/register/usertype" element={<RegisterUserType />} />
+
+          {/* personal info route start */}
+          <Route
+            path="register/personal-info"
+            element={<PersonalInformation />}
+          />
+          <Route
+            path="register/personalinfo/religion"
+            element={<Religions />}
+          />
+          <Route
+            path="register/personalinfo/marital_status"
+            element={<MaritalStatus />}
+          />
+          {/* personal info route end */}
+
+          {/* education type */}
+          <Route path="/register/education" element={<Education />} />
+          <Route
+            path="/register/education/type1"
+            element={<EducationTypes1 />}
+          />
+          <Route
+            path="/register/education/type2"
+            element={<EducationTypes2 />}
+          />
+          <Route
+            path="/register/education/type3"
+            element={<EducationType3 />}
+          />
+          <Route
+            path="/register/education/type4"
+            element={<EducationTypes4 />}
+          />
+
+          {/* education type end */}
+
+          {/* ocupation type */}
+          <Route path="register/ocupation" element={<Ocupation />} />
+          <Route path="register/ocupation/type" element={<OcupationTypes />} />
+
+          <Route path="register/ocupation/industry" element={<Industry />} />
+
+          {/* ocupation route end */}
+
+          {/* location route  */}
+
+          <Route path="/register/location" element={<Location />} />
+          <Route
+            path="/register/location/country"
+            element={<LocationCountry />}
+          />
+
+          <Route path="/register/location/city" element={<LocationCity />} />
+
+          {/* location route   end*/}
+
+          <Route path="register/family_info" element={<FamilyInfo />} />
+
+          <Route path="register/varification" element={<Varification />} />
+
+          {/* register process done */}
+        </Route>
+
         {/* Sazid */}
         <Route path="/settings" element={<Settings />} />
         <Route path="/editProfile" element={<EditProfile />} />
-
-        {/* register process routing */}
-        <Route path="/register/email" element={<RegisterEmail />} />
-        <Route path="/register/usertype" element={<RegisterUserType />} />
-
-        {/* personal info route start */}
-        <Route
-          path="register/personal-info"
-          element={<PersonalInformation />}
-        />
-        <Route path="register/personalinfo/religion" element={<Religions />} />
-        <Route
-          path="register/personalinfo/marital_status"
-          element={<MaritalStatus />}
-        />
-        {/* personal info route end */}
-
-        {/* education type */}
-        <Route path="/register/education" element={<Education />} />
-        <Route path="/register/education/type1" element={<EducationTypes1 />} />
-        <Route path="/register/education/type2" element={<EducationTypes2 />} />
-        <Route path="/register/education/type3" element={<EducationType3 />} />
-        <Route path="/register/education/type4" element={<EducationTypes4 />} />
-
-        {/* education type end */}
-
-        {/* ocupation type */}
-        <Route path="register/ocupation" element={<Ocupation />} />
-        <Route path="register/ocupation/type" element={<OcupationTypes />} />
-
-        <Route path="register/ocupation/industry" element={<Industry />} />
-
-        {/* ocupation route end */}
-
-        {/* location route  */}
-
-        <Route path="/register/location" element={<Location />} />
-        <Route
-          path="/register/location/country"
-          element={<LocationCountry />}
-        />
-
-        <Route path="/register/location/city" element={<LocationCity />} />
-
-        {/* location route   end*/}
-
-        <Route path="register/family_info" element={<FamilyInfo />} />
-
-        <Route path="register/varification" element={<Varification />} />
-        <Route path="success" element={<RegSuccess />} />
-
-        {/* register process done */}
-
+        {/* not varified */}
+        <Route element={<NotVarified />}>
+          <Route path="/success" element={<RegSuccess />} />
+        </Route>
 
         <Route element={<PrivateRoute />}>
-        <Route path="/tutorial" element={<Tutorial />} />
-        <Route path="/question/:id" element={<Question />} />
+          <Route path="/tutorial" element={<Tutorial />} />
+          <Route path="/question/:id" element={<Question />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
         <Route path="/home" element={<Index />} />

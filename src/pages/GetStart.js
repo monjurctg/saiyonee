@@ -1,10 +1,14 @@
 import React from "react";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
+import {setIsRegStart} from "../redux/slices/authSlices";
 
 function GetStarted() {
+  const dispatch = useDispatch();
   const registerStart = () => {
     localStorage.setItem("regStart", true);
+    dispatch(setIsRegStart(true));
   };
   let subItem = (
     <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
