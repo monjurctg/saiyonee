@@ -1,3 +1,26 @@
-.editProfile{
-    
+.central_items {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+h3,
+h4 {
+    margin-top: 50px;
+}
+
+.custom-primary {
+    margin-left: 30px;
+    width: 150px;
+    height: 50px;
+    background-color: #FFB7AC;
+    border-radius: 25px
+}
+
+
+
+.custom-primary:hover {
+    background-color: #fff;
+    color: #FFB7AC;
+    border: 1px solid #FFB7AC
 }

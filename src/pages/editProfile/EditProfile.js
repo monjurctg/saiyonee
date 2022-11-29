@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputLayOut from './InputLayOut';
 
-import "./style.css";
+import "./../../assets/css/editProfile.scss";
 
 const EditProfile = () => {
 

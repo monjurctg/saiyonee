@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import "./style.css";
+import "./../../assets/css/settingsStyle.scss";
 
 const Settings = () => {
 
