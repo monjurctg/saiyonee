@@ -203,6 +203,14 @@
     border: 1.5px dashed #ffb7ac;
     border-radius: 24px;
   }
+  .image-round {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+    /* Primary/Primary color */
+    border-radius: 50%;
+    border: 4px dashed #ffb7ac;
+  }
   .instruction {
     h4 {
       font-family: "Inter";
@@ -216,11 +224,67 @@
 
       color: #1f2937;
     }
-    p{
+    p {
       text-align: start;
       font-size: 12px;
       line-height: 22px;
       margin-bottom: 0;
     }
   }
+}
+
+.retake {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 19px 66px;
+  gap: 10px;
+
+  width: 306px;
+  height: 57px;
+
+  /* White */
+
+  background: #ffffff;
+  /* Primary/Primary color */
+
+  border: 1px solid #ffb7ac;
+  /* EV-01 */
+
+  box-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
+  border-radius: 100px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  /* Main Text */
+
+  color: #1f2937;
+}
+
+.upload-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 19px 66px;
+  gap: 8px;
+
+  width: 306px;
+  height: 57px;
+
+  /* Primary/Primary color */
+
+  background: #ffb7ac;
+  /* Primary/Primary color */
+
+  border: 1px solid #ffb7ac;
+  /* EV-01 */
+
+  box-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
+  border-radius: 100px;
 }

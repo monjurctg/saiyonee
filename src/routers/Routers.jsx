@@ -38,6 +38,7 @@ import {setIsVarified} from "../redux/slices/authSlices";
 import { getToken } from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
+import SelfieVerification from "../pages/questions/SelfieVerification";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -164,6 +165,8 @@ function Routers() {
         </Route>
 
         <Route path="/question/image" element={<AddPhoto/>} />
+        <Route path="/question/selfie-verification" element={<SelfieVerification/>} />
+
         <Route path="/home" element={<Index />} />
         <Route path="/explore" element={<Explore />} />
 
