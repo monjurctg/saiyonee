@@ -35,15 +35,15 @@ import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
 import {setIsVarified} from "../redux/slices/authSlices";
-import { getToken } from "../utils/functions";
+import {getToken} from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
 
 function Routers() {
   // console.log("getToken()", getToken());
-  if(getToken()){
-    setRouteToken(getToken())
+  if (getToken()) {
+    setRouteToken(getToken());
   }
 
   const location = useLocation();
@@ -164,8 +164,11 @@ function Routers() {
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
 
-        <Route path="/question/image" element={<AddPhoto/>} />
-        <Route path="/question/selfie-verification" element={<SelfieVerification/>} />
+        <Route path="/question/image" element={<AddPhoto />} />
+        <Route
+          path="/question/selfie-verification"
+          element={<SelfieVerification />}
+        />
 
         <Route path="/home" element={<Index />} />
         <Route path="/explore" element={<Explore />} />

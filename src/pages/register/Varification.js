@@ -17,25 +17,16 @@ import AuthServices from "../../services/authServices";
 import {setToken} from "../../utils/functions";
 
 function Varification() {
-  const [err, setErr] = useState();
+  const [err, setErr] = useState("Image is blank");
 
   const navigator = useNavigate();
 
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
   const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
-  // const [redirect, setRedirect] = useState("");
 
-  // let verification_type = "National ID";
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!verification_img1) setErr("Photo is blank");
-  }, []);
 
-  // // let dropdown = "";
-  // let ID_TYPES = ["abc", "bcd", "xyz"];
-  // let verification_img1 = true;
-  // let verification_img2 = true;
   const {
     full_name,
     email,
@@ -151,10 +142,21 @@ function Varification() {
     } else {
       console.log("error");
     }
-    // register({data}).then((da) => {
-    //   // navigator("/register/success");
-    //   console.log(da,'das');
-    // });
+  };
+  console.log(verification_img1, "verification_img1");
+
+  // useEffect(() => {
+  //   if (!verification_img1 || !verification_img2) setErr("Image is blank");
+  //   else if (verification_img1 && !verification_img2) setErr("Image");
+  // }, [verification_img1, verification_img2]);
+
+  const handleImage1 = (e) => {
+    dispatch(setVerificationImg1(e.target.files[0]));
+    setErr(!verification_img2 ? "Image2 is blank" : "");
+  };
+  const handleImage2 = (e) => {
+    dispatch(setVerificationImg2(e.target.files[0]));
+    setErr(!verification_img1 ? "Image1 is blank" : "");
   };
   return (
     <>
@@ -226,9 +228,7 @@ function Varification() {
                   type="file"
                   accept="image/*"
                   id="fileFrontSide"
-                  onChange={(e) =>
-                    dispatch(setVerificationImg1(e.target.files[0]))
-                  }
+                  onChange={handleImage1}
                 />
               </button>
               {!verification_img1 && (
@@ -259,10 +259,7 @@ function Varification() {
                     type="file"
                     accept="image/*"
                     id="fileBackSide"
-                    onChange={(e) =>
-                      // console.log('e', e.target.files[0])
-                      dispatch(setVerificationImg2(e.target.files[0]))
-                    }
+                    onChange={handleImage2}
                   />
                 </button>
                 {!verification_img2 && (

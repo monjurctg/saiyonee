@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -7,7 +7,7 @@ import {
   setEmployName,
   setWorkingSince,
 } from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function Ocupation() {
   const [err, setErr] = useState();
@@ -30,12 +30,29 @@ function Ocupation() {
 
   // console.log('current_employment_type',current_employment_type !== ("Unemployed" || "Student"))
   let onContinueClicked = () => {
-    if(current_employment_type.length === 0) setErr("Please select employment type");
-    else if( current_employment_type !== ("Unemployed" || "Student") && industry === "Select Industry") setErr("Please select Industry");
-    else if( current_employment_type !== ("Unemployed" || "Student") && !employer_name) setErr("Employer cannot be blank");
-    else if(current_employment_type !== ("Unemployed" || "Student") && !designation) setErr("Designation cannot be blank");
-    
-else navigate("/register/location");
+    if (current_employment_type.length === 0)
+      setErr("Please select employment type");
+    else if (
+      current_employment_type !== ("Unemployed" || "Student") &&
+      industry === "Select Industry"
+    )
+      setErr("Please select Industry");
+    else if (
+      current_employment_type !== ("Unemployed" || "Student") &&
+      !employer_name
+    )
+      setErr("Employer cannot be blank");
+    else if (
+      current_employment_type !== ("Unemployed" || "Student") &&
+      !working_since
+    )
+      setErr("Working since is  mandatory");
+    else if (
+      current_employment_type !== ("Unemployed" || "Student") &&
+      !designation
+    )
+      setErr("Designation cannot be blank");
+    else navigate("/register/location");
   };
   return (
     <>
@@ -104,11 +121,9 @@ else navigate("/register/location");
                     id="inputEmployer"
                     value={employer_name}
                     onChange={(e) => {
-                      dispatch(setEmployName(e.target.value))
-                      stoteRegisterValues({employer_name: e.target.value})
-                    }
-
-                    }
+                      dispatch(setEmployName(e.target.value));
+                      stoteRegisterValues({employer_name: e.target.value});
+                    }}
                     //   onChange={onEmployerNameChanged}
                     className="form-control border-0 rounded-1"
                     placeholder="employer"
@@ -122,11 +137,9 @@ else navigate("/register/location");
                     id="inputDesignation"
                     value={designation}
                     onChange={(e) => {
-                      dispatch(setDesignation(e.target.value))
-                      stoteRegisterValues({designation: e.target.value})
-                    
-                    }
-                  }
+                      dispatch(setDesignation(e.target.value));
+                      stoteRegisterValues({designation: e.target.value});
+                    }}
                     className="form-control border-0 rounded-1"
                     placeholder="designation"
                     aria-describedby="designation"
@@ -140,9 +153,9 @@ else navigate("/register/location");
                     className="form-control border-0 rounded-1"
                     placeholder="name@example.com"
                     aria-describedby="workingSinceDate"
-                    onChange={(e) => {dispatch(setWorkingSince(e.target.value))
-                      stoteRegisterValues({working_since: e.target.value})
-                    
+                    onChange={(e) => {
+                      dispatch(setWorkingSince(e.target.value));
+                      stoteRegisterValues({working_since: e.target.value});
                     }}
                     value={working_since}
                     //   onChange={onWorkingSinceDateChange}
