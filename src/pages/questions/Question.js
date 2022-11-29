@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
-import Loader from "../../components/Loader";
 import QuestionServices from "../../services/questionServices";
 
 function Question() {
@@ -141,17 +140,15 @@ function Question() {
     console.log("data",formData);
   };
   return (
-    <QuestionLayout err={err} onContinueClicked={onSubmit} length={length}>
-      {loading && <Loader />}
-      <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
-        <h1>{question?.title}</h1>
+    <QuestionLayout err={err} onContinueClicked={onSubmit} length={length} loading={loading} title={question?.title}>
+    
 
         <div className="mt-4 mb-5">
           <h4 className="mb-2">{question?.label}</h4>
 
           {field}
         </div>
-      </div>
+      
     </QuestionLayout>
   );
 }

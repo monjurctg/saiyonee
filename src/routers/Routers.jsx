@@ -37,6 +37,7 @@ import NotVarified from "./NotVarified";
 import {setIsVarified} from "../redux/slices/authSlices";
 import { getToken } from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
+import AddPhoto from "../pages/questions/AddPhoto";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -161,6 +162,8 @@ function Routers() {
           <Route path="/question/:id" element={<Question />} />
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
+
+        <Route path="/question/image" element={<AddPhoto/>} />
         <Route path="/home" element={<Index />} />
         <Route path="/explore" element={<Explore />} />
 
