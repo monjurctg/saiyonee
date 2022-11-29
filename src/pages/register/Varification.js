@@ -1,4 +1,5 @@
 import axios from "axios";
+// import {set} from "immer/dist/internal";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -143,11 +144,19 @@ function Varification() {
   };
 
   useEffect(() => {
-    if (verification_img1.name && verification_img2.name) setErr("");
-
-    if (!verification_img1.name && !verification_img2.name)
+    if (verification_img1.name) {
+      if (verification_img2.name) {
+        setErr("");
+      } else {
+        setErr("Image2 is blank");
+      }
+    } else if (verification_img2.name) {
+      if (verification_img1.name) {
+        setErr("Image1 is blank");
+      }
+    } else {
       setErr("Image is blank");
-    // else if (verification_img1 && !verification_img2) setErr("Image");
+    }
   }, []);
 
   const handleImage1 = (e) => {
