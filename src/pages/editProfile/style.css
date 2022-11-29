@@ -9,17 +9,18 @@ h4 {
     margin-top: 50px;
 }
 
-
-/* .btn-primary {
-    margin-top: 28px;
-    width: 200px;
+.custom-primary {
+    margin-left: 30px;
+    width: 150px;
     height: 50px;
     background-color: #FFB7AC;
-    border-radius: 25px;
+    border-radius: 25px
 }
 
-.btn-primary:hover {
+
+
+.custom-primary:hover {
     background-color: #fff;
     color: #FFB7AC;
     border: 1px solid #FFB7AC
-} */
+}

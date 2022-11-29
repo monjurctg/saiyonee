@@ -1,85 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
+import InputLayOut from './InputLayOut';
 
 import "./style.css";
 
 const EditProfile = () => {
+
+    const [err, seterr] = useState(null);
+    const [length, setlength] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [image, setimage] = useState(false);
+
+    let imageClick = (e) => {
+        e.preventDefault();
+        document.getElementById("image").click();
+    };
+
+    let onSubmit = async (e) => {
+        e.preventDefault();
+        // console.log("inputs");
+    };
+
+    let fileChange = (e) => {
+        e.preventDefault();
+        let file = e.target.files[0];
+        if (file) {
+            if (file.size > 1000000) {
+                seterr("File size is too large");
+            } else {
+                seterr(null);
+                setlength(file.size);
+                setimage(file);
+            }
+        }
+    };
+
     return (
-        <>
-            <div className="editProfile vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top rounded-bottom"
-                style={{
-                    backgroundColor: "#F9FAFB"
-                }}>
-                <div className="position-relative">
-                    <div className="position-absolute container position-top mt-6">
+        <InputLayOut
+            err={err}
+            onContinueClicked={onSubmit}
+            length={length}
+            title={"Edit Profile"}
+            loading={loading}
+        >
+            <div className="question mt-3">
 
-                        <button
-                            // onClick={history.goBack}
-                            className="btn btn-light rounded-circle shadow p-3 image-invert float-start"
-                            style={{
-                                height: "58px",
-                                width: "58px",
-                                backgroundColor: "#FFB7AC"
-                            }}>
-                            <img src="/img/back-icon.svg" alt="back" />
-                        </button>
-                    </div>
-                </div>
-                <div className='central_items'>
-                    <h3>
-                        Edit Profile
-                    </h3>
+                <div className="image-upload mt-4">
+                    <img
+                        src="/img/plus-round.svg"
+                        alt=""
+                        onClick={imageClick}
+                        style={{ display: image && "none", cursor: "pointer" }}
+                    />
 
                     <img
-                        className='rounded-circle'
-                        src="img/image-alt.svg"
+                        src={image && URL.createObjectURL(image)}
+                        alt=""
+                        onClick={imageClick}
+
                         style={{
-                            marginTop: "50px",
-                            height: "200px",
-                            width: "200px",
-                            color: "#FFB7AC",
-                            backgroundColor: "#FFB7AC"
+                            width: image && "100%",
+                            borderRadius: 24,
+                            height: image && "100%",
                         }}
                     />
-                    <br />
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                    // onClick={ }
-                    >
-                        {/* <input
-                            class="form-control"
-                            type="file"
-                            id="formFile"
-                            style={{
-                                visibility: "hidden"
-                            }}
-                        /> */}
-                        Take Selfie
-                    </button>
+
+                    <input
+                        type="file"
+                        id="image"
+                        style={{ display: "none" }}
+                        onChange={fileChange}
+                    />
                 </div>
+                <div></div>
 
-                <div
-                    className='d-flex justify-content-between'
-                    style={{
-                        marginRight: "10px",
-                        marginLeft: "10px"
-                    }}
-                >
-                    <h4>
-                        About
-                    </h4>
+                <div className="instruction my-4">
+                    <h4>About</h4>
 
-                    <img
-                        height="16px"
-                        src='img/edit.png'
+                    <p>
+                        Dont be shy. Express yourself
+                    </p>
+
+                    <textarea
+                        class="form-control"
+                        id="description"
+                        rows="10"
+                        placeholder=" Write About Yourself"
                         style={{
-                            marginTop: "50px"
+                            borderRadius: "20px"
                         }}
                     />
                 </div>
-
             </div>
-        </>
+        </InputLayOut>
     )
 }
 

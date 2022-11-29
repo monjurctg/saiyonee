@@ -68,25 +68,26 @@ const Settings = () => {
 
                     </div>
 
-                    <button
-                        type="button"
-                        class="btn btn-outline-secondary"
-                    >
-                        View Profile
-                    </button>
+                    <div style={{
+                        display: "inline"
+                    }}>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                        >
+                            View Profile
+                        </button>
 
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        style={{
-                            marginLeft: "30px"
-                        }}
-                        onClick={() => {
-                            Navigate("/editProfile")
-                        }}
-                    >
-                        Edit Profile
-                    </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary custom-primary"
+                            onClick={() => {
+                                Navigate("/editProfile")
+                            }}
+                        >
+                            Edit Profile
+                        </button>
+                    </div>
 
                 </div>
             </div>
