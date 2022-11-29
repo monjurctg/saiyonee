@@ -73,7 +73,7 @@ function Login() {
             <div className="row justify-content-center">
               <div className="col-2 ps-3">
                 <button
-                  // onClick={history.goBack}
+                  onClick={() => navigator(-1)}
                   className="btn btn-light rounded-circle shadow p-3 image-invert"
                   style={{height: "58px", width: "58px"}}>
                   <img src="/img/back-icon.svg" alt="back" />
