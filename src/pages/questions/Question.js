@@ -100,7 +100,7 @@ function Question() {
           type="radio"
           onChange={inputChange}
           name="user_radio"
-          value={value}
+          value={parseInt(key + 1)}
           className="input-checkbox"
           placeholder={`Enter ${question?.label}`}
         />
@@ -117,10 +117,10 @@ function Question() {
 
     inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
-      formData.append("user_input[]", [...inputs.user_checked]);
+      formData.append("user_input", [...inputs.user_checked]);
     // ))
     inputs.user_radio.length > 0 &&
-      formData.append("user_input[]", inputs.user_radio);
+      formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);
     // console.log('res', res)

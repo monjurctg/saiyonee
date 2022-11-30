@@ -79,6 +79,7 @@ function Routers() {
     <div
       style={{
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
+        height:"100vh"
       }}
     >
       <Routes>

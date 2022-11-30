@@ -15,14 +15,21 @@ function HomeLayout({ children, background }) {
         // "#F9FAFB"
       }}
     >
-      <div className="logos px-4" style={{ background: background }}>
+      <div className="logos px-4" style={{ background: background,position:"fixed",top:pathname === "home" ? 20 :0,
+    borderTopRightRadius:pathname === "home" ? 0 : 35,
+    borderTopLeftRadius: pathname === "home" ? 0 : 35,
+    width: pathname !== "home" && 428,
+    
+    }}>
         <div
           className="d-flex justify-content-end align-items-center"
-          style={{ gap: 30 }}
+          style={{ gap: 55,
+          marginTop:pathname === "home" ? 0 : 20,
+          }}
         >
           <Link
             to="/" // TODO ROUTES.tutorial
-            className="image-saturate position-relative me-auto"
+            className="image-saturate position-relative me-auto d-none"
           >
             <img src="img/back.svg" alt="next" className="img-fluid" />
             <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
@@ -44,16 +51,16 @@ function HomeLayout({ children, background }) {
             </div>
           </Link>
         </div>
-        {pathname && (
-          <div className="tab d-flex pt-5">
+        {pathname === "/explore" && (
+          <div className="tab d-flex pt-3">
             <p className="active">Visited you</p>
             <p>Short list</p>
             <p>Liked you</p>
           </div>
         )}
       </div>
-      <div className="px-4">{children}</div>
-      <div className="footer rounded-bottom mx-auto max-width-mobile">
+      <div className="px-4" style={{marginTop:70}}>{children}</div>
+      <div className="footer rounded-bottom mx-auto max-width-mobile" style={{position:"fixed",bottom:"0"}}>
         <div className="d-flex justify-content-around pt-3 align-items-baseline">
           <Link to={"/home"}>
             <div

@@ -7,7 +7,7 @@ function Explore() {
 
         <div className='mt-2 explore'>
           
-        <div className='pt-4 d-flex justify-content-around flex-wrap'>
+        <div className='pt-4 d-flex justify-content-around flex-wrap' style={{gap:10}}>
             <div className='explore-img'>
             <img src='/img/human.png' alt=''/>
 
