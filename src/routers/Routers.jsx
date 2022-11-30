@@ -28,7 +28,7 @@ import LocationCountry from "../pages/register/LocationCountry";
 import LocationCity from "../pages/register/LocationCity";
 import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
-import Explore from "../pages/Explore";
+// import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
 import { useDispatch, useSelector } from "react-redux";
 import Question from "../pages/questions/Question";
@@ -41,6 +41,7 @@ import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
 import ReviewProfile from "../pages/ReviewProfile";
 import Preference from "../pages/home/Preference";
+import Explore from "../pages/home/Explore";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -168,12 +169,14 @@ function Routers() {
           <Route path="/question/selfie-verification" element={<SelfieVerification />}/>
           <Route path="/review/profile" element={<ReviewProfile />} />
           <Route path="/preference" element={<Preference />}/>
+          <Route path="/explore" element={<Explore />}/>
+
 
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
 
         <Route path="/home" element={<Index />} />
-        <Route path="/explore" element={<Explore />} />
+        {/* <Route path="/explore" element={<Explore />} /> */}
 
         <Route path="*" element={<NotFound />} />
       </Routes>

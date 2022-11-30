@@ -6,7 +6,7 @@ import { Pagination } from "swiper";
 
 function Index() {
   return (
-    <HomeLayout>
+    <HomeLayout background={"#F9FAFB"}>
       <div className="body-div">
         <div className="menu">
           <img src="img/menu_top.svg" alt="" />

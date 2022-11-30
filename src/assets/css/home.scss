@@ -92,7 +92,10 @@
 }
 
 .explore {
-  background: #ffffff;
+  // background: #ffffff;
+      height: 533px;
+      margin-bottom: 55px;
+    overflow: auto;
   border-radius: 24px;
   img {
     width: 294px;
@@ -130,15 +133,17 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
+    color: black;
 
     text-align: center;
   }
   .active {
     background: #ffb7ac;
     border-radius: 17px;
-    padding: 1px 11px;
+    padding: 8px 11px;
     height: 60px;
     width: 63px;
+    color: black;
   }
   border-top: 2px solid #ececec;
   //   position: fixed;
@@ -287,4 +292,38 @@
 
   box-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
   border-radius: 100px;
+}
+
+.explore {
+  .explore-img {
+    img {
+      width: 170px;
+
+      height: 220px;
+    }
+    border-radius: 24px;
+  }
+}
+
+.logos {
+  .tab {
+    justify-content: space-between;
+    p {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 0;
+      padding-left: 0px;
+      /* line-height: 61px; */
+      color: #6b7280;
+      width: 95px;
+      border-right: none;
+      text-align: center;
+      &.active {
+        border-bottom: 3px solid #ffb7ac;
+        color: #1f2937;
+      }
+    }
+  }
 }
