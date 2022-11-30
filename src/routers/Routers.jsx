@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,16 +30,17 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import {setIsVarified} from "../redux/slices/authSlices";
-import {getToken} from "../utils/functions";
+import { setIsVarified } from "../redux/slices/authSlices";
+import { getToken } from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
 import ReviewProfile from "../pages/ReviewProfile";
+import Preference from "../pages/home/Preference";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -77,7 +78,8 @@ function Routers() {
     <div
       style={{
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-      }}>
+      }}
+    >
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/get-start" element={<GetStarted />} />
@@ -163,18 +165,12 @@ function Routers() {
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/question/:id" element={<Question />} />
           <Route path="/question/image" element={<AddPhoto />} />
-        <Route
-          path="/question/selfie-verification"
-          element={<SelfieVerification />}
-        />
-         <Route
-          path="/review/profile"
-          element={<ReviewProfile />}
-        />
+          <Route path="/question/selfie-verification" element={<SelfieVerification />}/>
+          <Route path="/review/profile" element={<ReviewProfile />} />
+          <Route path="/preference" element={<Preference />}/>
+
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
-
-       
 
         <Route path="/home" element={<Index />} />
         <Route path="/explore" element={<Explore />} />

@@ -33,6 +33,8 @@ function HomeLayout({ children }) {
                   </div>
                 </Link>
           <img src={"img/logo.svg"} alt="logo" style={{ height: 50 }} />
+          <Link to={"/preference"}>
+          
           <div className="menu-img">
             <img
               src={"img/menu.svg"}
@@ -40,6 +42,7 @@ function HomeLayout({ children }) {
               style={{ height: 30, width: 30 }}
             />
           </div>
+          </Link>
         </div>
       </div>
       <div className="px-4">
