@@ -55,7 +55,7 @@ function PersonalInformation() {
   // console.log(state.gender);
 
   const onContinueClicked = () => {
-    if (!state.full_name) {
+    if (!state.full_name.trim()) {
       setErr("Full name cannot be less than 6 characters long");
 
       return;

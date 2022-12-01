@@ -22,11 +22,12 @@ function Question() {
 
   let getQuestions = async () => {
     let res = await QuestionServices.getQuestions();
-    console.log("res", res.data.form_field_questions);
+    // console.log("res", res.data.form_field_questions);
     if (res.status === 200) {
       seterr(false);
       setLoading(false);
       setlength(res.data.form_field_questions.length);
+      if(res.data.form_field_questions?.length === 0 ) navigate("/home")
       setquestion(res.data.form_field_questions[id - 1]);
     } else {
       seterr(res.data.message);
@@ -34,6 +35,7 @@ function Question() {
     }
   };
   useEffect(() => {
+
     getQuestions();
   }, [id]);
 
@@ -123,7 +125,7 @@ function Question() {
       formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);
-    // console.log('res', res)
+    console.log('res', res)
     if (res.status === 200) {
       seterr(false);
       setLoading(false);

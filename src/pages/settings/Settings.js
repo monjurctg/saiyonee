@@ -1,97 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import HomeLayout from '../../components/layouts/HomeLayout';
+import QuestionServices from '../../services/questionServices';
+import UserServices from '../../services/userServices';
 
 import "./../../assets/css/settingsStyle.scss";
 
 const Settings = () => {
 
+    const [profile, setprofile] = useState()
+
     const Navigate = useNavigate();
 
+    let userProfile = async () => {
+        let res = await UserServices.UserProfile();
+        console.log("res", res.data);
+        if (res.status === 200) {
+            setprofile(res.data);
+
+        }
+    }
+    useEffect(() => {
+      userProfile();
+    }, [])
+    
     return (
-        <>
-            <div className="vh-100 max-width-mobile mx-auto d-flex flex-column rounded-top rounded-bottom"
-                style={{
-                    backgroundColor: "#F9FAFB"
-                }}
-            >
-                <div className="position-relative">
-                    <div className="position-absolute container position-top mt-6">
-                        <div className="row justify-content-center">
-                            <div className="col-2 ps-3">
-                                <button
-                                    // onClick={history.goBack}
-                                    className="btn btn-light rounded-circle shadow p-3 image-invert"
-                                    style={{
-                                        height: "58px",
-                                        width: "58px",
-                                        backgroundColor: "#FFB7AC"
-                                    }}>
-                                    <img src="/img/back-icon.svg" alt="back" />
-                                </button>
-                            </div>
-                            <div className="col-8 d-flex justify-content-center">
-                                {/* <LinkLogo /> */}
-                                <Link to={"/"}>
-                                    <img src="img/logo.svg" alt="" />
-                                </Link>
-                            </div>
-                            <div className="col-2"></div>
+        <HomeLayout>
+
+            <div className='mt-3'>
+
+                <div>
+                    <div className='d-flex justify-content-between align-items-center settings' style={{
+                        flexDirection:"column"
+                    }}>
+                        <div className='rounded-img'>
+                            <img src={"img/pp.png"} alt=""/>
+                        </div>
+
+                        <h2 className='mt-4'>{profile?.full_name}</h2>
+
+                        <div className='complete'>
+                            <p>Complete my profile</p>
                         </div>
                     </div>
-                </div>
 
-                <div className='central_items'>
-                    <img
-                        className='rounded-circle'
-                        src='img/userDemo.jpg'
-                        style={{
-                            marginTop: "100px",
-                            height: "220px",
-                            width: "200px"
-                        }}
-                    />
-                    <div>
-                        <h3>Nandita Ritu</h3>
-                        <button
-                            type="button"
-                            class="btn btn-outline-success"
-                            disabled
-
-                            style={{
-                                backgroundColor: "#28B56F1A",
-                                borderRadius: "25px",
-                                border: "0"
-                            }}
-                        >
-                            Completed My Profile
+                    <div className='buttons'>
+                        <button className='com-btn'>
+                            View profile
                         </button>
+                        <Link to={"/edit/profile"}>
+                        <button className='edit-btn'>
+                            Edit profile
+                        </button>
+                        </Link>
 
                     </div>
-
-                    <div style={{
-                        display: "inline"
-                    }}>
-                        <button
-                            type="button"
-                            class="btn btn-outline-secondary"
-                        >
-                            View Profile
-                        </button>
-
-                        <button
-                            type="button"
-                            class="btn btn-outline-secondary custom-primary"
-                            onClick={() => {
-                                Navigate("/editProfile")
-                            }}
-                        >
-                            Edit Profile
-                        </button>
-                    </div>
-
                 </div>
+
             </div>
-        </>
+         
+        </HomeLayout>
     )
 }
 

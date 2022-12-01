@@ -42,6 +42,7 @@ import SelfieVerification from "../pages/questions/SelfieVerification";
 import ReviewProfile from "../pages/ReviewProfile";
 import Preference from "../pages/home/Preference";
 import Explore from "../pages/home/Explore";
+import PublicRoute from "./PublicRoute";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -79,13 +80,15 @@ function Routers() {
     <div
       style={{
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-        height:"100vh"
+        height: "100%",
       }}
     >
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/get-start" element={<GetStarted />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/get-start" element={<GetStarted />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
 
         <Route element={<RegisterRoute />}>
           {/* register process routing */}
@@ -156,8 +159,6 @@ function Routers() {
         </Route>
 
         {/* Sazid */}
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/editProfile" element={<EditProfile />} />
         {/* not varified */}
         <Route element={<NotVarified />}>
           <Route path="/success" element={<RegSuccess />} />
@@ -167,16 +168,21 @@ function Routers() {
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/question/:id" element={<Question />} />
           <Route path="/question/image" element={<AddPhoto />} />
-          <Route path="/question/selfie-verification" element={<SelfieVerification />}/>
+          <Route
+            path="/question/selfie-verification"
+            element={<SelfieVerification />}
+          />
           <Route path="/review/profile" element={<ReviewProfile />} />
-          <Route path="/preference" element={<Preference />}/>
-          <Route path="/explore" element={<Explore />}/>
+          <Route path="/preference" element={<Preference />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/settings" element={<Settings />} />
 
+          <Route path="/edit/profile" element={<EditProfile />} />
+          <Route path="/home" element={<Index />} />
 
           {/* <Route path="/home" element={<Home />} /> */}
         </Route>
 
-        <Route path="/home" element={<Index />} />
         {/* <Route path="/explore" element={<Explore />} /> */}
 
         <Route path="*" element={<NotFound />} />
