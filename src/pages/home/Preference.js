@@ -1,35 +1,14 @@
-import React, { useState } from 'react'
-import QuestionLayout from '../../components/layouts/QuestionLayout'
+import React, {useState} from "react";
+import QuestionLayout from "../../components/layouts/QuestionLayout";
+import RegisterLayout from "../../components/layouts/RegisterLayout";
 
 function Preference() {
-    const [err, seterr] = useState(false)
+  const [err, seterr] = useState(false);
   return (
-    <QuestionLayout title="Set your Preference" err={err}>
-
-        <div className='preference my-3'>
-            <div className='preference-gender mb-3'>
-                <h5>Gender</h5>
-                <div>
-                    <button>Male</button>
-                    <button>Female</button>
-
-                </div>
-            </div>
-            <div className='preference-gender mb-3'>
-                <h5>Age</h5>
-                <div>
-                    <button>To</button>
-                    <input type={'date'} />
-                    <button>From</button>
-                    <input type={'date'} />
-
-
-                </div>
-            </div>
-
-        </div>
-    </QuestionLayout>
-  )
+    <>
+      <RegisterLayout></RegisterLayout>
+    </>
+  );
 }
 
-export default Preference
+export default Preference;
