@@ -14,7 +14,7 @@ function AddPhoto() {
 
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
-    console.log("res", res.data.images);
+    // console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images);
     }
@@ -53,6 +53,7 @@ function AddPhoto() {
         seterr("File size is too large");
       } else {
         // console.log('file', file)
+        setimage2(null);
         seterr(null);
         setlength(file.size);
         setimage(file);
@@ -78,7 +79,7 @@ function AddPhoto() {
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{ display: image && "none", cursor: "pointer" }}
+            style={{ display: (image || image2) && "none", cursor: "pointer" }}
           />
 
           <img
@@ -92,9 +93,9 @@ function AddPhoto() {
             alt=""
             onClick={imageClick}
             style={{
-              width: image && "100%",
+              width: (image || image2) && "100%",
               borderRadius: 24,
-              height: image && "100%",
+              height: (image || image2) && "100%",
             }}
           />
 

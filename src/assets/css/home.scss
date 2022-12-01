@@ -89,9 +89,9 @@
 
 .explore {
   // background: #ffffff;
-      height: 400px;
-      margin-bottom: 30px;
-    overflow: auto;
+  height: 400px;
+  margin-bottom: 30px;
+  overflow: auto;
   border-radius: 24px;
   img {
     width: 294px;
@@ -321,5 +321,107 @@
         color: #1f2937;
       }
     }
+  }
+}
+
+.settings {
+  .rounded-img {
+    position: relative;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 167px;
+    height: 163px;
+    padding: 4px 6px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  .complete {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 16px;
+    gap: 8px;
+
+    width: 176px;
+    height: 33px;
+
+    background: rgba(40, 181, 111, 0.1);
+    border-radius: 53px;
+    p {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      /* identical to box height */
+
+      /* Success */
+
+      color: #28b56f;
+    }
+  }
+
+  // .rounded-img::before{
+  //   content:'';
+  //   position:absolute;
+  //   top:-3px;
+  //   left:-3px;
+  //   width:100%;
+  //   height:100%;
+  //   border:3px solid transparent;
+  //   border-top:3px solid #fff000;
+  //   border-right:3px solid #fff000;
+  //   border-radius:50%;
+  // }
+}
+
+.buttons {
+  display: flex;
+    margin-top: 25px;
+    gap: 25px;
+  .com-btn {
+    padding: 19px 40px;
+
+    background: #ffffff;
+    /* Primary/Primary color */
+
+    border: 1px solid #ffb7ac;
+    /* EV-01 */
+
+    box-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
+    border-radius: 100px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Main Text */
+
+    color: #1f2937;
+  }
+  .edit-btn {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Main Text */
+
+    color: #1f2937;
+    padding: 19px 40px;
+
+    background: #ffb7ac;
+    /* Primary/Primary color */
+
+    border: 1px solid #ffb7ac;
+    /* EV-01 */
+
+    box-shadow: 0px 6px 11px rgba(235, 202, 202, 0.3);
+    border-radius: 100px;
   }
 }

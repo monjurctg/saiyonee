@@ -27,9 +27,11 @@ function HomeLayout({ children, background }) {
           marginTop:pathname === "home" ? 0 : 20,
           }}
         >
+          {pathname === "/settings" &&
+          
           <Link
             to="/" // TODO ROUTES.tutorial
-            className="image-saturate position-relative me-auto d-none"
+            className="image-saturate position-relative me-auto"
           >
             <img src="img/back.svg" alt="next" className="img-fluid" />
             <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
@@ -40,8 +42,9 @@ function HomeLayout({ children, background }) {
               />
             </div>
           </Link>
+          }
           <img src={"img/logo.svg"} alt="logo" style={{ height: 50 }} />
-          <Link to={"/preference"}>
+          <Link to={"/preference"} >
             <div className="menu-img">
               <img
                 src={"img/menu.svg"}
@@ -84,10 +87,16 @@ function HomeLayout({ children, background }) {
             <img src="img/message.svg" alt="" />
             <p>Message</p>
           </div>
-          <div className="text-center">
-            <img src="img/settings.svg" alt="" />
-            <p>Settings</p>
-          </div>
+          <Link to={"/settings"}>
+            <div
+              className={`text-center ${
+                pathname === "/settings" ? "active" : ""
+              }`}
+            >
+              <img src="img/glasses.svg" alt="" />
+              <p>Settings</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
