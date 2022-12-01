@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDesignation,
   setEmployName,
   setWorkingSince,
 } from "../../redux/slices/authSlices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function Ocupation() {
   const [err, setErr] = useState();
@@ -26,29 +26,29 @@ function Ocupation() {
     industry,
     working_since,
   } = useSelector((state) => state.auth);
-  // console.log('current_employment_type',current_employment_type)
+  console.log("current_employment_type", current_employment_type);
 
-  // console.log('current_employment_type',current_employment_type !== ("Unemployed" || "Student"))
+  // console.log('current_employment_type',current_employment_type !==  ("Unemployed" && "Student"))
   let onContinueClicked = () => {
     if (current_employment_type.length === 0)
       setErr("Please select employment type");
     else if (
-      current_employment_type !== ("Unemployed" || "Student") &&
+      current_employment_type !== ("Unemployed" && "Student") &&
       industry === "Select Industry"
     )
       setErr("Please select Industry");
     else if (
-      current_employment_type !== ("Unemployed" || "Student") &&
+      current_employment_type !== ("Unemployed" && "Student") &&
       !employer_name
     )
       setErr("Employer cannot be blank");
     else if (
-      current_employment_type !== ("Unemployed" || "Student") &&
+      current_employment_type !== ("Unemployed" && "Student") &&
       !working_since
     )
       setErr("Working since is  mandatory");
     else if (
-      current_employment_type !== ("Unemployed" || "Student") &&
+      current_employment_type !== ("Unemployed" && "Student") &&
       !designation
     )
       setErr("Designation cannot be blank");
@@ -122,7 +122,7 @@ function Ocupation() {
                     value={employer_name}
                     onChange={(e) => {
                       dispatch(setEmployName(e.target.value));
-                      stoteRegisterValues({employer_name: e.target.value});
+                      stoteRegisterValues({ employer_name: e.target.value });
                     }}
                     //   onChange={onEmployerNameChanged}
                     className="form-control border-0 rounded-1"
@@ -138,7 +138,7 @@ function Ocupation() {
                     value={designation}
                     onChange={(e) => {
                       dispatch(setDesignation(e.target.value));
-                      stoteRegisterValues({designation: e.target.value});
+                      stoteRegisterValues({ designation: e.target.value });
                     }}
                     className="form-control border-0 rounded-1"
                     placeholder="designation"
@@ -154,8 +154,17 @@ function Ocupation() {
                     placeholder="name@example.com"
                     aria-describedby="workingSinceDate"
                     onChange={(e) => {
-                      dispatch(setWorkingSince(e.target.value));
-                      stoteRegisterValues({working_since: e.target.value});
+                      let current_date = new Date();
+                      let selected_date = new Date(e.target.value);
+                      if (selected_date > current_date) {
+                        setErr(
+                          "Working since cannot be greater than current date"
+                        );
+                      } else {
+                        dispatch(setWorkingSince(e.target.value));
+                        setErr("");
+                        stoteRegisterValues({ working_since: e.target.value });
+                      }
                     }}
                     value={working_since}
                     //   onChange={onWorkingSinceDateChange}
