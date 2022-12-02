@@ -18,11 +18,11 @@ function FamilyInfo() {
     number_of_brothers,
     number_of_sisters,
   } = useSelector((state) => state.auth);
-  console.log('first', father_occupation)
+  console.log("first", father_occupation);
   let onContinueClicked = () => {
     if (!familyInfo.father_occupation.trim())
       setErr(" Father's occupation cannot be blank");
-   else if (!familyInfo.father_home_district.trim())
+    else if (!familyInfo.father_home_district.trim())
       setErr(" Father's home district cannot be blank");
     else if (!familyInfo.mother_home_district.trim())
       setErr("Mother's home district cannot be blank");
@@ -45,7 +45,7 @@ function FamilyInfo() {
     number_of_sisters: number_of_sisters,
   });
   const handleUserInputChange = (e) => {
-    console.log('e.target.value', e.target.value)
+    console.log("e.target.value", e.target.value);
     setFamilyInfo({
       ...familyInfo,
       [e.target.name]: e.target.value,
