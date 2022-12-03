@@ -24,7 +24,7 @@ function Varification() {
 
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
-  const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
+  const delayedDismiss = () => setTimeout(() => setDropdown(false), 300);
 
   const dispatch = useDispatch();
 
@@ -172,10 +172,15 @@ function Varification() {
     dispatch(setVerificationImg2(e.target.files[0]));
     setErr(!verification_img1 ? "Image1 is blank" : "");
   };
+  const selectType = (idType) => {
+    console.log(idType, "idType");
+
+    dispatch(setVerificationType(idType));
+  };
   return (
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
-        <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
+        <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
             <h1>ID Verification</h1>
             <p className="text-muted mt-3 mb-2">
@@ -204,7 +209,7 @@ function Varification() {
                     className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
-                    onClick={() => dispatch(setVerificationType(idType))}>
+                    onClick={() => selectType(idType)}>
                     {idType}
                   </div>
                 </li>
