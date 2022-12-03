@@ -43,6 +43,7 @@ import ReviewProfile from "../pages/ReviewProfile";
 import Preference from "../pages/home/Preference";
 import Explore from "../pages/home/Explore";
 import PublicRoute from "./PublicRoute";
+import PreferenceModule from "../pages/home/PreferenceModule";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -172,6 +173,7 @@ function Routers() {
             element={<SelfieVerification />}
           />
           <Route path="/preference" element={<Preference />} />
+          <Route path="/preference/:module" element={<PreferenceModule />} />
 
           <Route path="/review/profile" element={<ReviewProfile />} />
           <Route path="/explore" element={<Explore />} />

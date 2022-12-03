@@ -120,6 +120,7 @@ function Varification() {
     verification_img1: verification_img1,
     verification_img2: verification_img2,
   };
+  const [type, setType] = useState();
 
   let onContinueClicked = async () => {
     let d = JSON.stringify(window.localStorage.getItem("register"));
@@ -145,7 +146,7 @@ function Varification() {
 
   useEffect(() => {
     if (verification_img1.name) {
-      if (verification_img2.name) {
+      if (verification_img2.name || verification_type == "Passport") {
         setErr("");
       } else {
         setErr("Image2 is blank");
@@ -161,7 +162,11 @@ function Varification() {
 
   const handleImage1 = (e) => {
     dispatch(setVerificationImg1(e.target.files[0]));
-    setErr(!verification_img2 ? "Image2 is blank" : "");
+    setErr(
+      !verification_img2 && verification_type !== "Passport"
+        ? "Image2 is blank"
+        : ""
+    );
   };
   const handleImage2 = (e) => {
     dispatch(setVerificationImg2(e.target.files[0]));

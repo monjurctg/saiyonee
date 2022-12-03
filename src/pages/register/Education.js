@@ -137,19 +137,21 @@ function Education() {
   let onContinueClicked = () => {
     if (!education1 || education1 == "Select education")
       setErr("Please select your Secondary Education");
-    else if (!education1_institution)
+    else if (!education1_institution.trim())
       setErr("Please enter your Secondary Institution");
-    else if (!education1_major) setErr("Please enter your Secondary Major");
+    else if (!education1_major?.trim())
+      setErr("Please enter your Secondary Major");
     else if (!education2 || education2 == "Select education")
       setErr("Please select your Higher Secondary Education");
-    else if (!education2_institution)
+    else if (!education2_institution.trim())
       setErr("Please enter your Higher Secondary Institution");
-    else if (!education2_major)
+    else if (!education2_major?.trim())
       setErr("Please enter your Higher Secondary Major");
     else if (!education3) setErr("Please select your Graduate Education");
-    else if (!education3_institution)
+    else if (!education3_institution.trim())
       setErr("Please enter your Graduate Institution");
-    else if (!education3_major) setErr("Please enter your Secondary Major");
+    else if (!education3_major.trim())
+      setErr("Please enter your Graduate Major");
     else if (!education3_passing_year)
       setErr("Please select your Graduate Passing Year");
     else navigate("/register/ocupation");

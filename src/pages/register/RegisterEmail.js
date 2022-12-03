@@ -49,6 +49,10 @@ function RegisterEmail() {
       setErr("password is Required");
       return;
     }
+    if (password.length < 6) {
+      setErr("password length must be minimum 6 character ");
+      return;
+    }
 
     if (password !== confirmPassword) {
       setErr("password and confirmPassword does not match");

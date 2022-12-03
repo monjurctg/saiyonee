@@ -70,6 +70,10 @@ function PersonalInformation() {
       state.height_inc < 0
     ) {
       setErr("Height cannot be less than 0 inches or greater than 11 inches");
+    }
+    if (state.weight && state.weight < 30) {
+      setErr("weight cannot be less than 30 kg ");
+      return;
     } else if (!marital_status || marital_status === "Select marital status") {
       setErr("Please select marital status");
     } else {
