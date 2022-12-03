@@ -21,9 +21,9 @@ const Settings = () => {
         }
     }
     useEffect(() => {
-      userProfile();
+        userProfile();
     }, [])
-    
+
     return (
         <HomeLayout>
 
@@ -31,10 +31,10 @@ const Settings = () => {
 
                 <div>
                     <div className='d-flex justify-content-between align-items-center settings' style={{
-                        flexDirection:"column"
+                        flexDirection: "column"
                     }}>
                         <div className='rounded-img'>
-                            <img src={"img/pp.png"} alt=""/>
+                            <img src={"img/pp.png"} alt="" />
                         </div>
 
                         <h2 className='mt-4'>{profile?.full_name}</h2>
@@ -45,20 +45,23 @@ const Settings = () => {
                     </div>
 
                     <div className='buttons'>
-                        <button className='com-btn'>
-                            View profile
-                        </button>
+                        <Link to={"/viewProfile"}>
+                            <button className='com-btn'>
+                                View profile
+                            </button>
+                        </Link>
+
                         <Link to={"/edit/profile"}>
-                        <button className='edit-btn'>
-                            Edit profile
-                        </button>
+                            <button className='edit-btn'>
+                                Edit profile
+                            </button>
                         </Link>
 
                     </div>
                 </div>
 
             </div>
-         
+
         </HomeLayout>
     )
 }

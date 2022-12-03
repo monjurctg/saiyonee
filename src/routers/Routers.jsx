@@ -43,7 +43,10 @@ import ReviewProfile from "../pages/ReviewProfile";
 import Preference from "../pages/home/Preference";
 import Explore from "../pages/home/Explore";
 import PublicRoute from "./PublicRoute";
+
 import PreferenceModule from "../pages/home/PreferenceModule";
+
+import ViewProfile from "../pages/settings/ViewProfile";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -183,6 +186,7 @@ function Routers() {
           <Route path="/home" element={<Index />} />
 
           {/* <Route path="/home" element={<Home />} /> */}
+          <Route path="/viewProfile" element={<ViewProfile />} />
         </Route>
 
         {/* <Route path="/explore" element={<Explore />} /> */}
