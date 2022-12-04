@@ -20,10 +20,10 @@ function GetStarted() {
   );
   return (
     <BasicLayout subItem={subItem}>
-      <div className="card border-0 mt-n15 bg-transparent flex-grow-1">
-        <div className="card-body bg-body rounded p-4">
+      <div className="card border-0  bg-transparent flex-grow-1"  style={{height:"40vh",marginTop:"-55px"}}>
+        <div className="card-body bg-body rounded p-3">
           <h1
-            className="card-title mt-3 mb-5"
+            className="card-title mt-3 mb-4"
             style={{
               fontFamily: "Inter",
             }}>
@@ -52,7 +52,7 @@ function GetStarted() {
           </Link>
         </div>
       </div>
-      <div className="container p-4">
+      <div className="container p-4"  style={{height:"20vh"}}>
         <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">

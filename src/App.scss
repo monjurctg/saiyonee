@@ -10,12 +10,17 @@ body {
    a {
     text-decoration: none !important;
   }
+
+  // background: rgba(233, 236, 239, 0.23);
+  height: 100vh;
+
 }
 .btn:hover {
   color: #fff;
   background-color: #a60000;
   border-color: #a60000;
 }
+
 // ::-webkit-scrollbar {
 //     width: 10px;
 //   }

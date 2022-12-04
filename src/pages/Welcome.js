@@ -23,15 +23,16 @@ function Wellcome() {
   );
   return (
     <BasicLayout subItem={subItem}>
-      <div className="flex-grow-1">
+      <div className="flex-grow-1" style={{height:"40vh"}}>
         <img
           src="img/logo-index.png"
           alt="logo-index"
           className="img-fluid my-4"
+          style={{height: "100%",objectFit:"cover"}}
         />
       </div>
 
-      <div className="container p-4">
+      <div className="container p-4" style={{height:"20vh"}}>
         <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">

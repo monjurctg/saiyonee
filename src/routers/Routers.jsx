@@ -83,8 +83,10 @@ function Routers() {
   return (
     <div
       style={{
-        background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
+        width: "100%",
         height: "100%",
+        
+        background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       <Routes>
         <Route element={<PublicRoute />}>
