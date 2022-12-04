@@ -3,22 +3,33 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {OCCUPATION_TYPES} from "../../constants/register_constants";
 import {setCurrentEmplyType} from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {setEmployType} from "../../redux/slices/preferenceSlice";
+import {stoteRegisterValues} from "../../utils/functions";
 
-function OcupationTypes() {
+function OcupationTypes({module}) {
   const navigator = useNavigate();
   const dispatch = useDispatch();
   const {current_employment_type} = useSelector((state) => state.auth);
+  const {employType: preferenceEmploytype} = useSelector(
+    (state) => state.preference
+  );
+  const [employType, set_employType] = useState(
+    module === "employ" ? preferenceEmploytype : current_employment_type
+  );
 
   const onOccupationChange = (e) => {
+    set_employType(e.target.value);
+    if (module === "employ") {
+      dispatch(setEmployType(e.target.value));
+      navigator(-1);
+      return;
+    }
     if (e.target.value === "Other") {
       dispatch(setCurrentEmplyType("Other"));
-    stoteRegisterValues({current_employment_type: "Other"})
-
+      stoteRegisterValues({current_employment_type: "Other"});
     } else {
       dispatch(setCurrentEmplyType(e.target.value));
-    stoteRegisterValues({current_employment_type: e.target.value})
-
+      stoteRegisterValues({current_employment_type: e.target.value});
     }
     navigator(-1);
   };
@@ -69,7 +80,7 @@ function OcupationTypes() {
                   className="form-check-input"
                   type="radio"
                   name="occupation_type"
-                  checked={current_employment_type === occupationType}
+                  checked={employType === occupationType}
                   onChange={onOccupationChange}
                   value={occupationType}
                   id={occupationType}

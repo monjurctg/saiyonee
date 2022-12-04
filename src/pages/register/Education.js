@@ -62,19 +62,6 @@ function Education() {
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  // let education1Other = true;
-  // let education2Other = false;
-  // let education3Other = false;
-
-  // let education4Other = false;
-
-  // let education1_passing_year = 2012;
-  // let education2_passing_year = 2014;
-  // let education3_passing_year = 206;
-  // let education4_passing_year = 2018;
-  // let err = "";
-
-  // let passingYears = ["2012", "2013", "2014", "2016", "2018"];
   const [year1Dropdown, setYear1Dropdown] = useState(false);
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
   const delayedYear1Dismiss = () =>

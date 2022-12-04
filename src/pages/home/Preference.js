@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import PreferenceServices from "../../services/preferenceServices";
-
+let scrollPos = 0;
 function Preference() {
   const [err, seterr] = useState(false);
-  const {religion: preferenceReligion} = useSelector(
-    (state) => state.preference
-  );
+  const {
+    religion: preferenceReligion,
+    employType,
+    maritalStatus,
+  } = useSelector((state) => state.preference);
   const [extraQuestion, setextraQuestion] = useState([]);
 
   const fetchFilterQuestion = async () => {
@@ -18,6 +20,18 @@ function Preference() {
     }
     // console.log(res, "profile preference res");
   };
+
+  const scrollContainerRef = useRef();
+  const onSelectClicked = useCallback(() => {
+    scrollPos = scrollContainerRef.current?.scrollTop;
+  }, []);
+  const resetScroll = useCallback(() => {
+    scrollPos = 0;
+  }, []);
+  useEffect(() => {
+    if (typeof scrollPos !== "undefined")
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
+  }, [onSelectClicked]);
 
   useEffect(() => {
     fetchFilterQuestion();
@@ -36,7 +50,7 @@ function Preference() {
           className={`btn btn-mal outline-
     primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold`}>
           {/* {g} */}
-          male
+          Male
         </button>
         <button
           // key={i}
@@ -45,65 +59,109 @@ function Preference() {
           className={`btn btn-mal outline-
   primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold fw-semibold`}>
           {/* {g} */}
-          male
+          Female
         </button>
       </div>
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select religion
       </p>
       <div>
-        <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-          <div className="col-10">
-            <Link to={"/preference/religion"}>
+        <Link onClick={onSelectClicked} to={"/preference/religion"}>
+          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="col-10">
               <label
                 className="form-check-label  bg-white px-2 text-body"
                 style={{fontFamily: "Inter", cursor: "pointer"}}>
                 {/* {religion} */}
                 {preferenceReligion}
               </label>
-            </Link>
-          </div>
+            </div>
 
-          <div className="col-2 d-flex justify-content-end pe-3">
-            <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            <div className="col-2 d-flex justify-content-end pe-3">
+              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select employment type
       </p>
       <div>
-        <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-          <div className="col-10">
-            <label
-              className="form-check-label bg-white px-2 text-body"
-              style={{fontFamily: "Inter"}}>
-              {/* {religion} */}
-              Select employment type
-            </label>
+        <Link onClick={onSelectClicked} to="/preference/employ">
+          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="col-10">
+              <label
+                className="form-check-label bg-white px-2 text-body"
+                style={{fontFamily: "Inter"}}>
+                {/* {religion} */}
+                {employType}
+              </label>
+            </div>
+            <div className="col-2 d-flex justify-content-end pe-3">
+              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            </div>
           </div>
-          <div className="col-2 d-flex justify-content-end pe-3">
-            <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
-          </div>
-        </div>
+        </Link>
       </div>
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select marital status
       </p>
       <div>
-        <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-          <div className="col-10">
-            <label
-              className="form-check-label bg-white px-2 text-body"
-              style={{fontFamily: "Inter"}}>
-              {/* {religion} */}
-              Select marital status
-            </label>
+        <Link to="/preference/marital_status">
+          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="col-10">
+              <label
+                className="form-check-label bg-white px-2 text-body"
+                style={{fontFamily: "Inter"}}>
+                {/* {religion} */}
+                {maritalStatus}
+              </label>
+            </div>
+            <div className="col-2 d-flex justify-content-end pe-3">
+              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            </div>
           </div>
-          <div className="col-2 d-flex justify-content-end pe-3">
-            <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+        </Link>
+      </div>
+
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+        Select Current Country
+      </p>
+      <div>
+        <Link onClick={onSelectClicked} to="/preference/country">
+          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="col-10">
+              <label
+                className="form-check-label bg-white px-2 text-body"
+                style={{fontFamily: "Inter"}}>
+                Select Current Country
+              </label>
+            </div>
+            <div className="col-2 d-flex justify-content-end pe-3">
+              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            </div>
           </div>
-        </div>
+        </Link>
+      </div>
+
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+        Select Current City
+      </p>
+      <div>
+        <Link onClick={onSelectClicked} to="/preference/city">
+          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="col-10">
+              <label
+                className="form-check-label bg-white px-2 text-body"
+                style={{fontFamily: "Inter"}}>
+                Select Current City
+              </label>
+            </div>
+            <div className="col-2 d-flex justify-content-end pe-3">
+              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+            </div>
+          </div>
+        </Link>
       </div>
 
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
@@ -152,8 +210,7 @@ function Preference() {
       <RegisterLayout>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
-          // ref={scrollContainerRef}
-        >
+          ref={scrollContainerRef}>
           {/* <h1> </h1> */}
           {preferenceData}
           {extraQuestion.map((question, index) => (
@@ -162,26 +219,26 @@ function Preference() {
                 {question.title}
               </p>
               <div>
-                <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-                  <div className="col-10">
-                    <Link to={"/preference/religion"}>
+                <Link to={"/preference/dynamic"}>
+                  <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+                    <div className="col-10">
                       <label
                         className="form-check-label  bg-white px-2 text-body"
                         style={{fontFamily: "Inter", cursor: "pointer"}}>
                         {/* {religion} */}
                         {question.label}
                       </label>
-                    </Link>
-                  </div>
+                    </div>
 
-                  <div className="col-2 d-flex justify-content-end pe-3">
-                    <img
-                      src="/img/back-icon.svg"
-                      alt="next"
-                      className="rotate-180"
-                    />
+                    <div className="col-2 d-flex justify-content-end pe-3">
+                      <img
+                        src="/img/back-icon.svg"
+                        alt="next"
+                        className="rotate-180"
+                      />
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </>
           ))}

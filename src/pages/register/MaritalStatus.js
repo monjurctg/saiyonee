@@ -3,15 +3,27 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {MARITAL_STATUS_TYPES} from "../../constants/register_constants";
 import {setMaritalStatus} from "../../redux/slices/authSlices";
+import {setMaridStatus} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function MaritalStatus() {
+function MaritalStatus({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {marital_status: maritalStatus} = useSelector((state) => state.auth);
-  const [marital_status, setMarital_status] = useState(maritalStatus);
+  const {maritalStatus: preferenceMaritalStatus} = useSelector(
+    (state) => state.preference
+  );
+
+  const [marital_status, setMarital_status] = useState(
+    module === "marital_status" ? preferenceMaritalStatus : maritalStatus
+  );
   let onMaritalStatusChange = (e) => {
-    console.log(e.target.name);
+    if (module === "marital_status") {
+      dispatch(setMaridStatus(e.target.value));
+      navigate(-1);
+
+      return;
+    }
 
     if (e.target.name === "select_marital") {
       setMarital_status("Select marital status");

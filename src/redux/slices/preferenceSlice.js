@@ -15,10 +15,10 @@ const preferenceSlice = createSlice({
       state.religion = payload;
     },
     setEmployType: (state, {payload}) => {
-      state.religion = payload;
+      state.employType = payload;
     },
     setMaridStatus: (state, {payload}) => {
-      state.religion = payload;
+      state.maritalStatus = payload;
     },
   },
 });
