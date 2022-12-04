@@ -65,7 +65,7 @@ function RegisterEmail() {
   let subItem = (
     <div className="position-absolute container position-top mt-6">
       <div className="row justify-content-center">
-        <div className="col-2 ps-3">
+        <div className="col-2 pr-3">
           <button
             onClick={() => navigate(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
@@ -86,7 +86,7 @@ function RegisterEmail() {
 
   return (
     <BasicLayout subItem={subItem}>
-      <div className="card border-0 mt-n15 bg-transparent flex-grow-1 overflow-auto">
+      <div className="card border-0 bg-transparent flex-grow-1 overflow-auto" style={{height:"40vh",marginTop:"-55px"}}>
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1
             className="card-title mt-3"
@@ -164,7 +164,7 @@ function RegisterEmail() {
           </div>
         </div>
       </div>
-      <div className="container px-4 pb-4 pt-2">
+      <div className="container px-4 pb-4 pt-2" style={{height:"20vh"}}>
         {err && <p className="text-primary">* {err}</p>}
         <button
           onClick={onContinueClicked}
