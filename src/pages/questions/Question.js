@@ -27,7 +27,7 @@ function Question() {
       seterr(false);
       setLoading(false);
       setlength(res.data.form_field_questions.length);
-      if(res.data.form_field_questions?.length === 0 ) navigate("/home")
+      if(res.data.form_field_questions?.length === 0 ) navigate("/preference")
       setquestion(res.data.form_field_questions[id - 1]);
     } else {
       seterr(res.data.message);
@@ -52,12 +52,12 @@ function Question() {
       setInputs({...inputs, user_checked: arr});
     } else if (name === "user_radio") {
       let arr = inputs.user_radio;
-      // console.log('arr', arr)
-      if (arr.includes(value)) {
-        arr = arr.filter((item) => item !== value);
-      } else {
+      console.log('arr', arr)
+      // if (arr.includes(value)) {
+      //   arr = arr.filter((item) => item !== value);
+      // } else {
         arr.push(value);
-      }
+      // }
       setInputs({...inputs, user_radio: arr});
     } else {
       setInputs({...inputs, [name]: value});
@@ -121,11 +121,12 @@ function Question() {
       // inputs.user_checked.map(user=>(
       formData.append("user_input", [...inputs.user_checked]);
     // ))
+    console.log('first', inputs.user_radio)
     inputs.user_radio.length > 0 &&
       formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);
-    console.log('res', res)
+    // console.log('res', res)
     if (res.status === 200) {
       seterr(false);
       setLoading(false);
