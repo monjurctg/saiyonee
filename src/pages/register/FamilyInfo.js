@@ -24,10 +24,10 @@ function FamilyInfo() {
       setErr(" Father's occupation cannot be blank");
     else if (!familyInfo.father_home_district.trim())
       setErr(" Father's home district cannot be blank");
-    else if (!familyInfo.mother_home_district.trim())
-      setErr("Mother's home district cannot be blank");
     else if (!familyInfo.mother_occupation.trim())
       setErr(" Mother's occupation cannot be blank");
+    else if (!familyInfo.mother_home_district.trim())
+      setErr("Mother's home district cannot be blank");
     else {
       dispatch(setFamilyInformation(familyInfo));
       stoteRegisterValues(familyInfo);
@@ -126,7 +126,8 @@ function FamilyInfo() {
                   if (familyInfo.number_of_brothers <= 0) return;
                   setFamilyInfo({
                     ...familyInfo,
-                    number_of_brothers: familyInfo.number_of_brothers - 1,
+                    number_of_brothers:
+                      parseInt(familyInfo.number_of_brothers) - 1,
                   });
                 }}
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
@@ -150,7 +151,8 @@ function FamilyInfo() {
                 onClick={() =>
                   setFamilyInfo({
                     ...familyInfo,
-                    number_of_brothers: familyInfo.number_of_brothers + 1,
+                    number_of_brothers:
+                      parseInt(familyInfo.number_of_brothers) + 1,
                   })
                 }
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
@@ -168,7 +170,8 @@ function FamilyInfo() {
                   if (familyInfo.number_of_sisters <= 0) return;
                   setFamilyInfo({
                     ...familyInfo,
-                    number_of_sisters: familyInfo.number_of_sisters - 1,
+                    number_of_sisters:
+                      parseInt(familyInfo.number_of_sisters) - 1,
                   });
                 }}
                 className="btn btn-primary w-100 rounded-1 shadow p-3">
@@ -192,7 +195,8 @@ function FamilyInfo() {
                 onClick={() =>
                   setFamilyInfo({
                     ...familyInfo,
-                    number_of_sisters: familyInfo.number_of_sisters + 1,
+                    number_of_sisters:
+                      parseInt(familyInfo.number_of_sisters) + 1,
                   })
                 }
                 className="btn btn-primary w-100 rounded-1 shadow p-3">

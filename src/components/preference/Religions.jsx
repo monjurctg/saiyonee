@@ -1,39 +1,9 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import {useNavigate} from "react-router-dom";
 import {RELIGION_TYPES} from "../../constants/register_constants";
-import {setReligion} from "../../redux/slices/authSlices";
-import {setPreferenceReligion} from "../../redux/slices/preferenceSlice";
-import {stoteRegisterValues} from "../../utils/functions";
 
-function Religions({module}) {
+function Religions() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {religion: Religion} = useSelector((state) => state.auth);
-  const {religion: preferenceReligion} = useSelector(
-    (state) => state.preference
-  );
-
-  const [religion, set_religion] = useState(
-    module === "preference" ? preferenceReligion : Religion
-  );
-  let onReligionChange = (e) => {
-    set_religion(e.target.value);
-    console.log("module", module);
-
-    if (module == "preference") {
-      dispatch(setPreferenceReligion(e.target.value));
-      navigate(-1);
-
-      return;
-    }
-    dispatch(setReligion(e.target.value));
-    stoteRegisterValues({religion: e.target.value});
-
-    navigate(-1);
-  };
-  // console.log(religion);
-
   return (
     <>
       <div className="vh-100 max-width-mobile mx-auto">
@@ -63,8 +33,8 @@ function Religions({module}) {
                   className="form-check-input"
                   type="radio"
                   name="religion_type"
-                  checked={religion === religionType}
-                  onChange={onReligionChange}
+                  //   checked={religion === religionType}
+                  //   onChange={onReligionChange}
                   value={religionType}
                   id={religionType}
                 />

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import BasicLayout from "../../components/layouts/BasicLayout";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
@@ -9,9 +9,10 @@ import {stoteRegisterValues} from "../../utils/functions";
 
 function RegisterEmail() {
   const [err, setErr] = useState();
+  const {email: Email, password: Password} = useSelector((state) => state.auth);
   // let success = true;
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setemail] = useState(Email);
+  const [password, setPassword] = useState(Password);
   const [confirmPassword, setConfirmPassword] = useState("");
   // const [checkEmail, {isLoading, isSuccess, isError}] = useCheckEmailMutation();
 
@@ -47,6 +48,10 @@ function RegisterEmail() {
     }
     if (!password) {
       setErr("password is Required");
+      return;
+    }
+    if (password.length < 6) {
+      setErr("password length must be minimum 6 character ");
       return;
     }
 
@@ -97,7 +102,7 @@ function RegisterEmail() {
             }}>
             Take a step towards finding someone awesome!
           </p>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-start text-muted">
             <input
               type="email"
               id="inputEmail"
@@ -118,7 +123,7 @@ function RegisterEmail() {
               Email ID
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted text-start">
             <input
               type="password"
               id="inputPassword"
@@ -136,7 +141,7 @@ function RegisterEmail() {
               Password
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-start text-muted">
             <input
               style={{
                 fontFamily: "Inter",

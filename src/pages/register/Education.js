@@ -62,19 +62,6 @@ function Education() {
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  // let education1Other = true;
-  // let education2Other = false;
-  // let education3Other = false;
-
-  // let education4Other = false;
-
-  // let education1_passing_year = 2012;
-  // let education2_passing_year = 2014;
-  // let education3_passing_year = 206;
-  // let education4_passing_year = 2018;
-  // let err = "";
-
-  // let passingYears = ["2012", "2013", "2014", "2016", "2018"];
   const [year1Dropdown, setYear1Dropdown] = useState(false);
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
   const delayedYear1Dismiss = () =>
@@ -137,19 +124,21 @@ function Education() {
   let onContinueClicked = () => {
     if (!education1 || education1 == "Select education")
       setErr("Please select your Secondary Education");
-    else if (!education1_institution)
+    else if (!education1_institution.trim())
       setErr("Please enter your Secondary Institution");
-    else if (!education1_major) setErr("Please enter your Secondary Major");
+    else if (!education1_major?.trim())
+      setErr("Please enter your Secondary Major");
     else if (!education2 || education2 == "Select education")
       setErr("Please select your Higher Secondary Education");
-    else if (!education2_institution)
+    else if (!education2_institution.trim())
       setErr("Please enter your Higher Secondary Institution");
-    else if (!education2_major)
+    else if (!education2_major?.trim())
       setErr("Please enter your Higher Secondary Major");
     else if (!education3) setErr("Please select your Graduate Education");
-    else if (!education3_institution)
+    else if (!education3_institution.trim())
       setErr("Please enter your Graduate Institution");
-    else if (!education3_major) setErr("Please enter your Secondary Major");
+    else if (!education3_major.trim())
+      setErr("Please enter your Graduate Major");
     else if (!education3_passing_year)
       setErr("Please select your Graduate Passing Year");
     else navigate("/register/ocupation");

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import { setIsVarified } from "../redux/slices/authSlices";
-import { getToken } from "../utils/functions";
+import {setIsVarified} from "../redux/slices/authSlices";
+import {getToken} from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
@@ -43,6 +43,9 @@ import ReviewProfile from "../pages/ReviewProfile";
 import Preference from "../pages/home/Preference";
 import Explore from "../pages/home/Explore";
 import PublicRoute from "./PublicRoute";
+
+import PreferenceModule from "../pages/home/PreferenceModule";
+
 import ViewProfile from "../pages/settings/ViewProfile";
 
 function Routers() {
@@ -173,6 +176,7 @@ function Routers() {
             element={<SelfieVerification />}
           />
           <Route path="/preference" element={<Preference />} />
+          <Route path="/preference/:module" element={<PreferenceModule />} />
 
           <Route path="/review/profile" element={<ReviewProfile />} />
           <Route path="/explore" element={<Explore />} />

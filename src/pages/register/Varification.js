@@ -24,7 +24,7 @@ function Varification() {
 
   const [dropdown, setDropdown] = useState(false);
   const toggleDropdown = () => setDropdown((dropdown) => !dropdown);
-  const delayedDismiss = () => setTimeout(() => setDropdown(false), 200);
+  const delayedDismiss = () => setTimeout(() => setDropdown(false), 300);
 
   const dispatch = useDispatch();
 
@@ -120,6 +120,7 @@ function Varification() {
     verification_img1: verification_img1,
     verification_img2: verification_img2,
   };
+  const [type, setType] = useState();
 
   let onContinueClicked = async () => {
     let d = JSON.stringify(window.localStorage.getItem("register"));
@@ -145,7 +146,7 @@ function Varification() {
 
   useEffect(() => {
     if (verification_img1.name) {
-      if (verification_img2.name) {
+      if (verification_img2.name || verification_type !== "National ID") {
         setErr("");
       } else {
         setErr("Image2 is blank");
@@ -161,16 +162,25 @@ function Varification() {
 
   const handleImage1 = (e) => {
     dispatch(setVerificationImg1(e.target.files[0]));
-    setErr(!verification_img2 ? "Image2 is blank" : "");
+    setErr(
+      !verification_img2 && verification_type == "National ID"
+        ? "Image2 is blank"
+        : ""
+    );
   };
   const handleImage2 = (e) => {
     dispatch(setVerificationImg2(e.target.files[0]));
     setErr(!verification_img1 ? "Image1 is blank" : "");
   };
+  const selectType = (idType) => {
+    console.log(idType, "idType");
+
+    dispatch(setVerificationType(idType));
+  };
   return (
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
-        <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
+        <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
             <h1>ID Verification</h1>
             <p className="text-muted mt-3 mb-2">
@@ -199,7 +209,7 @@ function Varification() {
                     className={`btn py-3 dropdown-item${
                       verification_type === idType ? " active" : ""
                     }`}
-                    onClick={() => dispatch(setVerificationType(idType))}>
+                    onClick={() => selectType(idType)}>
                     {idType}
                   </div>
                 </li>
