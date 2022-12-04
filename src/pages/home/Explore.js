@@ -1,70 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Liked from '../../components/explore/Liked'
+import Shortlisted from '../../components/explore/Shortlisted'
+import Visited from '../../components/explore/Visited'
 import HomeLayout from '../../components/layouts/HomeLayout'
 
 function Explore() {
+   const [activeExplore, setactiveExplore] = useState("Visited")
+   let activeTab = ""
+   if(activeExplore === "Visited") activeTab = <Visited/>
+   else if(activeExplore === "Shortlist") activeTab = <Shortlisted/>
+   else if(activeExplore === "Liked") activeTab = <Liked/>
+
+
   return (
-     <HomeLayout background={"#fff"}>
+     <HomeLayout background={"#fff"} activeExplore={activeExplore} setactiveExplore={setactiveExplore}>
 
         <div className='mt-2 explore'>
-          
-        <div className='pt-4 d-flex justify-content-around flex-wrap' style={{gap:10}}>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-            <div className='explore-img'>
-            <img src='/img/human.png' alt=''/>
-
-            </div>
-        </div>
+         {activeTab}
         </div>
      </HomeLayout>
   )
