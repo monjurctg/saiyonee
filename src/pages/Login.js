@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
 import {setToken} from "../utils/functions";
 
@@ -9,6 +10,15 @@ function Login() {
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
   const navigator = useNavigate();
+
+  let subItem = (
+    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
+      {/* <LinkLogo /> */}
+      <Link to={"/"}>
+        <img src="img/logo.svg" alt="" />
+      </Link>
+    </div>
+  );
 
   const onChange = (e) => {
     const {name, value} = e.target;
@@ -60,36 +70,9 @@ function Login() {
   // let err = true;
   return (
     <>
-      <div
-        className="vh-100 max-width-mobile mx-auto d-flex flex-column"
-        style={{background: "#e9ecef3b"}}>
-        <div className="position-relative">
-          <img
-            src="img/bg.svg"
-            alt="bg-star"
-            className="img-fluid w-100 rounded-top"
-          />
-          <div className="position-absolute container position-top mt-6">
-            <div className="row justify-content-center">
-              <div className="col-2 ps-3">
-                <button
-                  onClick={() => navigator(-1)}
-                  className="btn btn-light rounded-circle shadow p-3 image-invert"
-                  style={{height: "58px", width: "58px"}}>
-                  <img src="/img/back-icon.svg" alt="back" />
-                </button>
-              </div>
-              <div className="col-8 d-flex justify-content-center">
-                {/* <LinkLogo /> */}
-                <Link to={"/"}>
-                  <img src="img/logo.svg" alt="" />
-                </Link>
-              </div>
-              <div className="col-2"></div>
-            </div>
-          </div>
-        </div>
-        <div className="card border-0 mt-n15 bg-transparent overflow-auto flex-grow-1">
+      <BasicLayout subItem={subItem}>
+    
+        <div className="card border-0 bg-transparent overflow-auto flex-grow-1"   style={{height:"40vh",marginTop:"-55px"}}>
           <div className="card-body bg-body rounded p-4 overflow-auto">
             <h1 className="card-title mt-3">Login</h1>
             <p className="card-text text-muted mt-3 mb-5">
@@ -126,7 +109,7 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2">
+        <div className="container px-4 pb-4 pt-2"   style={{height:"20vh"}}>
           {err !== false && <p className="text-primary">* {err}</p>}
           <button
             onClick={handleSubmit}
@@ -154,7 +137,7 @@ function Login() {
             }
           </button>
         </div>
-      </div>
+      </BasicLayout>
     </>
   );
 }
