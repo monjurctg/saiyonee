@@ -7,4 +7,9 @@ UserServices.UserProfile = async () => {
   return res;
 }
 
+UserServices.filter_users = async () => {
+  const res = await axios.get("/app_users/filter_users");
+  return res;
+}
+
 export default UserServices;

@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
 // import logo from '../../../public/img/logo.svg'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
+import UserServices from "../../services/userServices";
 
 function Index() {
+  const [data, setData] = useState(null)
+  let getData = async () => {
+    let res = await UserServices.filter_users();
+    console.log('res', res)
+    // let data = await res.json()
+    setData(res)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+  
+
   return (
     <HomeLayout background={"#F9FAFB"}>
       <div className="body-div">
