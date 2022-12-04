@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
+import {setpreferenceQuestion} from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 let scrollPos = 0;
 function Preference() {
@@ -9,14 +10,16 @@ function Preference() {
   const {
     religion: preferenceReligion,
     employType,
+    dynamicQuestion,
     maritalStatus,
   } = useSelector((state) => state.preference);
   const [extraQuestion, setextraQuestion] = useState([]);
+  const dispatch = useDispatch();
 
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
     if (res.status === 200) {
-      setextraQuestion(res.data.filters);
+      dispatch(setpreferenceQuestion(res.data.filters));
     }
     // console.log(res, "profile preference res");
   };
@@ -213,13 +216,13 @@ function Preference() {
           ref={scrollContainerRef}>
           {/* <h1> </h1> */}
           {preferenceData}
-          {extraQuestion.map((question, index) => (
+          {dynamicQuestion.map((question, index) => (
             <>
               <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
                 {question.title}
               </p>
               <div>
-                <Link to={"/preference/dynamic"}>
+                <Link to={`/preference/dynamic-${question.id}`}>
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
                       <label

@@ -1,9 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
+  dynamicQuestion: [],
   religion: "Select religion",
   employType: "Select employment type",
   maritalStatus: "Select marital status",
+  country: "",
+  city: "",
+  ft: null,
+  ins: null,
+  dynamicQuesAns: [],
 };
 
 const preferenceSlice = createSlice({
@@ -20,9 +26,24 @@ const preferenceSlice = createSlice({
     setMaridStatus: (state, {payload}) => {
       state.maritalStatus = payload;
     },
+    setPreferenceCountry: (state, {payload}) => {
+      state.country = payload;
+    },
+    setPreferenceCity: (state, {payload}) => {
+      state.city = payload;
+    },
+    setpreferenceQuestion: (state, {payload}) => {
+      state.dynamicQuestion = payload;
+    },
   },
 });
 
-export const {setPreferenceReligion, setEmployType, setMaridStatus} =
-  preferenceSlice.actions;
+export const {
+  setPreferenceReligion,
+  setEmployType,
+  setMaridStatus,
+  setPreferenceCity,
+  setPreferenceCountry,
+  setpreferenceQuestion,
+} = preferenceSlice.actions;
 export default preferenceSlice.reducer;
