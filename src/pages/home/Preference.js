@@ -217,7 +217,7 @@ function Preference() {
           {/* <h1> </h1> */}
           {preferenceData}
           {dynamicQuestion.map((question, index) => (
-            <>
+            <div key={index}>
               <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
                 {question.title}
               </p>
@@ -243,7 +243,7 @@ function Preference() {
                   </div>
                 </Link>
               </div>
-            </>
+            </div>
           ))}
         </div>
       </RegisterLayout>
