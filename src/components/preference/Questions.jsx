@@ -9,11 +9,50 @@ function Questions({id}) {
 
   const nowQuestion = dynamicQuestion.find((ques) => ques.id == id);
 
-  let checkbox = <></>;
+  let checkbox = nowQuestion?.value_list?.map((value, key) => (
+    <div
+      className="d-flex justify-content-between input-text align-item-center"
+      key={key}>
+      <p className="p-input">{value}</p>
+      <input
+        type="checkbox"
+        //   onChange={inputChange}
+        name="user_checked"
+        value={parseInt(key + 1)}
+        className="input-checkbox"
+        placeholder={`Enter ${nowQuestion?.label}`}
+      />
+    </div>
+  ));
 
-  let redio = <></>;
+  let radio = nowQuestion?.value_list?.map((value, key) => (
+    <div
+      className="d-flex justify-content-between input-text align-item-center"
+      key={key}>
+      <p className="p-input">{value}</p>
+      <input
+        type="radio"
+        // onChange={inputChange}
+        name="user_radio"
+        value={parseInt(key + 1)}
+        className="input-checkbox"
+        placeholder={`Enter ${nowQuestion?.label}`}
+      />
+    </div>
+  ));
 
-  let text = <></>;
+  let text = (
+    <>
+      <input
+        name="text_input"
+        type="text"
+        //   onChange={inputChange}
+        //   value={inputs.text_input}
+        className="input-text"
+        placeholder={`Enter ${nowQuestion?.label}`}
+      />
+    </>
+  );
 
   return (
     <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
@@ -30,6 +69,16 @@ function Questions({id}) {
 
         <div className="mt-4 mb-5">
           <h4 className="mb-2">{nowQuestion?.label}</h4>
+
+          {nowQuestion.field_type == "checkbox" ? (
+            checkbox
+          ) : nowQuestion.field_type == "radio" ? (
+            radio
+          ) : nowQuestion.field_type == "text" ? (
+            text
+          ) : (
+            <h1>404</h1>
+          )}
         </div>
       </div>
     </div>
