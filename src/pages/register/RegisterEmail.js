@@ -65,7 +65,7 @@ function RegisterEmail() {
   let subItem = (
     <div className="position-absolute container position-top mt-6">
       <div className="row justify-content-center">
-        <div className="col-2 ps-3">
+        <div className="col-2 pr-3">
           <button
             onClick={() => navigate(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
