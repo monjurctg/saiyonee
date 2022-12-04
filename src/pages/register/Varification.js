@@ -146,7 +146,7 @@ function Varification() {
 
   useEffect(() => {
     if (verification_img1.name) {
-      if (verification_img2.name || verification_type == "Passport") {
+      if (verification_img2.name || verification_type !== "National ID") {
         setErr("");
       } else {
         setErr("Image2 is blank");
@@ -163,7 +163,7 @@ function Varification() {
   const handleImage1 = (e) => {
     dispatch(setVerificationImg1(e.target.files[0]));
     setErr(
-      !verification_img2 && verification_type !== "Passport"
+      !verification_img2 && verification_type == "National ID"
         ? "Image2 is blank"
         : ""
     );

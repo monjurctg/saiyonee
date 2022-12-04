@@ -9,19 +9,20 @@ function Preference() {
   const {religion: preferenceReligion} = useSelector(
     (state) => state.preference
   );
-  const [extraQuestion, setextraQuestion] = useState(null);
+  const [extraQuestion, setextraQuestion] = useState([]);
 
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
     if (res.status === 200) {
       setextraQuestion(res.data.filters);
     }
-    console.log(res, "profile preference res");
+    // console.log(res, "profile preference res");
   };
 
   useEffect(() => {
     fetchFilterQuestion();
   }, []);
+  console.log(extraQuestion);
 
   let preferenceData = (
     <>
@@ -155,6 +156,35 @@ function Preference() {
         >
           {/* <h1> </h1> */}
           {preferenceData}
+          {extraQuestion.map((question, index) => (
+            <>
+              <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+                {question.title}
+              </p>
+              <div>
+                <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+                  <div className="col-10">
+                    <Link to={"/preference/religion"}>
+                      <label
+                        className="form-check-label  bg-white px-2 text-body"
+                        style={{fontFamily: "Inter", cursor: "pointer"}}>
+                        {/* {religion} */}
+                        {question.label}
+                      </label>
+                    </Link>
+                  </div>
+
+                  <div className="col-2 d-flex justify-content-end pe-3">
+                    <img
+                      src="/img/back-icon.svg"
+                      alt="next"
+                      className="rotate-180"
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          ))}
         </div>
       </RegisterLayout>
     </>
