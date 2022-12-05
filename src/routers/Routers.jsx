@@ -47,6 +47,7 @@ import PublicRoute from "./PublicRoute";
 import PreferenceModule from "../pages/home/PreferenceModule";
 
 import ViewProfile from "../pages/settings/ViewProfile";
+import Boom from "../pages/home/Boom";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -189,6 +190,8 @@ function Routers() {
 
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/viewProfile" element={<ViewProfile />} />
+          <Route path="/boom" element={<Boom />} />
+
         </Route>
 
         {/* <Route path="/explore" element={<Explore />} /> */}
