@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {setFamilyInformation} from "../../redux/slices/authSlices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { setFamilyInformation } from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
@@ -20,20 +20,52 @@ function FamilyInfo() {
   } = useSelector((state) => state.auth);
   console.log("first", father_occupation);
   let onContinueClicked = () => {
-    if (!familyInfo.father_occupation.trim())
-      setErr(" Father's occupation cannot be blank");
-    else if (!familyInfo.father_home_district.trim())
-      setErr(" Father's home district cannot be blank");
-    else if (!familyInfo.mother_occupation.trim())
-      setErr(" Mother's occupation cannot be blank");
-    else if (!familyInfo.mother_home_district.trim())
-      setErr("Mother's home district cannot be blank");
-    else {
-      dispatch(setFamilyInformation(familyInfo));
-      stoteRegisterValues(familyInfo);
+    // if (!familyInfo.father_occupation.trim())
+    //   setErr(" Father's occupation cannot be blank");
+    // else if (!familyInfo.father_home_district.trim())
+    //   setErr(" Father's home district cannot be blank");
+    // else if (!familyInfo.mother_occupation.trim())
+    //   setErr(" Mother's occupation cannot be blank");
+    // else if (!familyInfo.mother_home_district.trim())
+    //   setErr("Mother's home district cannot be blank");
+    // else {
+    //   dispatch(setFamilyInformation(familyInfo));
+    //   stoteRegisterValues(familyInfo);
 
-      navigate("/register/varification");
+    //   navigate("/register/varification");
+    // }
+
+
+    if (!familyInfo.father_occupation) {
+      setErr({
+        error: "father_occupation",
+        message: "Father's Occupation Can't Be Empty!"
+      });
+
+      return;
+    };
+
+    if (!familyInfo.father_home_district) {
+      setErr({
+        error: "father_home_district",
+        message: " Father's home district cannot be blank!",
+      });
+    };
+
+    if (!familyInfo.mother_occupation) {
+      setErr({
+        error: "mother_occupation",
+        message: "Mother's Occupation Can't Be Empty!",
+      })
+    };
+
+    if (!familyInfo.mother_home_district) {
+      setErr({
+        error: "mother_home_district",
+        message: "Mother's home district cannot be blank!",
+      })
     }
+
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
@@ -57,8 +89,15 @@ function FamilyInfo() {
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1>Candidate's Family Information</h1>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted rounded-1
+          "
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "father_occupation" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr({})}
               type="text"
               id="inputFatherOccupation"
               name="father_occupation"
@@ -72,7 +111,13 @@ function FamilyInfo() {
               Enter Father's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted rounded-1
+          "
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "father_home_district" ? "2px solid red" : "",
+            }}
+          >
             <input
               type="text"
               id="inputFatherHomeDistrict"
@@ -82,12 +127,19 @@ function FamilyInfo() {
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
               aria-describedby="homedistrict"
+              onFocus={() => setErr({})}
             />
             <label htmlFor="inputFatherHomeDistrict">
               Enter Father's Home District
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted rounded-1
+          "
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "mother_occupation" ? "2px solid red" : "",
+            }}
+          >
             <input
               type="text"
               id="inputMotherOccupation"
@@ -97,12 +149,20 @@ function FamilyInfo() {
               className="form-control border-0 rounded-1"
               placeholder="occupation"
               aria-describedby="occupation"
+              onFocus={() => setErr({})}
+
             />
             <label htmlFor="inputMotherOccupation">
               Enter Mother's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted rounded-1
+          "
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "mother_home_district" ? "2px solid red" : "",
+            }}
+          >
             <input
               type="text"
               name="mother_home_district"
@@ -112,6 +172,8 @@ function FamilyInfo() {
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
               aria-describedby="homedistrict"
+              onFocus={() => setErr({})}
+
             />
             <label htmlFor="inputMotherHomeDistrict">
               Enter Mother's Home District
@@ -144,6 +206,7 @@ function FamilyInfo() {
                 className="form-control border-0 rounded-1 p-3 text-center"
                 // placeholder="50"
                 aria-describedby="BrotherCount"
+
               />
             </div>
             <div className="col-2">
@@ -188,6 +251,7 @@ function FamilyInfo() {
                 className="form-control border-0 rounded-1 p-3 text-center"
                 placeholder="50"
                 aria-describedby="SisterCount"
+
               />
             </div>
             <div className="col-2">
