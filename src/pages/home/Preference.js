@@ -5,6 +5,7 @@ import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {setpreferenceQuestion} from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 let scrollPos = 0;
+let data = [];
 function Preference() {
   const [err, seterr] = useState(false);
   const {
@@ -12,7 +13,9 @@ function Preference() {
     employType,
     dynamicQuestion,
     maritalStatus,
+    dynamicQuesAns,
   } = useSelector((state) => state.preference);
+  // const [form_filter_ids, setForm_filter] = useState({});
   const [extraQuestion, setextraQuestion] = useState([]);
   const dispatch = useDispatch();
 
@@ -24,6 +27,13 @@ function Preference() {
     // console.log(res, "profile preference res");
   };
 
+  useEffect(() => {
+    dynamicQuesAns.map((Qans, i) => {
+      data.push({
+        form_filter_ids: Qans,
+      });
+    });
+  }, []);
   const scrollContainerRef = useRef();
   const onSelectClicked = useCallback(() => {
     scrollPos = scrollContainerRef.current?.scrollTop;
@@ -39,7 +49,8 @@ function Preference() {
   useEffect(() => {
     fetchFilterQuestion();
   }, []);
-  console.log(extraQuestion);
+  // console.log(extraQuestion);
+  console.log(data);
 
   let preferenceData = (
     <>

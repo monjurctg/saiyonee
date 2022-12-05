@@ -35,6 +35,16 @@ const preferenceSlice = createSlice({
     setpreferenceQuestion: (state, {payload}) => {
       state.dynamicQuestion = payload;
     },
+    setpreferenceAns: (state, {payload}) => {
+      let id = state?.dynamicQuesAns.find((id) => {
+        console.log(id, "id");
+      });
+      // console.log(state.dynamicQuesAns.includes(payload));
+
+      if (!id) {
+        state.dynamicQuesAns = [...state.dynamicQuesAns, payload];
+      }
+    },
   },
 });
 
@@ -45,5 +55,6 @@ export const {
   setPreferenceCity,
   setPreferenceCountry,
   setpreferenceQuestion,
+  setpreferenceAns,
 } = preferenceSlice.actions;
 export default preferenceSlice.reducer;

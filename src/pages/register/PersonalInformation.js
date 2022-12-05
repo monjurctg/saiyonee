@@ -67,14 +67,14 @@ function PersonalInformation() {
       return;
     } else if (
       !state.height_inc ||
-      state.height_inc >= 11 ||
+      state.height_inc >= 12 ||
       state.height_inc < 0
     ) {
       setErr("Height cannot be less than 0 inches or greater than 11 inches");
       return;
     }
-    if (state.weight && state.weight < 30) {
-      setErr("weight cannot be less than 30 kg ");
+    if ((state.weight && state.weight < 30) || state.weight >= 181) {
+      setErr("weight cannot be less than 30 kg or greater then 180 kg ");
       return;
     } else if (!marital_status || marital_status === "Select marital status") {
       setErr("Please select marital status");
