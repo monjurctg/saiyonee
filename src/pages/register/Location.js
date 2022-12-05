@@ -1,24 +1,35 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 
 function Location() {
   let navigate = useNavigate();
   const [err, setErr] = useState();
 
-  const {current_city, current_country} = useSelector((state) => state.auth);
+  const { current_city, current_country } = useSelector((state) => state.auth);
 
   console.log(
     current_country == "Select candidate's current country",
     "check current country"
   );
   const onContinueClicked = () => {
-    if (current_country == "Select candidate's current country")
-      setErr("Please select a country");
-    else if (current_city === "Select candidate's current city")
-      setErr("Please select a city");
-    else navigate("/register/family_info");
+    if (current_country == "Select candidate's current country") {
+      setErr({
+        error: "current_country",
+        message: "Please select a country",
+      });
+      return;
+    };
+
+    if (current_city === "Select candidate's current city") {
+      setErr({
+        error: "current_city",
+        message: "Please select a city",
+      });
+      return;
+    }
+    navigate("/register/family_info");
   };
   return (
     <>
@@ -27,7 +38,12 @@ function Location() {
           <h1>Current Country and City</h1>
           <p className="text-muted mt-5 mb-2">Candidate's current country</p>
           <Link to={"/register/location/country"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "current_country" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {current_country ? current_country : "Select current country"}
@@ -44,7 +60,12 @@ function Location() {
           </Link>
           <p className="text-muted mt-5 mb-2">Candidate's current city</p>
           <Link to={"/register/location/city"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "current_city" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {current_city ? current_city : "Select current city"}

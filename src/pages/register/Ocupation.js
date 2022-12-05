@@ -12,7 +12,7 @@ import { stoteRegisterValues } from "../../utils/functions";
 
 function Ocupation() {
   const [err, setErr] = useState();
-  let {pathname} = useLocation()
+  let { pathname } = useLocation()
   const [employeeType, setemployeeType] = useState(["Unemployed", "Student"]);
 
   const navigate = useNavigate();
@@ -34,36 +34,66 @@ function Ocupation() {
 
   // console.log('current_employment_type',current_employment_type !==  ("Unemployed" && "Student"))
 
-  let onContinueClicked = async() => {
-    if (current_employment_type.length === 0)
-      setErr("Please select employment type");
-    else if (
-     !employeeType?.includes(current_employment_type) && industry === "Select Industry")  setErr("Please select Industry");
-    else if (
+  let onContinueClicked = async () => {
+    if (current_employment_type.length === 0) {
+      setErr({
+        error: "current_employment_type",
+        message: "Please select employment type"
+      });
+      return;
+    };
+
+    if (
+      !employeeType?.includes(current_employment_type) && industry === "Select Industry") {
+      setErr({
+        error: "industry",
+        message: "Please select Industry",
+      });
+      return;
+    };
+
+    if (
       !employeeType?.includes(current_employment_type) &&
       !employer_name
-    )
-      setErr("Employer cannot be blank");
-    else if (
-      !employeeType?.includes(current_employment_type) &&
-      !working_since
-    )
-      setErr("Working since is  mandatory");
-    else if (
+    ) {
+      setErr({
+        error: "employer_name",
+        message: "Employer cannot be blank",
+      });
+      return;
+    };
+
+    if (
       !employeeType?.includes(current_employment_type) &&
       !designation
-    )
-      setErr("Designation cannot be blank");
-    else {
-      let data = {
-        email:email,
-        page_name: pathname,
-      }
-      let res = await AuthServices.checkPage(data)
-      if(res.status === 200){
+    ) {
+      setErr({
+        error: "designation",
+        message: "Designation cannot be blank",
+      });
+      return;
+    }
+
+    if (
+      !employeeType?.includes(current_employment_type) &&
+      !working_since
+    ) {
+      setErr({
+        error: "working_since",
+        message: "Working since is  mandatory",
+      });
+      return;
+    };
+
+    let data = {
+      email: email,
+      page_name: pathname,
+    }
+    let res = await AuthServices.checkPage(data)
+    if (res.status === 200) {
       navigate("/register/location");
     }
-  }
+
   };
   return (
     <>
@@ -72,14 +102,19 @@ function Ocupation() {
           <h1>Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>
           <Link to={"/register/ocupation/type"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "current_employment_type" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {current_employment_type === "Other"
                     ? "Other"
                     : current_employment_type
-                    ? current_employment_type
-                    : "Select current employment type"}
+                      ? current_employment_type
+                      : "Select current employment type"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -92,7 +127,12 @@ function Ocupation() {
             </div>
           </Link>
           {current_employment_type === "Other" && (
-            <div className="form-floating my-4 text-muted">
+            <div className="form-floating my-4 text-muted"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "{current_employment_type" ? "2px solid red" : "",
+              }}
+            >
               <input
                 type="text"
                 id="inputEmploymentType"
@@ -111,7 +151,12 @@ function Ocupation() {
               <>
                 <p className="text-muted mt-5 mb-2">Industry</p>
                 <Link to={"/register/ocupation/industry"}>
-                  <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+                  <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
+                    style={{
+                      fontFamily: "Inter",
+                      border: err?.error == "industry" ? "2px solid red" : "",
+                    }}
+                  >
                     <div className="col-10">
                       <label className="form-check-label bg-white px-2 text-body">
                         {industry ?? "Select current industry"}
@@ -126,7 +171,12 @@ function Ocupation() {
                     </div>
                   </div>
                 </Link>
-                <div className="form-floating my-4 text-muted">
+                <div className="form-floating my-4 text-muted rounded-1"
+                  style={{
+                    fontFamily: "Inter",
+                    border: err?.error == "employer_name" ? "2px solid red" : "",
+                  }}
+                >
                   <input
                     type="text"
                     id="inputEmployer"
@@ -142,7 +192,12 @@ function Ocupation() {
                   />
                   <label htmlFor="inputEmployer">Enter Employer's Name</label>
                 </div>
-                <div className="form-floating my-4 text-muted">
+                <div className="form-floating my-4 text-muted  rounded-1"
+                  style={{
+                    fontFamily: "Inter",
+                    border: err?.error == "designation" ? "2px solid red" : "",
+                  }}
+                >
                   <input
                     type="text"
                     id="inputDesignation"
@@ -157,7 +212,12 @@ function Ocupation() {
                   />
                   <label htmlFor="inputDesignation">Enter designation</label>
                 </div>
-                <div className="form-floating my-3 text-muted">
+                <div className="form-floating my-3 text-muted rounded-1"
+                  style={{
+                    fontFamily: "Inter",
+                    border: err?.error == "working_since" ? "2px solid red" : "",
+                  }}
+                >
                   <input
                     type="date"
                     id="inputWorkingSinceDate"
@@ -178,7 +238,7 @@ function Ocupation() {
                       }
                     }}
                     value={working_since}
-                    //   onChange={onWorkingSinceDateChange}
+                  //   onChange={onWorkingSinceDateChange}
                   />
                   <label htmlFor="inputWorkingSinceDate">Working Since</label>
                 </div>
