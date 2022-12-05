@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDegree2,
@@ -18,7 +18,7 @@ import {
   setPassingYear3,
   setPassingYear4,
 } from "../../redux/slices/authSlices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
 
 let scrollPos = 0;
 
@@ -33,7 +33,7 @@ function Education() {
   }, []);
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({top: scrollPos});
+      scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onEducationSelectorClicked]);
   const {
     education1Other,
@@ -122,26 +122,97 @@ function Education() {
 
   // console.log("passingYears", passingYears);
   let onContinueClicked = () => {
-    if (!education1 || education1 == "Select education")
-      setErr("Please select your Secondary Education");
-    else if (!education1_institution.trim())
-      setErr("Please enter your Secondary Institution");
-    else if (!education1_major?.trim())
-      setErr("Please enter your Secondary Major");
-    else if (!education2 || education2 == "Select education")
-      setErr("Please select your Higher Secondary Education");
-    else if (!education2_institution.trim())
-      setErr("Please enter your Higher Secondary Institution");
-    else if (!education2_major?.trim())
-      setErr("Please enter your Higher Secondary Major");
-    else if (!education3) setErr("Please select your Graduate Education");
-    else if (!education3_institution.trim())
-      setErr("Please enter your Graduate Institution");
-    else if (!education3_major.trim())
-      setErr("Please enter your Graduate Major");
-    else if (!education3_passing_year)
-      setErr("Please select your Graduate Passing Year");
-    else navigate("/register/ocupation");
+    if (!education1 || education1 == "Select education") {
+      setErr({
+        error: "education1",
+        message: "Please select your Secondary Education",
+      });
+
+      return;
+    }
+
+    if (!education1_institution.trim()) {
+      setErr({
+        error: "education1_institution",
+        message: "Please enter your Secondary Institution"
+      });
+
+      return;
+    }
+
+    if (!education1_major?.trim()) {
+      setErr({
+        error: "education1_major",
+        message: "Please enter your Secondary Major"
+      });
+
+      return;
+    }
+
+    if (!education2 || education2 == "Select education") {
+      setErr({
+        error: "education2",
+        message: "Please select your Higher Secondary Education"
+      });
+
+      return;
+    }
+
+    if (!education2_institution.trim()) {
+      setErr({
+        error: "education2_institution",
+        message: "Please enter your Higher Secondary Institution"
+      });
+
+      return;
+    }
+
+    if (!education2_major?.trim()) {
+      setErr({
+        error: "education2_major",
+        message: "Please enter your Higher Secondary Major"
+      });
+
+      return;
+    }
+
+    if (!education3) {
+      setErr({
+        error: "education3",
+        message: "Please select your Graduate Education"
+      });
+
+      return;
+    }
+
+    if (!education3_institution.trim()) {
+      setErr({
+        error: "education3_institution",
+        message: "Please enter your Graduate Institution"
+      });
+
+      return;
+    }
+
+    if (!education3_major.trim()) {
+      setErr({
+        error: "education3_major",
+        message: "Please enter your Graduate Major"
+      });
+
+      return;
+    }
+
+    if (!education3_passing_year) {
+      setErr({
+        error: "education3_passing_year",
+        message: "Please select your Graduate Passing Year"
+      });
+
+      return;
+    }
+
+    navigate("/register/ocupation");
   };
 
   return (
@@ -155,14 +226,19 @@ function Education() {
           <Link
             onClick={onEducationSelectorClicked}
             to={"/register/education/type1"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "education1" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education1Other
                     ? "Other"
                     : education1
-                    ? education1
-                    : "Select secondary education"}
+                      ? education1
+                      : "Select secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -175,7 +251,7 @@ function Education() {
             </div>
           </Link>
           {education1Other && (
-            <div className="form-floating my-4 text-muted">
+            <div className="form-floating my-4 text-muted  rounded-1">
               <input
                 type="text"
                 id="inputEducation1"
@@ -189,14 +265,20 @@ function Education() {
             </div>
           )}
 
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education1_institution" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputInstitution1"
               value={education1_institution}
               onChange={(e) => {
                 dispatch(setinstitution1(e.target.value));
-                stoteRegisterValues({education1_institution: e.target.value});
+                stoteRegisterValues({ education1_institution: e.target.value });
               }}
               className="form-control border-0 rounded-1"
               placeholder="institution1"
@@ -206,24 +288,30 @@ function Education() {
               Enter candidate's institution
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education1_major" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputMajor1"
               value={education1_major}
               //   onChange={onMajor1Change}
               onChange={(e) => {
                 dispatch(setMajor1(e.target.value));
-                stoteRegisterValues({education1_major: e.target.value});
+                stoteRegisterValues({ education1_major: e.target.value });
               }}
               className="form-control border-0 rounded-1"
               placeholder="major1"
               aria-describedby="major1"
             />
-            <label htmlFor="inputMajor1">Enter major/subject</label>
+            <label htmlFor="inputMajor1">Enter major subject</label>
           </div>
 
-          <div className="row my-4 px-2">
+          <div className="row my-4 px-2  rounded-1">
             <div className="col-8 d-flex align-items-center">
               <label className="form-check-label px-2 text-muted">
                 Select passing year
@@ -242,10 +330,9 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
-                    year1Dropdown ? " show" : ""
-                  }`}
-                  style={{maxHeight: 200}}>
+                  className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${year1Dropdown ? " show" : ""
+                    }`}
+                  style={{ maxHeight: 200 }}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
@@ -255,9 +342,8 @@ function Education() {
                             education1_passing_year: year,
                           });
                         }}
-                        className={`btn btn-primary py-3 dropdown-item${
-                          education1_passing_year === year ? " " : ""
-                        }`}>
+                        className={`btn btn-primary py-3 dropdown-item${education1_passing_year === year ? " " : ""
+                          }`}>
                         {year}
                       </div>
                     </li>
@@ -273,14 +359,19 @@ function Education() {
           <Link
             onClick={onEducationSelectorClicked}
             to={"/register/education/type2"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "education2" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education2Other
                     ? "Other"
                     : education2
-                    ? education2
-                    : "Select higher secondary education"}
+                      ? education2
+                      : "Select higher secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -307,14 +398,20 @@ function Education() {
               <label htmlFor="inputEducation2">Enter degree</label>
             </div>
           )}
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education2_institution" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputInstitution2"
               value={education2_institution}
               onChange={(e) => {
                 dispatch(setinstitution2(e.target.value));
-                stoteRegisterValues({education2_institution: e.target.value});
+                stoteRegisterValues({ education2_institution: e.target.value });
               }}
               // onChange={onInstitution2Change}
               className="form-control border-0 rounded-1"
@@ -325,21 +422,27 @@ function Education() {
               Enter candidate's institution
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education2_major" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputMajor2"
               value={education2_major}
               onChange={(e) => {
                 dispatch(setMajor2(e.target.value));
-                stoteRegisterValues({education1_major: e.target.value});
+                stoteRegisterValues({ education1_major: e.target.value });
               }}
               // onChange={onMajor2Change}
               className="form-control border-0 rounded-1"
               placeholder="major2"
               aria-describedby="major2"
             />
-            <label htmlFor="inputMajor2">Enter candidate's major/subject</label>
+            <label htmlFor="inputMajor2">Enter candidate's major subject</label>
           </div>
           <div className="row my-4 px-2">
             <div className="col-8 d-flex align-items-center">
@@ -347,6 +450,7 @@ function Education() {
                 Select your passing year
               </label>
             </div>
+
             <div className="col-4">
               <div className="dropup bg-white rounded-1">
                 <button
@@ -360,16 +464,14 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
-                    year2Dropdown ? " show" : ""
-                  }`}
-                  style={{maxHeight: 200}}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year2Dropdown ? " show" : ""
+                    }`}
+                  style={{ maxHeight: 200 }}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${
-                          education2_passing_year === year ? " active" : ""
-                        }`}
+                        className={`btn btn-primary py-3 dropdown-item${education2_passing_year === year ? " active" : ""
+                          }`}
                         onClick={() => {
                           dispatch(setPassingYear2(year));
                           stoteRegisterValues({
@@ -390,15 +492,22 @@ function Education() {
           <h4 className="mt-4 mb-2">Graduate Education</h4>
           <Link
             onClick={onEducationSelectorClicked}
-            to={"/register/education/type3"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            to={"/register/education/type3"}
+          >
+
+            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "education3" ? "2px solid red" : "",
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education3Other
                     ? "Other"
                     : education3
-                    ? education3
-                    : "Select graduate education"}
+                      ? education3
+                      : "Select graduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -425,14 +534,20 @@ function Education() {
               <label htmlFor="inputEducation3">Enter degree</label>
             </div>
           )}
-          <div className="form-floating my-4 text-muted">
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education3_institution" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputInstitution3"
               value={education3_institution}
               onChange={(e) => {
                 dispatch(setinstitution3(e.target.value));
-                stoteRegisterValues({education3_institution: e.target.value});
+                stoteRegisterValues({ education3_institution: e.target.value });
               }}
               // onChange={onInstitution3Change}
               className="form-control border-0 rounded-1"
@@ -443,14 +558,21 @@ function Education() {
               Enter candidate's institution
             </label>
           </div>
-          <div className="form-floating my-4 text-muted">
+
+          <div className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education3_major" ? "2px solid red" : "",
+            }}
+          >
             <input
+              onFocus={() => setErr()}
               type="text"
               id="inputMajor3"
               value={education3_major}
               onChange={(e) => {
                 dispatch(setMajor3(e.target.value));
-                stoteRegisterValues({education3_major: e.target.value});
+                stoteRegisterValues({ education3_major: e.target.value });
               }}
               // onChange={onMajor3Change}
               className="form-control border-0 rounded-1"
@@ -479,16 +601,14 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
-                    year3Dropdown ? " show" : ""
-                  }`}
-                  style={{maxHeight: 200}}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year3Dropdown ? " show" : ""
+                    }`}
+                  style={{ maxHeight: 200 }}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${
-                          education3_passing_year === year ? " active" : ""
-                        }`}
+                        className={`btn btn-primary py-3 dropdown-item${education3_passing_year === year ? " active" : ""
+                          }`}
                         onClick={() => {
                           dispatch(setPassingYear3(year));
                           stoteRegisterValues({
@@ -516,8 +636,8 @@ function Education() {
                   {education4Other
                     ? "Other"
                     : education4
-                    ? education4
-                    : "Select postgraduate education"}
+                      ? education4
+                      : "Select postgraduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -552,7 +672,7 @@ function Education() {
               value={education4_institution}
               onChange={(e) => {
                 dispatch(setinstitution4(e.target.value));
-                stoteRegisterValues({education4_institution: e.target.value});
+                stoteRegisterValues({ education4_institution: e.target.value });
               }}
               // onChange={onInstitution4Change}
               className="form-control border-0 rounded-1"
@@ -570,7 +690,7 @@ function Education() {
               value={education4_major}
               onChange={(e) => {
                 dispatch(setMajor4(e.target.value));
-                stoteRegisterValues({education4_major: e.target.value});
+                stoteRegisterValues({ education4_major: e.target.value });
               }}
               // onChange={onMajor4Change}
               className="form-control border-0 rounded-1"
@@ -599,16 +719,14 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
-                    year4Dropdown ? " show" : ""
-                  }`}
-                  style={{maxHeight: 200}}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year4Dropdown ? " show" : ""
+                    }`}
+                  style={{ maxHeight: 200 }}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${
-                          education4_passing_year === year ? " active" : ""
-                        }`}
+                        className={`btn btn-primary py-3 dropdown-item${education4_passing_year === year ? " active" : ""
+                          }`}
                         onClick={() => {
                           dispatch(setPassingYear4(year));
                           stoteRegisterValues({

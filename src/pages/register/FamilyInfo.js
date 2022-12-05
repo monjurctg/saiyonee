@@ -68,6 +68,11 @@ function FamilyInfo() {
       return;
     };
 
+    dispatch(setFamilyInformation(familyInfo));
+    stoteRegisterValues(familyInfo);
+
+    navigate("/register/varification");
+
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
