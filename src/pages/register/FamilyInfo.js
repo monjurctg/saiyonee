@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import { setFamilyInformation } from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {setFamilyInformation} from "../../redux/slices/authSlices";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
@@ -35,14 +35,13 @@ function FamilyInfo() {
     //   navigate("/register/varification");
     // }
 
-
     if (!familyInfo.father_occupation.trim()) {
       setErr({
         error: "father_occupation",
-        message: "Father's Occupation Can't Be Empty!"
+        message: "Father's Occupation Can't Be Empty!",
       });
       return;
-    };
+    }
 
     if (!familyInfo.father_home_district.trim()) {
       setErr({
@@ -50,24 +49,23 @@ function FamilyInfo() {
         message: " Father's home district cannot be blank!",
       });
       return;
-    };
+    }
 
     if (!familyInfo.mother_occupation.trim()) {
       setErr({
         error: "mother_occupation",
         message: "Mother's Occupation Can't Be Empty!",
-      })
+      });
       return;
-    };
+    }
 
     if (!familyInfo.mother_home_district.trim()) {
       setErr({
         error: "mother_home_district",
         message: "Mother's home district cannot be blank!",
-      })
+      });
       return;
-    };
-
+    }
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
@@ -91,12 +89,12 @@ function FamilyInfo() {
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1>Candidate's Family Information</h1>
-          <div className="form-floating my-4 text-muted rounded-1"
+          <div
+            className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "father_occupation" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr({})}
               type="text"
@@ -112,12 +110,13 @@ function FamilyInfo() {
               Enter Father's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1"
+          <div
+            className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "father_home_district" ? "2px solid red" : "",
-            }}
-          >
+              border:
+                err?.error == "father_home_district" ? "2px solid red" : "",
+            }}>
             <input
               onFocus={() => setErr({})}
               type="text"
@@ -133,12 +132,12 @@ function FamilyInfo() {
               Enter Father's Home District
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1"
+          <div
+            className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "mother_occupation" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="text"
               id="inputMotherOccupation"
@@ -149,18 +148,18 @@ function FamilyInfo() {
               placeholder="occupation"
               aria-describedby="occupation"
               onFocus={() => setErr({})}
-
             />
             <label htmlFor="inputMotherOccupation">
               Enter Mother's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1"
+          <div
+            className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "mother_home_district" ? "2px solid red" : "",
-            }}
-          >
+              border:
+                err?.error == "mother_home_district" ? "2px solid red" : "",
+            }}>
             <input
               type="text"
               name="mother_home_district"
@@ -203,7 +202,6 @@ function FamilyInfo() {
                 className="form-control border-0 rounded-1 p-3 text-center"
                 // placeholder="50"
                 aria-describedby="BrotherCount"
-
               />
             </div>
             <div className="col-2">
@@ -248,7 +246,6 @@ function FamilyInfo() {
                 className="form-control border-0 rounded-1 p-3 text-center"
                 placeholder="50"
                 aria-describedby="SisterCount"
-
               />
             </div>
             <div className="col-2">
