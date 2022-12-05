@@ -44,10 +44,13 @@ function PersonalInformation() {
   // console.log('state', state)
   const onReligionSelectorClicked = () => {
     dispatch(setPersonalInfo(state));
+    setErr({});
+
     navigate("/register/personalinfo/religion");
   };
 
   const onMaritalStatusClicked = () => {
+    setErr({});
     dispatch(setPersonalInfo(state));
 
     navigate("/register/personalinfo/marital_status");
@@ -56,28 +59,46 @@ function PersonalInformation() {
 
   const onContinueClicked = () => {
     if (!state.full_name.trim()) {
-      setErr("Full name cannot be less than 6 characters long");
-
+      setErr({
+        error: "name",
+        message: "Full name cannot be less than 6 characters long",
+      });
       return;
     } else if (!state.gender) {
-      setErr("Please select male or female");
+      setErr({
+        error: "gender",
+        message: "Please select male or female",
+      });
       return;
     } else if (!state.height_ft || state.height_ft > 8 || state.height_ft < 3) {
-      setErr("Height cannot be less than 3 feet or greater than 8 feet");
+      setErr({
+        error: "ft",
+        message: "Height cannot be less than 3 feet or greater than 8 feet",
+      });
       return;
     } else if (
       !state.height_inc ||
       state.height_inc >= 12 ||
       state.height_inc < 0
     ) {
-      setErr("Height cannot be less than 0 inches or greater than 11 inches");
+      setErr({
+        error: "inc",
+        message:
+          "Height cannot be less than 0 inches or greater than 11 inches",
+      });
       return;
     }
     if ((state.weight && state.weight < 30) || state.weight >= 181) {
-      setErr("weight cannot be less than 30 kg or greater then 180 kg ");
+      setErr({
+        error: "weight",
+        message: "weight cannot be less than 30 kg or greater then 180 kg",
+      });
       return;
     } else if (!marital_status || marital_status === "Select marital status") {
-      setErr("Please select marital status");
+      setErr({
+        error: "marital_status",
+        message: "Please select marital status",
+      });
     } else {
       dispatch(setPersonalInfo(state));
       stoteRegisterValues(state);
@@ -104,11 +125,17 @@ function PersonalInformation() {
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
             Name must match with government issued ID card
           </p>
-          <div className="form-floating my-3 text-muted">
+          <div
+            className="form-floating my-3 text-muted rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "name" ? "2px solid red" : "",
+            }}>
             <input
               type="text"
               name="full_name"
               id="inputRealName"
+              onFocus={() => setErr({})}
               style={{fontFamily: "Inter"}}
               value={state.full_name}
               onChange={handleUserInputChange}
@@ -136,14 +163,19 @@ function PersonalInformation() {
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
             Enter Date of Birth
           </p>
-          <div className="form-floating my-3 text-muted">
+          <div
+            className="form-floating my-3 text-muted rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "dob" ? "2px solid red" : "",
+            }}>
             <input
               type="date"
               style={{fontFamily: "Inter"}}
               name="date_of_birth"
               id="inputDateOfBirth"
               className="form-control border-0 rounded-1"
-              // placeholder="name@example.com"
+              onFocus={() => setErr({})}
               aria-describedby="dateOfBirth"
               value={state.date_of_birth}
               //               {date_of_birth.toISOString().substring(0, 10)}
@@ -157,13 +189,19 @@ function PersonalInformation() {
             What's Candidate's height?
           </p>
           <div className="d-flex">
-            <div className="form-floating my-3 text-muted me-2">
+            <div
+              className="form-floating my-3 text-muted rounded-1 me-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "ft" ? "2px solid red" : "",
+              }}>
               <input
                 type="number"
                 id="inputHeightFeet"
                 name="height_ft"
                 style={{fontFamily: "Inter"}}
                 value={state.height_ft}
+                onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 // placeholder={MIN_HEIGHT_FEET.toString()}
@@ -173,13 +211,14 @@ function PersonalInformation() {
                 ft
               </label>
             </div>
-            <div className="form-floating my-3 text-muted ms-2">
+            <div className="form-floating my-3 rounded-1 text-muted ms-2">
               <input
                 type="number"
                 name="height_inc"
                 id="inputHeightInches"
                 style={{fontFamily: "Inter"}}
                 value={state.height_inc}
+                onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 aria-describedby="height_inches"
@@ -192,11 +231,17 @@ function PersonalInformation() {
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
             Select Candidate's weight (optional)
           </p>
-          <div className="form-floating my-3 text-muted">
+          <div
+            className="form-floating my-3 text-muted rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "weight" ? "2px solid red" : "",
+            }}>
             <input
               type="number"
               id="inputWeight"
               name="weight"
+              onFocus={() => setErr({})}
               value={state.weight}
               style={{fontFamily: "Inter"}}
               onChange={handleUserInputChange}
@@ -233,7 +278,12 @@ function PersonalInformation() {
             Select Candidate's marital status
           </p>
           <div onClick={onMaritalStatusClicked}>
-            <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+            <div
+              className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "marital_status" ? "2px solid red" : "",
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {marital_status ?? "Select Marital Status"}
@@ -250,7 +300,7 @@ function PersonalInformation() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2">
-          {err && <p className="text-primary">* {err}</p>}
+          {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={onContinueClicked}
             style={{height: 60}}
