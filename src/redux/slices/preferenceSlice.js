@@ -36,14 +36,14 @@ const preferenceSlice = createSlice({
       state.dynamicQuestion = payload;
     },
     setpreferenceAns: (state, {payload}) => {
-      let id = state?.dynamicQuesAns.find((id) => {
-        console.log(id, "id");
-      });
+      // let id = state?.dynamicQuesAns.find((id) => {
+      //   console.log(id, "id");
+      // });
       // console.log(state.dynamicQuesAns.includes(payload));
+      // if (!id) {
 
-      if (!id) {
-        state.dynamicQuesAns = [...state.dynamicQuesAns, payload];
-      }
+      // }
+      state.dynamicQuesAns = [...state.dynamicQuesAns, payload];
     },
   },
 });
