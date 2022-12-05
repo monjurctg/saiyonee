@@ -36,35 +36,37 @@ function FamilyInfo() {
     // }
 
 
-    if (!familyInfo.father_occupation) {
+    if (!familyInfo.father_occupation.trim()) {
       setErr({
         error: "father_occupation",
         message: "Father's Occupation Can't Be Empty!"
       });
-
       return;
     };
 
-    if (!familyInfo.father_home_district) {
+    if (!familyInfo.father_home_district.trim()) {
       setErr({
         error: "father_home_district",
         message: " Father's home district cannot be blank!",
       });
+      return;
     };
 
-    if (!familyInfo.mother_occupation) {
+    if (!familyInfo.mother_occupation.trim()) {
       setErr({
         error: "mother_occupation",
         message: "Mother's Occupation Can't Be Empty!",
       })
+      return;
     };
 
-    if (!familyInfo.mother_home_district) {
+    if (!familyInfo.mother_home_district.trim()) {
       setErr({
         error: "mother_home_district",
         message: "Mother's home district cannot be blank!",
       })
-    }
+      return;
+    };
 
   };
   const dispatch = useDispatch();
@@ -89,8 +91,7 @@ function FamilyInfo() {
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1>Candidate's Family Information</h1>
-          <div className="form-floating my-4 text-muted rounded-1
-          "
+          <div className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "father_occupation" ? "2px solid red" : "",
@@ -111,14 +112,14 @@ function FamilyInfo() {
               Enter Father's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1
-          "
+          <div className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "father_home_district" ? "2px solid red" : "",
             }}
           >
             <input
+              onFocus={() => setErr({})}
               type="text"
               id="inputFatherHomeDistrict"
               name="father_home_district"
@@ -127,14 +128,12 @@ function FamilyInfo() {
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
               aria-describedby="homedistrict"
-              onFocus={() => setErr({})}
             />
             <label htmlFor="inputFatherHomeDistrict">
               Enter Father's Home District
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1
-          "
+          <div className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "mother_occupation" ? "2px solid red" : "",
@@ -156,8 +155,7 @@ function FamilyInfo() {
               Enter Mother's Occupation
             </label>
           </div>
-          <div className="form-floating my-4 text-muted rounded-1
-          "
+          <div className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "mother_home_district" ? "2px solid red" : "",
@@ -173,7 +171,6 @@ function FamilyInfo() {
               placeholder="homedistrict"
               aria-describedby="homedistrict"
               onFocus={() => setErr({})}
-
             />
             <label htmlFor="inputMotherHomeDistrict">
               Enter Mother's Home District
