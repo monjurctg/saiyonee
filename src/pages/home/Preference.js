@@ -174,8 +174,6 @@ function Preference() {
         <div className="form-floating my-3 text-muted me-2">
           <input
             type="number"
-            min="3"
-            max="8"
             id="inputHeightFeet"
             name="height_ft"
             style={{ fontFamily: "Inter" }}
@@ -192,8 +190,6 @@ function Preference() {
         <div className="form-floating my-3 text-muted ms-2">
           <input
             type="number"
-            min="0"
-            max="12"
             name="height_inc"
             id="inputHeightInches"
             style={{ fontFamily: "Inter" }}
