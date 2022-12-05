@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-function HomeLayout({ children, background }) {
+function HomeLayout({ children, background,activeExplore,setactiveExplore }) {
   let { pathname } = useLocation();
 
   return (
@@ -11,6 +11,7 @@ function HomeLayout({ children, background }) {
       style={{
         background: "#F9FAFB",
         borderRadius: 35,
+        height: "100vh",
 
         // "#F9FAFB"
       }}
@@ -18,7 +19,7 @@ function HomeLayout({ children, background }) {
       <div className="logos px-4" style={{ background: background,position:"fixed",top:pathname === "home" ? 20 :0,
     borderTopRightRadius:pathname === "home" ? 0 : 35,
     borderTopLeftRadius: pathname === "home" ? 0 : 35,
-    width: pathname !== "home" && 428,
+    width: pathname !== "home" && 390,
     
     }}>
         <div
@@ -56,9 +57,9 @@ function HomeLayout({ children, background }) {
         </div>
         {pathname === "/explore" && (
           <div className="tab d-flex pt-3">
-            <p className="active">Visited you</p>
-            <p>Short list</p>
-            <p>Liked you</p>
+            <p className={activeExplore === "Visited" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Visited")}>Visited you</p>
+            <p className={activeExplore === "Shortlist" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Shortlist")}>Short list</p>
+            <p className={activeExplore === "Liked" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Liked")}>Liked you</p>
           </div>
         )}
       </div>
