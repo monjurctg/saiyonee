@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {GENDER_TYPES} from "../../constants/register_constants";
-import {setPersonalInfo} from "../../redux/slices/authSlices";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GENDER_TYPES } from "../../constants/register_constants";
+import { setPersonalInfo } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function PersonalInformation() {
   const [err, setErr] = useState();
 
-  let {pathname} = useLocation()
+  let { pathname } = useLocation()
   // let gender = "male";
   // let marital_status = "marid";
 
@@ -23,7 +23,7 @@ function PersonalInformation() {
     height_feet,
     gender,
     weight,
-     email,
+    email,
     marital_status,
     religion,
   } = useSelector((state) => state.auth);
@@ -61,7 +61,7 @@ function PersonalInformation() {
   };
   // console.log(state.gender);
 
-  const onContinueClicked = async() => {
+  const onContinueClicked = async () => {
     if (!state.full_name.trim()) {
       setErr({
         error: "name",
@@ -105,14 +105,14 @@ function PersonalInformation() {
       });
     } else {
       let data = {
-        email:email,
+        email: email,
         page_name: pathname,
       }
       let res = await AuthServices.checkPage(data)
       // console.log('res', res)
-      if(res.status === 200){
+      if (res.status === 200) {
         dispatch(setPersonalInfo(state));
-  
+
         stoteRegisterValues(state);
         navigate("/register/education");
 
@@ -127,16 +127,16 @@ function PersonalInformation() {
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{ height: "58px", width: "58px" }}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
         </div>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          //   ref={scrollContainerRef}
+        //   ref={scrollContainerRef}
         >
-          <h1 style={{fontFamily: "Inter"}}>Personal Information</h1>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <h1 style={{ fontFamily: "Inter" }}>Personal Information</h1>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Name must match with government issued ID card
           </p>
           <div
@@ -150,14 +150,14 @@ function PersonalInformation() {
               name="full_name"
               id="inputRealName"
               onFocus={() => setErr({})}
-              style={{fontFamily: "Inter"}}
+              style={{ fontFamily: "Inter" }}
               value={state.full_name}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1 shadow-2"
               placeholder="realName"
               aria-describedby="realName"
             />
-            <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
+            <label htmlFor="inputRealName" style={{ fontFamily: "Inter" }}>
               Full Name
             </label>
           </div>
@@ -165,16 +165,15 @@ function PersonalInformation() {
             {GENDER_TYPES.map((g, i) => (
               <button
                 key={i}
-                style={{fontFamily: "Inter", height: 60}}
-                onClick={() => setState({...state, gender: g})}
-                className={`btn btn-${
-                  g === state.gender ? "" : "outline-"
-                }primary w-100 rounded shadow p-3 my-2 ms-2 fw-semibold`}>
+                style={{ fontFamily: "Inter", height: 60 }}
+                onClick={() => setState({ ...state, gender: g })}
+                className={`btn btn-${g === state.gender ? "" : "outline-"
+                  }primary w-100 rounded shadow p-3 my-2 ms-2 fw-semibold`}>
                 {g}
               </button>
             ))}
           </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Enter Date of Birth
           </p>
           <div
@@ -185,7 +184,7 @@ function PersonalInformation() {
             }}>
             <input
               type="date"
-              style={{fontFamily: "Inter"}}
+              style={{ fontFamily: "Inter" }}
               name="date_of_birth"
               id="inputDateOfBirth"
               className="form-control border-0 rounded-1"
@@ -195,11 +194,11 @@ function PersonalInformation() {
               //               {date_of_birth.toISOString().substring(0, 10)}
               onChange={handleUserInputChange}
             />
-            <label htmlFor="inputDateOfBirth" style={{fontFamily: "Inter"}}>
+            <label htmlFor="inputDateOfBirth" style={{ fontFamily: "Inter" }}>
               Date of birth
             </label>
           </div>
-          <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
             What's Candidate's height?
           </p>
           <div className="d-flex">
@@ -213,7 +212,7 @@ function PersonalInformation() {
                 type="number"
                 id="inputHeightFeet"
                 name="height_ft"
-                style={{fontFamily: "Inter"}}
+                style={{ fontFamily: "Inter" }}
                 value={state.height_ft}
                 onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
@@ -221,7 +220,7 @@ function PersonalInformation() {
                 // placeholder={MIN_HEIGHT_FEET.toString()}
                 aria-describedby="height_feet"
               />
-              <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+              <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
                 ft
               </label>
             </div>
@@ -235,19 +234,19 @@ function PersonalInformation() {
                 type="number"
                 name="height_inc"
                 id="inputHeightInches"
-                style={{fontFamily: "Inter"}}
+                style={{ fontFamily: "Inter" }}
                 value={state.height_inc}
                 onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 aria-describedby="height_inches"
               />
-              <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
+              <label htmlFor="inputHeightInches" style={{ fontFamily: "Inter" }}>
                 in
               </label>
             </div>
           </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Select Candidate's weight (optional)
           </p>
           <div
@@ -262,17 +261,17 @@ function PersonalInformation() {
               name="weight"
               onFocus={() => setErr({})}
               value={state.weight}
-              style={{fontFamily: "Inter"}}
+              style={{ fontFamily: "Inter" }}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               aria-describedby="weight"
             />
-            <label htmlFor="inputWeight" style={{fontFamily: "Inter"}}>
+            <label htmlFor="inputWeight" style={{ fontFamily: "Inter" }}>
               KG
             </label>
           </div>
 
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Select Candidate's religion
           </p>
           <div onClick={onReligionSelectorClicked}>
@@ -280,7 +279,7 @@ function PersonalInformation() {
               <div className="col-10">
                 <label
                   className="form-check-label bg-white px-2 text-body"
-                  style={{fontFamily: "Inter"}}>
+                  style={{ fontFamily: "Inter" }}>
                   {religion}
                 </label>
               </div>
@@ -293,7 +292,7 @@ function PersonalInformation() {
               </div>
             </div>
           </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Select Candidate's marital status
           </p>
           <div onClick={onMaritalStatusClicked}>
@@ -322,9 +321,9 @@ function PersonalInformation() {
           {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={onContinueClicked}
-            style={{height: 60}}
+            style={{ height: 60 }}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong style={{fontFamily: "Inter"}}>Continue</strong>
+            <strong style={{ fontFamily: "Inter" }}>Continue</strong>
           </button>
         </div>
       </div>

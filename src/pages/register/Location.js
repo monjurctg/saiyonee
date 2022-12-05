@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
+import AuthServices from "../../services/authServices";
 
 function Location() {
   let navigate = useNavigate();
+  let { pathname } = useLocation();
+
   const [err, setErr] = useState();
 
-  const { current_city, current_country } = useSelector((state) => state.auth);
+  const {
+    current_city,
+    current_country,
+    email
+  } = useSelector((state) => state.auth);
 
   console.log(
     current_country == "Select candidate's current country",
     "check current country"
   );
-  const onContinueClicked = () => {
+  const onContinueClicked = async () => {
     if (current_country == "Select candidate's current country") {
       setErr({
         error: "current_country",
@@ -28,8 +35,22 @@ function Location() {
         message: "Please select a city",
       });
       return;
+    };
+
+    let data = {
+      email: email,
+      page_name: pathname,
+    };
+
+    let res = await AuthServices.checkPage(data);
+
+    if (res.status == 200) {
+      navigate("/register/family_info");
     }
-    navigate("/register/family_info");
+    else {
+      console.log(data);
+      console.log(res);
+    }
   };
   return (
     <>
