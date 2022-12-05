@@ -62,7 +62,7 @@ function FamilyInfo() {
               type="text"
               id="inputFatherOccupation"
               name="father_occupation"
-              value={familyInfo.father_occupation || father_occupation}
+              value={familyInfo.father_occupation}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
@@ -77,7 +77,7 @@ function FamilyInfo() {
               type="text"
               id="inputFatherHomeDistrict"
               name="father_home_district"
-              value={familyInfo.father_home_district || father_home_district}
+              value={familyInfo.father_home_district}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
@@ -92,7 +92,7 @@ function FamilyInfo() {
               type="text"
               id="inputMotherOccupation"
               name="mother_occupation"
-              value={familyInfo.mother_occupation || mother_occupation}
+              value={familyInfo.mother_occupation}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="occupation"
@@ -107,7 +107,7 @@ function FamilyInfo() {
               type="text"
               name="mother_home_district"
               id="inputMotherHomeDistrict"
-              value={familyInfo.mother_home_district || mother_home_district}
+              value={familyInfo.mother_home_district}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               placeholder="homedistrict"
@@ -139,7 +139,7 @@ function FamilyInfo() {
                 type="number"
                 name="number_of_brothers"
                 id="inputBrotherCount"
-                value={familyInfo.number_of_brothers || number_of_brothers}
+                value={familyInfo.number_of_brothers}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1 p-3 text-center"
                 // placeholder="50"
