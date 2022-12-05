@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDegree2,
@@ -18,6 +18,7 @@ import {
   setPassingYear3,
   setPassingYear4,
 } from "../../redux/slices/authSlices";
+import AuthServices from "../../services/authServices";
 import { stoteRegisterValues } from "../../utils/functions";
 
 let scrollPos = 0;
@@ -25,6 +26,7 @@ let scrollPos = 0;
 function Education() {
   const navigate = useNavigate();
   const scrollContainerRef = useRef();
+  let {pathname} = useLocation()
   const onEducationSelectorClicked = useCallback(() => {
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
@@ -59,6 +61,7 @@ function Education() {
     education2,
     education3,
     education4,
+    email
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -121,7 +124,7 @@ function Education() {
   ).map((_, i) => 1990 + i);
 
   // console.log("passingYears", passingYears);
-  let onContinueClicked = () => {
+  let onContinueClicked = async() => {
     if (!education1 || education1 == "Select education") {
       setErr({
         error: "education1",
@@ -211,8 +214,14 @@ function Education() {
 
       return;
     }
-
+    let data = {
+      email:email,
+      page_name: pathname,
+    }
+    let res = await AuthServices.checkPage(data)
+    if(res.status === 200){
     navigate("/register/ocupation");
+    }
   };
 
   return (

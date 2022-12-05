@@ -38,6 +38,16 @@ AuthServices.login = async (data) => {
     .catch((err) => err.response);
   return res;
 };
+
+AuthServices.checkPage = async (data) => {
+  let url = "/app_track_data";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
+
 AuthServices.logout = async () => {
   // console.log('data', data)
   let url = "/ApiLogout";
