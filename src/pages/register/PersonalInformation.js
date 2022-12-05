@@ -211,7 +211,12 @@ function PersonalInformation() {
                 ft
               </label>
             </div>
-            <div className="form-floating my-3 rounded-1 text-muted ms-2">
+            <div
+              className="form-floating my-3 rounded-1 text-muted ms-2 border-1"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "inc" ? "2px solid red" : "",
+              }}>
               <input
                 type="number"
                 name="height_inc"
