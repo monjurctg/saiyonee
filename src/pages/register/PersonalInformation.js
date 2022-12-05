@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {GENDER_TYPES} from "../../constants/register_constants";
 import {setPersonalInfo} from "../../redux/slices/authSlices";
+import AuthServices from "../../services/authServices";
 import {stoteRegisterValues} from "../../utils/functions";
 
 function PersonalInformation() {
   const [err, setErr] = useState();
 
+  let {pathname} = useLocation()
   // let gender = "male";
   // let marital_status = "marid";
 
@@ -21,9 +23,11 @@ function PersonalInformation() {
     height_feet,
     gender,
     weight,
+     email,
     marital_status,
     religion,
   } = useSelector((state) => state.auth);
+  // console.log('email', email)
   const [state, setState] = useState({
     full_name: full_name,
     date_of_birth: date_of_birth || "1995-01-01",
@@ -57,7 +61,7 @@ function PersonalInformation() {
   };
   // console.log(state.gender);
 
-  const onContinueClicked = () => {
+  const onContinueClicked = async() => {
     if (!state.full_name.trim()) {
       setErr({
         error: "name",
@@ -100,9 +104,19 @@ function PersonalInformation() {
         message: "Please select marital status",
       });
     } else {
-      dispatch(setPersonalInfo(state));
-      stoteRegisterValues(state);
-      navigate("/register/education");
+      let data = {
+        email:email,
+        page_name: pathname,
+      }
+      let res = await AuthServices.checkPage(data)
+      // console.log('res', res)
+      if(res.status === 200){
+        dispatch(setPersonalInfo(state));
+  
+        stoteRegisterValues(state);
+        navigate("/register/education");
+
+      }
     }
   };
 

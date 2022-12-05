@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDesignation,
   setEmployName,
   setWorkingSince,
 } from "../../redux/slices/authSlices";
+import AuthServices from "../../services/authServices";
 import { stoteRegisterValues } from "../../utils/functions";
 
 function Ocupation() {
   const [err, setErr] = useState();
+  let {pathname} = useLocation()
   const [employeeType, setemployeeType] = useState(["Unemployed", "Student"]);
 
   const navigate = useNavigate();
@@ -26,12 +28,13 @@ function Ocupation() {
     employer_name,
     industry,
     working_since,
+    email
   } = useSelector((state) => state.auth);
-  console.log("current_employment_type", employeeType?.includes(current_employment_type));
+  // console.log("current_employment_type", employeeType?.includes(current_employment_type));
 
   // console.log('current_employment_type',current_employment_type !==  ("Unemployed" && "Student"))
 
-  let onContinueClicked = () => {
+  let onContinueClicked = async() => {
     if (current_employment_type.length === 0)
       setErr("Please select employment type");
     else if (
@@ -51,7 +54,16 @@ function Ocupation() {
       !designation
     )
       setErr("Designation cannot be blank");
-    else navigate("/register/location");
+    else {
+      let data = {
+        email:email,
+        page_name: pathname,
+      }
+      let res = await AuthServices.checkPage(data)
+      if(res.status === 200){
+      navigate("/register/location");
+    }
+  }
   };
   return (
     <>
