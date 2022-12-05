@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import back from "../../assets/imgs/Back.svg";
 import human1 from "../../assets/imgs/human1.svg";
 import human2 from "../../assets/imgs/human2.svg";
+import UserServices from "../../services/userServices";
 
 function Boom() {
+  const [data, setData] = useState("")
+  let getData = async () => {
+    let res = await UserServices.matched_users();
+    console.log('res', res)
+    // let data = await res.json()
+    setData(res)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+  
+
   return (
     <div
       className="vh-100 max-width-mobile mx-auto p-4"
