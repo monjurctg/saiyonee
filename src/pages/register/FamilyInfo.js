@@ -1,13 +1,16 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {setFamilyInformation} from "../../redux/slices/authSlices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { setFamilyInformation } from "../../redux/slices/authSlices";
+import AuthServices from "../../services/authServices";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
+  let { pathname } = useLocation();
+
   const [err, setErr] = useState();
 
   const {
@@ -17,9 +20,10 @@ function FamilyInfo() {
     mother_occupation,
     number_of_brothers,
     number_of_sisters,
+    email
   } = useSelector((state) => state.auth);
   console.log("first", father_occupation);
-  let onContinueClicked = () => {
+  let onContinueClicked = async () => {
     // if (!familyInfo.father_occupation.trim())
     //   setErr(" Father's occupation cannot be blank");
     // else if (!familyInfo.father_home_district.trim())
@@ -67,10 +71,21 @@ function FamilyInfo() {
       return;
     }
 
-    dispatch(setFamilyInformation(familyInfo));
-    stoteRegisterValues(familyInfo);
+    let data = {
+      email: email,
+      page_name: pathname,
+    }
 
-    navigate("/register/varification");
+    let res = await AuthServices.checkPage(data);
+
+    if (res.status == 200) {
+      dispatch(setFamilyInformation(familyInfo));
+      stoteRegisterValues(familyInfo);
+
+      navigate("/register/varification");
+    }
+
+
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
