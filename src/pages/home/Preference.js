@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {setpreferenceQuestion} from "../../redux/slices/preferenceSlice";
+import { setpreferenceQuestion } from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 let scrollPos = 0;
 function Preference() {
@@ -33,7 +33,7 @@ function Preference() {
   }, []);
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({top: scrollPos});
+      scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onSelectClicked]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function Preference() {
       <div className="d-flex my-4">
         <button
           // key={i}
-          style={{fontFamily: "Inter", height: 48, width: 107}}
+          style={{ fontFamily: "Inter", height: 48, width: 107 }}
           // onClick={() => setState({...state, gender: g})}
           className={`btn btn-mal outline-
     primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold`}>
@@ -57,7 +57,7 @@ function Preference() {
         </button>
         <button
           // key={i}
-          style={{fontFamily: "Inter", height: 48, width: 107}}
+          style={{ fontFamily: "Inter", height: 48, width: 107 }}
           // onClick={() => setState({...state, gender: g})}
           className={`btn btn-mal outline-
   primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold fw-semibold`}>
@@ -65,7 +65,7 @@ function Preference() {
           Female
         </button>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Select religion
       </p>
       <div>
@@ -74,7 +74,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label  bg-white px-2 text-body"
-                style={{fontFamily: "Inter", cursor: "pointer"}}>
+                style={{ fontFamily: "Inter", cursor: "pointer" }}>
                 {/* {religion} */}
                 {preferenceReligion}
               </label>
@@ -86,7 +86,7 @@ function Preference() {
           </div>
         </Link>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Select employment type
       </p>
       <div>
@@ -95,7 +95,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{fontFamily: "Inter"}}>
+                style={{ fontFamily: "Inter" }}>
                 {/* {religion} */}
                 {employType}
               </label>
@@ -106,7 +106,7 @@ function Preference() {
           </div>
         </Link>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Select marital status
       </p>
       <div>
@@ -115,7 +115,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{fontFamily: "Inter"}}>
+                style={{ fontFamily: "Inter" }}>
                 {/* {religion} */}
                 {maritalStatus}
               </label>
@@ -127,7 +127,7 @@ function Preference() {
         </Link>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Select Current Country
       </p>
       <div>
@@ -136,7 +136,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{fontFamily: "Inter"}}>
+                style={{ fontFamily: "Inter" }}>
                 Select Current Country
               </label>
             </div>
@@ -147,7 +147,7 @@ function Preference() {
         </Link>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Select Current City
       </p>
       <div>
@@ -156,7 +156,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{fontFamily: "Inter"}}>
+                style={{ fontFamily: "Inter" }}>
                 Select Current City
               </label>
             </div>
@@ -167,38 +167,42 @@ function Preference() {
         </Link>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
         Minimum height
       </p>
       <div className="d-flex">
         <div className="form-floating my-3 text-muted me-2">
           <input
             type="number"
+            min="3"
+            max="8"
             id="inputHeightFeet"
             name="height_ft"
-            style={{fontFamily: "Inter"}}
+            style={{ fontFamily: "Inter" }}
             // value={state.height_ft}
             // onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             // placeholder={MIN_HEIGHT_FEET.toString()}
             aria-describedby="height_feet"
           />
-          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+          <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
             ft
           </label>
         </div>
         <div className="form-floating my-3 text-muted ms-2">
           <input
             type="number"
+            min="0"
+            max="12"
             name="height_inc"
             id="inputHeightInches"
-            style={{fontFamily: "Inter"}}
+            style={{ fontFamily: "Inter" }}
             // value={state.height_inc}
             // onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
           />
-          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
+          <label htmlFor="inputHeightInches" style={{ fontFamily: "Inter" }}>
             in
           </label>
         </div>
@@ -218,7 +222,7 @@ function Preference() {
           {preferenceData}
           {dynamicQuestion.map((question, index) => (
             <div key={index}>
-              <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+              <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
                 {question.title}
               </p>
               <div>
@@ -227,7 +231,7 @@ function Preference() {
                     <div className="col-10">
                       <label
                         className="form-check-label  bg-white px-2 text-body"
-                        style={{fontFamily: "Inter", cursor: "pointer"}}>
+                        style={{ fontFamily: "Inter", cursor: "pointer" }}>
                         {/* {religion} */}
                         {question.label}
                       </label>
