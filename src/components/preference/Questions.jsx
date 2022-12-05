@@ -1,11 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {setpreferenceAns} from "../../redux/slices/preferenceSlice";
-import RegisterLayout from "../layouts/RegisterLayout";
+import {
+  setpreferenceAns,
+  updatePreerenceQAns,
+} from "../../redux/slices/preferenceSlice";
 
 function Questions({id}) {
-  const {dynamicQuestion} = useSelector((state) => state.preference);
+  const {dynamicQuestion, dynamicQuesAns} = useSelector(
+    (state) => state.preference
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,6 +21,13 @@ function Questions({id}) {
   };
 
   let back = () => {
+    const filterData = dynamicQuesAns.filter((ids) => ids.split("-")[0] != id);
+    console.log(filterData, "filter");
+
+    if (filterData.length > 0) {
+      console.log("hello");
+      dispatch(updatePreerenceQAns(filterData));
+    }
     dispatch(setpreferenceAns(`${id}-${ids}`));
     navigate(-1);
   };

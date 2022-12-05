@@ -14,6 +14,13 @@ function Preference() {
     dynamicQuestion,
     maritalStatus,
     dynamicQuesAns,
+    height_inches,
+    height_feet,
+    age_form,
+    age_to,
+    gender,
+    country,
+    city,
   } = useSelector((state) => state.preference);
   // const [form_filter_ids, setForm_filter] = useState({});
   const [extraQuestion, setextraQuestion] = useState([]);
@@ -53,6 +60,33 @@ function Preference() {
   }, []);
   // console.log(extraQuestion);
   // console.log(Set(data));
+
+  const onContinueClicked = async () => {
+    let formd = new FormData();
+
+    let data = {
+      gender,
+      age_form,
+      age_to,
+      height_feet,
+      height_inches,
+      religion: preferenceReligion,
+      marital_status: maritalStatus,
+      current_employment_type: employType,
+    };
+    Object.keys(data).map((key) => {
+      formd.append(key, data[key]);
+    });
+    if (dynamicQuesAns.length > 0) {
+      dynamicQuesAns.map((qa) => {
+        formd.append("form_filter_ids[]", [qa]);
+      });
+    }
+
+    country.length > 0 && formd.append("current_country[]", [...country]);
+    const res = await PreferenceServices.postPreference(formd);
+    console.log(res, "res");
+  };
 
   let preferenceData = (
     <>
@@ -150,7 +184,7 @@ function Preference() {
               <label
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
-                Select Current Country
+                {country ?? "Select Current Country"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -170,7 +204,7 @@ function Preference() {
               <label
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
-                Select Current City
+                {city ?? "Select Current City"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -223,7 +257,7 @@ function Preference() {
 
   return (
     <>
-      <RegisterLayout>
+      <RegisterLayout onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
           ref={scrollContainerRef}>

@@ -5,10 +5,13 @@ const initialState = {
   religion: "Select religion",
   employType: "Select employment type",
   maritalStatus: "Select marital status",
-  country: "",
-  city: "",
-  ft: null,
-  ins: null,
+  country: ["bangladesh", "india"],
+  gender: "male",
+  age_form: 14,
+  age_to: 34,
+  height_feet: 5,
+  height_inches: 4,
+
   dynamicQuesAns: [],
 };
 
@@ -35,15 +38,16 @@ const preferenceSlice = createSlice({
     setpreferenceQuestion: (state, {payload}) => {
       state.dynamicQuestion = payload;
     },
-    setpreferenceAns: (state, {payload}) => {
-      // let id = state?.dynamicQuesAns.find((id) => {
-      //   console.log(id, "id");
-      // });
-      // console.log(state.dynamicQuesAns.includes(payload));
-      // if (!id) {
+    setHeight: (state, {payload}) => {
+      state.age_form = payload.age_form;
+      state.age_to = payload.age_to;
+    },
 
-      // }
+    setpreferenceAns: (state, {payload}) => {
       state.dynamicQuesAns = [...state.dynamicQuesAns, payload];
+    },
+    updatePreerenceQAns: (state, {payload}) => {
+      state.dynamicQuesAns = payload;
     },
   },
 });
@@ -51,6 +55,7 @@ const preferenceSlice = createSlice({
 export const {
   setPreferenceReligion,
   setEmployType,
+  updatePreerenceQAns,
   setMaridStatus,
   setPreferenceCity,
   setPreferenceCountry,
