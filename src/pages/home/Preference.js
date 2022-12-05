@@ -2,7 +2,11 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {setpreferenceQuestion} from "../../redux/slices/preferenceSlice";
+import {
+  setGender,
+  setHeight,
+  setpreferenceQuestion,
+} from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 let scrollPos = 0;
 let data = [];
@@ -23,7 +27,24 @@ function Preference() {
     city,
   } = useSelector((state) => state.preference);
   // const [form_filter_ids, setForm_filter] = useState({});
+
   const [extraQuestion, setextraQuestion] = useState([]);
+
+  const [state, setState] = useState({
+    age_form: age_form,
+    age_to: age_to,
+    height_feet: height_feet,
+    height_inches: height_inches,
+    gender: gender,
+  });
+
+  const handleUserInputChange = (e) => {
+    console.log("e.target.value", e.target.value);
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
   const dispatch = useDispatch();
 
   const fetchFilterQuestion = async () => {
@@ -34,17 +55,10 @@ function Preference() {
     // console.log(res, "profile preference res");
   };
 
-  useEffect(() => {
-    // dynamicQuesAns.map((Qans, i) => {
-    //   const isInData = data.find((id) => id == Qans);
-    //   console.log(isInData);
-    //   data.push({
-    //     form_filter_ids: Qans,
-    //   });
-    // });
-  }, []);
   const scrollContainerRef = useRef();
+
   const onSelectClicked = useCallback(() => {
+    dispatch(setHeight(state));
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
   const resetScroll = useCallback(() => {
@@ -91,11 +105,13 @@ function Preference() {
   let preferenceData = (
     <>
       <h2 className="mb-2">Set your preference</h2>
-      <p>Gender</p>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+        Gender
+      </p>
       <div className="d-flex my-4">
         <button
-          // key={i}
-          style={{fontFamily: "Inter", height: 48, width: 107}}
+          onClick={() => dispatch(setGender("Female"))}
+          style={{fontFamily: "Inter", height: 60, width: 107}}
           // onClick={() => setState({...state, gender: g})}
           className={`btn btn-mal outline-
     primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold`}>
@@ -104,7 +120,8 @@ function Preference() {
         </button>
         <button
           // key={i}
-          style={{fontFamily: "Inter", height: 48, width: 107}}
+          onClick={() => dispatch(setGender("Female"))}
+          style={{fontFamily: "Inter", height: 60, width: 107}}
           // onClick={() => setState({...state, gender: g})}
           className={`btn btn-mal outline-
   primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold fw-semibold`}>
@@ -112,6 +129,45 @@ function Preference() {
           Female
         </button>
       </div>
+
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+        Age
+      </p>
+      <div className="d-flex">
+        <div className="form-floating my-3 text-muted me-2">
+          <input
+            type="number"
+            id="inputHeightFeet"
+            name="age_to"
+            style={{fontFamily: "Inter"}}
+            // value={state.height_ft}
+            // onChange={handleUserInputChange}
+            className="form-control border-0 rounded-1"
+            placeholder={"To"}
+            aria-describedby="height_feet"
+          />
+          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+            To
+          </label>
+        </div>
+        <div className="form-floating my-3 text-muted ms-2">
+          <input
+            type="number"
+            name="age_form"
+            id="inputHeightInches"
+            style={{fontFamily: "Inter"}}
+            // value={state.height_inc}
+            // onChange={handleUserInputChange}
+            placeholder={"Form"}
+            className="form-control border-0 rounded-1"
+            aria-describedby="height_inches"
+          />
+          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
+            Form
+          </label>
+        </div>
+      </div>
+
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select religion
       </p>
@@ -184,7 +240,7 @@ function Preference() {
               <label
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
-                {country ?? "Select Current Country"}
+                {country[0] ?? "Select Current Country"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -222,10 +278,10 @@ function Preference() {
           <input
             type="number"
             id="inputHeightFeet"
-            name="height_ft"
+            name="height_feet"
             style={{fontFamily: "Inter"}}
-            // value={state.height_ft}
-            // onChange={handleUserInputChange}
+            value={state.height_feet}
+            onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             // placeholder={MIN_HEIGHT_FEET.toString()}
             aria-describedby="height_feet"
@@ -237,11 +293,11 @@ function Preference() {
         <div className="form-floating my-3 text-muted ms-2">
           <input
             type="number"
-            name="height_inc"
+            name="height_inches"
             id="inputHeightInches"
             style={{fontFamily: "Inter"}}
-            // value={state.height_inc}
-            // onChange={handleUserInputChange}
+            value={state.height_inches}
+            onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
           />

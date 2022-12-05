@@ -5,7 +5,7 @@ const initialState = {
   religion: "Select religion",
   employType: "Select employment type",
   maritalStatus: "Select marital status",
-  country: ["bangladesh", "india"],
+  country: ["bangladesh"],
   gender: "male",
   age_form: 14,
   age_to: 34,
@@ -29,8 +29,11 @@ const preferenceSlice = createSlice({
     setMaridStatus: (state, {payload}) => {
       state.maritalStatus = payload;
     },
+    setGender: (state, {payload}) => {
+      state.gender = payload;
+    },
     setPreferenceCountry: (state, {payload}) => {
-      state.country = payload;
+      state.country = [...state.country, payload];
     },
     setPreferenceCity: (state, {payload}) => {
       state.city = payload;
@@ -41,6 +44,8 @@ const preferenceSlice = createSlice({
     setHeight: (state, {payload}) => {
       state.age_form = payload.age_form;
       state.age_to = payload.age_to;
+      state.height_feet = payload.height_feet;
+      state.height_inches = payload.height_inches;
     },
 
     setpreferenceAns: (state, {payload}) => {
@@ -53,6 +58,7 @@ const preferenceSlice = createSlice({
 });
 
 export const {
+  setGender,
   setPreferenceReligion,
   setEmployType,
   updatePreerenceQAns,
@@ -61,5 +67,6 @@ export const {
   setPreferenceCountry,
   setpreferenceQuestion,
   setpreferenceAns,
+  setHeight,
 } = preferenceSlice.actions;
 export default preferenceSlice.reducer;
