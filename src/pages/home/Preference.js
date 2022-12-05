@@ -9,7 +9,7 @@ import {
 } from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 let scrollPos = 0;
-let data = [];
+
 function Preference() {
   const [err, seterr] = useState(false);
   const {
