@@ -17,7 +17,7 @@ function Questions({id}) {
   };
 
   let back = () => {
-    dispatch(setpreferenceAns([`${id}-${ids}`]));
+    dispatch(setpreferenceAns(`${id}-${ids}`));
     navigate(-1);
   };
 
