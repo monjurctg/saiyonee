@@ -42,25 +42,39 @@ function RegisterEmail() {
 
   const onContinueClicked = async () => {
     if (!email) {
-      setErr("Email is Required");
+      setErr({
+        error: "email",
+        message: "Email is Required",
+      });
 
       return;
     }
     if (!password) {
-      setErr("password is Required");
+      setErr({
+        error: "password",
+        message: "password is Required",
+      });
+
       return;
     }
     if (password.length < 6) {
-      setErr("password length must be minimum 6 character ");
+      setErr({
+        error: "password",
+        message: "password length must be minimum 6 character ",
+      });
       return;
     }
 
     if (password !== confirmPassword) {
-      setErr("password and confirmPassword does not match");
+      setErr({
+        error: "confirm_password",
+        message: "password and confirm Password does not match",
+      });
       return;
     }
     checkEmail();
   };
+  console.log(err);
 
   let subItem = (
     <div className="position-absolute container position-top mt-6">
@@ -86,7 +100,9 @@ function RegisterEmail() {
 
   return (
     <BasicLayout subItem={subItem}>
-      <div className="card border-0 bg-transparent flex-grow-1 overflow-auto" style={{height:"40vh",marginTop:"-55px"}}>
+      <div
+        className="card border-0 bg-transparent flex-grow-1 overflow-auto"
+        style={{height: "40vh", marginTop: "-55px"}}>
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1
             className="card-title mt-3"
@@ -102,14 +118,17 @@ function RegisterEmail() {
             }}>
             Take a step towards finding someone awesome!
           </p>
-          <div className="form-floating my-4 text-start text-muted">
+          <div
+            className="form-floating my-4 rounded-1 text-start text-muted"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "email" ? "2px solid red" : "",
+            }}>
             <input
               type="email"
               id="inputEmail"
-              style={{
-                fontFamily: "Inter",
-              }}
               value={email}
+              onFocus={() => setErr({})}
               onChange={(e) => setemail(e.target.value)}
               className="form-control border-0 rounded-1"
               placeholder="name@example.com"
@@ -123,12 +142,18 @@ function RegisterEmail() {
               Email ID
             </label>
           </div>
-          <div className="form-floating my-4 text-muted text-start">
+          <div
+            className="form-floating my-4 text-muted text-start"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "password" ? "2px solid red" : "",
+            }}>
             <input
               type="password"
               id="inputPassword"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setErr({})}
               className="form-control border-0 rounded-1"
               placeholder="******"
               aria-describedby="password"
@@ -141,7 +166,12 @@ function RegisterEmail() {
               Password
             </label>
           </div>
-          <div className="form-floating my-4 text-start text-muted">
+          <div
+            className="form-floating my-4 rounded-1 text-start text-muted"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "confirm_password" ? "2px solid red" : "",
+            }}>
             <input
               style={{
                 fontFamily: "Inter",
@@ -149,6 +179,7 @@ function RegisterEmail() {
               type="password"
               id="inputConfirmPassword"
               value={confirmPassword}
+              onFocus={() => setErr({})}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="form-control border-0 rounded-1"
               placeholder="******"
@@ -164,8 +195,8 @@ function RegisterEmail() {
           </div>
         </div>
       </div>
-      <div className="container px-4 pb-4 pt-2" style={{height:"20vh"}}>
-        {err && <p className="text-primary">* {err}</p>}
+      <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
+        {err?.error && <p className="text-primary">* {err?.message}</p>}
         <button
           onClick={onContinueClicked}
           disabled={isLoading}
