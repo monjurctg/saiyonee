@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
-import {setToken} from "../utils/functions";
+import { setToken } from "../utils/functions";
 
 function Login() {
   const [loading, setloading] = useState(false);
@@ -21,7 +21,7 @@ function Login() {
   );
 
   const onChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
@@ -71,8 +71,8 @@ function Login() {
   return (
     <>
       <BasicLayout subItem={subItem}>
-    
-        <div className="card border-0 bg-transparent overflow-auto flex-grow-1"   style={{height:"40vh",marginTop:"-55px"}}>
+
+        <div className="card border-0 bg-transparent overflow-auto flex-grow-1" style={{ height: "40vh", marginTop: "-55px" }}>
           <div className="card-body bg-body rounded p-4 overflow-auto">
             <h1 className="card-title mt-3">Login</h1>
             <p className="card-text text-muted mt-3 mb-5">
@@ -89,7 +89,13 @@ function Login() {
                 placeholder="name@example.com"
                 aria-describedby="email"
               />
-              <label htmlFor="inputEmail">Email ID</label>
+              <label
+                htmlFor="inputEmail"
+                style={{
+                  textAlign: "left"
+                }}
+              >Email ID
+              </label>
             </div>
             <div className="form-floating my-4 text-muted">
               <input
@@ -102,14 +108,19 @@ function Login() {
                 placeholder="******"
                 aria-describedby="password"
               />
-              <label htmlFor="inputPassword">Password</label>
+              <label
+                htmlFor="inputPassword"
+                style={{
+                  textAlign: "left"
+                }}
+              >Password</label>
             </div>
             <div className="d-flex justify-content-end mb-4 mt-5">
               <Link to="#">Forgot Password</Link>
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2"   style={{height:"20vh"}}>
+        <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
           {err !== false && <p className="text-primary">* {err}</p>}
           <button
             onClick={handleSubmit}
