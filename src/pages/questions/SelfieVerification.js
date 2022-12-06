@@ -30,7 +30,7 @@ function SelfieVerification() {
     console.log("res", res);
     if (res.status === 200) {
       seterr(false);
-      navigate("/home");
+      navigate("/preference");
     } else {
       seterr(res.data.message);
     }
