@@ -116,7 +116,7 @@ function Login() {
               >Password</label>
             </div>
             <div className="d-flex justify-content-end mb-4 mt-5">
-              <Link to="#">Forgot Password</Link>
+              <Link to="/forgot-pass">Forgot Password</Link>
             </div>
           </div>
         </div>
