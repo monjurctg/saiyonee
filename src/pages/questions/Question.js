@@ -23,6 +23,7 @@ function Question() {
   let getQuestions = async () => {
     let res = await QuestionServices.getQuestions();
     // console.log("res", res.data.form_field_questions);
+    // console.log('res', res)
     if (res.status === 200) {
       seterr(false);
       setLoading(false);
@@ -121,7 +122,7 @@ function Question() {
       // inputs.user_checked.map(user=>(
       formData.append("user_input", [...inputs.user_checked]);
     // ))
-    console.log('first', inputs.user_radio)
+    // console.log('first', inputs.user_radio)
     inputs.user_radio.length > 0 &&
       formData.append("user_input", inputs.user_radio);
 
@@ -132,7 +133,7 @@ function Question() {
       setLoading(false);
       // Navigate
       navigate(
-        id <= length - 1 ? `/question/${parseInt(id) + 1}` : `/question/${id}`
+        id <= length - 1 ? `/question/${parseInt(id) + 1}` : `/preference`
       );
     } else {
       seterr(res.data.message);
