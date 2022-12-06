@@ -30,6 +30,7 @@ function Question() {
       setlength(res.data.form_field_questions.length);
       if (res.data.form_field_questions?.length === 0) navigate("/preference");
       setquestion(res.data.form_field_questions[id - 1]);
+      console.log(id);
     } else {
       seterr(res.data.message);
       setLoading(false);
@@ -38,6 +39,8 @@ function Question() {
   useEffect(() => {
     getQuestions();
   }, [id]);
+
+  console.log(question);
 
   let inputChange = (e) => {
     let {name, value} = e.target;
