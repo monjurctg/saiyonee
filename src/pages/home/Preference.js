@@ -12,8 +12,8 @@ import toastMsg from "../../utils/toastify";
 let scrollPos = 0;
 
 function Preference() {
-  const [err, seterr] = useState(false);
-  const [previousPreference, setPreviousPreference] = useState({});
+  const [err, setErr] = useState(false);
+  // const [previousPreference, setPreviousPreference] = useState({});
   const {
     religion: preferenceReligion,
     employType,
@@ -37,18 +37,7 @@ function Preference() {
     gender: gender,
   });
 
-  const [extraQuestion, setextraQuestion] = useState([]);
-
-  const fetchPreviousPreference = async () => {
-    const res = await PreferenceServices.getPreferenceData();
-    if (res.status === 200) {
-      setPreviousPreference(res.data.profile_preferences);
-    }
-  };
-
-  useEffect(() => {
-    fetchPreviousPreference();
-  }, []);
+  // const [extraQuestion, setextraQuestion] = useState([]);
 
   const navigate = useNavigate();
   const handleUserInputChange = (e) => {
@@ -94,6 +83,47 @@ function Preference() {
   // console.log(Set(data));
 
   const onContinueClicked = async () => {
+    if (state.age_to && (state.age_to > 100 || state.age_to < 18)) {
+      setErr({
+        error: "age_to",
+        message: "age to cannot be less than 18 year or greater than 100 year",
+      });
+      return;
+    } else if (
+      state.age_form &&
+      (state.age_form > 100 || state.age_form < 18)
+    ) {
+      setErr({
+        error: "age_form",
+        message: "age rom cannot be less than 18 year or greater than 100 year",
+      });
+      return;
+    } else if (
+      state.height_feet &&
+      (state.height_feet > 8 || state.height_feet < 3)
+    ) {
+      setErr({
+        error: "ft",
+        message: "Height cannot be less than 3 feet or greater than 8 feet",
+      });
+      return;
+    } else if (
+      state.height_inches &&
+      (state.height_inches >= 12 || state.height_inches < 0)
+    ) {
+      setErr({
+        error: "inc",
+        message:
+          "Height cannot be less than 0 inches or greater than 11 inches",
+      });
+      return;
+    }
+    // else if () {
+
+    // }
+    // else if () {
+
+    // }
     dispatch(setHeight(state));
 
     let formd = new FormData();
@@ -122,6 +152,8 @@ function Preference() {
     if (res.status === 200) {
       toastMsg.success("Preference set successfully");
       navigate("/home");
+    } else {
+      toastMsg.error(res.data.message);
     }
     console.log(res, "res");
   };
@@ -134,7 +166,12 @@ function Preference() {
         Age
       </p>
       <div className="d-flex">
-        <div className="form-floating my-3 text-muted me-2">
+        <div
+          className="form-floating my-3 text-muted me-2 rounded-1"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "age_to" ? "2px solid red" : "",
+          }}>
           <input
             type="number"
             id="inputHeightFeet"
@@ -150,7 +187,12 @@ function Preference() {
             To
           </label>
         </div>
-        <div className="form-floating my-3 text-muted ms-2">
+        <div
+          className="form-floating my-3 text-muted ms-2 rounded-1"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "age_form" ? "2px solid red" : "",
+          }}>
           <input
             type="number"
             name="age_form"
@@ -172,7 +214,12 @@ function Preference() {
         Minimum height
       </p>
       <div className="d-flex">
-        <div className="form-floating my-3 text-muted me-2">
+        <div
+          className="form-floating my-3 text-muted me-2 rounded-1"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "ft" ? "2px solid red" : "",
+          }}>
           <input
             type="number"
             id="inputHeightFeet"
@@ -188,7 +235,12 @@ function Preference() {
             ft
           </label>
         </div>
-        <div className="form-floating my-3 text-muted ms-2">
+        <div
+          className="form-floating my-3 text-muted ms-2 rounded-1"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "inc" ? "2px solid red" : "",
+          }}>
           <input
             type="number"
             name="height_inches"
@@ -293,7 +345,7 @@ function Preference() {
 
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked}>
+      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
           ref={scrollContainerRef}>

@@ -6,15 +6,20 @@ function PrivateRoute() {
   let auth = getToken();
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
+  const isAlreadySetPreference = localStorage.getItem("preference");
+  console.log(isAlreadySetPreference);
+
   if (auth && isVarified == 0) {
-    return <Navigate to="/success" state={{from: location}} />;
   }
   if (!auth && isVarified != 1) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }
-  if (auth && isVarified === 1) {
+  if (auth && isVarified === 1 && isAlreadySetPreference != true) {
     return <Navigate to="/question/1" state={{from: location}} />;
   }
+  // if (auth && isVarified === 1 && isAlreadySetPreference == true) {
+  //   return <Navigate to="/home" state={{from: location}} />;
+  // }
 
   return <Outlet />;
 }

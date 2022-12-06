@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
-import { setToken } from "../utils/functions";
+import {setToken} from "../utils/functions";
 
 function Login() {
   const [loading, setloading] = useState(false);
@@ -21,7 +21,7 @@ function Login() {
   );
 
   const onChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
@@ -54,6 +54,12 @@ function Login() {
 
         navigator("/success");
       } else {
+        if (res.data.profile_preference_exists) {
+          localStorage.setItem("preference", true);
+          localStorage.setItem("isVarified", 1);
+          navigator("/home");
+          return;
+        }
         localStorage.setItem("isVarified", 1);
 
         navigator("/question/1");
@@ -71,8 +77,9 @@ function Login() {
   return (
     <>
       <BasicLayout subItem={subItem}>
-
-        <div className="card border-0 bg-transparent overflow-auto flex-grow-1" style={{ height: "40vh", marginTop: "-55px" }}>
+        <div
+          className="card border-0 bg-transparent overflow-auto flex-grow-1"
+          style={{height: "40vh", marginTop: "-55px"}}>
           <div className="card-body bg-body rounded p-4 overflow-auto">
             <h1 className="card-title mt-3">Login</h1>
             <p className="card-text text-muted mt-3 mb-5">
@@ -92,9 +99,9 @@ function Login() {
               <label
                 htmlFor="inputEmail"
                 style={{
-                  textAlign: "left"
-                }}
-              >Email ID
+                  textAlign: "left",
+                }}>
+                Email ID
               </label>
             </div>
             <div className="form-floating my-4 text-muted">
@@ -111,16 +118,17 @@ function Login() {
               <label
                 htmlFor="inputPassword"
                 style={{
-                  textAlign: "left"
-                }}
-              >Password</label>
+                  textAlign: "left",
+                }}>
+                Password
+              </label>
             </div>
             <div className="d-flex justify-content-end mb-4 mt-5">
               <Link to="/forgot-pass">Forgot Password</Link>
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
+        <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
           {err !== false && <p className="text-primary">* {err}</p>}
           <button
             onClick={handleSubmit}
