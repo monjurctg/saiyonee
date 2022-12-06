@@ -6,108 +6,62 @@ import nouser from "../../assets/imgs/nouser.png";
 import { Pagination } from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
+import Swipers from "../../components/home/Swipers";
 
 function Index() {
-  const like = "like";
-  const dislike = "dislike";
+
   const [data, setData] = useState(null);
+  const [gettingUser, setgettingUser] = useState(false)
   let getData = async () => {
+    setgettingUser(true)
     let res = await UserServices.filter_users();
     console.log("res", res.data);
+    if(res.status === 200){
+      setgettingUser(false)
+      setData(res.data);
+    }
     // let data = await res.json()
-    setData(res.data);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  // console.log('filtered_users', data?.filtered_users)
-
-  let getActiveSlide = async (task) => {
-    // console.log('e', e)
-    let id = document
-      .getElementsByClassName("swiper-slide-active")[0]
-      .getAttribute("data-id");
-    if (task === like) {
-      console.log("like");
-      let res = await UserServices.like_user(id);
-      // console.log('res', res)
-      if (res.status === 200) {
-        toastMsg.success(res.data.message);
-        getData();
-      }
-
-      // console.log('id', id)
-    } else if (task === dislike) {
-      console.log("like");
-      let res = await UserServices.dislike_user(id);
-      // console.log('res', res)
-      if (res.status === 200) {
-        toastMsg.success(res.data.message);
-        getData();
-      }
-
-      // console.log('id', id)
-    }
-  };
+  // console.log('data', data)
+  console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
+  console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
 
   let show = "";
-  if (data?.filtered_users) {
-    show = data.filtered_users.map((item, index) => {
-      return (
-        <SwiperSlide data-id={item.id}>
-          <img
-            src={item?.profile_image_url || nouser}
-            alt=""
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: item?.filter_users ? "100%" : "40%",
-              borderRadius: 30,
-              marginTop: !item?.filter_users && 168,
-            }}
-          />
-        </SwiperSlide>
-      );
-    });
+  if (data?.filtered_users.length > 0 && !gettingUser) {
+    show = <Swipers getData={getData} data={data}/>
+  }else if(gettingUser){
+    show = <div className="d-flex justify-content-center align-items-center" style={{
+      height: "100%",
+      fontSize: 20,
+      color: "black",
+      fontWeight: 700
+    }}>
+      Loading data
+    </div>
+  }else if(data?.filtered_users.length === 0 && !gettingUser){
+    show = <div className="d-flex justify-content-center align-items-center" style={{
+      height: "100%",
+      fontSize: 20,
+      color: "black",
+      fontWeight: 700
+    }}>
+      {/* <img src="img/loading.gif" alt="" /> */}
+      No matched user found
+    </div>
   }
-  console.log("show", show);
+  // console.log("show", show);
   return (
     <HomeLayout background={"#F9FAFB"}>
       <div className="body-div">
-        <div className="menu">
+        {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
-        </div>
-        <div className="inside">
-          <Swiper
-            style={{ width: "100%", height: "100%" }}
-            direction={"vertical"}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination]}
-            className="mySwiper"
-          >
-            {show}
-          </Swiper>
-        </div>
-        <div className="body-bottom">
-          <div className="items">
-            <div className="item" onClick={() => getActiveSlide(dislike)}>
-              <img src="img/dislike.svg" alt="" />
-            </div>
-            <div className="item">
-              <img src="img/task.svg" alt="" />
-            </div>{" "}
-            <div className="item">
-              <img src="img/rocket.svg" alt="" />
-            </div>{" "}
-            <div className="item" onClick={() => getActiveSlide(like)}>
-              <img src="img/like.svg" alt="" />
-            </div>
-          </div>
-        </div>
+        </div> */}
+        {show}
       </div>
       {/* <div className="body-div-lower01"></div>
       <div className="body-div-lower02"></div> */}

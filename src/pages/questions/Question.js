@@ -29,8 +29,7 @@ function Question() {
       setLoading(false);
       setlength(res.data.form_field_questions.length);
       if (res.data.form_field_questions?.length === 0) navigate("/preference");
-      setquestion(res.data.form_field_questions[id - 1]);
-      console.log(id);
+      setquestion(res.data.form_field_questions[0]);
     } else {
       seterr(res.data.message);
       setLoading(false);
@@ -122,7 +121,7 @@ function Question() {
 
     inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
-      formData.append("user_input", [...inputs.user_checked]);
+      formData.append("user_input[]", [...inputs.user_checked]);
     // ))
     // console.log('first', inputs.user_radio)
     inputs.user_radio.length > 0 &&
