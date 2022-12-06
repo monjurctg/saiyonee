@@ -8,6 +8,7 @@ import {
   setpreferenceQuestion,
 } from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
+import toastMsg from "../../utils/toastify";
 let scrollPos = 0;
 
 function Preference() {
@@ -106,6 +107,10 @@ function Preference() {
 
     country.length > 0 && formd.append("current_country[]", [...country]);
     const res = await PreferenceServices.postPreference(formd);
+    if (res.status === 200) {
+      toastMsg.success("Preference set successfully");
+      navigate("/home");
+    }
     console.log(res, "res");
   };
 
