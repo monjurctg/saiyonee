@@ -86,7 +86,7 @@ function Routers() {
       style={{
         width: "100%",
         height: "100%",
-        
+
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       <Routes>
@@ -191,7 +191,6 @@ function Routers() {
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/viewProfile" element={<ViewProfile />} />
           <Route path="/boom" element={<Boom />} />
-
         </Route>
 
         {/* <Route path="/explore" element={<Explore />} /> */}

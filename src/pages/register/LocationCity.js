@@ -5,7 +5,7 @@ import Countries from "../../libs/cities_countries";
 import {setCity} from "../../redux/slices/authSlices";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function LocationCity() {
+function LocationCity({module}) {
   const navigate = useNavigate();
   const [searchedCity, setSearchedCity] = useState("");
   const onSearchChange = (e) => setSearchedCity(e.target.value);
@@ -13,6 +13,8 @@ function LocationCity() {
   const {current_city, current_country} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const onCityChange = (e) => {
+    if (module == "city") {
+    }
     dispatch(setCity(e.target.value));
     stoteRegisterValues({current_city: e.target.value});
 

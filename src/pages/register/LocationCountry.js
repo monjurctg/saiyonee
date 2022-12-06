@@ -3,24 +3,28 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
 import {setCountry} from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {setPreferenceCountry} from "../../redux/slices/preferenceSlice";
+import {stoteRegisterValues} from "../../utils/functions";
 
-function LocationCountry() {
+function LocationCountry({module}) {
   const navigator = useNavigate();
-
-
 
   const [searchedCountry, setSearchedCountry] = useState("");
   const onSearchChange = (e) => setSearchedCountry(e.target.value);
   const dispatch = useDispatch();
+  const {country: preferenceCountry} = useSelector((state) => state.preference);
   // const [current_country, setCurrentCountry] = useState("");
   // const [current_city, setCurrentCity] = useState("");
+
   const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
-    
-      dispatch(setCountry(e.target.value));
-      stoteRegisterValues({current_country: e.target.value})
-    
+    if (module == "country") {
+      dispatch(setPreferenceCountry(e.target.value));
+      // navigator(-1);
+      return;
+    }
+    dispatch(setCountry(e.target.value));
+    stoteRegisterValues({current_country: e.target.value});
 
     // setCurrentCity(undefined);
     navigator(-1);
@@ -50,7 +54,7 @@ function LocationCountry() {
           />
           <label htmlFor="inputSearchCountry">Search for country</label>
         </div>
-        <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+        {/* <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
           <div className="col-10">
             <label htmlFor="None" className="form-check-label bg-white w-100">
               <strong>Select candidate's current country</strong>
@@ -67,7 +71,7 @@ function LocationCountry() {
               id="None"
             />
           </div>
-        </div>
+        </div> */}
         {COUNTRIES.map(
           (country, i) =>
             country.toLowerCase().includes(searchedCountry.toLowerCase()) && (
@@ -84,9 +88,13 @@ function LocationCountry() {
                 <div className="col-2">
                   <input
                     className="form-check-input"
-                    type="radio"
+                    type={module == "country" ? "checkbox" : "radio"}
                     name="current_country"
-                    checked={current_country === country}
+                    checked={
+                      module == "country"
+                        ? preferenceCountry.includes(country)
+                        : current_country === country
+                    }
                     onChange={onCountryChange}
                     value={country}
                     id={country}

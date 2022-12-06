@@ -1,13 +1,36 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import RegisterLayout from "../layouts/RegisterLayout";
+import {
+  setpreferenceAns,
+  updatePreerenceQAns,
+} from "../../redux/slices/preferenceSlice";
 
 function Questions({id}) {
-  const {dynamicQuestion} = useSelector((state) => state.preference);
+  const {dynamicQuestion, dynamicQuesAns} = useSelector(
+    (state) => state.preference
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const nowQuestion = dynamicQuestion.find((ques) => ques.id == id);
+  let ids = [];
+
+  let inputChange = (e) => {
+    ids.push(e.target.value);
+  };
+
+  let back = () => {
+    const filterData = dynamicQuesAns.filter((ids) => ids.split("-")[0] != id);
+    console.log(filterData, "filter");
+
+    if (filterData.length > 0) {
+      console.log("hello");
+      dispatch(updatePreerenceQAns(filterData));
+    }
+    dispatch(setpreferenceAns(`${id}-${ids}`));
+    navigate(-1);
+  };
 
   let checkbox = nowQuestion?.value_list?.map((value, key) => (
     <div
@@ -16,7 +39,7 @@ function Questions({id}) {
       <p className="p-input">{value}</p>
       <input
         type="checkbox"
-        //   onChange={inputChange}
+        onChange={inputChange}
         name="user_checked"
         value={parseInt(key + 1)}
         className="input-checkbox"
@@ -58,7 +81,7 @@ function Questions({id}) {
     <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
       <div className="container pt-4 px-4">
         <div
-          onClick={() => navigate(-1)}
+          onClick={back}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
           style={{height: "58px", width: "58px"}}>
           <img src="/img/back-icon.svg" alt="back" />
@@ -70,11 +93,11 @@ function Questions({id}) {
         <div className="mt-4 mb-5">
           <h4 className="mb-2">{nowQuestion?.label}</h4>
 
-          {nowQuestion.field_type == "checkbox" ? (
+          {nowQuestion?.field_type == "checkbox" ? (
             checkbox
-          ) : nowQuestion.field_type == "radio" ? (
+          ) : nowQuestion?.field_type == "radio" ? (
             radio
-          ) : nowQuestion.field_type == "text" ? (
+          ) : nowQuestion?.field_type == "text" ? (
             text
           ) : (
             <h1>404</h1>
