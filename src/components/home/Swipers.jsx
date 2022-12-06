@@ -37,7 +37,7 @@ function Swipers({data,getData}) {
         }
       };
     let show = data?.filtered_users.map((item, index) => {
-        console.log('item', item?.profile_image_url)
+        // console.log('item', item?.profile_image_url)
         return (
           <SwiperSlide data-id={item.id}>
             <img
