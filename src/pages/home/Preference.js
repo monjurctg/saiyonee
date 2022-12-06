@@ -24,7 +24,6 @@ function Preference() {
     age_to,
     gender,
     country,
-    city,
   } = useSelector((state) => state.preference);
   // const [form_filter_ids, setForm_filter] = useState({});
 
@@ -82,6 +81,8 @@ function Preference() {
   // console.log(Set(data));
 
   const onContinueClicked = async () => {
+    dispatch(setHeight(state));
+
     let formd = new FormData();
 
     let data = {
@@ -111,30 +112,6 @@ function Preference() {
   let preferenceData = (
     <>
       <h2 className="mb-2">Set your preference</h2>
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
-        Gender
-      </p>
-      <div className="d-flex my-4">
-        <button
-          onClick={() => dispatch(setGender("Female"))}
-          style={{fontFamily: "Inter", height: 60, width: 107}}
-          // onClick={() => setState({...state, gender: g})}
-          className={`btn btn-mal outline-
-    primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold`}>
-          {/* {g} */}
-          Male
-        </button>
-        <button
-          // key={i}
-          onClick={() => dispatch(setGender("Female"))}
-          style={{fontFamily: "Inter", height: 60, width: 107}}
-          // onClick={() => setState({...state, gender: g})}
-          className={`btn btn-mal outline-
-  primary w-100 rounded shadow p-2 my-2 ms-2 fw-semibold fw-semibold`}>
-          {/* {g} */}
-          Female
-        </button>
-      </div>
 
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Age
@@ -222,7 +199,7 @@ function Preference() {
                 className="form-check-label  bg-white px-2 text-body"
                 style={{fontFamily: "Inter", cursor: "pointer"}}>
                 {/* {religion} */}
-                {preferenceReligion}
+                {preferenceReligion || "Select religion"}
               </label>
             </div>
 
@@ -243,7 +220,7 @@ function Preference() {
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {employType}
+                {employType || "Select employment type"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -263,7 +240,7 @@ function Preference() {
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {maritalStatus}
+                {maritalStatus || "Select marital status"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -292,10 +269,6 @@ function Preference() {
           </div>
         </Link>
       </div>
-
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
-        Select Current City
-      </p>
     </>
   );
 

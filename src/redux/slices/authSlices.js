@@ -35,6 +35,7 @@ const authSlice = createSlice({
     },
     setPersonalInfo: (state, {payload}) => {
       state.full_name = payload.full_name;
+      state.display_name = payload.display_name;
       state.date_of_birth = payload.date_of_birth;
       state.height_feet = payload.height_ft;
       state.height_inches = payload.height_inc;

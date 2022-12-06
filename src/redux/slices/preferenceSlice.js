@@ -2,9 +2,9 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   dynamicQuestion: [],
-  religion: "Select religion",
-  employType: "Select employment type",
-  maritalStatus: "Select marital status",
+  religion: "",
+  employType: "",
+  maritalStatus: "",
   country: ["bangladesh"],
   gender: "male",
   age_form: "",

@@ -145,6 +145,7 @@ function Varification() {
   };
 
   useEffect(() => {
+    console.log(verification_img1.name, "verification_img1.name");
     if (verification_img1.name) {
       if (verification_img2.name || verification_type !== "National ID") {
         setErr("");
@@ -153,6 +154,8 @@ function Varification() {
       }
     } else if (verification_img2.name) {
       if (verification_img1.name) {
+        setErr("");
+      } else {
         setErr("Image1 is blank");
       }
     } else {

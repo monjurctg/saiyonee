@@ -23,12 +23,11 @@ function Questions({id}) {
   let back = () => {
     const filterData = dynamicQuesAns.filter((ids) => ids.split("-")[0] != id);
     console.log(filterData, "filter");
-
     if (filterData.length > 0) {
-      console.log("hello");
+      // console.log("hello");
       dispatch(updatePreerenceQAns(filterData));
     }
-    dispatch(setpreferenceAns(`${id}-${ids}`));
+    dispatch(setpreferenceAns(`${id}-${Array.from(new Set(ids))}`));
     navigate(-1);
   };
 
@@ -55,7 +54,7 @@ function Questions({id}) {
       <p className="p-input">{value}</p>
       <input
         type="radio"
-        // onChange={inputChange}
+        onChange={inputChange}
         name="user_radio"
         value={parseInt(key + 1)}
         className="input-checkbox"
@@ -69,8 +68,8 @@ function Questions({id}) {
       <input
         name="text_input"
         type="text"
-        //   onChange={inputChange}
-        //   value={inputs.text_input}
+        onChange={inputChange}
+        // value={inputs.text_input}
         className="input-text"
         placeholder={`Enter ${nowQuestion?.label}`}
       />
