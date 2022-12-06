@@ -47,6 +47,13 @@ const preferenceSlice = createSlice({
       state.height_feet = payload.height_feet;
       state.height_inches = payload.height_inches;
     },
+    setPreviousPreference: (state, {payload}) => {
+      state.age_form = payload.age_form;
+      state.age_to = payload.age_to;
+      state.height_feet = payload.height_feet;
+      state.height_inches = payload.height_inches;
+      state.maritalStatus = payload.marital_status;
+    },
 
     setpreferenceAns: (state, {payload}) => {
       state.dynamicQuesAns = [...state.dynamicQuesAns, payload];
@@ -59,6 +66,7 @@ const preferenceSlice = createSlice({
 
 export const {
   setGender,
+  setPreviousPreference,
   setPreferenceReligion,
   setEmployType,
   updatePreerenceQAns,

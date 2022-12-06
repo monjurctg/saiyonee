@@ -13,6 +13,7 @@ let scrollPos = 0;
 
 function Preference() {
   const [err, seterr] = useState(false);
+  const [previousPreference, setPreviousPreference] = useState({});
   const {
     religion: preferenceReligion,
     employType,
@@ -26,10 +27,8 @@ function Preference() {
     gender,
     country,
   } = useSelector((state) => state.preference);
+
   // const [form_filter_ids, setForm_filter] = useState({});
-
-  const [extraQuestion, setextraQuestion] = useState([]);
-
   const [state, setState] = useState({
     age_form: age_form,
     age_to: age_to,
@@ -37,6 +36,19 @@ function Preference() {
     height_inches: height_inches,
     gender: gender,
   });
+
+  const [extraQuestion, setextraQuestion] = useState([]);
+
+  const fetchPreviousPreference = async () => {
+    const res = await PreferenceServices.getPreferenceData();
+    if (res.status === 200) {
+      setPreviousPreference(res.data.profile_preferences);
+    }
+  };
+
+  useEffect(() => {
+    fetchPreviousPreference();
+  }, []);
 
   const navigate = useNavigate();
   const handleUserInputChange = (e) => {
@@ -290,7 +302,7 @@ function Preference() {
           {dynamicQuestion.map((question, index) => (
             <div key={index}>
               <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
-                {question.title}
+                {question.label}
               </p>
               <div>
                 <Link to={`/preference/dynamic-${question.id}`}>
@@ -300,7 +312,7 @@ function Preference() {
                         className="form-check-label  bg-white px-2 text-body"
                         style={{fontFamily: "Inter", cursor: "pointer"}}>
                         {/* {religion} */}
-                        {question.label}
+                        {question.filter_display_name}
                       </label>
                     </div>
 
