@@ -6,7 +6,7 @@ import UserServices from '../../services/userServices';
 import toastMsg from '../../utils/toastify';
 
 function Swipers({data,getData}) {
-    console.log('data', data)
+    // console.log('data', data)
     const like = "like";
     const dislike = "dislike";
     let getActiveSlide = async (task) => {
@@ -37,6 +37,7 @@ function Swipers({data,getData}) {
         }
       };
     let show = data?.filtered_users.map((item, index) => {
+        console.log('item', item?.profile_image_url)
         return (
           <SwiperSlide data-id={item.id}>
             <img
