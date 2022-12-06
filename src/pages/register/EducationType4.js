@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION4_TYPES} from "../../constants/register_constants";
 import {setEducation4, setEducation4Other} from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function EducationTypes4() {
   const navigate = useNavigate();
@@ -17,8 +17,7 @@ function EducationTypes4() {
     } else {
       dispatch(setEducation4Other(false));
       dispatch(setEducation4(e.target.value));
-    stoteRegisterValues({education4: e.target.value})
-
+      stoteRegisterValues({education4: e.target.value});
     }
     navigate(-1);
   };
@@ -37,7 +36,7 @@ function EducationTypes4() {
         <div className="container px-4 pb-2 overflow-auto">
           <h1>Undergrad Education</h1>
 
-          <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+          {/* <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
             <div className="col-10">
               <label htmlFor="None" className="form-check-label bg-white w-100">
                 <strong>Select education</strong>
@@ -54,7 +53,7 @@ function EducationTypes4() {
                 id="None"
               />
             </div>
-          </div>
+          </div> */}
           {EDUCATION4_TYPES.map((educationType, i) => (
             <div
               key={i}

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setGender,
@@ -38,6 +38,7 @@ function Preference() {
     gender: gender,
   });
 
+  const navigate = useNavigate();
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -58,7 +59,6 @@ function Preference() {
   const scrollContainerRef = useRef();
 
   const onSelectClicked = useCallback(() => {
-    dispatch(setHeight(state));
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
   const resetScroll = useCallback(() => {
@@ -72,6 +72,12 @@ function Preference() {
   useEffect(() => {
     fetchFilterQuestion();
   }, []);
+
+  const routeClicked = () => {
+    // navigate(route);
+
+    dispatch(setHeight(state));
+  };
   // console.log(extraQuestion);
   // console.log(Set(data));
 
@@ -140,8 +146,8 @@ function Preference() {
             id="inputHeightFeet"
             name="age_to"
             style={{fontFamily: "Inter"}}
-            // value={state.height_ft}
-            // onChange={handleUserInputChange}
+            value={state.age_to}
+            onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             placeholder={"To"}
             aria-describedby="height_feet"
@@ -156,8 +162,8 @@ function Preference() {
             name="age_form"
             id="inputHeightInches"
             style={{fontFamily: "Inter"}}
-            // value={state.height_inc}
-            // onChange={handleUserInputChange}
+            value={state.age_form}
+            onChange={handleUserInputChange}
             placeholder={"Form"}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
@@ -169,10 +175,47 @@ function Preference() {
       </div>
 
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+        Minimum height
+      </p>
+      <div className="d-flex">
+        <div className="form-floating my-3 text-muted me-2">
+          <input
+            type="number"
+            id="inputHeightFeet"
+            name="height_feet"
+            style={{fontFamily: "Inter"}}
+            value={state.height_feet}
+            onChange={handleUserInputChange}
+            className="form-control border-0 rounded-1"
+            // placeholder={MIN_HEIGHT_FEET.toString()}
+            aria-describedby="height_feet"
+          />
+          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+            ft
+          </label>
+        </div>
+        <div className="form-floating my-3 text-muted ms-2">
+          <input
+            type="number"
+            name="height_inches"
+            id="inputHeightInches"
+            style={{fontFamily: "Inter"}}
+            value={state.height_inches}
+            onChange={handleUserInputChange}
+            className="form-control border-0 rounded-1"
+            aria-describedby="height_inches"
+          />
+          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
+            in
+          </label>
+        </div>
+      </div>
+
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select religion
       </p>
       <div>
-        <Link onClick={onSelectClicked} to={"/preference/religion"}>
+        <Link onClick={routeClicked} to="/preference/religion">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -193,7 +236,7 @@ function Preference() {
         Select employment type
       </p>
       <div>
-        <Link onClick={onSelectClicked} to="/preference/employ">
+        <Link onClick={routeClicked} to="/preference/employ">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -234,7 +277,7 @@ function Preference() {
         Select Current Country
       </p>
       <div>
-        <Link onClick={onSelectClicked} to="/preference/country">
+        <Link onClick={routeClicked} to="/preference/country">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -253,59 +296,6 @@ function Preference() {
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select Current City
       </p>
-      <div>
-        <Link onClick={onSelectClicked} to="/preference/city">
-          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-            <div className="col-10">
-              <label
-                className="form-check-label bg-white px-2 text-body"
-                style={{fontFamily: "Inter"}}>
-                {city ?? "Select Current City"}
-              </label>
-            </div>
-            <div className="col-2 d-flex justify-content-end pe-3">
-              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
-            </div>
-          </div>
-        </Link>
-      </div>
-
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
-        Minimum height
-      </p>
-      <div className="d-flex">
-        <div className="form-floating my-3 text-muted me-2">
-          <input
-            type="number"
-            id="inputHeightFeet"
-            name="height_feet"
-            style={{fontFamily: "Inter"}}
-            value={state.height_feet}
-            onChange={handleUserInputChange}
-            className="form-control border-0 rounded-1"
-            // placeholder={MIN_HEIGHT_FEET.toString()}
-            aria-describedby="height_feet"
-          />
-          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
-            ft
-          </label>
-        </div>
-        <div className="form-floating my-3 text-muted ms-2">
-          <input
-            type="number"
-            name="height_inches"
-            id="inputHeightInches"
-            style={{fontFamily: "Inter"}}
-            value={state.height_inches}
-            onChange={handleUserInputChange}
-            className="form-control border-0 rounded-1"
-            aria-describedby="height_inches"
-          />
-          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
-            in
-          </label>
-        </div>
-      </div>
     </>
   );
 

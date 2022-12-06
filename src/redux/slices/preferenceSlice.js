@@ -7,10 +7,10 @@ const initialState = {
   maritalStatus: "Select marital status",
   country: ["bangladesh"],
   gender: "male",
-  age_form: 14,
-  age_to: 34,
-  height_feet: 5,
-  height_inches: 4,
+  age_form: "",
+  age_to: "",
+  height_feet: "",
+  height_inches: "",
 
   dynamicQuesAns: [],
 };
