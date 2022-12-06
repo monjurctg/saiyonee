@@ -134,7 +134,7 @@ function Question() {
       setLoading(false);
       // Navigate
       navigate(
-        id <= length - 1 ? `/question/${parseInt(id) + 1}` : `/preference`
+        id <= length - 1 ? `/question/${parseInt(id) + 1}` : `/question/image`
       );
     } else {
       seterr(res.data.message);
