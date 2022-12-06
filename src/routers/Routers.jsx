@@ -50,6 +50,7 @@ import ViewProfile from "../pages/settings/ViewProfile";
 import Boom from "../pages/home/Boom";
 import ForgotPass from "../pages/forgotPass/ForgotPass";
 import ResetPass from "../pages/forgotPass/ResetPass";
+import Success from "../pages/forgotPass/Success";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -98,6 +99,7 @@ function Routers() {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-pass" element={<ForgotPass />} />
           <Route path="/reset-pass" element={<ResetPass />} />
+          <Route path="/success-change-pass" element={<Success />} />
         </Route>
 
         <Route element={<RegisterRoute />}>
