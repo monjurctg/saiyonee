@@ -5,7 +5,8 @@ import { Pagination } from "swiper";
 import UserServices from '../../services/userServices';
 import toastMsg from '../../utils/toastify';
 
-function Swipers(data,getData) {
+function Swipers({data,getData}) {
+    console.log('data', data)
     const like = "like";
     const dislike = "dislike";
     let getActiveSlide = async (task) => {
