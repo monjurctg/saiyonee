@@ -11,7 +11,6 @@ const Success = () => {
     if (res.status === 200) {
       if (res.data.is_verified == 1) {
         localStorage.setItem("isVarified", 1);
-
         navigator("/question/1");
       }
     }
