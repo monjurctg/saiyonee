@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import BasicLayout from "../../components/layouts/BasicLayout";
-import {useCheckEmailMutation} from "../../redux/api/authApi";
-import {setIsRegStart, setRegEmail_Pass} from "../../redux/slices/authSlices";
+import { useCheckEmailMutation } from "../../redux/api/authApi";
+import { setIsRegStart, setRegEmail_Pass } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function RegisterEmail() {
   const [err, setErr] = useState();
-  const {email: Email, password: Password} = useSelector((state) => state.auth);
+  const { email: Email, password: Password } = useSelector((state) => state.auth);
   // let success = true;
   const [email, setemail] = useState(Email);
   const [password, setPassword] = useState(Password);
@@ -22,12 +22,12 @@ function RegisterEmail() {
 
   const checkEmail = async () => {
     setisLoading(true);
-    const res = await AuthServices.checkIsEmailUnique({email});
+    const res = await AuthServices.checkIsEmailUnique({ email });
 
     if (res.status === 200) {
       setisLoading(false);
-      stoteRegisterValues({email, password, confirmPassword});
-      dispatch(setRegEmail_Pass({email, password, confirmPassword}));
+      stoteRegisterValues({ email, password, confirmPassword });
+      dispatch(setRegEmail_Pass({ email, password, confirmPassword }));
       navigate("/register/usertype");
     } else {
       setErr(res.data.message);
@@ -83,7 +83,7 @@ function RegisterEmail() {
           <button
             onClick={() => navigate(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{ height: "58px", width: "58px" }}>
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
@@ -102,7 +102,7 @@ function RegisterEmail() {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0 bg-transparent flex-grow-1 overflow-auto"
-        style={{height: "40vh", marginTop: "-55px"}}>
+        style={{ height: "40vh", marginTop: "-55px" }}>
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1
             className="card-title mt-3"
@@ -143,7 +143,7 @@ function RegisterEmail() {
             </label>
           </div>
           <div
-            className="form-floating my-4 text-muted text-start"
+            className="form-floating my-4 text-muted text-start rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "password" ? "2px solid red" : "",
@@ -195,7 +195,7 @@ function RegisterEmail() {
           </div>
         </div>
       </div>
-      <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
+      <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
         {err?.error && <p className="text-primary">* {err?.message}</p>}
         <button
           onClick={onContinueClicked}

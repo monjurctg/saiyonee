@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import back from "../../assets/imgs/Back.svg";
 import human1 from "../../assets/imgs/human1.svg";
 import human2 from "../../assets/imgs/human2.svg";
@@ -24,11 +26,13 @@ function Boom() {
       style={{ background: "#FFB7AC", borderRadius: 35 }}
     >
       <div className="text-end">
+        <Link to={"/home"}>
         <img
           src={back}
           alt=""
           style={{ width: "48px", height: "48px", cursor: "pointer" }}
         />
+        </Link>
       </div>
 
       <div className="pt-4 text-center">
