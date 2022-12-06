@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Navigate, useNavigate, useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 
@@ -7,7 +7,7 @@ function Question() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const navigate = useNavigate();
-  let {id} = useParams();
+  let { id } = useParams();
   const [inputs, setInputs] = useState({
     user_checked: [],
     user_radio: [],
@@ -40,8 +40,10 @@ function Question() {
     getQuestions();
   }, [id]);
 
+  console.log(question);
+
   let inputChange = (e) => {
-    let {name, value} = e.target;
+    let { name, value } = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
       // console.log('arr', arr)
@@ -50,18 +52,18 @@ function Question() {
       } else {
         arr.push(parseInt(value));
       }
-      setInputs({...inputs, user_checked: arr});
+      setInputs({ ...inputs, user_checked: arr });
     } else if (name === "user_radio") {
       let arr = inputs.user_radio;
       console.log('arr', arr)
       // if (arr.includes(value)) {
       //   arr = arr.filter((item) => item !== value);
       // } else {
-        arr.push(value);
+      arr.push(value);
       // }
-      setInputs({...inputs, user_radio: arr});
+      setInputs({ ...inputs, user_radio: arr });
     } else {
-      setInputs({...inputs, [name]: value});
+      setInputs({ ...inputs, [name]: value });
     }
   };
   // console.log('inputs', inputs)

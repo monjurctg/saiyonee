@@ -1,11 +1,11 @@
 import axios from "axios";
 // import {set} from "immer/dist/internal";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {ID_TYPES} from "../../constants/register_constants";
-import {useRegisterMutation} from "../../redux/api/authApi";
+import { ID_TYPES } from "../../constants/register_constants";
+import { useRegisterMutation } from "../../redux/api/authApi";
 import {
   regSuccessAction,
   setIsRegStart,
@@ -13,9 +13,9 @@ import {
   setVerificationImg2,
   setVerificationType,
 } from "../../redux/slices/authSlices";
-import {initialRegState} from "../../redux/slices/initialRegState";
+import { initialRegState } from "../../redux/slices/initialRegState";
 import AuthServices from "../../services/authServices";
-import {setToken} from "../../utils/functions";
+import { setToken } from "../../utils/functions";
 
 function Varification() {
   const [err, setErr] = useState("Image is blank");
@@ -36,6 +36,7 @@ function Varification() {
     user_type,
     gender,
     date_of_birth,
+    display_name,
     education1,
     education1_institution,
     education1_major,
@@ -81,6 +82,7 @@ function Varification() {
     password_confirmation: password_confirmation,
     user_type: user_type,
     gender: gender,
+    display_name: display_name,
     date_of_birth: date_of_birth,
     education1: education1,
     education1_institution: education1_institution,
@@ -202,16 +204,14 @@ function Varification() {
               ID Type: {verification_type}
             </button>
             <ul
-              className={`dropdown-menu w-100 p-2 shadow border-0 ${
-                dropdown ? " show" : ""
-              }`}>
+              className={`dropdown-menu w-100 p-2 shadow border-0 ${dropdown ? " show" : ""
+                }`}>
               {ID_TYPES.map((idType, i) => (
                 <li key={i}>
                   <div
-                    style={{width: "100%"}}
-                    className={`btn py-3 dropdown-item${
-                      verification_type === idType ? " active" : ""
-                    }`}
+                    style={{ width: "100%" }}
+                    className={`btn py-3 dropdown-item${verification_type === idType ? " active" : ""
+                      }`}
                     onClick={() => selectType(idType)}>
                     {idType}
                   </div>
@@ -241,7 +241,7 @@ function Varification() {
                     }
                     // src="/img/add-photo.svg"
                     alt="add id card"
-                    style={{width: 136, height: 172}}
+                    style={{ width: 136, height: 172 }}
                     className="object-cover rounded-1"
                   />
                 </label>
@@ -256,7 +256,7 @@ function Varification() {
               {!verification_img1 && (
                 <div
                   className="position-absolute text-center"
-                  style={{bottom: "20%", left: 0, right: 0}}>
+                  style={{ bottom: "20%", left: 0, right: 0 }}>
                   Front Side
                 </div>
               )}
@@ -272,7 +272,7 @@ function Varification() {
                           : "/img/add-photo.svg"
                       }
                       alt="add id card"
-                      style={{width: 136, height: 172}}
+                      style={{ width: 136, height: 172 }}
                       className="object-cover rounded-1"
                     />
                   </label>
@@ -287,7 +287,7 @@ function Varification() {
                 {!verification_img2 && (
                   <div
                     className="position-absolute text-center"
-                    style={{bottom: "20%", left: 0, right: 0}}>
+                    style={{ bottom: "20%", left: 0, right: 0 }}>
                     Back Side
                   </div>
                 )}
