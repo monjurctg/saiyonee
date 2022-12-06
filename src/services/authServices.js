@@ -48,6 +48,16 @@ AuthServices.checkPage = async (data) => {
   return res;
 };
 
+AuthServices.checkVarified = async () => {
+  // console.log('data', data)
+  let url = "/check_verified";
+  let res = axios
+    .get(url)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
+
 AuthServices.logout = async () => {
   // console.log('data', data)
   let url = "/ApiLogout";
@@ -58,5 +68,24 @@ AuthServices.logout = async () => {
   return res;
 };
 
+AuthServices.forgotPassword = async (data) => {
+  // console.log('data', data)
+  let url = "/forgot_password";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
+
+AuthServices.resetPassword = async (data) => {
+  // console.log('data', data)
+  let url = "/reset_password";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 
 export default AuthServices;
