@@ -28,11 +28,11 @@ function Index() {
   }, []);
 
   // console.log('data', data)
-  console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
-  console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
+  // console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
+  // console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
 
   let show = "";
-  if (data?.filtered_users.length > 0 && !gettingUser) {
+  if (data?.filtered_users?.length > 0 && !gettingUser) {
     show = <Swipers getData={getData} data={data}/>
   }else if(gettingUser){
     show = <div className="d-flex justify-content-center align-items-center" style={{
@@ -43,7 +43,7 @@ function Index() {
     }}>
       Loading data
     </div>
-  }else if(data?.filtered_users.length === 0 && !gettingUser){
+  }else if(data?.filtered_users?.length === 0 && !gettingUser){
     show = <div className="d-flex justify-content-center align-items-center" style={{
       height: "100%",
       fontSize: 20,
