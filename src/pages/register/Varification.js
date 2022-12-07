@@ -189,6 +189,10 @@ function Varification() {
           <div className="text-center">
             <h1>ID Verification</h1>
             <p className="text-muted mt-3 mb-2">
+              (Optional)
+            </p>
+
+            <p className="text-muted mt-3 mb-2">
               (NID / Passport / Driving License / Birth Certificate)
             </p>
             <img src="/img/id-verification.svg" alt="back" />
