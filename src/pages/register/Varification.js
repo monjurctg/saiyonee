@@ -187,10 +187,7 @@ function Varification() {
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
-            <h1>ID Verification</h1>
-            <p className="text-muted mt-3 mb-2" style={{fontSize:16}}>
-              (Optional)
-            </p>
+            <h1>ID Verification (Optional)</h1>
 
             <p className="text-muted mt-3 mb-2">
               (NID / Passport / Driving License / Birth Certificate)
