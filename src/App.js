@@ -25,7 +25,7 @@ function App() {
   // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   // const access_token = getToken();
   const route = useLocation();
-  console.log(route.pathname, "fjdkjf");
+  // console.log(route.pathname, "fjdkjf");
   const dispatch = useDispatch();
 
   // const fetchPreviousPreference = async () => {

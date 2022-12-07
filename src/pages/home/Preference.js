@@ -65,6 +65,7 @@ function Preference() {
   const resetScroll = useCallback(() => {
     scrollPos = 0;
   }, []);
+
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
       scrollContainerRef.current?.scrollTo({top: scrollPos});
@@ -261,7 +262,7 @@ function Preference() {
         Select religion
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/religion">
+        <Link onClick={onSelectClicked} to="/preference/religion">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -282,7 +283,7 @@ function Preference() {
         Select employment type
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/employ">
+        <Link onClick={onSelectClicked} to="/preference/employ">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -302,7 +303,7 @@ function Preference() {
         Select marital status
       </p>
       <div>
-        <Link to="/preference/marital_status">
+        <Link to="/preference/marital_status" onClick={onContinueClicked}>
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -323,7 +324,7 @@ function Preference() {
         Select Current Country
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/country">
+        <Link onClick={onSelectClicked} to="/preference/country">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -357,7 +358,9 @@ function Preference() {
                 {question.label}
               </p>
               <div>
-                <Link to={`/preference/dynamic-${question.id}`}>
+                <Link
+                  onClick={onSelectClicked}
+                  to={`/preference/dynamic-${question.id}`}>
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
                       <label

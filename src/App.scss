@@ -7,13 +7,12 @@
 
 body {
   font-family: "Inter";
-   a {
+  a {
     text-decoration: none !important;
   }
 
   // background: rgba(233, 236, 239, 0.23);
   height: 100vh;
-
 }
 .btn:hover {
   color: #fff;
@@ -39,3 +38,10 @@ body {
 //   ::-webkit-scrollbar-thumb:hover {
 //     background: #555;
 //   }
+
+@media all and (max-width: 700px) {
+  .max-width-mobile {
+    max-width: 90% !important;
+    margin: 0 auto;
+  }
+}
