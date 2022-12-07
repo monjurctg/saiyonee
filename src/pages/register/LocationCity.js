@@ -1,22 +1,22 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Countries from "../../libs/cities_countries";
-import {setCity} from "../../redux/slices/authSlices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { setCity } from "../../redux/slices/authSlices";
+import { stoteRegisterValues } from "../../utils/functions";
 
-function LocationCity({module}) {
+function LocationCity({ module }) {
   const navigate = useNavigate();
   const [searchedCity, setSearchedCity] = useState("");
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
-  const {current_city, current_country} = useSelector((state) => state.auth);
+  const { current_city, current_country } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const onCityChange = (e) => {
     if (module == "city") {
     }
     dispatch(setCity(e.target.value));
-    stoteRegisterValues({current_city: e.target.value});
+    stoteRegisterValues({ current_city: e.target.value });
 
     navigate(-1);
   };
@@ -27,7 +27,7 @@ function LocationCity({module}) {
         <div
           onClick={() => navigate(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-          style={{height: "58px", width: "58px"}}>
+          style={{ height: "58px", width: "58px" }}>
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
@@ -45,7 +45,7 @@ function LocationCity({module}) {
           />
           <label htmlFor="inputSearchCity">Search for city</label>
         </div>
-        <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+        {/* <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
           <div className="col-10">
             <label htmlFor="None" className="form-check-label bg-white w-100">
               <strong>Select candidate's current city</strong>
@@ -62,7 +62,7 @@ function LocationCity({module}) {
               id="None"
             />
           </div>
-        </div>
+        </div> */}
         {(Countries[current_country] || []).map(
           (city, i) =>
             city.toLowerCase().includes(searchedCity.toLowerCase()) && (
