@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setGender,
@@ -40,6 +40,7 @@ function Preference() {
   // const [extraQuestion, setextraQuestion] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -48,6 +49,15 @@ function Preference() {
     });
   };
   const dispatch = useDispatch();
+  const fetchPreviousPreference = async () => {
+    const res = await PreferenceServices.getPreferenceData();
+    if (res.status === 200) {
+      setState({
+        ...state,
+        age_form: res.data.age_form,
+      });
+    }
+  };
 
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
@@ -73,13 +83,9 @@ function Preference() {
 
   useEffect(() => {
     fetchFilterQuestion();
+    fetchPreviousPreference();
   }, []);
 
-  const routeClicked = () => {
-    // navigate(route);
-
-    dispatch(setHeight(state));
-  };
   // console.log(extraQuestion);
   // console.log(Set(data));
 
@@ -152,6 +158,7 @@ function Preference() {
     const res = await PreferenceServices.postPreference(formd);
     if (res.status === 200) {
       toastMsg.success("Preference set successfully");
+      localStorage.setItem("preference", true);
       navigate("/home");
     } else {
       toastMsg.error(res.data.message);
@@ -346,7 +353,10 @@ function Preference() {
 
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
+      <RegisterLayout
+        onContinueClicked={onContinueClicked}
+        onFocus={() => dispatch(setHeight(state))}
+        err={err}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
           ref={scrollContainerRef}>

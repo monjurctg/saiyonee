@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
-function RegisterLayout({children, err, onContinueClicked}) {
+function RegisterLayout({children, err, onContinueClicked, onFocus}) {
   const navigate = useNavigate();
   const location = useLocation();
   // useEffect(() => {
@@ -34,6 +34,7 @@ function RegisterLayout({children, err, onContinueClicked}) {
           )}
           <button
             style={{height: 60}}
+            onFocus={onFocus}
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             <strong>Continue</strong>
