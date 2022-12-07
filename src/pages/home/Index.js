@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
 // import logo from '../../../public/img/logo.svg'
-import { Swiper, SwiperSlide } from "swiper/react";
-import nouser from "../../assets/imgs/nouser.png";
-import { Pagination } from "swiper";
 import UserServices from "../../services/userServices";
-import toastMsg from "../../utils/toastify";
 import Swipers from "../../components/home/Swipers";
 
 function Index() {
@@ -15,7 +11,7 @@ function Index() {
   let getData = async () => {
     setgettingUser(true)
     let res = await UserServices.filter_users();
-    console.log("res", res.data);
+    // console.log("res", res.data);
     if(res.status === 200){
       setgettingUser(false)
       setData(res.data);
