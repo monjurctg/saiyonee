@@ -52,7 +52,9 @@ function GetStarted() {
           </Link>
         </div>
       </div>
-      <div className="container p-4"  style={{height:"20vh"}}>
+      <div className="container p-4"style={{height: "20vh",
+          position: "fixed",
+          bottom: 0,}}>
         <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">

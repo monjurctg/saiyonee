@@ -16,7 +16,7 @@ function RegisterLayout({children, err, onContinueClicked, onFocus}) {
   return (
     <>
       <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
-        <div className="container px-4">
+        <div className="container px-4 py-2">
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
