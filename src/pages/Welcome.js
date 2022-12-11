@@ -4,7 +4,7 @@ import BasicLayout from "../components/layouts/BasicLayout";
 
 function Wellcome() {
   let subItem = (
-    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-fill text-body">
+    <div className="position-absolute text-center mt-5 position-fill text-body">
       <h1
         style={{
           fontFamily: "Inter",
@@ -23,7 +23,7 @@ function Wellcome() {
   );
   return (
     <BasicLayout subItem={subItem}>
-      <div className="flex-grow-1" style={{height:"40vh"}}>
+      <div className="flex-grow-1" style={{height:"30vh"}}>
         <img
           src="img/logo-index.png"
           alt="logo-index"
