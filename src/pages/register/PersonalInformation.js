@@ -76,7 +76,7 @@ function PersonalInformation() {
     ) {
       setErr({
         error: "display_name",
-        message: "Display name is required and length should be greater then 2",
+        message: "Display name is required and length should be minimum 3 characters",
       });
       return;
     } else if (!state.gender) {
