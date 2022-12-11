@@ -72,7 +72,7 @@ function PersonalInformation() {
       return;
     } else if (
       !state.display_name.trim() ||
-      state.display_name.trim().length < 2
+      state.display_name.trim().length < 3
     ) {
       setErr({
         error: "display_name",
