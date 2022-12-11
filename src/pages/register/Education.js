@@ -5,6 +5,9 @@ import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDegree2,
   setEducation1,
+  setEducation2,
+  setEducation3,
+  setEducation4,
   setinstitution1,
   setinstitution2,
   setinstitution3,
@@ -264,8 +267,8 @@ function Education() {
               <input
                 type="text"
                 id="inputEducation1"
-                value={education1Other}
-                // onChange={onEducation1Change}
+                value={education1}
+                onChange={(e)=> dispatch(setEducation1(e.target.value))} 
                 className="form-control border-0 rounded-1"
                 placeholder="education1"
                 aria-describedby="education1"
@@ -399,6 +402,8 @@ function Education() {
                 type="text"
                 id="inputEducation2"
                 value={education2}
+            
+                onChange={(e)=> dispatch(setEducation2(e.target.value))} 
                 // onChange={onEducation2Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education2"
@@ -534,7 +539,8 @@ function Education() {
               <input
                 type="text"
                 id="inputEducation3"
-                // value={education3}
+                value={education3}
+                onChange={(e)=> dispatch(setEducation3(e.target.value))} 
                 // onChange={onEducation3Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education3"
@@ -664,7 +670,8 @@ function Education() {
               <input
                 type="text"
                 id="inputEducation4"
-                // value={education4}
+                value={education4}
+                onChange={(e)=> dispatch(setEducation4(e.target.value))} 
                 // onChange={onEducation4Change}
 
                 className="form-control border-0 rounded-1"
