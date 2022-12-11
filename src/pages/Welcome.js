@@ -4,7 +4,7 @@ import BasicLayout from "../components/layouts/BasicLayout";
 
 function Wellcome() {
   let subItem = (
-    <div className="position-absolute text-center mt-5 position-fill text-body">
+    <div className="position-absolute text-center position-fill text-body" style={{marginTop:"8rem"}}>
       <h1
         style={{
           fontFamily: "Inter",
