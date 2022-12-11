@@ -45,6 +45,20 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!email.trim()){
+      
+      setErr({
+        error:"email",
+        message:"Email is required"
+      })
+      return;
+    }
+    else if(!password.trim()){
+      setErr({
+        error:"password",
+        message:"password is required"
+      })
+    }
     setloading(true);
     let data = {
       email: email,
@@ -82,7 +96,10 @@ function Login() {
       // window.location.href = "/";
     } else {
       setloading(false);
-      setErr(res.data.message);
+      setErr({
+        error:"email",
+        message:res.data.message
+      });
     }
 
     // console.log("data", data);
