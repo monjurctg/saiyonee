@@ -28,7 +28,7 @@ function Wellcome() {
           src="img/logo-index.png"
           alt="logo-index"
           className="img-fluid my-4"
-          style={{height: "100%",objectFit:"cover"}}
+          style={{objectFit:"contain",width:270}}
         />
       </div>
 
