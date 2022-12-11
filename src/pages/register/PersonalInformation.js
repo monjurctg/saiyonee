@@ -72,11 +72,11 @@ function PersonalInformation() {
       return;
     } else if (
       !state.display_name.trim() ||
-      state.display_name.trim().length < 7
+      state.display_name.trim().length < 2
     ) {
       setErr({
         error: "display_name",
-        message: "Display name is required and length should be greater then 6",
+        message: "Display name is required and length should be greater then 2",
       });
       return;
     } else if (!state.gender) {
