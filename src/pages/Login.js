@@ -100,6 +100,7 @@ function Login() {
         error:"email",
         message:res.data.message
       });
+      return
     }
 
     // console.log("data", data);
@@ -116,12 +117,17 @@ function Login() {
             <p className="card-text text-muted mt-3 mb-5">
               Take a step towards finding someone awesome!
             </p>
-            <div className="form-floating my-4 text-muted">
+            
+            <div className="form-floating my-4 text-muted rounded-1"  style={{
+              fontFamily: "Inter",
+              border: err?.error == "email" ? "2px solid red" : "",
+            }} >
               <input
                 type="email"
                 id="inputEmail"
                 value={email}
                 name="email"
+                onFocus={()=>setErr({})}
                 onChange={onChange}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
@@ -135,10 +141,14 @@ function Login() {
                 Email ID
               </label>
             </div>
-            <div className="form-floating my-4 text-muted">
+            <div className="form-floating my-4 text-muted rounded-1"  style={{
+              fontFamily: "Inter",
+              border: err?.error == "password" ? "2px solid red" : "",
+            }}>
               <input
                 type="password"
                 id="inputPassword"
+                onFocus={()=>setErr({})}
                 value={password}
                 name="password"
                 onChange={onChange}
@@ -160,7 +170,7 @@ function Login() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
-          {err !== false && <p className="text-primary">* {err}</p>}
+          {err?.error  && <p className="text-primary">* {err?.messsage}</p>}
           <button
             onClick={handleSubmit}
             disabled={
