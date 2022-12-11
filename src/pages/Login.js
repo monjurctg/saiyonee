@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
+  console.log('err', err?.message)
   const navigator = useNavigate();
 
   let subItem = (
@@ -96,6 +97,7 @@ function Login() {
       // window.location.href = "/";
     } else {
       setloading(false);
+      console.log('res.data', res.data.message)
       setErr({
         error:"email",
         message:res.data.message
@@ -170,7 +172,7 @@ function Login() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
-          {err?.error  && <p className="text-primary">* {err?.messsage}</p>}
+          {err?.error  && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={handleSubmit}
             disabled={

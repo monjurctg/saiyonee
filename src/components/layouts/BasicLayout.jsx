@@ -11,7 +11,7 @@ let {pathname} = useLocation();
             src={bg}
             alt="bg-star"
             className="img-fluid rounded-md-top rounded-bottom basic-img"
-            style={{height: pathname !== "/" && "100%",objectFit:"cover",width:pathname === "/" ? 380 :"100%"}}
+            style={{height: pathname !== "/" && "100%",objectFit:"cover",width:pathname === "/" ? 350 :"100%"}}
           />
         {subItem}
         </div>
