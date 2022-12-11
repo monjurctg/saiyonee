@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {OCCUPATION_TYPES} from "../../constants/register_constants";
-import {setCurrentEmplyType} from "../../redux/slices/authSlices";
+import {setCurrentEmploymentTypeOther, setCurrentEmplyType} from "../../redux/slices/authSlices";
 import {setEmployType} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -25,9 +25,12 @@ function OcupationTypes({module}) {
       return;
     }
     if (e.target.value === "Other") {
-      dispatch(setCurrentEmplyType("Other"));
-      stoteRegisterValues({current_employment_type: "Other"});
+      dispatch(setCurrentEmploymentTypeOther(true));
+      dispatch(setCurrentEmplyType(""));
+
+      // stoteRegisterValues({current_employment_type: "Other"});
     } else {
+      dispatch(setCurrentEmploymentTypeOther(false));
       dispatch(setCurrentEmplyType(e.target.value));
       stoteRegisterValues({current_employment_type: e.target.value});
     }

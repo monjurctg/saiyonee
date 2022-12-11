@@ -171,7 +171,9 @@ const authSlice = createSlice({
     setEducation4Other: (state, {payload}) => {
       state.education4Other = payload;
     },
-    setCurrentEmploymentTypeOther: (state, {payload}) => {},
+    setCurrentEmploymentTypeOther: (state, {payload}) => {
+      state.currentEmploymentTypeOther=payload
+    },
     setIsRegStart: (state) => {
       state.isRegStart = true;
     },
@@ -208,6 +210,7 @@ export const {
   setMaritalStatus,
   setReligion,
   setUserType,
+  setCurrentEmploymentTypeOther,
   setFamilyInformation,
   setEducation1Other,
   setEducation2Other,
