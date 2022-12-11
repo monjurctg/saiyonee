@@ -74,7 +74,7 @@ function RegisterEmail() {
     }
     checkEmail();
   };
-  console.log(err);
+  // console.log(err);
 
   let subItem = (
     <div className="position-absolute container position-top mt-6">
@@ -87,7 +87,7 @@ function RegisterEmail() {
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
-        <div className="col-8 d-flex justify-content-center">
+        <div className="col-8 d-flex justify-content-end">
           {/* <LinkLogo /> */}
           <Link to={"/"}>
             <img src="/img/logo.svg" alt="" />
