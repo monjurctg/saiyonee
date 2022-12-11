@@ -70,10 +70,13 @@ function PersonalInformation() {
         message: "Full name cannot be less than 6 characters long",
       });
       return;
-    } else if (!state.display_name.trim()) {
+    } else if (
+      !state.display_name.trim() ||
+      state.display_name.trim().length < 7
+    ) {
       setErr({
         error: "display_name",
-        message: "Display name is required",
+        message: "Display name is required and length should be greater then 6",
       });
       return;
     } else if (!state.gender) {

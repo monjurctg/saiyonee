@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setGender,
@@ -40,6 +40,7 @@ function Preference() {
   // const [extraQuestion, setextraQuestion] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -48,6 +49,15 @@ function Preference() {
     });
   };
   const dispatch = useDispatch();
+  const fetchPreviousPreference = async () => {
+    const res = await PreferenceServices.getPreferenceData();
+    if (res.status === 200) {
+      setState({
+        ...state,
+        age_form: res.data.age_form,
+      });
+    }
+  };
 
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
@@ -65,6 +75,7 @@ function Preference() {
   const resetScroll = useCallback(() => {
     scrollPos = 0;
   }, []);
+
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
       scrollContainerRef.current?.scrollTo({top: scrollPos});
@@ -72,13 +83,9 @@ function Preference() {
 
   useEffect(() => {
     fetchFilterQuestion();
+    fetchPreviousPreference();
   }, []);
 
-  const routeClicked = () => {
-    // navigate(route);
-
-    dispatch(setHeight(state));
-  };
   // console.log(extraQuestion);
   // console.log(Set(data));
 
@@ -151,6 +158,7 @@ function Preference() {
     const res = await PreferenceServices.postPreference(formd);
     if (res.status === 200) {
       toastMsg.success("Preference set successfully");
+      localStorage.setItem("preference", true);
       navigate("/home");
     } else {
       toastMsg.error(res.data.message);
@@ -261,7 +269,7 @@ function Preference() {
         Select religion
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/religion">
+        <Link onClick={onSelectClicked} to="/preference/religion">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -282,7 +290,7 @@ function Preference() {
         Select employment type
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/employ">
+        <Link onClick={onSelectClicked} to="/preference/employ">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -302,7 +310,7 @@ function Preference() {
         Select marital status
       </p>
       <div>
-        <Link to="/preference/marital_status">
+        <Link to="/preference/marital_status" onClick={onContinueClicked}>
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -323,7 +331,7 @@ function Preference() {
         Select Current Country
       </p>
       <div>
-        <Link onClick={routeClicked} to="/preference/country">
+        <Link onClick={onSelectClicked} to="/preference/country">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -345,7 +353,10 @@ function Preference() {
 
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
+      <RegisterLayout
+        onContinueClicked={onContinueClicked}
+        onFocus={() => dispatch(setHeight(state))}
+        err={err}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
           ref={scrollContainerRef}>
@@ -357,7 +368,9 @@ function Preference() {
                 {question.label}
               </p>
               <div>
-                <Link to={`/preference/dynamic-${question.id}`}>
+                <Link
+                  onClick={onSelectClicked}
+                  to={`/preference/dynamic-${question.id}`}>
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
                       <label

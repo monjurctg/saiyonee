@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
-function HomeLayout({ children, background,activeExplore,setactiveExplore }) {
-  let { pathname } = useLocation();
+function HomeLayout({children, background, activeExplore, setactiveExplore}) {
+  let {pathname} = useLocation();
 
   return (
     <div
@@ -14,62 +14,78 @@ function HomeLayout({ children, background,activeExplore,setactiveExplore }) {
         height: "100vh",
 
         // "#F9FAFB"
-      }}
-    >
-      <div className="logos px-4" style={{ background: background,position:"fixed",top:pathname === "home" ? 20 :0,
-    borderTopRightRadius:pathname === "home" ? 0 : 35,
-    borderTopLeftRadius: pathname === "home" ? 0 : 35,
-    width: pathname !== "home" && 390,
-    
-    }}>
+      }}>
+      <div
+        className="logos px-4"
+        style={{
+          background: background,
+          position: "fixed",
+          top: pathname === "home" ? 20 : 0,
+          borderTopRightRadius: pathname === "home" ? 0 : 35,
+          borderTopLeftRadius: pathname === "home" ? 0 : 35,
+          width: pathname !== "home" && 390,
+        }}>
         <div
           className="d-flex justify-content-end align-items-center"
-          style={{ gap: 55,
-          marginTop:pathname === "home" ? 0 : 20,
-          }}
-        >
-          {pathname === "/settings" &&
-          
-          <Link
-            to="/" // TODO ROUTES.tutorial
-            className="image-saturate position-relative me-auto"
-          >
-            <img src="img/back.svg" alt="next" className="img-fluid" />
-            <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
-              <img
-                src="img/back-icon.svg"
-                alt="next-btn-25-percent.svg"
-                className="img-fluid"
-              />
-            </div>
-          </Link>
-          }
-          <img src={"img/logo.svg"} alt="logo" style={{ height: 50 }} />
-          <Link to={"/preference"} >
+          style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
+          {pathname === "/settings" && (
+            <Link
+              to="/" // TODO ROUTES.tutorial
+              className="image-saturate position-relative me-auto">
+              <img src="img/back.svg" alt="next" className="img-fluid" />
+              <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
+                <img
+                  src="img/back-icon.svg"
+                  alt="next-btn-25-percent.svg"
+                  className="img-fluid"
+                />
+              </div>
+            </Link>
+          )}
+          <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
+          <Link to={"/preference"}>
             <div className="menu-img">
               <img
                 src={"img/menu.svg"}
                 alt="logo"
-                style={{ height: 30, width: 30 }}
+                style={{height: 30, width: 30}}
               />
             </div>
           </Link>
         </div>
         {pathname === "/explore" && (
           <div className="tab d-flex pt-3">
-            <p className={activeExplore === "Visited" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Visited")}>Visited you</p>
-            <p className={activeExplore === "Shortlist" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Shortlist")}>Short list</p>
-            <p className={activeExplore === "Liked" &&"active"} style={{cursor:"pointer"}} onClick={()=>setactiveExplore("Liked")}>Liked you</p>
+            <p
+              className={activeExplore === "Visited" && "active"}
+              style={{cursor: "pointer"}}
+              onClick={() => setactiveExplore("Visited")}>
+              Visited you
+            </p>
+            <p
+              className={activeExplore === "Shortlist" && "active"}
+              style={{cursor: "pointer"}}
+              onClick={() => setactiveExplore("Shortlist")}>
+              Short list
+            </p>
+            <p
+              className={activeExplore === "Liked" && "active"}
+              style={{cursor: "pointer"}}
+              onClick={() => setactiveExplore("Liked")}>
+              Liked you
+            </p>
           </div>
         )}
       </div>
-      <div className="px-4" style={{marginTop:70}}>{children}</div>
-      <div className="footer rounded-bottom mx-auto max-width-mobile" style={{position:"fixed",bottom:"0"}}>
+      <div className="px-4" style={{marginTop: 70}}>
+        {children}
+      </div>
+      <div
+        className="footer rounded-bottom mx-auto max-width-mobile"
+        style={{position: "fixed", bottom: "0"}}>
         <div className="d-flex justify-content-around pt-3 align-items-baseline">
           <Link to={"/home"}>
             <div
-              className={`text-center ${pathname === "/home" ? "active" : ""}`}
-            >
+              className={`text-center ${pathname === "/home" ? "active" : ""}`}>
               <img src="img/home.svg" alt="" />
               <p>Home</p>
             </div>
@@ -78,8 +94,7 @@ function HomeLayout({ children, background,activeExplore,setactiveExplore }) {
             <div
               className={`text-center ${
                 pathname === "/explore" ? "active" : ""
-              }`}
-            >
+              }`}>
               <img src="img/glasses.svg" alt="" />
               <p>Explore</p>
             </div>
@@ -92,8 +107,7 @@ function HomeLayout({ children, background,activeExplore,setactiveExplore }) {
             <div
               className={`text-center ${
                 pathname === "/settings" ? "active" : ""
-              }`}
-            >
+              }`}>
               <img src="img/glasses.svg" alt="" />
               <p>Settings</p>
             </div>

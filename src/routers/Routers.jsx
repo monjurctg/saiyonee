@@ -63,11 +63,11 @@ function Routers() {
   const dispatch = useDispatch();
   useEffect(() => {
     const isVarified = localStorage.getItem("isVarified");
-    if (isVarified === 0) {
-      dispatch(setIsVarified(0));
-    } else if (isVarified === 1) {
-      dispatch(setIsVarified(1));
-    }
+    // if (isVarified === 0) {
+    //   dispatch(setIsVarified(0));
+    // } else if (isVarified === 1) {
+    //   dispatch(setIsVarified(1));
+    // }
     // console.log(registerStart);
     if (location.pathname === "/register/email") {
       // console.log(true, "path");

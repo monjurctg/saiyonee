@@ -28,7 +28,15 @@ function Question() {
       seterr(false);
       setLoading(false);
       setlength(res.data.form_field_questions.length);
-      if (res.data.form_field_questions?.length === 0) navigate("/preference");
+      if (res.data.form_field_questions?.length === 0) {
+        const isAlreadySetPreference = localStorage.getItem("preference");
+        if (isAlreadySetPreference) {
+          navigate("/home");
+          return;
+        }
+
+        navigate("/preference");
+      }
       setquestion(res.data.form_field_questions[0]);
     } else {
       seterr(res.data.message);
