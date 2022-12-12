@@ -9,7 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
-  console.log('err', err?.message)
+  // console.log('err', err?.message)
   const navigator = useNavigate();
 
   let subItem = (

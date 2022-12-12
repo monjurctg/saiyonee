@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
+import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {GENDER_TYPES} from "../../constants/register_constants";
 import {setPersonalInfo} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
@@ -132,15 +133,8 @@ function PersonalInformation() {
 
   return (
     <>
-      <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
-        <div className="container px-4">
-          <div
-            onClick={() => navigate(-1)}
-            className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-            style={{height: "58px", width: "58px"}}>
-            <img src="/img/back-icon.svg" alt="back" />
-          </div>
-        </div>
+      <RegisterLayout  err={err}
+        onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           //   ref={scrollContainerRef}
@@ -355,7 +349,7 @@ function PersonalInformation() {
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2">
+        {/* <div className="container px-4 pb-4 pt-2">
           {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={onContinueClicked}
@@ -363,8 +357,8 @@ function PersonalInformation() {
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             <strong style={{fontFamily: "Inter"}}>Continue</strong>
           </button>
-        </div>
-      </div>
+        </div> */}
+      </RegisterLayout>
     </>
   );
 }
