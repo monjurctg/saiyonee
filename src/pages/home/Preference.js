@@ -6,6 +6,7 @@ import {
   setGender,
   setHeight,
   setpreferenceQuestion,
+  setPreviousPreference,
 } from "../../redux/slices/preferenceSlice";
 import PreferenceServices from "../../services/preferenceServices";
 import toastMsg from "../../utils/toastify";
@@ -13,6 +14,7 @@ let scrollPos = 0;
 
 function Preference() {
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const [previousPreference, setPreviousPreference] = useState({});
   const {
     religion: preferenceReligion,
@@ -27,8 +29,6 @@ function Preference() {
     gender,
     country,
   } = useSelector((state) => state.preference);
-
-  // const [form_filter_ids, setForm_filter] = useState({});
   const [state, setState] = useState({
     age_form: age_form,
     age_to: age_to,
@@ -41,6 +41,15 @@ function Preference() {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // const fetchPreviousPreference = async () => {
+  //   // setLoading(true);
+  //   const res = await PreferenceServices.getPreferenceData();
+  //   if (res.status === 200) {
+  //     await dispatch(setPreviousPreference(res.data.profile_preferences));
+  //     // setLoading(false);
+  //   }
+  // };
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -48,21 +57,15 @@ function Preference() {
       [e.target.name]: e.target.value,
     });
   };
+
   const dispatch = useDispatch();
-  const fetchPreviousPreference = async () => {
-    const res = await PreferenceServices.getPreferenceData();
-    if (res.status === 200) {
-      setState({
-        ...state,
-        age_form: res.data.age_form,
-      });
-    }
-  };
 
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
     if (res.status === 200) {
       dispatch(setpreferenceQuestion(res.data.filters));
+    } else {
+      setLoading(false);
     }
     // console.log(res, "profile preference res");
   };
@@ -81,10 +84,10 @@ function Preference() {
       scrollContainerRef.current?.scrollTo({top: scrollPos});
   }, [onSelectClicked]);
 
-  useEffect(() => {
-    fetchFilterQuestion();
-    fetchPreviousPreference();
-  }, []);
+  const clickButton = () => {
+    dispatch(setHeight(state));
+    onSelectClicked();
+  };
 
   // console.log(extraQuestion);
   // console.log(Set(data));
@@ -165,6 +168,12 @@ function Preference() {
     }
     console.log(res, "res");
   };
+  // const [form_filter_ids, setForm_filter] = useState({});
+
+  useEffect(() => {
+    fetchFilterQuestion();
+    // fetchPreviousPreference();
+  }, []);
 
   let preferenceData = (
     <>
@@ -269,7 +278,7 @@ function Preference() {
         Select religion
       </p>
       <div>
-        <Link onClick={onSelectClicked} to="/preference/religion">
+        <Link onClick={clickButton} to="/preference/religion">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -290,7 +299,7 @@ function Preference() {
         Select employment type
       </p>
       <div>
-        <Link onClick={onSelectClicked} to="/preference/employ">
+        <Link onClick={clickButton} to="/preference/employ">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -310,7 +319,7 @@ function Preference() {
         Select marital status
       </p>
       <div>
-        <Link to="/preference/marital_status" onClick={onSelectClicked}>
+        <Link to="/preference/marital_status" onClick={clickButton}>
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -331,7 +340,7 @@ function Preference() {
         Select Current Country
       </p>
       <div>
-        <Link onClick={onSelectClicked} to="/preference/country">
+        <Link onClick={clickButton} to="/preference/country">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -362,7 +371,8 @@ function Preference() {
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
           ref={scrollContainerRef}>
           {/* <h1> </h1> */}
-          {preferenceData}
+
+          {loading ? <h1>Loading ...</h1> : preferenceData}
           {dynamicQuestion.map((question, index) => (
             <div key={index}>
               <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
@@ -370,7 +380,7 @@ function Preference() {
               </p>
               <div>
                 <Link
-                  onClick={onSelectClicked}
+                  onClick={clickButton}
                   to={`/preference/dynamic-${question.id}`}>
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
