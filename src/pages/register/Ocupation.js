@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
+  setCurrentEmplyType,
   setDesignation,
   setEmployName,
   setWorkingSince,
@@ -26,6 +27,7 @@ function Ocupation() {
     current_employment_type,
     designation,
     employer_name,
+    currentEmploymentTypeOther,
     industry,
     working_since,
     email
@@ -110,7 +112,7 @@ function Ocupation() {
             >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
-                  {current_employment_type === "Other"
+                  {currentEmploymentTypeOther
                     ? "Other"
                     : current_employment_type
                       ? current_employment_type
@@ -126,7 +128,7 @@ function Ocupation() {
               </div>
             </div>
           </Link>
-          {current_employment_type === "Other" && (
+          {currentEmploymentTypeOther  && (
             <div className="form-floating my-4 text-muted"
               style={{
                 fontFamily: "Inter",
@@ -137,15 +139,15 @@ function Ocupation() {
                 type="text"
                 id="inputEmploymentType"
                 value={current_employment_type}
-                // onChange={onEmploymentTypeChanged}
+                onChange={(e)=>  dispatch(setCurrentEmplyType(e.target.value))}
                 className="form-control border-0 rounded-1"
                 placeholder="employmentType"
                 aria-describedby="employmentType"
               />
-              <label htmlFor="inputEmploymentType">Enter Employment Type</label>
+              <label htmlFor="inputEmploymentType">Enter other employement type</label>
             </div>
           )}
-          {current_employment_type &&
+          {
             current_employment_type !== "Unemployed" &&
             current_employment_type !== "Student" && (
               <>
@@ -190,7 +192,7 @@ function Ocupation() {
                     placeholder="employer"
                     aria-describedby="employer"
                   />
-                  <label htmlFor="inputEmployer">Enter Employer's Name</label>
+                  <label htmlFor="inputEmployer">Enter your organization name</label>
                 </div>
                 <div className="form-floating my-4 text-muted  rounded-1"
                   style={{

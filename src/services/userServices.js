@@ -42,5 +42,12 @@ UserServices.shortlisted_users = async () => {
   return res;
 }
 
+UserServices.help = async (data) => {
+  const res = await axios.post("/submit_contact_us_mail", data);
+  return res;
+}
+
+
+
 
 export default UserServices;

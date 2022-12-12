@@ -51,6 +51,7 @@ import Boom from "../pages/home/Boom";
 import ForgotPass from "../pages/forgotPass/ForgotPass";
 import ResetPass from "../pages/forgotPass/ResetPass";
 import Success from "../pages/forgotPass/Success";
+import Help from "../pages/Help";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -106,6 +107,7 @@ function Routers() {
           {/* register process routing */}
           <Route path="/register/email" element={<RegisterEmail />} />
           <Route path="/register/usertype" element={<RegisterUserType />} />
+          <Route path="/help" element={<Help />} />
 
           {/* personal info route start */}
           <Route

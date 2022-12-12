@@ -61,14 +61,7 @@ function Question() {
       }
       setInputs({...inputs, user_checked: arr});
     } else if (name === "user_radio") {
-      let arr = inputs.user_radio;
-      console.log("arr", arr);
-      // if (arr.includes(value)) {
-      //   arr = arr.filter((item) => item !== value);
-      // } else {
-      arr.push(value);
-      // }
-      setInputs({...inputs, user_radio: arr});
+      setInputs({...inputs, user_radio: value});
     } else {
       setInputs({...inputs, [name]: value});
     }
@@ -127,12 +120,15 @@ function Question() {
     formData.append("form_field_id", question?.id);
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
+    // formdata.append('user_input[]', data
     inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
       formData.append("user_input[]", [...inputs.user_checked]);
     // ))
-    // console.log('first', inputs.user_radio)
+    // console.log('[...inputs.user_checked]', [...inputs.user_checked])
+    console.log('inputs.user_radio', inputs.user_radio)
     inputs.user_radio.length > 0 &&
+
       formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);

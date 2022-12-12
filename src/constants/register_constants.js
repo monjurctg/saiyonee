@@ -4,7 +4,7 @@ export const REG_URL_PATH = "/ApiRegister";
 export const EMAIL_VERIFY_URL_PATH = "/confirm_email_is_unique";
 
 export const USER_TYPES = [
-  "Myself",
+  "My Self",
   "My Daughter",
   "My Son",
   "My Sister",

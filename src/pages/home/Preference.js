@@ -310,7 +310,7 @@ function Preference() {
         Select marital status
       </p>
       <div>
-        <Link to="/preference/marital_status" onClick={onContinueClicked}>
+        <Link to="/preference/marital_status" onClick={onSelectClicked}>
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -356,6 +356,7 @@ function Preference() {
       <RegisterLayout
         onContinueClicked={onContinueClicked}
         onFocus={() => dispatch(setHeight(state))}
+        helpN={true}
         err={err}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"

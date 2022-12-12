@@ -9,16 +9,31 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
+  // console.log('err', err?.message)
   const navigator = useNavigate();
 
   let subItem = (
-    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
-      {/* <LinkLogo /> */}
-      <Link to={"/"}>
-        <img src="img/logo.svg" alt="" />
-      </Link>
+    <div className="position-absolute container position-top mt-6">
+      <div className="row justify-content-center">
+        <div className="col-2 pr-3">
+          <button
+            onClick={() => navigator(-1)}
+            className="btn btn-light rounded-circle shadow p-3 image-invert"
+            style={{ height: "58px", width: "58px" }}>
+            <img src="/img/back-icon.svg" alt="back" />
+          </button>
+        </div>
+        <div className="col-8 d-flex justify-content-end">
+          {/* <LinkLogo /> */}
+          <Link to={"/"}>
+            <img src="/img/logo.svg" alt="" />
+          </Link>
+        </div>
+        <div className="col-2"></div>
+      </div>
     </div>
   );
+
 
   const onChange = (e) => {
     const {name, value} = e.target;
@@ -31,6 +46,20 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!email.trim()){
+      
+      setErr({
+        error:"email",
+        message:"Email is required"
+      })
+      return;
+    }
+    else if(!password.trim()){
+      setErr({
+        error:"password",
+        message:"password is required"
+      })
+    }
     setloading(true);
     let data = {
       email: email,
@@ -68,7 +97,12 @@ function Login() {
       // window.location.href = "/";
     } else {
       setloading(false);
-      setErr(res.data.message);
+      console.log('res.data', res.data.message)
+      setErr({
+        error:"email",
+        message:res.data.message
+      });
+      return
     }
 
     // console.log("data", data);
@@ -85,12 +119,17 @@ function Login() {
             <p className="card-text text-muted mt-3 mb-5">
               Take a step towards finding someone awesome!
             </p>
-            <div className="form-floating my-4 text-muted">
+            
+            <div className="form-floating my-4 text-muted rounded-1"  style={{
+              fontFamily: "Inter",
+              border: err?.error == "email" ? "2px solid red" : "",
+            }} >
               <input
                 type="email"
                 id="inputEmail"
                 value={email}
                 name="email"
+                onFocus={()=>setErr({})}
                 onChange={onChange}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
@@ -104,10 +143,14 @@ function Login() {
                 Email ID
               </label>
             </div>
-            <div className="form-floating my-4 text-muted">
+            <div className="form-floating my-4 text-muted rounded-1"  style={{
+              fontFamily: "Inter",
+              border: err?.error == "password" ? "2px solid red" : "",
+            }}>
               <input
                 type="password"
                 id="inputPassword"
+                onFocus={()=>setErr({})}
                 value={password}
                 name="password"
                 onChange={onChange}
@@ -129,7 +172,7 @@ function Login() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
-          {err !== false && <p className="text-primary">* {err}</p>}
+          {err?.error  && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={handleSubmit}
             disabled={

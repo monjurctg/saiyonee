@@ -12,8 +12,8 @@ function Boom() {
 
   let getBoomData = async () => {
     let res = await UserServices.matched_users();
-    // console.log("resmatched_user", res.data.matched_users);
-    if (res?.data?.matched_users?.length > 0) {
+    // console.log("resmatched_user", res.data.matched_users.length);
+    if (res?.data?.matched_users ) {
       setBoomData(res.data.matched_users)
     }else{
       navigate("/home")
@@ -24,7 +24,7 @@ function Boom() {
   }, [])
   console.log('boomData', boomData)
 let show = ""
-if( boomData?.length > 0){
+if( boomData !== undefined){
   show = boomData.map((item, index) => {
     return (
       <div className="mt-5">

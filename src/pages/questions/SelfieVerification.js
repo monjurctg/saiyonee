@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
+import toastMsg from "../../utils/toastify";
 
 function SelfieVerification() {
   const [err, seterr] = useState(null);
@@ -10,14 +11,14 @@ function SelfieVerification() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
   const navigate = useNavigate();
-  console.log('image', image)
+  // console.log('image', image)
 
 
   const getImage = async () => {
     let res =  await QuestionServices.getSelfieImage();
-    console.log("res", res.data.images);
+    // console.log("res", res.data.images);
     if (res.status === 200) {
-      setimage2(res.data.images);
+      setimage2(res.data.images.selfie_img);
     }
 
   }
@@ -27,11 +28,18 @@ function SelfieVerification() {
     let data = new FormData();
     data.append("selfie_img", value);
     let res = await QuestionServices.submitSelfiePhoto(data);
-    console.log("res", res);
+    console.log("ressadasdasda", res);
     if (res.status === 200) {
       seterr(false);
-      navigate("/preference");
+      toastMsg.success("Image uploaded successfully");
+      getImage();
+      setTimeout(() => {
+        navigate("/preference");
+        
+      }, 2000);
     } else {
+      toastMsg.error(res.data.message);
+
       seterr(res.data.message);
     }
   };
@@ -56,7 +64,7 @@ function SelfieVerification() {
       }
     }
   };
-  let imageClick = (e) => {
+  let imageClick = (e,) => {
     e.preventDefault();
     document.getElementById("image").click();
   };
@@ -76,7 +84,7 @@ function SelfieVerification() {
         </p>
         <div className="image-round mt-5">
         <img
-                src={image2?.selfie_img ? image2?.selfie_img : image ?  URL.createObjectURL(image): null}
+                src={image2 ? image2 : image ?  URL.createObjectURL(image): null}
             alt=""
             // onClick={imageClick}
 
