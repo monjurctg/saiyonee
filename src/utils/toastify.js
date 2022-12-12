@@ -5,7 +5,7 @@ let toastMsg = {};
 toastMsg.success = (msg) => {
   toast.success(msg, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -18,7 +18,7 @@ toastMsg.success = (msg) => {
 toastMsg.error = (msg) => {
   toast.error(msg, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -31,7 +31,7 @@ toastMsg.error = (msg) => {
 toastMsg.info = (msg) => {
   toast.info(msg, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -44,7 +44,7 @@ toastMsg.info = (msg) => {
 toastMsg.warning = (msg) => {
   toast.warning(msg, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

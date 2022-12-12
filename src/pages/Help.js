@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
+import UserServices from "../services/userServices";
+import toastMsg from "../utils/toastify";
 
 function Help() {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
   const [err, setErr] = useState(null);
   // console.log('err', err?.message)
 
@@ -16,9 +20,73 @@ function Help() {
       setEmail(value);
     } else if (name === "name") {
       setName(value);
-    }
+    } else if (name === "message") {
+        setMessage(value);
+        }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(!email.trim()){
+      
+        setErr({
+          error:"name",
+          message:"Name is required"
+        })
+        return;
+      }
+    if(!email.trim()){
+      
+      setErr({
+        error:"email",
+        message:"Email is required"
+      })
+      return;
+    }
+    else if(!message.trim()){
+      setErr({
+        error:"query",
+        message:"query is required"
+      })
+    }
+    setloading(true);
+    let data = {
+      email: email,
+      name: name,
+      message: message,
+    };
+
+    let formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("name", data.name);
+    formData.append("message", data.message);
+
+
+    let res = await UserServices.help(formData);
+    // console.log("res", res.data);
+    if (res.status === 200) {
+      setloading(false);
+      setErr(false);
+    //   console.log('res.data', res.data)
+      toastMsg.success(res.data.message);
+      setTimeout(() => {
+            navigate(-1);
+        
+      }, 1000);
+      }
+    else {
+      setloading(false);
+    //   console.log('res.data', res.data.message)
+      toastMsg.error(res.data.message);
+      setErr({
+        error:"email",
+        message:res.data.message
+      });
+      return
+    }
+
+    // console.log("data", data);
+  };
   let subItem = (
     <div
       className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6"
@@ -118,8 +186,8 @@ function Help() {
               cols={"30"}
               rows={"5"}
               id="inputArea"
-              value={email}
-              name="email"
+              value={message}
+              name="message"
               onFocus={() => setErr({})}
               onChange={onChange}
               className="form-control border-0 rounded-1"
@@ -139,7 +207,7 @@ function Help() {
           <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
           {err?.error  && <p className="text-primary">* {err?.message}</p>}
           <button
-            // onClick={handleSubmit}
+            onClick={handleSubmit}
             disabled={
               loading
               // status === FetchStatus.LOADING ||
@@ -147,7 +215,7 @@ function Help() {
               // isPrefetchingForms
             }
             className="btn btn-primary w-100 rounded shadow p-3 my-2">
-            <strong>Submit query </strong>
+            <strong style={{color:"white"}}>Submit query </strong>
             {
               // (status === FetchStatus.LOADING ||
               // verifyingPreviousLogin ||
