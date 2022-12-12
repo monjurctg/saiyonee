@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import help from '../../assets/imgs/help.svg'
 
-function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn}) {
+function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn,helpN}) {
   const navigate = useNavigate();
   const location = useLocation();
   // useEffect(() => {
@@ -24,9 +24,16 @@ function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn}) {
             style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
-          <Link to={"/help"}>
+          {
+            !helpN ? <Link to={"/help"}>
             <img src={help} alt="" style={{height: "58px", width: "58px"}}/>
-          </Link>
+          </Link>:<div>
+
+          </div>
+          }
+          {/* <Link to={"/help"}>
+            <img src={help} alt="" style={{height: "58px", width: "58px"}}/>
+          </Link> */}
         </div>
 
         {children}

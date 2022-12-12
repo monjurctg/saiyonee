@@ -11,12 +11,12 @@ function AddPhoto() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
   
-
+console.log('image2', image2)
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
-    // console.log("res", res.data.images);
+    console.log("res", res.data.images);
     if (res.status === 200) {
-      setimage2(res.data.images);
+      setimage2(res.data.images.profile_img);
     }
   };
 
@@ -28,6 +28,7 @@ function AddPhoto() {
     e.preventDefault();
     // console.log("inputs");
     // console.log("image", image);
+    if(image2 && !image) navigate("/question/selfie-verification");
     let data = new FormData();
     data.append("profile_img", image);
     let res = await QuestionServices.submitProfilePhoto(data);
@@ -84,8 +85,8 @@ function AddPhoto() {
 
           <img
             src={
-              image2?.profile_img
-                ? image2?.profile_img
+              image2
+                ? image2
                 : image
                 ? URL.createObjectURL(image)
                 : null
