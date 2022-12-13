@@ -53,12 +53,14 @@ function Question() {
     let {name, value} = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
-      // console.log('arr', arr)
       if (arr.includes(value)) {
-        arr = arr.filter((item) => item !== parseInt(value));
+        // arr = arr.filter((item) => item !== parseInt(value));
+        arr = arr.filter((item) => item !== value);
       } else {
-        arr.push(parseInt(value));
+        // arr.push(parseInt(value));
+        arr.push(value);
       }
+      console.log(arr);
       setInputs({...inputs, user_checked: arr});
     } else if (name === "user_radio") {
       setInputs({...inputs, user_radio: value});
@@ -121,11 +123,20 @@ function Question() {
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
     // formdata.append('user_input[]', data
-    inputs.user_checked.length > 0 &&
+    // inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
-      formData.append("user_input[]", [...inputs.user_checked]);
+      // formData.append("user_input[]", inputs.user_checked);
+      // console.log(formData, 'here');
+
     // ))
     // console.log('[...inputs.user_checked]', [...inputs.user_checked])
+
+    inputs.user_checked.length > 0 &&
+    inputs.user_checked.map((user_data)=>{
+        return formData.append("user_input[]", user_data);
+      }
+    )
+
     console.log('inputs.user_radio', inputs.user_radio)
     inputs.user_radio.length > 0 &&
 
