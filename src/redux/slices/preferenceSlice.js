@@ -52,7 +52,10 @@ const preferenceSlice = createSlice({
       state.age_to = payload.age_to;
       state.height_feet = payload.height_feet;
       state.height_inches = payload.height_inches;
+      state.employType = payload.current_employment_type;
+      state.religion = payload.religion;
       state.maritalStatus = payload.marital_status;
+      // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
 
     setpreferenceAns: (state, {payload}) => {

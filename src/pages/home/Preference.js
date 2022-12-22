@@ -35,6 +35,11 @@ function Preference() {
     height_feet: height_feet,
     height_inches: height_inches,
     gender: gender,
+    religion: preferenceReligion,
+    maritalStatus: maritalStatus,
+
+    country: country,
+    employType: employType,
   });
 
   // const [extraQuestion, setextraQuestion] = useState([]);
@@ -42,14 +47,16 @@ function Preference() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const fetchPreviousPreference = async () => {
-  //   // setLoading(true);
-  //   const res = await PreferenceServices.getPreferenceData();
-  //   if (res.status === 200) {
-  //     await dispatch(setPreviousPreference(res.data.profile_preferences));
-  //     // setLoading(false);
-  //   }
-  // };
+  const fetchPreviousPreference = async () => {
+    setLoading(true);
+    const res = await PreferenceServices.getPreferenceData();
+    if (res.status === 200) {
+      setLoading(false);
+      dispatch(setPreviousPreference(res.data.profile_preferences));
+    } else {
+      setLoading(false);
+    }
+  };
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -65,7 +72,6 @@ function Preference() {
     if (res.status === 200) {
       dispatch(setpreferenceQuestion(res.data.filters));
     } else {
-      setLoading(false);
     }
     // console.log(res, "profile preference res");
   };
@@ -88,6 +94,15 @@ function Preference() {
     dispatch(setHeight(state));
     onSelectClicked();
   };
+
+  // const fetchPreviousPreference = async () => {
+  //   // setLoading(true);
+  //   const res = await PreferenceServices.getPreferenceData();
+  //   if (res.status === 200) {
+  //     await dispatch(setPreviousPreference(res.data.profile_preferences));
+  //     // setLoading(false);
+  //   }
+  // };
 
   // console.log(extraQuestion);
   // console.log(Set(data));
@@ -171,9 +186,23 @@ function Preference() {
   // const [form_filter_ids, setForm_filter] = useState({});
 
   useEffect(() => {
-    fetchFilterQuestion();
-    // fetchPreviousPreference();
+    if (!age_to) {
+      fetchFilterQuestion();
+      fetchPreviousPreference();
+    }
   }, []);
+
+  useEffect(() => {
+    if (age_to) {
+      setState({
+        ...state,
+        age_to: age_to,
+        age_form: age_form,
+        height_feet: height_feet,
+        height_inches: height_inches,
+      });
+    }
+  }, [age_to]);
 
   let preferenceData = (
     <>
@@ -285,7 +314,7 @@ function Preference() {
                 className="form-check-label  bg-white px-2 text-body"
                 style={{fontFamily: "Inter", cursor: "pointer"}}>
                 {/* {religion} */}
-                {preferenceReligion || "Select religion"}
+                {state.religion || preferenceReligion || "Select religion"}
               </label>
             </div>
 
@@ -306,7 +335,7 @@ function Preference() {
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {employType || "Select employment type"}
+                {state.employType || employType || "Select employment type"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -326,7 +355,9 @@ function Preference() {
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {maritalStatus || "Select marital status"}
+                {state.maritalStatus ||
+                  maritalStatus ||
+                  "Select marital status"}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">

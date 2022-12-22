@@ -22,18 +22,8 @@ function Index() {
     // let data = await res.json()
   };
 
-  const fetchPreviousPreference = async () => {
-    // setLoading(true);
-    const res = await PreferenceServices.getPreferenceData();
-    if (res.status === 200) {
-      await dispatch(setPreviousPreference(res.data.profile_preferences));
-      // setLoading(false);
-    }
-  };
-
   useEffect(() => {
     getData();
-    fetchPreviousPreference();
   }, []);
 
   // console.log('data', data)

@@ -29,6 +29,7 @@ function LocationCountry({module}) {
     // setCurrentCity(undefined);
     navigator(-1);
   };
+  // console.log(preferenceCountry.includes("bangladesh"));
 
   return (
     <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
