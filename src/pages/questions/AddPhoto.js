@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 
@@ -10,13 +10,17 @@ function AddPhoto() {
   const navigate = useNavigate();
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
-  
-console.log('image2', image2)
+
+  console.log("image2", image2);
+  const isEdit = localStorage.getItem("edit_img");
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
     console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
+      if (res.data.images.profile_img && !isEdit) {
+        navigate("/question/selfie-verification");
+      }
     }
   };
 
@@ -26,9 +30,10 @@ console.log('image2', image2)
 
   let onSubmit = async (e) => {
     e.preventDefault();
+    localStorage.setItem("edit_img", false);
     // console.log("inputs");
     // console.log("image", image);
-    if(image2 && !image) navigate("/question/selfie-verification");
+    if (image2 && !image) navigate("/question/selfie-verification");
     let data = new FormData();
     data.append("profile_img", image);
     let res = await QuestionServices.submitProfilePhoto(data);
@@ -67,8 +72,7 @@ console.log('image2', image2)
       onContinueClicked={onSubmit}
       length={length}
       title={"Add Profile Photo"}
-      loading={loading}
-    >
+      loading={loading}>
       <div className="question mt-3">
         <p>
           Your profile will only be visible to other members, when you add a
@@ -80,17 +84,11 @@ console.log('image2', image2)
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{ display: (image || image2) && "none", cursor: "pointer" }}
+            style={{display: (image || image2) && "none", cursor: "pointer"}}
           />
 
           <img
-            src={
-              image2
-                ? image2
-                : image
-                ? URL.createObjectURL(image)
-                : null
-            }
+            src={image2 ? image2 : image ? URL.createObjectURL(image) : null}
             alt=""
             onClick={imageClick}
             style={{
@@ -103,7 +101,7 @@ console.log('image2', image2)
           <input
             type="file"
             id="image"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
           />
         </div>

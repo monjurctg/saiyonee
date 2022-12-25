@@ -5,7 +5,7 @@ import BasicLayout from "../components/layouts/BasicLayout";
 function Wellcome() {
   let subItem = (
     <div
-      className="position-absolute text-center position-fill text-body"
+      className="position-absolute text-center  position-fill text-body"
       style={{marginTop: "8rem"}}>
       <h1
         style={{
@@ -37,7 +37,7 @@ function Wellcome() {
           <div className="col">
             <div className="d-flex align-items-center">
               <Link
-                to={"/tutorial"}
+                to={"/home"}
                 className="image-saturate position-relative ms-auto">
                 <img
                   src="img/next-btn-25-percent.svg"

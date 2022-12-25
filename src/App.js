@@ -28,13 +28,6 @@ function App() {
   // console.log(route.pathname, "fjdkjf");
   const dispatch = useDispatch();
 
-  // const fetchPreviousPreference = async () => {
-  //   const res = await PreferenceServices.getPreferenceData();
-  //   if (res.status === 200) {
-  //     dispatch(setPreviousPreference(res.data.profile_preferences));
-  //   }
-  // };
-
   // useEffect(() => {
   //   fetchPreviousPreference();
   // }, [route]);

@@ -176,6 +176,7 @@ function Routers() {
         {/* not varified */}
         <Route element={<NotVarified />}>
           <Route path="/success" element={<RegSuccess />} />
+          <Route path="/reveiw" element={<RegSuccess />} />
         </Route>
 
         <Route element={<PrivateRoute />}>
@@ -190,11 +191,12 @@ function Routers() {
           <Route path="/preference/:module" element={<PreferenceModule />} />
 
           <Route path="/review/profile" element={<ReviewProfile />} />
-          <Route path="/explore" element={<Explore />} />
+
           <Route path="/settings" element={<Settings />} />
 
           <Route path="/edit/profile" element={<EditProfile />} />
           <Route path="/home" element={<Index />} />
+          <Route path="/explore" element={<Explore />} />
 
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/viewProfile" element={<ViewProfile />} />

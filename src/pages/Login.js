@@ -19,7 +19,7 @@ function Login() {
           <button
             onClick={() => navigator(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{ height: "58px", width: "58px" }}>
+            style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
@@ -34,7 +34,6 @@ function Login() {
     </div>
   );
 
-
   const onChange = (e) => {
     const {name, value} = e.target;
     if (name === "email") {
@@ -46,19 +45,17 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!email.trim()){
-      
+    if (!email.trim()) {
       setErr({
-        error:"email",
-        message:"Email is required"
-      })
+        error: "email",
+        message: "Email is required",
+      });
       return;
-    }
-    else if(!password.trim()){
+    } else if (!password.trim()) {
       setErr({
-        error:"password",
-        message:"password is required"
-      })
+        error: "password",
+        message: "password is required",
+      });
     }
     setloading(true);
     let data = {
@@ -77,15 +74,23 @@ function Login() {
       setErr(false);
       setToken(res.data.auth_token);
       // console.log(res.data.is_verified);
+      console.log(res.data);
+
+      localStorage.setItem("preference", res.data.profile_preference_exists);
+      localStorage.setItem("isVarified", res.data.is_verified);
+      localStorage.setItem("is_banned", res.data.is_banned);
+      localStorage.setItem("show_liked_list", res.data.show_liked_list);
+      localStorage.setItem("package_id", res.data.package_id);
+      localStorage.setItem("package_name", res.data.package_name);
+      localStorage.setItem(
+        "show_supper_liked_list",
+        res.data.show_super_liked_list
+      );
 
       if (res.data.is_verified == 0) {
-        localStorage.setItem("isVarified", 0);
-
         navigator("/success");
       } else {
         if (res.data.profile_preference_exists) {
-          localStorage.setItem("preference", true);
-          localStorage.setItem("isVarified", 1);
           navigator("/home");
           return;
         }
@@ -97,12 +102,12 @@ function Login() {
       // window.location.href = "/";
     } else {
       setloading(false);
-      console.log('res.data', res.data.message)
+      console.log("res.data", res.data.message);
       setErr({
-        error:"email",
-        message:res.data.message
+        error: "email",
+        message: res.data.message,
       });
-      return
+      return;
     }
 
     // console.log("data", data);
@@ -119,17 +124,19 @@ function Login() {
             <p className="card-text text-muted mt-3 mb-5">
               Take a step towards finding someone awesome!
             </p>
-            
-            <div className="form-floating my-4 text-muted rounded-1"  style={{
-              fontFamily: "Inter",
-              border: err?.error == "email" ? "2px solid red" : "",
-            }} >
+
+            <div
+              className="form-floating my-4 text-muted rounded-1"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "email" ? "2px solid red" : "",
+              }}>
               <input
                 type="email"
                 id="inputEmail"
                 value={email}
                 name="email"
-                onFocus={()=>setErr({})}
+                onFocus={() => setErr({})}
                 onChange={onChange}
                 className="form-control border-0 rounded-1"
                 placeholder="name@example.com"
@@ -143,14 +150,16 @@ function Login() {
                 Email ID
               </label>
             </div>
-            <div className="form-floating my-4 text-muted rounded-1"  style={{
-              fontFamily: "Inter",
-              border: err?.error == "password" ? "2px solid red" : "",
-            }}>
+            <div
+              className="form-floating my-4 text-muted rounded-1"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "password" ? "2px solid red" : "",
+              }}>
               <input
                 type="password"
                 id="inputPassword"
-                onFocus={()=>setErr({})}
+                onFocus={() => setErr({})}
                 value={password}
                 name="password"
                 onChange={onChange}
@@ -172,7 +181,7 @@ function Login() {
           </div>
         </div>
         <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
-          {err?.error  && <p className="text-primary">* {err?.message}</p>}
+          {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={handleSubmit}
             disabled={

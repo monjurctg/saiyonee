@@ -2,12 +2,13 @@ const authToken = "saiyonee_auth_token";
 const cart = "cart";
 const userType = "userType";
 
-export const getToken = () => window.localStorage.getItem(authToken);
+export const getToken = () =>
+  JSON.parse(window.localStorage.getItem(authToken));
 
 export const setToken = (token) => {
   // console.log("token", token);
   token
-    ? window.localStorage.setItem(authToken, token)
+    ? window.localStorage.setItem(authToken, JSON.stringify(token))
     : window.localStorage.removeItem(authToken);
 };
 

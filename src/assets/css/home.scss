@@ -302,8 +302,20 @@
 }
 
 .logos {
+  width: 430px !important;
+  ::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+  }
+  @media screen and (max-width: 700px) {
+    width: 95% !important;
+  }
   .tab {
     justify-content: space-between;
+    overflow: auto;
+    white-space: nowrap;
+    width: 100%;
+
     p {
       font-family: "Inter";
       font-style: normal;
@@ -311,9 +323,14 @@
       font-size: 14px;
       margin-bottom: 0;
       padding-left: 0px;
+      display: inline-block;
+      color: wite;
+      text-align: center;
+      // padding: 14px;
       /* line-height: 61px; */
       color: #6b7280;
-      width: 95px;
+      width: 50%;
+      margin: auto;
       border-right: none;
       text-align: center;
       &.active {
@@ -380,8 +397,8 @@
 
 .buttons {
   display: flex;
-    margin-top: 25px;
-    gap: 25px;
+  margin-top: 25px;
+  gap: 25px;
   .com-btn {
     padding: 19px 30px;
     background: #ffffff;

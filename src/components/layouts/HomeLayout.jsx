@@ -16,14 +16,13 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
         // "#F9FAFB"
       }}>
       <div
-        className="logos px-4"
+        className="logos pb-3  px-4"
         style={{
           background: background,
           position: "fixed",
           top: pathname === "home" ? 20 : 0,
           borderTopRightRadius: pathname === "home" ? 0 : 35,
           borderTopLeftRadius: pathname === "home" ? 0 : 35,
-          width: pathname !== "home" && 390,
         }}>
         <div
           className="d-flex justify-content-end align-items-center"
@@ -54,18 +53,24 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
           </Link>
         </div>
         {pathname === "/explore" && (
-          <div className="tab d-flex pt-3">
+          <div className="tab  pt-3 ">
             <p
-              className={activeExplore === "Visited" && "active"}
+              className={activeExplore === "Superliked list" && "active"}
               style={{cursor: "pointer"}}
-              onClick={() => setactiveExplore("Visited")}>
-              Visited you
+              onClick={() => setactiveExplore("Superliked list")}>
+              Superliked list
             </p>
             <p
               className={activeExplore === "Shortlist" && "active"}
               style={{cursor: "pointer"}}
               onClick={() => setactiveExplore("Shortlist")}>
               Short list
+            </p>
+            <p
+              className={activeExplore === "Matched list" && "active"}
+              style={{cursor: "pointer"}}
+              onClick={() => setactiveExplore("Matched list")}>
+              Matched list
             </p>
             <p
               className={activeExplore === "Liked" && "active"}
