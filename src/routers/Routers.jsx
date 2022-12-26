@@ -96,7 +96,9 @@ function Routers() {
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path="/" element={<Welcome />} />
+          <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/get-start" element={<GetStarted />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-pass" element={<ForgotPass />} />
           <Route path="/reset-pass" element={<ResetPass />} />
@@ -180,7 +182,6 @@ function Routers() {
         </Route>
 
         <Route element={<PrivateRoute />}>
-          <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/question/:id" element={<Question />} />
           <Route path="/question/image" element={<AddPhoto />} />
           <Route

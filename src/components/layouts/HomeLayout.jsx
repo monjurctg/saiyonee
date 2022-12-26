@@ -1,8 +1,15 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function HomeLayout({children, background, activeExplore, setactiveExplore}) {
   let {pathname} = useLocation();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    console.log("logout");
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <div
@@ -25,7 +32,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
           borderTopLeftRadius: pathname === "home" ? 0 : 35,
         }}>
         <div
-          className="d-flex justify-content-end align-items-center"
+          className="d-flex justify-content-between align-items-center"
           style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
           {pathname === "/settings" && (
             <Link
@@ -41,6 +48,18 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
               </div>
             </Link>
           )}
+          <img
+            src={"img/logout.png"}
+            alt="logo"
+            onClick={logout}
+            style={{
+              height: 30,
+              width: 30,
+              marginLeft: "1s0px",
+              cursor: "pointer",
+            }}
+          />
+
           <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
           <Link to={"/preference"}>
             <div className="menu-img">
