@@ -62,7 +62,7 @@ export const EDUCATION4_TYPES = [
 export const OCCUPATION_TYPES = [
   "Unemployed",
   "Student",
-  "Government Job",
+  "Government job",
   "Private job",
   "Business",
   "Self Employed",

@@ -37,7 +37,7 @@ function Wellcome() {
           <div className="col">
             <div className="d-flex align-items-center">
               <Link
-                to={"/home"}
+                to={"/tutorial"}
                 className="image-saturate position-relative ms-auto">
                 <img
                   src="img/next-btn-25-percent.svg"
