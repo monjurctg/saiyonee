@@ -202,7 +202,7 @@ function Login() {
                     className="spinner-border spinner-border-sm text-black"
                     role="status"
                     aria-hidden="true"></i>
-                  <i className="visually-hidden">Loading...</i>
+                  <i className="visually-hidden">Loading.....</i>
                 </>
               )
             }
