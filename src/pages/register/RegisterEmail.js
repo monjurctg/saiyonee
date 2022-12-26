@@ -77,7 +77,7 @@ function RegisterEmail() {
   // console.log(err);
 
   let subItem = (
-    <div className="position-absolute container position-top mt-6">
+    <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
         <div className="col-2 pr-3">
           <button
@@ -102,7 +102,7 @@ function RegisterEmail() {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0 bg-transparent flex-grow-1 overflow-auto"
-        style={{ height: "40vh", marginTop: "-55px" }}>
+        style={{ height: "40vh", marginTop: "-70px" }}>
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1
             className="card-title mt-3"
