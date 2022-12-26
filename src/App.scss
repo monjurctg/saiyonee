@@ -40,10 +40,10 @@ body {
 //   }
 
 @media all and (max-width: 700px) {
-  .max-width-mobile {
-    max-width: 95% !important;
-    margin: 0 auto;
-  }
+  // .max-width-mobile {
+  //   max-width: 95% !important;
+  //   margin: 0 auto;
+  // }
 
   .basic-img {
     width: 100% !important;
@@ -56,4 +56,19 @@ body {
     max-width: 100% !important;
     margin: 0 auto;
   }
+}
+
+.get-started-p {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  /* or 20px */
+
+  text-align: center;
+  letter-spacing: 1.2px;
+
+  /* Sub Text */
+
+  color: #6b7280;
 }
