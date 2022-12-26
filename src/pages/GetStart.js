@@ -52,7 +52,7 @@ function GetStarted() {
           </Link>
         </div>
       </div>
-      <div className="container p-4"style={{height: "20vh",
+      <div className="container max-width-mobile p-4"style={{height: "20vh",
           position: "fixed",
           bottom: 0,}}>
         <div className="row">
@@ -77,6 +77,9 @@ function GetStarted() {
             </div>
           </div>
         </div>
+        <p className="get-started-p">
+        By continuing you agree to our Terms and Privacy Policy. We never post to facebook.
+        </p>
       </div>
     </BasicLayout>
   );
