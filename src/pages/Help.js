@@ -102,7 +102,7 @@ function Help() {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0  bg-transparent flex-grow-1"
-        style={{ height: "40vh", marginTop: "-55px" }}
+        style={{ height: "40vh", marginTop: "-70px" }}
       >
         <div className="card-body bg-body rounded p-3">
           <h1

@@ -11,7 +11,7 @@ function GetStarted() {
     dispatch(setIsRegStart(true));
   };
   let subItem = (
-    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
+    <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top">
       {/* <LinkLogo /> */}
       <Link to={"/"}>
         <img src="img/logo.svg" alt="" />
@@ -20,7 +20,7 @@ function GetStarted() {
   );
   return (
     <BasicLayout subItem={subItem}>
-      <div className="card border-0  bg-transparent flex-grow-1"  style={{height:"40vh",marginTop:"-55px"}}>
+      <div className="card border-0  bg-transparent flex-grow-1"  style={{height:"40vh",marginTop:"-70px"}}>
         <div className="card-body bg-body rounded p-3">
           <h1
             className="card-title mt-3 mb-4"
@@ -55,7 +55,7 @@ function GetStarted() {
       <div className="container max-width-mobile p-4"style={{height: "20vh",
           position: "fixed",
           bottom: 0,}}>
-        <div className="row">
+        {/* <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">
               <Link
@@ -76,7 +76,7 @@ function GetStarted() {
               </Link>
             </div>
           </div>
-        </div>
+        </div> */}
         <p className="get-started-p">
         By continuing you agree to our Terms and Privacy Policy. We never post to facebook.
         </p>

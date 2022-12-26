@@ -13,7 +13,7 @@ function Login() {
   const navigator = useNavigate();
 
   let subItem = (
-    <div className="position-absolute container position-top mt-6">
+    <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
         <div className="col-2 pr-3">
           <button

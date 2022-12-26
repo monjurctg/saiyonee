@@ -44,7 +44,7 @@ const ForgotPass = () => {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0 bg-transparent overflow-auto flex-grow-1"
-        style={{height: "40vh", marginTop: "-55px"}}>
+        style={{height: "40vh", marginTop: "-70px"}}>
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1 className="card-title mt-3">Forget Password</h1>
           <p className="card-text text-muted mt-3 mb-5">
