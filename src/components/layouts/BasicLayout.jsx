@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
-import bg from '../../assets/imgs/bg.svg';
+import bg from '../../assets/imgs/saiyoneeBack.png';
 
 function BasicLayout({children,subItem}) {
 let {pathname} = useLocation();

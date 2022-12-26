@@ -6,16 +6,20 @@ function Wellcome() {
   let subItem = (
     <div
       className="position-absolute text-center  position-fill text-body"
-      style={{marginTop: "8rem"}}>
+      style={{marginTop: "3rem"}}>
       <h1
         style={{
           fontFamily: "Inter",
+          fontSize:31
         }}>
-        <strong>Welcome to</strong>
+        <strong
+        
+        >Welcome to</strong>
       </h1>
       <h1
         style={{
           fontFamily: "Inter",
+          fontSize:31
         }}>
         <strong>Saiyonee</strong>
       </h1>
@@ -28,7 +32,7 @@ function Wellcome() {
           src="img/saiyonee-logo.png"
           alt="logo-index"
           className="img-fluid my-4"
-          style={{objectFit: "contain", width: 270}}
+          style={{objectFit: "contain", width: 240}}
         />
       </div>
 
