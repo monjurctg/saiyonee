@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import ReactPlayer from "react-player/lazy";
+import ReactPlayer from "react-player";
+
 function Tutorial() {
   return (
     <>
@@ -29,18 +30,21 @@ function Tutorial() {
                     className="card-img-top rounded-top"
                     alt="tutorial-video-bg"
                   />
-                  <ReactPlayer
-                    url="/video/Post 03.mp4"
-                    width={"100%"}
-                    height={"100%"}
-                    style={{objectFit: "cover"}}
-                  />
+
                   <div className="position-absolute position-fill bg-dark-transparent rounded-top d-flex justify-content-center align-items-center">
                     {/* <img
                       src="img/play.svg"
                       alt="play"
                       className="img-fluid position-fill"
                     /> */}
+                    <ReactPlayer
+                      // playIcon={<button >Play</button>}
+                      url="/video/Post03.mp4"
+                      width={"100%"}
+                      height={"100%"}
+                      controls={true}
+                      style={{objectFit: "cover"}}
+                    />
                   </div>
                 </div>
                 <div className="card-body bg-white rounded-bottom py-4">
