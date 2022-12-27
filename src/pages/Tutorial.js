@@ -29,7 +29,9 @@ function Tutorial() {
   return (
     <>
       <BasicLayout subItem={subItem}>
-        <div className="container flex-grow-1 px-4" style={{marginTop:"-6rem"}}>
+        <div
+          className="container flex-grow-1 px-4"
+          style={{marginTop: "-6rem"}}>
           <div className="row">
             <div className="col">
               <div className="card border-0 bg-transparent rounded shadow">
@@ -46,6 +48,22 @@ function Tutorial() {
                       src="img/play.svg"
                       alt="play"
                       className="img-fluid position-fill"
+                    /> */}
+                    <ReactPlayer
+                      // playIcon={<button >Play</button>}
+                      url="/video/Post03.mp4"
+                      width={"100%"}
+                      height={"100%"}
+                      controls={true}
+                      style={{objectFit: "cover"}}
+                    />
+                    {/* <ReactPlayer
+                      // playIcon={<button >Play</button>}
+                      url="/video/Post03.mp4"
+                      width={"100%"}
+                      height={"100%"}
+                      controls={true}
+                      style={{objectFit: "cover"}}
                     /> */}
                   </div>
                 </div>

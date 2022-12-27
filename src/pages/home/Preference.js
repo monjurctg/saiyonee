@@ -197,7 +197,7 @@ function Preference() {
       setState({
         ...state,
         age_to: age_to,
-        age_form: age_form,
+        age_from: age_form,
         height_feet: height_feet,
         height_inches: height_inches,
       });
