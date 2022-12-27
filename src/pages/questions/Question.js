@@ -129,6 +129,7 @@ function Question() {
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
     // formdata.append('user_input[]', data
+    console.log('inputs.user_checked', inputs.user_checked)
     inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
       formData.append("user_input[]", [...inputs.user_checked]);
