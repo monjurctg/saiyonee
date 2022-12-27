@@ -1,36 +1,41 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import ReactPlayer from "react-player/lazy";
+import BasicLayout from "../components/layouts/BasicLayout";
 function Tutorial() {
+  const navigator = useNavigate();
+
+  let subItem = (
+    <div className="position-absolute container position-top mt-2">
+      <div className="row justify-content-center">
+        <div className="col-2 pr-3">
+          <button
+            onClick={() => navigator(-1)}
+            className="btn btn-light rounded-circle shadow p-3 image-invert"
+            style={{height: "58px", width: "58px"}}>
+            <img src="/img/back-icon.svg" alt="back" />
+          </button>
+        </div>
+        <div className="col-8 d-flex justify-content-end">
+          {/* <LinkLogo /> */}
+          <Link to={"/"}>
+            <img src="/img/logo.svg" alt="" />
+          </Link>
+        </div>
+        <div className="col-2"></div>
+      </div>
+    </div>
+  );
   return (
     <>
-      <div className="text-center min-vh-100 d-flex flex-column max-width-mobile mx-auto">
-        {/* TODO: remove */}
-        {/* <Redirect to={ROUTES.get_started} />
-         */}
-        <p>redirect</p>
-        <div className="position-relative">
-          <img
-            src="img/bg.svg"
-            alt="bg-star"
-            className="img-fluid w-100 rounded-top"
-          />
-          <div className="position-absolute d-flex flex-column justify-content-center align-items-center position-top mt-6">
-            {/* <LinkLogo /> */}
-          </div>
-        </div>
+      <BasicLayout subItem={subItem}>
         <div className="container flex-grow-1 px-4">
           <div className="row">
             <div className="col">
               <div className="card border-0 mt-n15 bg-transparent rounded shadow">
                 <div className="position-relative">
-                  <img
-                    src="img/tutorial-video-bg.jpg"
-                    className="card-img-top rounded-top"
-                    alt="tutorial-video-bg"
-                  />
                   <ReactPlayer
-                    url="/video/Post 03.mp4"
+                    url="/video/Post03.mp4"
                     width={"100%"}
                     height={"100%"}
                     style={{objectFit: "cover"}}
@@ -89,7 +94,7 @@ function Tutorial() {
             </div>
           </div>
         </div>
-      </div>
+      </BasicLayout>
     </>
   );
 }
