@@ -29,16 +29,17 @@ function Tutorial() {
   return (
     <>
       <BasicLayout subItem={subItem}>
-        <div className="container flex-grow-1 px-4">
+        <div className="container flex-grow-1 px-4" style={{marginTop:"-6rem"}}>
           <div className="row">
             <div className="col">
-              <div className="card border-0 mt-n15 bg-transparent rounded shadow">
+              <div className="card border-0 bg-transparent rounded shadow">
                 <div className="position-relative">
                   <ReactPlayer
                     url="/video/Post03.mp4"
                     width={"100%"}
-                    height={"100%"}
+                    height={"210px"}
                     style={{objectFit: "cover"}}
+                    controls={true}
                   />
                   <div className="position-absolute position-fill bg-dark-transparent rounded-top d-flex justify-content-center align-items-center">
                     {/* <img
