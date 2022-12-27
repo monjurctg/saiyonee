@@ -47,17 +47,25 @@ function Question() {
     getQuestions();
   }, [id]);
 
-  console.log(question);
+  // console.log(question);
 
   let inputChange = (e) => {
     let {name, value} = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
+      console.log('value', value)
+
+      console.log('arr.includes(value)', arr.filter(i=>i === value))
+      if (arr.filter(i=>i == value) > 0 ) {
+        arr = arr.filter((item) => item !==value);
+      //   console.log('[...new Set(chars)]', [...new Set(arr)])
       // console.log('arr', arr)
-      if (arr.includes(value)) {
-        arr = arr.filter((item) => item !== parseInt(value));
+
       } else {
-        arr.push(parseInt(value));
+
+        arr.push(value);
+        // console.log('arr2', arr)
+
       }
       setInputs({...inputs, user_checked: arr});
     } else if (name === "user_radio") {
@@ -89,7 +97,7 @@ function Question() {
           type="checkbox"
           onChange={inputChange}
           name="user_checked"
-          value={parseInt(key + 1)}
+          value={`${key + 1}`}
           className="input-checkbox"
           placeholder={`Enter ${question?.label}`}
         />
@@ -124,15 +132,13 @@ function Question() {
     inputs.user_checked.length > 0 &&
       // inputs.user_checked.map(user=>(
       formData.append("user_input[]", [...inputs.user_checked]);
-    // ))
-    // console.log('[...inputs.user_checked]', [...inputs.user_checked])
-    console.log('inputs.user_radio', inputs.user_radio)
+    
+    // console.log('inputs.user_radio', inputs.user_radio)
     inputs.user_radio.length > 0 &&
 
       formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);
-    // console.log('res', res)
     if (res.status === 200) {
       seterr(false);
       setLoading(false);
