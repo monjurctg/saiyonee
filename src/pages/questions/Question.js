@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Navigate, useNavigate, useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 
@@ -7,7 +7,7 @@ function Question() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const navigate = useNavigate();
-  let {id} = useParams();
+  let { id } = useParams();
   const [inputs, setInputs] = useState({
     user_checked: [],
     user_radio: [],
@@ -50,28 +50,28 @@ function Question() {
   // console.log(question);
 
   let inputChange = (e) => {
-    let {name, value} = e.target;
+    let { name, value } = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
-      console.log('value', value)
+      console.log("value", value);
 
-      console.log('arr.includes(value)', arr.filter(i=>i === value))
-      if (arr.filter(i=>i == value) > 0 ) {
-        arr = arr.filter((item) => item !==value);
-      //   console.log('[...new Set(chars)]', [...new Set(arr)])
-      // console.log('arr', arr)
-
+      console.log(
+        "arr.includes(value)",
+        arr.filter((i) => i === value)
+      );
+      if (arr.filter((i) => i == value) > 0) {
+        arr = arr.filter((item) => item !== value);
+        //   console.log('[...new Set(chars)]', [...new Set(arr)])
+        // console.log('arr', arr)
       } else {
-
         arr.push(value);
         // console.log('arr2', arr)
-
       }
-      setInputs({...inputs, user_checked: arr});
+      setInputs({ ...inputs, user_checked: arr });
     } else if (name === "user_radio") {
-      setInputs({...inputs, user_radio: value});
+      setInputs({ ...inputs, user_radio: value });
     } else {
-      setInputs({...inputs, [name]: value});
+      setInputs({ ...inputs, [name]: value });
     }
   };
   // console.log('inputs', inputs)
@@ -91,7 +91,8 @@ function Question() {
     field = question?.value_list?.map((value, key) => (
       <div
         className="d-flex justify-content-between input-text align-item-center"
-        key={key}>
+        key={key}
+      >
         <p className="p-input">{value}</p>
         <input
           type="checkbox"
@@ -107,7 +108,8 @@ function Question() {
     field = question?.value_list?.map((value, key) => (
       <div
         className="d-flex justify-content-between input-text align-item-center"
-        key={key}>
+        key={key}
+      >
         <p className="p-input">{value}</p>
         <input
           type="radio"
@@ -129,14 +131,18 @@ function Question() {
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
     // formdata.append('user_input[]', data
-    console.log('inputs.user_checked', inputs.user_checked)
-    inputs.user_checked.length > 0 &&
-      // inputs.user_checked.map(user=>(
-      formData.append("user_input[]", [...inputs.user_checked]);
-    
+    console.log("inputs.user_checked", inputs.user_checked);
+    // inputs.user_checked.length > 0 ?
+    if (inputs.user_checked.length > 0) {
+      for (let i = 0; i < inputs.user_checked.length; i++) {
+        formData.append("user_input[]", inputs.user_checked[i]);
+      }
+    }
+    // inputs.user_checked.map(user=>(
+    // formData.append("user_input[]", [...inputs.user_checked]);
+
     // console.log('inputs.user_radio', inputs.user_radio)
     inputs.user_radio.length > 0 &&
-
       formData.append("user_input", inputs.user_radio);
 
     let res = await QuestionServices.answer(formData);
@@ -160,7 +166,8 @@ function Question() {
       onContinueClicked={onSubmit}
       length={length}
       loading={loading}
-      title={question?.title}>
+      title={question?.title}
+    >
       <div className="mt-4 mb-5">
         <h4 className="mb-2">{question?.label}</h4>
 
