@@ -43,7 +43,7 @@ UserServices.shortlisted_users = async () => {
 }
 
 UserServices.help = async (data) => {
-  const res = await axios.post("/submit_contact_us_mail", data);
+  const res = await axios.post("/submit_help_messages", data);
   return res;
 }
 
