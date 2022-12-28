@@ -4,18 +4,13 @@ import {getToken} from "../utils/functions";
 function PublicRoute({varification}) {
   // let auth = useAuth();
   let auth = getToken();
-
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
+  console.log("isVarified", auth);
 
-  if (auth && isVarified == 1 && varification?.ques?.length > 0) {
+  if (auth && isVarified == 1) {
+    console.log("first");
     return <Navigate to="/question/1" state={{from: location}} />;
-  } else if (auth && isVarified == 1 && !varification?.addImg) {
-    return <Navigate to="/question/image" state={{from: location}} />;
-  } else if (auth && isVarified == 1 && !varification?.selfie == null) {
-    return (
-      <Navigate to="/question/selfie-verification" state={{from: location}} />
-    );
   }
 
   return <Outlet />;

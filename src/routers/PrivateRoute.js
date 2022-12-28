@@ -34,13 +34,6 @@ function PrivateRoute({varification}) {
     isAlreadySetPreference
   ) {
     return <Navigate to="/home" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified == 1 &&
-    isBanned == 0 &&
-    isAlreadySetPreference
-  ) {
-    return <Navigate to="/home" state={{from: location}} />;
   }
 
   // if (auth && isVarified === 1 && isAlreadySetPreference == true) {

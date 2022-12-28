@@ -67,6 +67,7 @@ function Routers() {
     const isVarified = localStorage.getItem("isVarified");
     const getCondition = async () => {
       const res = await QuestionServices.routeData();
+      console.log(res, "Res");
       setVarification(res);
     };
 
@@ -87,7 +88,7 @@ function Routers() {
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       <Routes>
-        <Route element={<PublicRoute varification={varification} />}>
+        <Route element={<PublicRoute />}>
           <Route path="/" element={<Welcome />} />
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/get-start" element={<GetStarted />} />
