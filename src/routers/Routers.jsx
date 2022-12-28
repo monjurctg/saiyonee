@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
@@ -52,37 +52,30 @@ import ForgotPass from "../pages/forgotPass/ForgotPass";
 import ResetPass from "../pages/forgotPass/ResetPass";
 import Success from "../pages/forgotPass/Success";
 import Help from "../pages/Help";
+import QuestionServices from "../services/questionServices";
 
 function Routers() {
   // console.log("getToken()", getToken());
   if (getToken()) {
     setRouteToken(getToken());
   }
+  const [varification, setVarification] = useState({});
 
   const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   useEffect(() => {
     const isVarified = localStorage.getItem("isVarified");
-    // if (isVarified === 0) {
-    //   dispatch(setIsVarified(0));
-    // } else if (isVarified === 1) {
-    //   dispatch(setIsVarified(1));
-    // }
-    // console.log(registerStart);
+    const getCondition = async () => {
+      const res = await QuestionServices.routeData();
+      setVarification(res);
+    };
+
     if (location.pathname === "/register/email") {
       // console.log(true, "path");
     } else {
       localStorage.setItem("regStart", false);
     }
-    // if (registerStart) {
-    //   // console.log("first");
-
-    //   navigate("/register/email", {replace: true});
-    //   // navigate(1);
-    // } else {
-    //   return;
-    // }
+    getCondition();
   }, []);
   //  console.log('location', location)
   return (
@@ -94,7 +87,7 @@ function Routers() {
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       <Routes>
-        <Route element={<PublicRoute />}>
+        <Route element={<PublicRoute varification={varification} />}>
           <Route path="/" element={<Welcome />} />
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/get-start" element={<GetStarted />} />
@@ -181,13 +174,14 @@ function Routers() {
           <Route path="/reveiw" element={<RegSuccess />} />
         </Route>
 
-        <Route element={<PrivateRoute />}>
-          <Route path="/question/:id" element={<Question />} />
+        <Route element={<PrivateRoute varification={varification} />}>
           <Route path="/question/image" element={<AddPhoto />} />
           <Route
             path="/question/selfie-verification"
             element={<SelfieVerification />}
           />
+          <Route path="/question/:id" element={<Question />} />
+
           <Route path="/preference" element={<Preference />} />
           <Route path="/preference/:module" element={<PreferenceModule />} />
 

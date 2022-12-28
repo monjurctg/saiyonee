@@ -42,8 +42,6 @@ function Preference() {
     employType: employType,
   });
 
-  // const [extraQuestion, setextraQuestion] = useState([]);
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -95,46 +93,34 @@ function Preference() {
     onSelectClicked();
   };
 
-  // const fetchPreviousPreference = async () => {
-  //   // setLoading(true);
-  //   const res = await PreferenceServices.getPreferenceData();
-  //   if (res.status === 200) {
-  //     await dispatch(setPreviousPreference(res.data.profile_preferences));
-  //     // setLoading(false);
-  //   }
-  // };
-
-  // console.log(extraQuestion);
-  // console.log(Set(data));
-
   const onContinueClicked = async () => {
-    if (state.age_to && (state.age_to > 100 || state.age_to < 18)) {
+    if (state.age_to && (state.age_to > 255 || state.age_to < 17)) {
       setErr({
         error: "age_to",
-        message: "age to cannot be less than 18 year or greater than 100 year",
+        message: "age to cannot be less than 18 year or greater than 255 year",
       });
       return;
     } else if (
       state.age_form &&
-      (state.age_form > 100 || state.age_form < 18)
+      (state.age_form > 255 || state.age_form < 17)
     ) {
       setErr({
         error: "age_form",
-        message: "age rom cannot be less than 18 year or greater than 100 year",
+        message: "age rom cannot be less than 18 year or greater than 255 year",
       });
       return;
     } else if (
       state.height_feet &&
-      (state.height_feet > 8 || state.height_feet < 3)
+      (state.height_feet > 15 || state.height_feet <= 2)
     ) {
       setErr({
         error: "ft",
-        message: "Height cannot be less than 3 feet or greater than 8 feet",
+        message: "Height cannot be less than 3 feet or greater than 9 feet",
       });
       return;
     } else if (
       state.height_inches &&
-      (state.height_inches >= 12 || state.height_inches < 0)
+      (state.height_inches >= 12 || state.height_inches <= 0)
     ) {
       setErr({
         error: "inc",
@@ -155,7 +141,7 @@ function Preference() {
 
     let data = {
       gender,
-      age_form,
+      age_from: age_form,
       age_to,
       height_feet,
       height_inches,
