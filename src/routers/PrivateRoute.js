@@ -1,7 +1,7 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {getToken} from "../utils/functions";
 
-function PrivateRoute() {
+function PrivateRoute({varification}) {
   // let auth = useAuth();
   let auth = getToken();
   let location = useLocation();
@@ -10,6 +10,9 @@ function PrivateRoute() {
   const isAlreadySetPreference = localStorage.getItem("preference");
   const img_edit = localStorage.getItem("edit_img");
   const selfi_edit = localStorage.getItem("selfie_edit");
+
+  // console.log(varification.ques.length);
+  console.log("hello private");
 
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
@@ -24,6 +27,13 @@ function PrivateRoute() {
     !isAlreadySetPreference
   ) {
     return <Navigate to="/question/1" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified == 1 &&
+    isBanned == 0 &&
+    isAlreadySetPreference
+  ) {
+    return <Navigate to="/home" state={{from: location}} />;
   } else if (
     auth &&
     isVarified == 1 &&
