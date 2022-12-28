@@ -7,7 +7,7 @@ import toastMsg from "../../utils/toastify";
 function Question() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
-  console.log('first')
+  // console.log('first')
   const navigate = useNavigate();
   let { id } = useParams();
   const [inputs, setInputs] = useState({
@@ -38,7 +38,7 @@ function Question() {
           return;
         }
 
-        navigate("/preference");
+        navigate("/question/image");
       }
       setquestion(res.data.form_field_questions[0]);
     } else {

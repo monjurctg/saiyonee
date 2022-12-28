@@ -10,6 +10,7 @@ function AddPhoto() {
   const navigate = useNavigate();
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
+  
 
   console.log("image2", image2);
   const isEdit = localStorage.getItem("edit_img");
@@ -18,7 +19,10 @@ function AddPhoto() {
     console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
-      if (res.data.images.profile_img && !isEdit) {
+      if (res.data.images.profile_img 
+        // && !isEdit
+        
+        ) {
         navigate("/question/selfie-verification");
       }
     }
