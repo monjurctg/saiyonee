@@ -7,6 +7,7 @@ import toastMsg from "../../utils/toastify";
 function Question() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
+  console.log('first')
   const navigate = useNavigate();
   let { id } = useParams();
   const [inputs, setInputs] = useState({
@@ -31,7 +32,8 @@ function Question() {
       setlength(res.data.form_field_questions.length);
       if (res.data.form_field_questions?.length === 0) {
         const isAlreadySetPreference = localStorage.getItem("preference");
-        if (isAlreadySetPreference) {
+        console.log('isAlreadySetPreference', isAlreadySetPreference)
+        if (isAlreadySetPreference === true) {
           navigate("/home");
           return;
         }

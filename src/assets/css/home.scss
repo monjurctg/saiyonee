@@ -302,13 +302,13 @@
 }
 
 .logos {
-  width: 430px !important;
+  width: 420px !important;
   ::-webkit-scrollbar {
     width: 0px;
     display: none;
   }
   @media screen and (max-width: 700px) {
-    width: 100% !important;
+    // width: 100% !important;
   }
   .tab {
     justify-content: space-between;
