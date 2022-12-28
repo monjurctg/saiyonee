@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
+import toastMsg from "../../utils/toastify";
 
 function Question() {
   const [err, seterr] = useState(null);
@@ -53,7 +54,7 @@ function Question() {
     let { name, value } = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
-      console.log("value", value);
+      // console.log("value", value);
 
       console.log(
         "arr.includes(value)",
@@ -100,6 +101,7 @@ function Question() {
           name="user_checked"
           value={`${key + 1}`}
           className="input-checkbox"
+          id={"user_checked"+key}
           placeholder={`Enter ${question?.label}`}
         />
       </div>
@@ -131,7 +133,7 @@ function Question() {
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
     // formdata.append('user_input[]', data
-    console.log("inputs.user_checked", inputs.user_checked);
+    // console.log("inputs.user_checked", inputs.user_checked);
     // inputs.user_checked.length > 0 ?
     if (inputs.user_checked.length > 0) {
       for (let i = 0; i < inputs.user_checked.length; i++) {
@@ -145,13 +147,33 @@ function Question() {
     inputs.user_radio.length > 0 &&
       formData.append("user_input", inputs.user_radio);
 
+      // document.getElementById("user_checked").checked = false;
+
+      console.log('id,length', length-1)
+      // navigate(
+      //   length-1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/image`
+      // );
     let res = await QuestionServices.answer(formData);
     if (res.status === 200) {
+      toastMsg.success("success");
+      inputs.user_checked.length > 0 &&
+      inputs.user_checked.map((user, key) => {
+        // console.log(
+        //   'document.getElementById("user_checked"+key)',
+        //   document.getElementById("user_checked" + key).checked
+        // );
+        document.getElementById("user_checked" + key).checked = false;
+      });
       seterr(false);
       setLoading(false);
+      setInputs({
+        text_input: "",
+        user_checked: [],
+        user_radio: "",
+      });
       // Navigate
       navigate(
-        id <= length - 1 ? `/question/${parseInt(id) + 1}` : `/question/image`
+      length-1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/image`
       );
     } else {
       seterr(res.data.message);
