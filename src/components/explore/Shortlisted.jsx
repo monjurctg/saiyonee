@@ -39,7 +39,13 @@ function Shortlisted() {
       <div
         className="pt-4 d-flex justify-content-around flex-wrap"
         style={{gap: 10}}>
-        {loading ? <h1>Loading...</h1> : shortList}
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : shortList.length > 0 ? (
+          shortList
+        ) : (
+          <h1>No data found</h1>
+        )}
       </div>
     </div>
   );
