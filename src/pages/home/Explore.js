@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import Liked from "../../components/explore/Liked";
 import MatchList from "../../components/explore/MatchList";
 import Shortlisted from "../../components/explore/Shortlisted";
-import Visited from "../../components/explore/Visited";
+import SuperLikeList from "../../components/explore/Visited";
 import HomeLayout from "../../components/layouts/HomeLayout";
 
 function Explore() {
   const [activeExplore, setactiveExplore] = useState("Superliked list");
   let activeTab = "";
-  if (activeExplore === "Superliked list") activeTab = <Visited />;
+  if (activeExplore === "Superliked list") activeTab = <SuperLikeList />;
   else if (activeExplore === "Shortlist") activeTab = <Shortlisted />;
   else if (activeExplore === "Matched list") activeTab = <MatchList />;
   else if (activeExplore === "Liked") activeTab = <Liked />;

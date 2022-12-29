@@ -1,66 +1,8 @@
-import React from 'react'
+import React from "react";
+import Liked from "./Liked";
 
 function Visited() {
-  return (
-    <div className='pt-4 d-flex justify-content-around flex-wrap' style={{gap:10}}>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-    <div className='explore-img'>
-    <img src='/img/human.png' alt=''/>
-
-    </div>
-</div>
-  )
+  return <Liked id={1} />;
 }
 
-export default Visited
+export default Visited;

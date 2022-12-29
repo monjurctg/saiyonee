@@ -297,6 +297,19 @@
 
       height: 180px;
     }
+    .cross {
+      position: relative;
+      top: 30px;
+      right: -120px;
+      background-color: red;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      border-radius: 50%;
+    }
     border-radius: 24px;
   }
 }
