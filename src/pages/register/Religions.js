@@ -55,7 +55,7 @@ function Religions({module}) {
                 <label
                   htmlFor={religionType}
                   className="form-check-label bg-white w-100">
-                  <strong>{religionType}</strong>
+                  <strong>{religionType ? religionType : "None"} </strong>
                 </label>
               </div>
               <div className="col-2">

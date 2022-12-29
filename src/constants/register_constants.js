@@ -60,6 +60,7 @@ export const EDUCATION4_TYPES = [
 ];
 
 export const OCCUPATION_TYPES = [
+  "",
   "Unemployed",
   "Student",
   "Government job",
@@ -71,6 +72,7 @@ export const OCCUPATION_TYPES = [
 ];
 
 export const INDUSTRY_TYPES = [
+  "",
   "Telecommunication",
   "FMCG",
   "Beverage",
@@ -96,6 +98,7 @@ export const RELIGION_TYPES = [
 ];
 
 export const MARITAL_STATUS_TYPES = [
+  "",
   "Never married",
   "Divorced",
   "Widowed",

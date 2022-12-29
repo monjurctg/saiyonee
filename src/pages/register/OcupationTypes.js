@@ -2,7 +2,10 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {OCCUPATION_TYPES} from "../../constants/register_constants";
-import {setCurrentEmploymentTypeOther, setCurrentEmplyType} from "../../redux/slices/authSlices";
+import {
+  setCurrentEmploymentTypeOther,
+  setCurrentEmplyType,
+} from "../../redux/slices/authSlices";
 import {setEmployType} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -75,7 +78,7 @@ function OcupationTypes({module}) {
                 <label
                   htmlFor={occupationType}
                   className="form-check-label bg-white w-100">
-                  <strong>{occupationType}</strong>
+                  <strong>{occupationType ? occupationType : "None"}</strong>
                 </label>
               </div>
               <div className="col-2">

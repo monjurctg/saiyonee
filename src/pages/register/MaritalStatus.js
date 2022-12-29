@@ -78,7 +78,9 @@ function MaritalStatus({module}) {
                 <label
                   htmlFor={maritalStatusType}
                   className="form-check-label bg-white w-100">
-                  <strong>{maritalStatusType}</strong>
+                  <strong>
+                    {maritalStatusType ? maritalStatusType : "None"}
+                  </strong>
                 </label>
               </div>
               <div className="col-2">
