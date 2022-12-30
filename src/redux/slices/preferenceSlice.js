@@ -11,7 +11,6 @@ const initialState = {
   age_to: "",
   height_feet: "",
   height_inches: "",
-
   dynamicQuesAns: [],
 };
 

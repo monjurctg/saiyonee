@@ -11,6 +11,7 @@ import ExploreServices from "../../services/exploreServices";
 function Swipers({data, getData}) {
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
+  const [likeSlide, setLikeSlide] = useState("");
   let getBoomData = async () => {
     let res = await UserServices.matched_users();
     // console.log("resmatched_user", res.data.matched_users);
@@ -38,14 +39,20 @@ function Swipers({data, getData}) {
       if (res.status === 200) {
         toastMsg.success(res.data.message);
         getBoomData();
-        getData();
+        setLikeSlide(" animation-container-right");
+        setTimeout(() => {
+          getData();
+        }, 2000);
       }
     } else if (task === dislike) {
       console.log("like");
       let res = await UserServices.dislike_user(id);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
-        getData();
+        setLikeSlide(" animation-container-left");
+        setTimeout(() => {
+          getData();
+        }, 2000);
       }
     } else if (task === addShort_list) {
       addShortlist(id);
@@ -82,31 +89,33 @@ function Swipers({data, getData}) {
   };
   let show = data?.filtered_users.map((item, index) => {
     return (
-      <SwiperSlide data-id={item.id}>
-        <img
-          src={item?.profile_image_url || nouser}
-          alt=""
-          style={{
-            // objectFit: "cover",
-            width: "100%",
-            height: item?.profile_image_url ? "100%" : "40%",
-            borderRadius: 30,
-            marginTop: !item?.profile_image_url && 168,
-          }}
-        />
-      </SwiperSlide>
+      <div className={``}>
+        <SwiperSlide data-id={item.id}>
+          <img
+            src={item?.profile_image_url || nouser}
+            alt=""
+            style={{
+              // objectFit: "cover",
+              width: "100%",
+              height: item?.profile_image_url ? "100%" : "40%",
+              borderRadius: 30,
+              marginTop: !item?.profile_image_url && 168,
+            }}
+          />
+        </SwiperSlide>
+      </div>
     );
   });
   return (
     <div>
-      <div className="inside">
+      <div className={`inside ${likeSlide}`}>
         <Swiper
           style={{width: "100%", height: "100%"}}
           direction={"vertical"}
           pagination={{
             clickable: true,
           }}
-          modules={[Pagination]}
+          // modules={[Pagination]}
           className="mySwiper">
           {show}
         </Swiper>

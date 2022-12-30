@@ -314,6 +314,48 @@
   }
 }
 
+.animation-container-right {
+  // position: relative;
+  position: relative;
+  animation-name: todo;
+  animation-duration: 2s;
+  // animation-iteration-count: infinite;
+
+  // z-index: 999999;
+}
+@keyframes todo {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  100% {
+    left: 500px;
+    top: 0px;
+    display: none;
+  }
+}
+
+.animation-container-left {
+  // position: relative;
+  position: relative;
+  animation-name: todo2;
+  animation-duration: 2s;
+  // animation-iteration-count: infinite;
+
+  // z-index: 999999;
+}
+@keyframes todo2 {
+  0% {
+    right: 0px;
+    top: 0px;
+  }
+  100% {
+    right: 500px;
+    top: 0px;
+    display: none;
+  }
+}
+
 .logos {
   width: 420px !important;
   ::-webkit-scrollbar {
