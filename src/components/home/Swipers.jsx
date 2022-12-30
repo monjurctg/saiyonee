@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, {useState} from "react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import nouser from "../../assets/imgs/nouser.png";
-import { Pagination } from "swiper";
+import {Pagination} from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import Explore from "../../pages/home/Explore";
+import ExploreServices from "../../services/exploreServices";
 
-function Swipers({ data, getData }) {
+function Swipers({data, getData}) {
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
   let getBoomData = async () => {
@@ -23,10 +25,14 @@ function Swipers({ data, getData }) {
 
   const like = "like";
   const dislike = "dislike";
+  const addShort_list = "add_short_list";
+  const supper_like_submit = "supper_like_submit";
+
   let getActiveSlide = async (task) => {
     let id = document
       .getElementsByClassName("swiper-slide-active")[0]
       .getAttribute("data-id");
+
     if (task === like) {
       let res = await UserServices.like_user(id);
       if (res.status === 200) {
@@ -41,6 +47,37 @@ function Swipers({ data, getData }) {
         toastMsg.success(res.data.message);
         getData();
       }
+    } else if (task === addShort_list) {
+      addShortlist(id);
+    } else if (task === supper_like_submit) {
+      let data = new FormData();
+
+      data.append("superliked_app_user_id", id);
+      let res = await ExploreServices.addSupperLike(data);
+      if (res.status === 200) {
+        toastMsg.success(res.data.message);
+
+        getData();
+      } else {
+        console.log(res, "res");
+      }
+    }
+  };
+
+  const addShortlist = async (id) => {
+    let data = new FormData();
+
+    data.append("shortlist_app_user_id", id);
+    console.log(id, "id");
+
+    const res = await ExploreServices.submitShortList(data);
+    if (res.status === 200) {
+      toastMsg.success(res.data.message);
+      getData();
+    } else {
+      console.log(res);
+
+      toastMsg.error(res.response.data.message);
     }
   };
   let show = data?.filtered_users.map((item, index) => {
@@ -64,14 +101,13 @@ function Swipers({ data, getData }) {
     <div>
       <div className="inside">
         <Swiper
-          style={{ width: "100%", height: "100%" }}
+          style={{width: "100%", height: "100%"}}
           direction={"vertical"}
           pagination={{
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           {show}
         </Swiper>
       </div>
@@ -80,10 +116,12 @@ function Swipers({ data, getData }) {
           <div className="item" onClick={() => getActiveSlide(dislike)}>
             <img src="img/dislike.svg" alt="" />
           </div>
-          <div className="item">
+          <div className="item" onClick={() => getActiveSlide(addShort_list)}>
             <img src="img/task.svg" alt="" />
           </div>{" "}
-          <div className="item">
+          <div
+            className="item"
+            onClick={() => getActiveSlide(supper_like_submit)}>
             <img src="img/rocket.svg" alt="" />
           </div>{" "}
           <div className="item" onClick={() => getActiveSlide(like)}>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ExploreServices from "../../services/exploreServices";
+import toastMsg from "../../utils/toastify";
 
 function Shortlisted() {
   const [sortListData, setSortListData] = useState([]);
@@ -23,11 +24,29 @@ function Shortlisted() {
     getShortisted();
   }, []);
 
+  const removeShortList = async (id) => {
+    console.log("click");
+    let data = new FormData();
+
+    data.append("shortlist_id", id);
+
+    const res = await ExploreServices.removeFromShortList(data);
+    if (res.status === 200) {
+      toastMsg.success(res.data.message);
+
+      getShortisted();
+    } else {
+      console.log(res, "res");
+    }
+  };
+
   let shortList = sortListData.map((sl, index) => {
     return (
       <>
         <div className="explore-img" key={index}>
-          <div className="cross">X</div>
+          <div className="cross" onClick={() => removeShortList(sl?.id)}>
+            X
+          </div>
           <img src={sl?.app_user?.thumbnail_img_url} alt="" />
         </div>
       </>

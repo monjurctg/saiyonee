@@ -59,8 +59,9 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
               cursor: "pointer",
             }}
           />
-
-          <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
+          <Link to={"/home"}>
+            <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
+          </Link>
           <Link to={"/preference"}>
             <div className="menu-img">
               <img
