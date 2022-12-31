@@ -1,12 +1,41 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
+
 import NewHome from "./NewHome";
 
 import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
 const MatchedUser = () => {
 
-    const [openModal, setOpenModal] = useState(false);
+    let subtitle;
+
+
+    const [modal, setModal] = useState(false);
+
+    const openModal = () => {
+        setModal(!modal);
+        console.log(modal);
+    };
+
+    function afterOpenModal() {
+        subtitle.style.color = '#f00';
+    };
+
+    function closeModal() {
+        setModal(false);
+    }
 
     return (
         <NewHome>
@@ -93,7 +122,7 @@ const MatchedUser = () => {
                     <hr
                         style={{
                             width: "80px",
-                            border: "10px solid #f0f",
+                            border: "10px solid red",
                             margin: "0 auto",
                             marginTop: "20px",
                         }}
@@ -153,44 +182,53 @@ const MatchedUser = () => {
                     >
                         <button
                             className='edit-btn'
-                            onClick={() => {
-                                setOpenModal(true);
-                            }}
+                            onClick={openModal}
                         >
                             Unmatch User
                         </button>
 
-                        <div className="modalBackground">
-                            <div className="modalContainer">
-                                <div className="titleCloseBtn">
-                                    <button
-                                        onClick={() => {
-                                            setOpenModal(false);
-                                        }}
-                                    >
-                                        X
-                                    </button>
-                                </div>
-                                <div className="title">
-                                    <h1>Are You Sure You Want to Continue?</h1>
-                                </div>
-                                <div className="body">
-                                    <p>The next page looks amazing. Hope you want to go there!</p>
-                                </div>
-                                <div className="footer">
-                                    <button
-                                        onClick={() => {
-                                            setOpenModal(false);
-                                        }}
-                                        id="cancelBtn"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button>Continue</button>
-                                </div>
-                            </div>
-                        </div>
+                        <Modal
+                            isOpen={modal}
+                            onAfterOpen={afterOpenModal}
+                            onRequestClose={closeModal}
+                            style={customStyles}
+                        >
+                            <div
+                                className='modalBox'
+                            >
 
+                                <p>
+                                    <span
+                                        style={{
+                                            width: "20px",
+                                            backgroundColor: "#faf7ed",
+                                            marginRight: "20px",
+                                            cursor: "pointer"
+                                        }}
+                                        onClick={closeModal}
+                                    >X
+                                    </span>
+                                    Unmatch User!
+                                </p>
+                                <br />
+                            </div>
+
+                            <div
+                                className='buttons'
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    marginTop: "30px"
+                                }}
+                            >
+                                <button className='edit-btn'
+                                    onClick={closeModal}
+                                >
+                                    Unmatch User
+                                </button>
+                            </div>
+                        </Modal>
                     </div>
 
                     <div className='buttons'
@@ -208,7 +246,7 @@ const MatchedUser = () => {
 
                 </div>
             </div>
-        </NewHome>
+        </NewHome >
     )
 }
 
