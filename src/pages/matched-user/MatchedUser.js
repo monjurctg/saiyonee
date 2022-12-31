@@ -13,14 +13,14 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
+        transform: 'translate(-50%, 100%)',
+        width: "350px",
     },
 };
 
 const MatchedUser = () => {
 
     let subtitle;
-
 
     const [modal, setModal] = useState(false);
 
@@ -174,7 +174,7 @@ const MatchedUser = () => {
                     <div
                         className='buttons'
                         style={{
-                            display: "flex",
+
                             justifyContent: "center",
                             alignItems: "center",
                             marginTop: "30px"
@@ -193,17 +193,21 @@ const MatchedUser = () => {
                             onRequestClose={closeModal}
                             style={customStyles}
                         >
-                            <div
-                                className='modalBox'
-                            >
-
-                                <p>
+                            <div>
+                                <p
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }}
+                                >
                                     <span
                                         style={{
-                                            width: "20px",
+                                            width: "30px",
                                             backgroundColor: "#faf7ed",
                                             marginRight: "20px",
-                                            cursor: "pointer"
+                                            cursor: "pointer",
+                                            borderRadius: "10px"
                                         }}
                                         onClick={closeModal}
                                     >X
@@ -211,23 +215,61 @@ const MatchedUser = () => {
                                     Unmatch User!
                                 </p>
                                 <br />
-                            </div>
 
-                            <div
-                                className='buttons'
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    marginTop: "30px"
-                                }}
-                            >
-                                <button className='edit-btn'
+                                <button
                                     onClick={closeModal}
+                                    style={{
+                                        fontFamily: "Inter",
+                                        fontStyle: "normal",
+                                        fontWeight: "500",
+                                        fontSize: "16px",
+                                        lineHeight: "19px",
+
+                                        /* Main Text */
+
+                                        color: "#1f2937",
+                                        padding: "19px 40px",
+
+                                        background: "#ffb7ac",
+                                        /* Primary/Primary color */
+
+                                        border: "1px solid #ffb7ac",
+                                        /* EV-01 */
+
+                                        boxShadow: "0px 6px 11px rgba(235, 202, 202, 0.3)",
+                                        borderRadius: "100px",
+
+                                        marginLeft: "15%",
+                                        marginRight: "15%"
+
+                                    }}
                                 >
                                     Unmatch User
                                 </button>
+
+                                <button
+                                    style={{
+                                        padding: "19px 30px",
+                                        background: " #ffffff",
+                                        border: "1px solid #ffb7ac",
+                                        boxShadow: "0px 6px 11px rgb(235 202 202 / 30%)",
+                                        borderRadius: "100px",
+                                        fontFamily: "Inter",
+                                        fontStyle: "normal",
+                                        fontWeight: "500",
+                                        fontSize: "15px",
+                                        lineHeight: "19px",
+                                        color: "#1f2937",
+                                        width: "200px",
+                                        marginLeft: "15%",
+                                        marginRight: "15%"
+                                    }}
+                                >
+                                    Cancel
+                                </button>
                             </div>
+
+
                         </Modal>
                     </div>
 
