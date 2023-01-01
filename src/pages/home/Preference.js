@@ -24,13 +24,13 @@ function Preference() {
     dynamicQuesAns,
     height_inches,
     height_feet,
-    age_form,
+    age_from,
     age_to,
     gender,
     country,
   } = useSelector((state) => state.preference);
   const [state, setState] = useState({
-    age_form: age_form,
+    age_from: age_from,
     age_to: age_to,
     height_feet: height_feet,
     height_inches: height_inches,
@@ -40,20 +40,11 @@ function Preference() {
     country: country,
     employType: employType,
   });
+  console.log(state, "state");
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchPreviousPreference = async () => {
-    setLoading(true);
-    const res = await PreferenceServices.getPreferenceData();
-    if (res.status === 200) {
-      setLoading(false);
-      dispatch(setPreviousPreference(res.data.profile_preferences));
-    } else {
-      setLoading(false);
-    }
-  };
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
     setState({
@@ -67,7 +58,7 @@ function Preference() {
   const fetchFilterQuestion = async () => {
     const res = await PreferenceServices.getFilterQuestion();
     if (res.status === 200) {
-      dispatch(setpreferenceQuestion(res.data.filters));
+      // dispatch(setpreferenceQuestion(res.data.filters));
     } else {
     }
     // console.log(res, "profile preference res");
@@ -102,11 +93,11 @@ function Preference() {
       });
       return;
     } else if (
-      state.age_form &&
-      (state.age_form > 255 || state.age_form < 17)
+      state.age_from &&
+      (state.age_from > 255 || state.age_from < 17)
     ) {
       setErr({
-        error: "age_form",
+        error: "age_from",
         message: "age rom cannot be less than 18 year or greater than 255 year",
       });
       return;
@@ -142,13 +133,13 @@ function Preference() {
 
     let data = {
       gender,
-      age_from: age_form ?? "",
+      age_from: age_from,
       age_to,
       height_feet,
       height_inches,
-      religion: preferenceReligion ?? "",
-      marital_status: maritalStatus ?? "",
-      current_employment_type: employType ?? "",
+      religion: preferenceReligion,
+      marital_status: maritalStatus,
+      current_employment_type: employType,
     };
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
@@ -175,7 +166,7 @@ function Preference() {
   useEffect(() => {
     if (!age_to) {
       fetchFilterQuestion();
-      fetchPreviousPreference();
+      // fetchPreviousPreference();
     }
   }, []);
 
@@ -184,7 +175,7 @@ function Preference() {
       setState({
         ...state,
         age_to: age_to,
-        age_from: age_form,
+        age_from: age_from,
         height_feet: height_feet,
         height_inches: height_inches,
       });
@@ -224,14 +215,14 @@ function Preference() {
           className="form-floating my-3 text-muted ms-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "age_form" ? "2px solid red" : "",
+            border: err?.error == "age_from" ? "2px solid red" : "",
           }}>
           <input
             type="number"
-            name="age_form"
+            name="age_from"
             id="inputHeightInches"
             style={{fontFamily: "Inter"}}
-            value={state.age_form}
+            value={state.age_from}
             onChange={handleUserInputChange}
             placeholder={"Form"}
             className="form-control border-0 rounded-1"

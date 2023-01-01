@@ -7,7 +7,7 @@ const initialState = {
   maritalStatus: "",
   country: ["bangladesh"],
   gender: "male",
-  age_form: "",
+  age_from: "",
   age_to: "",
   height_feet: "",
   height_inches: "",
@@ -41,19 +41,19 @@ const preferenceSlice = createSlice({
       state.dynamicQuestion = payload;
     },
     setHeight: (state, {payload}) => {
-      state.age_form = payload.age_form;
+      state.age_from = payload.age_from;
       state.age_to = payload.age_to;
       state.height_feet = payload.height_feet;
       state.height_inches = payload.height_inches;
     },
     setPreviousPreference: (state, {payload}) => {
-      state.age_form = payload.age_form;
-      state.age_to = payload.age_to;
-      state.height_feet = payload.height_feet;
-      state.height_inches = payload.height_inches;
-      state.employType = payload.current_employment_type;
-      state.religion = payload.religion;
-      state.maritalStatus = payload.marital_status;
+      state.age_from = payload.age_from ?? "";
+      state.age_to = payload.age_to ?? "";
+      state.height_feet = payload.height_feet ?? "";
+      state.height_inches = payload.height_inches ?? "";
+      state.employType = payload.current_employment_type ?? "";
+      state.religion = payload.religion ?? "";
+      state.maritalStatus = payload.marital_status ?? "";
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
 
