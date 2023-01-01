@@ -7,14 +7,15 @@ import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
 
 const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, 100%)',
+        width: "350px",
+    },
 };
 
 const MatchedUser = () => {
@@ -131,7 +132,7 @@ const MatchedUser = () => {
           </div>
           <div>
 
-            
+
           </div>
           <img className="user-img" src="/img/user2.jpeg" />
 

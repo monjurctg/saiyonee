@@ -77,7 +77,7 @@ const EditProfile = () => {
                     <h4>About</h4>
 
                     <p>
-                        Dont be shy. Express yourself
+                        Don't be shy. Express yourself
                     </p>
 
                     <textarea
