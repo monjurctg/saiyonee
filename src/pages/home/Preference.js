@@ -37,7 +37,6 @@ function Preference() {
     gender: gender,
     religion: preferenceReligion,
     maritalStatus: maritalStatus,
-
     country: country,
     employType: employType,
   });
@@ -94,6 +93,8 @@ function Preference() {
   };
 
   const onContinueClicked = async () => {
+    console.log(maritalStatus);
+
     if (state.age_to && (state.age_to > 255 || state.age_to < 17)) {
       setErr({
         error: "age_to",
@@ -141,13 +142,13 @@ function Preference() {
 
     let data = {
       gender,
-      age_from: age_form,
+      age_from: age_form ?? "",
       age_to,
       height_feet,
       height_inches,
-      religion: preferenceReligion,
-      marital_status: maritalStatus,
-      current_employment_type: employType,
+      religion: preferenceReligion ?? "",
+      marital_status: maritalStatus ?? "",
+      current_employment_type: employType ?? "",
     };
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
