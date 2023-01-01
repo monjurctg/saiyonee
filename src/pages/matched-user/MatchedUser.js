@@ -25,8 +25,8 @@ const MatchedUser = () => {
 
   const [modal, setModal] = useState(false);
 
-  const {id, module} = useParams();
-  console.log(id, module, "dfdk");
+  const {id, appId} = useParams();
+  console.log(id, appId, "dfdk");
 
   const openModal = () => {
     setModal(!modal);
@@ -42,7 +42,7 @@ const MatchedUser = () => {
   }
   useEffect(() => {
     async function fetchData() {
-      let response = await ExploreServices.getSinglerUserInfo(id);
+      let response = await ExploreServices.getSinglerUserInfo(id, appId);
       console.log(response, "response");
     }
     fetchData();

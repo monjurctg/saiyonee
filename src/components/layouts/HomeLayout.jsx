@@ -108,14 +108,14 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
         className="footer rounded-bottom mx-auto max-width-mobile"
         style={{position: "fixed", bottom: "0"}}>
         <div className="d-flex justify-content-around pt-3 align-items-baseline">
-          <Link to={"/home"}>
+          <Link to={"/home"} style={{cursor: "pointer"}}>
             <div
               className={`text-center ${pathname === "/home" ? "active" : ""}`}>
               <img src="img/home.svg" alt="" />
               <p>Home</p>
             </div>
           </Link>
-          <Link to={"/explore"}>
+          <Link to={"/explore"} style={{cursor: "pointer"}}>
             <div
               className={`text-center ${
                 pathname === "/explore" ? "active" : ""
@@ -124,11 +124,11 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
               <p>Explore</p>
             </div>
           </Link>
-          <div className="text-center">
+          <div className="text-center" style={{cursor: "pointer"}}>
             <img src="img/message.svg" alt="" />
             <p>Message</p>
           </div>
-          <Link to={"/settings"}>
+          <Link to={"/settings"} style={{cursor: "pointer"}}>
             <div
               className={`text-center ${
                 pathname === "/settings" ? "active" : ""

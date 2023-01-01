@@ -52,10 +52,12 @@ ExploreServices.getMatchUsers = () => {
     .catch((err) => err);
   return res;
 };
-ExploreServices.getSinglerUserInfo = (id) => {
-  let url = `/get_single_user_info/${id}`;
+ExploreServices.getSinglerUserInfo = (id, appId) => {
+  let url = `/app_users/get_single_user_info/${id}`;
+  const data = new FormData();
+  data.append("app_user_id", appId);
   let res = axios
-    .get(url)
+    .post(url, data)
     .then((response) => response)
     .catch((err) => err);
   return res;
