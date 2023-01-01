@@ -53,6 +53,8 @@ import ResetPass from "../pages/forgotPass/ResetPass";
 import Success from "../pages/forgotPass/Success";
 import Help from "../pages/Help";
 import QuestionServices from "../services/questionServices";
+import MatchedUser from "./../pages/matched-user/MatchedUser";
+import ChatIndex from "../pages/chats/Index";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -197,10 +199,13 @@ function Routers() {
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/viewProfile" element={<ViewProfile />} />
           <Route path="/boom" element={<Boom />} />
+          <Route path="/matched-user" element={<MatchedUser />} />
+
+          <Route path="/chat" element = {<ChatIndex />} />
+
         </Route>
 
         {/* <Route path="/explore" element={<Explore />} /> */}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
