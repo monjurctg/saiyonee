@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
 
@@ -42,14 +43,14 @@ function Shortlisted() {
 
   let shortList = sortListData.map((sl, index) => {
     return (
-      <>
+      <Link to={`/matched-user/${sl.id}/shortList`}>
         <div className="explore-img" key={index}>
           <div className="cross" onClick={() => removeShortList(sl?.id)}>
             X
           </div>
           <img src={sl?.app_user?.thumbnail_img_url} alt="" />
         </div>
-      </>
+      </Link>
     );
   });
 

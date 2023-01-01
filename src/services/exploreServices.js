@@ -52,5 +52,13 @@ ExploreServices.getMatchUsers = () => {
     .catch((err) => err);
   return res;
 };
+ExploreServices.getSinglerUserInfo = (id) => {
+  let url = `/get_single_user_info/${id}`;
+  let res = axios
+    .get(url)
+    .then((response) => response)
+    .catch((err) => err);
+  return res;
+};
 
 export default ExploreServices;

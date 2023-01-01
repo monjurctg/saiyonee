@@ -199,10 +199,9 @@ function Routers() {
           {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/viewProfile" element={<ViewProfile />} />
           <Route path="/boom" element={<Boom />} />
-          <Route path="/matched-user" element={<MatchedUser />} />
+          <Route path="/matched-user/:id/:module" element={<MatchedUser />} />
 
-          <Route path="/chat" element = {<ChatIndex />} />
-
+          <Route path="/chat" element={<ChatIndex />} />
         </Route>
 
         {/* <Route path="/explore" element={<Explore />} /> */}
