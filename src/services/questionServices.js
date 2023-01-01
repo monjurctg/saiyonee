@@ -37,6 +37,7 @@ QuestionServices.submitProfilePhoto = async (data) => {
     .catch((err) => err.response);
   return res;
 };
+
 QuestionServices.getSelfieImage = async () => {
   let url = "user_images/get_selfie_image";
   let res = axios

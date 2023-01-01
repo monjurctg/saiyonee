@@ -11,8 +11,8 @@ function MatchList() {
     let res = await ExploreServices.getMatchUsers();
 
     if (res.status === 200) {
-      // setMatchData(res.data.matchlisted_users);
-      console.log(res.data);
+      setMatchData(res.data.matched_users);
+      console.log(res.data.matched_users, "matched_users");
       setLoading(false);
     } else {
       // console.log(res);

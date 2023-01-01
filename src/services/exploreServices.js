@@ -53,7 +53,7 @@ ExploreServices.getMatchUsers = () => {
   return res;
 };
 ExploreServices.getSinglerUserInfo = (id, appId) => {
-  let url = `/app_users/get_single_user_info/${id}`;
+  let url = `/app_users/get_single_user_info`;
   const data = new FormData();
   data.append("app_user_id", appId);
   let res = axios
