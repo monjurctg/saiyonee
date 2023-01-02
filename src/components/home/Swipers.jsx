@@ -96,12 +96,38 @@ function Swipers({data, getData}) {
             alt=""
             style={{
               // objectFit: "cover",
-              width: "100%",
-              height: item?.profile_image_url ? "100%" : "40%",
-              borderRadius: 30,
-              marginTop: !item?.profile_image_url && 168,
+              width: "80%",
+              height: "50%",
+              borderRadius: 10,
+              marginTop: 25,
+              marginLeft: "10%",
             }}
-          />
+            />
+            <div style={{boxShadow:"rgb(255 183 172) 2px 5px 20px -17px"}}>
+              <h3 style={{textAlign: "center", marginTop: 10,
+                fontSize: 20,
+                fontFamily: "sans-serif",marginBottom:0,
+                fontWeight:700
+            }}>
+                 {item?.display_name}
+              </h3>
+              <p style={{textAlign: "center", marginTop: 10,marginBottom:0}}>
+                {item?.age} years
+              </p>  
+              <div className="d-flex justify-content-center" style={{gap:5}}>
+
+              <p style={{textAlign: "center", marginTop: 10}}>
+                {item?.current_city},
+              </p>
+              <p style={{textAlign: "center", marginTop: 10}}>
+              {item?.current_country}
+              </p>
+
+              </div>
+
+
+            
+            </div>
         </SwiperSlide>
       </div>
     );
