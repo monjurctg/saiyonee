@@ -23,7 +23,7 @@ function Liked({id}) {
   useEffect(() => {
     getLikeData();
   }, []);
-console.log('LikeData', LikeData)
+// console.log('LikeData', LikeData)
   let LikeList = LikeData.map((ll, index) => {
     return (
       <Link to={`/user-info/liked/${ll.id}/${ll?.app_user?.id}`} key={index}>
@@ -44,10 +44,10 @@ console.log('LikeData', LikeData)
   return (
     <div className="mt-2">
       <div
-        className="pt-4 d-flex flex-wrap"
+        className="py-4 d-flex flex-wrap"
         style={{gap: 10}}>
         {loading ? (
-          <h1>Loading...</h1>
+          <div className="load">Loading...</div>
         ) : LikeList.length > 0 ? (
           LikeList
         ) : (
