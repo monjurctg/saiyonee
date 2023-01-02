@@ -36,9 +36,9 @@ function MatchList() {
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-2">
       <div
-        className="pt-4 d-flex justify-content-around flex-wrap"
+        className="pt-4 d-flex flex-wrap"
         style={{gap: 10}}>
         {loading ? (
           <h1>Loading...</h1>

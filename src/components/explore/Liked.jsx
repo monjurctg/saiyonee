@@ -22,22 +22,28 @@ function Liked({id}) {
   useEffect(() => {
     getLikeData();
   }, []);
-
+console.log('LikeData', LikeData)
   let LikeList = LikeData.map((ll, index) => {
     return (
       <>
         <div className="explore-img" key={index}>
           <div className="cross">X</div>
-          <img src={ll?.app_user?.thumbnail_img_url} alt="" />
+          {
+            ll?.thumbnail_img_url ? 
+            <img src={ll?.thumbnail_img_url} alt="" /> :<h4 className="no-image">No Image</h4>
+          }
+          <h5 className="no-image-h5">
+            {ll?.full_name}
+          </h5>
         </div>
       </>
     );
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-2">
       <div
-        className="pt-4 d-flex justify-content-around flex-wrap"
+        className="pt-4 d-flex flex-wrap"
         style={{gap: 10}}>
         {loading ? (
           <h1>Loading...</h1>
