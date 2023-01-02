@@ -116,7 +116,7 @@ function Routers() {
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       {loading ? (
-        <h1>Loading....</h1>
+         <div className="load">Loading...</div>
       ) : (
         <Routes>
           <Route element={<PublicRoute />}>

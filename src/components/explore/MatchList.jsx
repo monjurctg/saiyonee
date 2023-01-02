@@ -25,24 +25,31 @@ function MatchList() {
     getShortisted();
   }, []);
 
+  // console.log('matchData', matchData)
   let matchList = matchData.map((sl, index) => {
     return (
       <Link key={index} to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
         <div className="explore-img" key={index}>
           <div className="cross">X</div>
-          <img src={sl?.app_user?.thumbnail_img_url} alt="" />
+          {
+            sl?.thumbnail_img_url ? 
+            <img src={sl?.thumbnail_img_url} alt="" /> :<h4 className="no-image">No Image</h4>
+          }
+          <h5 className="no-image-h5">
+            {sl?.display_name}
+          </h5>
         </div>
       </Link>
     );
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-2">
       <div
-        className="pt-4 d-flex justify-content-around flex-wrap"
+        className="py-4 d-flex flex-wrap"
         style={{gap: 10}}>
         {loading ? (
-          <h1>Loading...</h1>
+           <div className="load">Loading...</div>
         ) : matchList.length > 0 ? (
           matchList
         ) : (
