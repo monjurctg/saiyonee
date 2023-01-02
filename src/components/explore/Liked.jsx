@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 
 function Liked({id}) {
@@ -25,8 +26,8 @@ function Liked({id}) {
 console.log('LikeData', LikeData)
   let LikeList = LikeData.map((ll, index) => {
     return (
-      <>
-        <div className="explore-img" key={index}>
+      <Link to={`/user-info/liked/${ll.id}/${ll?.app_user?.id}`} key={index}>
+        <div className="explore-img">
           <div className="cross">X</div>
           {
             ll?.thumbnail_img_url ? 
@@ -36,7 +37,7 @@ console.log('LikeData', LikeData)
             {ll?.full_name}
           </h5>
         </div>
-      </>
+      </Link>
     );
   });
 

@@ -231,7 +231,10 @@ function Routers() {
             {/* <Route path="/home" element={<Home />} /> */}
             <Route path="/viewProfile" element={<ViewProfile />} />
             <Route path="/boom" element={<Boom />} />
-            <Route path="/matched-user/:id/:appId" element={<MatchedUser />} />
+            <Route
+              path="/user-info/:route/:id/:appId"
+              element={<MatchedUser />}
+            />
 
             <Route path="/chat" element={<ChatIndex />} />
           </Route>

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
 
@@ -26,12 +27,12 @@ function MatchList() {
 
   let matchList = matchData.map((sl, index) => {
     return (
-      <>
+      <Link key={index} to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
         <div className="explore-img" key={index}>
           <div className="cross">X</div>
           <img src={sl?.app_user?.thumbnail_img_url} alt="" />
         </div>
-      </>
+      </Link>
     );
   });
 
