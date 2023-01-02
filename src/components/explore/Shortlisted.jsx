@@ -43,7 +43,7 @@ function Shortlisted() {
 
   let shortList = sortListData.map((sl, index) => {
     return (
-      <Link to={`/matched-user/${sl.id}/${sl.app_user.id}`}>
+      <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
         <div className="explore-img" key={index}>
           <div className="cross" onClick={() => removeShortList(sl?.id)}>
             X

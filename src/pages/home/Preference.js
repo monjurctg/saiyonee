@@ -194,27 +194,6 @@ function Preference() {
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "age_to" ? "2px solid red" : "",
-          }}>
-          <input
-            type="number"
-            id="inputHeightFeet"
-            name="age_to"
-            style={{fontFamily: "Inter"}}
-            value={state.age_to}
-            onChange={handleUserInputChange}
-            className="form-control border-0 rounded-1"
-            placeholder={"To"}
-            aria-describedby="height_feet"
-          />
-          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
-            To
-          </label>
-        </div>
-        <div
-          className="form-floating my-3 text-muted ms-2 rounded-1"
-          style={{
-            fontFamily: "Inter",
             border: err?.error == "age_from" ? "2px solid red" : "",
           }}>
           <input
@@ -230,6 +209,27 @@ function Preference() {
           />
           <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
             Form
+          </label>
+        </div>
+        <div
+          className="form-floating my-3 text-muted me-2 rounded-1"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "age_to" ? "2px solid red" : "",
+          }}>
+          <input
+            type="number"
+            id="inputHeightFeet"
+            name="age_to"
+            style={{fontFamily: "Inter"}}
+            value={state.age_to}
+            onChange={handleUserInputChange}
+            className="form-control border-0 rounded-1"
+            placeholder={"To"}
+            aria-describedby="height_feet"
+          />
+          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+            To
           </label>
         </div>
       </div>

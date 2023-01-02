@@ -509,3 +509,36 @@
     }
   }
 }
+
+.add-photos {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 50px;
+
+  .add-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px 1px 1px;
+    column-gap: 60px;
+    row-gap: 20px;
+    width: 124px;
+    height: 120px;
+    /* Primary/T20% */
+    background: rgba(255, 220, 220, 0.2);
+    /* Primary/Primary color */
+    border: 1.5px dashed #ffb7ac;
+    border-radius: 24px;
+
+    p {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}
