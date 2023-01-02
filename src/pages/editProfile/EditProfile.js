@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
 import {Link} from "react-router-dom";
+import UserServices from "../../services/userServices";
 
 const EditProfile = () => {
   const [err, seterr] = useState(null);
@@ -34,6 +35,15 @@ const EditProfile = () => {
     }
   };
 
+  async function fetchData() {
+    const data = new FormData();
+    const res = await UserServices.UserProfile();
+    console.log(res.data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <InputLayOut
       err={err}

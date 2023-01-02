@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Modal from "react-modal";
 
 import NewHome from "./NewHome";
 
@@ -8,25 +7,13 @@ import "./../../assets/css/modal.scss";
 import {useParams} from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, 100%)",
-    width: "350px",
-  },
-};
-
 const MatchedUser = () => {
   let subtitle;
 
   const [modal, setModal] = useState(false);
 
-  const {id, appId} = useParams();
-  console.log(id, appId, "dfdk");
+  const {id, appId, route} = useParams();
+  console.log(id, appId, route, "dfdk");
 
   const openModal = () => {
     setModal(!modal);
@@ -143,104 +130,72 @@ const MatchedUser = () => {
                 </p>
               </div>
             </div>
-            <div></div>
-            <img className="user-img" src="/img/user2.jpeg" />
 
-            <div
-              style={{
-                width: "53px",
-                background: "#D32C2C",
-                margin: "0 auto",
-                marginTop: "20px",
-                height: 10,
-              }}
-            />
+            {route == "match" && (
+              <>
+                <img className="user-img" src="/img/user2.jpeg" />
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginLeft: "-30px",
-                alignItems: "center",
-              }}>
-              <img
-                style={{
-                  height: "55px",
-                  width: "56px",
-                  marginTop: "10px",
-                  marginLeft: "10px",
-                  borderRadius: "20px",
-                }}
-                className="user-img"
-                src="/img/user2.jpeg"
-              />
-              <img
-                style={{
-                  height: "55px",
-                  width: "56px",
-                  marginTop: "10px",
-                  marginLeft: "10px",
-                  borderRadius: "20px",
-                }}
-                className="user-img"
-                src="/img/user2.jpeg"
-              />
-              <img
-                style={{
-                  height: "55px",
-                  width: "56px",
-                  marginTop: "10px",
-                  marginLeft: "10px",
-                  borderRadius: "20px",
-                }}
-                className="user-img"
-                src="/img/user2.jpeg"
-              />
-              <img
-                style={{
-                  height: "55px",
-                  width: "56px",
-                  marginTop: "10px",
-                  marginLeft: "10px",
-                  borderRadius: "20px",
-                }}
-                className="user-img"
-                src="/img/user2.jpeg"
-              />
-            </div>
+                <div
+                  style={{
+                    width: "53px",
+                    background: "#D32C2C",
+                    margin: "0 auto",
+                    marginTop: "20px",
+                    height: 10,
+                  }}
+                />
 
-            <div
-              className="buttons"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: "30px",
-              }}>
-              <button className="edit-btn" onClick={openModal}>
-                Unmatch User
-              </button>
-
-              <Modal
-                isOpen={modal}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}>
-                <div className="modalBox">
-                  <p>
-                    <span
-                      style={{
-                        width: "20px",
-                        backgroundColor: "#faf7ed",
-                        marginRight: "20px",
-                        cursor: "pointer",
-                      }}
-                      onClick={closeModal}>
-                      X
-                    </span>
-                    Unmatch User!
-                  </p>
-                  <br />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "-30px",
+                    alignItems: "center",
+                  }}>
+                  <img
+                    style={{
+                      height: "55px",
+                      width: "56px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      borderRadius: "20px",
+                    }}
+                    className="user-img"
+                    src="/img/user2.jpeg"
+                  />
+                  <img
+                    style={{
+                      height: "55px",
+                      width: "56px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      borderRadius: "20px",
+                    }}
+                    className="user-img"
+                    src="/img/user2.jpeg"
+                  />
+                  <img
+                    style={{
+                      height: "55px",
+                      width: "56px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      borderRadius: "20px",
+                    }}
+                    className="user-img"
+                    src="/img/user2.jpeg"
+                  />
+                  <img
+                    style={{
+                      height: "55px",
+                      width: "56px",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      borderRadius: "20px",
+                    }}
+                    className="user-img"
+                    src="/img/user2.jpeg"
+                  />
                 </div>
 
                 <div
@@ -251,23 +206,59 @@ const MatchedUser = () => {
                     alignItems: "center",
                     marginTop: "30px",
                   }}>
-                  <button className="edit-btn" onClick={closeModal}>
+                  <button className="edit-btn" onClick={openModal}>
                     Unmatch User
                   </button>
-                </div>
-              </Modal>
-            </div>
+                  {/* 
+                  <Modal
+                    isOpen={modal}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}>
+                    <div className="modalBox">
+                      <p>
+                        <span
+                          style={{
+                            width: "20px",
+                            backgroundColor: "#faf7ed",
+                            marginRight: "20px",
+                            cursor: "pointer",
+                          }}
+                          onClick={closeModal}>
+                          X
+                        </span>
+                        Unmatch User!
+                      </p>
+                      <br />
+                    </div>
 
-            <div
-              className="buttons"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: "30px",
-              }}>
-              <button className="edit-btn">Report User</button>
-            </div>
+                    <div
+                      className="buttons"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginTop: "30px",
+                      }}>
+                      <button className="edit-btn" onClick={closeModal}>
+                        Unmatch User
+                      </button>
+                    </div>
+                  </Modal> */}
+                </div>
+
+                <div
+                  className="buttons"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "30px",
+                  }}>
+                  <button className="edit-btn">Report User</button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </NewHome>

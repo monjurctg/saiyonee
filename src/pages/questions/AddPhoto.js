@@ -22,7 +22,7 @@ function AddPhoto() {
         res.data.images.profile_img
         // && !isEdit
       ) {
-        navigate("/question/selfie-verification");
+        // navigate("/question/selfie-verification");
       }
     }
   };

@@ -18,7 +18,7 @@ function Explore() {
       background={"#fff"}
       activeExplore={activeExplore}
       setactiveExplore={setactiveExplore}>
-      <div className="mt-2 explore">{activeTab}</div>
+      <div className="mt-2 mb-5 explore">{activeTab}</div>
     </HomeLayout>
   );
 }
