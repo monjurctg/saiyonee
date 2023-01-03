@@ -13,7 +13,7 @@ function MatchList() {
 
     if (res.status === 200) {
       setMatchData(res.data.matched_users);
-      console.log(res.data.matched_users, "matched_users");
+      // console.log(res.data.matched_users, "matched_users");
       setLoading(false);
     } else {
       // console.log(res);
@@ -54,6 +54,7 @@ function MatchList() {
           <h1>No data found</h1>
         )}
       </div>
+     
     </div>
   );
 }

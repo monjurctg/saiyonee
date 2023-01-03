@@ -15,7 +15,7 @@ function ExploreLayout({ children, background, tab, footer }) {
   return (
     <div
       //   className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative mt-2 mb-2"S
-      className="mx-auto max-width-mobile pt-4 "
+      className="mx-auto max-width-mobile pt-4 postion-relative "
       style={{
         background: "#F9FAFB",
         borderRadius: 35,

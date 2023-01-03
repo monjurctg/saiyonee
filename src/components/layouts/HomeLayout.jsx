@@ -34,7 +34,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
         <div
           className="d-flex justify-content-between align-items-center"
           style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
-          {pathname === "/settings" && (
+          {/* {pathname === "/settings" && (
             <Link
               to="/" // TODO ROUTES.tutorial
               className="image-saturate position-relative me-auto">
@@ -47,7 +47,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
                 />
               </div>
             </Link>
-          )}
+          )} */}
           <img
             src={"img/logout.png"}
             alt="logo"
