@@ -14,6 +14,24 @@ body {
   // background: rgba(233, 236, 239, 0.23);
   height: 100vh;
 }
+.itemss{
+  background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 10px;
+}
+.report{
+  background: #FFB7AC;
+    border: none;
+    padding: 16px 26px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 600;
+    /* margin: auto; */
+    margin-top: 23px;
+}
 .load{
   font-family: "Inter";
     font-style: normal;

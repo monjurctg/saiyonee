@@ -1,19 +1,23 @@
-import React, {useEffect, useState} from "react";
-
-import NewHome from "./NewHome";
+import React, { useEffect, useState } from "react";
 
 import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
+import ExploreLayout from "../../components/layouts/ExploreLayout";
+import dislike from "../../assets/imgs/dislike.svg";
+import task from "../../assets/imgs/task.svg";
+import rocket from "../../assets/imgs/rocket.svg";
+import like from "../../assets/imgs/like.svg";
+
 
 const MatchedUser = () => {
   let subtitle;
 
   const [modal, setModal] = useState(false);
 
-  const {id, appId, route} = useParams();
-  console.log(id, appId, route, "dfdk");
+  const { id, appId, route } = useParams();
+  // console.log(id, appId, route, "dfdk");
 
   const openModal = () => {
     setModal(!modal);
@@ -34,13 +38,50 @@ const MatchedUser = () => {
     }
     fetchData();
   }, [id, module]);
-
+  let tab = (
+    <div className="container pt-2 ">
+        <div className="items d-flex justify-content-evenly">
+          <div
+            className="itemss"
+            // onClick={() => getActiveSlide(dislike)}
+          >
+            <img src={dislike} alt="" />
+          </div>
+          {
+            route === "liked" && 
+            <div
+            className="itemss"
+            //  onClick={() => getActiveSlide(addShort_list)}
+          >
+            <img src={task} alt="" />
+          </div>
+          }
+       
+          <div
+            className="itemss"
+            // onClick={() => getActiveSlide(supper_like_submit)}
+          >
+            <img src={rocket} alt="" />
+          </div>{" "}
+          <div
+            className="itemss"
+            //  onClick={() => getActiveSlide(like)}
+          >
+            <img src={like} alt="" />
+          </div>
+        </div>
+     
+    </div>
+  );
+  let footer = <div className="text-center">
+    <button className="report">Report User</button>
+  </div>
   return (
     <>
-      <NewHome>
-        <div className="container pt-2 ">
-          <div className="container explore_viewProfile pt-2 text-center">
-            <div className="mt-3">
+      <ExploreLayout tab={tab} footer={footer}>
+      
+          <div className="explore_viewProfile text-center">
+            
               <div className="content-container">
                 <img className="user-img" src="/img/user.jpg" />
                 <h2>Sharmila</h2>
@@ -48,7 +89,8 @@ const MatchedUser = () => {
                 <p
                   style={{
                     textAlign: "Center",
-                  }}>
+                  }}
+                >
                   <span className="short-description">Student</span>
                   <span className="short-description">Khulna, BD</span>
                   <span className="short-description">Age 24</span>
@@ -57,7 +99,8 @@ const MatchedUser = () => {
                 <h4
                   style={{
                     paddingLeft: 20,
-                  }}>
+                  }}
+                >
                   Professional Details
                 </h4>
 
@@ -66,7 +109,8 @@ const MatchedUser = () => {
                     color: "#000",
 
                     fontSize: "14px",
-                  }}>
+                  }}
+                >
                   Company Name
                   <br />
                   Position : Manager
@@ -79,7 +123,8 @@ const MatchedUser = () => {
                 <h4
                   style={{
                     paddingLeft: 20,
-                  }}>
+                  }}
+                >
                   Educational qualification
                 </h4>
 
@@ -88,7 +133,8 @@ const MatchedUser = () => {
                     color: "#000",
 
                     fontSize: "14px",
-                  }}>
+                  }}
+                >
                   University :
                   <br />
                   College :
@@ -103,7 +149,8 @@ const MatchedUser = () => {
                     color: "#000",
 
                     fontSize: "14px",
-                  }}>
+                  }}
+                >
                   Name
                   <br />
                   Age
@@ -129,7 +176,7 @@ const MatchedUser = () => {
                   Physical Status
                 </p>
               </div>
-            </div>
+           
 
             {route == "match" && (
               <>
@@ -151,7 +198,8 @@ const MatchedUser = () => {
                     justifyContent: "center",
                     marginLeft: "-30px",
                     alignItems: "center",
-                  }}>
+                  }}
+                >
                   <img
                     style={{
                       height: "55px",
@@ -205,7 +253,8 @@ const MatchedUser = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     marginTop: "30px",
-                  }}>
+                  }}
+                >
                   <button className="edit-btn" onClick={openModal}>
                     Unmatch User
                   </button>
@@ -254,14 +303,15 @@ const MatchedUser = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     marginTop: "30px",
-                  }}>
+                  }}
+                >
                   <button className="edit-btn">Report User</button>
                 </div>
               </>
             )}
           </div>
-        </div>
-      </NewHome>
+        
+      </ExploreLayout>
     </>
   );
 };

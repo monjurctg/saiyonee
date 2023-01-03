@@ -43,20 +43,23 @@ function Shortlisted() {
 // console.log('first', sortListData)
   let shortList = sortListData.map((sl, index) => {
     return (
-      <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
         <div className="explore-img" key={index}>
           <div className="cross" onClick={() => removeShortList(sl?.id)}>
             X
           </div>
+      <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
+
           {
             sl?.app_user?.thumbnail_img_url ? 
             <img src={sl?.app_user?.thumbnail_img_url} alt="" /> :<h4 className="no-image">No Image</h4>
           }
+      </Link>
+
           <h5 className="no-image-h5">
-            {sl?.app_user?.full_name}
+            {sl?.app_user?.full_name},
+            {sl?.app_user?.age}
           </h5>
         </div>
-      </Link>
     );
   });
 
