@@ -30,7 +30,10 @@ const Settings = () => {
   return (
     <HomeLayout>
       <div className="mt-3">
-        <div>
+        <div style={{
+              height: "62vh",
+              overflowY: "scroll"
+        }}>
           <div
             className="d-flex justify-content-between align-items-center settings"
             style={{
