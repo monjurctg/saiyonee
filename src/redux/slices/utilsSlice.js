@@ -4,6 +4,7 @@ const initialState = {
   isEmptyQuestion: null,
   isProfileQuesionExist: null,
   isSelfieQuestionExist: null,
+  matchModal: false,
 };
 
 const utilsSlice = createSlice({
@@ -19,8 +20,11 @@ const utilsSlice = createSlice({
     set_is_ques: (state, {payload}) => {
       state.isEmptyQuestion = payload;
     },
+    setMatchModal: (state, {payload}) => {
+      state.matchModal = payload;
+    },
   },
 });
 
-export const {set_is_image, set_is_ques, set_is_selfie} = utilsSlice.actions;
+export const {set_is_image, set_is_ques, set_is_selfie,setMatchModal} = utilsSlice.actions;
 export default utilsSlice.reducer;

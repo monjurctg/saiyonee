@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
 
@@ -13,7 +13,7 @@ function MatchList() {
 
     if (res.status === 200) {
       setMatchData(res.data.matched_users);
-      console.log(res.data.matched_users, "matched_users");
+      // console.log(res.data.matched_users, "matched_users");
       setLoading(false);
     } else {
       // console.log(res);
@@ -28,34 +28,33 @@ function MatchList() {
   // console.log('matchData', matchData)
   let matchList = matchData.map((sl, index) => {
     return (
-      <Link key={index} to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
-        <div className="explore-img" key={index}>
-          <div className="cross">X</div>
-          {
-            sl?.thumbnail_img_url ? 
-            <img src={sl?.thumbnail_img_url} alt="" /> :<h4 className="no-image">No Image</h4>
-          }
-          <h5 className="no-image-h5">
-            {sl?.display_name}
-          </h5>
-        </div>
-      </Link>
+      <div className="explore-img" key={index}>
+        <div className="cross">X</div>
+        <Link key={index} to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
+          {sl?.thumbnail_img_url ? (
+            <img src={sl?.thumbnail_img_url} alt="" />
+          ) : (
+            <h4 className="no-image">No Image</h4>
+          )}
+        </Link>
+
+        <h5 className="no-image-h5">{sl?.display_name}, {sl?.age}</h5>
+      </div>
     );
   });
 
   return (
     <div className="mt-2">
-      <div
-        className="py-4 d-flex flex-wrap"
-        style={{gap: 10}}>
+      <div className="py-4 d-flex flex-wrap" style={{ gap: 10 }}>
         {loading ? (
-           <div className="load">Loading...</div>
+          <div className="load">Loading...</div>
         ) : matchList.length > 0 ? (
           matchList
         ) : (
           <h1>No data found</h1>
         )}
       </div>
+     
     </div>
   );
 }

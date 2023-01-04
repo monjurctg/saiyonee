@@ -57,4 +57,10 @@ UserServices.help = async (data) => {
   return res;
 };
 
+UserServices.completion = async () => {
+  const res = await axios.get("/form_fields/calculate_profile_completion_precentage");
+  return res;
+};
+
+
 export default UserServices;
