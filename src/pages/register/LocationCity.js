@@ -1,24 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import Countries from "../../libs/cities_countries";
-import { setCity } from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {setCity} from "../../redux/slices/authSlices";
+import {setEditProfileCity} from "../../redux/slices/editProfileslice";
+import {stoteRegisterValues} from "../../utils/functions";
 
-function LocationCity({ module }) {
+function LocationCity({module}) {
   const navigate = useNavigate();
   const [searchedCity, setSearchedCity] = useState("");
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
-  const { current_city, current_country } = useSelector((state) => state.auth);
+  const {current_city, current_country} = useSelector((state) => state.auth);
+  const {country, city: editProfileCity} = useSelector(
+    (state) => state.editProfile
+  );
+  console.log(country, editProfileCity);
+
   const dispatch = useDispatch();
   const onCityChange = (e) => {
-    if (module == "city") {
-    }
-    dispatch(setCity(e.target.value));
-    stoteRegisterValues({ current_city: e.target.value });
+    if (module == "eidt_profile_city") {
+      console.log(module);
+      dispatch(setEditProfileCity(e.target.value));
+      navigate(-1);
+      return;
+    } else {
+      dispatch(setCity(e.target.value));
+      stoteRegisterValues({current_city: e.target.value});
 
-    navigate(-1);
+      navigate(-1);
+    }
   };
 
   return (
@@ -27,7 +38,7 @@ function LocationCity({ module }) {
         <div
           onClick={() => navigate(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-          style={{ height: "58px", width: "58px" }}>
+          style={{height: "58px", width: "58px"}}>
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
@@ -63,7 +74,11 @@ function LocationCity({ module }) {
             />
           </div>
         </div> */}
-        {(Countries[current_country] || []).map(
+        {(
+          Countries[
+            module == "eidt_profile_city" ? country : current_country
+          ] || []
+        ).map(
           (city, i) =>
             city.toLowerCase().includes(searchedCity.toLowerCase()) && (
               <div
@@ -81,7 +96,7 @@ function LocationCity({ module }) {
                     className="form-check-input"
                     type="radio"
                     name="current_city"
-                    checked={current_city === city}
+                    checked={current_city ?? editProfileCity === city}
                     onChange={onCityChange}
                     value={city}
                     id={city}

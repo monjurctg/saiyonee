@@ -10,9 +10,8 @@ import Questions from "../../components/preference/Questions";
 function PreferenceModule() {
   const {module} = useParams();
   const id = module.split("-")[1];
-  console.log("slit", id);
 
-  const [activeModule, setActiveModule] = useState(<h1>404</h1>);
+  const [activeModule, setActiveModule] = useState("");
   useEffect(() => {
     if (module === "religion") {
       setActiveModule(<Religions module="preference" />);

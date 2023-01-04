@@ -60,6 +60,7 @@ import {
   set_is_ques,
   set_is_selfie,
 } from "../redux/slices/utilsSlice";
+import EditProfileModule from "../pages/editProfile/EditProfileModule";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -116,7 +117,7 @@ function Routers() {
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       {loading ? (
-         <div className="load">Loading...</div>
+        <div className="load">Loading...</div>
       ) : (
         <Routes>
           <Route element={<PublicRoute />}>
@@ -219,6 +220,10 @@ function Routers() {
 
             <Route path="/preference" element={<Preference />} />
             <Route path="/preference/:module" element={<PreferenceModule />} />
+            <Route
+              path="/editProfile/:module"
+              element={<EditProfileModule />}
+            />
 
             <Route path="/review/profile" element={<ReviewProfile />} />
 
