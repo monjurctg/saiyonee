@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
 import {setCountry} from "../../redux/slices/authSlices";
+import {setEditProfileCountry} from "../../redux/slices/editProfileslice";
 import {setPreferenceCountry} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -13,6 +14,9 @@ function LocationCountry({module}) {
   const onSearchChange = (e) => setSearchedCountry(e.target.value);
   const dispatch = useDispatch();
   const {country: preferenceCountry} = useSelector((state) => state.preference);
+  const {country: editProfileCountry} = useSelector(
+    (state) => state.editProfile
+  );
   // const [current_country, setCurrentCountry] = useState("");
   // const [current_city, setCurrentCity] = useState("");
 
@@ -21,13 +25,18 @@ function LocationCountry({module}) {
     if (module == "country") {
       dispatch(setPreferenceCountry(e.target.value));
       // navigator(-1);
+      // return;
+    } else if (module == "edit_profile_country") {
+      dispatch(setEditProfileCountry(e.target.value));
+      navigator(-1);
       return;
-    }
-    dispatch(setCountry(e.target.value));
-    stoteRegisterValues({current_country: e.target.value});
+    } else {
+      dispatch(setCountry(e.target.value));
+      stoteRegisterValues({current_country: e.target.value});
 
-    // setCurrentCity(undefined);
-    navigator(-1);
+      // setCurrentCity(undefined);
+      navigator(-1);
+    }
   };
   // console.log(preferenceCountry.includes("bangladesh"));
 
@@ -94,6 +103,8 @@ function LocationCountry({module}) {
                     checked={
                       module == "country"
                         ? preferenceCountry.includes(country)
+                        : module == "edit_profile_country"
+                        ? editProfileCountry.includes(country)
                         : current_country === country
                     }
                     onChange={onCountryChange}

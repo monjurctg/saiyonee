@@ -4,12 +4,14 @@ import InputLayOut from "./InputLayOut";
 import "./../../assets/css/editProfile.scss";
 import {Link} from "react-router-dom";
 import UserServices from "../../services/userServices";
+import {useSelector} from "react-redux";
 
 const EditProfile = () => {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
   const [image, setimage] = useState(false);
+  const {country, city} = useSelector((state) => state.editProfile);
 
   let imageClick = (e) => {
     e.preventDefault();
@@ -112,41 +114,50 @@ const EditProfile = () => {
             style={{fontFamily: "Inter"}}>
             Change your current country
           </p>
-          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-            <div className="col-10">
-              <label
-                className="form-check-label  bg-white px-2 text-body"
-                style={{fontFamily: "Inter", cursor: "pointer"}}>
-                {/* {religion} */}
-                {"Select country"}
-              </label>
-            </div>
+          <Link to={"/editProfile/country"}>
+            <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+              <div className="col-10">
+                <label
+                  className="form-check-label  bg-white px-2 text-body"
+                  style={{fontFamily: "Inter", cursor: "pointer"}}>
+                  {country ? country : "Select country"}
+                </label>
+              </div>
 
-            <div className="col-2 d-flex justify-content-end pe-3">
-              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+              <div className="col-2 d-flex justify-content-end pe-3">
+                <img
+                  src="/img/back-icon.svg"
+                  alt="next"
+                  className="rotate-180"
+                />
+              </div>
             </div>
-          </div>
-
+          </Link>
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
             Change your current city
           </p>
+          <Link to={"/editProfile/city"}>
+            <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+              <div className="col-10">
+                <label
+                  className="form-check-label  bg-white px-2 text-body"
+                  style={{fontFamily: "Inter", cursor: "pointer"}}>
+                  {/* {religion} */}
+                  {city ? city : "Select City"}
+                </label>
+              </div>
 
-          <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
-            <div className="col-10">
-              <label
-                className="form-check-label  bg-white px-2 text-body"
-                style={{fontFamily: "Inter", cursor: "pointer"}}>
-                {/* {religion} */}
-                {"Select City"}
-              </label>
+              <div className="col-2 d-flex justify-content-end pe-3">
+                <img
+                  src="/img/back-icon.svg"
+                  alt="next"
+                  className="rotate-180"
+                />
+              </div>
             </div>
-
-            <div className="col-2 d-flex justify-content-end pe-3">
-              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
-            </div>
-          </div>
+          </Link>
         </div>
 
         <div className="add-photos">
