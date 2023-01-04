@@ -1,11 +1,76 @@
-import React from 'react'
+import React from "react";
+import HomeLayout from "../../components/layouts/HomeLayout";
 
 const ChatIndex = () => {
-    return (
-        <>
-            Do Chat Here
-        </>
-    )
-}
+  return (
+    <HomeLayout>
+      <div style={{
+        height: "69vh",
+        overflowY: "auto"
+      }}>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+        <div className="chat_body mb-4">
+          <div className="d-flex justify-content-evenly align-items-center">
+            <p className="no-image">image</p>
+            <div>
+              <p className="name">Dianne, 22</p>
+              <p className="message">Was great hanging out!</p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
+        </div>
+      </div>
+    </HomeLayout>
+  );
+};
 
-export default ChatIndex
+export default ChatIndex;

@@ -579,3 +579,53 @@
     }
   }
 }
+
+.chat_body {
+  cursor: pointer;
+  width: 380px;
+  height: 80px;
+  background: #ffffff;
+  border-radius: 16px;
+
+  .no-image {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    width: 60px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-radius: 50%;
+    background: aliceblue;
+    margin-top: 10px;
+  }
+  .name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1f2937;
+    margin-bottom: 5px;
+  }
+  .message {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    /* Sub Text */
+
+    color: #6b7280;
+  }
+  .day{
+    font-size: 14px;
+line-height: 17px;
+margin: 0;
+
+text-transform: uppercase;
+
+
+color: #6B7280;
+  }
+}

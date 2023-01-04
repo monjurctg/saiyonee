@@ -236,7 +236,7 @@ function Routers() {
               element={<MatchedUser />}
             />
 
-            <Route path="/chat" element={<ChatIndex />} />
+            <Route path="/message" element={<ChatIndex />} />
           </Route>
 
           {/* <Route path="/explore" element={<Explore />} /> */}
