@@ -63,4 +63,35 @@ ExploreServices.getSinglerUserInfo = (id, appId) => {
   return res;
 };
 
+ExploreServices.getSingleLiked = (app_user_id) => {
+  let url = `/app_users/get_liked_you_single_user_info`;
+  const data = new FormData();
+  data.append("app_user_id", app_user_id);
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err);
+  return res;
+};
+ExploreServices.getSingleShortList = (app_user_id) => {
+  let url = `/app_users/get_shortlist_single_user_info`;
+  const data = new FormData();
+  data.append("app_user_id", app_user_id);
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err);
+  return res;
+};
+ExploreServices.getSingleMatchList = (app_user_id) => {
+  let url = `/app_users/get_matched_single_user_info`;
+  const data = new FormData();
+  data.append("app_user_id", app_user_id);
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err);
+  return res;
+};
+
 export default ExploreServices;

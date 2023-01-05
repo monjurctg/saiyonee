@@ -40,36 +40,33 @@ function Shortlisted() {
       // console.log(res, "res");
     }
   };
-// console.log('first', sortListData)
+  // console.log('first', sortListData)
   let shortList = sortListData.map((sl, index) => {
     return (
-        <div className="explore-img" key={index}>
-          <div className="cross" onClick={() => removeShortList(sl?.id)}>
-            X
-          </div>
-      <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
-
-          {
-            sl?.app_user?.thumbnail_img_url ? 
-            <img src={sl?.app_user?.thumbnail_img_url} alt="" /> :<h4 className="no-image">No Image</h4>
-          }
-      </Link>
-
-          <h5 className="no-image-h5">
-            {sl?.app_user?.full_name},
-            {sl?.app_user?.age}
-          </h5>
+      <div className="explore-img" key={index}>
+        <div className="cross" onClick={() => removeShortList(sl?.id)}>
+          X
         </div>
+        <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
+          {sl?.app_user?.thumbnail_img_url ? (
+            <img src={sl?.app_user?.thumbnail_img_url} alt="" />
+          ) : (
+            <h4 className="no-image">No Image</h4>
+          )}
+        </Link>
+
+        <h5 className="no-image-h5">
+          {sl?.app_user?.full_name},{sl?.app_user?.age}
+        </h5>
+      </div>
     );
   });
 
   return (
     <div className="mt-2">
-      <div
-        className="py-4 d-flex flex-wrap"
-        style={{gap: 10}}>
+      <div className="py-4 d-flex flex-wrap" style={{gap: 10}}>
         {loading ? (
-           <div className="load">Loading...</div>
+          <div className="load">Loading...</div>
         ) : shortList.length > 0 ? (
           shortList
         ) : (

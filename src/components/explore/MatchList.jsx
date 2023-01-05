@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
 
@@ -38,14 +38,16 @@ function MatchList() {
           )}
         </Link>
 
-        <h5 className="no-image-h5">{sl?.display_name}, {sl?.age}</h5>
+        <h5 className="no-image-h5">
+          {sl?.display_name}, {sl?.age}
+        </h5>
       </div>
     );
   });
 
   return (
     <div className="mt-2">
-      <div className="py-4 d-flex flex-wrap" style={{ gap: 10 }}>
+      <div className="py-4 d-flex flex-wrap" style={{gap: 10}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : matchList.length > 0 ? (
@@ -54,7 +56,6 @@ function MatchList() {
           <h1>No data found</h1>
         )}
       </div>
-     
     </div>
   );
 }
