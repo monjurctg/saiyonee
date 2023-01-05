@@ -61,6 +61,7 @@ import {
   set_is_selfie,
 } from "../redux/slices/utilsSlice";
 import EditProfileModule from "../pages/editProfile/EditProfileModule";
+import ChatBox from "../pages/chats/ChatBox";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -236,6 +237,8 @@ function Routers() {
             {/* <Route path="/home" element={<Home />} /> */}
             <Route path="/viewProfile" element={<ViewProfile />} />
             <Route path="/boom" element={<Boom />} />
+            <Route path="/chat/room" element={<ChatBox />} />
+
             <Route
               path="/user-info/:route/:id/:appId"
               element={<MatchedUser />}

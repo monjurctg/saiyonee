@@ -1,77 +1,159 @@
 .content-container {
-    background-color: rgb(255, 255, 255);
-    border-radius: 25px;
-    text-align: center;
-    padding: 10px;
-    // margin-top: 70px;
-    // height: 100%;
-    margin-bottom: 56px;
-    // padding-bottom: 100px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px;
+  // margin-top: 70px;
+  // height: 100%;
+  margin-bottom: 56px;
+  // padding-bottom: 100px;
 
-    h2 {
-        margin-top: 20px;
-    }
+  h2 {
+    margin-top: 20px;
+  }
 
-    .user-img {
-        height: 300px;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 20%;
-        padding-top: 10px;
-    }
+  .user-img {
+    height: 300px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20%;
+    padding-top: 10px;
+  }
 
-    .short-description {
-        margin-right: 20px;
-        color: #6B7280;
-        font-size: 16px;
-    }
+  .short-description {
+    margin-right: 20px;
+    color: #6b7280;
+    font-size: 16px;
+  }
 
-    h4 {
-        color: #6B7280;
-        font-size: 16px;
-        text-align: left;
-    }
+  h4 {
+    color: #6b7280;
+    font-size: 16px;
+    text-align: left;
+  }
 
-    p {
-        text-align: left;
-    }
+  p {
+    text-align: left;
+  }
 }
 
 .explore_viewProfile {
-    // background: #ffffff;
-    height: 70vh;
-    margin-bottom: 30px;
-    overflow: auto;
+  // background: #ffffff;
+  height: 70vh;
+  margin-bottom: 30px;
+  overflow: auto;
+  border-radius: 24px;
+
+  img {
+    width: 294px;
+    height: 230px;
     border-radius: 24px;
+  }
 
+  h1 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-left: 22px;
+    font-size: 31px;
+    line-height: 38px;
+    text-align: left;
+    color: #1f2937;
+  }
+
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    // width: 100px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #6b7280;
+    // border-right: 2px solid #80808024;
+    padding-left: 20px;
+  }
+}
+
+.chat-body {
+  img {
+    width: 42px;
+    height: 42px;
+  }
+  .chat-body-inner-right {
+    text-align: center;
+    display: flex;
+    justify-content: end;
+    gap: 11px;
+    padding: 10px;
+    .write {
+      width: 99px;
+      height: 40px;
+      p {
+        margin-top: 8px;
+      }
+      //   background: #ffb7ac;
+      //   transform: matrix(-1, 0, 0, 1, 0, 0);
+    }
+  }
+  .chat-body-inner-left {
+    text-align: center;
+    display: flex;
+    justify-content: start;
+    gap: 11px;
+    padding: 10px;
+
+    .write {
+      width: 99px;
+      height: 40px;
+      p {
+        margin-top: 8px;
+      }
+    }
+  }
+}
+.chat-footer {
+  position: fixed;
+  bottom: 20px;
+  padding: 15px;
+  gap: 15px;
+  align-items: center;
+  .round-shape {
+    width: 48px;
+    height: 48px;
+
+    background: #ffb7ac;
+
+    box-shadow: 0px 4px 4px rgba(196, 63, 21, 0.1);
+    border-radius: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
-        width: 294px;
-        height: 230px;
-        border-radius: 24px;
+      width: 20px;
+      height: 20px;
     }
+  }
+  input {
+    width: 286px;
+    height: 56px;
+    /* left: 80px; */
+    /* top: 764px; */
+    background: #ffffff;
+    box-shadow: 0px 10px 40px rgb(173 176 181 / 12%);
+    border-radius: 64px;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
 
-    h1 {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 500;
-        padding-top: 20px;
-        padding-left: 22px;
-        font-size: 31px;
-        line-height: 38px;
-        text-align: left;
-        color: #1f2937;
-    }
+    display: flex;
+    align-items: flex-end;
 
-    p {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        // width: 100px;
-        font-size: 16px;
-        line-height: 19px;
-        color: #6b7280;
-        // border-right: 2px solid #80808024;
-        padding-left: 20px;
-    }
+    /* Sub Text */
+
+    color: #6b7280;
+  }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 
 const ChatIndex = () => {
@@ -8,6 +9,7 @@ const ChatIndex = () => {
         height: "69vh",
         overflowY: "auto"
       }}>
+        <Link to={"/chat/room"}>
         <div className="chat_body mb-4">
           <div className="d-flex justify-content-evenly align-items-center">
             <p className="no-image">image</p>
@@ -18,6 +20,8 @@ const ChatIndex = () => {
             <p className="day">Fri</p>
           </div>
         </div>
+        
+        </Link>
         <div className="chat_body mb-4">
           <div className="d-flex justify-content-evenly align-items-center">
             <p className="no-image">image</p>
