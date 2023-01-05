@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 import ExploreLayout from "../../components/layouts/ExploreLayout";
 import dislike from "../../assets/imgs/dislike.svg";
@@ -11,33 +11,67 @@ import rocket from "../../assets/imgs/rocket.svg";
 import like from "../../assets/imgs/like.svg";
 import blur from "../../assets/imgs/blur.png";
 import cross from "../../assets/imgs/cross.png";
-import { useDispatch, useSelector } from "react-redux";
-import { setMatchModal } from "../../redux/slices/utilsSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {setMatchModal} from "../../redux/slices/utilsSlice";
 
 const MatchedUser = () => {
   let subtitle;
 
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [singleData, setSingleData] = useState({});
   let dispatch = useDispatch();
-  const {matchModal} = useSelector(
-    (state) => state.utils
-  );
+  const {matchModal} = useSelector((state) => state.utils);
   let modalChange = () => {
-console.log('matchModal', matchModal)
+    console.log("matchModal", matchModal);
 
-    if(matchModal === true) dispatch(setMatchModal(false));
+    if (matchModal === true) dispatch(setMatchModal(false));
     else dispatch(setMatchModal(true));
   };
 
-  const { id, appId, route } = useParams();
+  const {id, appId, route} = useParams();
   // console.log(id, appId, route, "dfdk");
+  async function fetchShortUser() {
+    setLoading(true);
+
+    let response = await ExploreServices.getSingleShortList(appId);
+    console.log(response, "response");
+    if (response === 200) {
+      setLoading(false);
+      setSingleData(response.data);
+    }
+  }
+  async function fetchMatchUser() {
+    setLoading(true);
+
+    let response = await ExploreServices.getSingleMatchList(appId);
+    console.log(response, "response");
+    if (response === 200) {
+      setLoading(false);
+      setSingleData(response.data);
+    }
+  }
+  async function fetchLikedUser() {
+    setLoading(true);
+
+    let response = await ExploreServices.getSingleLiked(appId);
+    console.log(response, "response");
+    if (response === 200) {
+      setLoading(false);
+      setSingleData(response.data);
+    }
+  }
+
+  console.log(singleData, "singleData");
 
   useEffect(() => {
-    async function fetchData() {
-      let response = await ExploreServices.getSinglerUserInfo(id, appId);
-      console.log(response, "response");
+    if (route === "shortList") {
+      fetchShortUser();
+    } else if (route === "match") {
+      fetchMatchUser();
+    } else if (route == "like") {
+      fetchLikedUser();
     }
-    fetchData();
   }, [id, module]);
   let tab = (
     <div className="container pt-2 ">
@@ -87,8 +121,7 @@ console.log('matchModal', matchModal)
             <p
               style={{
                 textAlign: "Center",
-              }}
-            >
+              }}>
               <span className="short-description">Student</span>
               <span className="short-description">Khulna, BD</span>
               <span className="short-description">Age 24</span>
@@ -97,8 +130,7 @@ console.log('matchModal', matchModal)
             <h4
               style={{
                 paddingLeft: 20,
-              }}
-            >
+              }}>
               Professional Details
             </h4>
 
@@ -107,8 +139,7 @@ console.log('matchModal', matchModal)
                 color: "#000",
 
                 fontSize: "14px",
-              }}
-            >
+              }}>
               Company Name
               <br />
               Position : Manager
@@ -121,8 +152,7 @@ console.log('matchModal', matchModal)
             <h4
               style={{
                 paddingLeft: 20,
-              }}
-            >
+              }}>
               Educational qualification
             </h4>
 
@@ -131,8 +161,7 @@ console.log('matchModal', matchModal)
                 color: "#000",
 
                 fontSize: "14px",
-              }}
-            >
+              }}>
               University :
               <br />
               College :
@@ -147,8 +176,7 @@ console.log('matchModal', matchModal)
                 color: "#000",
 
                 fontSize: "14px",
-              }}
-            >
+              }}>
               Name
               <br />
               Age
@@ -195,8 +223,7 @@ console.log('matchModal', matchModal)
                   justifyContent: "center",
                   marginLeft: "-30px",
                   alignItems: "center",
-                }}
-              >
+                }}>
                 <img
                   style={{
                     height: "55px",
@@ -250,12 +277,10 @@ console.log('matchModal', matchModal)
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: "30px",
-                }}
-              >
-                <button className="edit-btn"  onClick={modalChange}>
+                }}>
+                <button className="edit-btn" onClick={modalChange}>
                   Unmatch User
                 </button>
-               
               </div>
 
               <div
@@ -265,26 +290,26 @@ console.log('matchModal', matchModal)
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: "30px",
-                }}
-              >
+                }}>
                 <button className="edit-btn">Report User</button>
               </div>
             </>
           )}
         </div>
       </ExploreLayout>
-      <div className={`modal-user ${matchModal ? "transit":""}`}>
+      <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />
-        <div className="modal-div" style={{opacity:matchModal ? 1 : 0}}>
+        <div className="modal-div" style={{opacity: matchModal ? 1 : 0}}>
           <div className=" texts">
             <img src={cross} alt="" />
             <p className="text">Unmatch user</p>
           </div>
 
-          <button className="unmatch" onClick={modalChange}> Unmatch</button>
+          <button className="unmatch" onClick={modalChange}>
+            {" "}
+            Unmatch
+          </button>
           <button className="cancel"> Cancel</button>
-
-
         </div>
       </div>
     </>
