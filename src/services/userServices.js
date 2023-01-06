@@ -62,5 +62,15 @@ UserServices.completion = async () => {
   return res;
 };
 
+UserServices.message_users = async (data) => {
+
+  const res = await axios.post("/live_chat/submit_chat_message",data);
+  return res;
+}
+
+UserServices.getMessage = async (data) => {
+  const res = await axios.post("/live_chat/get_chat_messages",data);
+  return res;
+}
 
 export default UserServices;
