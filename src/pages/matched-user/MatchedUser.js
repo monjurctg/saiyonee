@@ -36,7 +36,7 @@ const MatchedUser = () => {
 
     let response = await ExploreServices.getSingleShortList(appId);
     console.log(response, "response");
-    if (response === 200) {
+    if (response?.status === 200) {
       setLoading(false);
       setSingleData(response.data);
     }
@@ -44,9 +44,9 @@ const MatchedUser = () => {
   async function fetchMatchUser() {
     setLoading(true);
 
-    let response = await ExploreServices.getSingleMatchList(appId);
+    let response = await ExploreServices.getSingleMatchList(id);
     console.log(response, "response");
-    if (response === 200) {
+    if (response?.status === 200) {
       setLoading(false);
       setSingleData(response.data);
     }
@@ -54,9 +54,9 @@ const MatchedUser = () => {
   async function fetchLikedUser() {
     setLoading(true);
 
-    let response = await ExploreServices.getSingleLiked(appId);
+    let response = await ExploreServices.getSingleLiked(id);
     console.log(response, "response");
-    if (response === 200) {
+    if (response.status === 200) {
       setLoading(false);
       setSingleData(response.data);
     }
@@ -115,16 +115,26 @@ const MatchedUser = () => {
       <ExploreLayout tab={tab} footer={footer}>
         <div className="explore_viewProfile text-center">
           <div className="content-container">
-            <img className="user-img" src="/img/user.jpg" />
-            <h2>Sharmila</h2>
+            <img className="user-img" src={singleData?.app_user?.profile_img} />
+            <h2>
+              {singleData?.app_user?.full_name ??
+                singleData?.app_user?.display_name}
+            </h2>
 
             <p
               style={{
                 textAlign: "Center",
               }}>
-              <span className="short-description">Student</span>
-              <span className="short-description">Khulna, BD</span>
-              <span className="short-description">Age 24</span>
+              <span className="short-description">
+                {singleData?.app_user?.designation}
+              </span>
+              <span className="short-description">
+                {singleData?.app_user?.current_city},
+                {singleData?.app_user?.current_country},
+              </span>
+              <span className="short-description">
+                Age {singleData?.app_user?.age}
+              </span>
             </p>
 
             <h4
@@ -162,11 +172,11 @@ const MatchedUser = () => {
 
                 fontSize: "14px",
               }}>
-              University :
+              University :{singleData?.app_user?.education3_institution}
               <br />
-              College :
+              College : {singleData?.app_user?.education2_institution}
               <br />
-              School :
+              School :{singleData?.app_user?.education1_institution}
             </p>
 
             <h4>Personal Details</h4>
@@ -177,21 +187,24 @@ const MatchedUser = () => {
 
                 fontSize: "14px",
               }}>
-              Name
+              Name :{" "}
+              {singleData?.app_user?.full_name ??
+                singleData?.app_user?.display_name}
               <br />
-              Age
+              Age :{singleData?.app_user?.age}
               <br />
-              Gender
+              Gender :{singleData?.app_user?.gender}
               <br />
-              Height
+              Height :{singleData?.app_user?.height_feet} feet{" "}
+              {singleData?.app_user?.height_inches} inches
               <br />
-              Weight
+              Weight {singleData?.app_user?.weight}
               <br />
-              Marital Status
+              Marital Status :{singleData?.app_user?.marital_status}
               <br />
               Marital Timing
               <br />
-              Date of Birth
+              Date of Birth :{singleData?.app_user?.date_of_birth}
               <br />
               Blood group
               <br />
