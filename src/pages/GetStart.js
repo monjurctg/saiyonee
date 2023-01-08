@@ -3,6 +3,11 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import {setIsRegStart} from "../redux/slices/authSlices";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillLinkedin,AiFillFacebook  } from "react-icons/ai";
+
+
+
 
 function GetStarted() {
   const dispatch = useDispatch();
@@ -50,6 +55,46 @@ function GetStarted() {
               Login
             </strong>
           </Link>
+
+          <div className="mb-2 d-flex justify-content-center" style={{
+            gap:10
+          }}>
+            <div>
+
+            <Link to={"/social-login"}>
+            <AiFillFacebook style={{
+             color: "#14a0f8",
+             width: 40,
+             height: 40,
+             borderRadius: "50%",
+             cursor: "pointer"
+            }}/>
+            
+            </Link>
+            </div>
+            <div>
+            <AiFillLinkedin style={{
+             color: "rgb(5 90 189)",
+             width: 40,
+             height: 40,
+             borderRadius: "50%",
+             cursor: "pointer"
+            }}/>
+
+            </div>
+            <div>
+            <FcGoogle
+            style={{
+              color: "rgb(5 90 189)",
+              width: 40,
+              height: 40,
+              borderRadius: "50%",
+              cursor: "pointer"
+              }}
+            />
+
+            </div>
+          </div>
         </div>
       </div>
       <div className="container max-width-mobile p-4"style={{height: "20vh",

@@ -62,6 +62,7 @@ import {
 } from "../redux/slices/utilsSlice";
 import EditProfileModule from "../pages/editProfile/EditProfileModule";
 import ChatBox from "../pages/chats/ChatBox";
+import SocialLogin from "../pages/social/SocialLogin";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -125,6 +126,8 @@ function Routers() {
             <Route path="/" element={<Welcome />} />
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/get-start" element={<GetStarted />} />
+            <Route path="/social-login" element={<SocialLogin />} />
+
 
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-pass" element={<ForgotPass />} />
@@ -238,6 +241,7 @@ function Routers() {
             <Route path="/viewProfile" element={<ViewProfile />} />
             <Route path="/boom" element={<Boom />} />
             <Route path="/chat/room" element={<ChatBox />} />
+
 
             <Route
               path="/user-info/:route/:id/:appId"
