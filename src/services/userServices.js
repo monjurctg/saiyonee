@@ -37,8 +37,8 @@ UserServices.dislike_user = async (id) => {
   return res;
 };
 
-UserServices.matched_users = async () => {
-  const res = await axios.get("/match_making/get_match_list");
+UserServices.getBoomUsers = async () => {
+  const res = await axios.get("/match_making/get_boom_match_list");
   return res;
 };
 
@@ -58,19 +58,24 @@ UserServices.help = async (data) => {
 };
 
 UserServices.completion = async () => {
-  const res = await axios.get("/form_fields/calculate_profile_completion_precentage");
+  const res = await axios.get(
+    "/form_fields/calculate_profile_completion_precentage"
+  );
   return res;
 };
 
 UserServices.message_users = async (data) => {
-
-  const res = await axios.post("/live_chat/submit_chat_message",data);
+  const res = await axios.post("/live_chat/submit_chat_message", data);
   return res;
-}
+};
 
 UserServices.getMessage = async (data) => {
-  const res = await axios.post("/live_chat/get_chat_messages",data);
+  const res = await axios.post("/live_chat/get_chat_messages", data);
   return res;
-}
+};
+
+UserServices.match_viewed = (data) => {
+  return axios.post("/match_making/match_viewed", data);
+};
 
 export default UserServices;

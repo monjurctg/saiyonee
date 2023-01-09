@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import Liked from "../../components/explore/Liked";
 import MatchList from "../../components/explore/MatchList";
 import Shortlisted from "../../components/explore/Shortlisted";
@@ -8,6 +9,9 @@ import HomeLayout from "../../components/layouts/HomeLayout";
 function Explore() {
   const [activeExplore, setactiveExplore] = useState("Superliked list");
   let activeTab = "";
+  const route = useLocation();
+  console.log(route.pathname, route, "route");
+
   if (activeExplore === "Superliked list") activeTab = <SuperLikeList />;
   else if (activeExplore === "Shortlist") activeTab = <Shortlisted />;
   else if (activeExplore === "Matched list") activeTab = <MatchList />;

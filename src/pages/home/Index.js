@@ -6,11 +6,13 @@ import Swipers from "../../components/home/Swipers";
 import PreferenceServices from "../../services/preferenceServices";
 import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
 import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function Index() {
   const [data, setData] = useState(null);
   const [gettingUser, setgettingUser] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
@@ -22,8 +24,16 @@ function Index() {
     // let data = await res.json()
   };
 
+  const getBoomData = async () => {
+    const res = await UserServices.getBoomUsers();
+    if (res.status == 200) {
+      if (res.data.matched_users.length > 0) navigate("/boom");
+    }
+  };
+
   useEffect(() => {
     getData();
+    getBoomData();
   }, []);
 
   // console.log('data', data)
