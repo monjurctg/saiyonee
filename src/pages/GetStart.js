@@ -83,6 +83,7 @@ function GetStarted() {
 
             </div>
             <div>
+              <a href="https://testingsaiyonee.betteraidbd.com/social_login/google"> 
             <FcGoogle
             style={{
               color: "rgb(5 90 189)",
@@ -92,6 +93,9 @@ function GetStarted() {
               cursor: "pointer"
               }}
             />
+
+
+              </a>
 
             </div>
           </div>
