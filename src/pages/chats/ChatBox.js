@@ -16,12 +16,17 @@ function ChatBox() {
     // console.log('res', res.data.data)
     setmessageData(res.data);
   };
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  // }
+
+  let scrollToBottomF = () => {
+    messagesEndRef.current.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});
   }
   useEffect(() => {
     // scrollToBottom();
     getMessage();
+    scrollToBottomF();
     const interval = setInterval(() => getMessage(), 10000)
         return () => {
           clearInterval(interval);
@@ -29,7 +34,8 @@ function ChatBox() {
   }, []);
 
   useEffect(() => {
-    scrollToBottom();
+    // scrollToBottom();
+    scrollToBottomF();
     }, [messageData]);
 
   let sendMessages = async (e) => {
