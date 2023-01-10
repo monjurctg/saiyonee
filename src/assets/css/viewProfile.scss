@@ -77,6 +77,8 @@
 }
 
 .chat-body {
+  height: 70vh;
+    overflow-y: auto;
   img {
     width: 42px;
     height: 42px;
@@ -100,6 +102,8 @@
         font-size: 14px;
         color: #1f2937;
         font-weight: 400;
+        /* width: 100%; */
+        word-break: break-all;
       }
       //   background: #ffb7ac;
       //   transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -125,6 +129,8 @@
         font-size: 14px;
         color: #1f2937;
         font-weight: 400;
+        /* width: 100%; */
+        word-break: break-all;
       }
       //   background: #ffb7ac;
       //   transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -133,7 +139,7 @@
 }
 .chat-footer {
   position: fixed;
-  bottom: 20px;
+  bottom: 0px;
   padding: 15px;
   gap: 15px;
   align-items: center;

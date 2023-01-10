@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 import message from "../../assets/imgs/msg.png";
@@ -10,18 +10,27 @@ import UserServices from "../../services/userServices";
 function ChatBox() {
   const [messageUser, setMessageUser] = useState();
   const [messageData, setmessageData] = useState([]);
+  const messagesEndRef = useRef(null)
   let getMessage = async () => {
     let res = await UserServices.getMessage({ match_id: 10 });
     // console.log('res', res.data.data)
     setmessageData(res.data);
   };
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
   useEffect(() => {
+    // scrollToBottom();
     getMessage();
     const interval = setInterval(() => getMessage(), 10000)
         return () => {
           clearInterval(interval);
         }
   }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+    }, [messageData]);
 
   let sendMessages = async (e) => {
     e.preventDefault();
@@ -87,7 +96,7 @@ function ChatBox() {
   );
   return (
     <ChatLayout>
-      <div className="chat-body" style={{ marginTop: 80 }}>
+      <div className="chat-body" style={{ marginTop: 80 }} ref={messagesEndRef}>
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
           <div>{showMessageFrom}</div>
