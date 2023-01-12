@@ -33,9 +33,11 @@ function ChatBox() {
         }
   }, []);
 
+
   useEffect(() => {
     // scrollToBottom();
     scrollToBottomF();
+    console.log('window.pageXOffset',messagesEndRef.current.off)
     }, [messageData]);
 
   let sendMessages = async (e) => {

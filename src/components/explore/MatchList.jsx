@@ -53,7 +53,7 @@ function MatchList() {
         ) : matchList.length > 0 ? (
           matchList
         ) : (
-          <h1>No data found</h1>
+          <h1 style={{fontSize:20}}>No data found</h1>
         )}
       </div>
     </div>
