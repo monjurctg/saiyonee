@@ -63,6 +63,7 @@ import {
 import EditProfileModule from "../pages/editProfile/EditProfileModule";
 import ChatBox from "../pages/chats/ChatBox";
 import SocialLogin from "../pages/social/SocialLogin";
+import Register from "../pages/social-login/Register";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -132,6 +133,8 @@ function Routers() {
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/get-start" element={<GetStarted />} />
             <Route path="/social-login" element={<SocialLogin />} />
+            <Route path="/social-login/register" element={<Register />} />
+
 
 
             <Route path="/login" element={<Login />} />

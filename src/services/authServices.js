@@ -68,6 +68,16 @@ AuthServices.logout = async () => {
   return res;
 };
 
+AuthServices.socialAppUserToken = async (data) => {
+  // console.log('data', data)
+  let url = "/social_login/retrieve_app_user_from_token";
+
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 AuthServices.forgotPassword = async (data) => {
   // console.log('data', data)
   let url = "/forgot_password";
