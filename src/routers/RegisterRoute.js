@@ -4,7 +4,8 @@ import {getToken} from "../utils/functions";
 
 function RegisterRoute() {
   // let auth = useAuth();
-  let isRegister = localStorage.getItem("regStart");
+  // let isRegister = localStorage.getItem("regStart");
+  let socialToken = localStorage.getItem("social-token");
   const {isRegStart} = useSelector((state) => state.auth);
   let location = useLocation();
   const token = getToken();
@@ -12,7 +13,7 @@ function RegisterRoute() {
   if (!isRegStart && token) {
     return <Navigate to="/success" state={{from: location}} />;
   }
-  if (!isRegStart) {
+  if (!isRegStart && !socialToken) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }
 

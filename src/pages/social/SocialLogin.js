@@ -26,7 +26,8 @@ function SocialLogin() {
     if (res.status === 200) {
       setlaoding(false);
       toastMsg.success(res?.data?.message);
-      navigate("/social-login/register");
+      localStorage.setItem("social-token", google_token);
+      navigate("/register/usertype");
 
       console.log("res", res);
     } else {
