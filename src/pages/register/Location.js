@@ -15,11 +15,11 @@ function Location() {
     current_country,
     email
   } = useSelector((state) => state.auth);
-
-  console.log(
-    current_country == "Select candidate's current country",
-    "check current country"
-  );
+  let socialToken = localStorage.getItem("social-token");
+  // console.log(
+  //   current_country == "Select candidate's current country",
+  //   "check current country"
+  // );
   const onContinueClicked = async () => {
     if (current_country == "Select candidate's current country") {
       setErr({
@@ -42,14 +42,19 @@ function Location() {
       page_name: pathname,
     };
 
-    let res = await AuthServices.checkPage(data);
+    if(!socialToken){
 
-    if (res.status == 200) {
+      let res = await AuthServices.checkPage(data);
+  
+      if (res.status == 200) {
+        navigate("/register/family_info");
+      }
+      else {
+        console.log(data);
+        console.log(res);
+      }
+    }else{
       navigate("/register/family_info");
-    }
-    else {
-      console.log(data);
-      console.log(res);
     }
   };
   return (

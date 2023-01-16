@@ -28,6 +28,15 @@ AuthServices.register = async (data) => {
     .catch((err) => err.response);
   return res;
 };
+AuthServices.socialRegister = async (data) => {
+  // console.log('data', data)
+  let url = "/social_login/complete_social_registration";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 
 AuthServices.login = async (data) => {
   // console.log('data', data)

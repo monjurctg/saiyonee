@@ -9,8 +9,9 @@ import {stoteRegisterValues} from "../../utils/functions";
 
 function PersonalInformation() {
   const [err, setErr] = useState();
-
+  let socialToken = localStorage.getItem("social-token");
   let {pathname} = useLocation();
+  
   // let gender = "male";
   // let marital_status = "marid";
 
@@ -115,11 +116,12 @@ function PersonalInformation() {
         error: "marital_status",
         message: "Please select marital status",
       });
-    } else {
+    } else if(!socialToken) {
       let data = {
         email: email,
         page_name: pathname,
       };
+
       let res = await AuthServices.checkPage(data);
       // console.log('res', res)
       if (res.status === 200) {
@@ -128,6 +130,10 @@ function PersonalInformation() {
         stoteRegisterValues(state);
         navigate("/register/education");
       }
+    }else if(socialToken){
+      dispatch(setPersonalInfo(state));
+      stoteRegisterValues(state);
+      navigate("/register/education");
     }
   };
 

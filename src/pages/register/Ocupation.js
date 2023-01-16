@@ -11,9 +11,11 @@ import {
 import AuthServices from "../../services/authServices";
 import { stoteRegisterValues } from "../../utils/functions";
 
+
 function Ocupation() {
   const [err, setErr] = useState();
   let { pathname } = useLocation()
+  let socialToken = localStorage.getItem("social-token");
   const [employeeType, setemployeeType] = useState(["Unemployed", "Student"]);
 
   const navigate = useNavigate();
@@ -87,12 +89,17 @@ function Ocupation() {
       return;
     };
 
-    let data = {
-      email: email,
-      page_name: pathname,
-    }
-    let res = await AuthServices.checkPage(data)
-    if (res.status === 200) {
+    if(!socialToken){
+
+      let data = {
+        email: email,
+        page_name: pathname,
+      }
+      let res = await AuthServices.checkPage(data)
+      if (res.status === 200) {
+        navigate("/register/location");
+      }
+    }else{
       navigate("/register/location");
     }
 

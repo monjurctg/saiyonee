@@ -9,6 +9,7 @@ import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
+  let socialToken = localStorage.getItem("social-token"); 
   let { pathname } = useLocation();
 
   const [err, setErr] = useState();
@@ -71,17 +72,23 @@ function FamilyInfo() {
       return;
     }
 
-    let data = {
-      email: email,
-      page_name: pathname,
-    }
+    if(!socialToken){
+      
+          let data = {
+            email: email,
+            page_name: pathname,
+          }
+      
+          let res = await AuthServices.checkPage(data);
+      
+          if (res.status == 200) {
+            dispatch(setFamilyInformation(familyInfo));
+            stoteRegisterValues(familyInfo);
+      
+            navigate("/register/varification");
+          }
 
-    let res = await AuthServices.checkPage(data);
-
-    if (res.status == 200) {
-      dispatch(setFamilyInformation(familyInfo));
-      stoteRegisterValues(familyInfo);
-
+    }else{
       navigate("/register/varification");
     }
 
