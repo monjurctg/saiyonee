@@ -89,6 +89,8 @@ function FamilyInfo() {
           }
 
     }else{
+      dispatch(setFamilyInformation(familyInfo));
+      stoteRegisterValues(familyInfo);
       navigate("/register/varification");
     }
 

@@ -3,9 +3,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Scalaton from "../../components/Scalaton";
 import AuthServices from "../../services/authServices";
 import toastMsg from "../../utils/toastify";
+import { setToken } from "../../utils/functions";
+import { setRegEmail_Pass } from "../../redux/slices/authSlices";
+import { useDispatch } from "react-redux";
 
 function SocialLogin() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const [laoding, setlaoding] = useState(false);
   // const status = searchParams.get("status");
@@ -23,13 +27,21 @@ function SocialLogin() {
       driver: driver,
       token: google_token,
     });
+    // console.log('res', res)
     if (res.status === 200) {
       setlaoding(false);
-      toastMsg.success(res?.data?.message);
-      localStorage.setItem("social-token", google_token);
-      navigate("/register/usertype");
+      if(res?.data?.registration_completed ){
+        setToken(res?.data?.auth_token);
+        navigate("/success");
+      }else{
+        
+        dispatch(setRegEmail_Pass({email:res?.data?.app_user_email, password:"", confirmPassword:""}));
+        toastMsg.success(res?.data?.message);
+        localStorage.setItem("social-token", res?.data?.auth_token);
+        navigate("/register/usertype");
+      }
 
-      console.log("res", res);
+      // console.log("res", res);
     } else {
       setlaoding(false);
       toastMsg.error(res?.data?.message);

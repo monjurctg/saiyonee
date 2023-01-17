@@ -30,9 +30,13 @@ AuthServices.register = async (data) => {
 };
 AuthServices.socialRegister = async (data) => {
   // console.log('data', data)
+  let socialToken = localStorage.getItem("social-token"); 
+  const config = {
+    headers: { Authorization: `Bearer ${socialToken}` }
+};
   let url = "/social_login/complete_social_registration";
   let res = axios
-    .post(url, data)
+    .post(url, data, config)
     .then((response) => response)
     .catch((err) => err.response);
   return res;

@@ -152,6 +152,9 @@ function Varification() {
       const res = await AuthServices.socialRegister(formd);
       console.log('res', res)
       if (res.status == 200) {
+        setToken(localStorage.setItem("social-token", res?.data?.auth_token));
+        localStorage.removeItem("social-token");
+        navigator("/success");
         // setToken(res.data.auth_token);
         // localStorage.setItem("isVarified", 0);
         // localStorage.setItem("is_banned", 0);
