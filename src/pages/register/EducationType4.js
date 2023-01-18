@@ -34,7 +34,7 @@ function EducationTypes4() {
           </div>
         </div>
         <div className="container px-4 pb-2 overflow-auto">
-          <h1>Undergrad Education</h1>
+          <h1>Postgrade Education</h1>
 
           {/* <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
             <div className="col-10">

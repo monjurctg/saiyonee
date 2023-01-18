@@ -13,7 +13,7 @@ function Help() {
   const [message, setMessage] = useState("");
 
   const [err, setErr] = useState(null);
-  // console.log('err', err?.message)
+  console.log('err', err)
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +31,7 @@ function Help() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!email.trim()){
+    if(!name.trim()){
       
         setErr({
           error:"name",
@@ -52,6 +52,7 @@ function Help() {
         error:"query",
         message:"Issue is required"
       })
+      return
     }
     setloading(true);
     let data = {
@@ -112,7 +113,7 @@ function Help() {
         className="card border-0  bg-transparent flex-grow-1"
         style={{ height: "40vh", marginTop: "-110px" }}
       >
-        <div className="card-body bg-body rounded p-3">
+        <div className="card-body bg-body rounded p-3  overflow-auto">
           <h3
             className="card-title mt-1 mb-4"
             style={{
@@ -187,7 +188,7 @@ function Help() {
             className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "email" ? "2px solid red" : "",
+              border: err?.error == "page" ? "2px solid red" : "",
             }}
           >
             <input
@@ -214,7 +215,7 @@ function Help() {
             className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "email" ? "2px solid red" : "",
+              border: err?.error == "query" ? "2px solid red" : "",
             }}
           >
             <textarea

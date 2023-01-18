@@ -56,7 +56,7 @@ function RegisterEmail() {
     if (!password) {
       setErr({
         error: "password",
-        message: "password is Required",
+        message: "Password is Required",
       });
 
       return;
@@ -64,7 +64,7 @@ function RegisterEmail() {
     if (password.length < 6) {
       setErr({
         error: "password",
-        message: "password length must be minimum 6 character ",
+        message: "Password length must be minimum 6 character ",
       });
       return;
     }
@@ -72,7 +72,7 @@ function RegisterEmail() {
     if (password !== confirmPassword) {
       setErr({
         error: "confirm_password",
-        message: "password and confirm Password does not match",
+        message: "Password and confirm Password does not match",
       });
       return;
     }

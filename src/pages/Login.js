@@ -54,7 +54,7 @@ function Login() {
     } else if (!password.trim()) {
       setErr({
         error: "password",
-        message: "password is required",
+        message: "Password is required",
       });
     }
     setloading(true);
