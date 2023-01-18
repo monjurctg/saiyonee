@@ -29,8 +29,8 @@ function Liked({id}) {
       <div className="explore-img">
         <div className="cross">X</div>
         <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`} key={index}>
-          {ll?.thumbnail_img_url ? (
-            <img src={ll?.thumbnail_img_url} alt="" />
+          {ll?.thumbnail_img ? (
+            <img src={ll?.thumbnail_img} alt="" />
           ) : (
             <h4 className="no-image">No Image</h4>
           )}
@@ -51,7 +51,7 @@ function Liked({id}) {
         ) : LikeList.length > 0 ? (
           LikeList
         ) : (
-          <h1>No data found</h1>
+          <h1 style={{fontSize:20}}>No data found</h1>
         )}
       </div>
     </div>

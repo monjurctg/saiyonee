@@ -45,7 +45,7 @@ function Swipers({data, getData}) {
         }, 2000);
       }
     } else if (task === dislike) {
-      console.log("like");
+      // console.log("like");
       let res = await UserServices.dislike_user(id);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
@@ -111,15 +111,15 @@ function Swipers({data, getData}) {
             }}>
                  {item?.display_name}
               </h3>
-              <p style={{textAlign: "center", marginTop: 10,marginBottom:0}}>
-                {item?.age} years
-              </p>  
+             
               <div className="d-flex justify-content-center" style={{gap:5}}>
-
-              <p style={{textAlign: "center", marginTop: 10}}>
+              <p style={{textAlign:"center",marginBottom:0,fontWeight:500}}>
+                {item?.age} years,
+              </p>  
+              <p style={{textAlign: "center",fontWeight:500}}>
                 {item?.current_city},
               </p>
-              <p style={{textAlign: "center", marginTop: 10}}>
+              <p style={{textAlign: "center",fontWeight:500}}>
               {item?.current_country}
               </p>
 

@@ -10,33 +10,69 @@ import UserServices from "../../services/userServices";
 function ChatBox() {
   const [messageUser, setMessageUser] = useState();
   const [messageData, setmessageData] = useState([]);
-  const messagesEndRef = useRef(null)
-  let getMessage = async () => {
-    let res = await UserServices.getMessage({ match_id: 10 });
-    // console.log('res', res.data.data)
-    setmessageData(res.data);
-  };
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  // }
+  const [scrollPos, setScrollPos] = useState();
+  console.log("scrollPos", scrollPos);
+  const messagesEndRef = useRef(null);
 
+  let getMessage = async (data) => {
+    // console.log('data', data)
+    let res = await UserServices.getMessage(data);
+    if(messageData?.data?.chat_messages?.length > 0){
+      let newMessage = res?.data?.data?.chat_messages[0]
+      messageData?.data?.chat_messages.push(newMessage)
+
+      console.log('newMessage', newMessage)
+      // setmessageData(res.data);
+
+    }
+    else{
+      setmessageData(res.data);
+    }
+    // console.log('res', res.data)
+  };
+console.log('messageData', messageData?.data?.chat_messages)
   let scrollToBottomF = () => {
-    messagesEndRef.current.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});
-  }
+    messagesEndRef.current.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+
+  useEffect(() => {
+   
+    if(scrollPos == 0){
+      console.log('first')
+      console.log('f',messageData?.data?.chat_messages[messageData?.data?.chat_messages.length - 1]?.id)
+      getMessage({match_id:10,oldest_message_id:messageData?.data?.chat_messages[messageData?.data?.chat_messages.length - 1]?.id});
+    }
+  }, [scrollPos])
+  
+
+  useEffect(() => {
+    if (!messagesEndRef.current &&! messageData) return;
+    const handleScroll = () => {setScrollPos(messagesEndRef.current.scrollTop)
+
+    };
+    messagesEndRef.current.addEventListener("scroll", handleScroll);
+    return () =>
+      messagesEndRef?.current?.removeEventListener("scroll", handleScroll);
+  }, [messagesEndRef]);
+
   useEffect(() => {
     // scrollToBottom();
-    getMessage();
-    scrollToBottomF();
-    const interval = setInterval(() => getMessage(), 10000)
-        return () => {
-          clearInterval(interval);
-        }
+    // scrollToBottomF();
+    getMessage({match_id:10});
+    // const interval = setInterval(() => getMessage(), 10000)
+    //     return () => {
+    //       clearInterval(interval);
+    //     }
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
     // scrollToBottom();
-    scrollToBottomF();
-    }, [messageData]);
+    // scrollToBottomF();
+  // }, [messageData]);
 
   let sendMessages = async (e) => {
     e.preventDefault();
@@ -59,9 +95,11 @@ function ChatBox() {
         <div className="chat-body-inner-right">
           <div
             className="write"
-            style={{
-              // backgroundImage: `url(${message})`,
-            }}
+            style={
+              {
+                // backgroundImage: `url(${message})`,
+              }
+            }
           >
             <p>{md.message}</p>
           </div>
@@ -72,9 +110,11 @@ function ChatBox() {
         <div className="chat-body-inner-left">
           <div
             className="write"
-            style={{
-              // backgroundImage: `url(${msgWhite})`,
-            }}
+            style={
+              {
+                // backgroundImage: `url(${msgWhite})`,
+              }
+            }
           >
             <p>{md.message}</p>
           </div>
@@ -102,7 +142,12 @@ function ChatBox() {
   );
   return (
     <ChatLayout>
-      <div className="chat-body" style={{ marginTop: 80 }} ref={messagesEndRef}>
+      <div
+        className="chat-body"
+        id="chat-body"
+        style={{ marginTop: 80 }}
+        ref={messagesEndRef}
+      >
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
           <div>{showMessageFrom}</div>

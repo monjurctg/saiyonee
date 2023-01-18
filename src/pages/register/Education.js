@@ -28,6 +28,7 @@ let scrollPos = 0;
 
 function Education() {
   const navigate = useNavigate();
+  let socialToken = localStorage.getItem("social-token");
   const scrollContainerRef = useRef();
   let {pathname} = useLocation()
   const onEducationSelectorClicked = useCallback(() => {
@@ -217,6 +218,7 @@ function Education() {
 
       return;
     }
+    if(!socialToken){
     let data = {
       email:email,
       page_name: pathname,
@@ -224,6 +226,10 @@ function Education() {
     let res = await AuthServices.checkPage(data)
     if(res.status === 200){
     navigate("/register/ocupation");
+    }
+  }
+    else{
+      navigate("/register/ocupation");
     }
   };
 

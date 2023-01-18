@@ -28,6 +28,19 @@ AuthServices.register = async (data) => {
     .catch((err) => err.response);
   return res;
 };
+AuthServices.socialRegister = async (data) => {
+  // console.log('data', data)
+  let socialToken = localStorage.getItem("social-token"); 
+  const config = {
+    headers: { Authorization: `Bearer ${socialToken}` }
+};
+  let url = "/social_login/complete_social_registration";
+  let res = axios
+    .post(url, data, config)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 
 AuthServices.login = async (data) => {
   // console.log('data', data)
@@ -68,6 +81,16 @@ AuthServices.logout = async () => {
   return res;
 };
 
+AuthServices.socialAppUserToken = async (data) => {
+  // console.log('data', data)
+  let url = "/social_login/retrieve_app_user_from_token";
+
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+  return res;
+};
 AuthServices.forgotPassword = async (data) => {
   // console.log('data', data)
   let url = "/forgot_password";

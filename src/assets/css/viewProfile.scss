@@ -77,7 +77,7 @@
 }
 
 .chat-body {
-  height: 70vh;
+  height: 60vh;
     overflow-y: auto;
   img {
     width: 42px;
@@ -136,6 +136,20 @@
       //   transform: matrix(-1, 0, 0, 1, 0, 0);
     }
   }
+}
+.chat-body {
+  overflow: auto; /* or auto */
+  width: 100%; /* or any width */
+  -ms-overflow-style: none; /* for IE and Edge */
+}
+
+/* Hide scrollbar in Webkit */
+.chat-body::-webkit-scrollbar {
+  width: 0.2em;
+  background-color: transparent; /* change the color to match your background */
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background-color: transparent; /* change the color to match your background */
 }
 .chat-footer {
   position: fixed;
