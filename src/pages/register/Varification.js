@@ -150,10 +150,11 @@ function Varification() {
       }
     }else{
       const res = await AuthServices.socialRegister(formd);
-      console.log('res', res)
+      // console.log('res', res)
       if (res.status == 200) {
         setToken(localStorage.setItem("social-token", res?.data?.auth_token));
         localStorage.removeItem("social-token");
+        toastMsg.success("Registration Successful");
         navigator("/success");
         // setToken(res.data.auth_token);
         // localStorage.setItem("isVarified", 0);
@@ -170,7 +171,7 @@ function Varification() {
   };
 
   useEffect(() => {
-    console.log(verification_img1.name, "verification_img1.name");
+    // console.log(verification_img1.name, "verification_img1.name");
     if (verification_img1.name) {
       if (verification_img2.name || verification_type !== "National ID") {
         setErr("");
