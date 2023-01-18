@@ -38,10 +38,8 @@ ExploreServices.getLikeSupperLike = (id) => {
 };
 ExploreServices.addSupperLike = (id) => {
   let url = `all_liked/submit_superlike`;
-  let res = axios
-    .post(url, id)
-    .then((response) => response)
-    .catch((err) => err);
+  let res = axios.post(url, id);
+
   return res;
 };
 ExploreServices.getMatchUsers = () => {

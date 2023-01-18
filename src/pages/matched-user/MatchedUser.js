@@ -13,6 +13,8 @@ import blur from "../../assets/imgs/blur.png";
 import cross from "../../assets/imgs/cross.png";
 import {useDispatch, useSelector} from "react-redux";
 import {setMatchModal} from "../../redux/slices/utilsSlice";
+import UserServices from "../../services/userServices";
+import toastMsg from "../../utils/toastify";
 
 const MatchedUser = () => {
   let subtitle;
@@ -22,6 +24,7 @@ const MatchedUser = () => {
   const [singleData, setSingleData] = useState({});
   let dispatch = useDispatch();
   const {matchModal} = useSelector((state) => state.utils);
+  const {gender} = useSelector((state) => state.auth.user);
   let modalChange = () => {
     console.log("matchModal", matchModal);
 
@@ -29,6 +32,7 @@ const MatchedUser = () => {
     else dispatch(setMatchModal(true));
   };
 
+  // console.log(gender, "gender");
   const {id, appId, route} = useParams();
   // console.log(id, appId, route, "dfdk");
   async function fetchShortUser() {
@@ -61,8 +65,57 @@ const MatchedUser = () => {
       setSingleData(response.data);
     }
   }
+  let getActiveSlide = async (task, id) => {
+    if (task === "like") {
+      let res = await UserServices.like_user(id);
+      if (res.status === 200) {
+        toastMsg.success(res.data.message);
+      } else {
+        console.log(res, "res from like");
+        toastMsg.error(res.response.data.message, "hello");
+      }
+    } else if (task === "dislike") {
+      let res = await UserServices.dislike_user(id);
+      if (res.status === 200) {
+        toastMsg.success(res.data.message);
+      } else {
+        console.log(res, "res from dislike");
+        toastMsg.error(res.response.data.message, "hello");
+      }
+    } else if (task === "addShort_list") {
+      addShortlist(id);
+    } else if (task === "supper_like_submit") {
+      let data = new FormData();
 
-  console.log(singleData, "singleData");
+      data.append("superliked_app_user_id", id);
+      let res = await ExploreServices.addSupperLike(data);
+      if (res.status === 200) {
+        toastMsg.success(res.data.message);
+
+        // getData();
+      } else {
+        toastMsg.error(res.error.message);
+        console.log(res, "res");
+      }
+    }
+  };
+
+  const addShortlist = async (id) => {
+    let data = new FormData();
+
+    data.append("shortlist_app_user_id", id);
+    console.log(id, "id");
+
+    const res = await ExploreServices.submitShortList(data);
+    if (res.status === 200) {
+      toastMsg.success(res.data.message);
+      // getData();
+    } else {
+      console.log(res);
+
+      toastMsg.error(res.response.data.message);
+    }
+  };
 
   useEffect(() => {
     if (route === "shortList") {
@@ -76,30 +129,22 @@ const MatchedUser = () => {
   let tab = (
     <div className="container pt-2 ">
       <div className="items d-flex justify-content-evenly">
-        <div
-          className="itemss"
-          // onClick={() => getActiveSlide(dislike)}
-        >
+        <div className="itemss" onClick={() => getActiveSlide("dislike", id)}>
           <img src={dislike} alt="" />
         </div>
         {route === "liked" && (
           <div
             className="itemss"
-            //  onClick={() => getActiveSlide(addShort_list)}
-          >
+            onClick={() => getActiveSlide("addShort_list", id)}>
             <img src={task} alt="" />
           </div>
         )}
         <div
           className="itemss"
-          // onClick={() => getActiveSlide(supper_like_submit)}
-        >
+          onClick={() => getActiveSlide("supper_like_submit", id)}>
           <img src={rocket} alt="" />
         </div>{" "}
-        <div
-          className="itemss"
-          //  onClick={() => getActiveSlide(like)}
-        >
+        <div className="itemss" onClick={() => getActiveSlide("like", id)}>
           <img src={like} alt="" />
         </div>
       </div>

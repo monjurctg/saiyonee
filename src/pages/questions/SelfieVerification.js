@@ -20,9 +20,9 @@ function SelfieVerification() {
 
     if (res.status === 200) {
       setimage2(res.data.images.selfie_img);
-      if (res.data.images.selfie_img && !selfieEdit) {
-        navigate("/preference");
-      }
+      // if (res.data.images.selfie_img && !selfieEdit) {
+      //   navigate("/preference");
+      // }
     }
   };
 

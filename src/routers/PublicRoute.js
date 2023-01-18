@@ -17,7 +17,8 @@ function PublicRoute({varification}) {
     isEmptyQuestion,
     isProfileQuesionExist,
     isAlreadySetPreference,
-    isBanned
+    isBanned,
+    "from public route"
   );
   if (auth && !isEmptyQuestion) {
     return <Navigate to="/question/1" state={{from: location}} />;

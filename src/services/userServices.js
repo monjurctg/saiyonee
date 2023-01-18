@@ -12,16 +12,22 @@ UserServices.filter_users = async () => {
   return res;
 };
 
-UserServices.like_user = async (id) => {
-  const res = await axios.post("/all_liked/submit_like", {
-    liked_app_user_id: id,
-  });
+UserServices.like_user = (id) => {
+  const res = axios
+    .post("/all_liked/submit_like", {
+      liked_app_user_id: id,
+    })
+    .then((res) => res)
+    .catch((err) => err);
   return res;
 };
 UserServices.super_like_user = async (id) => {
-  const res = await axios.post("/all_liked/submit_superlike", {
-    superliked_app_user_id: id,
-  });
+  const res = await axios
+    .post("/all_liked/submit_superlike", {
+      superliked_app_user_id: id,
+    })
+    .then((res) => res)
+    .catch((err) => err);
   return res;
 };
 
@@ -31,9 +37,12 @@ UserServices.edit_user_info = async (data) => {
 };
 
 UserServices.dislike_user = async (id) => {
-  const res = await axios.post("/all_disliked/submit_dislike", {
-    disliked_app_user_id: id,
-  });
+  const res = await axios
+    .post("/all_disliked/submit_dislike", {
+      disliked_app_user_id: id,
+    })
+    .then((res) => res)
+    .catch((err) => err);
   return res;
 };
 

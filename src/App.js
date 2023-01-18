@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import {setPreviousPreference} from "./redux/slices/preferenceSlice";
 import {useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import UserServices from "./services/userServices";
+import {setCurrentUser} from "./redux/slices/authSlices";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
@@ -29,6 +31,7 @@ function App() {
   const dispatch = useDispatch();
   const fetchPreviousPreference = async () => {
     const res = await PreferenceServices.getPreferenceData();
+
     if (res.status === 200) {
       dispatch(setPreviousPreference(res.data.profile_preferences));
     } else {
@@ -36,8 +39,17 @@ function App() {
     }
   };
 
+  const fetchCurrentUser = async () => {
+    const res = await UserServices.UserProfile();
+    if (res.status === 200) {
+      dispatch(setCurrentUser(res.data));
+      console.log(res.data);
+    }
+  };
+
   useEffect(() => {
     fetchPreviousPreference();
+    fetchCurrentUser();
   }, []);
 
   return <Routers />;

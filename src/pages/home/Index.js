@@ -3,8 +3,6 @@ import HomeLayout from "../../components/layouts/HomeLayout";
 // import logo from '../../../public/img/logo.svg'
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
-import PreferenceServices from "../../services/preferenceServices";
-import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 

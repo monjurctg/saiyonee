@@ -27,6 +27,9 @@ const authSlice = createSlice({
       state.password = payload.password;
       state.password_confirmation = payload.confirmPassword;
     },
+    setCurrentUser: (state, {payload}) => {
+      state.user = payload;
+    },
     setGender: (state, {payload}) => {
       state.gender = payload.gender;
     },
@@ -172,7 +175,7 @@ const authSlice = createSlice({
       state.education4Other = payload;
     },
     setCurrentEmploymentTypeOther: (state, {payload}) => {
-      state.currentEmploymentTypeOther=payload
+      state.currentEmploymentTypeOther = payload;
     },
     setIsRegStart: (state) => {
       state.isRegStart = true;
@@ -203,6 +206,7 @@ const authSlice = createSlice({
 
 export const {
   setRegEmail_Pass,
+  setCurrentUser,
   setGender,
   setIsVarified,
   regSuccessAction,
