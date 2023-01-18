@@ -72,7 +72,6 @@ export const OCCUPATION_TYPES = [
 ];
 
 export const INDUSTRY_TYPES = [
-  "",
   "Telecommunication",
   "FMCG",
   "Beverage",

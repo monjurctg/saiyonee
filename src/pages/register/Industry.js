@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { INDUSTRY_TYPES } from "../../constants/register_constants";
-import { setIndustry } from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {INDUSTRY_TYPES} from "../../constants/register_constants";
+import {setIndustry} from "../../redux/slices/authSlices";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function Industry() {
   const navigator = useNavigate();
   const dispatch = useDispatch();
-  const { industry } = useSelector((state) => state.auth);
+  const {industry} = useSelector((state) => state.auth);
   const onIndustryChange = (e) => {
     dispatch(setIndustry(e.target.value));
     stoteRegisterValues({
@@ -24,7 +24,7 @@ function Industry() {
         <div
           onClick={() => navigator(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-          style={{ height: "58px", width: "58px" }}>
+          style={{height: "58px", width: "58px"}}>
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
@@ -54,7 +54,7 @@ function Industry() {
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
             <div className="col-10">
               <label htmlFor={ind} className="form-check-label bg-white w-100">
-                <strong>{ind}</strong>
+                <strong>{ind ? ind : "None"}</strong>
               </label>
             </div>
             <div className="col-2">
@@ -64,7 +64,7 @@ function Industry() {
                 name="industry_type"
                 checked={industry === ind}
                 onChange={onIndustryChange}
-                value={ind}
+                value={ind ?? ""}
                 id={ind}
               />
             </div>
