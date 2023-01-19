@@ -12,13 +12,16 @@ function LocationCity({module}) {
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
   const {current_city, current_country} = useSelector((state) => state.auth);
+  console.log('current_city', current_city)
+  
   const {country, city: editProfileCity} = useSelector(
     (state) => state.editProfile
   );
-  console.log(country, editProfileCity);
+  console.log("country", editProfileCity);
 
   const dispatch = useDispatch();
   const onCityChange = (e) => {
+    console.log('e', e)
     if (module == "eidt_profile_city") {
       console.log(module);
       dispatch(setEditProfileCity(e.target.value));
@@ -91,13 +94,14 @@ function LocationCity({module}) {
                     <strong>{city}</strong>
                   </label>
                 </div>
-                <div className="col-2">
+                <div className="col-2"  >
                   <input
                     className="form-check-input"
                     type="radio"
                     name="current_city"
-                    checked={current_city ?? editProfileCity === city}
+                    checked={current_city == city}
                     onChange={onCityChange}
+                   
                     value={city}
                     id={city}
                   />

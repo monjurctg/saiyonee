@@ -22,6 +22,7 @@ function LocationCountry({module}) {
 
   const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
+    // console.log('e', e)
     if (module == "country") {
       dispatch(setPreferenceCountry(e.target.value));
       // navigator(-1);
