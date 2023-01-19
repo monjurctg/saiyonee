@@ -59,12 +59,9 @@ QuestionServices.submitSelfiePhoto = async (data) => {
 
 QuestionServices.routeData = async () => {
   const resQues = await QuestionServices.getQuestions();
-  const resImg = await QuestionServices.getProfileImage();
-  const selfieImg = await QuestionServices.getSelfieImage();
+
   return {
     ques: resQues.data.form_field_questions,
-    addImg: resImg.data.images.profile_img,
-    selfie: selfieImg.data.images.selfie_img,
   };
 };
 

@@ -79,8 +79,10 @@ function Routers() {
   useEffect(() => {
     const getCondition = async () => {
       const res = await QuestionServices.routeData();
-      console.log(res, "Res");
-      const {addImg, selfie, ques} = res;
+
+      const {ques} = res;
+      const addImg = localStorage.getItem("profile_image");
+      const selfie = localStorage.getItem("selfies_image");
       // setVarification(res);
       if (addImg) {
         dispatch(set_is_image(true));
@@ -109,7 +111,7 @@ function Routers() {
 
   setTimeout(() => {
     setLoading(false);
-  }, 3000);
+  }, 2000);
   //  console.log('location', location)
   return (
     <div
@@ -119,12 +121,10 @@ function Routers() {
 
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
-    {loading ? (
+      {loading ? (
         <div className="load">
           <div className="load-up"></div>
-          <div>
-
-          </div>
+          <div></div>
         </div>
       ) : (
         <Routes>
@@ -134,8 +134,6 @@ function Routers() {
             <Route path="/get-start" element={<GetStarted />} />
             <Route path="/social-login" element={<SocialLogin />} />
             <Route path="/social-login/register" element={<Register />} />
-
-
 
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-pass" element={<ForgotPass />} />
@@ -249,7 +247,6 @@ function Routers() {
             <Route path="/viewProfile" element={<ViewProfile />} />
             <Route path="/boom" element={<Boom />} />
             <Route path="/chat/room" element={<ChatBox />} />
-
 
             <Route
               path="/user-info/:route/:id/:appId"
