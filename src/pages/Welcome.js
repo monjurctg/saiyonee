@@ -10,16 +10,14 @@ function Wellcome() {
       <h1
         style={{
           fontFamily: "Inter",
-          fontSize:31
+          fontSize: 31,
         }}>
-        <strong
-        
-        >Welcome to</strong>
+        <strong>Welcome to</strong>
       </h1>
       <h1
         style={{
           fontFamily: "Inter",
-          fontSize:31
+          fontSize: 31,
         }}>
         <strong>Saiyonee</strong>
       </h1>

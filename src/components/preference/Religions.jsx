@@ -16,7 +16,7 @@ function Religions() {
           </div>
         </div>
         <div className="container px-4 pb-2 overflow-auto">
-          <h1>Religion</h1>
+          <h1 className="card-title">Religion</h1>
           {RELIGION_TYPES.map((religionType, i) => (
             <div
               key={i}

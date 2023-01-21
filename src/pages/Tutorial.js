@@ -18,9 +18,9 @@ function Tutorial() {
         </div>
         <div className="col-8 d-flex justify-content-end">
           {/* <LinkLogo /> */}
-          <Link to={"/"}>
+          <div className="w-100">
             <img src="/img/logo.svg" alt="" />
-          </Link>
+          </div>
         </div>
         <div className="col-2"></div>
       </div>

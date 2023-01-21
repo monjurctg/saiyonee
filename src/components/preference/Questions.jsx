@@ -87,7 +87,7 @@ function Questions({id}) {
         </div>
       </div>
       <div className="container px-4 pb-2 overflow-auto">
-        <h1>{nowQuestion?.title}</h1>
+        <h1 className="card-title">{nowQuestion?.title}</h1>
 
         <div className="mt-4 mb-5">
           <h4 className="mb-2">{nowQuestion?.label}</h4>

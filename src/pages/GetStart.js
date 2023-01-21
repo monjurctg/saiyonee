@@ -3,11 +3,8 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import {setIsRegStart} from "../redux/slices/authSlices";
-import { FcGoogle } from "react-icons/fc";
-import { AiFillLinkedin,AiFillFacebook  } from "react-icons/ai";
-
-
-
+import {FcGoogle} from "react-icons/fc";
+import {AiFillLinkedin, AiFillFacebook} from "react-icons/ai";
 
 function GetStarted() {
   const dispatch = useDispatch();
@@ -25,7 +22,9 @@ function GetStarted() {
   );
   return (
     <BasicLayout subItem={subItem}>
-      <div className="card border-0  bg-transparent flex-grow-1"  style={{height:"40vh",marginTop:"-70px"}}>
+      <div
+        className="card border-0  bg-transparent flex-grow-1"
+        style={{height: "40vh", marginTop: "-70px"}}>
         <div className="card-body bg-body rounded p-3">
           <h1
             className="card-title mt-3 mb-4"
@@ -56,54 +55,54 @@ function GetStarted() {
             </strong>
           </Link>
 
-          <div className="mb-2 d-flex justify-content-center" style={{
-            gap:10
-          }}>
-            <div>
-
-            <Link to={"/social-login"}>
-            <AiFillFacebook style={{
-             color: "#14a0f8",
-             width: 40,
-             height: 40,
-             borderRadius: "50%",
-             cursor: "pointer"
-            }}/>
-            
-            </Link>
-            </div>
-            <div>
-            <AiFillLinkedin style={{
-             color: "rgb(5 90 189)",
-             width: 40,
-             height: 40,
-             borderRadius: "50%",
-             cursor: "pointer"
-            }}/>
-
-            </div>
-            <div>
-              <a href="https://testingsaiyonee.betteraidbd.com/social_login/google"> 
-            <FcGoogle
+          <div
+            className="mb-2 d-flex justify-content-center"
             style={{
-              color: "rgb(5 90 189)",
-              width: 40,
-              height: 40,
-              borderRadius: "50%",
-              cursor: "pointer"
-              }}
-            />
-
-
+              gap: 10,
+            }}>
+            <div>
+              <Link to={"/social-login"}>
+                <AiFillFacebook
+                  style={{
+                    color: "#14a0f8",
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                  }}
+                />
+              </Link>
+            </div>
+            <div>
+              <AiFillLinkedin
+                style={{
+                  color: "rgb(5 90 189)",
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+              />
+            </div>
+            <div>
+              <a href="https://testingsaiyonee.betteraidbd.com/social_login/google">
+                <FcGoogle
+                  style={{
+                    color: "rgb(5 90 189)",
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                  }}
+                />
               </a>
-
             </div>
           </div>
         </div>
       </div>
-      <div className="container max-width-mobile p-4"style={{height: "20vh",
-          position: "fixed",
-          bottom: 0,}}>
+      <div
+        className="container max-width-mobile p-4"
+        style={{height: "20vh", position: "fixed", bottom: 0}}>
         {/* <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">
@@ -127,7 +126,8 @@ function GetStarted() {
           </div>
         </div> */}
         <p className="get-started-p">
-        By continuing you agree to our Terms and Privacy Policy. We never post to facebook.
+          By continuing you agree to our Terms and Privacy Policy. We never post
+          to facebook.
         </p>
       </div>
     </BasicLayout>

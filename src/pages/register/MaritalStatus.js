@@ -50,7 +50,7 @@ function MaritalStatus({module}) {
           </div>
         </div>
         <div className="container px-4 pb-2 overflow-auto">
-          <h1>Marital status</h1>
+          <h1 className="card-title">Marital status</h1>
           {/* <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
             <div className="col-10">
               <label htmlFor="None" className="form-check-label bg-white w-100">
