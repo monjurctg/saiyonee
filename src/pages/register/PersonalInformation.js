@@ -187,7 +187,7 @@ function PersonalInformation() {
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           //   ref={scrollContainerRef}
         >
-          <h1 className="card-title">Personal Information</h1>
+          <h1 className="card-title">Bride/Groom Information</h1>
 
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
             Name must match with government issued ID card
