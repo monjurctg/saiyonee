@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import { USER_TYPES } from "../../constants/register_constants";
-import { setGender, setUserType } from "../../redux/slices/authSlices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {USER_TYPES} from "../../constants/register_constants";
+import {setGender, setUserType} from "../../redux/slices/authSlices";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function RegisterUserType() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user_type: userType } = useSelector((state) => state.auth);
+  const {user_type: userType} = useSelector((state) => state.auth);
   const [err, setErr] = useState("");
   const [user_type, set_user_type] = useState(userType);
   const onTypeChange = (e) => {
@@ -25,7 +25,7 @@ function RegisterUserType() {
       return;
     }
     dispatch(setUserType(user_type));
-    stoteRegisterValues({ user_type: user_type });
+    stoteRegisterValues({user_type: user_type});
     navigate("/register/personal-info");
   };
 
@@ -35,26 +35,23 @@ function RegisterUserType() {
       <RegisterLayout
         err={err}
         onContinueClicked={onClickNext}
-        footerBtn={"Next"}
-      >
+        footerBtn={"Next"}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1
+            className="card-title"
             style={{
               fontFamily: "Inter",
-            }}
-          >
+            }}>
             I'm searching life partner for
           </h1>
           {USER_TYPES.map((userType, i) => (
             <div
               key={i}
-              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
-            >
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
               <div className="col-10">
                 <label
                   htmlFor={userType}
-                  className="form-check-label bg-white w-100"
-                >
+                  className="form-check-label bg-white w-100">
                   <strong>{userType}</strong>
                 </label>
               </div>

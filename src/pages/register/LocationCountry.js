@@ -52,7 +52,7 @@ function LocationCountry({module}) {
         </div>
       </div>
       <div className="container px-4 pb-2 overflow-auto">
-        <h1>Select candidate's current country</h1>
+        <h1 className="card-title">Select candidate's current country</h1>
         <div className="form-floating my-4 text-muted shadow-2">
           <input
             type="text"

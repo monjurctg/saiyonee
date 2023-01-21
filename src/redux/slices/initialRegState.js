@@ -28,7 +28,7 @@ export const initialRegState = {
   working_since: "",
   employer_name: "",
   designation: "",
-  religion: "Islam",
+  religion: "",
   height_feet: "",
   height_inches: "",
   weight: "",

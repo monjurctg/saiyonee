@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setDegree2,
@@ -22,7 +22,7 @@ import {
   setPassingYear4,
 } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 let scrollPos = 0;
 
@@ -30,7 +30,7 @@ function Education() {
   const navigate = useNavigate();
   let socialToken = localStorage.getItem("social-token");
   const scrollContainerRef = useRef();
-  let {pathname} = useLocation()
+  let {pathname} = useLocation();
   const onEducationSelectorClicked = useCallback(() => {
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
@@ -39,7 +39,7 @@ function Education() {
   }, []);
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({ top: scrollPos });
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
   }, [onEducationSelectorClicked]);
   const {
     education1Other,
@@ -65,7 +65,7 @@ function Education() {
     education2,
     education3,
     education4,
-    email
+    email,
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -128,7 +128,7 @@ function Education() {
   ).map((_, i) => 1990 + i);
 
   // console.log("passingYears", passingYears);
-  let onContinueClicked = async() => {
+  let onContinueClicked = async () => {
     if (!education1 || education1 == "Select education") {
       setErr({
         error: "education1",
@@ -141,7 +141,7 @@ function Education() {
     if (!education1_institution.trim()) {
       setErr({
         error: "education1_institution",
-        message: "Please enter your Secondary Institution"
+        message: "Please enter your Secondary Institution",
       });
 
       return;
@@ -150,7 +150,7 @@ function Education() {
     if (!education1_major?.trim()) {
       setErr({
         error: "education1_major",
-        message: "Please enter your Secondary Major"
+        message: "Please enter your Secondary Major",
       });
 
       return;
@@ -159,7 +159,7 @@ function Education() {
     if (!education2 || education2 == "Select education") {
       setErr({
         error: "education2",
-        message: "Please select your Higher Secondary Education"
+        message: "Please select your Higher Secondary Education",
       });
 
       return;
@@ -168,7 +168,7 @@ function Education() {
     if (!education2_institution.trim()) {
       setErr({
         error: "education2_institution",
-        message: "Please enter your Higher Secondary Institution"
+        message: "Please enter your Higher Secondary Institution",
       });
 
       return;
@@ -177,7 +177,7 @@ function Education() {
     if (!education2_major?.trim()) {
       setErr({
         error: "education2_major",
-        message: "Please enter your Higher Secondary Major"
+        message: "Please enter your Higher Secondary Major",
       });
 
       return;
@@ -186,7 +186,7 @@ function Education() {
     if (!education3) {
       setErr({
         error: "education3",
-        message: "Please select your Graduate Education"
+        message: "Please select your Graduate Education",
       });
 
       return;
@@ -195,7 +195,7 @@ function Education() {
     if (!education3_institution.trim()) {
       setErr({
         error: "education3_institution",
-        message: "Please enter your Graduate Institution"
+        message: "Please enter your Graduate Institution",
       });
 
       return;
@@ -204,7 +204,7 @@ function Education() {
     if (!education3_major.trim()) {
       setErr({
         error: "education3_major",
-        message: "Please enter your Graduate Major"
+        message: "Please enter your Graduate Major",
       });
 
       return;
@@ -213,22 +213,21 @@ function Education() {
     if (!education3_passing_year) {
       setErr({
         error: "education3_passing_year",
-        message: "Please select your Graduate Passing Year"
+        message: "Please select your Graduate Passing Year",
       });
 
       return;
     }
-    if(!socialToken){
-    let data = {
-      email:email,
-      page_name: pathname,
-    }
-    let res = await AuthServices.checkPage(data)
-    if(res.status === 200){
-    navigate("/register/ocupation");
-    }
-  }
-    else{
+    if (!socialToken) {
+      let data = {
+        email: email,
+        page_name: pathname,
+      };
+      let res = await AuthServices.checkPage(data);
+      if (res.status === 200) {
+        navigate("/register/ocupation");
+      }
+    } else {
       navigate("/register/ocupation");
     }
   };
@@ -239,24 +238,26 @@ function Education() {
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           ref={scrollContainerRef}>
-          <h1>Candidate’s Educational Background</h1>
-          <h4 className="mt-5 mb-2">Secondary Education</h4>
+          <h1 className="card-title">Candidate’s Educational Background</h1>
+          <h4 className="mt-5 mb-2" style={{fontSize: "20px"}}>
+            Secondary Education
+          </h4>
           <Link
             onClick={onEducationSelectorClicked}
             to={"/register/education/type1"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+            <div
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "education1" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education1Other
                     ? "Other"
                     : education1
-                      ? education1
-                      : "Select secondary education"}
+                    ? education1
+                    : "Select secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -274,7 +275,7 @@ function Education() {
                 type="text"
                 id="inputEducation1"
                 value={education1}
-                onChange={(e)=> dispatch(setEducation1(e.target.value))} 
+                onChange={(e) => dispatch(setEducation1(e.target.value))}
                 className="form-control border-0 rounded-1"
                 placeholder="education1"
                 aria-describedby="education1"
@@ -283,12 +284,13 @@ function Education() {
             </div>
           )}
 
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education1_institution" ? "2px solid red" : "",
-            }}
-          >
+              border:
+                err?.error == "education1_institution" ? "2px solid red" : "",
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -296,7 +298,7 @@ function Education() {
               value={education1_institution}
               onChange={(e) => {
                 dispatch(setinstitution1(e.target.value));
-                stoteRegisterValues({ education1_institution: e.target.value });
+                stoteRegisterValues({education1_institution: e.target.value});
               }}
               className="form-control border-0 rounded-1"
               placeholder="institution1"
@@ -306,12 +308,12 @@ function Education() {
               Enter candidate's institution
             </label>
           </div>
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "education1_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -320,7 +322,7 @@ function Education() {
               //   onChange={onMajor1Change}
               onChange={(e) => {
                 dispatch(setMajor1(e.target.value));
-                stoteRegisterValues({ education1_major: e.target.value });
+                stoteRegisterValues({education1_major: e.target.value});
               }}
               className="form-control border-0 rounded-1"
               placeholder="major1"
@@ -348,9 +350,10 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${year1Dropdown ? " show" : ""
-                    }`}
-                  style={{ maxHeight: 200 }}>
+                  className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
+                    year1Dropdown ? " show" : ""
+                  }`}
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
@@ -360,8 +363,9 @@ function Education() {
                             education1_passing_year: year,
                           });
                         }}
-                        className={`btn btn-primary py-3 dropdown-item${education1_passing_year === year ? " " : ""
-                          }`}>
+                        className={`btn btn-primary py-3 dropdown-item${
+                          education1_passing_year === year ? " " : ""
+                        }`}>
                         {year}
                       </div>
                     </li>
@@ -373,23 +377,25 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2">Higher Secondary Education</h4>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
+            Higher Secondary Education
+          </h4>
           <Link
             onClick={onEducationSelectorClicked}
             to={"/register/education/type2"}>
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+            <div
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "education2" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education2Other
                     ? "Other"
                     : education2
-                      ? education2
-                      : "Select higher secondary education"}
+                    ? education2
+                    : "Select higher secondary education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -408,8 +414,7 @@ function Education() {
                 type="text"
                 id="inputEducation2"
                 value={education2}
-            
-                onChange={(e)=> dispatch(setEducation2(e.target.value))} 
+                onChange={(e) => dispatch(setEducation2(e.target.value))}
                 // onChange={onEducation2Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education2"
@@ -418,12 +423,13 @@ function Education() {
               <label htmlFor="inputEducation2">Enter degree</label>
             </div>
           )}
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education2_institution" ? "2px solid red" : "",
-            }}
-          >
+              border:
+                err?.error == "education2_institution" ? "2px solid red" : "",
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -431,7 +437,7 @@ function Education() {
               value={education2_institution}
               onChange={(e) => {
                 dispatch(setinstitution2(e.target.value));
-                stoteRegisterValues({ education2_institution: e.target.value });
+                stoteRegisterValues({education2_institution: e.target.value});
               }}
               // onChange={onInstitution2Change}
               className="form-control border-0 rounded-1"
@@ -442,12 +448,12 @@ function Education() {
               Enter candidate's institution
             </label>
           </div>
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "education2_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -455,7 +461,7 @@ function Education() {
               value={education2_major}
               onChange={(e) => {
                 dispatch(setMajor2(e.target.value));
-                stoteRegisterValues({ education1_major: e.target.value });
+                stoteRegisterValues({education1_major: e.target.value});
               }}
               // onChange={onMajor2Change}
               className="form-control border-0 rounded-1"
@@ -484,14 +490,16 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year2Dropdown ? " show" : ""
-                    }`}
-                  style={{ maxHeight: 200 }}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
+                    year2Dropdown ? " show" : ""
+                  }`}
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${education2_passing_year === year ? " active" : ""
-                          }`}
+                        className={`btn btn-primary py-3 dropdown-item${
+                          education2_passing_year === year ? " active" : ""
+                        }`}
                         onClick={() => {
                           dispatch(setPassingYear2(year));
                           stoteRegisterValues({
@@ -509,25 +517,25 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2">Graduate Education</h4>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
+            Graduate Education
+          </h4>
           <Link
             onClick={onEducationSelectorClicked}
-            to={"/register/education/type3"}
-          >
-
-            <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+            to={"/register/education/type3"}>
+            <div
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "education3" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education3Other
                     ? "Other"
                     : education3
-                      ? education3
-                      : "Select graduate education"}
+                    ? education3
+                    : "Select graduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -546,7 +554,7 @@ function Education() {
                 type="text"
                 id="inputEducation3"
                 value={education3}
-                onChange={(e)=> dispatch(setEducation3(e.target.value))} 
+                onChange={(e) => dispatch(setEducation3(e.target.value))}
                 // onChange={onEducation3Change}
                 className="form-control border-0 rounded-1"
                 placeholder="education3"
@@ -555,12 +563,13 @@ function Education() {
               <label htmlFor="inputEducation3">Enter degree</label>
             </div>
           )}
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education3_institution" ? "2px solid red" : "",
-            }}
-          >
+              border:
+                err?.error == "education3_institution" ? "2px solid red" : "",
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -568,7 +577,7 @@ function Education() {
               value={education3_institution}
               onChange={(e) => {
                 dispatch(setinstitution3(e.target.value));
-                stoteRegisterValues({ education3_institution: e.target.value });
+                stoteRegisterValues({education3_institution: e.target.value});
               }}
               // onChange={onInstitution3Change}
               className="form-control border-0 rounded-1"
@@ -580,12 +589,12 @@ function Education() {
             </label>
           </div>
 
-          <div className="form-floating my-4 text-muted  rounded-1"
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
               border: err?.error == "education3_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -593,7 +602,7 @@ function Education() {
               value={education3_major}
               onChange={(e) => {
                 dispatch(setMajor3(e.target.value));
-                stoteRegisterValues({ education3_major: e.target.value });
+                stoteRegisterValues({education3_major: e.target.value});
               }}
               // onChange={onMajor3Change}
               className="form-control border-0 rounded-1"
@@ -622,14 +631,16 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year3Dropdown ? " show" : ""
-                    }`}
-                  style={{ maxHeight: 200 }}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
+                    year3Dropdown ? " show" : ""
+                  }`}
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${education3_passing_year === year ? " active" : ""
-                          }`}
+                        className={`btn btn-primary py-3 dropdown-item${
+                          education3_passing_year === year ? " active" : ""
+                        }`}
                         onClick={() => {
                           dispatch(setPassingYear3(year));
                           stoteRegisterValues({
@@ -647,7 +658,9 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2">Postgraduate Education (Optional)</h4>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
+            Postgraduate Education (Optional)
+          </h4>
           <Link
             // onClick={onEducationSelectorClicked}
             to={"/register/education/type4"}>
@@ -657,8 +670,8 @@ function Education() {
                   {education4Other
                     ? "Other"
                     : education4
-                      ? education4
-                      : "Select postgraduate education"}
+                    ? education4
+                    : "Select postgraduate education"}
                 </label>
               </div>
               <div className="col-2 d-flex justify-content-end pe-3">
@@ -677,7 +690,7 @@ function Education() {
                 type="text"
                 id="inputEducation4"
                 value={education4}
-                onChange={(e)=> dispatch(setEducation4(e.target.value))} 
+                onChange={(e) => dispatch(setEducation4(e.target.value))}
                 // onChange={onEducation4Change}
 
                 className="form-control border-0 rounded-1"
@@ -694,7 +707,7 @@ function Education() {
               value={education4_institution}
               onChange={(e) => {
                 dispatch(setinstitution4(e.target.value));
-                stoteRegisterValues({ education4_institution: e.target.value });
+                stoteRegisterValues({education4_institution: e.target.value});
               }}
               // onChange={onInstitution4Change}
               className="form-control border-0 rounded-1"
@@ -712,7 +725,7 @@ function Education() {
               value={education4_major}
               onChange={(e) => {
                 dispatch(setMajor4(e.target.value));
-                stoteRegisterValues({ education4_major: e.target.value });
+                stoteRegisterValues({education4_major: e.target.value});
               }}
               // onChange={onMajor4Change}
               className="form-control border-0 rounded-1"
@@ -741,14 +754,16 @@ function Education() {
                 </button>
                 <ul
                   data-bs-popper
-                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${year4Dropdown ? " show" : ""
-                    }`}
-                  style={{ maxHeight: 200 }}>
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
+                    year4Dropdown ? " show" : ""
+                  }`}
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
-                        className={`btn btn-primary py-3 dropdown-item${education4_passing_year === year ? " active" : ""
-                          }`}
+                        className={`btn btn-primary py-3 dropdown-item${
+                          education4_passing_year === year ? " active" : ""
+                        }`}
                         onClick={() => {
                           dispatch(setPassingYear4(year));
                           stoteRegisterValues({
