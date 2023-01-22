@@ -221,7 +221,7 @@ function Preference() {
           <input
             type="number"
             name="age_from"
-            min={1}
+            min={0}
             id="inputHeightInches"
             style={{fontFamily: "Inter"}}
             value={state.age_from}

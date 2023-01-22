@@ -41,7 +41,7 @@ function GetStarted() {
               style={{
                 fontFamily: "Inter",
               }}>
-              Sign Up
+              Sign Up With Email
             </strong>
           </Link>
           <Link

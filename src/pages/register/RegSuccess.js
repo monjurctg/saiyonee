@@ -55,7 +55,7 @@ function RegSuccess() {
               <button
                 className="btn btn-primary w-100 rounded shadow p-3 my-4"
                 onClick={onClickLogout}>
-                <strong>Logout</strong>
+                <strong>Back to home</strong>
               </button>
             </div>
           </div>
