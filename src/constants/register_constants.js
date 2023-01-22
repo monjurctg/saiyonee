@@ -50,6 +50,7 @@ export const EDUCATION3_TYPES = [
   "Other",
 ];
 export const EDUCATION4_TYPES = [
+  "",
   "Masters",
   "MBA",
   "MD/ FCPS",
@@ -60,7 +61,6 @@ export const EDUCATION4_TYPES = [
 ];
 
 export const OCCUPATION_TYPES = [
-  "",
   "Unemployed",
   "Student",
   "Government job",
@@ -87,8 +87,6 @@ export const INDUSTRY_TYPES = [
 ];
 
 export const RELIGION_TYPES = [
-  "",
-
   "Islam",
   "Hinduism",
   "Buddhism",
@@ -97,11 +95,10 @@ export const RELIGION_TYPES = [
 ];
 
 export const MARITAL_STATUS_TYPES = [
-  "",
   "Never married",
   "Divorced",
   "Widowed",
-  "Seperated",
+  "Separated",
 ];
 
 // const CURR_YEAR = new Date().getFullYear()

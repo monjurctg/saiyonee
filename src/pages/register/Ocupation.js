@@ -105,7 +105,7 @@ function Ocupation() {
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
-          <h1>Candidate’s Professional Background</h1>
+          <h1 className="card-title">Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>
           <Link to={"/register/ocupation/type"}>
             <div

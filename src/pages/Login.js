@@ -68,7 +68,7 @@ function Login() {
     formData.append("password", data.password);
 
     let res = await AuthServices.login(formData);
-    // console.log("res", res.data);
+    console.log("res", res.data);
     if (res.status === 200) {
       setloading(false);
       setErr(false);
@@ -82,6 +82,8 @@ function Login() {
       localStorage.setItem("show_liked_list", res.data.show_liked_list);
       localStorage.setItem("package_id", res.data.package_id);
       localStorage.setItem("package_name", res.data.package_name);
+      localStorage.setItem("profile_image", res.data.profile_image);
+      localStorage.setItem("selfie_image", res.data.selfie_image);
       localStorage.setItem(
         "show_supper_liked_list",
         res.data.show_super_liked_list

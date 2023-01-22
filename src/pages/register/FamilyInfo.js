@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import { setFamilyInformation } from "../../redux/slices/authSlices";
+import {setFamilyInformation} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
-  let socialToken = localStorage.getItem("social-token"); 
-  let { pathname } = useLocation();
+  let socialToken = localStorage.getItem("social-token");
+  let {pathname} = useLocation();
 
   const [err, setErr] = useState();
 
@@ -21,7 +21,7 @@ function FamilyInfo() {
     mother_occupation,
     number_of_brothers,
     number_of_sisters,
-    email
+    email,
   } = useSelector((state) => state.auth);
   console.log("first", father_occupation);
   let onContinueClicked = async () => {
@@ -72,29 +72,25 @@ function FamilyInfo() {
       return;
     }
 
-    if(!socialToken){
-      
-          let data = {
-            email: email,
-            page_name: pathname,
-          }
-      
-          let res = await AuthServices.checkPage(data);
-      
-          if (res.status == 200) {
-            dispatch(setFamilyInformation(familyInfo));
-            stoteRegisterValues(familyInfo);
-      
-            navigate("/register/varification");
-          }
+    if (!socialToken) {
+      let data = {
+        email: email,
+        page_name: pathname,
+      };
 
-    }else{
+      let res = await AuthServices.checkPage(data);
+
+      if (res.status == 200) {
+        dispatch(setFamilyInformation(familyInfo));
+        stoteRegisterValues(familyInfo);
+
+        navigate("/register/varification");
+      }
+    } else {
       dispatch(setFamilyInformation(familyInfo));
       stoteRegisterValues(familyInfo);
       navigate("/register/varification");
     }
-
-
   };
   const dispatch = useDispatch();
   const [familyInfo, setFamilyInfo] = useState({
@@ -117,7 +113,7 @@ function FamilyInfo() {
     <>
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
-          <h1>Candidate's Family Information</h1>
+          <h1 className="card-title">Candidate's Family Information</h1>
           <div
             className="form-floating my-4 text-muted rounded-1"
             style={{

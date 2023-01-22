@@ -215,7 +215,7 @@ function Preference() {
         Age
       </p>
       <div className="d-flex">
-        <div
+          <div
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
@@ -224,10 +224,10 @@ function Preference() {
         >
           <input
             type="number"
-            name="age_from"
-            id="inputHeightInches"
-            style={{ fontFamily: "Inter" }}
-            value={state.age_from}
+            id="inputHeightFeet"
+            name="age_to"
+            style={{fontFamily: "Inter"}}
+            value={state.age_to}
             onChange={handleUserInputChange}
             placeholder={"From"}
             className="form-control border-0 rounded-1"
@@ -247,6 +247,7 @@ function Preference() {
           <input
             type="number"
             id="inputHeightFeet"
+            min={0}
             name="age_to"
             style={{ fontFamily: "Inter" }}
             value={state.age_to}
@@ -276,6 +277,7 @@ function Preference() {
             type="number"
             id="inputHeightFeet"
             name="height_feet"
+            min={1}
             style={{ fontFamily: "Inter" }}
             value={state.height_feet}
             onChange={handleUserInputChange}
@@ -297,6 +299,7 @@ function Preference() {
           <input
             type="number"
             name="height_inches"
+            min={1}
             id="inputHeightInches"
             style={{ fontFamily: "Inter" }}
             value={state.height_inches}

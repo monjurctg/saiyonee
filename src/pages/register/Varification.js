@@ -124,7 +124,7 @@ function Varification() {
     verification_img2: verification_img2,
   };
   const [type, setType] = useState();
-  let socialToken = localStorage.getItem("social-token"); 
+  let socialToken = localStorage.getItem("social-token");
 
   let onContinueClicked = async () => {
     let d = JSON.stringify(window.localStorage.getItem("register"));
@@ -133,9 +133,9 @@ function Varification() {
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
     });
-    if(!socialToken){
+    if (!socialToken) {
       const res = await AuthServices.register(formd);
-  
+
       if (res.status == 200) {
         setToken(res.data.auth_token);
         localStorage.setItem("isVarified", 0);
@@ -148,7 +148,7 @@ function Varification() {
         console.log("error");
         toastMsg.error(res.data.message);
       }
-    }else{
+    } else {
       const res = await AuthServices.socialRegister(formd);
       // console.log('res', res)
       if (res.status == 200) {
@@ -211,7 +211,7 @@ function Varification() {
       <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
         <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
-            <h1>ID Verification (Optional)</h1>
+            <h1 className="card-title">ID Verification (Optional)</h1>
 
             <p className="text-muted mt-3 mb-2">
               (NID / Passport / Driving License / Birth Certificate)

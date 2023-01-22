@@ -5,7 +5,7 @@ const initialState = {
   religion: "",
   employType: "",
   maritalStatus: "",
-  country: ["bangladesh"],
+  country: ["Bangladesh"],
   gender: "male",
   age_from: "",
   age_to: "",
@@ -32,6 +32,13 @@ const preferenceSlice = createSlice({
       state.gender = payload;
     },
     setPreferenceCountry: (state, {payload}) => {
+      if (state.country.includes(payload)) {
+        const restCountry = state.country.filter(
+          (country) => country !== payload
+        );
+        state.country = restCountry;
+        return;
+      }
       state.country = [...state.country, payload];
     },
     setPreferenceCity: (state, {payload}) => {

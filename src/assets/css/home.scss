@@ -546,6 +546,10 @@
     }
   }
 }
+.card-title {
+  font-size: 25px !important;
+  font-family: "Inter" !important;
+}
 
 .add-photos {
   display: flex;
@@ -618,14 +622,13 @@
 
     color: #6b7280;
   }
-  .day{
+  .day {
     font-size: 14px;
-line-height: 17px;
-margin: 0;
+    line-height: 17px;
+    margin: 0;
 
-text-transform: uppercase;
+    text-transform: uppercase;
 
-
-color: #6B7280;
+    color: #6b7280;
   }
 }
