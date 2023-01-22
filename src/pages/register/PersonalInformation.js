@@ -183,7 +183,7 @@ function PersonalInformation() {
           <h1 style={{ fontFamily: "Inter" }}>Personal Information</h1>
 
           <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
-            Name must match with government issued ID card
+            Name must match with government issued ID card(Not Visible to public)
           </p>
 
           <div
@@ -210,7 +210,7 @@ function PersonalInformation() {
             </label>
           </div>
           <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
-            App display name
+            App display name(Visible to public)
           </p>
           <div
             className="form-floating my-3 text-muted rounded-1 "

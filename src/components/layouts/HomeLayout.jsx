@@ -131,7 +131,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
           </div>
         )}
       </div>
-      <div className="px-4" style={{marginTop: 70}}>
+      <div className="" style={{marginTop: 70}}>
         {children}
       </div>
       <div

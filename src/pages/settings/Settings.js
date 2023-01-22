@@ -32,7 +32,7 @@ const Settings = () => {
       <div className="mt-3">
         <div style={{
               height: "62vh",
-              overflowY: "scroll"
+              overflowY: "auto"
         }}>
           <div
             className="d-flex justify-content-between align-items-center settings"
@@ -56,15 +56,15 @@ const Settings = () => {
 
             <h2 className="mt-4">{profile?.full_name}</h2>
 
-            <div className="complete">
+            {/* <div className="complete">
               <p>Complete my profile</p>
-            </div>
+            </div> */}
             <p className='percentage'>
                 {percentage}%
             </p>
           </div>
 
-          <div className="buttons">
+          <div className="buttons justify-content-center">
             <Link to={"/viewProfile"}>
               <button className="com-btn">View profile</button>
             </Link>
