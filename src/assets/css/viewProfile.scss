@@ -78,7 +78,7 @@
 
 .chat-body {
   height: 60vh;
-    overflow-y: auto;
+  overflow-y: auto;
   img {
     width: 42px;
     height: 42px;
@@ -193,5 +193,18 @@
     /* Sub Text */
 
     color: #6b7280;
+  }
+}
+
+.logos {
+  .viewProfile-no-active {
+    background: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #edafa6;
+    border-radius: 5px;
+  }
+  .viewProfile-active {
+    background-color: #edafa6;
   }
 }

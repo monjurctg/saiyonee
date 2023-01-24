@@ -127,8 +127,7 @@
   }
 }
 
-
-.s-logout{
+.s-logout {
   width: 200px;
   text-align: center;
   margin: 0;
@@ -421,6 +420,7 @@
   .tab {
     justify-content: space-between;
     overflow: auto;
+
     white-space: nowrap;
     width: 100%;
 
@@ -437,8 +437,8 @@
       // padding: 14px;
       /* line-height: 61px; */
       color: #6b7280;
-      width: 50%;
-      margin: auto;
+      width: 40%;
+      margin: 0 auto;
       border-right: none;
       text-align: center;
       &.active {

@@ -160,7 +160,7 @@ const EditProfile = () => {
           </Link>
         </div>
 
-        <div className="add-photos">
+        {/* <div className="add-photos">
           <div className="add-photo">
             <p>Add a Photo</p>
           </div>
@@ -176,7 +176,7 @@ const EditProfile = () => {
             {" "}
             <p>Add a Photo</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </InputLayOut>
   );
