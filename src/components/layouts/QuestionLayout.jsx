@@ -50,15 +50,15 @@ function QuestionLayout({
               style={{height: 60}}
               onClick={imageClick}
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
-              <strong>Upload A Photo</strong>
+              <strong>Retake</strong>
             </button>
 
-            <button
+            {/* <button
               style={{height: 60}}
               onClick={imageClick}
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake">
               <strong>Retake</strong>
-            </button>
+            </button> */}
           </div>
         )}
 

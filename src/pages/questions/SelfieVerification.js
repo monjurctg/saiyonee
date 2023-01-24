@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -53,7 +53,7 @@ function SelfieVerification() {
     let file = e.target.files[0];
     // console.log('file', file)
     if (file) {
-      if (file.size > 1000000) {
+      if (file.size > 100000000) {
         seterr("File size is too large");
       } else {
         // console.log('file', file)
@@ -65,7 +65,9 @@ function SelfieVerification() {
     }
   };
   let imageClick = (e) => {
-    e.preventDefault();
+    console.log('e', e)
+    // e.preventDefault();
+    // console.log(' document.getElementById("image")',  document.getElementById("image").click())
     document.getElementById("image").click();
   };
   return (
@@ -74,14 +76,21 @@ function SelfieVerification() {
       err={err}
       // onContinueClicked={onSubmit}
       length={length}
-      title={"Selfie Verification"}
-      loading={loading}>
+      title={"Candidate's Selfie (optional)"}
+      loading={loading}
+    >
       <div className="question mt-3">
-        <p>
-          Hold the phone at eye level and make sure that your whole face is
-          visible. Tap the camera when you’re ready.
+        <p
+          style={{
+            fontSize: "12px",
+            textAlign: "start",
+          }}
+        >
+          If you are the bride/groom, please tap the camera and take a selfie If
+          you are not the candidate, please ask the candidate to login
+          separately to this account and give her/his selfie
         </p>
-        <div className="image-round mt-5">
+        <div className="image-round mt-5" onClick={imageClick}>
           <img
             src={image2 ? image2 : image ? URL.createObjectURL(image) : null}
             alt=""
@@ -96,14 +105,41 @@ function SelfieVerification() {
           <input
             type="file"
             id="image"
-            style={{display: "none"}}
+            style={{ display: "none" }}
             onChange={fileChange}
+            accept="image/*" capture="camera"
           />
+        </div>
+        <div>
+        <h5
+          style={{
+            fontSize: "16px",
+            textAlign: "start",
+          }}
+        >
+          Selfie Guideline</h5>
+       
+        <p
+          style={{
+            fontSize: "12px",
+            textAlign: "start",
+            margin:0
+          }}
+        >1. Hold the phone at eye level 
+        </p>
+        <p
+          style={{
+            fontSize: "12px",
+            textAlign: "start",
+          }}
+        >2. Make sure that your whole face is visible
+        </p>
+
         </div>
         <p className="mt-3">We will not make this public. it’s kept PRIVATE</p>
         {image2?.selfie_img && (
           <Link to={"/review/profile"}>
-            <p style={{color: "#1F2937"}}>I will do it later</p>
+            <p style={{ color: "#1F2937" }}>I will do it later</p>
           </Link>
         )}
       </div>
