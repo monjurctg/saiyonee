@@ -454,13 +454,16 @@
     position: relative;
     background: #ffffff;
     border-radius: 50%;
-    width: 167px;
+    width: 177px;
     height: 163px;
     padding: 4px 6px;
     img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
+      width: 95%;
+    height: 95%;
+    position: absolute;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: antiquewhite;
     }
   }
   .complete {
@@ -646,4 +649,39 @@
 
     color: #6b7280;
   }
+}
+
+.circle-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.circle-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.circle-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4CAF50;
+  border-radius: 50%;
+  clip-path: polygon(0 0, var(--progress) 100%, 0% 100%);
+  transition: all 1s ease-in-out;
+}
+
+.percentage-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

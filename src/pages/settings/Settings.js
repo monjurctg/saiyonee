@@ -10,7 +10,6 @@ const Settings = () => {
   const [profile, setprofile] = useState();
   const [percentage, setpercentage] = useState(0);
 
-
   const Navigate = useNavigate();
 
   let userProfile = async () => {
@@ -20,7 +19,7 @@ const Settings = () => {
     // console.log("res", res.data);
     if (res.status === 200) {
       setprofile(res.data);
-      setpercentage(percentageV.data?.percentage_completion)
+      setpercentage(percentageV.data?.percentage_completion);
     }
   };
   useEffect(() => {
@@ -30,10 +29,12 @@ const Settings = () => {
   return (
     <HomeLayout>
       <div className="mt-3">
-        <div style={{
-              height: "62vh",
-              overflowY: "auto"
-        }}>
+        <div
+          style={{
+            height: "62vh",
+            overflowY: "auto",
+          }}
+        >
           <div
             className="d-flex justify-content-between align-items-center settings"
             style={{
@@ -44,24 +45,38 @@ const Settings = () => {
                             <img src={"img/pp.png"} alt="" />
 
                         </div> */}
-            {profile?.profile_img ? (
-              <div className="rounded-img">
-                <img src={profile?.profile_img} alt="" />
-              </div>
-            ) : (
-              <div className="no-image">
-                <p>{profile?.full_name?.charAt(0)}</p>
-              </div>
-            )}
+            {/* {profile?.profile_img ? ( */}
+            <div className="rounded-img"
+            style={{
 
-            <h2 className="mt-4">{profile?.full_name}</h2>
+              background: "conic-gradient(#4D5BFA 101deg,#dee2e6 33deg)"
+            }}
+            
+            >
+                {/* <input type={"range"}/> */}
+            <img src={profile?.profile_img || "img/home.svg"} alt="" />
+            </div>
+
+            {/* ) : ( */}
+            {/* <div className="no-image">
+                <p>{profile?.full_name?.charAt(0)}</p>
+              </div> */}
+            {/* )} */}
+              <div>
+              <h3 className="mt-2">{profile?.full_name|| "Kamrul Hassan"}</h3>
+
+              </div>
 
             {/* <div className="complete">
               <p>Complete my profile</p>
             </div> */}
-            <p className='percentage'>
-                {percentage}%
-            </p>
+            <div className="percentage-div">
+            <p className="percentage">{percentage}%</p>
+            <p style={{
+                  fontWight: 600,
+            }}>Profile complete</p>
+
+            </div>
           </div>
 
           <div className="buttons justify-content-center">
@@ -73,6 +88,9 @@ const Settings = () => {
               <button className="edit-btn">Edit profile</button>
             </Link>
           </div>
+          <Link to={"/edit/profile"} className="buttons">
+              <button className="edit-btn">View Gallery</button>
+            </Link>
         </div>
       </div>
     </HomeLayout>
