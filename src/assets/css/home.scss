@@ -127,6 +127,21 @@
   }
 }
 
+
+.s-logout{
+  width: 200px;
+  text-align: center;
+  margin: 0;
+  background: #ffb7ac;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 7px;
+}
+
 .footer {
   p {
     font-family: "Inter";
@@ -149,7 +164,7 @@
   border-top: 2px solid #ececec;
   //   position: fixed;
   width: 100%;
-  height: 104px;
+  height: 90px;
   //   bottom: 0px;
 
   /* White */
