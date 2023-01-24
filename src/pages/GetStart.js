@@ -54,7 +54,13 @@ function GetStarted() {
               Login
             </strong>
           </Link>
-
+              <h5
+              style={{
+                fontSize: 16,
+                margin: 10,
+                fontWeight: 700
+              }}
+              >OR</h5>
           <div
             className="mb-2 d-flex justify-content-center"
             style={{
@@ -102,7 +108,7 @@ function GetStarted() {
       </div>
       <div
         className="container max-width-mobile p-4"
-        style={{height: "20vh", position: "fixed", bottom: 0}}>
+        style={{height: "17vh", position: "fixed", bottom: 0}}>
         {/* <div className="row">
           <div className="col">
             <div className="d-flex align-items-center">

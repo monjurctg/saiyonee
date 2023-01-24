@@ -8,7 +8,7 @@ function BasicLayout({children, subItem}) {
     <div className="text-center min-vh-100 d-flex flex-column max-width-mobile mx-auto rounded-md-top">
       <div
         className="position-relative"
-        style={{height: pathname === "/" ? "" : "40vh"}}>
+        style={{height: pathname === "/" ? "" : "37vh"}}>
         <img
           src={bg}
           alt="bg-star"

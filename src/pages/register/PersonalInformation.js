@@ -190,7 +190,7 @@ function PersonalInformation() {
           <h1 className="card-title">Bride/Groom Information</h1>
 
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
-            Name must match with government issued ID card(Not Visible to public)
+            Name must match with government issued ID card
           </p>
 
           <div
@@ -212,7 +212,14 @@ function PersonalInformation() {
               aria-describedby="realName"
             />
             <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Full Name
+              Full Name<span style={{
+                fontSize:`12px`,
+                fontFamily: "Inter",
+                fontWeight: "bold",
+                marginLeft: "5px"
+              }}>
+              (Not Visible to public)
+                </span>
             </label>
           </div>
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
@@ -237,7 +244,15 @@ function PersonalInformation() {
               aria-describedby="realName"
             />
             <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Display Name(Visible to public)
+              Display Name<span style={{
+                fontSize:`12px`,
+                fontFamily: "Inter",
+                fontWeight: "bold",
+                // marginLeft: "30%"
+                marginLeft: "5px"
+              }}>
+              (Not Visible to public)
+                </span>
             </label>
           </div>
           <div className="d-flex my-4">

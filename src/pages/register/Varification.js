@@ -212,8 +212,17 @@ function Varification() {
         <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
             <h1 className="card-title">ID Verification (Optional)</h1>
+            <p
+            style={{color: "red",
+          fontSize: "12px",
+          fontWeight: "bold",
+          margin:0
 
-            <p className="text-muted mt-3 mb-2">
+          }}
+            >Not visible to public</p>
+            <p className="text-muted mt-1 mb-2" style={{
+              // marginTop: "0px",
+            }}>
               (NID / Passport / Driving License / Birth Certificate)
             </p>
             <img src="/img/id-verification.svg" alt="back" />
