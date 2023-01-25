@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import {setIsVarified} from "../redux/slices/authSlices";
-import {getToken} from "../utils/functions";
+import { setIsVarified } from "../redux/slices/authSlices";
+import { getToken } from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
@@ -64,6 +64,8 @@ import EditProfileModule from "../pages/editProfile/EditProfileModule";
 import ChatBox from "../pages/chats/ChatBox";
 import SocialLogin from "../pages/social/SocialLogin";
 import Register from "../pages/social-login/Register";
+import EmailVerication from "../pages/register/EmailVerication";
+import VerifyEmail from "../pages/VerifyEmail";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -80,7 +82,7 @@ function Routers() {
     const getCondition = async () => {
       const res = await QuestionServices.routeData();
 
-      const {ques} = res;
+      const { ques } = res;
       const addImg = localStorage.getItem("profile_image");
       const selfie = localStorage.getItem("selfies_image");
       // setVarification(res);
@@ -120,7 +122,8 @@ function Routers() {
         height: "100%",
 
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-      }}>
+      }}
+    >
       {loading ? (
         <div className="load">
           <div className="load-up"></div>
@@ -135,6 +138,7 @@ function Routers() {
             <Route path="/social-login" element={<SocialLogin />} />
             <Route path="/social-login/register" element={<Register />} />
 
+            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-pass" element={<ForgotPass />} />
             <Route path="/reset-pass" element={<ResetPass />} />
@@ -207,8 +211,7 @@ function Routers() {
             {/* location route   end*/}
 
             <Route path="register/family_info" element={<FamilyInfo />} />
-
-            <Route path="register/varification" element={<Varification />} />
+            <Route path="register/varification" element={<Varification/>}/>
 
             {/* register process done */}
           </Route>
@@ -216,8 +219,10 @@ function Routers() {
           {/* Sazid */}
           {/* not varified */}
           <Route element={<NotVarified />}>
+            <Route path="/email-verification" element={<EmailVerication />} />
+
             <Route path="/success" element={<RegSuccess />} />
-            <Route path="/reveiw" element={<RegSuccess />} />
+            <Route path="/review" element={<RegSuccess />} />
           </Route>
 
           <Route element={<PrivateRoute />}>

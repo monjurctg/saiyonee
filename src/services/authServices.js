@@ -19,6 +19,17 @@ AuthServices.checkIsEmailUnique = async (data) => {
   return res;
 };
 
+AuthServices.checkIsEmailVerification = async (data) => {
+  let url = "/ApiRegister/VerifyEmail";
+  let res = axios
+    .post(url, data)
+    .then((response) => response)
+    .catch((err) => err.response);
+
+  return res;
+};
+
+
 AuthServices.register = async (data) => {
   // console.log('data', data)
   let url = "/ApiRegister";
