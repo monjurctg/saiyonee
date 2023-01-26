@@ -44,11 +44,13 @@ function RegSuccess() {
             <div className="col">
               <div className="card border-0 mt-n8 bg-transparent rounded shadow">
                 <div className="card-body bg-white rounded px-4 py-5">
-                  <h1 className="card-title">
-                    Congratulation! Register Success
+                  <h1 className="card-title" style={{fontSize: "30px"}}>
+                    Congratulation!
                   </h1>
+                  <h5> You Have SuccessFully Registered</h5>
                   <p className="card-text text-muted">
-                    Your informations are being verified now
+                    Your informations is being reviewed.We will contact you by
+                    email soon.
                   </p>
                 </div>
               </div>
