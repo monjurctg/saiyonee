@@ -1,8 +1,16 @@
 import React, {useEffect} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import help from '../../assets/imgs/help.svg'
+import help from "../../assets/imgs/help.svg";
 
-function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn,helpN}) {
+function RegisterLayout({
+  children,
+  err,
+  onContinueClicked,
+  onFocus,
+  footerBtn,
+  helpN,
+  from,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
   // useEffect(() => {
@@ -13,7 +21,7 @@ function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn,hel
   //     }
   //   }
   // }, [])
-// console.log('err in lay', err)
+  // console.log('err in lay', err)
   return (
     <>
       <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
@@ -24,13 +32,13 @@ function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn,hel
             style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
-          {
-            !helpN ? <Link to={"/help"}>
-            <img src={help} alt="" style={{height: "58px", width: "58px"}}/>
-          </Link>:<div>
-
-          </div>
-          }
+          {!helpN ? (
+            <Link to={"/help"}>
+              <img src={help} alt="" style={{height: "58px", width: "58px"}} />
+            </Link>
+          ) : (
+            <div></div>
+          )}
           {/* <Link to={"/help"}>
             <img src={help} alt="" style={{height: "58px", width: "58px"}}/>
           </Link> */}
@@ -48,7 +56,13 @@ function RegisterLayout({children, err, onContinueClicked, onFocus,footerBtn,hel
             onFocus={onFocus}
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong>{footerBtn ? footerBtn :"Continue"}</strong>
+            <strong>
+              {footerBtn
+                ? footerBtn
+                : from === "varification"
+                ? "Submit"
+                : "Continue"}
+            </strong>
           </button>
         </div>
       </div>
