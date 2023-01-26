@@ -4,6 +4,8 @@ import AuthServices from "../../services/authServices";
 import {getToken} from "../../utils/functions";
 
 function RegSuccess() {
+  console.log("first");
+
   const navigate = useNavigate();
   // let token = getToken();
   // let isVarified = localStorage.getItem("isVarified");
