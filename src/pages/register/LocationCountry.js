@@ -47,7 +47,13 @@ function LocationCountry({module}) {
         <div
           onClick={() => navigator(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-          style={{height: "58px", width: "58px"}}>
+          style={{
+            height: "40px",
+            width: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>

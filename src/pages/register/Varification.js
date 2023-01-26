@@ -135,7 +135,7 @@ function Varification() {
     });
     if (!socialToken) {
       const res = await AuthServices.register(formd);
-      console.log('res', res)
+      console.log("res", res);
       if (res.status == 200) {
         setToken(res.data.auth_token);
         localStorage.setItem("isVarified", 0);
@@ -210,21 +210,29 @@ function Varification() {
   };
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
+      <RegisterLayout
+        onContinueClicked={onContinueClicked}
+        err={err}
+        from={"varification"}>
         <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">
             <h1 className="card-title">ID Verification (Optional)</h1>
             <p
-            style={{color: "red",
-          fontSize: "12px",
-          fontWeight: "bold",
-          margin:0
-
-          }}
-            >Not visible to public</p>
-            <p className="text-muted mt-1 mb-2" style={{
-              // marginTop: "0px",
-            }}>
+              style={{
+                color: "red",
+                fontSize: "12px",
+                fontWeight: "bold",
+                margin: 0,
+              }}>
+              Not visible to public
+            </p>
+            <p
+              className="text-muted mt-1 mb-2"
+              style={
+                {
+                  // marginTop: "0px",
+                }
+              }>
               (NID / Passport / Driving License / Birth Certificate)
             </p>
             <img src="/img/id-verification.svg" alt="back" />

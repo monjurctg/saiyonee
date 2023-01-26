@@ -50,7 +50,6 @@ export const EDUCATION3_TYPES = [
   "Other",
 ];
 export const EDUCATION4_TYPES = [
-  "",
   "Masters",
   "MBA",
   "MD/ FCPS",

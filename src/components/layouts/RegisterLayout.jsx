@@ -29,12 +29,18 @@ function RegisterLayout({
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{
+              height: "40px",
+              width: "40px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
           {!helpN ? (
             <Link to={"/help"}>
-              <img src={help} alt="" style={{height: "58px", width: "58px"}} />
+              <img src={help} alt="" style={{height: "35px", width: "35px"}} />
             </Link>
           ) : (
             <div></div>
@@ -48,9 +54,9 @@ function RegisterLayout({
 
         <div className="container px-4 pb-4 pt-2">
           {err?.error && <p className="text-primary">* {err?.message}</p>}
-          {location.pathname === "/register/varification" && (
+          {/* {location.pathname === "/register/varification" && (
             <Link to={"/register/email"}>Go back to Refill the Data</Link>
-          )}
+          )} */}
           <button
             style={{height: 60}}
             onFocus={onFocus}

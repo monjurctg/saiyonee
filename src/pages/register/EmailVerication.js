@@ -12,7 +12,7 @@ function EmailVerication() {
     if (res.status === 200) {
       toastMsg.success(res.data?.message);
     }
-    console.log('res', res)
+    console.log("res", res);
     // localStorage.removeItem("saiyonee_auth_token");
     // localStorage.removeItem("isVarified");
     // navigate("/get-start");
@@ -38,11 +38,10 @@ function EmailVerication() {
             <div className="col">
               <div className="card border-0 mt-n8 bg-transparent rounded shadow">
                 <div className="card-body bg-white rounded px-4 py-5">
-                  <h1 className="card-title">
-                    Verify Email
-                  </h1>
+                  <h1 className="card-title">Verify Email</h1>
                   <p className="card-text text-muted">
-                    We have send you link in your email. Please check your inbox and click on that click to complete your registration
+                    We have sent you link in your email. Please check your inbox
+                    and click on that click to complete your registration
                   </p>
                 </div>
               </div>
