@@ -28,7 +28,7 @@ function VerifyEmail() {
     }else{
       toastMsg.error(res.data.message)
       navigator("/email-verification");
-      // console.log(res);
+      console.log(res);
     }
     //   setToken(res.data?.token);
     //   localStorage.setItem("isVarified", true);
@@ -131,7 +131,7 @@ function VerifyEmail() {
   };
   let activeNow = "";
   if (token) {
-    activeNow = "active";
+    activeNow = "Loading...";
   } else {
     activeNow = (
       <BasicLayout subItem={subItem}>
