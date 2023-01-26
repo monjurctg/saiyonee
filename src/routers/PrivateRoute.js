@@ -24,16 +24,16 @@ function PrivateRoute() {
     return <Navigate to="/review" state={{from: location}} />;
   } else if (
     auth &&
-    isVarified === 1 &&
-    isBanned == 0 &&
+    isVarified ==="true" &&
+    isBanned == "false" &&
     !isAlreadySetPreference &&
     emailVerified == true
   ) {
     return <Navigate to="/question/1" state={{from: location}} />;
   } else if (
     auth &&
-    isVarified == 1 &&
-    isBanned == 0 &&
+    isVarified == "true" &&
+    isBanned == "false" &&
     isAlreadySetPreference
   ) {
     return <Navigate to="/home" state={{from: location}} />;

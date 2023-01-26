@@ -88,17 +88,19 @@ function Login() {
         "show_supper_liked_list",
         res.data.show_super_liked_list
       );
+      console.log(res.data.is_verified,"login")
 
-      if (res.data.is_verified == 0) {
+      if (!res.data.is_verified && res.data?.email_verified) {
+        console.log('t')
         navigator("/success");
       } else {
         if (res.data.profile_preference_exists) {
-          navigator("/home");
+          // navigator("/home");
           return;
         }
-        localStorage.setItem("isVarified", 1);
+        localStorage.setItem("isVarified", true);
 
-        navigator("/question/1");
+        // navigator("/question/1");
       }
       // localStorage.setItem("user", JSON.stringify(res.data.user));
       // window.location.href = "/";
