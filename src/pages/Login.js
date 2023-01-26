@@ -73,7 +73,7 @@ function Login() {
       setloading(false);
       setErr(false);
       setToken(res.data.auth_token);
-      // console.log(res.data.is_verified);
+
       console.log(res.data);
 
       localStorage.setItem("preference", res.data.profile_preference_exists);
