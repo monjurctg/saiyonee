@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -6,12 +6,24 @@ import {GENDER_TYPES} from "../../constants/register_constants";
 import {setPersonalInfo} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
 import {stoteRegisterValues} from "../../utils/functions";
-
+let scrollPos = 0;
 function PersonalInformation() {
   const [err, setErr] = useState();
   console.log("err", err);
   let socialToken = localStorage.getItem("social-token");
   let {pathname} = useLocation();
+  const scrollContainerRef = useRef();
+
+  const onEducationSelectorClicked = useCallback(() => {
+    scrollPos = scrollContainerRef.current?.scrollTop;
+  }, []);
+  const resetScroll = useCallback(() => {
+    scrollPos = 0;
+  }, []);
+  useEffect(() => {
+    if (typeof scrollPos !== "undefined")
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
+  }, [onEducationSelectorClicked]);
 
   // let gender = "male";
   // let marital_status = "marid";
@@ -78,6 +90,7 @@ function PersonalInformation() {
   const onReligionSelectorClicked = () => {
     dispatch(setPersonalInfo(state));
     setErr({});
+    onEducationSelectorClicked();
 
     navigate("/register/personalinfo/religion");
   };
@@ -85,6 +98,7 @@ function PersonalInformation() {
   const onMaritalStatusClicked = () => {
     setErr({});
     dispatch(setPersonalInfo(state));
+    onEducationSelectorClicked();
 
     navigate("/register/personalinfo/marital_status");
   };
@@ -185,8 +199,7 @@ function PersonalInformation() {
       <RegisterLayout err={err} onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          //   ref={scrollContainerRef}
-        >
+          ref={scrollContainerRef}>
           <h1 className="card-title">Bride/Groom Information</h1>
 
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
@@ -212,14 +225,16 @@ function PersonalInformation() {
               aria-describedby="realName"
             />
             <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Full Name<span style={{
-                fontSize:`12px`,
-                fontFamily: "Inter",
-                fontWeight: "bold",
-                marginLeft: "5px"
-              }}>
-              (Not Visible to public)
-                </span>
+              Full Name
+              <span
+                style={{
+                  fontSize: `12px`,
+                  fontFamily: "Inter",
+                  fontWeight: "bold",
+                  marginLeft: "5px",
+                }}>
+                (Not Visible to public)
+              </span>
             </label>
           </div>
           <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
@@ -244,15 +259,17 @@ function PersonalInformation() {
               aria-describedby="realName"
             />
             <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Display Name<span style={{
-                fontSize:`12px`,
-                fontFamily: "Inter",
-                fontWeight: "bold",
-                // marginLeft: "30%"
-                marginLeft: "5px"
-              }}>
-              (Not Visible to public)
-                </span>
+              Display Name
+              <span
+                style={{
+                  fontSize: `12px`,
+                  fontFamily: "Inter",
+                  fontWeight: "bold",
+                  // marginLeft: "30%"
+                  marginLeft: "5px",
+                }}>
+                (Not Visible to public)
+              </span>
             </label>
           </div>
           <div className="d-flex my-4">
