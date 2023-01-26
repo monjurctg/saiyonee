@@ -30,6 +30,15 @@ AuthServices.checkIsEmailVerification = async (data) => {
 };
 
 
+AuthServices.sendVerificationLink = async () => {
+  let url = "/ApiRegister/SendVerificationEmail";
+  let res = axios
+    .get(url)
+    .then((response) => response)
+    .catch((err) => err.response);
+
+  return res;
+}
 AuthServices.register = async (data) => {
   // console.log('data', data)
   let url = "/ApiRegister";

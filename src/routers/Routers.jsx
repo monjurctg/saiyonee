@@ -138,7 +138,6 @@ function Routers() {
             <Route path="/social-login" element={<SocialLogin />} />
             <Route path="/social-login/register" element={<Register />} />
 
-            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-pass" element={<ForgotPass />} />
             <Route path="/reset-pass" element={<ResetPass />} />
@@ -226,6 +225,8 @@ function Routers() {
           </Route>
 
           <Route element={<PrivateRoute />}>
+          <Route path="/verify-email" element={<VerifyEmail />} />
+
             <Route path="/question/image" element={<AddPhoto />} />
             <Route
               path="/question/selfie-verification"

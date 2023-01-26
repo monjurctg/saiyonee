@@ -141,6 +141,8 @@ function Varification() {
         localStorage.setItem("isVarified", 0);
         localStorage.setItem("is_banned", 0);
         localStorage.setItem("regStart", false);
+        localStorage.setItem("emailVerified", false);
+
         dispatch(setIsRegStart(false));
         navigator("/email-verification");
         dispatch(regSuccessAction());
