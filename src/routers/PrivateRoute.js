@@ -8,6 +8,8 @@ function PrivateRoute() {
   const isVarified = localStorage.getItem("isVarified");
   const isBanned = localStorage.getItem("isBanned");
   const isAlreadySetPreference = localStorage.getItem("preference");
+  const emailVerified = localStorage.getItem("emailVerified");
+  console.log('emailVerified privatw', emailVerified)
   const img_edit = localStorage.getItem("edit_img");
   const selfi_edit = localStorage.getItem("selfie_edit");
 
@@ -16,21 +18,22 @@ function PrivateRoute() {
 
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
-  } else if (auth && isVarified == 0 && isBanned == 0) {
+  } else if (auth && isVarified == 0 && isBanned == 0 && emailVerified == true) {
     return <Navigate to="/success" state={{from: location}} />;
   } else if (auth && isVarified == 1 && isBanned == 1) {
     return <Navigate to="/review" state={{from: location}} />;
   } else if (
     auth &&
-    isVarified === 1 &&
-    isBanned == 0 &&
-    !isAlreadySetPreference
+    isVarified ==="true" &&
+    isBanned == "false" &&
+    !isAlreadySetPreference &&
+    emailVerified == true
   ) {
     return <Navigate to="/question/1" state={{from: location}} />;
   } else if (
     auth &&
-    isVarified == 1 &&
-    isBanned == 0 &&
+    isVarified == "true" &&
+    isBanned == "false" &&
     isAlreadySetPreference
   ) {
     return <Navigate to="/home" state={{from: location}} />;

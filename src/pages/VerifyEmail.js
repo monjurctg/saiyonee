@@ -1,17 +1,49 @@
-import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
-import {setToken} from "../utils/functions";
+import { setToken } from "../utils/functions";
+import toastMsg from "../utils/toastify";
 
-function Login() {
+function VerifyEmail() {
   const [loading, setloading] = useState(false);
-  const [email, setEmail] = useState("");
+  let token = localStorage.getItem("saiyonee_auth_token");
+  const [searchParams] = useSearchParams();
+  // console.log('saiyonee_auth_token', token)
+  console.log("searchParams", searchParams.get("code"));
+  const verification_code = searchParams.get("code");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
   // console.log('err', err?.message)
   const navigator = useNavigate();
 
+  let verify = async () => {
+    let res = await AuthServices.checkIsEmailVerification({"code":verification_code});
+    console.log("res", res);
+    if (res.status === 200) {
+    localStorage.setItem("emailVerified", true);
+    toastMsg.success(res.data?.message);
+    navigator("/success");
+    }else{
+      toastMsg.error(res.data.message)
+      navigator("/email-verification");
+      console.log(res);
+    }
+    //   setToken(res.data?.token);
+    //   localStorage.setItem("isVarified", true);
+    //   navigator("/get-start");
+    // } else {
+    //   console.log(res);
+    // }
+  };
+
+  useEffect(() => {
+    if(token){
+      verify();
+    }
+  }, [])
+  
   let subItem = (
     <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
@@ -19,7 +51,8 @@ function Login() {
           <button
             onClick={() => navigator(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{ height: "58px", width: "58px" }}
+          >
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
@@ -35,9 +68,9 @@ function Login() {
   );
 
   const onChange = (e) => {
-    const {name, value} = e.target;
-    if (name === "email") {
-      setEmail(value);
+    const { name, value } = e.target;
+    if (name === "confirmPassword") {
+      setConfirmPassword(value);
     } else if (name === "password") {
       setPassword(value);
     }
@@ -45,13 +78,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email.trim()) {
-      setErr({
-        error: "email",
-        message: "Email is required",
-      });
-      return;
-    } else if (!password.trim()) {
+    if (!password.trim()) {
       setErr({
         error: "password",
         message: "Password is required",
@@ -59,48 +86,34 @@ function Login() {
     }
     setloading(true);
     let data = {
-      email: email,
+      code: verification_code,
       password: password,
+      password_confirmation: confirmPassword,
     };
 
     let formData = new FormData();
-    formData.append("email", data.email);
+    formData.append("code", data.code);
     formData.append("password", data.password);
+    formData.append("password_confirmation", data.password_confirmation);
 
-    let res = await AuthServices.login(formData);
+    let res = await AuthServices.checkIsEmailVerification(formData);
     console.log("res", res.data);
     if (res.status === 200) {
       setloading(false);
       setErr(false);
       setToken(res.data.auth_token);
+      // console.log(res.data.is_verified);
 
-      console.log(res.data);
-
-      localStorage.setItem("preference", res.data.profile_preference_exists);
-      localStorage.setItem("isVarified", res.data.is_verified);
-      localStorage.setItem("is_banned", res.data.is_banned);
-      localStorage.setItem("show_liked_list", res.data.show_liked_list);
-      localStorage.setItem("package_id", res.data.package_id);
-      localStorage.setItem("package_name", res.data.package_name);
-      localStorage.setItem("profile_image", res.data.profile_image);
-      localStorage.setItem("selfie_image", res.data.selfie_image);
-      localStorage.setItem(
-        "show_supper_liked_list",
-        res.data.show_super_liked_list
-      );
-      console.log(res.data.is_verified,"login")
-
-      if (!res.data.is_verified && res.data?.email_verified) {
-        console.log('t')
+      if (res.data.is_verified == 0) {
         navigator("/success");
       } else {
         if (res.data.profile_preference_exists) {
-          // navigator("/home");
+          navigator("/home");
           return;
         }
-        localStorage.setItem("isVarified", true);
+        localStorage.setItem("isVarified", 1);
 
-        // navigator("/question/1");
+        navigator("/question/1");
       }
       // localStorage.setItem("user", JSON.stringify(res.data.user));
       // window.location.href = "/";
@@ -116,15 +129,18 @@ function Login() {
 
     // console.log("data", data);
   };
-  // let err = true;
-  return (
-    <>
+  let activeNow = "";
+  if (token) {
+    activeNow = "Loading...";
+  } else {
+    activeNow = (
       <BasicLayout subItem={subItem}>
         <div
           className="card border-0 bg-transparent overflow-auto flex-grow-1"
-          style={{height: "40vh", marginTop: "-55px"}}>
+          style={{ height: "40vh", marginTop: "-55px" }}
+        >
           <div className="card-body bg-body rounded p-4 overflow-auto">
-            <h1 className="card-title mt-3">Login</h1>
+            <h1 className="card-title mt-3">Verify your Email</h1>
             <p className="card-text text-muted mt-3 mb-5">
               Take a step towards finding someone awesome!
             </p>
@@ -133,33 +149,9 @@ function Login() {
               className="form-floating my-4 text-muted rounded-1"
               style={{
                 fontFamily: "Inter",
-                border: err?.error == "email" ? "2px solid red" : "",
-              }}>
-              <input
-                type="email"
-                id="inputEmail"
-                value={email}
-                name="email"
-                onFocus={() => setErr({})}
-                onChange={onChange}
-                className="form-control border-0 rounded-1"
-                placeholder="name@example.com"
-                aria-describedby="email"
-              />
-              <label
-                htmlFor="inputEmail"
-                style={{
-                  textAlign: "left",
-                }}>
-                Email ID
-              </label>
-            </div>
-            <div
-              className="form-floating my-4 text-muted rounded-1"
-              style={{
-                fontFamily: "Inter",
                 border: err?.error == "password" ? "2px solid red" : "",
-              }}>
+              }}
+            >
               <input
                 type="password"
                 id="inputPassword"
@@ -175,8 +167,38 @@ function Login() {
                 htmlFor="inputPassword"
                 style={{
                   textAlign: "left",
-                }}>
+                }}
+              >
                 Password
+              </label>
+            </div>
+            <div
+              className="form-floating my-4 rounded-1 text-start text-muted"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "confirm_password" ? "2px solid red" : "",
+              }}
+            >
+              <input
+                style={{
+                  fontFamily: "Inter",
+                }}
+                type="password"
+                id="inputConfirmPassword"
+                value={confirmPassword}
+                onFocus={() => setErr({})}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="form-control border-0 rounded-1"
+                placeholder="******"
+                aria-describedby="confirm-password"
+              />
+              <label
+                htmlFor="inputConfirmPassword"
+                style={{
+                  fontFamily: "Inter",
+                }}
+              >
+                Confirm Password
               </label>
             </div>
             <div className="d-flex justify-content-end mb-4 mt-5">
@@ -184,7 +206,7 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
+        <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
           {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={handleSubmit}
@@ -194,7 +216,8 @@ function Login() {
               // verifyingPreviousLogin ||
               // isPrefetchingForms
             }
-            className="btn btn-primary w-100 rounded shadow p-3 my-2">
+            className="btn btn-primary w-100 rounded shadow p-3 my-2"
+          >
             <strong>Continue </strong>
             {
               // (status === FetchStatus.LOADING ||
@@ -205,7 +228,8 @@ function Login() {
                   <i
                     className="spinner-border spinner-border-sm text-black"
                     role="status"
-                    aria-hidden="true"></i>
+                    aria-hidden="true"
+                  ></i>
                   <i className="visually-hidden">Loading.....</i>
                 </>
               )
@@ -213,8 +237,10 @@ function Login() {
           </button>
         </div>
       </BasicLayout>
-    </>
-  );
+    );
+  }
+  // let err = true;
+  return <>{activeNow}</>;
 }
 
-export default Login;
+export default VerifyEmail;

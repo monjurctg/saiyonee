@@ -10,9 +10,10 @@ function RegisterRoute() {
   let location = useLocation();
   const token = getToken();
 
-  if (!isRegStart && token) {
-    return <Navigate to="/success" state={{from: location}} />;
+  if (!isRegStart && token ) {
+    return <Navigate to="/email-verification" state={{from: location}} />;
   }
+
   if (!isRegStart && !socialToken) {
     return <Navigate to="/get-start" state={{from: location}} />;
   }

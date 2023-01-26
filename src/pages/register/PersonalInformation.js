@@ -268,7 +268,7 @@ function PersonalInformation() {
                   // marginLeft: "30%"
                   marginLeft: "5px",
                 }}>
-                (Not Visible to public)
+                ( Visible to public)
               </span>
             </label>
           </div>

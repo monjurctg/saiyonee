@@ -20,20 +20,20 @@ function PublicRoute({varification}) {
     isBanned,
     "from public route"
   );
-  if (auth && !isEmptyQuestion) {
-    return <Navigate to="/question/1" state={{from: location}} />;
-  }
-  if (auth && isVarified == 1 && !isProfileQuesionExist) {
-    return <Navigate to="/question/image" state={{from: location}} />;
-  }
+  // if (auth && !isEmptyQuestion) {
+  //   return <Navigate to="/question/1" state={{from: location}} />;
+  // }
+  // if (auth && isVarified == 1 && !isProfileQuesionExist) {
+  //   return <Navigate to="/question/image" state={{from: location}} />;
+  // }
 
-  if (auth && isVarified == 1 && !isSelfieQuestionExist) {
-    return (
-      <Navigate to="/question/selfie-verification" state={{from: location}} />
-    );
-  }
+  // if (auth && isVarified == 1 && !isSelfieQuestionExist) {
+  //   return (
+  //     <Navigate to="/question/selfie-verification" state={{from: location}} />
+  //   );
+  // }
 
-  if (auth && isVarified == 1 && isBanned == 0 && isAlreadySetPreference) {
+  if (auth && isVarified ==="true" && isBanned ==="false" && isAlreadySetPreference) {
     return <Navigate to="/home" state={{from: location}} />;
   }
 

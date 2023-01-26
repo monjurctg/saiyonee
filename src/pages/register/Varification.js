@@ -135,14 +135,16 @@ function Varification() {
     });
     if (!socialToken) {
       const res = await AuthServices.register(formd);
-
+      console.log('res', res)
       if (res.status == 200) {
         setToken(res.data.auth_token);
         localStorage.setItem("isVarified", 0);
         localStorage.setItem("is_banned", 0);
         localStorage.setItem("regStart", false);
+        localStorage.setItem("emailVerified", false);
+
         dispatch(setIsRegStart(false));
-        navigator("/success");
+        navigator("/email-verification");
         dispatch(regSuccessAction());
       } else {
         console.log("error");
@@ -155,7 +157,7 @@ function Varification() {
         setToken(localStorage.setItem("social-token", res?.data?.auth_token));
         localStorage.removeItem("social-token");
         toastMsg.success("Registration Successful");
-        navigator("/success");
+        navigator("/email-verification");
         // setToken(res.data.auth_token);
         // localStorage.setItem("isVarified", 0);
         // localStorage.setItem("is_banned", 0);
