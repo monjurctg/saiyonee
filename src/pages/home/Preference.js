@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setGender,
@@ -46,19 +46,18 @@ function Preference() {
   const location = useLocation();
 
   const handleUserInputChange = (e) => {
-
-    if(e.target.name === "age_to" && state.age_from > e.target.value){
-
+    if (e.target.name === "age_to" && state.age_from > e.target.value) {
       setErr({
         error: "age_to",
         message: "To can not be smaller than From",
       });
-    }if(e.target.name === "age_from" && state.age_to < e.target.value){
+    }
+    if (e.target.name === "age_from" && state.age_to < e.target.value) {
       setErr({
         error: "age_from",
         message: "From can not be bigger than To",
       });
-    }else {
+    } else {
       setErr({});
     }
     setState({
@@ -89,7 +88,7 @@ function Preference() {
 
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({ top: scrollPos });
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
   }, [onSelectClicked]);
 
   const clickButton = () => {
@@ -134,18 +133,21 @@ function Preference() {
           "Height cannot be less than 0 inches or greater than 11 inches",
       });
       return;
-    } if(state.age_from >state.age_to){
-      
-      setErr({
-        error: "age_to",
-        message: "To can not be smaller than From",
-      });
-    }if( state.age_to <state.age_from){
-      setErr({
-        error: "age_from",
-        message: "From can not be bigger than To",
-      });
     }
+    // if (state.age_from > state.age_to) {
+    //   setErr({
+    //     error: "age_to",
+    //     message: "To can not be smaller than From",
+    //   });
+    //   return;
+    // }
+    // if (state.age_to < state.age_from ) {
+    //   setErr({
+    //     error: "age_from",
+    //     message: "From can not be bigger than To",
+    //   });
+    //   return;
+    // }
     // else if () {
 
     // }
@@ -205,35 +207,34 @@ function Preference() {
         height_inches: height_inches,
       });
     }
-  }, [age_to]);
+  }, [age_to, age_from]);
 
   let preferenceData = (
     <>
       <h2 className="mb-2">Set your preference</h2>
 
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Age
       </p>
       <div className="d-flex">
-          <div
+        <div
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
             border: err?.error == "age_from" ? "2px solid red" : "",
-          }}
-        >
+          }}>
           <input
             type="number"
             id="inputHeightFeet"
-            name="age_to"
+            name="age_from"
             style={{fontFamily: "Inter"}}
-            value={state.age_to}
+            value={state.age_from}
             onChange={handleUserInputChange}
             placeholder={"From"}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
           />
-          <label htmlFor="inputHeightInches" style={{ fontFamily: "Inter" }}>
+          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
             Form
           </label>
         </div>
@@ -242,27 +243,26 @@ function Preference() {
           style={{
             fontFamily: "Inter",
             border: err?.error == "age_to" ? "2px solid red" : "",
-          }}
-        >
+          }}>
           <input
             type="number"
             id="inputHeightFeet"
             min={0}
             name="age_to"
-            style={{ fontFamily: "Inter" }}
+            style={{fontFamily: "Inter"}}
             value={state.age_to}
             onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             placeholder={"To"}
             aria-describedby="height_feet"
           />
-          <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
+          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
             To
           </label>
         </div>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Minimum height
       </p>
       <div className="d-flex">
@@ -271,21 +271,20 @@ function Preference() {
           style={{
             fontFamily: "Inter",
             border: err?.error == "ft" ? "2px solid red" : "",
-          }}
-        >
+          }}>
           <input
             type="number"
             id="inputHeightFeet"
             name="height_feet"
             min={1}
-            style={{ fontFamily: "Inter" }}
+            style={{fontFamily: "Inter"}}
             value={state.height_feet}
             onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             // placeholder={MIN_HEIGHT_FEET.toString()}
             aria-describedby="height_feet"
           />
-          <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
+          <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
             ft
           </label>
         </div>
@@ -294,26 +293,25 @@ function Preference() {
           style={{
             fontFamily: "Inter",
             border: err?.error == "inc" ? "2px solid red" : "",
-          }}
-        >
+          }}>
           <input
             type="number"
             name="height_inches"
             min={1}
             id="inputHeightInches"
-            style={{ fontFamily: "Inter" }}
+            style={{fontFamily: "Inter"}}
             value={state.height_inches}
             onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
           />
-          <label htmlFor="inputHeightInches" style={{ fontFamily: "Inter" }}>
+          <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
             in
           </label>
         </div>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select religion
       </p>
       <div>
@@ -322,8 +320,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label  bg-white px-2 text-body"
-                style={{ fontFamily: "Inter", cursor: "pointer" }}
-              >
+                style={{fontFamily: "Inter", cursor: "pointer"}}>
                 {/* {religion} */}
                 {state.religion || preferenceReligion || "Select religion"}
               </label>
@@ -335,7 +332,7 @@ function Preference() {
           </div>
         </Link>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select employment type
       </p>
       <div>
@@ -344,8 +341,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{ fontFamily: "Inter" }}
-              >
+                style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
                 {state.employType || employType || "Select employment type"}
               </label>
@@ -356,7 +352,7 @@ function Preference() {
           </div>
         </Link>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select marital status
       </p>
       <div>
@@ -365,8 +361,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{ fontFamily: "Inter" }}
-              >
+                style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
                 {state.maritalStatus ||
                   maritalStatus ||
@@ -380,7 +375,7 @@ function Preference() {
         </Link>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
+      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select Current Country
       </p>
       <div>
@@ -389,8 +384,7 @@ function Preference() {
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
-                style={{ fontFamily: "Inter" }}
-              >
+                style={{fontFamily: "Inter"}}>
                 {country[0] ?? "Select Current Country"}
               </label>
             </div>
@@ -411,34 +405,27 @@ function Preference() {
         onContinueClicked={onContinueClicked}
         onFocus={() => dispatch(setHeight(state))}
         helpN={true}
-        err={err}
-      >
+        err={err}>
         <div
           className="container px-4 pb-2 flex-grow-1  overflow-auto"
-          ref={scrollContainerRef}
-        >
+          ref={scrollContainerRef}>
           {/* <h1> </h1> */}
 
           {loading ? <h1>Loading ...</h1> : preferenceData}
           {dynamicQuestion.map((question, index) => (
             <div key={index}>
-              <p
-                className="text-muted mt-4 mb-1"
-                style={{ fontFamily: "Inter" }}
-              >
+              <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
                 {question.label}
               </p>
               <div>
                 <Link
                   onClick={clickButton}
-                  to={`/preference/dynamic-${question.id}`}
-                >
+                  to={`/preference/dynamic-${question.id}`}>
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
                       <label
                         className="form-check-label  bg-white px-2 text-body"
-                        style={{ fontFamily: "Inter", cursor: "pointer" }}
-                      >
+                        style={{fontFamily: "Inter", cursor: "pointer"}}>
                         {/* {religion} */}
                         {question.filter_display_name}
                       </label>

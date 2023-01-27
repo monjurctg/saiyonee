@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import { setIsVarified } from "../redux/slices/authSlices";
-import { getToken } from "../utils/functions";
+import {setIsVarified} from "../redux/slices/authSlices";
+import {getToken} from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
@@ -73,34 +73,37 @@ function Routers() {
     setRouteToken(getToken());
   }
   const dispatch = useDispatch();
-  const [varification, setVarification] = useState({});
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCondition = async () => {
-      const res = await QuestionServices.routeData();
-
-      const { ques } = res;
+      const token = getToken();
       const addImg = localStorage.getItem("profile_image");
       const selfie = localStorage.getItem("selfies_image");
+      if (token) {
+        const res = await QuestionServices.routeData();
+
+        const {ques} = res;
+        if (addImg) {
+          dispatch(set_is_image(true));
+        } else {
+          dispatch(set_is_image(false));
+        }
+        if (selfie) {
+          dispatch(set_is_selfie(true));
+        } else {
+          dispatch(set_is_selfie(false));
+        }
+        if (ques.length <= 0) {
+          dispatch(set_is_ques(true));
+        } else {
+          dispatch(set_is_ques(false));
+        }
+      }
+
       // setVarification(res);
-      if (addImg) {
-        dispatch(set_is_image(true));
-      } else {
-        dispatch(set_is_image(false));
-      }
-      if (selfie) {
-        dispatch(set_is_selfie(true));
-      } else {
-        dispatch(set_is_selfie(false));
-      }
-      if (ques.length <= 0) {
-        dispatch(set_is_ques(true));
-      } else {
-        dispatch(set_is_ques(false));
-      }
     };
 
     if (location.pathname === "/register/email") {
@@ -109,7 +112,7 @@ function Routers() {
       localStorage.setItem("regStart", false);
     }
     getCondition();
-  }, []);
+  }, [dispatch, location.pathname]);
 
   setTimeout(() => {
     setLoading(false);
@@ -122,8 +125,7 @@ function Routers() {
         height: "100%",
 
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-      }}
-    >
+      }}>
       {loading ? (
         <div className="load">
           <div className="load-up"></div>
@@ -210,7 +212,7 @@ function Routers() {
             {/* location route   end*/}
 
             <Route path="register/family_info" element={<FamilyInfo />} />
-            <Route path="register/varification" element={<Varification/>}/>
+            <Route path="register/varification" element={<Varification />} />
 
             {/* register process done */}
           </Route>
@@ -225,7 +227,7 @@ function Routers() {
           </Route>
 
           <Route element={<PrivateRoute />}>
-          <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
 
             <Route path="/question/image" element={<AddPhoto />} />
             <Route

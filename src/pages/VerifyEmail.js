@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
-import { setToken } from "../utils/functions";
+import {setToken} from "../utils/functions";
 import toastMsg from "../utils/toastify";
 
 function VerifyEmail() {
@@ -19,14 +19,16 @@ function VerifyEmail() {
   const navigator = useNavigate();
 
   let verify = async () => {
-    let res = await AuthServices.checkIsEmailVerification({"code":verification_code});
+    let res = await AuthServices.checkIsEmailVerification({
+      code: verification_code,
+    });
     console.log("res", res);
     if (res.status === 200) {
-    localStorage.setItem("emailVerified", true);
-    toastMsg.success(res.data?.message);
-    navigator("/success");
-    }else{
-      toastMsg.error(res.data.message)
+      localStorage.setItem("emailVerified", true);
+      toastMsg.success(res.data?.message);
+      navigator("/success");
+    } else {
+      toastMsg.error(res.data.message);
       navigator("/email-verification");
       console.log(res);
     }
@@ -39,11 +41,11 @@ function VerifyEmail() {
   };
 
   useEffect(() => {
-    if(token){
+    if (token) {
       verify();
     }
-  }, [])
-  
+  }, []);
+
   let subItem = (
     <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
@@ -51,8 +53,7 @@ function VerifyEmail() {
           <button
             onClick={() => navigator(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{ height: "58px", width: "58px" }}
-          >
+            style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
@@ -68,7 +69,7 @@ function VerifyEmail() {
   );
 
   const onChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     if (name === "confirmPassword") {
       setConfirmPassword(value);
     } else if (name === "password") {
@@ -137,8 +138,7 @@ function VerifyEmail() {
       <BasicLayout subItem={subItem}>
         <div
           className="card border-0 bg-transparent overflow-auto flex-grow-1"
-          style={{ height: "40vh", marginTop: "-55px" }}
-        >
+          style={{height: "40vh", marginTop: "-55px"}}>
           <div className="card-body bg-body rounded p-4 overflow-auto">
             <h1 className="card-title mt-3">Verify your Email</h1>
             <p className="card-text text-muted mt-3 mb-5">
@@ -150,8 +150,7 @@ function VerifyEmail() {
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "password" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <input
                 type="password"
                 id="inputPassword"
@@ -167,8 +166,7 @@ function VerifyEmail() {
                 htmlFor="inputPassword"
                 style={{
                   textAlign: "left",
-                }}
-              >
+                }}>
                 Password
               </label>
             </div>
@@ -177,8 +175,7 @@ function VerifyEmail() {
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "confirm_password" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <input
                 style={{
                   fontFamily: "Inter",
@@ -196,8 +193,7 @@ function VerifyEmail() {
                 htmlFor="inputConfirmPassword"
                 style={{
                   fontFamily: "Inter",
-                }}
-              >
+                }}>
                 Confirm Password
               </label>
             </div>
@@ -206,7 +202,7 @@ function VerifyEmail() {
             </div>
           </div>
         </div>
-        <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
+        <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
           {err?.error && <p className="text-primary">* {err?.message}</p>}
           <button
             onClick={handleSubmit}
@@ -216,8 +212,7 @@ function VerifyEmail() {
               // verifyingPreviousLogin ||
               // isPrefetchingForms
             }
-            className="btn btn-primary w-100 rounded shadow p-3 my-2"
-          >
+            className="btn btn-primary w-100 rounded shadow p-3 my-2">
             <strong>Continue </strong>
             {
               // (status === FetchStatus.LOADING ||
@@ -228,8 +223,7 @@ function VerifyEmail() {
                   <i
                     className="spinner-border spinner-border-sm text-black"
                     role="status"
-                    aria-hidden="true"
-                  ></i>
+                    aria-hidden="true"></i>
                   <i className="visually-hidden">Loading.....</i>
                 </>
               )

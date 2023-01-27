@@ -1,11 +1,12 @@
 import axios from "axios";
+
 // import {set} from "immer/dist/internal";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {ID_TYPES} from "../../constants/register_constants";
-import {useRegisterMutation} from "../../redux/api/authApi";
+
 import {
   regSuccessAction,
   setIsRegStart,
@@ -13,13 +14,14 @@ import {
   setVerificationImg2,
   setVerificationType,
 } from "../../redux/slices/authSlices";
-import {initialRegState} from "../../redux/slices/initialRegState";
+
 import AuthServices from "../../services/authServices";
 import {setToken} from "../../utils/functions";
 import toastMsg from "../../utils/toastify";
 
 function Varification() {
   const [err, setErr] = useState("Image is blank");
+  const [loading, setLoading] = useState(false);
 
   const navigator = useNavigate();
 
@@ -136,28 +138,37 @@ function Varification() {
     if (!socialToken) {
       const res = await AuthServices.register(formd);
       console.log("res", res);
-      if (res.status == 200) {
+      setLoading(true);
+      if (res.status === 200) {
         setToken(res.data.auth_token);
-        localStorage.setItem("isVarified", 0);
-        localStorage.setItem("is_banned", 0);
+        localStorage.setItem("isVarified", false);
+        localStorage.setItem("is_banned", false);
         localStorage.setItem("regStart", false);
         localStorage.setItem("emailVerified", false);
+        setLoading(false);
 
         dispatch(setIsRegStart(false));
         navigator("/email-verification");
         dispatch(regSuccessAction());
       } else {
         console.log("error");
+        setLoading(false);
         toastMsg.error(res.data.message);
       }
     } else {
       const res = await AuthServices.socialRegister(formd);
+      setLoading(true);
       // console.log('res', res)
-      if (res.status == 200) {
+      if (res.status === 200) {
+        setLoading(false);
         setToken(localStorage.setItem("social-token", res?.data?.auth_token));
         localStorage.removeItem("social-token");
         toastMsg.success("Registration Successful");
         navigator("/email-verification");
+        localStorage.setItem("isVarified", false);
+        localStorage.setItem("is_banned", false);
+        localStorage.setItem("regStart", false);
+        localStorage.setItem("emailVerified", true);
         // setToken(res.data.auth_token);
         // localStorage.setItem("isVarified", 0);
         // localStorage.setItem("is_banned", 0);
@@ -166,6 +177,7 @@ function Varification() {
         // navigator("/success");
         // dispatch(regSuccessAction());
       } else {
+        setLoading(false);
         console.log("error");
         toastMsg.error(res.data.message);
       }
@@ -213,6 +225,7 @@ function Varification() {
       <RegisterLayout
         onContinueClicked={onContinueClicked}
         err={err}
+        loading={loading}
         from={"varification"}>
         <div className="container px-4 pyb-2 flex-grow-1 overflow-auto">
           <div className="text-center">

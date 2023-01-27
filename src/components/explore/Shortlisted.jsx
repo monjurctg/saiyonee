@@ -70,7 +70,7 @@ function Shortlisted() {
         ) : shortList.length > 0 ? (
           shortList
         ) : (
-          <h1  style={{fontSize:20}}>No data found</h1>
+          <h1 style={{fontSize: 20}}>No data found</h1>
         )}
       </div>
     </div>

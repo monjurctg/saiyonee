@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -32,6 +32,7 @@ function SelfieVerification() {
     let res = await QuestionServices.submitSelfiePhoto(data);
     console.log("ressadasdasda", res);
     if (res.status === 200) {
+      localStorage.setItem("selfie_img", "true");
       seterr(false);
       toastMsg.success("Image uploaded successfully");
       getImage();
@@ -65,7 +66,7 @@ function SelfieVerification() {
     }
   };
   let imageClick = (e) => {
-    console.log('e', e)
+    console.log("e", e);
     // e.preventDefault();
     // console.log(' document.getElementById("image")',  document.getElementById("image").click())
     document.getElementById("image").click();
@@ -77,15 +78,13 @@ function SelfieVerification() {
       // onContinueClicked={onSubmit}
       length={length}
       title={"Candidate's Selfie (optional)"}
-      loading={loading}
-    >
+      loading={loading}>
       <div className="question mt-3">
         <p
           style={{
             fontSize: "12px",
             textAlign: "start",
-          }}
-        >
+          }}>
           If you are the bride/groom, please tap the camera and take a selfie If
           you are not the candidate, please ask the candidate to login
           separately to this account and give her/his selfie
@@ -105,41 +104,41 @@ function SelfieVerification() {
           <input
             type="file"
             id="image"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
-            accept="image/*" capture="camera"
+            accept="image/*"
+            capture="camera"
           />
         </div>
         <div>
-        <h5
-          style={{
-            fontSize: "16px",
-            textAlign: "start",
-          }}
-        >
-          Selfie Guideline</h5>
-       
-        <p
-          style={{
-            fontSize: "12px",
-            textAlign: "start",
-            margin:0
-          }}
-        >1. Hold the phone at eye level 
-        </p>
-        <p
-          style={{
-            fontSize: "12px",
-            textAlign: "start",
-          }}
-        >2. Make sure that your whole face is visible
-        </p>
+          <h5
+            style={{
+              fontSize: "16px",
+              textAlign: "start",
+            }}>
+            Selfie Guideline
+          </h5>
 
+          <p
+            style={{
+              fontSize: "12px",
+              textAlign: "start",
+              margin: 0,
+            }}>
+            1. Hold the phone at eye level
+          </p>
+          <p
+            style={{
+              fontSize: "12px",
+              textAlign: "start",
+            }}>
+            2. Make sure that your whole face is visible
+          </p>
         </div>
         <p className="mt-3">We will not make this public. it’s kept PRIVATE</p>
         {image2?.selfie_img && (
           <Link to={"/review/profile"}>
-            <p style={{ color: "#1F2937" }}>I will do it later</p>
+            <p style={{color: "#1F2937"}}>I will do it later</p>
           </Link>
         )}
       </div>

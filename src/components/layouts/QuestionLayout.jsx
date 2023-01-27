@@ -26,7 +26,11 @@ function QuestionLayout({
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
-      {loading && <Loader />}
+      {loading && (
+        <div className="d-flex justify-content-center align-items-center">
+          <Loader />
+        </div>
+      )}
       <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
         <h1 className="card-title">{title}</h1>
 

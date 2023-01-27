@@ -15,6 +15,7 @@ function Ocupation() {
   const [err, setErr] = useState();
   let {pathname} = useLocation();
   let socialToken = localStorage.getItem("social-token");
+  const [loading, setLoading] = useState(false);
   const [employeeType, setemployeeType] = useState([
     "Unemployed",
     "Student",
@@ -93,17 +94,23 @@ function Ocupation() {
         email: email,
         page_name: pathname,
       };
+      setLoading(true);
       let res = await AuthServices.checkPage(data);
       if (res.status === 200) {
+        setLoading(false);
         navigate("/register/location");
       }
     } else {
+      setLoading(false);
       navigate("/register/location");
     }
   };
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
+      <RegisterLayout
+        onContinueClicked={onContinueClicked}
+        err={err}
+        loading={loading}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>

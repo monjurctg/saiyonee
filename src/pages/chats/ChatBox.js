@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 import message from "../../assets/imgs/msg.png";
 import msgWhite from "../../assets/imgs/msgWhite.png";
@@ -17,20 +17,18 @@ function ChatBox() {
   let getMessage = async (data) => {
     // console.log('data', data)
     let res = await UserServices.getMessage(data);
-    if(messageData?.data?.chat_messages?.length > 0){
-      let newMessage = res?.data?.data?.chat_messages[0]
-      messageData?.data?.chat_messages.push(newMessage)
+    if (messageData?.data?.chat_messages?.length > 0) {
+      let newMessage = res?.data?.data?.chat_messages[0];
+      messageData?.data?.chat_messages.push(newMessage);
 
-      console.log('newMessage', newMessage)
+      console.log("newMessage", newMessage);
       // setmessageData(res.data);
-
-    }
-    else{
+    } else {
       setmessageData(res.data);
     }
     // console.log('res', res.data)
   };
-console.log('messageData', messageData?.data?.chat_messages)
+  console.log("messageData", messageData?.data?.chat_messages);
   let scrollToBottomF = () => {
     messagesEndRef.current.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -38,21 +36,29 @@ console.log('messageData', messageData?.data?.chat_messages)
     });
   };
 
-
   useEffect(() => {
-   
-    if(scrollPos == 0){
-      console.log('first')
-      console.log('f',messageData?.data?.chat_messages[messageData?.data?.chat_messages.length - 1]?.id)
-      getMessage({match_id:10,oldest_message_id:messageData?.data?.chat_messages[messageData?.data?.chat_messages.length - 1]?.id});
+    if (scrollPos == 0) {
+      console.log("first");
+      console.log(
+        "f",
+        messageData?.data?.chat_messages[
+          messageData?.data?.chat_messages.length - 1
+        ]?.id
+      );
+      getMessage({
+        match_id: 10,
+        oldest_message_id:
+          messageData?.data?.chat_messages[
+            messageData?.data?.chat_messages.length - 1
+          ]?.id,
+      });
     }
-  }, [scrollPos])
-  
+  }, [scrollPos]);
 
   useEffect(() => {
-    if (!messagesEndRef.current &&! messageData) return;
-    const handleScroll = () => {setScrollPos(messagesEndRef.current.scrollTop)
-
+    if (!messagesEndRef.current && !messageData) return;
+    const handleScroll = () => {
+      setScrollPos(messagesEndRef.current.scrollTop);
     };
     messagesEndRef.current.addEventListener("scroll", handleScroll);
     return () =>
@@ -62,7 +68,7 @@ console.log('messageData', messageData?.data?.chat_messages)
   useEffect(() => {
     // scrollToBottom();
     // scrollToBottomF();
-    getMessage({match_id:10});
+    getMessage({match_id: 10});
     // const interval = setInterval(() => getMessage(), 10000)
     //     return () => {
     //       clearInterval(interval);
@@ -70,8 +76,8 @@ console.log('messageData', messageData?.data?.chat_messages)
   }, []);
 
   // useEffect(() => {
-    // scrollToBottom();
-    // scrollToBottomF();
+  // scrollToBottom();
+  // scrollToBottomF();
   // }, [messageData]);
 
   let sendMessages = async (e) => {
@@ -89,18 +95,17 @@ console.log('messageData', messageData?.data?.chat_messages)
     // console.log("res", res);
   };
 
-  let showMessageFrom = messageData?.data?.chat_messages.map((md) => {
+  let showMessageFrom = messageData?.data?.chat_messages.map((md, index) => {
     if (md?.from_id === messageData?.data?.user.id)
       return (
-        <div className="chat-body-inner-right">
+        <div key={index} className="chat-body-inner-right">
           <div
             className="write"
             style={
               {
                 // backgroundImage: `url(${message})`,
               }
-            }
-          >
+            }>
             <p>{md.message}</p>
           </div>
         </div>
@@ -114,8 +119,7 @@ console.log('messageData', messageData?.data?.chat_messages)
               {
                 // backgroundImage: `url(${msgWhite})`,
               }
-            }
-          >
+            }>
             <p>{md.message}</p>
           </div>
         </div>
@@ -145,9 +149,8 @@ console.log('messageData', messageData?.data?.chat_messages)
       <div
         className="chat-body"
         id="chat-body"
-        style={{ marginTop: 80 }}
-        ref={messagesEndRef}
-      >
+        style={{marginTop: 80}}
+        ref={messagesEndRef}>
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
           <div>{showMessageFrom}</div>

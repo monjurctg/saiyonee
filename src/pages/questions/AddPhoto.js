@@ -12,16 +12,18 @@ function AddPhoto() {
   const [image2, setimage2] = useState(null);
 
   console.log("image2", image, image2);
-  const isEdit = localStorage.getItem("edit_img");
+
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
     console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
+
       if (
         res.data.images.profile_img
         // && !isEdit
       ) {
+        localStorage.setItem("profile_image", res.data.images.profile_img);
         // navigate("/question/selfie-verification");
       }
     }
@@ -42,6 +44,7 @@ function AddPhoto() {
     let res = await QuestionServices.submitProfilePhoto(data);
     console.log("res", res);
     if (res.status === 200) {
+      localStorage.setItem("profile_image", true);
       seterr(false);
       navigate("/question/selfie-verification");
     } else {

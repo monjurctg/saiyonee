@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
-  setDegree2,
   setEducation1,
   setEducation2,
   setEducation3,
@@ -90,38 +89,7 @@ function Education() {
     setTimeout(() => setYear4Dropdown(false), 200);
 
   const [err, setErr] = useState("");
-  // const onContinueClicked = () => {
-  //   let hasError: ""
-  //   hasError = checkEducation(
-  //     education1,
-  //     education1_institution,
-  //     education1_major,
-  //     'Secondary'
-  //   )
-  //   setErr(hasError)
-  //   if (hasError) return
-
-  //   hasError = checkEducation(
-  //     education2,
-  //     education2_institution,
-  //     education2_major,
-  //     'Higher Secondary'
-  //   )
-  //   setErr(hasError)
-  //   if (hasError) return
-
-  //   hasError = checkEducation(
-  //     education3,
-  //     education3_institution,
-  //     education3_major,
-  //     'Undergrad'
-  //   )
-  //   setErr(hasError)
-  //   if (hasError) return
-
-  //   resetScroll()
-  //   history.push(ROUTES.signUp.occupation)
-  // }
+  const [loading, setLoading] = useState(false);
 
   const passingYears = Array.from(
     new Array(new Date().getFullYear() - 1990 + 1)
@@ -223,18 +191,24 @@ function Education() {
         email: email,
         page_name: pathname,
       };
+      setLoading(true);
       let res = await AuthServices.checkPage(data);
       if (res.status === 200) {
+        setLoading(false);
         navigate("/register/ocupation");
       }
     } else {
+      setLoading(false);
       navigate("/register/ocupation");
     }
   };
 
   return (
     <>
-      <RegisterLayout err={err} onContinueClicked={onContinueClicked}>
+      <RegisterLayout
+        err={err}
+        loading={loading}
+        onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           ref={scrollContainerRef}>

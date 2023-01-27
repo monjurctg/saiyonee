@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React from "react";
+import {Link, useNavigate} from "react-router-dom";
 import help from "../../assets/imgs/help.svg";
+import Loader from "../Loader";
 
 function RegisterLayout({
   children,
@@ -10,18 +11,10 @@ function RegisterLayout({
   footerBtn,
   helpN,
   from,
+  loading,
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
-  // useEffect(() => {
-  //   // console.log('first')
-  //   if (window.performance) {
-  //     if (performance.navigation.type === 1) {
-  //       navigate('/register/email')
-  //     }
-  //   }
-  // }, [])
-  // console.log('err in lay', err)
+
   return (
     <>
       <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
@@ -30,8 +23,8 @@ function RegisterLayout({
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
             style={{
-              height: "40px",
-              width: "40px",
+              height: "50px",
+              width: "50px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -62,13 +55,17 @@ function RegisterLayout({
             onFocus={onFocus}
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong>
-              {footerBtn
-                ? footerBtn
-                : from === "varification"
-                ? "Submit"
-                : "Continue"}
-            </strong>
+            {loading ? (
+              <Loader />
+            ) : (
+              <strong>
+                {footerBtn
+                  ? footerBtn
+                  : from === "varification"
+                  ? "Submit"
+                  : "Continue"}
+              </strong>
+            )}
           </button>
         </div>
       </div>

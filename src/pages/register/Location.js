@@ -7,6 +7,7 @@ import AuthServices from "../../services/authServices";
 function Location() {
   let navigate = useNavigate();
   let {pathname} = useLocation();
+  const [loading, setLoading] = useState(false);
 
   const [err, setErr] = useState();
 
@@ -41,13 +42,14 @@ function Location() {
     };
 
     if (!socialToken) {
+      setLoading(true);
       let res = await AuthServices.checkPage(data);
 
-      if (res.status == 200) {
+      if (res.status === 200) {
+        setLoading(false);
         navigate("/register/family_info");
       } else {
-        console.log(data);
-        console.log(res);
+        setLoading(false);
       }
     } else {
       navigate("/register/family_info");
@@ -55,7 +57,10 @@ function Location() {
   };
   return (
     <>
-      <RegisterLayout err={err} onContinueClicked={onContinueClicked}>
+      <RegisterLayout
+        err={err}
+        onContinueClicked={onContinueClicked}
+        loading={loading}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Current Country and City</h1>
           <p className="text-muted mt-5 mb-2">Candidate's current country</p>

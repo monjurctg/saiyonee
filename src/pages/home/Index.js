@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
-// import logo from '../../../public/img/logo.svg'
+
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
-import {useDispatch} from "react-redux";
+
 import {useNavigate} from "react-router-dom";
 
 function Index() {
   const [data, setData] = useState(null);
   const [gettingUser, setgettingUser] = useState(false);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
@@ -22,17 +22,17 @@ function Index() {
     // let data = await res.json()
   };
 
-  const getBoomData = async () => {
+  const getBoomData = useCallback(async () => {
     const res = await UserServices.getBoomUsers();
-    if (res.status == 200) {
+    if (res.status === 200) {
       if (res.data.matched_users.length > 0) navigate("/boom");
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
     getData();
     getBoomData();
-  }, []);
+  }, [getBoomData]);
 
   // console.log('data', data)
   // console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )

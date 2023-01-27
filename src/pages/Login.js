@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
 import {setToken} from "../utils/functions";
@@ -9,31 +9,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
-  // console.log('err', err?.message)
-  const navigator = useNavigate();
 
-  let subItem = (
-    <div className="position-absolute container position-top mt-2">
-      <div className="row justify-content-center">
-        <div className="col-2 pr-3">
-          <button
-            onClick={() => navigator(-1)}
-            className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{height: "58px", width: "58px"}}>
-            <img src="/img/back-icon.svg" alt="back" />
-          </button>
-        </div>
-        <div className="col-8 d-flex justify-content-end">
-          {/* <LinkLogo /> */}
-          <Link to={"/"}>
-            <img src="/img/logo.svg" alt="" />
-          </Link>
-        </div>
-        <div className="col-2"></div>
-      </div>
-    </div>
-  );
-
+  const navigate = useNavigate();
   const onChange = (e) => {
     const {name, value} = e.target;
     if (name === "email") {
@@ -84,21 +61,26 @@ function Login() {
       localStorage.setItem("package_name", res.data.package_name);
       localStorage.setItem("profile_image", res.data.profile_image);
       localStorage.setItem("selfie_image", res.data.selfie_image);
+      localStorage.setItem("emailVerified", res.data.email_verified);
       localStorage.setItem(
         "show_supper_liked_list",
         res.data.show_super_liked_list
       );
-      console.log(res.data.is_verified,"login")
 
-      if (!res.data.is_verified && res.data?.email_verified) {
-        console.log('t')
-        navigator("/success");
+      if (!res.data.email_verified) {
+        console.log(res.data.email_verified, "login");
+        navigate("/email-verification");
+        return;
+      } else if (
+        !res.data.is_verified &&
+        !res.data.is_banned &&
+        res.data.email_verified
+      ) {
+        navigate("/success");
+        return;
       } else {
-        if (res.data.profile_preference_exists) {
-          // navigator("/home");
-          return;
-        }
-        localStorage.setItem("isVarified", true);
+        navigate("/question/1");
+        // localStorage.setItem("isVarified", true);
 
         // navigator("/question/1");
       }
@@ -116,6 +98,28 @@ function Login() {
 
     // console.log("data", data);
   };
+
+  let subItem = (
+    <div className="position-absolute container position-top mt-2">
+      <div className="row justify-content-center">
+        <div className="col-2 pr-3">
+          <button
+            onClick={() => navigator(-1)}
+            className="btn btn-light rounded-circle shadow p-3 image-invert"
+            style={{height: "58px", width: "58px"}}>
+            <img src="/img/back-icon.svg" alt="back" />
+          </button>
+        </div>
+        <div className="col-8 d-flex justify-content-end">
+          {/* <LinkLogo /> */}
+          <Link to={"/"}>
+            <img src="/img/logo.svg" alt="" />
+          </Link>
+        </div>
+        <div className="col-2"></div>
+      </div>
+    </div>
+  );
   // let err = true;
   return (
     <>

@@ -8,29 +8,6 @@ import AuthServices from "../../services/authServices";
 import {stoteRegisterValues} from "../../utils/functions";
 let scrollPos = 0;
 function PersonalInformation() {
-  const [err, setErr] = useState();
-  console.log("err", err);
-  let socialToken = localStorage.getItem("social-token");
-  let {pathname} = useLocation();
-  const scrollContainerRef = useRef();
-
-  const onEducationSelectorClicked = useCallback(() => {
-    scrollPos = scrollContainerRef.current?.scrollTop;
-  }, []);
-  const resetScroll = useCallback(() => {
-    scrollPos = 0;
-  }, []);
-  useEffect(() => {
-    if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({top: scrollPos});
-  }, [onEducationSelectorClicked]);
-
-  // let gender = "male";
-  // let marital_status = "marid";
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
   const {
     full_name,
     date_of_birth,
@@ -43,7 +20,7 @@ function PersonalInformation() {
     marital_status,
     religion,
   } = useSelector((state) => state.auth);
-  // console.log('email', email)
+
   const [state, setState] = useState({
     full_name: full_name,
     display_name: display_name,
@@ -53,6 +30,27 @@ function PersonalInformation() {
     weight: weight || "",
     gender: gender,
   });
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState();
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  let {pathname} = useLocation();
+  const scrollContainerRef = useRef();
+
+  let socialToken = localStorage.getItem("social-token");
+
+  const onEducationSelectorClicked = useCallback(() => {
+    scrollPos = scrollContainerRef.current?.scrollTop;
+  }, []);
+  // const resetScroll = useCallback(() => {
+  //   scrollPos = 0;
+  // }, []);
+  useEffect(() => {
+    if (typeof scrollPos !== "undefined")
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
+  }, [onEducationSelectorClicked]);
 
   console.log("date_of_birth", state.date_of_birth);
 
@@ -178,11 +176,13 @@ function PersonalInformation() {
         email: email,
         page_name: pathname,
       };
+      setLoading(true);
 
       let res = await AuthServices.checkPage(data);
       // console.log('res', res)
       if (res.status === 200) {
         dispatch(setPersonalInfo(state));
+        setLoading(false);
 
         stoteRegisterValues(state);
         navigate("/register/education");
@@ -190,13 +190,19 @@ function PersonalInformation() {
     } else if (socialToken) {
       dispatch(setPersonalInfo(state));
       stoteRegisterValues(state);
+      setLoading(false);
       navigate("/register/education");
+    } else {
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <RegisterLayout err={err} onContinueClicked={onContinueClicked}>
+      <RegisterLayout
+        err={err}
+        onContinueClicked={onContinueClicked}
+        loading={loading}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           ref={scrollContainerRef}>

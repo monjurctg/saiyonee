@@ -26,9 +26,9 @@ function Liked({id}) {
   // console.log('LikeData', LikeData)
   let LikeList = LikeData.map((ll, index) => {
     return (
-      <div className="explore-img">
+      <div className="explore-img" key={index}>
         <div className="cross">X</div>
-        <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`} key={index}>
+        <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`}>
           {ll?.thumbnail_img ? (
             <img src={ll?.thumbnail_img} alt="" />
           ) : (
@@ -51,7 +51,7 @@ function Liked({id}) {
         ) : LikeList.length > 0 ? (
           LikeList
         ) : (
-          <h1 style={{fontSize:20}}>No data found</h1>
+          <h1 style={{fontSize: 20}}>No data found</h1>
         )}
       </div>
     </div>

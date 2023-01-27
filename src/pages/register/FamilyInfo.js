@@ -10,6 +10,7 @@ import {stoteRegisterValues} from "../../utils/functions";
 function FamilyInfo() {
   let navigate = useNavigate();
   let socialToken = localStorage.getItem("social-token");
+  const [loading, setLoading] = useState(false);
   let {pathname} = useLocation();
 
   const [err, setErr] = useState();
@@ -77,16 +78,19 @@ function FamilyInfo() {
         email: email,
         page_name: pathname,
       };
+      setLoading(true);
 
       let res = await AuthServices.checkPage(data);
 
-      if (res.status == 200) {
+      if (res.status === 200) {
+        setLoading(false);
         dispatch(setFamilyInformation(familyInfo));
         stoteRegisterValues(familyInfo);
 
         navigate("/register/varification");
       }
     } else {
+      setLoading(false);
       dispatch(setFamilyInformation(familyInfo));
       stoteRegisterValues(familyInfo);
       navigate("/register/varification");
@@ -111,7 +115,10 @@ function FamilyInfo() {
 
   return (
     <>
-      <RegisterLayout onContinueClicked={onContinueClicked} err={err}>
+      <RegisterLayout
+        onContinueClicked={onContinueClicked}
+        err={err}
+        loading={loading}>
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate's Family Information</h1>
           <div

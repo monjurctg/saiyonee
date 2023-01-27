@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import BasicLayout from "../../components/layouts/BasicLayout";
+import Loader from "../../components/Loader";
 import {useCheckEmailMutation} from "../../redux/api/authApi";
 import {setIsRegStart, setRegEmail_Pass} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
@@ -214,16 +215,7 @@ function RegisterEmail() {
             }}>
             Continue
           </strong>
-          {isLoading && (
-            <>
-              {" "}
-              <i
-                className="spinner-border spinner-border-sm text-black"
-                role="status"
-                aria-hidden="true"></i>
-              <i className="visually-hidden">isLoading...</i>
-            </>
-          )}
+          {isLoading && <Loader />}
         </button>
       </div>
     </BasicLayout>

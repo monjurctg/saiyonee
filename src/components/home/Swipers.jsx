@@ -89,7 +89,7 @@ function Swipers({data, getData}) {
   };
   let show = data?.filtered_users.map((item, index) => {
     return (
-      <div className={``}>
+      <div className={``} key={item.id}>
         <SwiperSlide data-id={item.id}>
           <img
             src={item?.profile_image_url || nouser}
@@ -102,32 +102,33 @@ function Swipers({data, getData}) {
               marginTop: 25,
               marginLeft: "10%",
             }}
-            />
-            <div style={{boxShadow:"rgb(255 183 172) 2px 5px 20px -17px"}}>
-              <h3 style={{textAlign: "center", marginTop: 10,
+          />
+          <div style={{boxShadow: "rgb(255 183 172) 2px 5px 20px -17px"}}>
+            <h3
+              style={{
+                textAlign: "center",
+                marginTop: 10,
                 fontSize: 20,
-                fontFamily: "sans-serif",marginBottom:0,
-                fontWeight:700
-            }}>
-                 {item?.display_name}
-              </h3>
-             
-              <div className="d-flex justify-content-center" style={{gap:5}}>
-              <p style={{textAlign:"center",marginBottom:0,fontWeight:500}}>
+                fontFamily: "sans-serif",
+                marginBottom: 0,
+                fontWeight: 700,
+              }}>
+              {item?.display_name}
+            </h3>
+
+            <div className="d-flex justify-content-center" style={{gap: 5}}>
+              <p
+                style={{textAlign: "center", marginBottom: 0, fontWeight: 500}}>
                 {item?.age} years,
-              </p>  
-              <p style={{textAlign: "center",fontWeight:500}}>
+              </p>
+              <p style={{textAlign: "center", fontWeight: 500}}>
                 {item?.current_city},
               </p>
-              <p style={{textAlign: "center",fontWeight:500}}>
-              {item?.current_country}
+              <p style={{textAlign: "center", fontWeight: 500}}>
+                {item?.current_country}
               </p>
-
-              </div>
-
-
-            
             </div>
+          </div>
         </SwiperSlide>
       </div>
     );

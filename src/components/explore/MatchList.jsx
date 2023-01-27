@@ -30,7 +30,7 @@ function MatchList() {
     return (
       <div className="explore-img" key={index}>
         <div className="cross">X</div>
-        <Link key={index} to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
+        <Link to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
           {sl?.thumbnail_img_url ? (
             <img src={sl?.thumbnail_img_url} alt="" />
           ) : (
@@ -53,7 +53,7 @@ function MatchList() {
         ) : matchList.length > 0 ? (
           matchList
         ) : (
-          <h1 style={{fontSize:20}}>No data found</h1>
+          <h1 style={{fontSize: 20}}>No data found</h1>
         )}
       </div>
     </div>
