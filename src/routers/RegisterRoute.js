@@ -6,16 +6,19 @@ function RegisterRoute() {
   // let auth = useAuth();
   // let isRegister = localStorage.getItem("regStart");
   let socialToken = localStorage.getItem("social-token");
+  const isVarified = localStorage.getItem("isVarified");
+  const isBanned = localStorage.getItem("is_banned");
+  const isAlreadySetPreference = localStorage.getItem("preference");
+  const emailVerified = localStorage.getItem("emailVerified");
+  console.log("emailVerified privatw", emailVerified);
   const {isRegStart} = useSelector((state) => state.auth);
   let location = useLocation();
   const token = getToken();
 
-  if (!isRegStart && token ) {
-    return <Navigate to="/email-verification" state={{from: location}} />;
-  }
-
-  if (!isRegStart && !socialToken) {
+  if (isRegStart === "false" && !socialToken) {
     return <Navigate to="/get-start" state={{from: location}} />;
+  } else if (token) {
+    return <Navigate to="/home" state={{from: location}} />;
   }
 
   return <Outlet />;

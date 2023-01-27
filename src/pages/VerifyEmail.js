@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
@@ -18,7 +18,7 @@ function VerifyEmail() {
   // console.log('err', err?.message)
   const navigator = useNavigate();
 
-  let verify = async () => {
+  let verify = useCallback(async () => {
     let res = await AuthServices.checkIsEmailVerification({
       code: verification_code,
     });
@@ -38,13 +38,13 @@ function VerifyEmail() {
     // } else {
     //   console.log(res);
     // }
-  };
+  }, [verification_code, navigator]);
 
   useEffect(() => {
     if (token) {
       verify();
     }
-  }, []);
+  }, [token, verify]);
 
   let subItem = (
     <div className="position-absolute container position-top mt-2">

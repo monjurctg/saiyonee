@@ -16,46 +16,56 @@ function PublicRoute() {
 
   const emailVerified = localStorage.getItem("emailVerified");
   const isAlreadySetPreference = localStorage.getItem("preference");
-
-  if (
-    auth &&
-    isBanned === "false" &&
-    isVarified === "true" &&
-    emailVerified === "true" &&
-    isAlreadySetPreference === "false"
-  ) {
-    return <Navigate to="/question/1" state={{from: location}} />;
-  }
-  if (
-    (auth && isBanned === "false" && isVarified === "false",
-    emailVerified === "true" && isAlreadySetPreference === "false")
-  ) {
-    return <Navigate to="/success" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified === "true" &&
-    isProfileQuesionExist === "false"
-  ) {
-    return <Navigate to="/question/image" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified === "true" &&
-    isSelfieQuestionExist === "false"
-  ) {
-    return (
-      <Navigate to="/question/selfie-verification" state={{from: location}} />
-    );
-  }
-
-  if (
-    auth &&
-    isVarified === "true" &&
-    isBanned === "false" &&
-    isAlreadySetPreference === "true"
-  ) {
-    console.log("hello publick", isAlreadySetPreference);
+  if (auth) {
     return <Navigate to="/home" state={{from: location}} />;
   }
+
+  // if (
+  //   auth &&
+  //   isBanned === "false" &&
+  //   isVarified === "true" &&
+  //   emailVerified === "true" &&
+  //   isAlreadySetPreference === "false"
+  // ) {
+  //   return <Navigate to="/question/1" state={{from: location}} />;
+  // } else if (
+  //   auth &&
+  //   isBanned === "false" &&
+  //   isVarified === "false" &&
+  //   emailVerified === "false" &&
+  //   isAlreadySetPreference === "false"
+  // ) {
+  //   return <Navigate to="/question/1" state={{from: location}} />;
+  // } else if (
+  //   (auth && isBanned === "false" && isVarified === "false",
+  //   emailVerified === "true" && isAlreadySetPreference === "false")
+  // ) {
+  //   return <Navigate to="/success" state={{from: location}} />;
+  // } else if (
+  //   auth &&
+  //   isVarified === "true" &&
+  //   isProfileQuesionExist === "false"
+  // ) {
+  //   return <Navigate to="/question/image" state={{from: location}} />;
+  // } else if (
+  //   auth &&
+  //   isVarified === "true" &&
+  //   isSelfieQuestionExist === "false"
+  // ) {
+  //   return (
+  //     <Navigate to="/question/selfie-verification" state={{from: location}} />
+  //   );
+  // }
+
+  // if (
+  //   auth &&
+  //   isVarified === "true" &&
+  //   isBanned === "false" &&
+  //   isAlreadySetPreference === "true"
+  // ) {
+  //   console.log("hello publick", isAlreadySetPreference);
+  //   return <Navigate to="/home" state={{from: location}} />;
+  // }
 
   return <Outlet />;
 }

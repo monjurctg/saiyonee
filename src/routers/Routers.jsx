@@ -221,14 +221,12 @@ function Routers() {
           {/* not varified */}
           <Route element={<NotVarified />}>
             <Route path="/email-verification" element={<EmailVerication />} />
-
+            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/success" element={<RegSuccess />} />
             <Route path="/review" element={<RegSuccess />} />
           </Route>
 
           <Route element={<PrivateRoute />}>
-            <Route path="/verify-email" element={<VerifyEmail />} />
-
             <Route path="/question/image" element={<AddPhoto />} />
             <Route
               path="/question/selfie-verification"

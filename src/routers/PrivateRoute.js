@@ -6,16 +6,23 @@ function PrivateRoute() {
   let auth = getToken();
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
-  const isBanned = localStorage.getItem("isBanned");
+  const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");
   const emailVerified = localStorage.getItem("emailVerified");
   console.log("emailVerified privatw", emailVerified);
 
   // console.log(varification.ques.length);
-  console.log("hello private", emailVerified);
+  console.log("hello private", isVarified, isBanned, emailVerified);
 
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified === "false" &&
+    isBanned === "false" &&
+    emailVerified === "false"
+  ) {
+    return <Navigate to="/email-verification" state={{from: location}} />;
   } else if (
     auth &&
     isVarified === "false" &&

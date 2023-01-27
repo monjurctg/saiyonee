@@ -13,10 +13,8 @@ function NotVarified() {
   let location = useLocation();
   if (!token) {
     return <Navigate to="/get-start" state={{from: location}} />;
-  }
-
-  if (isVerified === "false" && emailVerified === "false") {
-    return <Navigate to="/get-start" state={{from: location}} />;
+  } else if (token && isVerified === "true" && emailVerified === "true") {
+    return <Navigate to="/home" state={{from: location}} />;
   }
 
   return <Outlet />;
