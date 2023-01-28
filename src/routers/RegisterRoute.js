@@ -17,8 +17,6 @@ function RegisterRoute() {
 
   if (isRegStart === "false" && !socialToken) {
     return <Navigate to="/get-start" state={{from: location}} />;
-  } else if (token) {
-    return <Navigate to="/home" state={{from: location}} />;
   }
 
   return <Outlet />;

@@ -3,12 +3,13 @@ import {getToken} from "../utils/functions";
 
 function NotVarified() {
   console.log("first");
-  const isVerified = localStorage.getItem("isVerified");
+  const isVerified = localStorage.getItem("isVarified");
   const is_banned = localStorage.getItem("is_banned");
   const emailVerified = localStorage.getItem("emailVerified");
   const token = getToken();
 
   // d");
+  console.log("not varified", isVerified, emailVerified);
   // let auth = getToken()
   let location = useLocation();
   if (!token) {

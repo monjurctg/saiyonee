@@ -32,23 +32,17 @@ function PrivateRoute() {
     return <Navigate to="/success" state={{from: location}} />;
   } else if (auth && isVarified === "true" && isBanned === "true") {
     return <Navigate to="/review" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified === "true" &&
-    isBanned === "false" &&
-    isAlreadySetPreference === "false" &&
-    emailVerified === "true"
-  ) {
-    return <Navigate to="/question/1" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified === "true" &&
-    isBanned === "false" &&
-    emailVerified === "true" &&
-    isAlreadySetPreference === "true"
-  ) {
-    return <Navigate to="/home" state={{from: location}} />;
   }
+
+  // else if (
+  //   auth &&
+  //   isVarified === "true" &&
+  //   isBanned === "false" &&
+  //   isAlreadySetPreference === "false" &&
+  //   emailVerified === "true"
+  // ) {
+  //   return <Navigate to="/question/1" state={{from: location}} />;
+  // }
 
   // if (auth && isVarified === 1 && isAlreadySetPreference == true) {
   //   return <Navigate to="/home" state={{from: location}} />;
