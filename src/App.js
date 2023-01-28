@@ -5,7 +5,7 @@ import PreferenceServices from "./services/preferenceServices";
 import {useDispatch} from "react-redux";
 import {setPreviousPreference} from "./redux/slices/preferenceSlice";
 import {useEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import UserServices from "./services/userServices";
 import {setCurrentUser} from "./redux/slices/authSlices";
 import {getToken} from "./utils/functions";

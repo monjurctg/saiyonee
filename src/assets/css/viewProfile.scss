@@ -198,13 +198,21 @@
 
 .logos {
   .viewProfile-no-active {
-    background: white;
-    padding: 10px 15px;
-    cursor: pointer;
-    border: 1px solid #edafa6;
-    border-radius: 5px;
+    padding-bottom: 10px;
   }
   .viewProfile-active {
-    background-color: #edafa6;
+    border-bottom: 2px solid #edafa6;
+  }
+}
+
+.information-container {
+  width: 100% !important;
+
+  .info {
+    display: flex;
+    p {
+      border: none;
+      width: 100%;
+    }
   }
 }
