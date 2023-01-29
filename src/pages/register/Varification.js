@@ -165,8 +165,8 @@ function Varification() {
         localStorage.removeItem("social-token");
         toastMsg.success("Registration Successful");
         navigator("/email-verification");
-        localStorage.setItem("isVarified", false);
-        localStorage.setItem("is_banned", false);
+        localStorage.setItem("isVarified", res?.data?.is_verified);
+        localStorage.setItem("is_banned", res?.data?.is_banned);
         localStorage.setItem("regStart", false);
         localStorage.setItem("emailVerified", true);
         // setToken(res.data.auth_token);
