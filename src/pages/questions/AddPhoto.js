@@ -61,7 +61,7 @@ function AddPhoto() {
     let file = e.target.files[0];
     // console.log('file', file)
     if (file) {
-      if (file.size > 1000000) {
+      if (file.size > 10000000) {
         seterr("File size is too large");
       } else {
         // console.log('file', file)

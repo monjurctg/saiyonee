@@ -15,10 +15,14 @@ function SelfieVerification() {
 
   const getImage = async () => {
     let res = await QuestionServices.getSelfieImage();
-    // console.log("res", res.data.images);
-    const selfieEdit = localStorage.getItem("selfie_edit");
 
     if (res.status === 200) {
+      if (res.data.images.selfie_img) {
+        console.log("hello world selfie");
+        localStorage.setItem("selfie_image", "true");
+      } else {
+        localStorage.setItem("selfie_image", "false");
+      }
       setimage2(res.data.images.selfie_img);
       // if (res.data.images.selfie_img && !selfieEdit) {
       //   navigate("/preference");
@@ -32,7 +36,6 @@ function SelfieVerification() {
     let res = await QuestionServices.submitSelfiePhoto(data);
     console.log("ressadasdasda", res);
     if (res.status === 200) {
-      localStorage.setItem("selfie_img", "true");
       seterr(false);
       toastMsg.success("Image uploaded successfully");
       getImage();

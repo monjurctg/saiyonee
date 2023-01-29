@@ -45,7 +45,7 @@ function ViewProfile() {
         </div>
         <div className="info">
           <p> Date of Birth</p>
-          <p>{user.date_of_birth}</p>
+          <p>{user?.date_of_birth}</p>
         </div>
 
         <div className="info">

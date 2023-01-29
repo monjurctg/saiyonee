@@ -79,7 +79,7 @@ function Login() {
         navigate("/success");
         return;
       } else {
-        navigate("/question/1");
+        navigate("/");
         // localStorage.setItem("isVarified", true);
 
         // navigator("/question/1");

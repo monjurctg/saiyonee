@@ -13,11 +13,49 @@ function PublicRoute() {
   const isVarified = localStorage.getItem("isVarified");
 
   const isBanned = localStorage.getItem("is_banned");
+  const profile_image = localStorage.getItem("profile_image");
+  const selfie_image = localStorage.getItem("selfie_image");
 
   const emailVerified = localStorage.getItem("emailVerified");
   const isAlreadySetPreference = localStorage.getItem("preference");
-  if (auth) {
+  if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "true"
+  ) {
     return <Navigate to="/home" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "false" &&
+    profile_image === "false"
+  ) {
+    return <Navigate to="/question/image" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "false" &&
+    selfie_image === "false"
+  ) {
+    return (
+      <Navigate to="/question/selfie-verification" state={{from: location}} />
+    );
+  } else if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "false" &&
+    selfie_image !== "false" &&
+    profile_image !== "false"
+  ) {
+    return <Navigate to="/preference" state={{from: location}} />;
   }
 
   // if (

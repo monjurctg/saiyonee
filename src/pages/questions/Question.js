@@ -17,7 +17,7 @@ function Question() {
     form_field_id: "",
     text_input: "",
   });
-  // console.log('id', id)
+  console.log("id", id);
 
   const [question, setquestion] = useState("");
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,6 @@ function Question() {
         console.log("isAlreadySetPreference", isAlreadySetPreference);
         if (isAlreadySetPreference === "true") {
           navigate("/home");
-          return;
         }
 
         navigate("/question/image");
