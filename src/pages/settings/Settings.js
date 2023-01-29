@@ -10,7 +10,25 @@ const Settings = () => {
   const [profile, setprofile] = useState();
   const [percentage, setpercentage] = useState(0);
 
+  let percentageCal = (value) => {
+    let left = 0;
+    if (value <= 0) left = 80;
+    else if (value <= 10) left = 125;
+    else if (value <= 20) left = 150;
+    else if (value <= 30) left = 185;
+    else if (value <= 40) left = 215;
+    else if (value <= 50) left = 245;
+    else if (value <= 60) left = 255;
+    else if (value <= 70) left = 265;
+    else if (value <= 80) left = 335;
+    else if (value <= 90) left = 355;
+    else if (value <= 100) left = 365;
+
+    return left;
+  };
+
   const Navigate = useNavigate();
+
 
   let userProfile = async () => {
     let res = await UserServices.UserProfile();
@@ -49,7 +67,7 @@ const Settings = () => {
             <div className="rounded-img"
             style={{
 
-              background: "conic-gradient(#4D5BFA 101deg,#dee2e6 33deg)"
+              background: `conic-gradient(#ffb7ac  ${percentageCal(percentage)}deg,#dee2e6 33deg)`
             }}
             
             >
@@ -63,7 +81,20 @@ const Settings = () => {
               </div> */}
             {/* )} */}
               <div>
-              <h3 className="mt-2">{profile?.full_name|| "Kamrul Hassan"}</h3>
+              <h3 className="mt-2 mb-1">{profile?.full_name|| "Kamrul Hassan"}</h3>
+              <p style={{fontSize:12}}>
+                Selfie varifired:<span style={{
+
+                  fontSize:14,
+                  padding:5,
+                  color:"white",
+                  background:profile?.selfie_verified == 0 ? "red" : "green",
+                  fontWeight:600
+
+                }}>{
+                  profile?.selfie_verified == 0 ? "No" : "Yes"
+                  }</span>
+              </p>
 
               </div>
 
@@ -88,8 +119,8 @@ const Settings = () => {
               <button className="edit-btn">Edit profile</button>
             </Link>
           </div>
-          <Link to={"/edit/profile"} className="buttons">
-              <button className="edit-btn">View Gallery</button>
+          <Link to={"/edit/profile"} className="buttons justify-content-center">
+              <button className="edit-btn" style={{width:"100%",marginBottom:10}}>View Gallery</button>
             </Link>
         </div>
       </div>

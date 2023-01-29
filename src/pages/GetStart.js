@@ -67,7 +67,8 @@ function GetStarted() {
               gap: 10,
             }}>
             <div>
-              <Link to={"/social-login"}>
+            <a href="https://testingsaiyonee.betteraidbd.com/social_login/facebook">
+                
                 <AiFillFacebook
                   style={{
                     color: "#14a0f8",
@@ -77,9 +78,10 @@ function GetStarted() {
                     cursor: "pointer",
                   }}
                 />
-              </Link>
+              </a>
             </div>
             <div>
+            <a href="https://testingsaiyonee.betteraidbd.com/social_login/linkedin">
               <AiFillLinkedin
                 style={{
                   color: "rgb(5 90 189)",
@@ -89,6 +91,7 @@ function GetStarted() {
                   cursor: "pointer",
                 }}
               />
+              </a>
             </div>
             <div>
               <a href="https://testingsaiyonee.betteraidbd.com/social_login/google">

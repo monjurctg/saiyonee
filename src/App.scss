@@ -260,13 +260,16 @@ body {
 }
 
 .percentage{
-  font-size: 20px;
+  font-size: 16px;
     font-weight: 600;
+    display: flex;
     margin-bottom: 0;
-    // margin-left: 10px;
-    /* height: 30px; */
-    background: #198754;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    background: #ffb7ac;
     color: white;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 50%;
+    justify-content: center;
 }
