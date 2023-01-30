@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {useSelector} from "react-redux";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {getToken} from "../utils/functions";
@@ -57,6 +56,10 @@ function PublicRoute() {
   ) {
     return <Navigate to="/preference" state={{from: location}} />;
   }
+
+  // <!--Start of Tawk.to Script-->
+
+  // <!--End of Tawk.to Script-->
 
   // if (
   //   auth &&

@@ -103,15 +103,19 @@ function ViewProfile() {
           <div className="mt-3">
             <div className="content-container">
               <img className="user-img" src={user?.profile_img} />
-              <h2>Sharmila</h2>
+              <h2>{user?.display_name ?? user?.full_name}</h2>
 
               <p
                 style={{
                   textAlign: "Center",
                 }}>
-                <span className="short-description">Student</span>
-                <span className="short-description">Khulna, BD</span>
-                <span className="short-description">Age 24</span>
+                <span className="short-description">
+                  {user?.current_employment_type}
+                </span>
+                <span className="short-description">
+                  {user?.current_city},BD
+                </span>
+                <span className="short-description">Age {user?.age}</span>
               </p>
               <div className="logos">
                 <div className="tab  pt-3 ">

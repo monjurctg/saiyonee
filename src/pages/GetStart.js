@@ -4,7 +4,11 @@ import {Link} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import {setIsRegStart} from "../redux/slices/authSlices";
 import {FcGoogle} from "react-icons/fc";
-import {AiFillLinkedin, AiFillFacebook} from "react-icons/ai";
+import {
+  AiFillLinkedin,
+  AiFillFacebook,
+  AiFillAccountBook,
+} from "react-icons/ai";
 
 function GetStarted() {
   const dispatch = useDispatch();
@@ -24,7 +28,7 @@ function GetStarted() {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0  bg-transparent flex-grow-1"
-        style={{height: "40vh", marginTop: "-70px"}}>
+        style={{height: "40vh", marginTop: "-10px"}}>
         <div className="card-body bg-body rounded p-3">
           <h1
             className="card-title mt-3 mb-4"
@@ -34,9 +38,15 @@ function GetStarted() {
             Hi there! Let's get <br /> Started.
           </h1>
           <Link
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "70px",
+            }}
             onClick={registerStart}
             to={"/register/email"}
-            className="btn btn-primary w-100 rounded shadow p-3 my-2">
+            className="btn  btn btn-outline-primary w-100 rounded shadow p-3 my-2">
             <strong
               style={{
                 fontFamily: "Inter",
@@ -44,9 +54,88 @@ function GetStarted() {
               Sign Up With Email
             </strong>
           </Link>
+          <div
+            className="mb-2  justify-content-center"
+            style={{
+              gap: 10,
+            }}>
+            <div>
+              <a
+                style={{
+                  fontFamily: "Inter",
+                }}
+                href="https://testingsaiyonee.betteraidbd.com/social_login/facebook"
+                className="btn  btn-outline-primary w-100 rounded shadow p-3 my-2">
+                <strong
+                  style={{
+                    fontFamily: "Inter",
+                  }}>
+                  <span> Sign Up With </span>
+                  <AiFillFacebook
+                    style={{
+                      color: "#14a0f8",
+                      width: 35,
+                      height: 35,
+                      borderRadius: "50%",
+                      cursor: "pointer",
+                    }}
+                  />
+                </strong>
+              </a>
+            </div>
+            <div className="">
+              <a
+                style={{
+                  fontFamily: "Inter",
+                }}
+                href="https://testingsaiyonee.betteraidbd.com/social_login/linkedin"
+                className="btn  btn-outline-primary  w-100 rounded shadow p-3 my-2">
+                <strong
+                  style={{
+                    fontFamily: "Inter",
+                  }}>
+                  <span> Sign Up With </span>
+                  <AiFillLinkedin
+                    style={{
+                      color: "#14a0f8",
+                      width: 35,
+                      height: 35,
+                      borderRadius: "50%",
+                      cursor: "pointer",
+                    }}
+                  />
+                </strong>
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://testingsaiyonee.betteraidbd.com/social_login/google"
+                className="btn btn btn-outline-primary w-100 rounded shadow p-3 my-2"
+                style={{
+                  fontFamily: "Inter",
+                }}>
+                <strong
+                  style={{
+                    fontFamily: "Inter",
+                  }}>
+                  <span>Sign Up With </span>
+                  {""}
+                  <FcGoogle
+                    style={{
+                      color: "#14a0f8",
+                      width: 35,
+                      height: 35,
+                      borderRadius: "50%",
+                      cursor: "pointer",
+                    }}
+                  />
+                </strong>
+              </a>
+            </div>
+          </div>
           <Link
             to={"/login"}
-            className="btn btn-outline-primary w-100 rounded shadow p-3 my-2">
+            className="btn mt-4  btn-primary w-100 rounded shadow p-3 my-2">
             <strong
               style={{
                 fontFamily: "Inter",
@@ -54,90 +143,37 @@ function GetStarted() {
               Login
             </strong>
           </Link>
-              <h5
-              style={{
-                fontSize: 16,
-                margin: 10,
-                fontWeight: 700
-              }}
-              >OR</h5>
-          <div
-            className="mb-2 d-flex justify-content-center"
-            style={{
-              gap: 10,
-            }}>
-            <div>
-            <a href="https://testingsaiyonee.betteraidbd.com/social_login/facebook">
-                
-                <AiFillFacebook
-                  style={{
-                    color: "#14a0f8",
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    cursor: "pointer",
-                  }}
-                />
-              </a>
-            </div>
-            <div>
-            <a href="https://testingsaiyonee.betteraidbd.com/social_login/linkedin">
-              <AiFillLinkedin
-                style={{
-                  color: "rgb(5 90 189)",
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
-              />
-              </a>
-            </div>
-            <div>
-              <a href="https://testingsaiyonee.betteraidbd.com/social_login/google">
-                <FcGoogle
-                  style={{
-                    color: "rgb(5 90 189)",
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    cursor: "pointer",
-                  }}
-                />
-              </a>
-            </div>
-          </div>
         </div>
-      </div>
-      <div
-        className="container max-width-mobile p-4"
-        style={{height: "17vh", position: "fixed", bottom: 0}}>
-        {/* <div className="row">
-          <div className="col">
-            <div className="d-flex align-items-center">
-              <Link
-                to="/" // TODO ROUTES.tutorial
-                className="image-saturate position-relative me-auto">
+        <div
+          className="container max-width-mobile p-4"
+          style={{height: "17vh"}}>
+          {/* <div className="row">
+        <div className="col">
+          <div className="d-flex align-items-center">
+            <Link
+              to="/" // TODO ROUTES.tutorial
+              className="image-saturate position-relative me-auto">
+              <img
+                src="img/next-btn-25-percent.svg"
+                alt="next-btn-25-percent.svg"
+                className="img-fluid"
+              />
+              <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
                 <img
-                  src="img/next-btn-25-percent.svg"
+                  src="img/back-icon.svg"
                   alt="next-btn-25-percent.svg"
                   className="img-fluid"
                 />
-                <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
-                  <img
-                    src="img/back-icon.svg"
-                    alt="next-btn-25-percent.svg"
-                    className="img-fluid"
-                  />
-                </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
-        </div> */}
-        <p className="get-started-p">
-          By continuing you agree to our Terms and Privacy Policy. We never post
-          to facebook.
-        </p>
+        </div>
+      </div> */}
+          <p className="get-started-p">
+            By continuing you agree to our Terms and Privacy Policy. We never
+            post to facebook.
+          </p>
+        </div>
       </div>
     </BasicLayout>
   );
