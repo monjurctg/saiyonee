@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 import ExploreLayout from "../../components/layouts/ExploreLayout";
 import dislike from "../../assets/imgs/dislike.svg";
@@ -24,7 +24,8 @@ const MatchedUser = () => {
   const [singleData, setSingleData] = useState({});
   let dispatch = useDispatch();
   const {matchModal} = useSelector((state) => state.utils);
-  const {gender} = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
+  const {gender} = useSelector((state) => state?.auth?.user);
   let modalChange = () => {
     console.log("matchModal", matchModal);
 
@@ -67,9 +68,12 @@ const MatchedUser = () => {
   }
   let getActiveSlide = async (task, id) => {
     if (task === "like") {
-      let res = await UserServices.like_user(id);
+      let res = await UserServices.like_user(
+        route === "shortList" ? appId : id
+      );
       if (res.status === 200) {
         toastMsg.success(res.data.message);
+        navigate(-1);
       } else {
         console.log(res, "res from like");
         toastMsg.error(res.response.data.message, "hello");

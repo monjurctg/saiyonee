@@ -1,12 +1,14 @@
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
+import QuestionServices from "../services/questionServices";
 import {getToken} from "../utils/functions";
 
 function PublicRoute() {
   // let auth = useAuth();
   const {isEmptyQuestion, isProfileQuesionExist, isSelfieQuestionExist} =
     useSelector((state) => state.utils);
-
+  console.log(isEmptyQuestion, "question");
   let auth = getToken();
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
@@ -17,6 +19,21 @@ function PublicRoute() {
 
   const emailVerified = localStorage.getItem("emailVerified");
   const isAlreadySetPreference = localStorage.getItem("preference");
+
+  // const [quesLength, setQuesLength] = useState(0);
+  // let getQuestions = async () => {
+  //   let res = await QuestionServices.getQuestions();
+  //   // console.log("res", res.data.form_field_questions);
+  //   // console.log('res', res)
+  //   if (res.status === 200) {
+  //     setQuesLength(res.data.form_field_questions?.length);
+  //   } else {
+  //   }
+  // };
+  // useEffect(() => {
+  //   getQuestions();
+  // }, []);
+
   if (
     auth &&
     isVarified === "true" &&
@@ -25,6 +42,16 @@ function PublicRoute() {
     isAlreadySetPreference === "true"
   ) {
     return <Navigate to="/home" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "false" &&
+    profile_image === "false" &&
+    isEmptyQuestion
+  ) {
+    return <Navigate to="/question/1" state={{from: location}} />;
   } else if (
     auth &&
     isVarified === "true" &&

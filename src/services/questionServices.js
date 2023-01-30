@@ -57,12 +57,12 @@ QuestionServices.submitSelfiePhoto = async (data) => {
   return res;
 };
 
-QuestionServices.routeData = async () => {
-  const resQues = await QuestionServices.getQuestions();
+// QuestionServices.routeData = async () => {
+//   const resQues = await QuestionServices.getQuestions();
 
-  return {
-    ques: resQues.data.form_field_questions,
-  };
-};
+//   return {
+//     ques: resQues,
+//   };
+// };
 
 export default QuestionServices;

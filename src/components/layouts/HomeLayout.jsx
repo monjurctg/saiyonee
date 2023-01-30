@@ -8,7 +8,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
   const logout = () => {
     // console.log("logout");
     localStorage.clear();
-    navigate("/login");
+    navigate("/get-start");
   };
 
   let header = "";
@@ -72,24 +72,42 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
       }}
     /> */}
 
-        {pathname === "/settings" ? (
-          <p className="s-logout" onClick={logout}>
-            Log out
-          </p>
+        {pathname === "/home" ? (
+          <>
+            <Link to={"/home"}>
+              <img src={"img/logo.svg"} alt="logo" style={{height: 30}} />
+            </Link>
+            <Link to={"/preference"}>
+              <div className="menu-img">
+                <img
+                  src={"img/menu.svg"}
+                  alt="logo"
+                  style={{height: 30, width: 30}}
+                />
+              </div>
+            </Link>
+          </>
         ) : (
-          <Link to={"/home"}>
-            <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
-          </Link>
-        )}
-        <Link to={"/preference"}>
-          <div className="menu-img">
+          <p
+            onClick={logout}
+            style={{
+              padding: "5px 10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "10px",
+              cursor: "pointer",
+              border: "1px solid #ffb7ac",
+            }}>
             <img
-              src={"img/menu.svg"}
-              alt="logo"
-              style={{height: 30, width: 30}}
+              className="me-2"
+              style={{margin: "0 auto", height: "25px"}}
+              src="https://toppng.com/uploads/preview/free-login-logout-black-icon-116420824011bgykrtibc.png"
+              alt=""
             />
-          </div>
-        </Link>
+            <span>Logout</span>
+          </p>
+        )}
       </div>
     );
   }

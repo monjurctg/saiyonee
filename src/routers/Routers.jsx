@@ -66,57 +66,56 @@ import SocialLogin from "../pages/social/SocialLogin";
 import Register from "../pages/social-login/Register";
 import EmailVerication from "../pages/register/EmailVerication";
 import VerifyEmail from "../pages/VerifyEmail";
+import {useCallback} from "react";
 
 function Routers() {
   // console.log("getToken()", getToken());
+
   if (getToken()) {
     setRouteToken(getToken());
   }
+  const navigate = useNavigate();
+  const {isEmptyQuestion, isProfileQuesionExist, isSelfieQuestionExist} =
+    useSelector((state) => state.utils);
   const dispatch = useDispatch();
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+  const getCondition = useCallback(async () => {
+    const token = getToken();
+
+    const res = await QuestionServices.getQuestions();
+    console.log(res, "res from home");
+
+    if (res.status === 200) {
+      setLoading(false);
+
+      if (res.data.form_field_questions.length > 0) {
+        dispatch(set_is_ques(true));
+        navigate("/question/1");
+      } else {
+        dispatch(set_is_ques(false));
+      }
+    } else {
+      setLoading(false);
+      dispatch(set_is_ques(false));
+    }
+
+    // setVarification(res);
+  }, []);
+  if (location.pathname === "/register/email") {
+    // console.log(true, "path");
+  } else {
+    localStorage.setItem("regStart", false);
+  }
 
   useEffect(() => {
-    const getCondition = async () => {
-      const token = getToken();
-      const addImg = localStorage.getItem("profile_image");
-      const selfie = localStorage.getItem("selfies_image");
-      if (token) {
-        const res = await QuestionServices.routeData();
-
-        const {ques} = res;
-        if (addImg) {
-          dispatch(set_is_image(true));
-        } else {
-          dispatch(set_is_image(false));
-        }
-        if (selfie) {
-          dispatch(set_is_selfie(true));
-        } else {
-          dispatch(set_is_selfie(false));
-        }
-        if (ques.length <= 0) {
-          dispatch(set_is_ques(true));
-        } else {
-          dispatch(set_is_ques(false));
-        }
-      }
-
-      // setVarification(res);
-    };
-
-    if (location.pathname === "/register/email") {
-      // console.log(true, "path");
-    } else {
-      localStorage.setItem("regStart", false);
-    }
     getCondition();
-  }, [dispatch, location.pathname]);
+  }, []);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 1000);
   //  console.log('location', location)
   return (
     <div

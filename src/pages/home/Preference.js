@@ -235,7 +235,7 @@ function Preference() {
             aria-describedby="height_inches"
           />
           <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
-            Form
+            From
           </label>
         </div>
         <div

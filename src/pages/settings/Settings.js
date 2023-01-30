@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import QuestionServices from "../../services/questionServices";
 import UserServices from "../../services/userServices";
@@ -29,7 +29,6 @@ const Settings = () => {
 
   const Navigate = useNavigate();
 
-
   let userProfile = async () => {
     let res = await UserServices.UserProfile();
     let percentageV = await UserServices.completion();
@@ -51,28 +50,26 @@ const Settings = () => {
           style={{
             height: "62vh",
             overflowY: "auto",
-          }}
-        >
+          }}>
           <div
             className="d-flex justify-content-between align-items-center settings"
             style={{
               flexDirection: "column",
-            }}
-          >
+            }}>
             {/* <div className='rounded-img'>
                             <img src={"img/pp.png"} alt="" />
 
                         </div> */}
             {/* {profile?.profile_img ? ( */}
-            <div className="rounded-img"
-            style={{
-
-              background: `conic-gradient(#ffb7ac  ${percentageCal(percentage)}deg,#dee2e6 33deg)`
-            }}
-            
-            >
-                {/* <input type={"range"}/> */}
-            <img src={profile?.profile_img || "img/home.svg"} alt="" />
+            <div
+              className="rounded-img"
+              style={{
+                background: `conic-gradient(#ffb7ac  ${percentageCal(
+                  percentage
+                )}deg,#dee2e6 33deg)`,
+              }}>
+              {/* <input type={"range"}/> */}
+              <img src={profile?.profile_img || "img/home.svg"} alt="" />
             </div>
 
             {/* ) : ( */}
@@ -80,33 +77,36 @@ const Settings = () => {
                 <p>{profile?.full_name?.charAt(0)}</p>
               </div> */}
             {/* )} */}
-              <div>
-              <h3 className="mt-2 mb-1">{profile?.full_name|| "Kamrul Hassan"}</h3>
-              <p style={{fontSize:12}}>
-                Selfie varifired:<span style={{
-
-                  fontSize:14,
-                  padding:5,
-                  color:"white",
-                  background:profile?.selfie_verified == 0 ? "red" : "green",
-                  fontWeight:600
-
-                }}>{
-                  profile?.selfie_verified == 0 ? "No" : "Yes"
-                  }</span>
-              </p>
-
-              </div>
+            <div>
+              <h3 className="mt-2 mb-1">
+                {profile?.full_name || "Kamrul Hassan"}
+              </h3>
+              {/* <p style={{fontSize: 12}}>
+                Selfie varifired:
+                <span
+                  style={{
+                    fontSize: 14,
+                    padding: 5,
+                    color: "white",
+                    background: profile?.selfie_verified == 0 ? "red" : "green",
+                    fontWeight: 600,
+                  }}>
+                  {profile?.selfie_verified == 0 ? "No" : "Yes"}
+                </span>
+              </p> */}
+            </div>
 
             {/* <div className="complete">
               <p>Complete my profile</p>
             </div> */}
             <div className="percentage-div">
-            <p className="percentage">{percentage}%</p>
-            <p style={{
+              <p className="percentage">{percentage}%</p>
+              <p
+                style={{
                   fontWight: 600,
-            }}>Profile complete</p>
-
+                }}>
+                Profile complete
+              </p>
             </div>
           </div>
 
@@ -120,8 +120,12 @@ const Settings = () => {
             </Link>
           </div>
           <Link to={"/edit/profile"} className="buttons justify-content-center">
-              <button className="edit-btn" style={{width:"100%",marginBottom:10}}>View Gallery</button>
-            </Link>
+            <button
+              className="edit-btn"
+              style={{width: "80%", marin: "0 auto", marginBottom: 10}}>
+              View Gallery
+            </button>
+          </Link>
         </div>
       </div>
     </HomeLayout>

@@ -14,7 +14,7 @@ function BasicLayout({children, subItem}) {
           alt="bg-star"
           className="img-fluid rounded-md-top rounded-bottom basic-img"
           style={{
-            height: pathname !== "/" && "100%",
+            height: pathname !== "/" || (pathname !== "get-start" && "100%"),
             objectFit: "cover",
             width: pathname === "/" ? 350 : "100%",
           }}

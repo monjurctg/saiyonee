@@ -78,7 +78,7 @@ function Question() {
   };
   // console.log('inputs', inputs)
   let field = "";
-  if (question?.field_type === "text") {
+  if (question?.field_type === "text" || question?.field_type === "textarea") {
     field = (
       <input
         name="text_input"
