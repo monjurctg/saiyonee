@@ -29,7 +29,13 @@ function MatchList() {
   let matchList = matchData.map((sl, index) => {
     return (
       <div className="explore-img" key={index}>
-        <div className="cross">X</div>
+        <div className="cross">
+          <img
+            height={15}
+            src="https://icon-library.com/images/delete-icon-png/delete-icon-png-19.jpg"
+            alt=""
+          />
+        </div>
         <Link to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
           {sl?.thumbnail_img_url ? (
             <img src={sl?.thumbnail_img_url} alt="" />

@@ -27,7 +27,14 @@ function Liked({id}) {
   let LikeList = LikeData.map((ll, index) => {
     return (
       <div className="explore-img" key={index}>
-        <div className="cross">X</div>
+        <div className="cross">
+          {" "}
+          <img
+            height={15}
+            src="https://icon-library.com/images/delete-icon-png/delete-icon-png-19.jpg"
+            alt=""
+          />
+        </div>
         <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`}>
           {ll?.thumbnail_img ? (
             <img src={ll?.thumbnail_img} alt="" />

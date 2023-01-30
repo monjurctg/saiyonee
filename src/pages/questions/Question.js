@@ -31,14 +31,10 @@ function Question() {
       setLoading(false);
       setlength(res.data.form_field_questions.length);
       if (res.data.form_field_questions?.length === 0) {
-        const isAlreadySetPreference = localStorage.getItem("preference");
-        console.log("isAlreadySetPreference", isAlreadySetPreference);
-        if (isAlreadySetPreference === "true") {
-          navigate("/home");
-        }
-
-        navigate("/question/image");
+        navigate("/");
+        return;
       }
+
       setquestion(res.data.form_field_questions[0]);
     } else {
       seterr(res.data.message);
