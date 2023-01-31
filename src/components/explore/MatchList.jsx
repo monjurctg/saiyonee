@@ -66,7 +66,11 @@ function MatchList() {
     <div className="mt-2">
       <div
         className="py-4 d-flex  flex-wrap"
-        style={{gap: 0, justifyContent: "space-around"}}>
+        style={{
+          gap: 0,
+          justifyContent:
+            matchData.length <= 0 ? "space-between" : "space-around",
+        }}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : matchList.length > 0 ? (

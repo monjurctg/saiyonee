@@ -92,7 +92,11 @@ function Shortlisted() {
     <div className="mt-2">
       <div
         className="py-4  d-flex flex-wrap"
-        style={{gap: 0, justifyContent: "space-around"}}>
+        style={{
+          gap: 0,
+          justifyContent:
+            sortListData.length <= 1 ? "space-between" : "space-around",
+        }}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : shortList.length > 0 ? (

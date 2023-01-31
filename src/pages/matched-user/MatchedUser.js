@@ -186,6 +186,47 @@ const MatchedUser = () => {
                 Age {singleData?.app_user?.age}
               </span>
             </p>
+            <h4
+              style={{
+                paddingLeft: 20,
+              }}>
+              Personal Details
+            </h4>
+
+            <p
+              style={{
+                color: "#000",
+
+                fontSize: "14px",
+              }}>
+              Name :{" "}
+              {singleData?.app_user?.full_name ??
+                singleData?.app_user?.display_name}
+              <br />
+              Age :{singleData?.app_user?.age}
+              <br />
+              Gender :{singleData?.app_user?.gender}
+              <br />
+              Height :{singleData?.app_user?.height_feet} feet{" "}
+              {singleData?.app_user?.height_inches} inches
+              <br />
+              Weight {singleData?.app_user?.weight}
+              <br />
+              Marital Status :{singleData?.app_user?.marital_status}
+              <br />
+              Marital Timing
+              <br />
+              Date of Birth :{singleData?.app_user?.date_of_birth}
+              {/* <br />
+              Blood group
+              <br />
+              Nationality
+              <br />
+              Mother Tongue
+              <br />
+              Physical Status
+            */}
+            </p>
 
             <h4
               style={{
@@ -227,47 +268,6 @@ const MatchedUser = () => {
               College : {singleData?.app_user?.education2_institution}
               <br />
               School :{singleData?.app_user?.education1_institution}
-            </p>
-
-            <h4
-              style={{
-                paddingLeft: 20,
-              }}>
-              Personal Details
-            </h4>
-
-            <p
-              style={{
-                color: "#000",
-
-                fontSize: "14px",
-              }}>
-              Name :{" "}
-              {singleData?.app_user?.full_name ??
-                singleData?.app_user?.display_name}
-              <br />
-              Age :{singleData?.app_user?.age}
-              <br />
-              Gender :{singleData?.app_user?.gender}
-              <br />
-              Height :{singleData?.app_user?.height_feet} feet{" "}
-              {singleData?.app_user?.height_inches} inches
-              <br />
-              Weight {singleData?.app_user?.weight}
-              <br />
-              Marital Status :{singleData?.app_user?.marital_status}
-              <br />
-              Marital Timing
-              <br />
-              Date of Birth :{singleData?.app_user?.date_of_birth}
-              <br />
-              Blood group
-              <br />
-              Nationality
-              <br />
-              Mother Tongue
-              <br />
-              Physical Status
             </p>
           </div>
 
