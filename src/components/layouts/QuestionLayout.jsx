@@ -63,7 +63,13 @@ function QuestionLayout({
             }
           </button>
         ) : (
-          <div>
+          <div className="d-flex" style={{gap:10}}>
+             <button
+              style={{height: 60}}
+              onClick={imageClick}
+              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake">
+              <strong>Skip</strong>
+            </button>
             <button
               style={{height: 60}}
               onClick={imageClick}
@@ -71,12 +77,7 @@ function QuestionLayout({
               <strong>Retake</strong>
             </button>
 
-            {/* <button
-              style={{height: 60}}
-              onClick={imageClick}
-              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake">
-              <strong>Retake</strong>
-            </button> */}
+           
           </div>
         )}
 

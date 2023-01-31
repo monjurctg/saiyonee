@@ -69,7 +69,7 @@ function SelfieVerification() {
     }
   };
   let imageClick = (e) => {
-    console.log("e", e);
+    // console.log("e", e);
     // e.preventDefault();
     // console.log(' document.getElementById("image")',  document.getElementById("image").click())
     document.getElementById("image").click();
@@ -92,7 +92,7 @@ function SelfieVerification() {
           you are not the candidate, please ask the candidate to login
           separately to this account and give her/his selfie
         </p>
-        <div className="image-round mt-5" onClick={imageClick}>
+        <div className="image-round mt-3" onClick={imageClick}>
           <img
             src={image2 ? image2 : image ? URL.createObjectURL(image) : null}
             alt=""
@@ -113,7 +113,7 @@ function SelfieVerification() {
             capture="camera"
           />
         </div>
-        <div>
+        <div className="mt-2">
           <h5
             style={{
               fontSize: "16px",
@@ -138,7 +138,11 @@ function SelfieVerification() {
             2. Make sure that your whole face is visible
           </p>
         </div>
-        <p className="mt-3">We will not make this public. it’s kept PRIVATE</p>
+        <p className="mt-3" style={{color:"red",
+          fontSize: 15,
+          textAlign: "initial",
+          fontWeight: 600
+      }}>We will not make this public. it’s kept PRIVATE</p>
         {image2?.selfie_img && (
           <Link to={"/review/profile"}>
             <p style={{color: "#1F2937"}}>I will do it later</p>
