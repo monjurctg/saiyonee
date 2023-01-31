@@ -75,7 +75,8 @@ function QuestionLayout({
           <div className="d-flex" style={{gap:10}}>
              <button
               style={{height: 60}}
-              onClick={imageClick}
+              // onClick={imageClick}
+              onClick={handleSkip}
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake">
               <strong>Skip</strong>
             </button>
@@ -85,14 +86,14 @@ function QuestionLayout({
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
               <strong>Retake</strong>
             </button>
-            {skipBtn && (
+            {/* {skipBtn && (
               <button
                 style={{height: 60}}
-                onClick={handleSkip}
+                
                 className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
                 <strong>Skip</strong>
               </button>
-            )}
+            )} */}
 
            
           </div>
