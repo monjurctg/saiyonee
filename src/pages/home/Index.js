@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
+import nouser from "../../assets/imgs/nouser.png";
 
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
@@ -11,18 +12,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {set_is_ques} from "../../redux/slices/utilsSlice";
 import QuestionServices from "../../services/questionServices";
 
+
 function Index() {
   const [data, setData] = useState(null);
+  const [likeSlide, setLikeSlide] = useState("");
+  // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
-
+// console.log('gettingUser', gettingUser)
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
-    // console.log("res", res.data);
+    console.log("ressss", res.data?.filtered_users[0]    );
     if (res.status === 200) {
       setgettingUser(false);
-      setData(res.data);
+      setData(res.data?.filtered_users[0] );
     }
     // let data = await res.json()
   };
@@ -31,8 +35,7 @@ function Index() {
     setRouteToken(getToken());
   }
 
-  const {isEmptyQuestion, isProfileQuesionExist, isSelfieQuestionExist} =
-    useSelector((state) => state.utils);
+
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -86,8 +89,10 @@ function Index() {
   // console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
 
   let show = "";
-  if (data?.filtered_users?.length > 0 && !gettingUser) {
-    show = <Swipers getData={getData} data={data} />;
+  if (data && !gettingUser) {
+    show = <Swipers getData={getData} data={data}
+    likeSlide={likeSlide} setLikeSlide={setLikeSlide}
+    />;
   } else if (gettingUser) {
     show = (
       <div
@@ -118,12 +123,22 @@ function Index() {
   }
   // console.log("show", show);
   return (
-    <HomeLayout background={"#F9FAFB"}>
-      <div className="body-div">
+    <HomeLayout background={"#F9FAFB"} mTop={40}>
+      <div className="d-flex justify-content-center">
+      <div
+      className={`body-div inside ${likeSlide}`}
+      style={{
+        backgroundRepeat: "round",
+        width:"90%",
+        backgroundImage: `url(${data?.profile_image_url || nouser})`,
+      }}
+      >
         {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
         {show}
+      </div>
+
       </div>
       {/* <div className="body-div-lower01"></div>
       <div className="body-div-lower02"></div> */}

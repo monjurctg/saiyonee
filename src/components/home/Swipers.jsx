@@ -1,17 +1,20 @@
-import React, {useState} from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import nouser from "../../assets/imgs/nouser.png";
-import {Pagination} from "swiper";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
 
-function Swipers({data, getData}) {
+function Swipers({ data, getData,
+  likeSlide, setLikeSlide
+
+}) {
+  console.log("data", data);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
-  const [likeSlide, setLikeSlide] = useState("");
+
   let getBoomData = async () => {
     let res = await UserServices.matched_users();
     // console.log("resmatched_user", res.data.matched_users);
@@ -30,9 +33,11 @@ function Swipers({data, getData}) {
   const supper_like_submit = "supper_like_submit";
 
   let getActiveSlide = async (task) => {
+    console.log("task", task);
     let id = document
       .getElementsByClassName("swiper-slide-active")[0]
       .getAttribute("data-id");
+    // console.log('id', id)
 
     if (task === like) {
       let res = await UserServices.like_user(id);
@@ -42,7 +47,9 @@ function Swipers({data, getData}) {
         setLikeSlide(" animation-container-right");
         setTimeout(() => {
           getData();
-        }, 2000);
+        }, 1000);
+      } else {
+        toastMsg.error(res.data.message);
       }
     } else if (task === dislike) {
       // console.log("like");
@@ -87,23 +94,40 @@ function Swipers({data, getData}) {
       toastMsg.error(res.response.data.message);
     }
   };
-  let show = data?.filtered_users.map((item, index) => {
-    return (
-      <div className={``} key={item.id}>
-        <SwiperSlide data-id={item.id}>
-          <img
-            src={item?.profile_image_url || nouser}
-            alt=""
+  let show = (
+    <div  key={data.id}>
+      <div className={`swiper-slide-active`} data-id={data.id}>
+        {/* <img
+          src={data?.profile_image_url || nouser}
+          alt=""
+          style={{
+            // objectFit: "cover",
+            width: "80%",
+            height: "50%",
+            borderRadius: 10,
+            marginTop: 25,
+            marginLeft: "10%",
+          }}
+        /> */}
+        <div
+          style={{
+            boxShadow: "rgb(255 183 172) 2px 5px 20px -17px",
+            position: "absolute",
+            bottom: 50,
+            left: "10%",
+            transform: "translateX(-10%)",
+          
+            background: "rgb(255 255 255 / 33%)",
+            padding: 5,
+            borderRadius: 10
+          }}
+        >
+          <div
+            className="d-flex align-items-baseline justify-content-start"
             style={{
-              // objectFit: "cover",
-              width: "80%",
-              height: "50%",
-              borderRadius: 10,
-              marginTop: 25,
-              marginLeft: "10%",
+              gap: 10,
             }}
-          />
-          <div style={{boxShadow: "rgb(255 183 172) 2px 5px 20px -17px"}}>
+          >
             <h3
               style={{
                 textAlign: "center",
@@ -112,40 +136,45 @@ function Swipers({data, getData}) {
                 fontFamily: "sans-serif",
                 marginBottom: 0,
                 fontWeight: 700,
-              }}>
-              {item?.display_name}
+                color: "white"
+              }}
+            >
+              {data?.display_name},
             </h3>
-
-            <div className="d-flex justify-content-center" style={{gap: 5}}>
-              <p
-                style={{textAlign: "center", marginBottom: 0, fontWeight: 500}}>
-                {item?.age} years,
-              </p>
-              <p style={{textAlign: "center", fontWeight: 500}}>
-                {item?.current_city},
-              </p>
-              <p style={{textAlign: "center", fontWeight: 500}}>
-                {item?.current_country}
-              </p>
-            </div>
+            <p
+              style={{ textAlign: "center", marginBottom: 0, fontWeight: 700,
+              fontSize: 20,
+              color: "white"
+            }}
+            >
+              {data?.age}
+            </p>
           </div>
-        </SwiperSlide>
+            <p
+            style={{
+              margin: 0,fontSize: 12,color: "white"
+            }}
+            >
+              {data?.current_employment_type}
+            </p>
+          <div className="d-flex" style={{ gap: 5 }}>
+            <p style={{ textAlign: "center", fontWeight: 500, margin: 0,fontSize: 12,color: "white" }}>
+              {data?.current_city},
+            </p>
+            <p style={{ textAlign: "center", fontWeight: 500, margin: 0,fontSize: 12,color: "white" }}>
+              {data?.current_country}
+            </p>
+          </div>
+        </div>
       </div>
-    );
-  });
+    </div>
+  );
   return (
-    <div>
-      <div className={`inside ${likeSlide}`}>
-        <Swiper
-          style={{width: "100%", height: "100%"}}
-          direction={"vertical"}
-          pagination={{
-            clickable: true,
-          }}
-          // modules={[Pagination]}
-          className="mySwiper">
+    <>
+      <div >
+        <div style={{ width: "100%", height: "100%" }} direction={"vertical"}>
           {show}
-        </Swiper>
+        </div>
       </div>
       <div className="body-bottom">
         <div className="items">
@@ -157,7 +186,8 @@ function Swipers({data, getData}) {
           </div>{" "}
           <div
             className="item"
-            onClick={() => getActiveSlide(supper_like_submit)}>
+            onClick={() => getActiveSlide(supper_like_submit)}
+          >
             <img src="img/rocket.svg" alt="" />
           </div>{" "}
           <div className="item" onClick={() => getActiveSlide(like)}>
@@ -165,7 +195,7 @@ function Swipers({data, getData}) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
