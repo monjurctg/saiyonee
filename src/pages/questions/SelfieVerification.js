@@ -79,6 +79,7 @@ function SelfieVerification() {
       imageClick={imageClick}
       err={err}
       // onContinueClicked={onSubmit}
+      skipBtn={true}
       length={length}
       title={"Candidate's Selfie (optional)"}
       loading={loading}>

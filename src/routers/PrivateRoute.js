@@ -9,7 +9,8 @@ function PrivateRoute() {
   const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");
   const emailVerified = localStorage.getItem("emailVerified");
-
+  const profile_image = localStorage.getItem("profile_image");
+  const selfie_image = localStorage.getItem("selfie_image");
   console.log("emailVerified privatw", emailVerified);
 
   // console.log(varification.ques.length);
@@ -17,6 +18,8 @@ function PrivateRoute() {
     "hello private",
     isVarified,
     isBanned,
+    profile_image,
+    selfie_image,
     emailVerified,
     isAlreadySetPreference
   );
@@ -42,7 +45,7 @@ function PrivateRoute() {
     isVarified === "true" &&
     isBanned === "false" &&
     isAlreadySetPreference === "false" &&
-    emailVerified === "false"
+    emailVerified === "true"
   ) {
     return <Navigate to="/question/1" state={{from: location}} />;
   } else if (auth && isVarified === "true" && isBanned === "true") {

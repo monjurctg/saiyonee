@@ -45,11 +45,7 @@ function Shortlisted() {
     return (
       <div className="explore-img" key={index}>
         <div className="cross" onClick={() => removeShortList(sl?.id)}>
-          <img
-            height={15}
-            src="https://icon-library.com/images/delete-icon-png/delete-icon-png-19.jpg"
-            alt=""
-          />
+          <img height={15} src="/img/delete3.png" alt="" />
         </div>
         <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
           {sl?.app_user?.thumbnail_img_url ? (
@@ -70,7 +66,7 @@ function Shortlisted() {
     <div className="mt-2">
       <div
         className="py-4 justify-contetn-center d-flex flex-wrap"
-        style={{gap: 10, justifyContent: "center"}}>
+        style={{gap: 10, justifyContent: "spce-betweena"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : shortList.length > 0 ? (

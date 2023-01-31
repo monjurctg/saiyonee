@@ -10,10 +10,19 @@ function QuestionLayout({
   title,
   loading,
   imageClick,
+  skipBtn,
 }) {
   // console.log("length", length);
   // let { id } = useParams();
   let {pathname} = useLocation();
+  const handleSkip = () => {
+    const isPreference = localStorage.getItem("preference");
+    if (isPreference === "true") {
+      navigate("/home");
+    } else {
+      navigate("/preference");
+    }
+  };
 
   const navigate = useNavigate();
   return (
@@ -56,6 +65,14 @@ function QuestionLayout({
               className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
               <strong>Retake</strong>
             </button>
+            {skipBtn && (
+              <button
+                style={{height: 60}}
+                onClick={handleSkip}
+                className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
+                <strong>Skip</strong>
+              </button>
+            )}
 
             {/* <button
               style={{height: 60}}
