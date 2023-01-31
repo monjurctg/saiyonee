@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Navigate, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -167,9 +167,7 @@ function Question() {
         user_radio: "",
       });
       // Navigate
-      navigate(
-        length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/image`
-      );
+      navigate(length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/`);
     } else {
       seterr(res.data.message);
       setLoading(false);

@@ -29,30 +29,43 @@ function Liked({id}) {
       <div className="explore-img" key={index}>
         <div className="cross">
           {" "}
-          <img
-            height={15}
-            src="https://icon-library.com/images/delete-icon-png/delete-icon-png-19.jpg"
-            alt=""
-          />
+          <img height={15} src="/img/delete3.png" alt="" />
         </div>
         <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`}>
           {ll?.thumbnail_img ? (
-            <img src={ll?.thumbnail_img} alt="" />
+            <img
+              src={ll?.thumbnail_img}
+              style={{
+                height: "80%",
+                width: "100%",
+                border: "1px solid #cba0a0",
+              }}
+              alt=""
+            />
           ) : (
             <h4 className="no-image">No Image</h4>
           )}
-        </Link>
 
-        <h5 className="no-image-h5">
-          {ll?.full_name}, {ll?.age}
-        </h5>
+          <h5
+            style={{
+              fontSize: "14px",
+              paddingTop: "10px",
+
+              color: "#000",
+              textAlign: "center",
+            }}>
+            {ll?.full_name}, {ll?.age}
+          </h5>
+        </Link>
       </div>
     );
   });
 
   return (
     <div className="mt-2">
-      <div className="py-4 d-flex flex-wrap" style={{gap: 10}}>
+      <div
+        className="py-4 d-flex flex-wrap"
+        style={{gap: 10, justifyContent: "center"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : LikeList.length > 0 ? (

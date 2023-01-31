@@ -55,6 +55,7 @@ const Settings = () => {
             className="d-flex justify-content-between align-items-center settings"
             style={{
               flexDirection: "column",
+              marginTop: "20px",
             }}>
             {/* <div className='rounded-img'>
                             <img src={"img/pp.png"} alt="" />

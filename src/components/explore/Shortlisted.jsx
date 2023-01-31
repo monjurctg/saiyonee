@@ -68,7 +68,9 @@ function Shortlisted() {
 
   return (
     <div className="mt-2">
-      <div className="py-4 d-flex flex-wrap" style={{gap: 10}}>
+      <div
+        className="py-4 justify-contetn-center d-flex flex-wrap"
+        style={{gap: 10, justifyContent: "center"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : shortList.length > 0 ? (

@@ -46,6 +46,12 @@ function Login() {
 
     let res = await AuthServices.login(formData);
     console.log("res", res.data);
+    if (!res) {
+      console.log("res", res.data);
+      setErr({error: "", message: "Server Error"});
+      setloading(false);
+      return;
+    }
     if (res.status === 200) {
       setloading(false);
       setErr(false);
@@ -104,7 +110,7 @@ function Login() {
       <div className="row justify-content-center">
         <div className="col-2 pr-3">
           <button
-            onClick={() => navigator(-1)}
+            onClick={() => navigate("/get-start")}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
             style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
