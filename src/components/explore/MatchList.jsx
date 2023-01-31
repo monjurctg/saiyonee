@@ -30,7 +30,7 @@ function MatchList() {
     return (
       <div className="explore-img" key={index}>
         <div className="cross">
-          <img height={10} src="/img/delete3.png" alt="" />
+          <img height={10} src="/img/cross.png" alt="" />
         </div>
 
         <Link to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
@@ -66,7 +66,7 @@ function MatchList() {
     <div className="mt-2">
       <div
         className="py-4 d-flex  flex-wrap"
-        style={{gap: 0, justifyContent: "spce-betweena"}}>
+        style={{gap: 0, justifyContent: "space-around"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : matchList.length > 0 ? (

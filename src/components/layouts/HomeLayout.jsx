@@ -147,21 +147,21 @@ function HomeLayout({
           <div className="tab  pt-3 ">
             <p
               className={activeExplore === "Matched list" && "active"}
-              style={{cursor: "pointer"}}
+              style={{cursor: "pointer", color: "#7d8490f0"}}
               onClick={() => setactiveExplore("Matched list")}>
               Matched list
             </p>
 
             <p
               className={activeExplore === "Shortlist" && "active"}
-              style={{cursor: "pointer"}}
+              style={{cursor: "pointer", color: "#7d8490f0"}}
               onClick={() => setactiveExplore("Shortlist")}>
-              Short list
+              Shortlist
             </p>
             {show_supper_liked_list === "true" ? (
               <p
                 className={activeExplore === "Superliked list" && "active"}
-                style={{cursor: "pointer"}}
+                style={{cursor: "pointer", color: "#7d8490f0"}}
                 onClick={() => setactiveExplore("Superliked list")}>
                 Superliked you
               </p>
@@ -171,20 +171,16 @@ function HomeLayout({
                 style={{
                   cursor: "pointer",
                 }}>
-                <span>Superliked you</span>
+                <span style={{color: "#7d849075"}}>Superliked you</span>
                 <span style={{paddingLeft: "4px"}}>
-                  <img
-                    src="https://www.clipartmax.com/png/middle/209-2090961_crown-prince-royal-luxury-best-queen-svg-png-icon-free-queen-crown.png"
-                    height={12}
-                    alt=""
-                  />
+                  <img src="/img/crown2.png" height={20} alt="" />
                 </span>
               </p>
             )}
             {show_liked_list === "true" ? (
               <p
                 className={activeExplore === "Liked" && "active"}
-                style={{cursor: "pointer"}}
+                style={{cursor: "pointer", color: "#7d8490f0"}}
                 onClick={() => setactiveExplore("Liked")}>
                 Liked you
               </p>
@@ -192,13 +188,9 @@ function HomeLayout({
               <p
                 className={activeExplore === "Liked" && "active"}
                 style={{cursor: "pointer"}}>
-                <span>liked you</span>
+                <span style={{color: "#7d849075"}}>Liked you</span>
                 <span style={{paddingLeft: "4px"}}>
-                  <img
-                    src="https://www.clipartmax.com/png/middle/209-2090961_crown-prince-royal-luxury-best-queen-svg-png-icon-free-queen-crown.png"
-                    height={12}
-                    alt=""
-                  />
+                  <img src="/img/crown2.png" height={20} alt="" />
                 </span>
               </p>
             )}

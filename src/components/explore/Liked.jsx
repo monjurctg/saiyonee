@@ -29,7 +29,7 @@ function Liked({id}) {
       <div className="explore-img" key={index}>
         <div className="cross">
           {" "}
-          <img height={15} src="/img/delete3.png" alt="" />
+          <img height={15} src="/img/cross.png" alt="" />
         </div>
         <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`}>
           {ll?.thumbnail_img ? (
@@ -65,7 +65,7 @@ function Liked({id}) {
     <div className="mt-2">
       <div
         className="py-4 d-flex flex-wrap"
-        style={{gap: 0, justifyContent: "spce-betweena"}}>
+        style={{gap: 0, justifyContent: "spce-around"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : LikeList.length > 0 ? (

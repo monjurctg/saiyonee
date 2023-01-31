@@ -81,7 +81,7 @@ const EditProfile = () => {
           />
         </div>
 
-        <div className="mt-5 pt-5">
+        <div className=" pt-5">
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
