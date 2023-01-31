@@ -86,6 +86,9 @@ function Routers() {
 
     const res = await QuestionServices.getQuestions();
     console.log(res, "res from home");
+    if (!res) {
+      setLoading(false);
+    }
 
     if (res.status === 200) {
       setLoading(false);
