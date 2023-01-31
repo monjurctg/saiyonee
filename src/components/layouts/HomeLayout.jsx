@@ -93,6 +93,8 @@ function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}
             style={{
               padding: "5px 10px",
               display: "flex",
+              borderRadius: "5px",
+              background: "#ffb7ac",
               justifyContent: "center",
               alignItems: "center",
               marginTop: "10px",
@@ -102,10 +104,10 @@ function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}
             <img
               className="me-2"
               style={{margin: "0 auto", height: "25px"}}
-              src="https://toppng.com/uploads/preview/free-login-logout-black-icon-116420824011bgykrtibc.png"
+              src="https://pngfreepic.com/wp-content/uploads/2022/12/c8a7b2ce.png?v=1669889560"
               alt=""
             />
-            <span>Logout</span>
+            <span style={{fontWeight: "bold"}}>Logout</span>
           </p>
         )}
       </div>

@@ -25,8 +25,9 @@ function Question() {
   let getQuestions = async () => {
     let res = await QuestionServices.getQuestions();
     // console.log("res", res.data.form_field_questions);
-    // console.log('res', res)
+    console.log("res", res);
     if (res.status === 200) {
+      console.log("res", res);
       seterr(false);
       setLoading(false);
       setlength(res.data.form_field_questions.length);
@@ -150,7 +151,6 @@ function Question() {
     // );
     let res = await QuestionServices.answer(formData);
     if (res.status === 200) {
-      toastMsg.success("success");
       inputs.user_checked.length > 0 &&
         inputs.user_checked.map((user, key) => {
           // console.log(
@@ -167,7 +167,9 @@ function Question() {
         user_radio: "",
       });
       // Navigate
-      navigate(length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/`);
+      navigate(
+        length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/1`
+      );
     } else {
       seterr(res.data.message);
       setLoading(false);

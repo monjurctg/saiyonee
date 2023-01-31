@@ -20,29 +20,7 @@ function PublicRoute() {
   const emailVerified = localStorage.getItem("emailVerified");
   const isAlreadySetPreference = localStorage.getItem("preference");
 
-  // const [quesLength, setQuesLength] = useState(0);
-  // let getQuestions = async () => {
-  //   let res = await QuestionServices.getQuestions();
-  //   // console.log("res", res.data.form_field_questions);
-  //   // console.log('res', res)
-  //   if (res.status === 200) {
-  //     setQuesLength(res.data.form_field_questions?.length);
-  //   } else {
-  //   }
-  // };
-  // useEffect(() => {
-  //   getQuestions();
-  // }, []);
-
   if (
-    auth &&
-    isVarified === "true" &&
-    isBanned === "false" &&
-    emailVerified === "true" &&
-    isAlreadySetPreference === "true"
-  ) {
-    return <Navigate to="/home" state={{from: location}} />;
-  } else if (
     auth &&
     isVarified === "true" &&
     isBanned === "false" &&
@@ -57,7 +35,6 @@ function PublicRoute() {
     isVarified === "true" &&
     isBanned === "false" &&
     emailVerified === "true" &&
-    isAlreadySetPreference === "false" &&
     profile_image === "false"
   ) {
     return <Navigate to="/question/image" state={{from: location}} />;
@@ -66,7 +43,6 @@ function PublicRoute() {
     isVarified === "true" &&
     isBanned === "false" &&
     emailVerified === "true" &&
-    isAlreadySetPreference === "false" &&
     selfie_image === "false"
   ) {
     return (
@@ -77,11 +53,17 @@ function PublicRoute() {
     isVarified === "true" &&
     isBanned === "false" &&
     emailVerified === "true" &&
-    isAlreadySetPreference === "false" &&
-    selfie_image !== "false" &&
-    profile_image !== "false"
+    isAlreadySetPreference === "false"
   ) {
     return <Navigate to="/preference" state={{from: location}} />;
+  } else if (
+    auth &&
+    isVarified === "true" &&
+    isBanned === "false" &&
+    emailVerified === "true" &&
+    isAlreadySetPreference === "true"
+  ) {
+    return <Navigate to="/home" state={{from: location}} />;
   }
 
   // <!--Start of Tawk.to Script-->
