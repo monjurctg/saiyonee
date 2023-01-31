@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
-function HomeLayout({children, background, activeExplore, setactiveExplore}) {
+function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}) {
   let {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -162,7 +162,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore}) {
           </div>
         )}
       </div>
-      <div className="" style={{marginTop: 70}}>
+      <div className="" style={{marginTop:mTop || 70}}>
         {children}
       </div>
       <div
