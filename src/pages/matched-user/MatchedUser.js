@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setMatchModal} from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
+import HomeLayout from "../../components/layouts/HomeLayout";
 
 const MatchedUser = () => {
   let subtitle;
@@ -161,7 +162,7 @@ const MatchedUser = () => {
   );
   return (
     <>
-      <ExploreLayout tab={tab} footer={footer}>
+      <HomeLayout tab={tab} footer={footer}>
         <div className="explore_viewProfile text-center">
           <div className="content-container">
             <img className="user-img" src={singleData?.app_user?.profile_img} />
@@ -228,7 +229,12 @@ const MatchedUser = () => {
               School :{singleData?.app_user?.education1_institution}
             </p>
 
-            <h4>Personal Details</h4>
+            <h4
+              style={{
+                paddingLeft: 20,
+              }}>
+              Personal Details
+            </h4>
 
             <p
               style={{
@@ -358,7 +364,7 @@ const MatchedUser = () => {
             </>
           )}
         </div>
-      </ExploreLayout>
+      </HomeLayout>
       <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />
         <div className="modal-div" style={{opacity: matchModal ? 1 : 0}}>

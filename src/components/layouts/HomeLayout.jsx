@@ -59,14 +59,14 @@ function HomeLayout({
         <Link
           to="/" // TODO ROUTES.tutorial
           className="image-saturate position-relative me-auto">
-          <img src="img/back.svg" alt="next" className="img-fluid" />
-          <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
+          <img src="/img/back.svg" alt="next" className="img-fluid" />
+          {/* <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
             <img
-              src="img/back-icon.svg"
+              src="/img/back-icon.svg"
               alt="next-btn-25-percent.svg"
               className="img-fluid"
             />
-          </div>
+          </div> */}
         </Link>
         {/* )} */}
         {/* <img
@@ -134,7 +134,7 @@ function HomeLayout({
         // "#F9FAFB"
       }}>
       <div
-        className="logos pb-3  px-4"
+        className="logos px-4"
         style={{
           background: background || "rgb(255, 255, 255)",
           position: "fixed",
@@ -207,7 +207,7 @@ function HomeLayout({
           <Link to={"/home"} style={{cursor: "pointer"}}>
             <div
               className={`text-center ${pathname === "/home" ? "active" : ""}`}>
-              <img src="img/home.svg" alt="" />
+              <img src="/img/home.svg" alt="" />
               <p>Home</p>
             </div>
           </Link>
@@ -216,7 +216,7 @@ function HomeLayout({
               className={`text-center ${
                 pathname === "/explore" ? "active" : ""
               }`}>
-              <img src="img/glasses.svg" alt="" />
+              <img src="/img/glasses.svg" alt="" />
               <p>Explore</p>
             </div>
           </Link>
@@ -225,7 +225,7 @@ function HomeLayout({
               className={`text-center ${
                 pathname === "/message" ? "active" : ""
               }`}>
-              <img src="img/message.svg" alt="" />
+              <img src="/img/message.svg" alt="" />
               <p>Message</p>
             </div>
           </Link>
@@ -234,7 +234,7 @@ function HomeLayout({
               className={`text-center ${
                 pathname === "/settings" ? "active" : ""
               }`}>
-              <img src="img/settings.svg" alt="" />
+              <img src="/img/settings.svg" alt="" />
               <p>Profile</p>
             </div>
           </Link>

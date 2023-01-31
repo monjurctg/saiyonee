@@ -40,24 +40,50 @@ function Shortlisted() {
       // console.log(res, "res");
     }
   };
-  // console.log('first', sortListData)
+  console.log("first", sortListData);
   let shortList = sortListData.map((sl, index) => {
     return (
       <div className="explore-img" key={index}>
         <div className="cross" onClick={() => removeShortList(sl?.id)}>
           <img height={15} src="/img/cross.png" alt="" />
         </div>
-        <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
+
+        <Link to={`/user-info/shortList/${sl?.id}/${sl?.app_user?.id}`}>
+          {sl?.app_user.thumbnail_img_url ? (
+            <img
+              src={sl?.app_user?.thumbnail_img_url}
+              alt=""
+              style={{
+                height: "80%",
+                width: "100%",
+                border: "1px solid #cba0a0",
+              }}
+            />
+          ) : (
+            <h4 className="no-image">No Image</h4>
+          )}
+          <h5
+            style={{
+              fontSize: "14px",
+              paddingTop: "10px",
+
+              color: "#000",
+              textAlign: "center",
+            }}>
+            {sl?.app_user.display_name}, {sl?.app_user.age}
+          </h5>
+        </Link>
+        {/* <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
           {sl?.app_user?.thumbnail_img_url ? (
             <img src={sl?.app_user?.thumbnail_img_url} alt="" />
           ) : (
             <h4 className="no-image">No Image</h4>
           )}
-        </Link>
-
+        </Link> */}
+        {/* 
         <h5 className="no-image-h5">
           {sl?.app_user?.full_name},{sl?.app_user?.age}
-        </h5>
+        </h5> */}
       </div>
     );
   });
