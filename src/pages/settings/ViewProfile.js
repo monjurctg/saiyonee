@@ -117,7 +117,7 @@ function ViewProfile() {
                 </span>
                 <span className="short-description">Age {user?.age}</span>
               </p>
-              <div className="logos">
+              <div className="logos" style={{width: "100%"}}>
                 <div className="tab  pt-3 ">
                   <p
                     className={

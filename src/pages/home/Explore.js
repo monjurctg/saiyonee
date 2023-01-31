@@ -7,7 +7,7 @@ import SuperLikeList from "../../components/explore/Visited";
 import HomeLayout from "../../components/layouts/HomeLayout";
 
 function Explore() {
-  const [activeExplore, setactiveExplore] = useState("Superliked list");
+  const [activeExplore, setactiveExplore] = useState("Matched list");
   let activeTab = "";
   const route = useLocation();
   console.log(route.pathname, route, "route");

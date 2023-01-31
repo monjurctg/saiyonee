@@ -1,7 +1,13 @@
 import React from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
-function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}) {
+function HomeLayout({
+  children,
+  background,
+  activeExplore,
+  setactiveExplore,
+  mTop,
+}) {
   let {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -10,6 +16,9 @@ function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}
     localStorage.clear();
     navigate("/get-start");
   };
+
+  const show_liked_list = localStorage.getItem("show_liked_list");
+  const show_supper_liked_list = localStorage.getItem("show_supper_liked_list");
 
   let header = "";
   if (pathname === "/message") {
@@ -104,7 +113,7 @@ function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}
             <img
               className="me-2"
               style={{margin: "0 auto", height: "25px"}}
-              src="https://pngfreepic.com/wp-content/uploads/2022/12/c8a7b2ce.png?v=1669889560"
+              src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
               alt=""
             />
             <span style={{fontWeight: "bold"}}>Logout</span>
@@ -137,34 +146,66 @@ function HomeLayout({children, background, activeExplore, setactiveExplore,mTop}
         {pathname === "/explore" && (
           <div className="tab  pt-3 ">
             <p
-              className={activeExplore === "Superliked list" && "active"}
+              className={activeExplore === "Matched list" && "active"}
               style={{cursor: "pointer"}}
-              onClick={() => setactiveExplore("Superliked list")}>
-              Superliked list
+              onClick={() => setactiveExplore("Matched list")}>
+              Matched list
             </p>
+
             <p
               className={activeExplore === "Shortlist" && "active"}
               style={{cursor: "pointer"}}
               onClick={() => setactiveExplore("Shortlist")}>
               Short list
             </p>
-
-            <p
-              className={activeExplore === "Matched list" && "active"}
-              style={{cursor: "pointer"}}
-              onClick={() => setactiveExplore("Matched list")}>
-              Matched list
-            </p>
-            <p
-              className={activeExplore === "Liked" && "active"}
-              style={{cursor: "pointer"}}
-              onClick={() => setactiveExplore("Liked")}>
-              Liked you
-            </p>
+            {show_supper_liked_list === "true" ? (
+              <p
+                className={activeExplore === "Superliked list" && "active"}
+                style={{cursor: "pointer"}}
+                onClick={() => setactiveExplore("Superliked list")}>
+                Superliked you
+              </p>
+            ) : (
+              <p
+                className={activeExplore === "Superliked list" && "active"}
+                style={{
+                  cursor: "pointer",
+                }}>
+                <span>Superliked you</span>
+                <span style={{paddingLeft: "4px"}}>
+                  <img
+                    src="https://www.clipartmax.com/png/middle/209-2090961_crown-prince-royal-luxury-best-queen-svg-png-icon-free-queen-crown.png"
+                    height={12}
+                    alt=""
+                  />
+                </span>
+              </p>
+            )}
+            {show_liked_list === "true" ? (
+              <p
+                className={activeExplore === "Liked" && "active"}
+                style={{cursor: "pointer"}}
+                onClick={() => setactiveExplore("Liked")}>
+                Liked you
+              </p>
+            ) : (
+              <p
+                className={activeExplore === "Liked" && "active"}
+                style={{cursor: "pointer"}}>
+                <span>liked you</span>
+                <span style={{paddingLeft: "4px"}}>
+                  <img
+                    src="https://www.clipartmax.com/png/middle/209-2090961_crown-prince-royal-luxury-best-queen-svg-png-icon-free-queen-crown.png"
+                    height={12}
+                    alt=""
+                  />
+                </span>
+              </p>
+            )}
           </div>
         )}
       </div>
-      <div className="" style={{marginTop:mTop || 70}}>
+      <div className="" style={{marginTop: mTop || 70}}>
         {children}
       </div>
       <div

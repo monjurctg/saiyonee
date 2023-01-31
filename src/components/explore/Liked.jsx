@@ -65,7 +65,7 @@ function Liked({id}) {
     <div className="mt-2">
       <div
         className="py-4 d-flex flex-wrap"
-        style={{gap: 10, justifyContent: "spce-betweena"}}>
+        style={{gap: 0, justifyContent: "spce-betweena"}}>
         {loading ? (
           <div className="load">Loading...</div>
         ) : LikeList.length > 0 ? (
