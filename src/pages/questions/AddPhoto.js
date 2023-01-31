@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
+import toastMsg from "../../utils/toastify";
 
 function AddPhoto() {
   const [err, seterr] = useState(null);
@@ -11,11 +12,11 @@ function AddPhoto() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
 
-  console.log("image2", image, image2);
+  // console.log("image2", image, image2);
 
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
-    console.log("res", res.data.images);
+    // console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
 
@@ -34,6 +35,7 @@ function AddPhoto() {
   }, []);
 
   let onSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     localStorage.setItem("edit_img", false);
     // console.log("inputs");
@@ -42,12 +44,15 @@ function AddPhoto() {
     let data = new FormData();
     data.append("profile_img", image);
     let res = await QuestionServices.submitProfilePhoto(data);
-    console.log("res", res);
+    // console.log("ressdddddd", res);
     if (res.status === 200) {
+      setLoading(false);
       localStorage.setItem("profile_image", true);
+      toastMsg.success("Profile photo added successfully");
       seterr(false);
-      navigate("/question/selfie-verification");
+      // navigate("/question/selfie-verification");
     } else {
+      setLoading(false);
       seterr(res.data.message);
     }
   };
@@ -78,19 +83,25 @@ function AddPhoto() {
       onContinueClicked={onSubmit}
       length={length}
       title={"Add Profile Photo"}
-      loading={loading}>
+      loading={loading}
+    >
       <div className="question mt-3">
-        <p>
+        <p className="text-start">
           Your profile will only be visible to other members, when you add a
           photo.
         </p>
 
-        <div className="image-upload mt-4">
+        <div
+          className="image-upload mt-4"
+          style={{
+            width: "100%",
+          }}
+        >
           <img
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{display: (image || image2) && "none", cursor: "pointer"}}
+            style={{ display: (image || image2) && "none", cursor: "pointer" }}
           />
 
           <img
@@ -107,14 +118,20 @@ function AddPhoto() {
           <input
             type="file"
             id="image"
-            style={{display: "none"}}
+            style={{ display: "none" }}
             onChange={fileChange}
           />
         </div>
         <div></div>
 
-        <div className="instruction my-4">
-          <h4>Instruction</h4>
+        <div className="instruction">
+          <h4
+            style={{
+              marginTop: 20,
+            }}
+          >
+            Instruction
+          </h4>
           <p>- Upload a clear photo.</p>
           <p>- It is better to avoid group photo.</p>
           <p>

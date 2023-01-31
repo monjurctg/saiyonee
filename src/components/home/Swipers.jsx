@@ -114,8 +114,12 @@ function Swipers({ data, getData,
             boxShadow: "rgb(255 183 172) 2px 5px 20px -17px",
             position: "absolute",
             bottom: 50,
-            left: "20%",
-            transform: "translateX(-20%)",
+            left: "10%",
+            transform: "translateX(-10%)",
+          
+            background: "rgb(255 255 255 / 33%)",
+            padding: 5,
+            borderRadius: 10
           }}
         >
           <div

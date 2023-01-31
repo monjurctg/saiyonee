@@ -5,16 +5,18 @@ import back from "../../assets/imgs/Back.svg";
 import human1 from "../../assets/imgs/human1.svg";
 import human2 from "../../assets/imgs/human2.svg";
 import UserServices from "../../services/userServices";
+import { useSelector } from "react-redux";
 
 function Boom() {
   const [boomData, setBoomData] = useState([]);
   const navigate = useNavigate();
-
+  const {user} = useSelector((state) => state.auth);
+  console.log('user', user)
   let getBoomData = async () => {
     let res = await UserServices.getBoomUsers();
     // console.log("resmatched_user", res.data.matched_users.length);
     if (res?.data?.matched_users.length > 0) {
-      console.log(res?.data?.matched_users, "res?.data?.matched_users");
+      // console.log(res?.data?.matched_users, "res?.data?.matched_users");
       setBoomData(res?.data?.matched_users);
     } else {
       navigate("/home");
@@ -32,22 +34,24 @@ function Boom() {
       getBoomData();
     }
   };
-  // console.log("boomData", boomData);
+  console.log("boomData", boomData);
   let show = "";
   if (boomData.length > 0) {
     show = (
       <div className="mt-5">
         <img
-          src={human1}
+          src={user?.thumbnail_img ?  user?.thumbnail_img  : human1}
           alt=""
           style={{
             width: 112,
             height: 112,
+            borderRadius: "50%",
+            objectFit: "cover",
           }}
         />
         <img
           src={
-            boomData[boomData.length]?.matched_user?.thumbnail_img_url || human2
+            boomData?.length > 0 ? boomData[0]?.thumbnail_img_url : human2
           }
           alt=""
           style={{
@@ -55,8 +59,7 @@ function Boom() {
             height: 112,
             marginLeft: -22,
             objectFit: "cover",
-            borderRadius:
-              boomData[boomData.length]?.matched_user?.thumbnail_img_url &&
+            borderRadius: boomData?.length > 0 && boomData[0]?.thumbnail_img_url &&
               "50%",
           }}
         />
@@ -70,7 +73,12 @@ function Boom() {
             color: "#1F2937",
           }}>
           You have matched with{" "}
-          {boomData[boomData.length]?.matched_user?.display_name}!
+          <span style={{
+            fontWeight: 700,
+          }}>
+          {boomData[boomData.length -1]?.display_name}!
+
+          </span>
         </p>
 
         <button

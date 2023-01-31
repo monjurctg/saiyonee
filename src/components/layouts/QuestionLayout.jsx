@@ -26,11 +26,11 @@ function QuestionLayout({
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
-      {loading && (
+      {/* {loading && (
         <div className="d-flex justify-content-center align-items-center">
           <Loader />
         </div>
-      )}
+      )} */}
       <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
         <h1 className="card-title">{title}</h1>
 
@@ -47,6 +47,20 @@ function QuestionLayout({
             onClick={onContinueClicked}
             className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             <strong>Next</strong>
+            {
+              // (status === FetchStatus.LOADING ||
+              // verifyingPreviousLogin ||
+              //   isPrefetchingForms)
+              loading && (
+                <>
+                  <i
+                    className="spinner-border spinner-border-sm text-black"
+                    role="status"
+                    aria-hidden="true"></i>
+                  <i className="visually-hidden">Uploading.....</i>
+                </>
+              )
+            }
           </button>
         ) : (
           <div>
