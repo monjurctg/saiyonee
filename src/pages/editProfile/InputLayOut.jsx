@@ -22,7 +22,7 @@ function InputLayOut({
 
         // "#F9FAFB"
       }}>
-      <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">
+      <div className=" d-flex flex-column max-width-mobile mx-auto">
         <div className="container px-4 pt-4">
           <div
             onClick={() => navigate(-1)}

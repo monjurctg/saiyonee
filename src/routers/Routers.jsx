@@ -67,6 +67,7 @@ import Register from "../pages/social-login/Register";
 import EmailVerication from "../pages/register/EmailVerication";
 import VerifyEmail from "../pages/VerifyEmail";
 import {useCallback} from "react";
+import GalleryImage from "../pages/settings/GalleryImage";
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -248,6 +249,8 @@ function Routers() {
             <Route path="/settings" element={<Settings />} />
 
             <Route path="/edit/profile" element={<EditProfile />} />
+            <Route path="/image/gallery" element={<GalleryImage />} />
+
             <Route path="/home" element={<Index />} />
             <Route path="/explore" element={<Explore />} />
 
