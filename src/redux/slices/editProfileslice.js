@@ -46,6 +46,9 @@ const EditProfileSlice = createSlice({
       state.height_feet = payload.height_feet;
       state.height_inches = payload.height_inches;
     },
+    setEditDisplayName: (state, {payload}) => {
+      state.displayName = payload;
+    },
     setPreviousEditProfile: (state, {payload}) => {
       state.age_from = payload.age_from ?? "";
       state.age_to = payload.age_to ?? "";
@@ -70,6 +73,7 @@ export const {
   setPreviousEditProfile,
   setEditProfileReligion,
   setEmployType,
+  setEditDisplayName,
   updatePreerenceQAns,
   setMaridStatus,
   setEditProfileCity,

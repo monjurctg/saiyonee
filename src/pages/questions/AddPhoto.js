@@ -93,7 +93,9 @@ function AddPhoto() {
         <div
           className="image-upload mt-4"
           style={{
-            width: "100%",
+            width: "70%",
+            height: "40vh",
+            margin: 0,
           }}>
           <img
             src="/img/plus-round.svg"

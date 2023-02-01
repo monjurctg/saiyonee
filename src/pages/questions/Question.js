@@ -197,7 +197,7 @@ function Question() {
       loading={loading}
       title={question?.title}>
       <div className="mt-4 mb-5">
-        <h4 className="mb-2">{question?.label}</h4>
+        <p className="mb-2">{question?.label}</p>
 
         {field}
       </div>

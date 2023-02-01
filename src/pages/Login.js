@@ -189,7 +189,7 @@ function Login() {
                 Password
               </label>
             </div>
-            <div className="d-flex justify-content-end mb-4 mt-5">
+            <div className="d-flex justify-content-end">
               <Link to="/forgot-pass">Forgot Password</Link>
             </div>
           </div>

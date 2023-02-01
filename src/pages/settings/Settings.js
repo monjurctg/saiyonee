@@ -79,9 +79,7 @@ const Settings = () => {
               </div> */}
             {/* )} */}
             <div>
-              <h3 className="mt-2 mb-1">
-                {profile?.full_name || "Kamrul Hassan"}
-              </h3>
+              <h3 className="mt-2 mb-1">{profile?.display_name}</h3>
               {/* <p style={{fontSize: 12}}>
                 Selfie varifired:
                 <span
