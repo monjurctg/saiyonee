@@ -117,7 +117,7 @@ const EditProfile = () => {
           />
         </div>
 
-        <div className=" pt-5">
+        <div className="">
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>

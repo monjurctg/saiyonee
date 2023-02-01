@@ -23,22 +23,34 @@ function InputLayOut({
         // "#F9FAFB"
       }}>
       <div className=" d-flex flex-column max-width-mobile mx-auto">
-        <div className="container px-4 pt-4">
+        <div className="container px-4">
           <div
             onClick={() => navigate(-1)}
-            className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
+            className="btn btn-primary rounded-circle shadow p-3 mb-2 image-invert"
             style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
         </div>
 
-        <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
+        <div className="container px-4 pb-2 flex-grow-1 overflow-auto"
+         style={{
+          height: "75vh",
+        }}
+        >
           <h1>{title}</h1>
 
           {children}
         </div>
 
-        <div className="container px-4 pb-4 pt-2">
+        <div className="container px-4 pt-2"
+        style={{
+          
+    position: "absolute",
+    bottom: 0,
+    width: 420
+
+        }}
+        >
           {err && <p className="text-primary">* {err}</p>}
 
           <button

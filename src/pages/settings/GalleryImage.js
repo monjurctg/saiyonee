@@ -11,8 +11,13 @@ const GalleryImage = () => {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [image, setimage] = useState(false);
-  const {country, city} = useSelector((state) => state.editProfile);
+const [images, setimages] = useState({
+    optional_img_1: "",
+    optional_img_2: "",
+    optional_img_3: "",
+    optional_img_4: "",
+    optional_img_5: "",
+})
 
   let imageClick = (e) => {
     e.preventDefault();
@@ -27,13 +32,14 @@ const GalleryImage = () => {
   let fileChange = (e) => {
     e.preventDefault();
     let file = e.target.files[0];
+    console.log('file', e.target.name)
     if (file) {
       if (file.size > 1000000) {
         seterr("File size is too large");
       } else {
         seterr(null);
         setlength(file.size);
-        setimage(file);
+        // setimage(file);
       }
     }
   };
@@ -55,23 +61,60 @@ const GalleryImage = () => {
       length={length}
       title={"Image Gallery"}
       loading={loading}>
-      <div className="question mt-3 d-flex flex-wrap">
-        <div className="image-upload">
+      <div className="question mt-3 d-flex flex-wrap" style={{
+        gap: 20
+      }}>
+        <div className="image-upload" style={{
+                width:"40%",
+                height: 150,
+                margin:0
+        }}>
           <img
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{display: image && "none", cursor: "pointer"}}
+            style={{display: images?.optional_img_1 && "none", cursor: "pointer"}}
           />
 
           <img
-            src={image && URL.createObjectURL(image)}
+            src={images?.optional_img_1 && URL.createObjectURL(images?.optional_img_1)}
             alt=""
             onClick={imageClick}
             style={{
-              width: image && "100%",
+              width: images?.optional_img_1 && "100%",
               borderRadius: 24,
-              height: image && "100%",
+              height: images?.optional_img_1 && "100%",
+            }}
+          />
+
+          <input
+            type="file"
+            id="image"
+            name="optional_img_1"
+            style={{display: "none"}}
+            onChange={fileChange}
+          />
+        </div>
+        <div className="image-upload" style={{
+                width:"40%",
+                height: 150,
+                margin:0
+        }}>
+          <img
+            src="/img/plus-round.svg"
+            alt=""
+            onClick={imageClick}
+            style={{display: images?.optional_img_2 && "none", cursor: "pointer"}}
+          />
+
+          <img
+            src={images?.optional_img_2 && URL.createObjectURL(images?.optional_img_2)}
+            alt=""
+            onClick={imageClick}
+            style={{
+              width: images?.optional_img_2 && "100%",
+              borderRadius: 24,
+              height: images?.optional_img_2 && "100%",
             }}
           />
 
@@ -80,24 +123,29 @@ const GalleryImage = () => {
             id="image"
             style={{display: "none"}}
             onChange={fileChange}
+            name="optional_img_2"
           />
         </div>
-        <div className="image-upload">
+        <div className="image-upload" style={{
+                width:"40%",
+                height: 150,
+                margin:0
+        }}>
           <img
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{display: image && "none", cursor: "pointer"}}
+            style={{display: images?.optional_img_3 && "none", cursor: "pointer"}}
           />
 
           <img
-            src={image && URL.createObjectURL(image)}
+            src={images?.optional_img_3 && URL.createObjectURL(images?.optional_img_3)}
             alt=""
             onClick={imageClick}
             style={{
-              width: image && "100%",
+              width: images?.optional_img_3 && "100%",
               borderRadius: 24,
-              height: image && "100%",
+              height: images?.optional_img_3 && "100%",
             }}
           />
 
@@ -106,24 +154,60 @@ const GalleryImage = () => {
             id="image"
             style={{display: "none"}}
             onChange={fileChange}
+            name="optional_img_3"
           />
         </div>
-        <div className="image-upload">
+        <div className="image-upload" style={{
+                width:"40%",
+                height: 150,
+                margin:0
+        }}>
           <img
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{display: image && "none", cursor: "pointer"}}
+            style={{display: images?.optional_img_4 && "none", cursor: "pointer"}}
           />
 
           <img
-            src={image && URL.createObjectURL(image)}
+            src={images?.optional_img_4 && URL.createObjectURL(images?.optional_img_4)}
             alt=""
             onClick={imageClick}
             style={{
-              width: image && "100%",
+              width: images?.optional_img_4 && "100%",
               borderRadius: 24,
-              height: image && "100%",
+              height: images?.optional_img_4 && "100%",
+            }}
+          />
+
+          <input
+            type="file"
+            id="image"
+            name="optional_img_4"
+            style={{display: "none"}}
+            onChange={fileChange}
+          />
+        </div>
+        <div className="image-upload" style={{
+                width:"40%",
+                height: 150,
+                margin:0
+        }}>
+          <img
+            src="/img/plus-round.svg"
+            alt=""
+            onClick={imageClick}
+            style={{display: images?.optional_img_5 && "none", cursor: "pointer"}}
+          />
+
+          <img
+            src={images?.optional_img_5 && URL.createObjectURL(images?.optional_img_5)}
+            alt=""
+            onClick={imageClick}
+            style={{
+              width: images?.optional_img_5 && "100%",
+              borderRadius: 24,
+              height: images?.optional_img_5 && "100%",
             }}
           />
 
@@ -132,80 +216,9 @@ const GalleryImage = () => {
             id="image"
             style={{display: "none"}}
             onChange={fileChange}
+            name="optional_img_5"
           />
         </div>
-        <div className="image-upload">
-          <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={imageClick}
-            style={{display: image && "none", cursor: "pointer"}}
-          />
-
-          <img
-            src={image && URL.createObjectURL(image)}
-            alt=""
-            onClick={imageClick}
-            style={{
-              width: image && "100%",
-              borderRadius: 24,
-              height: image && "100%",
-            }}
-          />
-
-          <input
-            type="file"
-            id="image"
-            style={{display: "none"}}
-            onChange={fileChange}
-          />
-        </div>
-          <div className="image-upload">
-          <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={imageClick}
-            style={{display: image && "none", cursor: "pointer"}}
-          />
-
-          <img
-            src={image && URL.createObjectURL(image)}
-            alt=""
-            onClick={imageClick}
-            style={{
-              width: image && "100%",
-              borderRadius: 24,
-              height: image && "100%",
-            }}
-          />
-
-          <input
-            type="file"
-            id="image"
-            style={{display: "none"}}
-            onChange={fileChange}
-          />
-        </div>
-
-  
-
-        {/* <div className="add-photos">
-          <div className="add-photo">
-            <p>Add a Photo</p>
-          </div>
-          <div className="add-photo">
-            {" "}
-            <p>Add a Photo</p>
-          </div>
-          <div className="add-photo">
-            {" "}
-            <p>Add a Photo</p>
-          </div>
-          <div className="add-photo">
-            {" "}
-            <p>Add a Photo</p>
-          </div>
-        </div> */}
       </div>
     </InputLayOut>
   );

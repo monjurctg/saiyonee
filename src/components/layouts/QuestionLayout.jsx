@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../Loader";
 
 function QuestionLayout({
@@ -14,7 +14,7 @@ function QuestionLayout({
 }) {
   // console.log("length", length);
   // let { id } = useParams();
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
   const handleSkip = () => {
     const isPreference = localStorage.getItem("preference");
     if (isPreference === "true") {
@@ -31,7 +31,8 @@ function QuestionLayout({
         <div
           onClick={() => navigate(-1)}
           className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-          style={{height: "58px", width: "58px"}}>
+          style={{ height: "58px", width: "58px" }}
+        >
           <img src="/img/back-icon.svg" alt="back" />
         </div>
       </div>
@@ -40,7 +41,10 @@ function QuestionLayout({
           <Loader />
         </div>
       )} */}
-      <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
+      <div
+        className="container px-4 pb-2 flex-grow-1 overflow-auto"
+       
+      >
         <h1 className="card-title">{title}</h1>
 
         {children}
@@ -52,9 +56,10 @@ function QuestionLayout({
         {/* <Link to={} > */}
         {pathname !== "/question/selfie-verification" ? (
           <button
-            style={{height: 60}}
+            style={{ height: 60 }}
             onClick={onContinueClicked}
-            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
+            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1"
+          >
             <strong>Next</strong>
             {
               // (status === FetchStatus.LOADING ||
@@ -65,25 +70,28 @@ function QuestionLayout({
                   <i
                     className="spinner-border spinner-border-sm text-black"
                     role="status"
-                    aria-hidden="true"></i>
+                    aria-hidden="true"
+                  ></i>
                   <i className="visually-hidden">Uploading.....</i>
                 </>
               )
             }
           </button>
         ) : (
-          <div className="d-flex" style={{gap:10}}>
-             <button
-              style={{height: 60}}
+          <div className="d-flex" style={{ gap: 10 }}>
+            <button
+              style={{ height: 60 }}
               // onClick={imageClick}
               onClick={handleSkip}
-              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake">
+              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 retake"
+            >
               <strong>Skip</strong>
             </button>
             <button
-              style={{height: 60}}
+              style={{ height: 60 }}
               onClick={imageClick}
-              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn">
+              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1 upload-btn"
+            >
               <strong>Retake</strong>
             </button>
             {/* {skipBtn && (
@@ -94,8 +102,6 @@ function QuestionLayout({
                 <strong>Skip</strong>
               </button>
             )} */}
-
-           
           </div>
         )}
 
