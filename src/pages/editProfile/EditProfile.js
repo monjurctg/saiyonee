@@ -51,8 +51,10 @@ const EditProfile = () => {
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
       toastMsg.success("Profile edit successfully");
+    }else{
+      toastMsg.error(res.data.message);
     }
-    console.log(res, "edit res");
+    // console.log(res, "edit res");
     // console.log("inputs");
   };
 
@@ -117,7 +119,7 @@ const EditProfile = () => {
           />
         </div>
 
-        <div className=" pt-5">
+        <div className="">
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>

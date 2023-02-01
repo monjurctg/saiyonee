@@ -110,6 +110,7 @@ const Settings = () => {
                 margin: 0,
                 fontSize: 20,
                 fontWeight: 600,
+                color: "#ffb7ac",
               }}
             >
               {percentage}%
