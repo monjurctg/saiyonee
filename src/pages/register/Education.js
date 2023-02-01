@@ -151,41 +151,41 @@ function Education() {
       return;
     }
 
-    if (!education3) {
-      setErr({
-        error: "education3",
-        message: "Please select your Graduate Education",
-      });
+    // if (!education3) {
+    //   setErr({
+    //     error: "education3",
+    //     message: "Please select your Graduate Education",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (!education3_institution.trim()) {
-      setErr({
-        error: "education3_institution",
-        message: "Please enter your Graduate Institution",
-      });
+    // if (!education3_institution.trim()) {
+    //   setErr({
+    //     error: "education3_institution",
+    //     message: "Please enter your Graduate Institution",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (!education3_major.trim()) {
-      setErr({
-        error: "education3_major",
-        message: "Please enter your Graduate Major",
-      });
+    // if (!education3_major.trim()) {
+    //   setErr({
+    //     error: "education3_major",
+    //     message: "Please enter your Graduate Major",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (!education3_passing_year) {
-      setErr({
-        error: "education3_passing_year",
-        message: "Please select your Graduate Passing Year",
-      });
+    // if (!education3_passing_year) {
+    //   setErr({
+    //     error: "education3_passing_year",
+    //     message: "Please select your Graduate Passing Year",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
     if (!socialToken) {
       let data = {
         email: email,

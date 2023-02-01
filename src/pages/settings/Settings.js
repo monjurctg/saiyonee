@@ -82,12 +82,10 @@ const Settings = () => {
           {/* <div className="no-image">
                 <p>{profile?.full_name?.charAt(0)}</p>
               </div> */}
-          {/* )} */}
-          <div>
-            <h3 className="mt-2 mb-1">
-              {profile?.full_name || "Kamrul Hassan"}
-            </h3>
-            {/* <p style={{fontSize: 12}}>
+            {/* )} */}
+            <div>
+              <h3 className="mt-2 mb-1">{profile?.display_name}</h3>
+              {/* <p style={{fontSize: 12}}>
                 Selfie varifired:
                 <span
                   style={{
