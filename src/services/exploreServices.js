@@ -11,6 +11,15 @@ ExploreServices.submitShortList = (id) => {
   return res;
 };
 
+ExploreServices.unMatchUser = (data) => {
+  let url = "match_making/unmatch_app_user";
+  let res = axios
+    .post(url, data)
+    .then((res) => res)
+    .catch((err) => err);
+  return res;
+};
+
 ExploreServices.removeFromShortList = (id) => {
   let url = "shortlist/remove_from_shortlist";
   let res = axios

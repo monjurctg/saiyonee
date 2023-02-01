@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
+import toastMsg from "../../utils/toastify";
 
 function MatchList() {
   const [matchData, setMatchData] = useState([]);
@@ -25,11 +26,22 @@ function MatchList() {
     getShortisted();
   }, []);
 
+  const unmatchHandler = async (id) => {
+    let data = new FormData();
+    data.append("match_record_id", id);
+    const res = await ExploreServices.unMatchUser(data);
+    console.log(res, "res from unmatch user ");
+    if (res.status === 200) {
+      toastMsg.success("unmatched successfully");
+      getShortisted();
+    }
+  };
+
   // console.log('matchData', matchData)
   let matchList = matchData.map((sl, index) => {
     return (
       <div className="explore-img" key={index}>
-        <div className="cross">
+        <div className="cross" onClick={() => unmatchHandler(sl?.match_id)}>
           <img height={10} src="/img/cross.png" alt="" />
         </div>
 
