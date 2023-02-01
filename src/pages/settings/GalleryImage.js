@@ -83,6 +83,7 @@ const GalleryImage = () => {
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
       toastMsg.success("Profile edit successfully");
+      fetchData();
     } else {
       toastMsg.error(res.data.message);
     }

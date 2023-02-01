@@ -59,7 +59,7 @@ function GetStarted() {
             style={{
               gap: 10,
             }}>
-            <div>
+            {/* <div>
               <a
                 style={{
                   fontFamily: "Inter",
@@ -131,7 +131,7 @@ function GetStarted() {
                   />
                 </strong>
               </a>
-            </div>
+            </div> */}
           </div>
           <Link
             to={"/login"}
