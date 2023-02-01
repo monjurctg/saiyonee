@@ -27,7 +27,7 @@ function PublicRoute() {
     emailVerified === "true" &&
     isAlreadySetPreference === "false" &&
     profile_image === "false" &&
-    isEmptyQuestion
+    selfie_image === "false"
   ) {
     return <Navigate to="/question/1" state={{from: location}} />;
   } else if (

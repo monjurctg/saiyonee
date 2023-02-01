@@ -7,6 +7,9 @@ import toastMsg from "../../utils/toastify";
 function Question() {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
+  const profile_image = localStorage.getItem("profile_image");
+  const selfie_image = localStorage.getItem("selfie_image");
+  const isAlreadySetPreference = localStorage.getItem("preference");
   // console.log('first')
   const navigate = useNavigate();
   let {id} = useParams();
@@ -32,7 +35,16 @@ function Question() {
       setLoading(false);
       setlength(res.data.form_field_questions.length);
       if (res.data.form_field_questions?.length === 0) {
-        navigate("/");
+        if (profile_image === "false") {
+          navigate("/question/image");
+        } else if (selfie_image === "false") {
+          navigate("/question/selfie-verification");
+        } else if (isAlreadySetPreference === "false") {
+          navigate("/preference");
+        } else {
+          navigate("/home");
+        }
+
         return;
       }
 
@@ -168,7 +180,7 @@ function Question() {
       });
       // Navigate
       navigate(
-        length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/1`
+        length - 1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/image`
       );
     } else {
       seterr(res.data.message);
