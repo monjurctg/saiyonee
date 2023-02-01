@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -50,7 +50,7 @@ function AddPhoto() {
       localStorage.setItem("profile_image", true);
       toastMsg.success("Profile photo added successfully");
       seterr(false);
-      // navigate("/question/selfie-verification");
+      navigate("/question/selfie-verification");
     } else {
       setLoading(false);
       seterr(res.data.message);
@@ -83,8 +83,7 @@ function AddPhoto() {
       onContinueClicked={onSubmit}
       length={length}
       title={"Add Profile Photo"}
-      loading={loading}
-    >
+      loading={loading}>
       <div className="question mt-3">
         <p className="text-start">
           Your profile will only be visible to other members, when you add a
@@ -95,13 +94,12 @@ function AddPhoto() {
           className="image-upload mt-4"
           style={{
             width: "100%",
-          }}
-        >
+          }}>
           <img
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{ display: (image || image2) && "none", cursor: "pointer" }}
+            style={{display: (image || image2) && "none", cursor: "pointer"}}
           />
 
           <img
@@ -118,7 +116,7 @@ function AddPhoto() {
           <input
             type="file"
             id="image"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
           />
         </div>
@@ -128,8 +126,7 @@ function AddPhoto() {
           <h4
             style={{
               marginTop: 20,
-            }}
-          >
+            }}>
             Instruction
           </h4>
           <p>- Upload a clear photo.</p>

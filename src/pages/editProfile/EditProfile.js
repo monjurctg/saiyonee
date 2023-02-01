@@ -5,6 +5,7 @@ import "./../../assets/css/editProfile.scss";
 import {Link} from "react-router-dom";
 import UserServices from "../../services/userServices";
 import {useSelector} from "react-redux";
+import HomeLayout from "../../components/layouts/HomeLayout";
 
 const EditProfile = () => {
   const [err, seterr] = useState(null);
