@@ -7,8 +7,12 @@ function HomeLayout({
   activeExplore,
   setactiveExplore,
   mTop,
+  match
 }) {
   let {pathname} = useLocation();
+
+
+  // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
 
   const logout = () => {
@@ -56,8 +60,8 @@ function HomeLayout({
         className="d-flex justify-content-between align-items-center"
         style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
         {/* {pathname === "/settings" && ( */}
-        <Link
-          to="/" // TODO ROUTES.tutorial
+        <div onClick={() => navigate(-1)}
+         // TODO ROUTES.tutorial
           className="image-saturate position-relative me-auto">
           <img src="/img/back.svg" alt="next" className="img-fluid" />
           {/* <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
@@ -67,7 +71,7 @@ function HomeLayout({
               className="img-fluid"
             />
           </div> */}
-        </Link>
+        </div>
         {/* )} */}
         {/* <img
       src={"img/logout.png"}
@@ -96,9 +100,10 @@ function HomeLayout({
               </div>
             </Link>
           </>
-        ) : (
+        ) : match ? (
+          <Link to={`/chat/room/${match}`}>
           <p
-            onClick={logout}
+            // onClick={logout}
             style={{
               padding: "5px 10px",
               display: "flex",
@@ -106,6 +111,7 @@ function HomeLayout({
               background: "#ffb7ac",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
               marginTop: "10px",
               cursor: "pointer",
               border: "1px solid #ffb7ac",
@@ -116,9 +122,33 @@ function HomeLayout({
               src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
               alt=""
             />
-            <span style={{fontWeight: "bold"}}>Logout</span>
+            <span style={{fontWeight: "bold"}}>Message</span>
           </p>
-        )}
+          </Link>
+        ):
+        <p
+        onClick={logout}
+        style={{
+          padding: "5px 10px",
+          display: "flex",
+          borderRadius: "5px",
+          background: "#ffb7ac",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "10px",
+         
+          cursor: "pointer",
+          border: "1px solid #ffb7ac",
+        }}>
+        <img
+          className="me-2"
+          style={{margin: "0 auto", height: "25px"}}
+          src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
+          alt=""
+        />
+        <span style={{fontWeight: "bold"}}>Logout</span>
+      </p>
+        }
       </div>
     );
   }

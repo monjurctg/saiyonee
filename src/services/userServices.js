@@ -82,7 +82,10 @@ UserServices.getMessage = async (data) => {
   const res = await axios.post("/live_chat/get_chat_messages", data);
   return res;
 };
-
+UserServices.getInbox = async () => {
+  const res = await axios.post("/live_chat/message_directory");
+  return res;
+};
 UserServices.match_viewed = (data) => {
   return axios.post("/match_making/match_viewed", data);
 };
