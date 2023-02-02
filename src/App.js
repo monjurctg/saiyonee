@@ -61,10 +61,10 @@ function App() {
     <>
       <Routers />
       <MessengerChat
-        language="sv_SE"
+        language="EN"
         themeColor={"#000000"}
         bottomSpacing={300}
-        loggedInGreeting="loggedInGreeting"
+        loggedInGreeting="Wellcome to saiyonee"
         loggedOutGreeting="loggedOutGreeting"
         greetingDialogDisplay={"show"}
         debugMode={true}
