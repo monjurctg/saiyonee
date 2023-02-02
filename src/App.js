@@ -62,7 +62,7 @@ function App() {
       <Routers />
       <MessengerChat
         language="EN"
-        themeColor={"#000000"}
+        themeColor={"#ffb7ac"}
         bottomSpacing={300}
         loggedInGreeting="Wellcome to saiyonee"
         loggedOutGreeting="loggedOutGreeting"
