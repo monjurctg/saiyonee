@@ -9,6 +9,9 @@ function HomeLayout({
   mTop,
 }) {
   let {pathname} = useLocation();
+
+
+  // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
 
   const logout = () => {
@@ -56,8 +59,8 @@ function HomeLayout({
         className="d-flex justify-content-between align-items-center"
         style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
         {/* {pathname === "/settings" && ( */}
-        <Link
-          to="/" // TODO ROUTES.tutorial
+        <div onClick={() => navigate(-1)}
+         // TODO ROUTES.tutorial
           className="image-saturate position-relative me-auto">
           <img src="/img/back.svg" alt="next" className="img-fluid" />
           {/* <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
@@ -67,7 +70,7 @@ function HomeLayout({
               className="img-fluid"
             />
           </div> */}
-        </Link>
+        </div>
         {/* )} */}
         {/* <img
       src={"img/logout.png"}
