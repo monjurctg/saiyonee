@@ -60,16 +60,19 @@ function App() {
   return (
     <>
       <Routers />
-      <MessengerChat
-        language="EN"
-        themeColor={"#ffb7ac"}
-        bottomSpacing={300}
-        loggedInGreeting="Wellcome to saiyonee"
-        loggedOutGreeting="loggedOutGreeting"
-        greetingDialogDisplay={"show"}
-        debugMode={true}
-        pageId="105398835401043"
-      />
+
+      <div className="max-width-mobile">
+        <MessengerChat
+          language="EN"
+          themeColor={"#ffb7ac"}
+          bottomSpacing={300}
+          loggedInGreeting="Wellcome to saiyonee"
+          // loggedOutGreeting="loggedOutGreeting"
+          greetingDialogDisplay={"show"}
+          debugMode={true}
+          pageId="105398835401043"
+        />
+      </div>
     </>
   );
 }
