@@ -65,11 +65,13 @@ function App() {
         <MessengerChat
           language="EN"
           themeColor={"#ffb7ac"}
-          bottomSpacing={300}
+          bottomSpacing={0}
           loggedInGreeting="Wellcome to saiyonee"
           // loggedOutGreeting="loggedOutGreeting"
-          greetingDialogDisplay={"show"}
+
+          greetingDialogDisplay={"hide"}
           debugMode={true}
+          B
           pageId="105398835401043"
         />
       </div>
