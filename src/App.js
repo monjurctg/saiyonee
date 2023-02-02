@@ -65,7 +65,7 @@ function App() {
         <MessengerChat
           language="EN"
           themeColor={"#ffb7ac"}
-          bottomSpacing={175}
+          bottomSpacing={80}
           loggedInGreeting="Wellcome to saiyonee"
           // loggedOutGreeting="loggedOutGreeting"
 
