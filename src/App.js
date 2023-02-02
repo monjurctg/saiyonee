@@ -10,6 +10,7 @@ import UserServices from "./services/userServices";
 import {setCurrentUser} from "./redux/slices/authSlices";
 import {getToken} from "./utils/functions";
 import {useCallback} from "react";
+import {MessengerChat} from "react-messenger-chat-plugin";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
@@ -56,7 +57,21 @@ function App() {
     }
   }, [fetchCurrentUser, fetchPreviousPreference]);
 
-  return <Routers />;
+  return (
+    <>
+      <Routers />
+      <MessengerChat
+        language="sv_SE"
+        themeColor={"#000000"}
+        bottomSpacing={300}
+        loggedInGreeting="loggedInGreeting"
+        loggedOutGreeting="loggedOutGreeting"
+        greetingDialogDisplay={"show"}
+        debugMode={true}
+        pageId="105398835401043"
+      />
+    </>
+  );
 }
 
 export default App;
