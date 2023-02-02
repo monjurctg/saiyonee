@@ -257,7 +257,7 @@ function Routers() {
             {/* <Route path="/home" element={<Home />} /> */}
             <Route path="/viewProfile" element={<ViewProfile />} />
             <Route path="/boom" element={<Boom />} />
-            <Route path="/chat/room" element={<ChatBox />} />
+            <Route path="/chat/room/:id" element={<ChatBox />} />
 
             <Route
               path="/user-info/:route/:id/:appId"

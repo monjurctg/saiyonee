@@ -16,30 +16,61 @@ const ChatIndex = () => {
     getInbox();
   }, []);
 
-  let div = ""
-  if(data?.length > 0){
-    div =  <Link to={"/chat/room"}>
-    <div className="chat_body mb-4">
-      <div className="d-flex justify-content-evenly align-items-center">
-        <p className="no-image">image</p>
-        <div>
-          <p className="name">Dianne, 22</p>
-          <p className="message">Was great hanging out!</p>
+  let div = "";
+  if (data?.length > 0) {
+    div = data?.map((item) => (
+      <Link to={`/chat/room/${item?.latest_live_chat_message?.match_id}`}>
+        <div className="chat_body mb-4" style={{
+          margin:"auto",
+        }}>
+          <div className="d-flex justify-content-evenly align-items-center">
+            {item?.latest_live_chat_message?.from_user?.thumbnail_img ? (
+              <img
+                src={item?.latest_live_chat_message?.from_user?.thumbnail_img}
+                alt=""
+                style={{
+                  width: 70,
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  height: 70,
+                  borderRadius: "50%",
+                  /* background: #ffb7ac36; */
+                  marginTop: 10,
+                  padding: 10,
+                }}
+              />
+            ) : (
+              <p className="no-image">image</p>
+            )}
+            {/* <p className="no-image">image</p> */}
+            <div>
+              <p className="name">
+                {item?.latest_live_chat_message?.from_user?.display_name}, 22
+              </p>
+              <p className="message">
+                {item?.latest_live_chat_message?.message}
+              </p>
+            </div>
+            <p className="day">Fri</p>
+          </div>
         </div>
-        <p className="day">Fri</p>
-      </div>
-    </div>
-  </Link>
-  }else{
-    div = <div className="mb-4 text-center">
+      </Link>
+    ));
+  } else {
+    div = (
+      <div className="mb-4 text-center">
         <h5
-        style={{
-          color: "#000",
-          fontSize: "1.2rem",
-          fontWeight: "500",
-        }}
-        >No chat available</h5>
+          style={{
+            color: "#000",
+            fontSize: "1.2rem",
+            fontWeight: "500",
+          }}
+        >
+          No chat available
+        </h5>
       </div>
+    );
   }
   return (
     <HomeLayout>
@@ -49,8 +80,7 @@ const ChatIndex = () => {
           overflowY: "auto",
         }}
       >
-       
-   {div}
+        {div}
       </div>
     </HomeLayout>
   );

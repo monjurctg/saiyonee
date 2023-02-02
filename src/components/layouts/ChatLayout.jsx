@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 
-function ChatLayout({ children }) {
+function ChatLayout({ children,user }) {
   const navigate = useNavigate();
+  console.log('user', user)
   return (
     <div
       //   className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative mt-2 mb-2"S
@@ -41,16 +42,19 @@ function ChatLayout({ children }) {
           <p
             style={{
               fontWeight: 500,
-              fontSize: 20,
+              fontSize: 16,
               lineHeight: "24px",
               color: "#1F2937",
               marginBottom: 0,
               marginRight: 15,
             }}
           >
-            Skylar
+            {user?.display_name}
           </p>
-          <img src={demoProfile} alt="" />
+          <img src={user?.thumbnail_img||demoProfile} alt="" style={{
+            height: 50,
+            width: 50,
+          }} />
         </div>
       </div>
       {children}

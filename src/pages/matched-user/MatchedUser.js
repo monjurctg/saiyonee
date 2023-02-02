@@ -162,7 +162,7 @@ const MatchedUser = () => {
   );
   return (
     <>
-      <HomeLayout tab={tab} footer={footer}>
+      <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
         <div className="explore_viewProfile text-center">
           <div className="content-container">
             <img className="user-img" src={singleData?.app_user?.profile_img} />

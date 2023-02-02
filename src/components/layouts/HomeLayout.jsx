@@ -7,6 +7,7 @@ function HomeLayout({
   activeExplore,
   setactiveExplore,
   mTop,
+  match
 }) {
   let {pathname} = useLocation();
 
@@ -99,9 +100,10 @@ function HomeLayout({
               </div>
             </Link>
           </>
-        ) : (
+        ) : match ? (
+          <Link to={`/chat/room/${match}`}>
           <p
-            onClick={logout}
+            // onClick={logout}
             style={{
               padding: "5px 10px",
               display: "flex",
@@ -109,6 +111,7 @@ function HomeLayout({
               background: "#ffb7ac",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
               marginTop: "10px",
               cursor: "pointer",
               border: "1px solid #ffb7ac",
@@ -119,9 +122,33 @@ function HomeLayout({
               src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
               alt=""
             />
-            <span style={{fontWeight: "bold"}}>Logout</span>
+            <span style={{fontWeight: "bold"}}>Message</span>
           </p>
-        )}
+          </Link>
+        ):
+        <p
+        onClick={logout}
+        style={{
+          padding: "5px 10px",
+          display: "flex",
+          borderRadius: "5px",
+          background: "#ffb7ac",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "10px",
+         
+          cursor: "pointer",
+          border: "1px solid #ffb7ac",
+        }}>
+        <img
+          className="me-2"
+          style={{margin: "0 auto", height: "25px"}}
+          src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
+          alt=""
+        />
+        <span style={{fontWeight: "bold"}}>Logout</span>
+      </p>
+        }
       </div>
     );
   }

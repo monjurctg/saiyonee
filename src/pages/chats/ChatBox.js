@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 import message from "../../assets/imgs/msg.png";
 import msgWhite from "../../assets/imgs/msgWhite.png";
@@ -8,27 +8,35 @@ import ChatLayout from "../../components/layouts/ChatLayout";
 import UserServices from "../../services/userServices";
 
 function ChatBox() {
+  const {id} = useParams();
+  console.log('id', id)
   const [messageUser, setMessageUser] = useState();
+  const [userData, setuserData] = useState()
   const [messageData, setmessageData] = useState([]);
   const [scrollPos, setScrollPos] = useState();
-  console.log("scrollPos", scrollPos);
+  // console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
 
   let getMessage = async (data) => {
     // console.log('data', data)
+    if(!data){
+      data = {match_id: id}
+    }
+
     let res = await UserServices.getMessage(data);
     if (messageData?.data?.chat_messages?.length > 0) {
       let newMessage = res?.data?.data?.chat_messages[0];
       messageData?.data?.chat_messages.push(newMessage);
 
-      console.log("newMessage", newMessage);
+      // console.log("newMessage", newMessage);
       // setmessageData(res.data);
     } else {
       setmessageData(res.data);
+      setuserData(res.data?.data?.other_user)
     }
     // console.log('res', res.data)
   };
-  console.log("messageData", messageData?.data?.chat_messages);
+  console.log("messageData", userData);
   let scrollToBottomF = () => {
     messagesEndRef.current.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -46,7 +54,7 @@ function ChatBox() {
         ]?.id
       );
       getMessage({
-        match_id: 10,
+        match_id: id,
         oldest_message_id:
           messageData?.data?.chat_messages[
             messageData?.data?.chat_messages.length - 1
@@ -68,7 +76,7 @@ function ChatBox() {
   useEffect(() => {
     // scrollToBottom();
     // scrollToBottomF();
-    getMessage({match_id: 10});
+    getMessage({match_id: id});
     // const interval = setInterval(() => getMessage(), 10000)
     //     return () => {
     //       clearInterval(interval);
@@ -84,7 +92,7 @@ function ChatBox() {
     e.preventDefault();
     // console.log("ss");
     let data = {
-      match_id: 10,
+      match_id: id,
       message: messageUser,
     };
     let res = await UserServices.message_users(data);
@@ -106,7 +114,7 @@ function ChatBox() {
                 // backgroundImage: `url(${message})`,
               }
             }>
-            <p>{md.message}</p>
+            <p>{md?.message}</p>
           </div>
         </div>
       );
@@ -120,7 +128,7 @@ function ChatBox() {
                 // backgroundImage: `url(${msgWhite})`,
               }
             }>
-            <p>{md.message}</p>
+            <p>{md?.message}</p>
           </div>
         </div>
       );
@@ -145,7 +153,7 @@ function ChatBox() {
     </div>
   );
   return (
-    <ChatLayout>
+    <ChatLayout user={userData}>
       <div
         className="chat-body"
         id="chat-body"
