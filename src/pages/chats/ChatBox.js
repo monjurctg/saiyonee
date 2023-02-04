@@ -24,19 +24,20 @@ function ChatBox() {
     }
 
     let res = await UserServices.getMessage(data);
+    console.log('messageData?.data?.chat_messages?.length', messageData?.data?.chat_messages?.length)
     if (messageData?.data?.chat_messages?.length > 0) {
       let newMessage = res?.data?.data?.chat_messages[0];
       messageData?.data?.chat_messages.push(newMessage);
 
       // console.log("newMessage", newMessage);
-      // setmessageData(res.data);
+      setmessageData(res.data);
     } else {
       setmessageData(res.data);
       setuserData(res.data?.data?.other_user)
     }
     // console.log('res', res.data)
   };
-  console.log("messageData", userData);
+  // console.log("messageData", userData);
   let scrollToBottomF = () => {
     messagesEndRef.current.scrollTo({
       top: document.documentElement.scrollHeight,
