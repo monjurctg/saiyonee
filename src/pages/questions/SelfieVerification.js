@@ -161,7 +161,7 @@ function SelfieVerification() {
           <span style={{
             color: "red",
             fontWeight: "bold",
-          }}>Please login through a mobile phone to verify your selfie. </span>
+          }}>You need to have a webcam to complete this step </span>
         }
 
         <p className="mt-3" style={{
