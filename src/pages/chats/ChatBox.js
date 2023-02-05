@@ -9,7 +9,7 @@ import UserServices from "../../services/userServices";
 
 function ChatBox() {
   const {id} = useParams();
-  console.log('id', id)
+  // console.log('id', id)
   const [messageUser, setMessageUser] = useState();
   const [userData, setuserData] = useState()
   const [messageData, setmessageData] = useState([]);
@@ -39,10 +39,12 @@ function ChatBox() {
   };
   // console.log("messageData", userData);
   let scrollToBottomF = () => {
-    messagesEndRef.current.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: "smooth",
-    });
+    console.log('ss' )
+    // messagesEndRef.current.scrollTo({
+    //   top: document.documentElement.scrollHeight,
+    //   behavior: "smooth",
+    // });
+    messagesEndRef?.current?.scrollTo(0, document.body.scrollHeight);
   };
 
   useEffect(() => {
@@ -76,18 +78,18 @@ function ChatBox() {
 
   useEffect(() => {
     // scrollToBottom();
-    // scrollToBottomF();
     getMessage({match_id: id});
+    scrollToBottomF();
     // const interval = setInterval(() => getMessage(), 10000)
     //     return () => {
     //       clearInterval(interval);
     //     }
   }, []);
 
-  // useEffect(() => {
+  useEffect(() => {
   // scrollToBottom();
-  // scrollToBottomF();
-  // }, [messageData]);
+  scrollToBottomF();
+  }, [messageData]);
 
   let sendMessages = async (e) => {
     e.preventDefault();
