@@ -114,6 +114,13 @@ function AddPhoto() {
               height: (image || image2) && "100%",
             }}
           />
+
+          <input
+            type="file"
+            id="image"
+            style={{ display: "none" }}
+            onChange={fileChange}
+          />
         </div>
         <div>
         </div>
