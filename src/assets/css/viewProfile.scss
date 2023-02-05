@@ -79,16 +79,19 @@
 .chat-body {
   height: 60vh;
   overflow-y: auto;
+
   img {
     width: 42px;
     height: 42px;
   }
+
   .chat-body-inner-right {
     text-align: center;
     display: flex;
     justify-content: end;
     gap: 11px;
     margin: 10px;
+
     .write {
       background: #ffb7ac;
       min-width: 120px;
@@ -97,6 +100,7 @@
       align-items: center;
       padding: 5px 15px;
       border-radius: 5px;
+
       p {
         margin: 0;
         font-size: 14px;
@@ -105,10 +109,12 @@
         /* width: 100%; */
         word-break: break-all;
       }
+
       //   background: #ffb7ac;
       //   transform: matrix(-1, 0, 0, 1, 0, 0);
     }
   }
+
   .chat-body-inner-left {
     text-align: center;
     display: flex;
@@ -124,6 +130,7 @@
       align-items: center;
       padding: 5px 15px;
       border-radius: 5px;
+
       p {
         margin: 0;
         font-size: 14px;
@@ -132,31 +139,41 @@
         /* width: 100%; */
         word-break: break-all;
       }
+
       //   background: #ffb7ac;
       //   transform: matrix(-1, 0, 0, 1, 0, 0);
     }
   }
 }
+
 .chat-body {
-  overflow: auto; /* or auto */
-  width: 100%; /* or any width */
-  -ms-overflow-style: none; /* for IE and Edge */
+  overflow: auto;
+  /* or auto */
+  width: 100%;
+  /* or any width */
+  -ms-overflow-style: none;
+  /* for IE and Edge */
 }
 
 /* Hide scrollbar in Webkit */
 .chat-body::-webkit-scrollbar {
   width: 0.2em;
-  background-color: transparent; /* change the color to match your background */
+  background-color: transparent;
+  /* change the color to match your background */
 }
+
 .chat-body::-webkit-scrollbar-thumb {
-  background-color: transparent; /* change the color to match your background */
+  background-color: transparent;
+  /* change the color to match your background */
 }
+
 .chat-footer {
   position: fixed;
   bottom: 0px;
   padding: 15px;
   gap: 15px;
   align-items: center;
+
   .round-shape {
     width: 48px;
     height: 48px;
@@ -168,11 +185,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     img {
       width: 20px;
       height: 20px;
     }
   }
+
   input {
     width: 286px;
     height: 56px;
@@ -200,6 +219,7 @@
   .viewProfile-no-active {
     padding-bottom: 10px;
   }
+
   .viewProfile-active {
     border-bottom: 2px solid #edafa6;
   }
@@ -210,6 +230,7 @@
 
   .info {
     display: flex;
+
     p {
       border: none;
       width: 100%;

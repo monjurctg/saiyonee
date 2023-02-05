@@ -1,5 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+/* eslint-disable */
+
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 import message from "../../assets/imgs/msg.png";
 import msgWhite from "../../assets/imgs/msgWhite.png";
@@ -8,7 +10,7 @@ import ChatLayout from "../../components/layouts/ChatLayout";
 import UserServices from "../../services/userServices";
 
 function ChatBox() {
-  const {id} = useParams();
+  const { id } = useParams();
   // console.log('id', id)
   const [messageUser, setMessageUser] = useState();
   const [userData, setuserData] = useState()
@@ -19,8 +21,8 @@ function ChatBox() {
 
   let getMessage = async (data) => {
     // console.log('data', data)
-    if(!data){
-      data = {match_id: id}
+    if (!data) {
+      data = { match_id: id }
     }
 
     let res = await UserServices.getMessage(data);
@@ -39,7 +41,7 @@ function ChatBox() {
   };
   // console.log("messageData", userData);
   let scrollToBottomF = () => {
-    console.log('ss' )
+    console.log('ss')
     // messagesEndRef.current.scrollTo({
     //   top: document.documentElement.scrollHeight,
     //   behavior: "smooth",
@@ -78,7 +80,7 @@ function ChatBox() {
 
   useEffect(() => {
     // scrollToBottom();
-    getMessage({match_id: id});
+    getMessage({ match_id: id });
     scrollToBottomF();
     // const interval = setInterval(() => getMessage(), 10000)
     //     return () => {
@@ -87,8 +89,8 @@ function ChatBox() {
   }, []);
 
   useEffect(() => {
-  // scrollToBottom();
-  scrollToBottomF();
+    // scrollToBottom();
+    scrollToBottomF();
   }, [messageData]);
 
   let sendMessages = async (e) => {
@@ -160,7 +162,7 @@ function ChatBox() {
       <div
         className="chat-body"
         id="chat-body"
-        style={{marginTop: 80}}
+        style={{ marginTop: 80 }}
         ref={messagesEndRef}>
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
