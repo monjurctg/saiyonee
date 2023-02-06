@@ -185,7 +185,7 @@ function HomeLayout({
           <div className="tab  pt-3 d-flex justify-content-evenly">
             <p
               className={activeExplore === "Matched list" && "active"}
-              style={{ cursor: "pointer", color: "#7d8490f0" }}
+              style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
               onClick={() => setactiveExplore("Matched list")}
             >
               Matched list
@@ -193,7 +193,7 @@ function HomeLayout({
 
             <p
               className={activeExplore === "Shortlist" && "active"}
-              style={{ cursor: "pointer", color: "#7d8490f0" }}
+              style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
               onClick={() => setactiveExplore("Shortlist")}
             >
               Shortlist
@@ -201,7 +201,7 @@ function HomeLayout({
             {show_liked_list === "true" ? (
               <p
                 className={activeExplore === "Liked" && "active"}
-                style={{ cursor: "pointer", color: "#7d8490f0" }}
+                style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
                 onClick={() => setactiveExplore("Liked")}
               >
                 Liked you
@@ -211,7 +211,9 @@ function HomeLayout({
                 className={activeExplore === "Liked" && "active"}
                 style={{ cursor: "pointer" }}
               >
-                <span style={{ color: "#7d849075" }}>Liked you</span>
+                <span style={{ color: "#7d849075", fontSize: 11 }}>
+                  Liked you
+                </span>
                 <span style={{ paddingLeft: "4px" }}>
                   <img src="/img/crown2.png" height={20} alt="" />
                 </span>
@@ -220,7 +222,7 @@ function HomeLayout({
             {show_supper_liked_list === "true" ? (
               <p
                 className={activeExplore === "Superliked list" && "active"}
-                style={{ cursor: "pointer", color: "#7d8490f0" }}
+                style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
                 onClick={() => setactiveExplore("Superliked list")}
               >
                 Superliked you
@@ -232,7 +234,9 @@ function HomeLayout({
                   cursor: "pointer",
                 }}
               >
-                <span style={{ color: "#7d849075" }}>Superliked you</span>
+                <span style={{ color: "#7d849075", fontSize: 11 }}>
+                  Superliked you
+                </span>
                 <span style={{ paddingLeft: "4px" }}>
                   <img src="/img/crown2.png" height={20} alt="" />
                 </span>
