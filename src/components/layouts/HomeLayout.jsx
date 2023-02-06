@@ -182,7 +182,7 @@ function HomeLayout({
       >
         {header}
         {pathname === "/explore" && (
-          <div className="tab  pt-3 ">
+          <div className="tab  pt-3 d-flex justify-content-evenly">
             <p
               className={activeExplore === "Matched list" && "active"}
               style={{ cursor: "pointer", color: "#7d8490f0" }}
@@ -198,6 +198,25 @@ function HomeLayout({
             >
               Shortlist
             </p>
+            {show_liked_list === "true" ? (
+              <p
+                className={activeExplore === "Liked" && "active"}
+                style={{ cursor: "pointer", color: "#7d8490f0" }}
+                onClick={() => setactiveExplore("Liked")}
+              >
+                Liked you
+              </p>
+            ) : (
+              <p
+                className={activeExplore === "Liked" && "active"}
+                style={{ cursor: "pointer" }}
+              >
+                <span style={{ color: "#7d849075" }}>Liked you</span>
+                <span style={{ paddingLeft: "4px" }}>
+                  <img src="/img/crown2.png" height={20} alt="" />
+                </span>
+              </p>
+            )}
             {show_supper_liked_list === "true" ? (
               <p
                 className={activeExplore === "Superliked list" && "active"}
@@ -214,25 +233,6 @@ function HomeLayout({
                 }}
               >
                 <span style={{ color: "#7d849075" }}>Superliked you</span>
-                <span style={{ paddingLeft: "4px" }}>
-                  <img src="/img/crown2.png" height={20} alt="" />
-                </span>
-              </p>
-            )}
-            {show_liked_list === "true" ? (
-              <p
-                className={activeExplore === "Liked" && "active"}
-                style={{ cursor: "pointer", color: "#7d8490f0" }}
-                onClick={() => setactiveExplore("Liked")}
-              >
-                Liked you
-              </p>
-            ) : (
-              <p
-                className={activeExplore === "Liked" && "active"}
-                style={{ cursor: "pointer" }}
-              >
-                <span style={{ color: "#7d849075" }}>Liked you</span>
                 <span style={{ paddingLeft: "4px" }}>
                   <img src="/img/crown2.png" height={20} alt="" />
                 </span>
