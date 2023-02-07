@@ -205,7 +205,7 @@ const MatchedUser = () => {
               <br />
               Age :{singleData?.app_user?.age}
               <br />
-              Gender :{singleData?.app_user?.gender}
+              {/* Gender :{singleData?.app_user?.gender} */}
               <br />
               Height :{singleData?.app_user?.height_feet} feet{" "}
               {singleData?.app_user?.height_inches} inches

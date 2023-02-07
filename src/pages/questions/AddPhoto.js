@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -101,7 +101,7 @@ function AddPhoto() {
             src="/img/plus-round.svg"
             alt=""
             onClick={imageClick}
-            style={{display: (image || image2) && "none", cursor: "pointer"}}
+            style={{ display: (image || image2) && "none", cursor: "pointer" }}
           />
 
           <img
@@ -118,11 +118,12 @@ function AddPhoto() {
           <input
             type="file"
             id="image"
-            style={{display: "none"}}
+            style={{ display: "none" }}
             onChange={fileChange}
           />
         </div>
-        <div></div>
+        <div>
+        </div>
 
         <div className="instruction">
           <h4

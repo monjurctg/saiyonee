@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useEffect, useState } from "react";
 // import InputLayOut from "./InputLayOut";
 
@@ -168,27 +170,27 @@ const GalleryImage = () => {
             margin: 0,
           }}
         >
-            {
-                data?.optional_img_2 ?
-                <img
+          {
+            data?.optional_img_2 ?
+              <img
                 src={data?.optional_img_2}
                 alt=""
-                onClick={(e)=>imageClick(e,2)} 
+                onClick={(e) => imageClick(e, 2)}
                 style={{
-                  width: data?.optional_img_2&& "100%",
+                  width: data?.optional_img_2 && "100%",
                   borderRadius: 24,
                   height: data?.optional_img_2 && "100%",
-            display: images?.optional_img_2 && "none", cursor: "pointer"
+                  display: images?.optional_img_2 && "none", cursor: "pointer"
                 }}
               />
-              :   
+              :
               <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={(e)=>imageClick(e,2)}
-            style={{display: images?.optional_img_2 && "none", cursor: "pointer"}}
-          />
-            }
+                src="/img/plus-round.svg"
+                alt=""
+                onClick={(e) => imageClick(e, 2)}
+                style={{ display: images?.optional_img_2 && "none", cursor: "pointer" }}
+              />
+          }
 
           <img
             src={
@@ -220,27 +222,27 @@ const GalleryImage = () => {
             margin: 0,
           }}
         >
-            {
-                data?.optional_img_3 ?
-                <img
+          {
+            data?.optional_img_3 ?
+              <img
                 src={data?.optional_img_3}
                 alt=""
-                onClick={(e)=>imageClick(e,3)} 
+                onClick={(e) => imageClick(e, 3)}
                 style={{
-                  width: data?.optional_img_3&& "100%",
+                  width: data?.optional_img_3 && "100%",
                   borderRadius: 24,
                   height: data?.optional_img_3 && "100%",
-            display: images?.optional_img_3 && "none", cursor: "pointer"
+                  display: images?.optional_img_3 && "none", cursor: "pointer"
                 }}
               />
-              :   
+              :
               <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={(e)=>imageClick(e,3)}
-            style={{display: images?.optional_img_3 && "none", cursor: "pointer"}}
-          />
-            }
+                src="/img/plus-round.svg"
+                alt=""
+                onClick={(e) => imageClick(e, 3)}
+                style={{ display: images?.optional_img_3 && "none", cursor: "pointer" }}
+              />
+          }
 
           <img
             src={
@@ -273,26 +275,26 @@ const GalleryImage = () => {
           }}
         >
           {
-                data?.optional_img_4 ?
-                <img
+            data?.optional_img_4 ?
+              <img
                 src={data?.optional_img_4}
                 alt=""
-                onClick={(e)=>imageClick(e,4)} 
+                onClick={(e) => imageClick(e, 4)}
                 style={{
-                  width: data?.optional_img_4&& "100%",
+                  width: data?.optional_img_4 && "100%",
                   borderRadius: 24,
                   height: data?.optional_img_4 && "100%",
-            display: images?.optional_img_4 && "none", cursor: "pointer"
+                  display: images?.optional_img_4 && "none", cursor: "pointer"
                 }}
               />
-              :   
+              :
               <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={(e)=>imageClick(e,4)}
-            style={{display: images?.optional_img_4 && "none", cursor: "pointer"}}
-          />
-            }
+                src="/img/plus-round.svg"
+                alt=""
+                onClick={(e) => imageClick(e, 4)}
+                style={{ display: images?.optional_img_4 && "none", cursor: "pointer" }}
+              />
+          }
 
           <img
             src={
@@ -324,27 +326,27 @@ const GalleryImage = () => {
             margin: 0,
           }}
         >
-           {
-                data?.optional_img_5 ?
-                <img
+          {
+            data?.optional_img_5 ?
+              <img
                 src={data?.optional_img_5}
                 alt=""
-                onClick={(e)=>imageClick(e,5)} 
+                onClick={(e) => imageClick(e, 5)}
                 style={{
                   width: data?.optional_img_5 && "100%",
                   borderRadius: 24,
                   height: data?.optional_img_5 && "100%",
-            display: images?.optional_img_5 && "none", cursor: "pointer"
+                  display: images?.optional_img_5 && "none", cursor: "pointer"
                 }}
               />
-              :   
+              :
               <img
-            src="/img/plus-round.svg"
-            alt=""
-            onClick={(e)=>imageClick(e,5)}
-            style={{display: images?.optional_img_5 && "none", cursor: "pointer"}}
-          />
-            }
+                src="/img/plus-round.svg"
+                alt=""
+                onClick={(e) => imageClick(e, 5)}
+                style={{ display: images?.optional_img_5 && "none", cursor: "pointer" }}
+              />
+          }
 
           <img
             src={
