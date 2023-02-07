@@ -332,17 +332,17 @@ function Preference() {
           </div>
         </Link>
       </div>
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      {/* <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select employment type
-      </p>
-      <div>
+      </p> */}
+      {/* <div>
         <Link onClick={clickButton} to="/preference/employ">
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
-                {/* {religion} */}
+                {religion} 
                 {state.employType || employType || "Select employment type"}
               </label>
             </div>
@@ -351,7 +351,7 @@ function Preference() {
             </div>
           </div>
         </Link>
-      </div>
+      </div> */}
       <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select marital status
       </p>
@@ -375,7 +375,7 @@ function Preference() {
         </Link>
       </div>
 
-      <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+      {/* <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select Current Country
       </p>
       <div>
@@ -393,7 +393,7 @@ function Preference() {
             </div>
           </div>
         </Link>
-      </div>
+      </div> */}
     </>
   );
 
