@@ -492,7 +492,7 @@ function Education() {
           <br />
 
           <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
-            Graduate Education
+            Graduate Education (Optional)
           </h4>
           <Link
             onClick={onEducationSelectorClicked}
