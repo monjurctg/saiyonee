@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import QuestionServices from "../../services/questionServices";
 import UserServices from "../../services/userServices";
@@ -10,7 +10,7 @@ const Settings = () => {
   const [profile, setprofile] = useState();
   const [percentage, setpercentage] = useState(0);
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   let percentageCal = (value) => {
     let left = 0;
@@ -48,60 +48,58 @@ const Settings = () => {
 
   return (
     <HomeLayout>
-      {
-        loading ?
-          <div style={{
+      {loading ? (
+        <div
+          style={{
             height: "70vh",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}>
-            <div class="spinner-border text-danger" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
+          <div class="spinner-border text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
-          :
+        </div>
+      ) : (
+        <div
+          className="mt-3"
+          style={{
+            minHeight: "70vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}>
           <div
-            className="mt-3"
+            className="d-flex justify-content-between align-items-center settings"
             style={{
-              minHeight: "70vh",
-              display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              className="d-flex justify-content-between align-items-center settings"
-              style={{
-                flexDirection: "column",
-                // marginTop: "20px",
-              }}
-            >
-              {/* <div className='rounded-img'>
+              // marginTop: "20px",
+            }}>
+            {/* <div className='rounded-img'>
                             <img src={"img/pp.png"} alt="" />
 
                         </div> */}
-              {/* {profile?.profile_img ? ( */}
-              <div
-                className="rounded-img"
-                style={{
-                  background: `conic-gradient(#ffb7ac  ${percentageCal(
-                    percentage
-                  )}deg,#dee2e6 33deg)`,
-                }}
-              >
-                {/* <input type={"range"}/> */}
-                <img src={profile?.profile_img || "img/home.svg"} alt="" />
-              </div>
+            {/* {profile?.profile_img ? ( */}
+            <div
+              className="rounded-img"
+              // style={{
+              //   background: `conic-gradient(#ffb7ac  ${percentageCal(
+              //     percentage
+              //   )}deg,#dee2e6 33deg)`,
+              // }}
+            >
+              {/* <input type={"range"}/> */}
+              <img src={profile?.profile_img || "img/home.svg"} alt="" />
+            </div>
 
-              {/* ) : ( */}
-              {/* <div className="no-image">
+            {/* ) : ( */}
+            {/* <div className="no-image">
                 <p>{profile?.full_name?.charAt(0)}</p>
               </div> */}
-              {/* )} */}
-              <div>
-                <h3 className="mt-2 mb-1">{profile?.display_name}</h3>
-                {/* <p style={{fontSize: 12}}>
+            {/* )} */}
+            <div>
+              <h3 className="mt-2 mb-1">{profile?.display_name}</h3>
+              {/* <p style={{fontSize: 12}}>
                 Selfie varifired:
                 <span
                   style={{
@@ -114,58 +112,55 @@ const Settings = () => {
                   {profile?.selfie_verified == 0 ? "No" : "Yes"}
                 </span>
               </p> */}
-              </div>
+            </div>
 
-              {/* <div className="complete">
+            {/* <div className="complete">
               <p>Complete my profile</p>
             </div> */}
-              <div className="percentage-div">
-                <p
-                  className=""
-                  style={{
-                    margin: 0,
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: "#ffb7ac",
-                  }}
-                >
-                  {percentage}%
-                </p>
-                <p
-                  style={{
-                    fontWight: 600,
-                  }}
-                >
-                  Profile complete
-                </p>
-              </div>
+            <div className="percentage-div">
+              <p
+                className=""
+                style={{
+                  margin: 0,
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "#ffb7ac",
+                }}>
+                {percentage}%
+              </p>
+              <p
+                style={{
+                  fontWight: 600,
+                }}>
+                Profile complete
+              </p>
             </div>
+          </div>
 
-            <div
-              className="buttons justify-content-center"
-              style={{
-                marginTop: 0,
-              }}
-            >
-              <Link to={"/viewProfile"}>
-                <button className="com-btn">View profile</button>
-              </Link>
+          <div
+            className="buttons justify-content-center"
+            style={{
+              marginTop: 0,
+            }}>
+            <Link to={"/viewProfile"}>
+              <button className="com-btn">View profile</button>
+            </Link>
 
-              <Link to={"/edit/profile"}>
-                <button className="edit-btn">Edit profile</button>
-              </Link>
-            </div>
-            <Link to={"/image/gallery"} className="buttons justify-content-center">
-              <button
-                className="edit-btn"
-                style={{ width: "80%", marin: "0 auto", marginBottom: 10 }}
-              >
-                View Gallery
-              </button>
+            <Link to={"/edit/profile"}>
+              <button className="edit-btn">Edit profile</button>
             </Link>
           </div>
-      }
-
+          <Link
+            to={"/image/gallery"}
+            className="buttons justify-content-center">
+            <button
+              className="edit-btn"
+              style={{width: "80%", marin: "0 auto", marginBottom: 10}}>
+              View Gallery
+            </button>
+          </Link>
+        </div>
+      )}
     </HomeLayout>
   );
 };

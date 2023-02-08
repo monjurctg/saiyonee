@@ -12,21 +12,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {set_is_ques} from "../../redux/slices/utilsSlice";
 import QuestionServices from "../../services/questionServices";
 
-
 function Index() {
   const [data, setData] = useState(null);
   const [likeSlide, setLikeSlide] = useState("");
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
-// console.log('gettingUser', gettingUser)
+  // console.log('gettingUser', gettingUser)
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
-    console.log("ressss", res.data?.filtered_users[0]    );
+    console.log("ressss", res.data?.filtered_users[0]);
     if (res.status === 200) {
       setgettingUser(false);
-      setData(res.data?.filtered_users[0] );
+      setData(res.data?.filtered_users[0]);
     }
     // let data = await res.json()
   };
@@ -34,7 +33,6 @@ function Index() {
   if (getToken()) {
     setRouteToken(getToken());
   }
-
 
   const dispatch = useDispatch();
 
@@ -90,9 +88,14 @@ function Index() {
 
   let show = "";
   if (data && !gettingUser) {
-    show = <Swipers getData={getData} data={data}
-    likeSlide={likeSlide} setLikeSlide={setLikeSlide}
-    />;
+    show = (
+      <Swipers
+        getData={getData}
+        data={data}
+        likeSlide={likeSlide}
+        setLikeSlide={setLikeSlide}
+      />
+    );
   } else if (gettingUser) {
     show = (
       <div
@@ -125,20 +128,20 @@ function Index() {
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
       <div className="d-flex justify-content-center">
-      <div
-      className={`body-div inside ${likeSlide}`}
-      style={{
-        backgroundRepeat: "round",
-        width:"90%",
-        backgroundImage: `url(${data?.profile_image_url || nouser})`,
-      }}
-      >
-        {/* <div className="menu">
+        <div
+          className={`body-div inside ${likeSlide}`}
+          style={{
+            // backgroundRepeat: "round",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "90%",
+            backgroundImage: `url(${data?.profile_image_url || nouser})`,
+          }}>
+          {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-        {show}
-      </div>
-
+          {show}
+        </div>
       </div>
       {/* <div className="body-div-lower01"></div>
       <div className="body-div-lower02"></div> */}

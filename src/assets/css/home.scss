@@ -453,18 +453,22 @@
 .settings {
   .rounded-img {
     position: relative;
-    background: #ffffff;
-    border-radius: 50%;
-    width: 177px;
-    height: 163px;
+    // background: #ffffff;
+    // border-radius: 50%;
+    width: 225px !important;
+    height: 300px !important;
     padding: 4px 6px;
     img {
-      width: 95%;
+      object-fit: cover;
+      object-position: center;
+      /* background: #faebd7; */
+      border-radius: 10%;
       height: 95%;
-      position: absolute;
       margin-left: -2px;
-      border-radius: 50%;
-      background: antiquewhite;
+      position: absolute;
+      width: 95%;
+      border: 2px solid #ffb7ac42;
+      // background: antiquewhite;
     }
   }
   .complete {

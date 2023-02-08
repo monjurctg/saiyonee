@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import React, {useState} from "react";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Pagination} from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
 
-function Swipers({ data, getData,
-  likeSlide, setLikeSlide
-
-}) {
+function Swipers({data, getData, likeSlide, setLikeSlide}) {
   console.log("data", data);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
@@ -95,9 +92,10 @@ function Swipers({ data, getData,
     }
   };
   let show = (
-    <div  key={data.id}>
-      <div className={`swiper-slide-active`} data-id={data.id}>
-        {/* <img
+    <Link to={`/${data.id}`}>
+      <div key={data.id}>
+        <div className={`swiper-slide-active`} data-id={data.id}>
+          {/* <img
           src={data?.profile_image_url || nouser}
           alt=""
           style={{
@@ -109,70 +107,85 @@ function Swipers({ data, getData,
             marginLeft: "10%",
           }}
         /> */}
-        <div
-          style={{
-            boxShadow: "rgb(255 183 172) 2px 5px 20px -17px",
-            position: "absolute",
-            bottom: 50,
-            left: "10%",
-            transform: "translateX(-10%)",
-          
-            background: "rgb(255 255 255 / 33%)",
-            padding: 5,
-            borderRadius: 10
-          }}
-        >
           <div
-            className="d-flex align-items-baseline justify-content-start"
             style={{
-              gap: 10,
-            }}
-          >
-            <h3
+              boxShadow: "rgb(255 183 172) 2px 5px 20px -17px",
+              position: "absolute",
+              bottom: 50,
+              left: "10%",
+              transform: "translateX(-10%)",
+
+              background: "rgb(255 255 255 / 33%)",
+              padding: 5,
+              borderRadius: 10,
+            }}>
+            <div
+              className="d-flex align-items-baseline justify-content-start"
               style={{
-                textAlign: "center",
-                marginTop: 10,
-                fontSize: 20,
-                fontFamily: "sans-serif",
-                marginBottom: 0,
-                fontWeight: 700,
-                color: "white"
-              }}
-            >
-              {data?.display_name},
-            </h3>
+                gap: 10,
+              }}>
+              <h3
+                style={{
+                  textAlign: "center",
+                  marginTop: 10,
+                  fontSize: 20,
+                  fontFamily: "sans-serif",
+                  marginBottom: 0,
+                  fontWeight: 700,
+                  color: "white",
+                }}>
+                {data?.display_name},
+              </h3>
+              <p
+                style={{
+                  textAlign: "center",
+                  marginBottom: 0,
+                  fontWeight: 700,
+                  fontSize: 20,
+                  color: "white",
+                }}>
+                {data?.age}
+              </p>
+            </div>
             <p
-              style={{ textAlign: "center", marginBottom: 0, fontWeight: 700,
-              fontSize: 20,
-              color: "white"
-            }}
-            >
-              {data?.age}
-            </p>
-          </div>
-            <p
-            style={{
-              margin: 0,fontSize: 12,color: "white"
-            }}
-            >
+              style={{
+                margin: 0,
+                fontSize: 12,
+                color: "white",
+              }}>
               {data?.current_employment_type}
             </p>
-          <div className="d-flex" style={{ gap: 5 }}>
-            <p style={{ textAlign: "center", fontWeight: 500, margin: 0,fontSize: 12,color: "white" }}>
-              {data?.current_city},
-            </p>
-            <p style={{ textAlign: "center", fontWeight: 500, margin: 0,fontSize: 12,color: "white" }}>
-              {data?.current_country}
-            </p>
+            <div className="d-flex" style={{gap: 5}}>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: 500,
+                  margin: 0,
+                  fontSize: 12,
+                  color: "white",
+                }}>
+                {data?.current_city},
+              </p>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontWeight: 500,
+                  margin: 0,
+                  fontSize: 12,
+                  color: "white",
+                }}>
+                {data?.current_country}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
   return (
     <>
-      <div >
-        <div style={{ width: "100%", height: "100%" }} direction={"vertical"}>
+      <div>
+        <div style={{width: "100%", height: "100%"}} direction={"vertical"}>
           {show}
         </div>
       </div>
@@ -186,8 +199,7 @@ function Swipers({ data, getData,
           </div>{" "}
           <div
             className="item"
-            onClick={() => getActiveSlide(supper_like_submit)}
-          >
+            onClick={() => getActiveSlide(supper_like_submit)}>
             <img src="img/rocket.svg" alt="" />
           </div>{" "}
           <div className="item" onClick={() => getActiveSlide(like)}>

@@ -16,62 +16,62 @@ function ViewProfile() {
     activeData = (
       <div className="information-container">
         <div className="info">
-          <p>Name</p>
+          <p className="fw-bold">Name</p>
           <p>{user?.full_name}</p>
         </div>
 
         <div className="info">
-          <p>Age</p>
+          <p className="fw-bold">Age</p>
           <p>{user?.age}</p>
         </div>
 
         <div className="info">
-          <p>Gender</p>
+          <p className="fw-bold">Gender</p>
           <p>{user?.gender}</p>
         </div>
         <div className="info">
-          <p>Height</p>
+          <p className="fw-bold">Height</p>
           <p>
             {user?.height_feet} Feet {user?.height_inches} inches
           </p>
         </div>
         <div className="info">
-          <p>Weight</p>
+          <p className="fw-bold">Weight</p>
           <p>{user?.weight} kg</p>
         </div>
         <div className="info">
-          <p> Marital Status</p>
+          <p className="fw-bold"> Marital Status</p>
           <p>{user?.marital_status}</p>
         </div>
         <div className="info">
-          <p> Date of Birth</p>
+          <p className="fw-bold"> Date of Birth</p>
           <p>{user?.date_of_birth}</p>
         </div>
 
-        <div className="info">
+        {/* <div className="info">
           <p>Nationality</p>
           <p>Bangladeshi</p>
-        </div>
+        </div> */}
 
-        <div className="info">
+        {/* <div className="info">
           <p>Mother Tongue</p>
           <p>Bangla</p>
-        </div>
+        </div> */}
       </div>
     );
   } else if (active === "Professional") {
     activeData = (
       <div className="information-container">
         <div className="info">
-          <p>Company Name</p>
+          <p className="fw-bold">Company Name</p>
           <p>Teah Hash Code</p>
         </div>
         <div className="info">
-          <p>Position Name</p>
+          <p className="fw-bold">Position Name</p>
           <p>Manager</p>
         </div>
         <div className="info">
-          <p>Address</p>
+          <p className="fw-bold">Address</p>
           <p>Lalmatia</p>
         </div>
         {/* LinkedIn Account Verified */}
@@ -81,15 +81,15 @@ function ViewProfile() {
     activeData = (
       <div className="information-container">
         <div className="info">
-          <p>University</p>
+          <p className="fw-bold">University</p>
           <p>IIUC</p>
         </div>
         <div className="info">
-          <p>Collage</p>
+          <p className="fw-bold">Collage</p>
           <p>Chittagong Collage</p>
         </div>
         <div className="info">
-          <p>School</p>
+          <p className="fw-bold">School</p>
           <p>B.S Ideal</p>
         </div>
       </div>
