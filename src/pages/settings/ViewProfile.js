@@ -117,45 +117,36 @@ function ViewProfile() {
                 </span>
                 <span className="short-description">Age {user?.age}</span>
               </p>
-              <div className="logos" style={{width: "100%"}}>
-                <div className="tab  pt-3 ">
+              <div className="" style={{width: "100%"}}>
+                <div className="tab  pt-3 d-flex justify-content-evenly">
                   <p
-                    className={
-                      active === "personal"
-                        ? "viewProfile-active viewProfile-no-active"
-                        : "viewProfile-no-active"
-                    }
+                    className={active === "personal" && "active"}
                     style={{
                       cursor: "pointer",
-                      width: "45%",
-                      marginLeft: "10px",
+                      color: "#7d8490f0",
+                      fontSize: 12,
                     }}
                     onClick={() => setActive("personal")}>
                     Personal
                   </p>
+
                   <p
-                    className={
-                      active === "Professional"
-                        ? "viewProfile-active viewProfile-no-active"
-                        : "viewProfile-no-active"
-                    }
+                    className={active === "Professional" && "active"}
                     style={{
                       cursor: "pointer",
+                      color: "#7d8490f0",
+                      fontSize: 12,
                     }}
                     onClick={() => setActive("Professional")}>
                     Professional
                   </p>
 
                   <p
-                    className={
-                      active === "educaltion"
-                        ? "viewProfile-active viewProfile-no-active"
-                        : "viewProfile-no-active"
-                    }
+                    className={active === "educational" && "active"}
                     style={{
                       cursor: "pointer",
-                      width: "45%",
-                      marginLeft: "10px",
+                      color: "#7d8490f0",
+                      fontSize: 12,
                     }}
                     onClick={() => setActive("educational")}>
                     Educational
@@ -163,7 +154,9 @@ function ViewProfile() {
                 </div>
               </div>
 
-              <div className="mt-5 mb-5 explore">{activeData}</div>
+              <div className="mt-5 mb-5 explore" style={{height: "auto"}}>
+                {activeData}
+              </div>
 
               {/* <img className="user-img" src="/img/user2.jpeg" /> */}
 
