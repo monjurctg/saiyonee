@@ -41,7 +41,7 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
       if (res.status === 200) {
         toastMsg.success(res.data.message);
         getBoomData();
-        setLikeSlide(" animation-container-right");
+        setLikeSlide("animation-container-right");
         setTimeout(() => {
           getData();
         }, 1000);
@@ -114,7 +114,6 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
               bottom: 50,
               left: "10%",
               transform: "translateX(-10%)",
-
               background: "rgb(255 255 255 / 33%)",
               padding: 5,
               borderRadius: 10,
@@ -136,12 +135,25 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                 }}>
                 {data?.display_name},
               </h3>
+            </div>
+            <div className="d-flex">
               <p
                 style={{
                   textAlign: "center",
                   marginBottom: 0,
                   fontWeight: 700,
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
+                }}>
+                Age
+              </p>
+              <p
+                style={{
+                  textAlign: "center",
+                  marginLeft: 15,
+                  marginBottom: 0,
+                  fontWeight: 700,
+                  fontSize: 16,
                   color: "white",
                 }}>
                 {data?.age}

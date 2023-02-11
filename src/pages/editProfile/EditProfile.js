@@ -22,7 +22,9 @@ const EditProfile = () => {
   const [image, setimage] = useState(false);
   // console.log(user.profile_img);
   const [inputChange, setInputChange] = useState({
-    display_name: displayName ? displayName : user?.display_name,
+    display_name: displayName
+      ? displayName
+      : user?.display_name ?? user?.full_name,
     current_country: country ? country : user?.current_country,
     current_city: city ? city : user?.current_city,
   });
@@ -51,7 +53,7 @@ const EditProfile = () => {
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
       toastMsg.success("Profile edit successfully");
-    }else{
+    } else {
       toastMsg.error(res.data.message);
     }
     // console.log(res, "edit res");

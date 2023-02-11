@@ -66,11 +66,10 @@ UserServices.help = async (data) => {
   return res;
 };
 
-UserServices.completion = async () => {
-  const res = await axios.get(
-    "/form_fields/calculate_profile_completion_precentage"
-  );
-  return res;
+UserServices.completion = () => {
+  return axios
+    .get("/form_fields/calculate_profile_completion_precentage")
+    .then((res) => res.data);
 };
 
 UserServices.message_users = async (data) => {

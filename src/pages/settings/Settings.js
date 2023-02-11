@@ -3,14 +3,25 @@ import {Link, useNavigate} from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import QuestionServices from "../../services/questionServices";
 import UserServices from "../../services/userServices";
+import useSWR from "swr";
 
 import "./../../assets/css/settingsStyle.scss";
+import fetcher from "../../utils/fetchData";
+import {percentageSWR} from "../../services/swrApi";
 
 const Settings = () => {
-  const [profile, setprofile] = useState();
-  const [percentage, setpercentage] = useState(0);
+  // const [profile, setprofile] = useState();
+  // const [percentage, setpercentage] = useState(0);
 
   const [loading, setLoading] = useState(true);
+  const {data: profile, error: profileError} = useSWR("/user", fetcher);
+  const {data: percentage, error: percentageError} = useSWR(
+    `/form_fields/calculate_profile_completion_precentage`,
+    fetcher
+  );
+
+  const isLoading = !profile && !profileError;
+  console.log(profile, isLoading, percentage, "swr");
 
   let percentageCal = (value) => {
     let left = 0;
@@ -29,26 +40,26 @@ const Settings = () => {
     return left;
   };
 
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
-  let userProfile = async () => {
-    let res = await UserServices.UserProfile();
-    let percentageV = await UserServices.completion();
-    // console.log('percentage', percentage)
-    // console.log("res", res.data);
-    if (res.status === 200) {
-      setprofile(res.data);
-      setpercentage(percentageV.data?.percentage_completion);
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    userProfile();
-  }, []);
+  // let userProfile = async () => {
+  //   let res = await UserServices.UserProfile();
+  // let percentageV = await UserServices.completion();
+  //   // console.log('percentage', percentage)
+  //   // console.log("res", res.data);
+  //   if (res.status === 200) {
+  //     setprofile(res.data);
+  //     setpercentage(percentageV.data?.percentage_completion);
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   userProfile();
+  // }, []);
 
   return (
     <HomeLayout>
-      {loading ? (
+      {!profile ? (
         <div
           style={{
             height: "70vh",
@@ -64,7 +75,7 @@ const Settings = () => {
         <div
           className="mt-3"
           style={{
-            minHeight: "70vh",
+            minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -98,7 +109,9 @@ const Settings = () => {
               </div> */}
             {/* )} */}
             <div>
-              <h3 className="mt-2 mb-1">{profile?.display_name}</h3>
+              <h3 className="mt-2 mb-1">
+                {profile?.display_name ?? profile.full_name}
+              </h3>
               {/* <p style={{fontSize: 12}}>
                 Selfie varifired:
                 <span
@@ -126,7 +139,7 @@ const Settings = () => {
                   fontWeight: 600,
                   color: "#ffb7ac",
                 }}>
-                {percentage}%
+                {percentage?.percentage_completion}%
               </p>
               <p
                 style={{
@@ -159,6 +172,7 @@ const Settings = () => {
               View Gallery
             </button>
           </Link>
+          <div style={{height: 100}}></div>
         </div>
       )}
     </HomeLayout>

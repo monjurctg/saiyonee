@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import nouser from "../../assets/imgs/nouser.png";
+import male from "../../assets/imgs/male.png";
+import female from "../../assets/imgs/female.png";
 
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
@@ -85,6 +87,7 @@ function Index() {
   // console.log('data', data)
   // console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
   // console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
+  console.log(data, "data");
 
   let show = "";
   if (data && !gettingUser) {
@@ -135,7 +138,15 @@ function Index() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             width: "90%",
-            backgroundImage: `url(${data?.profile_image_url || nouser})`,
+            backgroundImage: `url(${
+              data?.id && data?.profile_image_url
+                ? data?.profile_image_url
+                : data?.gender === "male"
+                ? male
+                : data?.gender === "female"
+                ? female
+                : nouser
+            })`,
           }}>
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />

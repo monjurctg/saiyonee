@@ -16,8 +16,7 @@ import {setMatchModal} from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
-// import useSWR from 'swr'
-// import fetcher from "../../utils/fetchData";
+
 const MatchedUser = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,6 +25,8 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
+  // import useSWR from 'swr'
+  // import fetcher from "../../utils/fetchData";
   // const {data, error, isLoading} = useSWR("", fetcher);
 
   let modalChange = () => {
@@ -287,7 +288,18 @@ const MatchedUser = () => {
             </p>
           </div>
 
-          {route == "match" && (
+          <div
+            className="buttons"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "30px",
+            }}>
+            <button className="edit-btn">View Gallery</button>
+          </div>
+
+          {/* {route == "match" && (
             <>
               <img className="user-img" src="/img/user2.jpeg" />
 
@@ -378,10 +390,10 @@ const MatchedUser = () => {
                 <button className="edit-btn">Report User</button>
               </div>
             </>
-          )}
+          )} */}
         </div>
       </HomeLayout>
-      <div className={`modal-user ${matchModal ? "transit" : ""}`}>
+      {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />
         <div className="modal-div" style={{opacity: matchModal ? 1 : 0}}>
           <div className=" texts">
@@ -395,7 +407,7 @@ const MatchedUser = () => {
           </button>
           <button className="cancel"> Cancel</button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
