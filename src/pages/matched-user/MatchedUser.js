@@ -16,10 +16,9 @@ import {setMatchModal} from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
-
+// import useSWR from 'swr'
+// import fetcher from "../../utils/fetchData";
 const MatchedUser = () => {
-  let subtitle;
-
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [singleData, setSingleData] = useState({});
@@ -27,9 +26,10 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
+  // const {data, error, isLoading} = useSWR("", fetcher);
+
   let modalChange = () => {
     console.log("matchModal", matchModal);
-
     if (matchModal === true) dispatch(setMatchModal(false));
     else dispatch(setMatchModal(true));
   };
@@ -67,6 +67,20 @@ const MatchedUser = () => {
       setSingleData(response.data);
     }
   }
+
+  async function fetchHomeuser() {
+    setLoading(true);
+
+    let response = await ExploreServices.getSingleHomeuser(id);
+    console.log(response, "response");
+    if (response.status === 200) {
+      setLoading(false);
+      setSingleData(response.data);
+    } else {
+      setLoading(false);
+    }
+  }
+
   let getActiveSlide = async (task, id) => {
     if (task === "like") {
       let res = await UserServices.like_user(
@@ -129,6 +143,8 @@ const MatchedUser = () => {
       fetchMatchUser();
     } else if (route == "like") {
       fetchLikedUser();
+    } else if (route === "home") {
+      fetchHomeuser();
     }
   }, [id, module]);
   let tab = (
@@ -167,8 +183,8 @@ const MatchedUser = () => {
           <div className="content-container">
             <img className="user-img" src={singleData?.app_user?.profile_img} />
             <h2>
-              {singleData?.app_user?.full_name ??
-                singleData?.app_user?.display_name}
+              {singleData?.app_user?.display_name ??
+                singleData?.app_user?.full_name}
             </h2>
 
             <p
@@ -385,3 +401,5 @@ const MatchedUser = () => {
 };
 
 export default MatchedUser;
+
+// import axios from 'axios'

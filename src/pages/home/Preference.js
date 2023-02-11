@@ -399,7 +399,7 @@ function Preference() {
 
   const subData = "";
 
-  return (
+  return          (
     <>
       <RegisterLayout
         onContinueClicked={onContinueClicked}
@@ -430,7 +430,7 @@ function Preference() {
                         {question.filter_display_name}
                       </label>
                     </div>
-
+ 
                     <div className="col-2 d-flex justify-content-end pe-3">
                       <img
                         src="/img/back-icon.svg"
