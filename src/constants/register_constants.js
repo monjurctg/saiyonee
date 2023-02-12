@@ -86,6 +86,7 @@ export const INDUSTRY_TYPES = [
 ];
 
 export const RELIGION_TYPES = [
+  "",
   "Islam",
   "Hinduism",
   "Buddhism",

@@ -87,7 +87,9 @@ function Index() {
   // console.log('data', data)
   // console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
   // console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
-  console.log(data, "data");
+  // console.log(
+  //   data?.profile_image_url ? data?.profile_image_url : data?.gender === "Male"
+  // );
 
   let show = "";
   if (data && !gettingUser) {
@@ -130,20 +132,21 @@ function Index() {
   // console.log("show", show);
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center ">
         <div
           className={`body-div inside ${likeSlide}`}
           style={{
             // backgroundRepeat: "round",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
             width: "90%",
             backgroundImage: `url(${
-              data?.id && data?.profile_image_url
+              data?.profile_image_url
                 ? data?.profile_image_url
-                : data?.gender === "male"
+                : data?.gender.toLowerCase() === "male"
                 ? male
-                : data?.gender === "female"
+                : data?.gender.toLowerCase() === "female"
                 ? female
                 : nouser
             })`,

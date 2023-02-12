@@ -1,29 +1,37 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import useSWR, {useSWRConfig} from "swr";
 import ExploreServices from "../../services/exploreServices";
+import fetcher from "../../utils/fetchData";
 import toastMsg from "../../utils/toastify";
 
 function Shortlisted() {
-  const [sortListData, setSortListData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [sortListData, setSortListData] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  const {mutate} = useSWRConfig();
+  const {
+    data: sortListData,
+    error: shortListError,
+    isLoading,
+  } = useSWR("/shortlist/get_shortlist_users", fetcher);
 
-  let getShortisted = async () => {
-    setLoading(true);
-    let res = await ExploreServices.getShortList();
+  // let getShortisted = async () => {
+  //   setLoading(true);
+  //   let res = await ExploreServices.getShortList();
 
-    if (res.status === 200) {
-      setSortListData(res.data.shortlisted_users);
-      // console.log(res.data);
-      setLoading(false);
-    } else {
-      // console.log(res);
-      // setLoading(false);
-    }
-  };
+  //   if (res.status === 200) {
+  //     setSortListData(res.data.shortlisted_users);
+  //     // console.log(res.data);
+  //     setLoading(false);
+  //   } else {
+  //     // console.log(res);
+  //     // setLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    getShortisted();
-  }, []);
+  // useEffect(() => {
+  //   getShortisted();
+  // }, []);
 
   const removeShortList = async (id) => {
     console.log("click");
@@ -35,20 +43,21 @@ function Shortlisted() {
     if (res.status === 200) {
       toastMsg.success(res.data.message);
 
-      getShortisted();
+      // getShortisted();
+      mutate("/shortlist/get_shortlist_users");
     } else {
       // console.log(res, "res");
     }
   };
   console.log("first", sortListData);
-  let shortList = sortListData.map((sl, index) => {
+  let shortList = (sortListData?.shortlisted_users || []).map((sl, index) => {
     return (
       <div className="explore-img" key={index}>
         <div className="cross" onClick={() => removeShortList(sl?.id)}>
           <img height={15} src="/img/cross.png" alt="" />
         </div>
 
-        <Link to={`/user-info/shortList/${sl?.id}/${sl?.app_user?.id}`}>
+        <Link to={`/user-info/shortList/${sl?.app_user?.id}`}>
           {sl?.app_user.thumbnail_img_url ? (
             <img
               src={sl?.app_user?.thumbnail_img_url}
@@ -95,11 +104,13 @@ function Shortlisted() {
         style={{
           gap: 0,
           justifyContent:
-            sortListData.length <= 1 ? "space-between" : "space-around",
+            sortListData?.shortlisted_users?.length <= 1
+              ? "space-between"
+              : "space-around",
         }}>
-        {loading ? (
+        {isLoading ? (
           <div className="load">Loading...</div>
-        ) : shortList.length > 0 ? (
+        ) : shortList?.length > 0 ? (
           shortList
         ) : (
           <h1 style={{fontSize: 20}}>No data found</h1>

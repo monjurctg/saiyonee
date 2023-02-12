@@ -1,37 +1,50 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import ExploreServices from "../../services/exploreServices";
+import useSWR, {useSWRConfig} from "swr";
+
+import fetcher from "../../utils/fetchData";
 
 function Liked({id}) {
-  const [LikeData, setLikeData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [LikeData, setLikeData] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  let url = `all_liked/get_liked_by_users_list?is_superlike=${id ?? 0}`;
 
-  let getLikeData = async () => {
-    setLoading(true);
-    let res = await ExploreServices.getLikeSupperLike(id ?? 0);
+  const {mutate} = useSWRConfig();
+  const {
+    data: LikeData,
+    error: LikeDataError,
+    isLoading,
+  } = useSWR(url, fetcher);
 
-    if (res.status === 200) {
-      setLikeData(res.data.liked_by_users);
-      // console.log(res.data);
-      setLoading(false);
-    } else {
-      console.log(res);
-      setLoading(false);
-    }
-  };
+  console.log(LikeData, isLoading, "like");
 
-  useEffect(() => {
-    getLikeData();
-  }, []);
+  // let getLikeData = async () => {
+  //   setLoading(true);
+  //   let res = await ExploreServices.getLikeSupperLike(id ?? 0);
+
+  //   if (res.status === 200) {
+  //     setLikeData(res.data.liked_by_users);
+  //     // console.log(res.data);
+  //     setLoading(false);
+  //   } else {
+  //     console.log(res);
+  //     setLoading(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getLikeData();
+  // }, []);
   // console.log('LikeData', LikeData)
-  let LikeList = LikeData.map((ll, index) => {
+
+  let LikeList = (LikeData?.liked_by_users || []).map((ll, index) => {
     return (
       <div className="explore-img" key={index}>
         <div className="cross">
           {" "}
           <img height={15} src="/img/cross.png" alt="" />
         </div>
-        <Link to={`/user-info/like/${ll.id}/${ll?.app_user?.id}`}>
+        <Link to={`/user-info/like/${ll.id}`}>
           {ll?.thumbnail_img ? (
             <img
               src={ll?.thumbnail_img}
@@ -68,11 +81,11 @@ function Liked({id}) {
         style={{
           gap: 0,
           justifyContent:
-            LikeList.length <= 1 ? "space-between" : "space-around",
+            LikeList?.length <= 1 ? "space-between" : "space-around",
         }}>
-        {loading ? (
+        {isLoading ? (
           <div className="load">Loading...</div>
-        ) : LikeList.length > 0 ? (
+        ) : LikeList?.length > 0 ? (
           LikeList
         ) : (
           <h1 style={{fontSize: 20}}>No data found</h1>

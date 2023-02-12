@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
-import useSWR from "swr";
+import useSWR, {useSWRConfig} from "swr";
 import {get_match_list} from "../../services/swrApi";
 import fetcher from "../../utils/fetchData";
 
@@ -11,12 +11,12 @@ function MatchList() {
   // const [matchData, setMatchData] = useState([]);
 
   // const [loading, setLoading] = useState(true);
+  const {mutate} = useSWRConfig();
   const {data: matchData, error: matchError} = useSWR(
     "/match_making/get_match_list",
     fetcher
   );
   const loading = !matchData && !matchError;
-  console.log(matchData, loading, "matchData");
 
   // let getShortisted = async () => {
   //   setLoading(true);
@@ -44,6 +44,7 @@ function MatchList() {
     if (res.status === 200) {
       toastMsg.success("unmatched successfully");
       // getShortisted();
+      mutate("/match_making/get_match_list");
     }
   };
 
@@ -57,7 +58,7 @@ function MatchList() {
             <img height={10} src="/img/cross.png" alt="" />
           </div>
 
-          <Link to={`/user-info/match/${sl?.id}/${sl?.app_user?.id}`}>
+          <Link to={`/user-info/match/${sl?.id}`}>
             {sl?.thumbnail_img_url ? (
               <img
                 src={sl?.thumbnail_img_url}

@@ -92,7 +92,7 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
     }
   };
   let show = (
-    <Link to={`/user-info/home/${data.id}/id`}>
+    <Link to={`/user-info/home/${data.id}`}>
       <div key={data.id}>
         <div className={`swiper-slide-active`} data-id={data.id}>
           {/* <img
@@ -114,7 +114,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
               bottom: 50,
               left: "10%",
               transform: "translateX(-10%)",
-              background: "rgb(255 255 255 / 33%)",
+              // background: "rgb(255 255 255 / 33%)",
+              background: "#a99d9bc2",
               padding: 5,
               borderRadius: 10,
             }}>

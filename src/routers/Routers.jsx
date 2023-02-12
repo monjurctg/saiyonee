@@ -259,10 +259,7 @@ function Routers() {
             <Route path="/boom" element={<Boom />} />
             <Route path="/chat/room/:id" element={<ChatBox />} />
 
-            <Route
-              path="/user-info/:route/:id/:appId"
-              element={<MatchedUser />}
-            />
+            <Route path="/user-info/:route/:id" element={<MatchedUser />} />
 
             <Route path="/message" element={<ChatIndex />} />
           </Route>
