@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import nouser from "../../assets/imgs/nouser.png";
 import male from "../../assets/imgs/male.png";
@@ -7,11 +7,11 @@ import female from "../../assets/imgs/female.png";
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
 
-import {useLocation, useNavigate} from "react-router-dom";
-import {getToken} from "../../utils/functions";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getToken } from "../../utils/functions";
 import setRouteToken from "../../utils/tokenSet";
-import {useDispatch, useSelector} from "react-redux";
-import {set_is_ques} from "../../redux/slices/utilsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { set_is_ques } from "../../redux/slices/utilsSlice";
 import QuestionServices from "../../services/questionServices";
 
 function Index() {
@@ -24,11 +24,14 @@ function Index() {
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
-    console.log("ressss", res.data?.filtered_users[0]);
+    // console.log("ressss", res.data?.filtered_users[0]);
     if (res.status === 200) {
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
     }
+
+    setgettingUser(false);
+
     // let data = await res.json()
   };
 
@@ -40,11 +43,12 @@ function Index() {
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+
   const getCondition = useCallback(async () => {
     const token = getToken();
 
     const res = await QuestionServices.getQuestions();
-    console.log(res, "res from home");
+    // console.log(res, "res from home");
 
     if (res.status === 200) {
       setLoading(false);
@@ -84,12 +88,6 @@ function Index() {
     getBoomData();
   }, []);
 
-  // console.log('data', data)
-  // console.log('filtered_users', data?.filtered_users.length === 0 && !gettingUser )
-  // console.log('data?.filtered_users.length > 0 && !gettingUser', data?.filtered_users.length > 0 && !gettingUser)
-  // console.log(
-  //   data?.profile_image_url ? data?.profile_image_url : data?.gender === "Male"
-  // );
 
   let show = "";
   if (data && !gettingUser) {
@@ -101,7 +99,8 @@ function Index() {
         setLikeSlide={setLikeSlide}
       />
     );
-  } else if (gettingUser) {
+  }
+  else if (gettingUser) {
     show = (
       <div
         className="d-flex justify-content-center align-items-center "
@@ -111,21 +110,32 @@ function Index() {
           color: "black",
           fontWeight: 700,
         }}>
+        {
+          console.log("Loading from condition")
+        }
         Loading data
       </div>
     );
-  } else if (data?.filtered_users?.length === 0 && !gettingUser) {
+  }
+  else if (data?.filtered_users?.length === 0 && !gettingUser) {
     show = (
       <div
-        className="d-flex justify-content-center align-items-center"
         style={{
-          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100%",
           fontSize: 20,
-          color: "black",
           fontWeight: 700,
         }}>
         {/* <img src="img/loading.gif" alt="" /> */}
-        No matched user found
+
+        {
+          console.log("Not Found")
+        }
+        <span>
+          No matched user found
+        </span>
       </div>
     );
   }
@@ -141,15 +151,14 @@ function Index() {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             width: "90%",
-            backgroundImage: `url(${
-              data?.profile_image_url
-                ? data?.profile_image_url
-                : data?.gender.toLowerCase() === "male"
+            backgroundImage: `url(${data?.profile_image_url
+              ? data?.profile_image_url
+              : data?.gender.toLowerCase() === "male"
                 ? male
                 : data?.gender.toLowerCase() === "female"
-                ? female
-                : nouser
-            })`,
+                  ? female
+                  : nouser
+              })`,
           }}>
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
