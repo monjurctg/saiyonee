@@ -89,4 +89,9 @@ UserServices.match_viewed = (data) => {
   return axios.post("/match_making/match_viewed", data);
 };
 
+//sazid
+UserServices.view_gallery = (data) => {
+  return axios.post("/app_users/get_single_user_gallery_images", data);
+}
+
 export default UserServices;
