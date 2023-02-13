@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
-import useSWR, {useSWRConfig} from "swr";
-import {get_match_list} from "../../services/swrApi";
+import useSWR, { useSWRConfig } from "swr";
+import { get_match_list } from "../../services/swrApi";
 import fetcher from "../../utils/fetchData";
 
 function MatchList() {
   // const [matchData, setMatchData] = useState([]);
 
   // const [loading, setLoading] = useState(true);
-  const {mutate} = useSWRConfig();
-  const {data: matchData, error: matchError} = useSWR(
+  const { mutate } = useSWRConfig();
+  const { data: matchData, error: matchError } = useSWR(
     "/match_making/get_match_list",
     fetcher
   );
@@ -79,7 +79,8 @@ function MatchList() {
 
                 color: "#000",
                 textAlign: "center",
-              }}>
+              }}
+            >
               {sl?.display_name}, {sl?.age}
             </h5>
           </Link>
@@ -97,13 +98,23 @@ function MatchList() {
             matchData?.matched_users.length <= 0
               ? "space-between"
               : "space-around",
-        }}>
+        }}
+      >
         {loading ? (
           <div className="load">Loading...</div>
         ) : !loading ? (
           matchList
         ) : (
-          <h1 style={{fontSize: 20}}>No data found</h1>
+          <div
+            style={{
+              minHeight: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h1 style={{ fontSize: 20 }}>No data found</h1>
+          </div>
         )}
       </div>
     </div>

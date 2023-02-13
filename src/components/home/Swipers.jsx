@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Pagination} from "swiper";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
 
-function Swipers({data, getData, likeSlide, setLikeSlide}) {
+function Swipers({ data, getData, likeSlide, setLikeSlide }) {
   console.log("data", data);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
@@ -118,12 +118,14 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
               background: "#a99d9bc2",
               padding: 5,
               borderRadius: 10,
-            }}>
+            }}
+          >
             <div
               className="d-flex align-items-baseline justify-content-start"
               style={{
                 gap: 10,
-              }}>
+              }}
+            >
               <h3
                 style={{
                   textAlign: "center",
@@ -133,7 +135,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                   marginBottom: 0,
                   fontWeight: 700,
                   color: "white",
-                }}>
+                }}
+              >
                 {data?.display_name},
               </h3>
             </div>
@@ -145,7 +148,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                   fontWeight: 700,
                   fontSize: 16,
                   color: "white",
-                }}>
+                }}
+              >
                 Age
               </p>
               <p
@@ -156,7 +160,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                   fontWeight: 700,
                   fontSize: 16,
                   color: "white",
-                }}>
+                }}
+              >
                 {data?.age}
               </p>
             </div>
@@ -165,10 +170,11 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                 margin: 0,
                 fontSize: 12,
                 color: "white",
-              }}>
+              }}
+            >
               {data?.current_employment_type}
             </p>
-            <div className="d-flex" style={{gap: 5}}>
+            <div className="d-flex" style={{ gap: 5 }}>
               <p
                 style={{
                   textAlign: "center",
@@ -176,7 +182,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                   margin: 0,
                   fontSize: 12,
                   color: "white",
-                }}>
+                }}
+              >
                 {data?.current_city},
               </p>
               <p
@@ -186,7 +193,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
                   margin: 0,
                   fontSize: 12,
                   color: "white",
-                }}>
+                }}
+              >
                 {data?.current_country}
               </p>
             </div>
@@ -198,24 +206,46 @@ function Swipers({data, getData, likeSlide, setLikeSlide}) {
   return (
     <>
       <div>
-        <div style={{width: "100%", height: "100%"}} direction={"vertical"}>
+        <div style={{ width: "100%", height: "100%" }} direction={"vertical"}>
           {show}
         </div>
       </div>
       <div className="body-bottom">
         <div className="items">
-          <div className="item" onClick={() => getActiveSlide(dislike)}>
+          <div
+            className="item"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Dislike"
+            onClick={() => getActiveSlide(dislike)}
+          >
             <img src="img/dislike.svg" alt="" />
           </div>
-          <div className="item" onClick={() => getActiveSlide(addShort_list)}>
+          <div
+            className="item"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Short list"
+            onClick={() => getActiveSlide(addShort_list)}
+          >
             <img src="img/task.svg" alt="" />
+          </div>
+          <div
+            className="item"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Super Like"
+            onClick={() => getActiveSlide(supper_like_submit)}
+          >
+            <img src="img/rocket.svg" alt="" />
           </div>{" "}
           <div
             className="item"
-            onClick={() => getActiveSlide(supper_like_submit)}>
-            <img src="img/rocket.svg" alt="" />
-          </div>{" "}
-          <div className="item" onClick={() => getActiveSlide(like)}>
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Like"
+            onClick={() => getActiveSlide(like)}
+          >
             <img src="img/like.svg" alt="" />
           </div>
         </div>
