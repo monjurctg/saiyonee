@@ -126,6 +126,7 @@ const GalleryImage = () => {
                 height: data?.optional_img_1 && "100%",
                 display: images?.optional_img_1 && "none",
                 cursor: "pointer",
+                objectFit: 'contain'
               }}
             />
           ) : (
