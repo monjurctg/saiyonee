@@ -40,22 +40,22 @@ function MatchList() {
     let data = new FormData();
     data.append("match_record_id", id);
     const res = await ExploreServices.unMatchUser(data);
-    console.log(res, "res from unmatch user ");
+    // console.log(res, "res from unmatch user ");
     if (res.status === 200) {
-      toastMsg.success("unmatched successfully");
+      toastMsg.success("Unmatched successfully");
       // getShortisted();
       mutate("/match_making/get_match_list");
     }
   };
 
-  console.log(
-    "matchData?.matched_users.length > 1",
-    matchData?.matched_users.length
-  );
-  console.log(
-    "matchData?.matched_users.length > 1",
-    matchData?.matched_users.length > 1
-  );
+  // console.log(
+  //   "matchData?.matched_users.length > 1",
+  //   matchData?.matched_users.length
+  // );
+  // console.log(
+  //   "matchData?.matched_users.length > 1",
+  //   matchData?.matched_users.length > 1
+  // );
   let matchList =
     !loading &&
     matchData?.matched_users?.map((sl, index) => {
