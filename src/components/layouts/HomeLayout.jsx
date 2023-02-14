@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function HomeLayout({
   children,
@@ -10,14 +10,12 @@ function HomeLayout({
   mTop,
   match,
 }) {
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
   const dispatch = useDispatch();
 
   // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
   // const history = useRouter();
-
-  
 
   const logout = () => {
     // console.log("logout");
@@ -35,7 +33,8 @@ function HomeLayout({
     header = (
       <div
         className="d-flex justify-content-between align-items-center"
-        style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
+        style={{ gap: 55, marginTop: pathname === "home" ? 0 : 20 }}
+      >
         <p
           style={{
             fontWeight: 500,
@@ -43,13 +42,14 @@ function HomeLayout({
             lineHeight: "38px",
             margin: 0,
             color: "#1F2937",
-          }}>
+          }}
+        >
           Inbox
         </p>
         {/* <Link to={"/home"}>
       <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />
     </Link> */}
-        <Link to={"/preference"}>
+        {/* <Link to={"/preference"}>
           <div className="menu-img">
             <img
               src={"img/search.svg"}
@@ -57,19 +57,21 @@ function HomeLayout({
               style={{height: 30, width: 30}}
             />
           </div>
-        </Link>
+        </Link> */}
       </div>
     );
   } else {
     header = (
       <div
         className="d-flex justify-content-between align-items-center"
-        style={{gap: 55, marginTop: pathname === "home" ? 0 : 20}}>
+        style={{ gap: 55, marginTop: pathname === "home" ? 0 : 20 }}
+      >
         {/* {pathname === "/settings" && ( */}
         <div
           onClick={() => navigate(-1)}
           // TODO ROUTES.tutorial
-          className="image-saturate position-relative ">
+          className="image-saturate position-relative "
+        >
           <img src="/img/back.svg" alt="next" className="img-fluid" />
           {/* <div className="position-absolute position-fill d-flex align-items-center justify-content-center">
             <img
@@ -95,14 +97,14 @@ function HomeLayout({
         {pathname === "/home" ? (
           <>
             <Link to={"/home"}>
-              <img src={"img/logo.svg"} alt="logo" style={{height: 30}} />
+              <img src={"img/logo.svg"} alt="logo" style={{ height: 30 }} />
             </Link>
             <Link to={"/preference"}>
               <div className="menu-img">
                 <img
                   src={"img/menu.svg"}
                   alt="logo"
-                  style={{height: 30, width: 30}}
+                  style={{ height: 30, width: 30 }}
                 />
               </div>
             </Link>
@@ -122,14 +124,15 @@ function HomeLayout({
                 marginTop: "10px",
                 cursor: "pointer",
                 border: "1px solid #ffb7ac",
-              }}>
+              }}
+            >
               <img
                 className="me-2"
-                style={{margin: "0 auto", height: "25px"}}
+                style={{ margin: "0 auto", height: "25px" }}
                 src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
                 alt=""
               />
-              <span style={{fontWeight: "bold"}}>Message</span>
+              <span style={{ fontWeight: "bold" }}>Message</span>
             </p>
           </Link>
         ) : (
@@ -146,14 +149,15 @@ function HomeLayout({
 
               cursor: "pointer",
               border: "1px solid #ffb7ac",
-            }}>
+            }}
+          >
             <img
               className="me-2"
-              style={{margin: "0 auto", height: "25px"}}
+              style={{ margin: "0 auto", height: "25px" }}
               src="https://cdn1.iconfinder.com/data/icons/heroicons-ui/24/logout-512.png"
               alt=""
             />
-            <span style={{fontWeight: "bold"}}>Logout</span>
+            <span style={{ fontWeight: "bold" }}>Logout</span>
           </p>
         )}
       </div>
@@ -169,7 +173,8 @@ function HomeLayout({
         height: "100vh",
 
         // "#F9FAFB"
-      }}>
+      }}
+    >
       <div
         className="logos px-4"
         style={{
@@ -178,47 +183,52 @@ function HomeLayout({
           top: pathname === "home" ? 20 : 0,
           borderTopRightRadius: pathname === "home" ? 0 : 35,
           borderTopLeftRadius: pathname === "home" ? 0 : 35,
-        }}>
+        }}
+      >
         {header}
         {pathname === "/explore" && (
           <div className="tab  pt-3 d-flex justify-content-evenly">
             <p
               className={activeExplore === "?Match-list" && "active"}
-              style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-              onClick={() => {setactiveExplore("?Match-list")
-              navigate('/explore?Match-list')
-              
-              }}>
+              style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
+              onClick={() => {
+                setactiveExplore("?Match-list");
+                navigate("/explore?Match-list");
+              }}
+            >
               Matched list
             </p>
 
             <p
               className={activeExplore === "?Shortlist" && "active"}
-              style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-              onClick={() => {setactiveExplore("?Shortlist")
-              navigate('/explore?Shortlist') 
-              
-              }}>
+              style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
+              onClick={() => {
+                setactiveExplore("?Shortlist");
+                navigate("/explore?Shortlist");
+              }}
+            >
               Shortlist
             </p>
             {show_liked_list === "true" ? (
               <p
                 className={activeExplore === "?Liked" && "active"}
-                style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
+                style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
                 onClick={() => {
-                  setactiveExplore("?Liked")
-                navigate('/explore?Liked')
-              }}>
+                  setactiveExplore("?Liked");
+                  navigate("/explore?Liked");
+                }}
+              >
                 Liked you
               </p>
             ) : (
               <p
                 className={activeExplore === "?Liked" && "active"}
-                style={{cursor: "pointer"}}>
-                <span style={{color: "#7d849075", fontSize: 11}}>
+                style={{ cursor: "pointer" }}
+              >
+                <span style={{ color: "#7d849075", fontSize: 11 }}>
                   Liked you
                 </span>
-                <span style={{paddingLeft: "4px"}}>
+                <span style={{ paddingLeft: "4px" }}>
                   <img src="/img/crown2.png" height={20} alt="" />
                 </span>
               </p>
@@ -226,11 +236,12 @@ function HomeLayout({
             {show_supper_liked_list === "true" ? (
               <p
                 className={activeExplore === "?SuperLiked" && "active"}
-                style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-                onClick={() => {setactiveExplore("?SuperLiked")
-                navigate('/explore?SuperLiked')
-                
-                }}>
+                style={{ cursor: "pointer", color: "#7d8490f0", fontSize: 11 }}
+                onClick={() => {
+                  setactiveExplore("?SuperLiked");
+                  navigate("/explore?SuperLiked");
+                }}
+              >
                 Superliked you
               </p>
             ) : (
@@ -238,11 +249,12 @@ function HomeLayout({
                 className={activeExplore === "?SuperLiked" && "active"}
                 style={{
                   cursor: "pointer",
-                }}>
-                <span style={{color: "#7d849075", fontSize: 11}}>
+                }}
+              >
+                <span style={{ color: "#7d849075", fontSize: 11 }}>
                   Superliked you
                 </span>
-                <span style={{paddingLeft: "4px"}}>
+                <span style={{ paddingLeft: "4px" }}>
                   <img src="/img/crown2.png" height={20} alt="" />
                 </span>
               </p>
@@ -250,43 +262,48 @@ function HomeLayout({
           </div>
         )}
       </div>
-      <div className="" style={{marginTop: mTop || 70}}>
+      <div className="" style={{ marginTop: mTop || 70 }}>
         {children}
       </div>
       <div
         className="footer rounded-bottom mx-auto max-width-mobile"
-        style={{position: "fixed", bottom: "0"}}>
+        style={{ position: "fixed", bottom: "0" }}
+      >
         <div className="d-flex justify-content-around pt-3 align-items-baseline">
-          <Link to={"/home"} style={{cursor: "pointer"}}>
+          <Link to={"/home"} style={{ cursor: "pointer" }}>
             <div
-              className={`text-center ${pathname === "/home" ? "active" : ""}`}>
+              className={`text-center ${pathname === "/home" ? "active" : ""}`}
+            >
               <img src="/img/home.svg" alt="" />
               <p>Home</p>
             </div>
           </Link>
-          <Link to={"/explore"} style={{cursor: "pointer"}}>
+          <Link to={"/explore"} style={{ cursor: "pointer" }}>
             <div
               className={`text-center ${
                 pathname === "/explore" ? "active" : ""
-              }`}>
+              }`}
+            >
               <img src="/img/glasses.svg" alt="" />
               <p>Explore</p>
             </div>
           </Link>
-          <Link to={"/message"} style={{cursor: "pointer"}}>
+          <Link to={"/message"} style={{ cursor: "pointer" }}>
             <div
               className={`text-center ${
                 pathname === "/message" ? "active" : ""
-              }`}>
+              }`}
+            >
               <img src="/img/message.svg" alt="" />
               <p>Message</p>
             </div>
           </Link>
-          <Link to={"/settings"} style={{cursor: "pointer"}}>
+          <Link to={"/settings"} style={{ cursor: "pointer" }}>
             <div
               className={`text-center ${
                 pathname === "/settings" ? "active" : ""
-              }`}>
+              }`}
+            >
               <img src="/img/settings.svg" alt="" />
               <p>Profile</p>
             </div>

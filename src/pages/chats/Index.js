@@ -6,6 +6,7 @@ import UserServices from "../../services/userServices";
 const ChatIndex = () => {
   const [data, setdata] = useState();
 
+
   let getInbox = async () => {
     const res = await UserServices.getInbox();
     console.log("res ,]msg", res.data?.matched_users);
@@ -21,7 +22,7 @@ const ChatIndex = () => {
     div = data?.map((item) => (
       <Link to={`/chat/room/${item?.latest_live_chat_message?.match_id}`}>
         <div className="chat_body mb-4" style={{
-          margin:"auto",
+          margin: "auto",
         }}>
           <div className="d-flex justify-content-evenly align-items-center">
             {item?.latest_live_chat_message?.from_user?.thumbnail_img ? (
