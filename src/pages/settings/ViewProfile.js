@@ -103,19 +103,21 @@ function ViewProfile() {
           <div className="mt-3">
             <div className="content-container">
               <img className="user-img" src={user?.profile_img} />
-              <h2>{user?.display_name ?? user?.full_name}</h2>
+              <h2 style={{
+                marginBottom: 0,
+              }}>{user?.display_name ?? user?.full_name}</h2>
 
               <p
                 style={{
                   textAlign: "Center",
                 }}>
-                <span className="short-description">
-                  {user?.current_employment_type}
+                <span className="short-description" style={{marginRight:0}}>
+                  {user?.current_employment_type},
                 </span>
                 <span className="short-description">
                   {user?.current_city},BD
                 </span>
-                <span className="short-description">Age {user?.age}</span>
+                {/* <span className="short-description">Age {user?.age}</span> */}
               </p>
               <div className="" style={{width: "100%"}}>
                 <div className="tab  pt-3 d-flex justify-content-evenly">
