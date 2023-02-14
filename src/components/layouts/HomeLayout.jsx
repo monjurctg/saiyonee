@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
 function HomeLayout({
@@ -10,6 +11,7 @@ function HomeLayout({
   match,
 }) {
   let {pathname} = useLocation();
+  const dispatch = useDispatch();
 
   // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
@@ -17,6 +19,8 @@ function HomeLayout({
   const logout = () => {
     // console.log("logout");
     localStorage.clear();
+    window.location.reload();
+
     navigate("/get-start");
   };
 

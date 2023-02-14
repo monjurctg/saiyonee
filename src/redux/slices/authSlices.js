@@ -226,6 +226,7 @@ export const {
   setEducation4,
   setDegree1,
   setDegree2,
+  logout,
   setCurrentEmplyType,
   setDegree3,
   setDegree4,

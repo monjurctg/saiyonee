@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import nouser from "../../assets/imgs/nouser.png";
 import male from "../../assets/imgs/male.png";
@@ -7,12 +7,15 @@ import female from "../../assets/imgs/female.png";
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
 
-import { useLocation, useNavigate } from "react-router-dom";
-import { getToken } from "../../utils/functions";
+import {useLocation, useNavigate} from "react-router-dom";
+import {getToken} from "../../utils/functions";
 import setRouteToken from "../../utils/tokenSet";
-import { useDispatch, useSelector } from "react-redux";
-import { set_is_ques } from "../../redux/slices/utilsSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {set_is_ques} from "../../redux/slices/utilsSlice";
 import QuestionServices from "../../services/questionServices";
+import {setCurrentUser} from "../../redux/slices/authSlices";
+import PreferenceServices from "../../services/preferenceServices";
+import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
 
 function Index() {
   const [data, setData] = useState(null);
@@ -43,6 +46,30 @@ function Index() {
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+
+  const fetchCurrentUser = async () => {
+    const res = await UserServices.UserProfile();
+    if (res.status === 200) {
+      dispatch(setCurrentUser(res.data));
+      console.log(res.data);
+    }
+  };
+  const fetchPreviousPreference = useCallback(async () => {
+    const res = await PreferenceServices.getPreferenceData();
+    if (res.status === 200) {
+      dispatch(setPreviousPreference(res.data.profile_preferences));
+    } else {
+      console.log(res);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      fetchPreviousPreference();
+      fetchCurrentUser();
+    }
+  }, []);
 
   const getCondition = useCallback(async () => {
     const token = getToken();
@@ -88,7 +115,6 @@ function Index() {
     getBoomData();
   }, []);
 
-
   let show = "";
   if (data && !gettingUser) {
     show = (
@@ -99,8 +125,7 @@ function Index() {
         setLikeSlide={setLikeSlide}
       />
     );
-  }
-  else if (gettingUser) {
+  } else if (gettingUser) {
     show = (
       <div
         className="d-flex justify-content-center align-items-center "
@@ -110,14 +135,11 @@ function Index() {
           color: "black",
           fontWeight: 700,
         }}>
-        {
-          console.log("Loading from condition")
-        }
+        {console.log("Loading from condition")}
         Loading data
       </div>
     );
-  }
-  else if (data?.filtered_users?.length === 0 && !gettingUser) {
+  } else if (data?.filtered_users?.length === 0 && !gettingUser) {
     show = (
       <div
         style={{
@@ -130,12 +152,8 @@ function Index() {
         }}>
         {/* <img src="img/loading.gif" alt="" /> */}
 
-        {
-          console.log("Not Found")
-        }
-        <span>
-          No matched user found
-        </span>
+        {console.log("Not Found")}
+        <span>No matched user found</span>
       </div>
     );
   }
@@ -151,14 +169,15 @@ function Index() {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             width: "90%",
-            backgroundImage: `url(${data?.profile_image_url
-              ? data?.profile_image_url
-              : data?.gender.toLowerCase() === "male"
+            backgroundImage: `url(${
+              data?.profile_image_url
+                ? data?.profile_image_url
+                : data?.gender.toLowerCase() === "male"
                 ? male
                 : data?.gender.toLowerCase() === "female"
-                  ? female
-                  : nouser
-              })`,
+                ? female
+                : nouser
+            })`,
           }}>
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />

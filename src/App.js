@@ -41,13 +41,13 @@ function App() {
     }
   }, [dispatch]);
 
-  const fetchCurrentUser = useCallback(async () => {
+  const fetchCurrentUser = async () => {
     const res = await UserServices.UserProfile();
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
       console.log(res.data);
     }
-  }, [dispatch]);
+  };
 
   useEffect(() => {
     const token = getToken();
@@ -55,7 +55,7 @@ function App() {
       fetchPreviousPreference();
       fetchCurrentUser();
     }
-  }, [fetchCurrentUser, fetchPreviousPreference]);
+  }, []);
 
   return (
     <>
