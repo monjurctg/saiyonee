@@ -31,6 +31,10 @@ const MatchedUser = () => {
   // import useSWR from 'swr'
   // import fetcher from "../../utils/fetchData";
   // const {data, error, isLoading} = useSWR("", fetcher);
+  const {group_1, group_2, group_3, group_4} =
+    singleData?.structured_app_user_info?.app_user_detail;
+
+  console.log(group_1?.data[0], group_2, "group_1 group_2");
 
   let modalChange = () => {
     console.log("matchModal", matchModal);
@@ -186,223 +190,255 @@ const MatchedUser = () => {
       <button className="report">Report User</button>
     </div>
   );
+
+  let userInfo = (
+    <div className="explore_viewProfile text-center">
+      <div className="content-container">
+        <img
+          className="user-img"
+          src={singleData?.structured_app_user_info?.profile_img}
+        />
+        <h2>
+          {
+            singleData?.structured_app_user_info?.app_user_detail?.group_1
+              ?.data[0]["Name"]
+          }
+        </h2>
+
+        <p
+          style={{
+            textAlign: "Center",
+          }}>
+          <span className="short-description">
+            {singleData?.app_user?.designation}
+          </span>
+          <span className="short-description">
+            {singleData?.app_user?.current_city},
+            {singleData?.app_user?.current_country},
+          </span>
+          <span className="short-description">
+            Age {singleData?.app_user?.age}
+          </span>
+        </p>
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          Personal Details
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          Name :{" "}
+          {singleData?.app_user?.full_name ??
+            singleData?.app_user?.display_name}
+          <br />
+          Age :{singleData?.app_user?.age}
+          <br />
+          {/* Gender :{singleData?.app_user?.gender} */}
+          <br />
+          Height :{singleData?.app_user?.height_feet} feet{" "}
+          {singleData?.app_user?.height_inches} inches
+          <br />
+          Weight {singleData?.app_user?.weight}
+          <br />
+          Marital Status :{singleData?.app_user?.marital_status}
+          <br />
+          Marital Timing
+          <br />
+          Date of Birth :{singleData?.app_user?.date_of_birth}
+          {/* <br />
+      Blood group
+      <br />
+      Nationality
+      <br />
+      Mother Tongue
+      <br />
+      Physical Status
+    */}
+        </p>
+
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          Professional Details
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          Company Name
+          <br />
+          Position : Manager
+          <br />
+          Address : Lalmatia
+          <br />
+          LinkedIn Account Verified
+        </p>
+
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          Educational qualification
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          University :{singleData?.app_user?.education3_institution}
+          <br />
+          College : {singleData?.app_user?.education2_institution}
+          <br />
+          School :{singleData?.app_user?.education1_institution}
+        </p>
+      </div>
+
+      <div
+        className="buttons"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "30px",
+        }}>
+        <button className="edit-btn" onClick={viewGallery}>
+          View Gallery
+        </button>
+      </div>
+    </div>
+  );
+  let userInfo2 = (
+    <div className="explore_viewProfile text-center">
+      <div className="content-container">
+        <img className="user-img" src={singleData?.app_user?.profile_img} />
+        <h2 style={{fontSize: 25}}>{group_1?.data[0].split(":")[1]}</h2>
+
+        <p
+          style={{
+            textAlign: "Center",
+          }}>
+          {/* <span className="short-description">
+            {singleData?.app_user?.designation}
+          </span>
+          <span className="short-description">
+            {singleData?.app_user?.current_city},
+            {singleData?.app_user?.current_country},
+          </span> */}
+          <span className="short-description">
+            Age {group_1?.data[2].split(":")[1]}
+          </span>
+        </p>
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          {group_1?.title}
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          {group_1?.data?.map((info, index) => (
+            <p style={{color: "#000"}}>
+              {info} <br />
+            </p>
+          ))}
+        </p>
+
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          {group_2?.title}
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          {group_2?.data?.map((info, index) => (
+            <p style={{color: "#000"}}>
+              {info} <br />
+            </p>
+          ))}
+        </p>
+
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          {group_3?.title}
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          {group_3?.data?.map((info, index) => (
+            <p style={{color: "#000"}}>
+              {info} <br />
+            </p>
+          ))}
+        </p>
+
+        <h4
+          style={{
+            paddingLeft: 20,
+          }}>
+          {group_4?.title}
+        </h4>
+
+        <p
+          style={{
+            color: "#000",
+
+            fontSize: "14px",
+          }}>
+          {group_4?.data?.map((info, index) => (
+            <p style={{color: "#000"}}>
+              {info} <br />
+            </p>
+          ))}
+        </p>
+      </div>
+
+      <div
+        className="buttons"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "30px",
+        }}>
+        <button className="edit-btn" onClick={viewGallery}>
+          View Gallery
+        </button>
+      </div>
+    </div>
+  );
   return (
     <>
       <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
-        <div className="explore_viewProfile text-center">
-          <div className="content-container">
-            <img className="user-img" src={singleData?.app_user?.profile_img} />
-            <h2>
-              {singleData?.app_user?.display_name ??
-                singleData?.app_user?.full_name}
-            </h2>
-
-            <p
-              style={{
-                textAlign: "Center",
-              }}>
-              <span className="short-description">
-                {singleData?.app_user?.designation}
-              </span>
-              <span className="short-description">
-                {singleData?.app_user?.current_city},
-                {singleData?.app_user?.current_country},
-              </span>
-              <span className="short-description">
-                Age {singleData?.app_user?.age}
-              </span>
-            </p>
-            <h4
-              style={{
-                paddingLeft: 20,
-              }}>
-              Personal Details
-            </h4>
-
-            <p
-              style={{
-                color: "#000",
-
-                fontSize: "14px",
-              }}>
-              Name :{" "}
-              {singleData?.app_user?.full_name ??
-                singleData?.app_user?.display_name}
-              <br />
-              Age :{singleData?.app_user?.age}
-              <br />
-              {/* Gender :{singleData?.app_user?.gender} */}
-              <br />
-              Height :{singleData?.app_user?.height_feet} feet{" "}
-              {singleData?.app_user?.height_inches} inches
-              <br />
-              Weight {singleData?.app_user?.weight}
-              <br />
-              Marital Status :{singleData?.app_user?.marital_status}
-              <br />
-              Marital Timing
-              <br />
-              Date of Birth :{singleData?.app_user?.date_of_birth}
-              {/* <br />
-              Blood group
-              <br />
-              Nationality
-              <br />
-              Mother Tongue
-              <br />
-              Physical Status
-            */}
-            </p>
-
-            <h4
-              style={{
-                paddingLeft: 20,
-              }}>
-              Professional Details
-            </h4>
-
-            <p
-              style={{
-                color: "#000",
-
-                fontSize: "14px",
-              }}>
-              Company Name
-              <br />
-              Position : Manager
-              <br />
-              Address : Lalmatia
-              <br />
-              LinkedIn Account Verified
-            </p>
-
-            <h4
-              style={{
-                paddingLeft: 20,
-              }}>
-              Educational qualification
-            </h4>
-
-            <p
-              style={{
-                color: "#000",
-
-                fontSize: "14px",
-              }}>
-              University :{singleData?.app_user?.education3_institution}
-              <br />
-              College : {singleData?.app_user?.education2_institution}
-              <br />
-              School :{singleData?.app_user?.education1_institution}
-            </p>
-          </div>
-
-          <div
-            className="buttons"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "30px",
-            }}>
-            <button className="edit-btn" onClick={viewGallery}>
-              View Gallery
-            </button>
-          </div>
-
-          {/* {route == "match" && (
-            <>
-              <img className="user-img" src="/img/user2.jpeg" />
-
-              <div
-                style={{
-                  width: "53px",
-                  background: "#D32C2C",
-                  margin: "0 auto",
-                  marginTop: "20px",
-                  height: 10,
-                }}
-              />
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginLeft: "-30px",
-                  alignItems: "center",
-                }}>
-                <img
-                  style={{
-                    height: "55px",
-                    width: "56px",
-                    marginTop: "10px",
-                    marginLeft: "10px",
-                    borderRadius: "20px",
-                  }}
-                  className="user-img"
-                  src="/img/user2.jpeg"
-                />
-                <img
-                  style={{
-                    height: "55px",
-                    width: "56px",
-                    marginTop: "10px",
-                    marginLeft: "10px",
-                    borderRadius: "20px",
-                  }}
-                  className="user-img"
-                  src="/img/user2.jpeg"
-                />
-                <img
-                  style={{
-                    height: "55px",
-                    width: "56px",
-                    marginTop: "10px",
-                    marginLeft: "10px",
-                    borderRadius: "20px",
-                  }}
-                  className="user-img"
-                  src="/img/user2.jpeg"
-                />
-                <img
-                  style={{
-                    height: "55px",
-                    width: "56px",
-                    marginTop: "10px",
-                    marginLeft: "10px",
-                    borderRadius: "20px",
-                  }}
-                  className="user-img"
-                  src="/img/user2.jpeg"
-                />
-              </div>
-
-              <div
-                className="buttons"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "30px",
-                }}>
-                <button className="edit-btn" onClick={modalChange}>
-                  Unmatch User
-                </button>
-              </div>
-
-              <div
-                className="buttons"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "30px",
-                }}>
-                <button className="edit-btn">Report User</button>
-              </div>
-            </>
-          )} */}
-        </div>
+        {route !== ("home" || "shortlist") ? userInfo : userInfo2}
       </HomeLayout>
       {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />
