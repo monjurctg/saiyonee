@@ -1,5 +1,6 @@
 .logos {
   z-index: 9999;
+
   .menu-img {
     width: 44px;
     height: 44px;
@@ -8,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     .img {
       width: 24px;
       height: 24px;
@@ -22,6 +24,7 @@
   margin-top: 20px;
   position: relative;
   margin-bottom: 45px;
+
   .menu {
     z-index: 999;
     width: 52px;
@@ -35,11 +38,13 @@
     background: #f9fafb;
     border: 2px solid #ffffff;
     border-radius: 100px;
+
     img {
       width: 23.33px;
       height: 21px;
     }
   }
+
   .inside {
     width: 100%;
     height: 64vh;
@@ -47,15 +52,18 @@
     box-shadow: 1px 1px 20px -12px #dee2e6;
     border-radius: 15px;
   }
+
   .body-bottom {
     position: absolute;
     bottom: -20px;
     width: 90%;
     left: 20px;
     z-index: 9999;
+
     .items {
       display: flex;
       justify-content: space-between;
+
       .item {
         width: 52px;
         display: flex;
@@ -67,6 +75,7 @@
         cursor: pointer;
         box-shadow: 0px 4px 21px rgb(0 0 0 / 8%);
         border-radius: 100px;
+
         img {
           width: 25px;
           height: 25px;
@@ -75,6 +84,7 @@
     }
   }
 }
+
 .body-div-lower01 {
   background: #ffb7ac;
   opacity: 0.6;
@@ -83,6 +93,7 @@
   height: 30px;
   margin: 0px 24px;
 }
+
 .body-div-lower02 {
   background: #ffb7ac;
   opacity: 0.3;
@@ -98,11 +109,13 @@
   margin-bottom: 30px;
   overflow: auto;
   border-radius: 24px;
+
   img {
     width: 294px;
     height: 230px;
     border-radius: 24px;
   }
+
   h1 {
     font-family: "Inter";
     font-style: normal;
@@ -114,6 +127,7 @@
     text-align: left;
     color: #1f2937;
   }
+
   p {
     font-family: "Inter";
     font-style: normal;
@@ -152,14 +166,17 @@
 
     text-align: center;
   }
+
   .active {
     background: #ffb7ac;
     border-radius: 17px;
-    padding: 8px 11px;
+    // padding: 8px 11px;
+    padding-top: 8px;
     height: 60px;
     width: 63px;
     color: black;
   }
+
   border-top: 2px solid #ececec;
   //   position: fixed;
   width: 100%;
@@ -206,6 +223,7 @@
 
     color: #6b7280;
   }
+
   .image-upload {
     display: flex;
     flex-direction: column;
@@ -223,6 +241,7 @@
     border: 1.5px dashed #ffb7ac;
     border-radius: 24px;
   }
+
   .image-round {
     width: 220px;
     height: 220px;
@@ -231,6 +250,7 @@
     border-radius: 50%;
     border: 4px dashed #ffb7ac;
   }
+
   .instruction {
     h4 {
       font-family: "Inter";
@@ -244,6 +264,7 @@
 
       color: #1f2937;
     }
+
     p {
       text-align: start;
       font-size: 12px;
@@ -315,6 +336,7 @@
     // padding: 5px;
     height: 200px;
     width: 45%;
+
     img {
       width: 100%;
       height: 100%;
@@ -322,6 +344,7 @@
       border: none;
       border-radius: 10px;
     }
+
     .no-image {
       width: 100%;
       height: 150px;
@@ -334,6 +357,7 @@
       color: #808080;
       margin: 0;
     }
+
     .no-image-h5 {
       bottom: 16px;
       left: 10px;
@@ -344,6 +368,7 @@
       position: absolute;
       color: #000;
     }
+
     .cross {
       position: absolute;
       top: 7px;
@@ -360,6 +385,7 @@
       color: white;
       border-radius: 50%;
     }
+
     border-radius: 10px;
     margin-top: 40px;
     box-shadow: 1px 1px 1px 1px #dee2e6;
@@ -375,11 +401,13 @@
 
   // z-index: 999999;
 }
+
 @keyframes todo {
   0% {
     left: 0px;
     top: 0px;
   }
+
   100% {
     left: 500px;
     top: 0px;
@@ -396,11 +424,13 @@
 
   // z-index: 999999;
 }
+
 @keyframes todo2 {
   0% {
     right: 0px;
     top: 0px;
   }
+
   100% {
     right: 500px;
     top: 0px;
@@ -410,14 +440,17 @@
 
 .logos {
   width: 420px !important;
+
   ::-webkit-scrollbar {
     width: 0px;
     display: none;
   }
+
   @media screen and (max-width: 500px) {
     width: 100% !important;
   }
 }
+
 .tab {
   justify-content: space-between;
   overflow: auto;
@@ -442,6 +475,7 @@
     margin: 0 auto;
     border-right: none;
     text-align: center;
+
     &.active {
       border-bottom: 3px solid #ffb7ac;
       color: #1f2937;
@@ -458,6 +492,7 @@
     width: 225px !important;
     height: 300px !important;
     padding: 4px 6px;
+
     img {
       object-fit: cover;
       object-position: center;
@@ -471,6 +506,7 @@
       // background: antiquewhite;
     }
   }
+
   .complete {
     display: flex;
     flex-direction: row;
@@ -483,6 +519,7 @@
 
     background: rgba(40, 181, 111, 0.1);
     border-radius: 53px;
+
     p {
       font-family: "Inter";
       font-style: normal;
@@ -515,6 +552,7 @@
   display: flex;
   margin-top: 25px;
   gap: 25px;
+
   .com-btn {
     padding: 19px 30px;
     background: #ffffff;
@@ -528,6 +566,7 @@
     line-height: 19px;
     color: #1f2937;
   }
+
   .edit-btn {
     font-family: "Inter";
     font-style: normal;
@@ -550,6 +589,7 @@
     border-radius: 100px;
   }
 }
+
 .modal-container {
   width: 100%;
   opacity: 0.5;
@@ -562,6 +602,7 @@
     bottom: 100px;
 
     background: #000;
+
     .cross {
       position: relative;
       color: white;
@@ -569,6 +610,7 @@
     }
   }
 }
+
 .card-title {
   font-size: 25px !important;
   font-family: "Inter" !important;
@@ -627,6 +669,7 @@
     background: aliceblue;
     margin-top: 10px;
   }
+
   .name {
     font-weight: 500;
     font-size: 16px;
@@ -634,6 +677,7 @@
     color: #1f2937;
     margin-bottom: 5px;
   }
+
   .message {
     margin: 0;
     font-weight: 500;
@@ -645,6 +689,7 @@
 
     color: #6b7280;
   }
+
   .day {
     font-size: 14px;
     line-height: 17px;
