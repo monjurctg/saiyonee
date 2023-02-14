@@ -28,7 +28,7 @@ function Index() {
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
-    // console.log("ressss", res.data?.filtered_users[0]);
+
     if (res.status === 200) {
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
@@ -126,29 +126,66 @@ function Index() {
 
         padding: 20,
       }}>
-      <div style={{marginTop: "100px"}}>
-        <p style={{fontWeight: "bold"}}>
-          No profiles available based on your filter. To see more profiles,
-          please change your filter
-        </p>
-        <p>
-          আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও
-          প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন
-        </p>
-      </div>
-      <Link to={"/preference"}>
-        <a
-          href="#"
-          style={{
-            color: "black",
-            border: "1px solid gray",
-            // textDecoration: "underline",
-            padding: 10,
-            borderRadius: 10,
-          }}>
-          Change filter
-        </a>
-      </Link>
+      {isLimited ? (
+        <div style={{marginTop: "80px"}}>
+          <p style={{fontWeight: "bold"}}>
+            {" "}
+            You have reached daily free profile view limit. To view 5 profiles
+            daily, please upgrade to "Premium Membership". You can purchase
+            "Premium Membership" by calling 01327230288
+          </p>
+
+          <p>
+            আজকের মত ফ্রি বায়োডাটা লিমিট শেষ। অনুগ্রহ করে আগামীকাল আবার লগইন
+            করুন। প্রতিদিন ৫ টি বায়োডাটা দেখার জন্য আমাদের "প্রিমিয়াম মেম্বারশিপ
+            নিতে পারেন। "প্রিমিয়াম মেম্বারশিপ নেয়ার জন্য কল করুন ০১৩২৭২৩০২৮৮
+          </p>
+          <div
+            onClick={() => setIslimited(false)}
+            style={{
+              color: "black",
+              border: "1px solid gray",
+              // textDecoration: "underline",
+              width: "60%",
+              // padding: 10,
+              background: "#ffb7ac",
+              cursor: "pointer",
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 10,
+            }}>
+            <p style={{textAlign: "center", paddingTop: "12px"}}> Go to home</p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div style={{marginTop: "100px"}}>
+            <p style={{fontWeight: "bold"}}>
+              No profiles available based on your filter. To see more profiles,
+              please change your filter
+            </p>
+            <p>
+              আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও
+              প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন
+            </p>
+          </div>
+          <Link to={"/preference"}>
+            <a
+              href="#"
+              style={{
+                color: "black",
+                border: "1px solid gray",
+                // textDecoration: "underline",
+                padding: 10,
+                borderRadius: 10,
+              }}>
+              Change filter
+            </a>
+          </Link>
+        </div>
+      )}
     </div>
   );
 
@@ -199,35 +236,49 @@ function Index() {
   // console.log("show", show);
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
-      <Link
-        to={data?.id ? `/user-info/home/${data?.id}` : "/home"}
-        style={{color: "black"}}>
-        <div className="d-flex justify-content-center ">
-          <div
-            className={`body-div inside ${likeSlide}`}
-            style={{
-              // backgroundRepeat: "round",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              width: "90%",
-              backgroundImage: `url(${
-                data?.profile_image_url
-                  ? data?.profile_image_url
-                  : data?.gender.toLowerCase() === "male"
-                  ? male
-                  : data?.gender.toLowerCase() === "female"
-                  ? female
-                  : ""
-              })`,
-            }}>
-            {/* <div className="menu">
+      <div className="d-flex justify-content-center ">
+        <div
+          style={{
+            position: "relative",
+            left: "85%",
+            top: "23px",
+            zIndex: "999999",
+            cursor: "pointer",
+          }}>
+          <Link to={`/user-info/home/${data?.id}`}>
+            <img src="/img/eye2.svg" alt="" height={30} width={30} />
+          </Link>
+        </div>
+        {/* <Link
+          to={data?.id ? `/user-info/home/${data?.id}` : "/home"}
+          style={{color: "black"}}> */}
+        <div
+          className={`body-div inside ${likeSlide}`}
+          style={{
+            // backgroundRepeat: "round",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            width: "90%",
+            backgroundImage: `url(${
+              isLimited
+                ? ""
+                : data?.profile_image_url
+                ? data?.profile_image_url
+                : data?.gender.toLowerCase() === "male"
+                ? male
+                : data?.gender.toLowerCase() === "female"
+                ? female
+                : ""
+            })`,
+          }}>
+          {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-            {show ? show : noUser}
-          </div>
+          {isLimited ? noUser : show ? show : noUser}
         </div>
-      </Link>
+        {/* </Link> */}
+      </div>
 
       {/* <div className="body-div-lower01"></div>
       <div className="body-div-lower02"></div> */}
