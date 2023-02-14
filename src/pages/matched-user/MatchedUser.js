@@ -9,18 +9,21 @@ import dislike from "../../assets/imgs/dislike.svg";
 import task from "../../assets/imgs/task.svg";
 import rocket from "../../assets/imgs/rocket.svg";
 import like from "../../assets/imgs/like.svg";
-
+import useSWR from "swr";
 import {useDispatch, useSelector} from "react-redux";
 import {setMatchModal} from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
+import fetcher from "../../utils/fetchData";
 
 const MatchedUser = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [singleData, setSingleData] = useState({});
 
+  // console.log(gender, "gender");
+  const {id, appId, route} = useParams();
   //sazid
   const [uID, setUID] = useState();
 
@@ -28,13 +31,19 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
-  // import useSWR from 'swr'
-  // import fetcher from "../../utils/fetchData";
-  // const {data, error, isLoading} = useSWR("", fetcher);
-  const {group_1, group_2, group_3, group_4} =
-    singleData?.structured_app_user_info?.app_user_detail;
 
-  console.log(group_1?.data[0], group_2, "group_1 group_2");
+  // const {
+  //   data: homeData,
+  //   error: homeError,
+  //   isLoading,
+  // } = useSWR(
+  //   "/app_users/get_home_page_single_user_info/",
+  //   ExploreServices.getSingleHomeuser(id)
+  // );
+  let {group_1, group_2, group_3, group_4} =
+    singleData?.structured_app_user_info?.app_user_detail ?? {};
+
+  // console.log(homeData, homeError, isLoading, "group_1 group_2");
 
   let modalChange = () => {
     console.log("matchModal", matchModal);
@@ -42,14 +51,12 @@ const MatchedUser = () => {
     else dispatch(setMatchModal(true));
   };
 
-  // console.log(gender, "gender");
-  const {id, appId, route} = useParams();
-  // console.log(id, appId, route, "dfdk");
+  console.log(id, route, "dfdk");
   async function fetchShortUser() {
     setLoading(true);
 
     let response = await ExploreServices.getSingleShortList(id);
-    console.log(response, "response");
+    // console.log(response, "response");
     if (response?.status === 200) {
       setLoading(false);
       setSingleData(response.data);
@@ -59,7 +66,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleMatchList(id);
-    console.log(response, "response");
+    // console.log(response, "response");
     if (response?.status === 200) {
       setUID(response.data.app_user.id);
       setLoading(false);
@@ -70,7 +77,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleLiked(id);
-    console.log(response, "response");
+    // console.log(response, "response");
     if (response.status === 200) {
       setLoading(false);
       setSingleData(response.data);
@@ -81,7 +88,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleHomeuser(id);
-    console.log(response, "response");
+    // console.log(response, "response");
     if (response.status === 200) {
       setLoading(false);
       setSingleData(response.data);
@@ -92,9 +99,7 @@ const MatchedUser = () => {
 
   let getActiveSlide = async (task, id) => {
     if (task === "like") {
-      let res = await UserServices.like_user(
-        route === "shortList" ? appId : id
-      );
+      let res = await UserServices.like_user(id);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
         navigate(-1);
@@ -151,6 +156,7 @@ const MatchedUser = () => {
   };
 
   useEffect(() => {
+    console.log("hello route");
     if (route === "shortList") {
       fetchShortUser();
     } else if (route === "match") {
@@ -160,7 +166,7 @@ const MatchedUser = () => {
     } else if (route === "home") {
       fetchHomeuser();
     }
-  }, [id, module]);
+  }, [id, route]);
   let tab = (
     <div className="container pt-2 ">
       <div className="items d-flex justify-content-evenly">
@@ -194,16 +200,8 @@ const MatchedUser = () => {
   let userInfo = (
     <div className="explore_viewProfile text-center">
       <div className="content-container">
-        <img
-          className="user-img"
-          src={singleData?.structured_app_user_info?.profile_img}
-        />
-        <h2>
-          {
-            singleData?.structured_app_user_info?.app_user_detail?.group_1
-              ?.data[0]["Name"]
-          }
-        </h2>
+        <img className="user-img" src={singleData?.app_user?.profile_img} />
+        <h2>{singleData?.app_user?.display_name}</h2>
 
         <p
           style={{
@@ -323,7 +321,7 @@ const MatchedUser = () => {
     <div className="explore_viewProfile text-center">
       <div className="content-container">
         <img className="user-img" src={singleData?.app_user?.profile_img} />
-        <h2 style={{fontSize: 25}}>{group_1?.data[0].split(":")[1]}</h2>
+        <h2 style={{fontSize: 28}}>{group_1?.data[0].split(":")[1]}</h2>
 
         <p
           style={{
@@ -435,10 +433,15 @@ const MatchedUser = () => {
       </div>
     </div>
   );
+
   return (
     <>
       <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
-        {route !== ("home" || "shortlist") ? userInfo : userInfo2}
+        {route === "shortList"
+          ? userInfo2
+          : route === "home"
+          ? userInfo2
+          : userInfo}
       </HomeLayout>
       {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />

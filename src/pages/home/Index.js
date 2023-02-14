@@ -65,6 +65,8 @@ function Index() {
   }, [dispatch]);
 
   useEffect(() => {
+    console.log(navigator.onLine, "onlie");
+
     const token = getToken();
     if (token) {
       fetchPreviousPreference();
