@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import Liked from "../../components/explore/Liked";
 import MatchList from "../../components/explore/MatchList";
@@ -7,15 +7,31 @@ import SuperLikeList from "../../components/explore/Visited";
 import HomeLayout from "../../components/layouts/HomeLayout";
 
 function Explore() {
-  const [activeExplore, setactiveExplore] = useState("Matched list");
   let activeTab = "";
-  const route = useLocation();
-  console.log(route.pathname, route, "route");
+  const {search} = useLocation();
+  // console.log('search', search)
+  const [activeExplore, setactiveExplore] = useState(search);
+  console.log( "route",search);
+  console.log('activeExplore', activeExplore)
+  const navigate = useNavigate();
 
-  if (activeExplore === "Superliked list") activeTab = <SuperLikeList />;
-  else if (activeExplore === "Shortlist") activeTab = <Shortlisted />;
-  else if (activeExplore === "Matched list") activeTab = <MatchList />;
-  else if (activeExplore === "Liked") activeTab = <Liked />;
+  useEffect(() => {
+    if(!search){
+      setactiveExplore('?Match-list')
+      navigate('/explore?Match-list')
+    }else{
+      setactiveExplore(search)
+
+    }
+  //  navigate('/explore?Match-list')
+      // setactiveExplore('?Match-list')
+  }, [search,navigate])
+  
+
+  if (search === "?SuperLiked") activeTab = <SuperLikeList />;
+  else if (search === "?Shortlist") activeTab = <Shortlisted />;
+  else if (search === "?Match-list" || !search) activeTab = <MatchList />;
+  else if (search === "?Liked") activeTab = <Liked />;
 
   return (
     <HomeLayout

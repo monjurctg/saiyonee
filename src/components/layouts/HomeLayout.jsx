@@ -15,6 +15,9 @@ function HomeLayout({
 
   // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
+  // const history = useRouter();
+
+  
 
   const logout = () => {
     // console.log("logout");
@@ -180,28 +183,37 @@ function HomeLayout({
         {pathname === "/explore" && (
           <div className="tab  pt-3 d-flex justify-content-evenly">
             <p
-              className={activeExplore === "Matched list" && "active"}
+              className={activeExplore === "?Match-list" && "active"}
               style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-              onClick={() => setactiveExplore("Matched list")}>
+              onClick={() => {setactiveExplore("?Match-list")
+              navigate('/explore?Match-list')
+              
+              }}>
               Matched list
             </p>
 
             <p
-              className={activeExplore === "Shortlist" && "active"}
+              className={activeExplore === "?Shortlist" && "active"}
               style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-              onClick={() => setactiveExplore("Shortlist")}>
+              onClick={() => {setactiveExplore("?Shortlist")
+              navigate('/explore?Shortlist') 
+              
+              }}>
               Shortlist
             </p>
             {show_liked_list === "true" ? (
               <p
-                className={activeExplore === "Liked" && "active"}
+                className={activeExplore === "?Liked" && "active"}
                 style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-                onClick={() => setactiveExplore("Liked")}>
+                onClick={() => {
+                  setactiveExplore("?Liked")
+                navigate('/explore?Liked')
+              }}>
                 Liked you
               </p>
             ) : (
               <p
-                className={activeExplore === "Liked" && "active"}
+                className={activeExplore === "?Liked" && "active"}
                 style={{cursor: "pointer"}}>
                 <span style={{color: "#7d849075", fontSize: 11}}>
                   Liked you
@@ -213,14 +225,17 @@ function HomeLayout({
             )}
             {show_supper_liked_list === "true" ? (
               <p
-                className={activeExplore === "Superliked list" && "active"}
+                className={activeExplore === "?SuperLiked" && "active"}
                 style={{cursor: "pointer", color: "#7d8490f0", fontSize: 11}}
-                onClick={() => setactiveExplore("Superliked list")}>
+                onClick={() => {setactiveExplore("?SuperLiked")
+                navigate('/explore?SuperLiked')
+                
+                }}>
                 Superliked you
               </p>
             ) : (
               <p
-                className={activeExplore === "Superliked list" && "active"}
+                className={activeExplore === "?SuperLiked" && "active"}
                 style={{
                   cursor: "pointer",
                 }}>
