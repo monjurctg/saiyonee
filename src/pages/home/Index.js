@@ -7,7 +7,7 @@ import female from "../../assets/imgs/female.png";
 import UserServices from "../../services/userServices";
 import Swipers from "../../components/home/Swipers";
 
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {getToken} from "../../utils/functions";
 import setRouteToken from "../../utils/tokenSet";
 import {useDispatch, useSelector} from "react-redux";
@@ -20,6 +20,7 @@ import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
 function Index() {
   const [data, setData] = useState(null);
   const [likeSlide, setLikeSlide] = useState("");
+  const [isLimited, setIslimited] = useState(false);
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
   // console.log('gettingUser', gettingUser)
@@ -115,10 +116,48 @@ function Index() {
     getBoomData();
   }, []);
 
+  const noUser = (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+
+        padding: 20,
+      }}>
+      <div style={{marginTop: "100px"}}>
+        <p style={{fontWeight: "bold"}}>
+          No profiles available based on your filter. To see more profiles,
+          please change your filter
+        </p>
+        <p>
+          আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও
+          প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন
+        </p>
+      </div>
+      <Link to={"/preference"}>
+        <a
+          href="#"
+          style={{
+            color: "black",
+            border: "1px solid gray",
+            // textDecoration: "underline",
+            padding: 10,
+            borderRadius: 10,
+          }}>
+          Change filter
+        </a>
+      </Link>
+    </div>
+  );
+
   let show = "";
   if (data && !gettingUser) {
     show = (
       <Swipers
+        isLimited={isLimited}
+        setIslimited={setIslimited}
         getData={getData}
         data={data}
         likeSlide={likeSlide}
@@ -160,31 +199,36 @@ function Index() {
   // console.log("show", show);
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
-      <div className="d-flex justify-content-center ">
-        <div
-          className={`body-div inside ${likeSlide}`}
-          style={{
-            // backgroundRepeat: "round",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            width: "90%",
-            backgroundImage: `url(${
-              data?.profile_image_url
-                ? data?.profile_image_url
-                : data?.gender.toLowerCase() === "male"
-                ? male
-                : data?.gender.toLowerCase() === "female"
-                ? female
-                : nouser
-            })`,
-          }}>
-          {/* <div className="menu">
+      <Link
+        to={data?.id ? `/user-info/home/${data?.id}` : "/home"}
+        style={{color: "black"}}>
+        <div className="d-flex justify-content-center ">
+          <div
+            className={`body-div inside ${likeSlide}`}
+            style={{
+              // backgroundRepeat: "round",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "90%",
+              backgroundImage: `url(${
+                data?.profile_image_url
+                  ? data?.profile_image_url
+                  : data?.gender.toLowerCase() === "male"
+                  ? male
+                  : data?.gender.toLowerCase() === "female"
+                  ? female
+                  : ""
+              })`,
+            }}>
+            {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-          {show}
+            {show ? show : noUser}
+          </div>
         </div>
-      </div>
+      </Link>
+
       {/* <div className="body-div-lower01"></div>
       <div className="body-div-lower02"></div> */}
     </HomeLayout>
