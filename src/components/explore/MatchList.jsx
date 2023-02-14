@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { AiOutlineDelete } from "react-icons/ai";
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
 import useSWR, { useSWRConfig } from "swr";
@@ -63,6 +63,11 @@ function MatchList() {
         <div className="explore-img" key={index}>
           <div className="cross" onClick={() => unmatchHandler(sl?.match_id)}>
             <img height={10} src="/img/cross.png" alt="" />
+            {/* <AiOutlineDelete style={{
+              height: 20,
+              width: 20,
+              color: "red",
+            }}/> */}
           </div>
 
           <Link to={`/user-info/match/${sl?.id}`}>
@@ -73,7 +78,10 @@ function MatchList() {
                 style={{
                   height: "80%",
                   width: "100%",
-                  border: "1px solid #cba0a0",
+                  // border: "1px solid #cba0a0",
+                  objectFit: "cover",
+                  borderBottomRightRadius: 0,
+                  borderBottomLeftRadius: 0,
                 }}
               />
             ) : (
@@ -86,6 +94,9 @@ function MatchList() {
 
                 color: "#000",
                 textAlign: "center",
+                fontWeight: 600,
+                fontStyle: 'oblique',
+                textTransform: 'capitalize'
               }}
             >
               {sl?.display_name}, {sl?.age}
