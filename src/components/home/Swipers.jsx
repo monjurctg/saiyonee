@@ -87,8 +87,9 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
       getData();
     } else {
       console.log(res);
+      setIslimited(true);
 
-      toastMsg.error(res.response.data.message);
+      // toastMsg.error(res.response.data.message);
     }
   };
   let show = (
