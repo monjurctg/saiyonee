@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import "./../../assets/css/viewProfile.scss";
 import "./../../assets/css/modal.scss";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ExploreServices from "../../services/exploreServices";
 import ExploreLayout from "../../components/layouts/ExploreLayout";
 import dislike from "../../assets/imgs/dislike.svg";
@@ -11,8 +11,8 @@ import rocket from "../../assets/imgs/rocket.svg";
 import like from "../../assets/imgs/like.svg";
 import blur from "../../assets/imgs/blur.png";
 import cross from "../../assets/imgs/cross.png";
-import {useDispatch, useSelector} from "react-redux";
-import {setMatchModal} from "../../redux/slices/utilsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setMatchModal } from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
@@ -21,10 +21,14 @@ const MatchedUser = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [singleData, setSingleData] = useState({});
+
+  //sazid
+  const [uID, setUID] = useState();
+
   let dispatch = useDispatch();
-  const {matchModal} = useSelector((state) => state.utils);
+  const { matchModal } = useSelector((state) => state.utils);
   const navigate = useNavigate();
-  const {gender} = useSelector((state) => state?.auth?.user);
+  const { gender } = useSelector((state) => state?.auth?.user);
   // import useSWR from 'swr'
   // import fetcher from "../../utils/fetchData";
   // const {data, error, isLoading} = useSWR("", fetcher);
@@ -36,7 +40,7 @@ const MatchedUser = () => {
   };
 
   // console.log(gender, "gender");
-  const {id, appId, route} = useParams();
+  const { id, appId, route } = useParams();
   // console.log(id, appId, route, "dfdk");
   async function fetchShortUser() {
     setLoading(true);
@@ -54,6 +58,7 @@ const MatchedUser = () => {
     let response = await ExploreServices.getSingleMatchList(id);
     console.log(response, "response");
     if (response?.status === 200) {
+      setUID(response.data.app_user.id);
       setLoading(false);
       setSingleData(response.data);
     }
@@ -137,6 +142,11 @@ const MatchedUser = () => {
     }
   };
 
+  const viewGallery = () => {
+    // console.log(uID);
+    navigate(`/user-info/${uID}/gallery`);
+  }
+
   useEffect(() => {
     if (route === "shortList") {
       fetchShortUser();
@@ -165,7 +175,7 @@ const MatchedUser = () => {
           className="itemss"
           onClick={() => getActiveSlide("supper_like_submit", id)}>
           <img src={rocket} alt="" />
-        </div>{" "}
+        </div>
         <div className="itemss" onClick={() => getActiveSlide("like", id)}>
           <img src={like} alt="" />
         </div>
@@ -296,7 +306,12 @@ const MatchedUser = () => {
               alignItems: "center",
               marginTop: "30px",
             }}>
-            <button className="edit-btn">View Gallery</button>
+            <button
+              className="edit-btn"
+              onClick={viewGallery}
+            >
+              View Gallery
+            </button>
           </div>
 
           {/* {route == "match" && (

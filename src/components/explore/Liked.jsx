@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import useSWR, {useSWRConfig} from "swr";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import useSWR, { useSWRConfig } from "swr";
 
 import fetcher from "../../utils/fetchData";
 
-function Liked({id}) {
+function Liked({ id }) {
   // const [LikeData, setLikeData] = useState([]);
   // const [loading, setLoading] = useState(false);
   let url = `all_liked/get_liked_by_users_list?is_superlike=${id ?? 0}`;
 
-  const {mutate} = useSWRConfig();
+  const { mutate } = useSWRConfig();
   const {
     data: LikeData,
     error: LikeDataError,
@@ -66,7 +66,8 @@ function Liked({id}) {
 
               color: "#000",
               textAlign: "center",
-            }}>
+            }}
+          >
             {ll?.full_name}, {ll?.age}
           </h5>
         </Link>
@@ -82,13 +83,33 @@ function Liked({id}) {
           gap: 0,
           justifyContent:
             LikeList?.length <= 1 ? "space-between" : "space-around",
-        }}>
+        }}
+      >
         {isLoading ? (
           <div className="load">Loading...</div>
         ) : LikeList?.length > 0 ? (
           LikeList
         ) : (
-          <h1 style={{fontSize: 20}}>No data found</h1>
+          <div
+            style={{
+              minHeight: "30vh",
+              display: "flex",
+              alignItems: "center",
+              width: "50%",
+              margin: "0 auto",
+              textAlign: "center",
+              justifyContent: "center",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: 20,
+                color: "#f33",
+              }}
+            >
+              No data found
+            </h1>
+          </div>
         )}
       </div>
     </div>
