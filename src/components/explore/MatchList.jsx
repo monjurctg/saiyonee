@@ -48,7 +48,14 @@ function MatchList() {
     }
   };
 
-  // console.log('matchData', matchData)
+  console.log(
+    "matchData?.matched_users.length > 1",
+    matchData?.matched_users.length
+  );
+  console.log(
+    "matchData?.matched_users.length > 1",
+    matchData?.matched_users.length > 1
+  );
   let matchList =
     !loading &&
     matchData?.matched_users?.map((sl, index) => {
@@ -95,9 +102,7 @@ function MatchList() {
         style={{
           gap: 0,
           justifyContent:
-            matchData?.matched_users.length <= 0
-              ? "space-between"
-              : "space-around",
+            matchData?.matched_users.length > 1 ? "space-between" : "",
         }}
       >
         {loading ? (
