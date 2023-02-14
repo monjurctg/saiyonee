@@ -9,18 +9,28 @@ import HomeLayout from "../../components/layouts/HomeLayout";
 function Explore() {
   let activeTab = "";
   const {search} = useLocation();
+  // console.log('search', search)
   const [activeExplore, setactiveExplore] = useState(search);
-  console.log(search, "route");
-  // const navigate = useNavigate();
+  console.log( "route",search);
+  console.log('activeExplore', activeExplore)
+  const navigate = useNavigate();
 
-  // useEffect(() => {
+  useEffect(() => {
+    if(!search){
+      setactiveExplore('?Match-list')
+      navigate('/explore?Match-list')
+    }else{
+      setactiveExplore(search)
+
+    }
   //  navigate('/explore?Match-list')
-  // }, [])
+      // setactiveExplore('?Match-list')
+  }, [search,navigate])
   
 
   if (search === "?SuperLiked") activeTab = <SuperLikeList />;
   else if (search === "?Shortlist") activeTab = <Shortlisted />;
-  else if (search === "?Match-list") activeTab = <MatchList />;
+  else if (search === "?Match-list" || !search) activeTab = <MatchList />;
   else if (search === "?Liked") activeTab = <Liked />;
 
   return (
