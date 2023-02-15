@@ -12,7 +12,7 @@ function AddPhoto() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
 
-  // console.log("image2", image, image2);
+  console.log("image2", image, image2);
 
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
