@@ -261,38 +261,6 @@ function Index() {
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
       <div className="d-flex justify-content-center ">
-        {isLimited || isFilterModalShow ? (
-          ""
-        ) : (
-          <div
-            onClick={() => navigate(`/user-info/home/${data?.id}`)}
-            style={{
-              position: "relative",
-              left: "80%",
-              top: "30px",
-              height: 25,
-              width: 70,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              background: "#ffb7ac",
-              borderRadius: 10,
-              zIndex: "999999",
-              cursor: "pointer",
-            }}>
-            <div className="d-flex  justify-content-around align-items-center">
-              <span>
-                <img
-                  src="/img/eye2.svg"
-                  alt=""
-                  style={{height: 20, width: 17}}
-                />
-              </span>
-              <span style={{fontSize: 12, marginLeft: 4}}>View</span>
-            </div>
-          </div>
-        )}
-
         {/* <Link
           to={data?.id ? `/user-info/home/${data?.id}` : "/home"}
           style={{color: "black"}}> */}
@@ -316,10 +284,46 @@ function Index() {
                 : ""
             })`,
           }}>
+          {isLimited || isFilterModalShow || !data ? (
+            ""
+          ) : (
+            <div
+              onClick={() => navigate(`/user-info/home/${data?.id}`)}
+              style={{
+                marginLeft: "75%",
+                marginTop: 18,
+                height: 25,
+                width: 70,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                background: "#ffb7ac",
+                borderRadius: 10,
+                zIndex: "999999",
+                cursor: "pointer",
+              }}>
+              <div className="d-flex  justify-content-around align-items-center">
+                <span>
+                  <img
+                    src="/img/eye2.svg"
+                    alt=""
+                    style={{height: 20, width: 17}}
+                  />
+                </span>
+                <span style={{fontSize: 12, marginLeft: 4}}>View</span>
+              </div>
+            </div>
+          )}
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-          {isLimited ? noUser : show ? show : isFilterModalShow ? noUser : ""}
+          {isLimited
+            ? noUser
+            : show
+            ? show
+            : isFilterModalShow
+            ? noUser
+            : noUser}
         </div>
         {/* </Link> */}
       </div>
