@@ -34,7 +34,7 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
     let id = document
       .getElementsByClassName("swiper-slide-active")[0]
       .getAttribute("data-id");
-    // console.log('id', id)
+    console.log("id", id);
 
     if (task === like) {
       let res = await UserServices.like_user(id);
@@ -134,27 +134,23 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
                 fontWeight: 700,
                 color: "white",
               }}>
-              {data?.display_name},
+              {data?.display_name}
             </h3>
           </div>
           <div className="d-flex">
             <p
               style={{
-                textAlign: "center",
-                marginBottom: 0,
-                fontWeight: 700,
-                fontSize: 16,
+                margin: 0,
+                fontSize: 12,
                 color: "white",
               }}>
               Age
             </p>
             <p
               style={{
-                textAlign: "center",
-                marginLeft: 15,
-                marginBottom: 0,
-                fontWeight: 700,
-                fontSize: 16,
+                margin: 0,
+                fontSize: 12,
+                marginLeft: 10,
                 color: "white",
               }}>
               {data?.age}
@@ -226,7 +222,7 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
             title="Super Like"
             onClick={() => getActiveSlide(supper_like_submit)}>
             <img src="img/rocket.svg" alt="" />
-          </div>{" "}
+          </div>
           <div
             className="item"
             data-toggle="tooltip"
@@ -235,6 +231,7 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
             onClick={() => getActiveSlide(like)}>
             <img src="img/like.svg" alt="" />
           </div>
+          {/* <div></div> */}
         </div>
       </div>
     </>

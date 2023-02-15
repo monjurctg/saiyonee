@@ -21,6 +21,10 @@ function Index() {
   const [data, setData] = useState(null);
   const [likeSlide, setLikeSlide] = useState("");
   const [isLimited, setIslimited] = useState(false);
+  const [isFilterModalShow, setFilterModalShow] = useState(false);
+  const [filterErrorMessage, setFilterErrorMessage] = useState(
+    " আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন"
+  );
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
   // console.log('gettingUser', gettingUser)
@@ -32,6 +36,10 @@ function Index() {
     if (res.status === 200) {
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
+    } else {
+      setgettingUser(false);
+      setFilterErrorMessage(res.response.data.message);
+      setFilterModalShow(res.response.data.show_in_modal);
     }
 
     setgettingUser(false);
@@ -52,7 +60,7 @@ function Index() {
     const res = await UserServices.UserProfile();
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
-      console.log(res.data);
+      // console.log(res.data);
     }
   };
   const fetchPreviousPreference = useCallback(async () => {
@@ -60,12 +68,12 @@ function Index() {
     if (res.status === 200) {
       dispatch(setPreviousPreference(res.data.profile_preferences));
     } else {
-      console.log(res);
+      // console.log(res);
     }
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(navigator.onLine, "onlie");
+    // console.log(navigator.onLine, "onlie");
 
     const token = getToken();
     if (token) {
@@ -146,7 +154,7 @@ function Index() {
             onClick={() => setIslimited(false)}
             style={{
               color: "black",
-              border: "1px solid gray",
+              // border: "1px solid gray",
               // textDecoration: "underline",
               width: "60%",
               // padding: 10,
@@ -164,28 +172,42 @@ function Index() {
       ) : (
         <div>
           <div style={{marginTop: "100px"}}>
-            <p style={{fontWeight: "bold"}}>
+            {/* <p style={{fontWeight: "bold"}}>
               No profiles available based on your filter. To see more profiles,
               please change your filter
             </p>
             <p>
               আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও
               প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন
+            </p> */}
+
+            <p style={{fontWeight: "bold"}}>
+              {filterErrorMessage.split("88.")[0] + "88."}
             </p>
+            <p>{filterErrorMessage.split("88.")[1]}</p>
           </div>
-          <Link to={"/preference"}>
-            <a
-              href="#"
-              style={{
-                color: "black",
-                border: "1px solid gray",
-                // textDecoration: "underline",
-                padding: 10,
-                borderRadius: 10,
-              }}>
-              Change filter
-            </a>
-          </Link>
+          <div
+            style={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}>
+            <Link to={"/preference"}>
+              <a
+                href="#"
+                style={{
+                  color: "black",
+                  background: "#ffb7ac",
+                  // border: "1px solid gray",
+                  // textDecoration: "underline",
+                  padding: 10,
+                  borderRadius: 10,
+                }}>
+                Change filter
+              </a>
+            </Link>
+          </div>
         </div>
       )}
     </div>
@@ -209,12 +231,12 @@ function Index() {
         className="d-flex justify-content-center align-items-center "
         style={{
           height: "100%",
-          fontSize: 20,
+          fontSize: 17,
           color: "black",
           fontWeight: 700,
         }}>
-        {console.log("Loading from condition")}
-        Loading data
+        {/* {console.log("Loading from condition")} */}
+        Please wait for the next profile...
       </div>
     );
   } else if (data?.filtered_users?.length === 0 && !gettingUser) {
@@ -230,7 +252,7 @@ function Index() {
         }}>
         {/* <img src="img/loading.gif" alt="" /> */}
 
-        {console.log("Not Found")}
+        {/* {console.log("Not Found")} */}
         <span>No matched user found</span>
       </div>
     );
@@ -239,18 +261,38 @@ function Index() {
   return (
     <HomeLayout background={"#F9FAFB"} mTop={40}>
       <div className="d-flex justify-content-center ">
-        <div
-          style={{
-            position: "relative",
-            left: "85%",
-            top: "23px",
-            zIndex: "999999",
-            cursor: "pointer",
-          }}>
-          <Link to={`/user-info/home/${data?.id}`}>
-            <img src="/img/eye2.svg" alt="" height={30} width={30} />
-          </Link>
-        </div>
+        {isLimited || isFilterModalShow ? (
+          ""
+        ) : (
+          <div
+            onClick={() => navigate(`/user-info/home/${data?.id}`)}
+            style={{
+              position: "relative",
+              left: "80%",
+              top: "30px",
+              height: 25,
+              width: 70,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              background: "#ffb7ac",
+              borderRadius: 10,
+              zIndex: "999999",
+              cursor: "pointer",
+            }}>
+            <div className="d-flex  justify-content-around align-items-center">
+              <span>
+                <img
+                  src="/img/eye2.svg"
+                  alt=""
+                  style={{height: 20, width: 17}}
+                />
+              </span>
+              <span style={{fontSize: 12, marginLeft: 4}}>View</span>
+            </div>
+          </div>
+        )}
+
         {/* <Link
           to={data?.id ? `/user-info/home/${data?.id}` : "/home"}
           style={{color: "black"}}> */}
@@ -277,7 +319,7 @@ function Index() {
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-          {isLimited ? noUser : show ? show : noUser}
+          {isLimited ? noUser : show ? show : isFilterModalShow ? noUser : ""}
         </div>
         {/* </Link> */}
       </div>

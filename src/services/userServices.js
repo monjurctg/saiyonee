@@ -8,7 +8,10 @@ UserServices.UserProfile = async () => {
 };
 
 UserServices.filter_users = async () => {
-  const res = await axios.get("/app_users/filter_users");
+  const res = await axios
+    .get("/app_users/filter_users")
+    .then((res) => res)
+    .catch((err) => err);
   return res;
 };
 
@@ -92,6 +95,6 @@ UserServices.match_viewed = (data) => {
 //sazid
 UserServices.view_gallery = (data) => {
   return axios.post("/app_users/get_single_user_gallery_images", data);
-}
+};
 
 export default UserServices;

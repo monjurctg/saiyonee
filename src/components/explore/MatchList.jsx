@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AiOutlineDelete } from "react-icons/ai";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import {AiOutlineDelete} from "react-icons/ai";
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
-import useSWR, { useSWRConfig } from "swr";
-import { get_match_list } from "../../services/swrApi";
+import useSWR, {useSWRConfig} from "swr";
+import {get_match_list} from "../../services/swrApi";
 import fetcher from "../../utils/fetchData";
 
 function MatchList() {
   // const [matchData, setMatchData] = useState([]);
 
   // const [loading, setLoading] = useState(true);
-  const { mutate } = useSWRConfig();
-  const { data: matchData, error: matchError } = useSWR(
-    "/match_making/get_match_list",
-    fetcher
-  );
-  const loading = !matchData && !matchError;
+  const {mutate} = useSWRConfig();
+  const {
+    data: matchData,
+    error: matchError,
+    isLoading,
+  } = useSWR("/match_making/get_match_list", fetcher);
+  // const loading = !matchData && !matchError;
 
   // let getShortisted = async () => {
   //   setLoading(true);
@@ -57,7 +58,7 @@ function MatchList() {
   //   matchData?.matched_users.length > 1
   // );
   let matchList =
-    !loading &&
+    !isLoading &&
     matchData?.matched_users?.map((sl, index) => {
       return (
         <div className="explore-img" key={index}>
@@ -95,10 +96,9 @@ function MatchList() {
                 color: "#000",
                 textAlign: "center",
                 fontWeight: 600,
-                fontStyle: 'oblique',
-                textTransform: 'capitalize'
-              }}
-            >
+                fontStyle: "oblique",
+                textTransform: "capitalize",
+              }}>
               {sl?.display_name}, {sl?.age}
             </h5>
           </Link>
@@ -114,11 +114,10 @@ function MatchList() {
           gap: 0,
           justifyContent:
             matchData?.matched_users.length > 1 ? "space-between" : "",
-        }}
-      >
-        {loading ? (
+        }}>
+        {isLoading ? (
           <div className="load">Loading...</div>
-        ) : !loading ? (
+        ) : !isLoading ? (
           matchList
         ) : (
           <div
@@ -127,9 +126,8 @@ function MatchList() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-            }}
-          >
-            <h1 style={{ fontSize: 20 }}>No data found</h1>
+            }}>
+            <h1 style={{fontSize: 20}}>No data found</h1>
           </div>
         )}
       </div>

@@ -33,6 +33,7 @@ function Explore() {
   return (
     <HomeLayout
       background={"#fff"}
+      search={search}
       activeExplore={activeExplore}
       setactiveExplore={setactiveExplore}>
       <div className="mt-2 mb-5 explore p-4">{activeTab}</div>
