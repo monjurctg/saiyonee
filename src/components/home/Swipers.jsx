@@ -57,6 +57,13 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
         setTimeout(() => {
           getData();
         }, 2000);
+      } else {
+        if (res.response.data.show_in_modal) {
+          // setFilterErrorMessage(res.response.data.message);
+          setIslimited(res.response.data.show_in_modal);
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
       }
     } else if (task === addShort_list) {
       addShortlist(id);
@@ -70,7 +77,12 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
 
         getData();
       } else {
-        console.log(res, "res");
+        if (res.response.data.show_in_modal) {
+          // setFilterErrorMessage(res.response.data.message);
+          setIslimited(res.response.data.show_in_modal);
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
       }
     }
   };
@@ -86,8 +98,12 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
       toastMsg.success(res.data.message);
       getData();
     } else {
-      console.log(res);
-      setIslimited(true);
+      if (res.response.data.show_in_modal) {
+        // setFilterErrorMessage(res.response.data.message);
+        setIslimited(res.response.data.show_in_modal);
+      } else {
+        toastMsg.error(res.response.data.message);
+      }
 
       // toastMsg.error(res.response.data.message);
     }

@@ -16,6 +16,7 @@ import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import fetcher from "../../utils/fetchData";
+import ProfileImage from "../../components/ProfileImage";
 
 const MatchedUser = () => {
   const [modal, setModal] = useState(false);
@@ -80,7 +81,7 @@ const MatchedUser = () => {
     // console.log(response, "response");
     if (response.status === 200) {
       setLoading(false);
-      setSingleData(response.data);
+      setSingleData(response?.data);
     }
   }
 
@@ -200,7 +201,11 @@ const MatchedUser = () => {
   let userInfo = (
     <div className="explore_viewProfile text-center">
       <div className="content-container">
-        <img className="user-img" src={singleData?.app_user?.profile_img} />
+        <ProfileImage
+          url={singleData?.app_user?.profile_img}
+          gender={singleData?.gender}
+        />
+        {/* <img className="user-img" src={singleData?.app_user?.profile_img} /> */}
         <h2>{singleData?.app_user?.display_name}</h2>
 
         <p
@@ -320,7 +325,10 @@ const MatchedUser = () => {
   let userInfo2 = (
     <div className="explore_viewProfile text-center">
       <div className="content-container">
-        <img className="user-img" src={singleData?.app_user?.profile_img} />
+        <ProfileImage
+          url={singleData?.structured_app_user_info?.profile_img}
+          gender={group_1?.data[1].split(":")[1]}
+        />
         <h2 style={{fontSize: 28}}>{group_1?.data[0].split(":")[1]}</h2>
 
         <p

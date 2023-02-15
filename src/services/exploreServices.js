@@ -47,7 +47,10 @@ ExploreServices.getLikeSupperLike = (id) => {
 };
 ExploreServices.addSupperLike = (id) => {
   let url = `all_liked/submit_superlike`;
-  let res = axios.post(url, id);
+  let res = axios
+    .post(url, id)
+    .then((res) => res)
+    .catch((err) => err);
 
   return res;
 };

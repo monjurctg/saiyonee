@@ -16,6 +16,7 @@ import QuestionServices from "../../services/questionServices";
 import {setCurrentUser} from "../../redux/slices/authSlices";
 import PreferenceServices from "../../services/preferenceServices";
 import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
+import toastMsg from "../../utils/toastify";
 
 function Index() {
   const [data, setData] = useState(null);
@@ -38,8 +39,13 @@ function Index() {
       setData(res.data?.filtered_users[0]);
     } else {
       setgettingUser(false);
-      setFilterErrorMessage(res.response.data.message);
-      setFilterModalShow(res.response.data.show_in_modal);
+
+      if (res.response.data.show_in_modal) {
+        setFilterErrorMessage(res.response.data.message);
+        setFilterModalShow(res.response.data.show_in_modal);
+      } else {
+        toastMsg.error(res.response.data.message);
+      }
     }
 
     setgettingUser(false);
