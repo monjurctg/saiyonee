@@ -111,6 +111,7 @@ const EditProfile = () => {
               borderRadius: 24,
               height: "100%",
               objectFit: "cover",
+              objectPosition: "center",
             }}
           />
 

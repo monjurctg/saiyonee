@@ -24,7 +24,11 @@ function Index() {
   const [isLimited, setIslimited] = useState(false);
   const [isFilterModalShow, setFilterModalShow] = useState(false);
   const [filterErrorMessage, setFilterErrorMessage] = useState(
-    " আপনার দেয়া ফিল্টার অনুযায়ী আর কোন প্রোফাইল আমাদের কাছে নেই। আরও প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন"
+    `  You have reached daily free profile view limit. To view 5 profiles
+    daily, please upgrade to "Premium Membership". You can purchase
+    "Premium Membership" by calling 01327230288.    আজকের মত ফ্রি বায়োডাটা লিমিট শেষ। অনুগ্রহ করে আগামীকাল আবার লগইন
+    করুন। প্রতিদিন ৫ টি বায়োডাটা দেখার জন্য আমাদের "প্রিমিয়াম মেম্বারশিপ
+    নিতে পারেন। "প্রিমিয়াম মেম্বারশিপ নেয়ার জন্য কল করুন ০১৩২৭২৩০২৮৮`
   );
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
