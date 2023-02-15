@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import useSWR, { useSWRConfig } from "swr";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import useSWR, {useSWRConfig} from "swr";
 import ExploreServices from "../../services/exploreServices";
 import fetcher from "../../utils/fetchData";
 import toastMsg from "../../utils/toastify";
 
 function Shortlisted() {
   // const [sortListData, setSortListData] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  const { mutate } = useSWRConfig();
+  const [loading, setLoading] = useState(false);
+  const {mutate} = useSWRConfig();
   const {
     data: sortListData,
     error: shortListError,
@@ -78,8 +78,7 @@ function Shortlisted() {
 
               color: "#000",
               textAlign: "center",
-            }}
-          >
+            }}>
             {sl?.app_user.display_name}, {sl?.app_user.age}
           </h5>
         </Link>
@@ -108,8 +107,7 @@ function Shortlisted() {
             sortListData?.shortlisted_users?.length <= 1
               ? "space-between"
               : "space-around",
-        }}
-      >
+        }}>
         {isLoading ? (
           <div className="load">Loading...</div>
         ) : shortList?.length > 0 ? (
@@ -121,9 +119,8 @@ function Shortlisted() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-            }}
-          >
-            <h1 style={{ fontSize: 20 }}>No data found</h1>
+            }}>
+            <h1 style={{fontSize: 20}}>No data found</h1>
           </div>
         )}
       </div>
