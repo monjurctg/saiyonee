@@ -6,11 +6,14 @@ import toastMsg from "../../utils/toastify";
 import useSWR, {useSWRConfig} from "swr";
 import {get_match_list} from "../../services/swrApi";
 import fetcher from "../../utils/fetchData";
+import {useSelector} from "react-redux";
+import ProfileImage from "../ProfileImage";
 
 function MatchList() {
   // const [matchData, setMatchData] = useState([]);
 
   // const [loading, setLoading] = useState(true);
+  const {user} = useSelector((state) => state.auth);
   const {mutate} = useSWRConfig();
   const {
     data: matchData,
@@ -72,22 +75,26 @@ function MatchList() {
           </div>
 
           <Link to={`/user-info/match/${sl?.id}`}>
-            {sl?.thumbnail_img_url ? (
+            {/* {sl?.thumbnail_img_url ? (
               <img
                 src={sl?.thumbnail_img_url}
                 alt=""
-                style={{
-                  height: "80%",
-                  width: "100%",
-                  // border: "1px solid #cba0a0",
-                  objectFit: "cover",
-                  borderBottomRightRadius: 0,
-                  borderBottomLeftRadius: 0,
-                }}
-              />
+              
             ) : (
               <h4 className="no-image">No Image</h4>
-            )}
+            )}  */}
+            <ProfileImage
+              style={{
+                height: "80%",
+                width: "100%",
+                // border: "1px solid #cba0a0",
+                objectFit: "cover",
+                borderBottomRightRadius: 0,
+                borderBottomLeftRadius: 0,
+              }}
+              url={sl?.thumbnail_img_url}
+              gender={user?.gender === "Male" ? "female" : "male"}
+            />
             <h5
               style={{
                 fontSize: "14px",

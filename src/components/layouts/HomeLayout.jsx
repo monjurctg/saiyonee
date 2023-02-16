@@ -102,7 +102,7 @@ function HomeLayout({
         {pathname === "/home" ? (
           <>
             <Link to={"/home"}>
-              <img src={"img/logo.svg"} alt="logo" style={{height: 30}} />
+              <img src={"img/logo.svg"} alt="logo" style={{height: 33}} />
             </Link>
             <Link to={"/preference"}>
               <div className="menu-img">

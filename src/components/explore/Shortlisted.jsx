@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import useSWR, {useSWRConfig} from "swr";
 import ExploreServices from "../../services/exploreServices";
 import fetcher from "../../utils/fetchData";
 import toastMsg from "../../utils/toastify";
+import ProfileImage from "../ProfileImage";
 
 function Shortlisted() {
   // const [sortListData, setSortListData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const {user} = useSelector((state) => state.auth);
+  console.log(user.gender);
+
   const {mutate} = useSWRConfig();
   const {
     data: sortListData,
@@ -58,7 +63,7 @@ function Shortlisted() {
         </div>
 
         <Link to={`/user-info/shortList/${sl?.app_user?.id}`}>
-          {sl?.app_user.thumbnail_img_url ? (
+          {/* {sl?.app_user.thumbnail_img_url ? (
             <img
               src={sl?.app_user?.thumbnail_img_url}
               alt=""
@@ -68,9 +73,22 @@ function Shortlisted() {
                 border: "1px solid #cba0a0",
               }}
             />
+
           ) : (
             <h4 className="no-image">No Image</h4>
-          )}
+          )} */}
+          <ProfileImage
+            style={{
+              height: "80%",
+              width: "100%",
+              // border: "1px solid #cba0a0",
+              objectFit: "cover",
+              borderBottomRightRadius: 0,
+              borderBottomLeftRadius: 0,
+            }}
+            url={sl?.app_user.thumbnail_img_url}
+            gender={user?.gender === "Male" ? "female" : "male"}
+          />
           <h5
             style={{
               fontSize: "14px",

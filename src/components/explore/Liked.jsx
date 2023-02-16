@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import useSWR, { useSWRConfig } from "swr";
+import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import useSWR, {useSWRConfig} from "swr";
 
 import fetcher from "../../utils/fetchData";
+import ProfileImage from "../ProfileImage";
 
-function Liked({ id }) {
+function Liked({id}) {
   // const [LikeData, setLikeData] = useState([]);
   // const [loading, setLoading] = useState(false);
   let url = `all_liked/get_liked_by_users_list?is_superlike=${id ?? 0}`;
+  const {user} = useSelector((state) => state.auth);
 
-  const { mutate } = useSWRConfig();
+  const {mutate} = useSWRConfig();
   const {
     data: LikeData,
     error: LikeDataError,
@@ -45,7 +48,7 @@ function Liked({ id }) {
           <img height={15} src="/img/cross.png" alt="" />
         </div>
         <Link to={`/user-info/like/${ll.id}`}>
-          {ll?.thumbnail_img ? (
+          {/* {ll?.thumbnail_img ? (
             <img
               src={ll?.thumbnail_img}
               style={{
@@ -57,7 +60,19 @@ function Liked({ id }) {
             />
           ) : (
             <h4 className="no-image">No Image</h4>
-          )}
+          )} */}
+          <ProfileImage
+            style={{
+              height: "80%",
+              width: "100%",
+              // border: "1px solid #cba0a0",
+              objectFit: "cover",
+              borderBottomRightRadius: 0,
+              borderBottomLeftRadius: 0,
+            }}
+            url={ll?.app_user.thumbnail_img_url}
+            gender={user?.gender === "Male" ? "female" : "male"}
+          />
 
           <h5
             style={{
@@ -66,8 +81,7 @@ function Liked({ id }) {
 
               color: "#000",
               textAlign: "center",
-            }}
-          >
+            }}>
             {ll?.full_name}, {ll?.age}
           </h5>
         </Link>
@@ -83,8 +97,7 @@ function Liked({ id }) {
           gap: 0,
           justifyContent:
             LikeList?.length <= 1 ? "space-between" : "space-around",
-        }}
-      >
+        }}>
         {isLoading ? (
           <div className="load">Loading...</div>
         ) : LikeList?.length > 0 ? (
@@ -99,14 +112,12 @@ function Liked({ id }) {
               margin: "0 auto",
               textAlign: "center",
               justifyContent: "center",
-            }}
-          >
+            }}>
             <h1
               style={{
                 fontSize: 20,
                 color: "#f33",
-              }}
-            >
+              }}>
               No data found
             </h1>
           </div>

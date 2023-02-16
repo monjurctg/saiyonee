@@ -8,7 +8,6 @@ import "./../../assets/css/viewProfile.scss";
 function ViewProfile() {
   const [active, setActive] = useState("personal");
   const {user} = useSelector((state) => state.auth);
-  console.log(user, "user from view profile");
 
   let activeData;
 
@@ -103,15 +102,18 @@ function ViewProfile() {
           <div className="mt-3">
             <div className="content-container">
               <img className="user-img" src={user?.profile_img} />
-              <h2 style={{
-                marginBottom: 0,
-              }}>{user?.display_name ?? user?.full_name}</h2>
+              <h2
+                style={{
+                  marginBottom: 0,
+                }}>
+                {user?.display_name ?? user?.full_name}
+              </h2>
 
               <p
                 style={{
                   textAlign: "Center",
                 }}>
-                <span className="short-description" style={{marginRight:0}}>
+                <span className="short-description" style={{marginRight: 0}}>
                   {user?.current_employment_type},
                 </span>
                 <span className="short-description">

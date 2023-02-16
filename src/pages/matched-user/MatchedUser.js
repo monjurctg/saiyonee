@@ -202,7 +202,10 @@ const MatchedUser = () => {
     <div className="explore_viewProfile text-center">
       <div className="content-container">
         <ProfileImage
-          url={singleData?.app_user?.profile_img}
+          url={
+            singleData?.app_user?.profile_img ||
+            singleData?.app_user?.thumbnail_img_url
+          }
           gender={singleData?.gender}
         />
         {/* <img className="user-img" src={singleData?.app_user?.profile_img} /> */}
