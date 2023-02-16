@@ -41,7 +41,7 @@ function EmailVerication() {
                   <h1 className="card-title">Verify Email</h1>
                   <p className="card-text text-muted">
                     We have sent you link in your email. Please check your inbox
-                    and click on that click to complete your registration
+                    and click on that link to complete your registration
                   </p>
                 </div>
               </div>

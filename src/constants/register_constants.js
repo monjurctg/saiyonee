@@ -85,8 +85,8 @@ export const INDUSTRY_TYPES = [
   "Government Job",
 ];
 
+
 export const RELIGION_TYPES = [
-  "",
   "Islam",
   "Hinduism",
   "Buddhism",

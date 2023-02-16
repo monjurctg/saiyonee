@@ -37,13 +37,11 @@ function Index() {
   let getData = async () => {
     setgettingUser(true);
     let res = await UserServices.filter_users();
-
     if (res.status === 200) {
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
     } else {
       setgettingUser(false);
-
       if (res.response.data.show_in_modal) {
         setFilterErrorMessage(res.response.data.message);
         setFilterModalShow(res.response.data.show_in_modal);
@@ -80,7 +78,7 @@ function Index() {
     } else {
       // console.log(res);
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     // console.log(navigator.onLine, "onlie");
