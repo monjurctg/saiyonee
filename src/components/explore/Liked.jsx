@@ -70,7 +70,7 @@ function Liked({id}) {
               borderBottomRightRadius: 0,
               borderBottomLeftRadius: 0,
             }}
-            url={ll?.app_user.thumbnail_img_url}
+            url={ll?.thumbnail_img_url}
             gender={user?.gender === "Male" ? "female" : "male"}
           />
 
