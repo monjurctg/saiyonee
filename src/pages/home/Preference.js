@@ -120,13 +120,14 @@ function Preference() {
     ) {
       setErr({
         error: "ft",
-        message: "Height cannot be less than 3 feet or greater than 9 feet",
+        message: "Height cannot be less than 3 feet or greater than 15 feet",
       });
       return;
     } else if (
       state.height_inches &&
-      (state.height_inches >= 12 || state.height_inches <= 0)
+      (state.height_inches < 0 || state.height_inches > 11)
     ) {
+      console.log(state.height_inches, "incs");
       setErr({
         error: "inc",
         message:
@@ -399,7 +400,7 @@ function Preference() {
 
   const subData = "";
 
-  return          (
+  return (
     <>
       <RegisterLayout
         onContinueClicked={onContinueClicked}
@@ -430,7 +431,7 @@ function Preference() {
                         {question.filter_display_name}
                       </label>
                     </div>
- 
+
                     <div className="col-2 d-flex justify-content-end pe-3">
                       <img
                         src="/img/back-icon.svg"
