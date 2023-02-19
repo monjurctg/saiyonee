@@ -8,8 +8,10 @@ function InputLayOut({
   length,
   title,
   loading,
+  from,
 }) {
   let {pathname} = useLocation();
+  console.log(from, "from");
 
   const navigate = useNavigate();
   return (
@@ -32,33 +34,32 @@ function InputLayOut({
           </div>
         </div>
 
-        <div className="container px-4 pb-2 flex-grow-1 overflow-auto"
-         style={{
-          height: "75vh",
-        }}
-        >
+        <div
+          className="container px-4 pb-2 flex-grow-1 overflow-auto"
+          style={{
+            height: "75vh",
+          }}>
           <h1>{title}</h1>
 
           {children}
         </div>
 
-        <div className="container px-4 pt-2"
-        style={{
-          
-    position: "absolute",
-    bottom: 0,
-    width: 420
-
-        }}
-        >
+        <div
+          className="container px-4 pt-2"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            width: 420,
+          }}>
           {err && <p className="text-primary">* {err}</p>}
-
-          <button
-            style={{height: 60}}
-            onClick={onContinueClicked}
-            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong>Save</strong>
-          </button>
+          {from !== "gellary" && (
+            <button
+              style={{height: 60}}
+              onClick={onContinueClicked}
+              className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
+              <strong>Save</strong>
+            </button>
+          )}
         </div>
       </div>
     </div>

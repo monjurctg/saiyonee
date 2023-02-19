@@ -239,9 +239,7 @@ const MatchedUser = () => {
 
             fontSize: "14px",
           }}>
-          Name :{" "}
-          {singleData?.app_user?.full_name ??
-            singleData?.app_user?.display_name}
+          Name : {singleData?.app_user?.display_name}
           <br />
           Age :{singleData?.app_user?.age}
           <br />

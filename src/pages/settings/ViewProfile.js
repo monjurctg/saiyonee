@@ -16,7 +16,7 @@ function ViewProfile() {
       <div className="information-container">
         <div className="info">
           <p className="fw-bold">Name</p>
-          <p>{user?.full_name}</p>
+          <p>{user?.display_name}</p>
         </div>
 
         <div className="info">

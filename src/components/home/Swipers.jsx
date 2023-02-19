@@ -7,7 +7,13 @@ import {Link, useNavigate} from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
 
-function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
+function Swipers({
+  data,
+  getData,
+  likeSlide,
+  setLikeSlide,
+  setFilterErrorMessage,
+}) {
   console.log("data", data);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
@@ -39,28 +45,38 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
     if (task === like) {
       let res = await UserServices.like_user(id);
       if (res.status === 200) {
+        setLikeSlide("");
         toastMsg.success(res.data.message);
         getBoomData();
+        getData();
         setLikeSlide("animation-container-right");
         setTimeout(() => {
           getData();
         }, 1000);
       } else {
-        toastMsg.error(res.data.message);
+        setLikeSlide("");
+        getData();
+        if (res.response.data.show_in_modal) {
+          setFilterErrorMessage(res.response.data);
+          setFilterErrorMessage(res.response.data.show_in_modal);
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
       }
     } else if (task === dislike) {
       // console.log("like");
       let res = await UserServices.dislike_user(id);
+      setLikeSlide("");
       if (res.status === 200) {
         toastMsg.success(res.data.message);
-        setLikeSlide(" animation-container-left");
+        setLikeSlide("animation-container-left");
         setTimeout(() => {
           getData();
         }, 2000);
       } else {
         if (res.response.data.show_in_modal) {
-          // setFilterErrorMessage(res.response.data.message);
-          setIslimited(res.response.data.show_in_modal);
+          setFilterErrorMessage(res.response.data);
+          setFilterErrorMessage(res.response.data.show_in_modal);
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -77,9 +93,11 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
 
         getData();
       } else {
+        console.log(res, "super like");
+
         if (res.response.data.show_in_modal) {
-          // setFilterErrorMessage(res.response.data.message);
-          setIslimited(res.response.data.show_in_modal);
+          setFilterErrorMessage(res.response.data);
+          setFilterErrorMessage(res.response.data.show_in_modal);
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -99,8 +117,8 @@ function Swipers({data, getData, likeSlide, setLikeSlide, setIslimited}) {
       getData();
     } else {
       if (res.response.data.show_in_modal) {
-        // setFilterErrorMessage(res.response.data.message);
-        setIslimited(res.response.data.show_in_modal);
+        setFilterErrorMessage(res.response.data.message);
+        setFilterErrorMessage(res.response.data.show_in_modal);
       } else {
         toastMsg.error(res.response.data.message);
       }

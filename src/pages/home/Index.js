@@ -21,29 +21,34 @@ import toastMsg from "../../utils/toastify";
 function Index() {
   const [data, setData] = useState(null);
   const [likeSlide, setLikeSlide] = useState("");
-  const [isLimited, setIslimited] = useState(false);
+  // const [isLimited, setIslimited] = useState(false);
   const [isFilterModalShow, setFilterModalShow] = useState(false);
-  const [filterErrorMessage, setFilterErrorMessage] = useState(
-    `  You have reached daily free profile view limit. To view 5 profiles
-    daily, please upgrade to "Premium Membership". You can purchase
-    "Premium Membership" by calling 01327230288.    আজকের মত ফ্রি বায়োডাটা লিমিট শেষ। অনুগ্রহ করে আগামীকাল আবার লগইন
-    করুন। প্রতিদিন ৫ টি বায়োডাটা দেখার জন্য আমাদের "প্রিমিয়াম মেম্বারশিপ
-    নিতে পারেন। "প্রিমিয়াম মেম্বারশিপ নেয়ার জন্য কল করুন ০১৩২৭২৩০২৮৮`
-  );
+  const [filterErrorMessage, setFilterErrorMessage] = useState();
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
   // console.log('gettingUser', gettingUser)
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
+    // setIslimited(false);
+
     let res = await UserServices.filter_users();
+
     if (res.status === 200) {
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
     } else {
       setgettingUser(false);
+
+      if (res?.data?.show_in_modal) {
+        setFilterErrorMessage(res?.data);
+        // setIslimited(false);
+        setFilterModalShow(res?.data?.show_in_modal);
+      }
+      console.log(res.response.data.show_in_modal, "res from res.da");
       if (res.response.data.show_in_modal) {
-        setFilterErrorMessage(res.response.data.message);
+        // setIslimited(true);
+        setFilterErrorMessage(res.response.data);
         setFilterModalShow(res.response.data.show_in_modal);
       } else {
         toastMsg.error(res.response.data.message);
@@ -122,6 +127,8 @@ function Index() {
     getCondition();
   }, []);
 
+  console.log(filterErrorMessage, "filterErrorMessage");
+
   const getBoomData = useCallback(async () => {
     const res = await UserServices.getBoomUsers();
     if (res.status === 200) {
@@ -144,43 +151,9 @@ function Index() {
 
         padding: 20,
       }}>
-      {isLimited ? (
-        <div style={{marginTop: "80px"}}>
-          <p style={{fontWeight: "bold"}}>
-            {" "}
-            You have reached daily free profile view limit. To view 5 profiles
-            daily, please upgrade to "Premium Membership". You can purchase
-            "Premium Membership" by calling 01327230288
-          </p>
-
-          <p>
-            আজকের মত ফ্রি বায়োডাটা লিমিট শেষ। অনুগ্রহ করে আগামীকাল আবার লগইন
-            করুন। প্রতিদিন ৫ টি বায়োডাটা দেখার জন্য আমাদের "প্রিমিয়াম মেম্বারশিপ
-            নিতে পারেন। "প্রিমিয়াম মেম্বারশিপ নেয়ার জন্য কল করুন ০১৩২৭২৩০২৮৮
-          </p>
-          <div
-            onClick={() => setIslimited(false)}
-            style={{
-              color: "black",
-              // border: "1px solid gray",
-              // textDecoration: "underline",
-              width: "60%",
-              // padding: 10,
-              background: "#ffb7ac",
-              cursor: "pointer",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 10,
-            }}>
-            <p style={{textAlign: "center", paddingTop: "12px"}}> Go to home</p>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div style={{marginTop: "100px"}}>
-            {/* <p style={{fontWeight: "bold"}}>
+      <div>
+        <div style={{marginTop: "100px"}}>
+          {/* <p style={{fontWeight: "bold"}}>
               No profiles available based on your filter. To see more profiles,
               please change your filter
             </p>
@@ -189,18 +162,19 @@ function Index() {
               প্রোফাইল দেখতে চাইলে আপনার ফিল্টার চেঞ্জ করুন
             </p> */}
 
-            <p style={{fontWeight: "bold"}}>
-              {filterErrorMessage.split("88.")[0] + "88."}
-            </p>
-            <p>{filterErrorMessage.split("88.")[1]}</p>
-          </div>
-          <div
-            style={{
-              alignItems: "center",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "20px",
-            }}>
+          <p style={{fontWeight: "bold"}}>
+            {filterErrorMessage?.message_english}
+          </p>
+          <p>{filterErrorMessage?.message_bangla}</p>
+        </div>
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}>
+          {filterErrorMessage?.show_change_filter_button && (
             <Link to={"/preference"}>
               <a
                 href="#"
@@ -215,9 +189,33 @@ function Index() {
                 Change filter
               </a>
             </Link>
-          </div>
+          )}
+
+          {filterErrorMessage?.show_go_to_home_button && (
+            <div
+              onClick={() => setFilterModalShow(false)}
+              style={{
+                color: "black",
+                // border: "1px solid gray",
+                // textDecoration: "underline",
+                width: "60%",
+                // padding: 10,
+                background: "#ffb7ac",
+                cursor: "pointer",
+                margin: "0 auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 10,
+              }}>
+              <p style={{textAlign: "center", paddingTop: "12px"}}>
+                {" "}
+                Go to home
+              </p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 
@@ -225,11 +223,12 @@ function Index() {
   if (data && !gettingUser) {
     show = (
       <Swipers
-        isLimited={isLimited}
-        setIslimited={setIslimited}
+        // isLimited={isLimited}
+        // setIslimited={setIslimited}
         getData={getData}
         data={data}
         likeSlide={likeSlide}
+        setFilterErrorMessage={setFilterErrorMessage}
         setLikeSlide={setLikeSlide}
       />
     );
@@ -281,7 +280,7 @@ function Index() {
             backgroundRepeat: "no-repeat",
             width: "90%",
             backgroundImage: `url(${
-              isLimited
+              isFilterModalShow
                 ? ""
                 : data?.profile_image_url
                 ? data?.profile_image_url
@@ -292,7 +291,7 @@ function Index() {
                 : ""
             })`,
           }}>
-          {isLimited || isFilterModalShow || !data ? (
+          {isFilterModalShow || !data ? (
             ""
           ) : (
             <div
@@ -325,13 +324,7 @@ function Index() {
           {/* <div className="menu">
           <img src="img/menu_top.svg" alt="" />
         </div> */}
-          {isLimited
-            ? noUser
-            : show
-            ? show
-            : isFilterModalShow
-            ? noUser
-            : noUser}
+          {isFilterModalShow ? noUser : show}
         </div>
         {/* </Link> */}
       </div>

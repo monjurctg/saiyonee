@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import "./../../assets/css/editProfile.scss";
 import UserServices from "../../services/userServices";
@@ -42,21 +42,19 @@ const ViewGallery = () => {
       length={length}
       title={"Image Gallery"}
       loading={loading}
-    >
+      from={"gellary"}>
       <div
         className="question mt-3 d-flex flex-wrap"
         style={{
           gap: 20,
-        }}
-      >
+        }}>
         <div
           className="image-upload"
           style={{
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.profile_img ? (
             <img
               src={data?.profile_img}
@@ -84,8 +82,7 @@ const ViewGallery = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_1 ? (
             <img
               src={data?.optional_img_1}
@@ -114,8 +111,7 @@ const ViewGallery = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_2 ? (
             <img
               src={data?.optional_img_2}
@@ -144,8 +140,7 @@ const ViewGallery = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_3 ? (
             <img
               src={data?.optional_img_3}
@@ -174,8 +169,7 @@ const ViewGallery = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_4 ? (
             <img
               src={data?.optional_img_4}
@@ -204,8 +198,7 @@ const ViewGallery = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_5 ? (
             <img
               src={data?.optional_img_5}
