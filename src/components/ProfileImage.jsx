@@ -3,6 +3,9 @@ import male from "../assets/imgs/male.png";
 import female from "../assets/imgs/female.png";
 
 function ProfileImage({url, gender, style}) {
+  let f = "Female";
+  let m = "male";
+
   return (
     <>
       <img
@@ -11,9 +14,9 @@ function ProfileImage({url, gender, style}) {
         src={
           url
             ? url
-            : gender?.toLowerCase() === "male"
+            : gender?.toLowerCase()?.trim() === "male"
             ? male
-            : gender?.toLowerCase() === "female"
+            : gender?.toLowerCase()?.trim() === "female"
             ? female
             : "No Image"
         }
