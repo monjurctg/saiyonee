@@ -8,7 +8,15 @@ function ProfileImage({url, gender, style}) {
       <img
         style={{...style}}
         className="user-img"
-        src={url ? url : gender === "Male" ? male : female}
+        src={
+          url
+            ? url
+            : gender?.toLowerCase() === "male"
+            ? male
+            : gender?.toLowerCase() === "female"
+            ? female
+            : "No Image"
+        }
       />
     </>
   );

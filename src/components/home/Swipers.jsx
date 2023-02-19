@@ -36,6 +36,7 @@ function Swipers({
   const supper_like_submit = "supper_like_submit";
 
   let getActiveSlide = async (task) => {
+    setLikeSlide("");
     console.log("task", task);
     let id = document
       .getElementsByClassName("swiper-slide-active")[0]
@@ -44,8 +45,8 @@ function Swipers({
 
     if (task === like) {
       let res = await UserServices.like_user(id);
+
       if (res.status === 200) {
-        setLikeSlide("");
         toastMsg.success(res.data.message);
         getBoomData();
         getData();
@@ -54,7 +55,6 @@ function Swipers({
           getData();
         }, 1000);
       } else {
-        setLikeSlide("");
         getData();
         if (res.response.data.show_in_modal) {
           setFilterErrorMessage(res.response.data);
@@ -66,7 +66,7 @@ function Swipers({
     } else if (task === dislike) {
       // console.log("like");
       let res = await UserServices.dislike_user(id);
-      setLikeSlide("");
+
       if (res.status === 200) {
         toastMsg.success(res.data.message);
         setLikeSlide("animation-container-left");

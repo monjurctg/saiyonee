@@ -26,7 +26,7 @@ function Index() {
   const [filterErrorMessage, setFilterErrorMessage] = useState();
   // console.log('data in ', data)
   const [gettingUser, setgettingUser] = useState(false);
-  // console.log('gettingUser', gettingUser)
+
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
@@ -127,8 +127,6 @@ function Index() {
     getCondition();
   }, []);
 
-  console.log(filterErrorMessage, "filterErrorMessage");
-
   const getBoomData = useCallback(async () => {
     const res = await UserServices.getBoomUsers();
     if (res.status === 200) {
@@ -140,6 +138,10 @@ function Index() {
     getData();
     getBoomData();
   }, []);
+
+  useEffect(() => {
+    console.log(likeSlide, "likeSlide");
+  }, [likeSlide]);
 
   const noUser = (
     <div
