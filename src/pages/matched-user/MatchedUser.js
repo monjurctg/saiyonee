@@ -32,6 +32,7 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
+  console.log(gender, "current user");
 
   // const {
   //   data: homeData,
@@ -328,25 +329,30 @@ const MatchedUser = () => {
       <div className="content-container">
         <ProfileImage
           url={singleData?.structured_app_user_info?.profile_img}
-          gender={group_1?.data[1].split(":")[1]}
+          gender={gender?.toLowerCase()?.trim() === "male" ? "female" : "male"}
         />
-        <h2 style={{fontSize: 28}}>{group_1?.data[0].split(":")[1]}</h2>
+        <h2 style={{fontSize: 28}}>
+          {singleData?.structured_app_user_info?.sub_header[0]}
+        </h2>
+        {singleData?.structured_app_user_info?.sub_header.map((item, index) => {
+          if (index == 0) return;
+          return (
+            <p
+              style={{
+                textAlign: "Center",
+              }}>
+              {/* <span className="short-description">
+              {singleData?.app_user?.designation}
+            </span>
+            <span className="short-description">
+              {singleData?.app_user?.current_city},
+              {singleData?.app_user?.current_country},
+            </span> */}
+              <span className="short-description">{item}</span>
+            </p>
+          );
+        })}
 
-        <p
-          style={{
-            textAlign: "Center",
-          }}>
-          {/* <span className="short-description">
-            {singleData?.app_user?.designation}
-          </span>
-          <span className="short-description">
-            {singleData?.app_user?.current_city},
-            {singleData?.app_user?.current_country},
-          </span> */}
-          <span className="short-description">
-            Age {group_1?.data[2].split(":")[1]}
-          </span>
-        </p>
         <h4
           style={{
             paddingLeft: 20,

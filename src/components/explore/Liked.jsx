@@ -71,7 +71,9 @@ function Liked({id}) {
               borderBottomLeftRadius: 0,
             }}
             url={ll?.thumbnail_img_url}
-            gender={user?.gender === "Male" ? "female" : "male"}
+            gender={
+              user?.gender?.toLowerCase()?.trim() === "male" ? "female" : "male"
+            }
           />
 
           <h5

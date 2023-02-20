@@ -87,7 +87,9 @@ function Shortlisted() {
               borderBottomLeftRadius: 0,
             }}
             url={sl?.app_user.thumbnail_img_url}
-            gender={user?.gender === "Male" ? "female" : "male"}
+            gender={
+              user?.gender?.toLowerCase()?.trim() === "male" ? "female" : "male"
+            }
           />
           <h5
             style={{
