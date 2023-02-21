@@ -9,7 +9,7 @@ import HomeLayout from "../../components/layouts/HomeLayout";
 function Explore() {
   let activeTab = "";
   const {search} = useLocation();
-  console.log("search", search);
+  // console.log("search", search);
   const [activeExplore, setactiveExplore] = useState(search);
 
   const navigate = useNavigate();

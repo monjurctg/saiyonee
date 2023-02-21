@@ -19,7 +19,7 @@ function Liked({id}) {
     isLoading,
   } = useSWR(url, fetcher);
 
-  console.log(LikeData, isLoading, "like");
+  // console.log(LikeData, isLoading, "like");
 
   // let getLikeData = async () => {
   //   setLoading(true);
@@ -100,11 +100,7 @@ function Liked({id}) {
           justifyContent:
             LikeList?.length <= 1 ? "space-between" : "space-around",
         }}>
-        {isLoading ? (
-          <div className="load">Loading...</div>
-        ) : LikeList?.length > 0 ? (
-          LikeList
-        ) : (
+      
           <div
             style={{
               minHeight: "30vh",
@@ -123,7 +119,7 @@ function Liked({id}) {
               No data found
             </h1>
           </div>
-        )}
+        
       </div>
     </div>
   );
