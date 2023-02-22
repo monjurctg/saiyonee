@@ -46,6 +46,12 @@ function ViewProfile() {
           <p className="fw-bold"> Date of Birth</p>
           <p>{user?.date_of_birth}</p>
         </div>
+        <div className="info">
+          <p className="fw-bold">Address</p>
+          <p>
+            {user?.current_city}, {user?.current_country}
+          </p>
+        </div>
 
         {/* <div className="info">
           <p>Nationality</p>
@@ -67,12 +73,9 @@ function ViewProfile() {
         </div>
         <div className="info">
           <p className="fw-bold">Position Name</p>
-          <p>Manager</p>
+          <p>{user?.designation}</p>
         </div>
-        <div className="info">
-          <p className="fw-bold">Address</p>
-          <p>Lalmatia</p>
-        </div>
+
         {/* LinkedIn Account Verified */}
       </div>
     );
@@ -81,15 +84,15 @@ function ViewProfile() {
       <div className="information-container">
         <div className="info">
           <p className="fw-bold">University</p>
-          <p>IIUC</p>
+          <p>{user?.education3_institution}</p>
         </div>
         <div className="info">
           <p className="fw-bold">Collage</p>
-          <p>Chittagong Collage</p>
+          <p>{user?.education2_institution}</p>
         </div>
         <div className="info">
           <p className="fw-bold">School</p>
-          <p>B.S Ideal</p>
+          <p>{user?.education1_institution}</p>
         </div>
       </div>
     );
