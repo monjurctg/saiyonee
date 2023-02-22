@@ -34,22 +34,26 @@ body {
 }
 .load {
   font-family: "Inter";
+  margin-left: auto;
+  margin-right: auto;
+
   font-style: normal;
   font-weight: 700;
-  // padding-top: 20px;
-  // padding-left: 22px;
   font-size: 25px;
-  background: #dee2e6;
-  height: 100vh;
+  width: 150px;
+  border-radius: 50%;
+  height: 150px;
+  padding: 10px;
+  background: #ffb7ac;
+  margin-top: 22%;
+  /* height: 16vh; */
   /* line-height: 38px; */
   /* text-align: left; */
-  // padding: 10px;
   /* margin-top: 12px; */
   justify-content: center;
   color: white;
   display: flex;
-  width: 420px;
-  margin: auto;
+  align-items: center;
   .load-up {
     height: 250px;
     background: linear-gradient(110deg, #dee2e6 8%, #f5f5f5 18%, #ffb7ac87 33%);

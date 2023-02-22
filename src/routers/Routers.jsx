@@ -87,7 +87,7 @@ function Routers() {
     const token = getToken();
 
     const res = await QuestionServices.getQuestions();
-    console.log(res, "res from home");
+    // console.log(res, "res from home");
     if (!res) {
       setLoading(false);
     }
@@ -132,10 +132,7 @@ function Routers() {
       }}
     >
       {loading ? (
-        <div className="load">
-          <div className="load-up"></div>
-          <div></div>
-        </div>
+         <div className="load">Loading...</div>
       ) : (
         <Routes>
           <Route element={<PublicRoute />}>
