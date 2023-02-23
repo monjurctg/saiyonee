@@ -112,10 +112,16 @@ function Liked({id}) {
               justifyContent: "center",
             }}>
             <h1
-              style={{
-                fontSize: 20,
-                color: "#f33",
-              }}>
+                style={{
+                  fontSize: 20,
+  
+                  border: "1px solid #dee2e6",
+                  color: "#ffb7ac",
+                  padding: 10,
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
               No data found
             </h1>
           </div>
