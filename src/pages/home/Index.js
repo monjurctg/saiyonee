@@ -154,7 +154,7 @@ function Index() {
         padding: 20,
       }}>
       <div>
-        <div style={{marginTop: "100px"}}>
+        <div style={{marginTop: "20px"}}>
           {/* <p style={{fontWeight: "bold"}}>
               No profiles available based on your filter. To see more profiles,
               please change your filter
@@ -227,6 +227,7 @@ function Index() {
       <Swipers
         // isLimited={isLimited}
         // setIslimited={setIslimited}
+        setFilterModalShow={setFilterModalShow}
         getData={getData}
         data={data}
         likeSlide={likeSlide}

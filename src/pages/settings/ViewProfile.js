@@ -1,15 +1,28 @@
 import React from "react";
 import {useState} from "react";
 import {useSelector} from "react-redux";
+import useSWR, {useSWRConfig} from "swr";
 import HomeLayout from "../../components/layouts/HomeLayout";
+import fetcher from "../../utils/fetchData";
 
 import "./../../assets/css/viewProfile.scss";
 
 function ViewProfile() {
   const [active, setActive] = useState("personal");
-  const {user} = useSelector((state) => state.auth);
+  const {user} = useSelector((state) => state?.auth);
+  const {mutate} = useSWRConfig();
+  const {
+    data: userData,
+    error: userError,
+    isLoading,
+  } = useSWR("/app_users/get_auth_user_info", fetcher);
 
+  const {display_name, profile_img, current_city, current_country, user_type} =
+    userData?.structured_app_user_info?.sub_header ?? {};
   let activeData;
+  const {group_1, group_2, group_3, group_4} =
+    userData?.structured_app_user_info?.app_user_detail ?? {};
+  console.log(group_1);
 
   if (active === "personal") {
     activeData = (
@@ -104,23 +117,23 @@ function ViewProfile() {
         <div className="container explore_viewProfile pt-2 text-center">
           <div className="mt-3">
             <div className="content-container">
-              <img className="user-img" src={user?.profile_img} />
+              <img className="user-img" src={profile_img} />
               <h2
                 style={{
                   marginBottom: 0,
                 }}>
-                {user?.display_name ?? user?.full_name}
+                {display_name}
               </h2>
 
               <p
                 style={{
                   textAlign: "Center",
                 }}>
-                <span className="short-description" style={{marginRight: 0}}>
-                  {user?.current_employment_type},
-                </span>
+                {/* <span className="short-description" style={{marginRight: 0}}>
+                  {user_type},
+                </span> */}
                 <span className="short-description">
-                  {user?.current_city},BD
+                  {current_city},{current_country}
                 </span>
                 {/* <span className="short-description">Age {user?.age}</span> */}
               </p>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import React, {useState} from "react";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Pagination} from "swiper";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
 
@@ -11,6 +11,7 @@ function Swipers({
   data,
   getData,
   likeSlide,
+  setFilterModalShow,
   setLikeSlide,
   setFilterErrorMessage,
 }) {
@@ -60,7 +61,7 @@ function Swipers({
         getData();
         if (res.response.data.show_in_modal) {
           setFilterErrorMessage(res.response.data);
-          setFilterErrorMessage(res.response.data.show_in_modal);
+          setFilterModalShow(res.response.data.show_in_modal);
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -78,7 +79,7 @@ function Swipers({
       } else {
         if (res.response.data.show_in_modal) {
           setFilterErrorMessage(res.response.data);
-          setFilterErrorMessage(res.response.data.show_in_modal);
+          setFilterModalShow(res.response.data.show_in_modal);
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -99,7 +100,7 @@ function Swipers({
 
         if (res.response.data.show_in_modal) {
           setFilterErrorMessage(res.response.data);
-          setFilterErrorMessage(res.response.data.show_in_modal);
+          setFilterModalShow(res.response.data.show_in_modal);
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -118,9 +119,10 @@ function Swipers({
       toastMsg.success(res.data.message);
       getData();
     } else {
+      console.log("hello", res);
       if (res.response.data.show_in_modal) {
-        setFilterErrorMessage(res.response.data.message);
-        setFilterErrorMessage(res.response.data.show_in_modal);
+        setFilterErrorMessage(res.response.data);
+        setFilterModalShow(res.response.data.show_in_modal);
       } else {
         toastMsg.error(res.response.data.message);
       }
@@ -154,14 +156,12 @@ function Swipers({
             background: "#a99d9bc2",
             padding: 5,
             borderRadius: 10,
-          }}
-        >
+          }}>
           <div
             className="d-flex align-items-baseline justify-content-start"
             style={{
               gap: 10,
-            }}
-          >
+            }}>
             <h3
               style={{
                 textAlign: "center",
@@ -171,8 +171,7 @@ function Swipers({
                 marginBottom: 0,
                 fontWeight: 700,
                 color: "white",
-              }}
-            >
+              }}>
               {data?.display_name}
             </h3>
           </div>
@@ -182,8 +181,7 @@ function Swipers({
                 margin: 0,
                 fontSize: 12,
                 color: "white",
-              }}
-            >
+              }}>
               Age
             </p>
             <p
@@ -192,8 +190,7 @@ function Swipers({
                 fontSize: 12,
                 marginLeft: 10,
                 color: "white",
-              }}
-            >
+              }}>
               {data?.age}
             </p>
           </div>
@@ -202,11 +199,10 @@ function Swipers({
               margin: 0,
               fontSize: 12,
               color: "white",
-            }}
-          >
+            }}>
             {data?.current_employment_type}
           </p>
-          <div className="d-flex" style={{ gap: 5 }}>
+          <div className="d-flex" style={{gap: 5}}>
             <p
               style={{
                 textAlign: "center",
@@ -214,8 +210,7 @@ function Swipers({
                 margin: 0,
                 fontSize: 12,
                 color: "white",
-              }}
-            >
+              }}>
               {data?.current_city},
             </p>
             <p
@@ -225,8 +220,7 @@ function Swipers({
                 margin: 0,
                 fontSize: 12,
                 color: "white",
-              }}
-            >
+              }}>
               {data?.current_country}
             </p>
           </div>
@@ -237,7 +231,7 @@ function Swipers({
   return (
     <>
       <div>
-        <div style={{ width: "100%", height: "100%" }} direction={"vertical"}>
+        <div style={{width: "100%", height: "100%"}} direction={"vertical"}>
           {show}
         </div>
       </div>
@@ -255,8 +249,7 @@ function Swipers({
               if (submited) {
                 return;
               } else getActiveSlide(dislike);
-            }}
-          >
+            }}>
             <img src="img/dislike.svg" alt="" />
           </div>
           <div
@@ -271,8 +264,7 @@ function Swipers({
               if (submited) {
                 return;
               } else getActiveSlide(addShort_list);
-            }}
-          >
+            }}>
             <img src="img/task.svg" alt="" />
           </div>
           <div
@@ -287,8 +279,7 @@ function Swipers({
               if (submited) {
                 return;
               } else getActiveSlide(supper_like_submit);
-            }}
-          >
+            }}>
             <img src="img/rocket.svg" alt="" />
           </div>
           <div
@@ -303,8 +294,7 @@ function Swipers({
               if (submited) {
                 return;
               } else getActiveSlide(like);
-            }}
-          >
+            }}>
             <img src="img/like.svg" alt="" />
           </div>
           {/* <div></div> */}
