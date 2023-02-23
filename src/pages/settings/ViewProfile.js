@@ -22,49 +22,19 @@ function ViewProfile() {
   let activeData;
   const {group_1, group_2, group_3, group_4} =
     userData?.structured_app_user_info?.app_user_detail ?? {};
-  console.log(group_1);
+  console.log(profile_img, "profile_img");
 
   if (active === "personal") {
     activeData = (
       <div className="information-container">
-        <div className="info">
-          <p className="fw-bold">Name</p>
-          <p>{user?.display_name}</p>
-        </div>
-
-        <div className="info">
-          <p className="fw-bold">Age</p>
-          <p>{user?.age}</p>
-        </div>
-
-        <div className="info">
-          <p className="fw-bold">Gender</p>
-          <p>{user?.gender}</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">Height</p>
-          <p>
-            {user?.height_feet} Feet {user?.height_inches} inches
-          </p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">Weight</p>
-          <p>{user?.weight} kg</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold"> Marital Status</p>
-          <p>{user?.marital_status}</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold"> Date of Birth</p>
-          <p>{user?.date_of_birth}</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">Address</p>
-          <p>
-            {user?.current_city}, {user?.current_country}
-          </p>
-        </div>
+        {group_1?.data.map((info, index) => (
+          <div className="info" key={index}>
+            <p className="fw-bold" style={{width: "60%"}}>
+              {info?.label}
+            </p>
+            <p style={{width: "40%"}}>{info?.value}</p>
+          </div>
+        ))}
 
         {/* <div className="info">
           <p>Nationality</p>
@@ -80,14 +50,14 @@ function ViewProfile() {
   } else if (active === "Professional") {
     activeData = (
       <div className="information-container">
-        <div className="info">
-          <p className="fw-bold">Company Name</p>
-          <p>Teah Hash Code</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">Position Name</p>
-          <p>{user?.designation}</p>
-        </div>
+        {group_2?.data.map((info, index) => (
+          <div className="info" key={index}>
+            <p className="fw-bold" style={{width: "60%"}}>
+              {info?.label}
+            </p>
+            <p style={{width: "40%"}}>{info?.value}</p>
+          </div>
+        ))}
 
         {/* LinkedIn Account Verified */}
       </div>
@@ -95,18 +65,14 @@ function ViewProfile() {
   } else if (active === "educational") {
     activeData = (
       <div className="information-container">
-        <div className="info">
-          <p className="fw-bold">University</p>
-          <p>{user?.education3_institution}</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">Collage</p>
-          <p>{user?.education2_institution}</p>
-        </div>
-        <div className="info">
-          <p className="fw-bold">School</p>
-          <p>{user?.education1_institution}</p>
-        </div>
+        {group_3?.data.map((info, index) => (
+          <div className="info" key={index}>
+            <p className="fw-bold" style={{width: "60%"}}>
+              {info?.label}
+            </p>
+            <p style={{width: "40%"}}>{info?.value}</p>
+          </div>
+        ))}
       </div>
     );
   }
