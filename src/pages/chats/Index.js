@@ -62,10 +62,15 @@ const ChatIndex = () => {
     div = (
       <div className="mb-4 text-center">
         <h5
-          style={{
-            color: "#000",
-            fontSize: "1.2rem",
-            fontWeight: "500",
+           style={{
+            fontSize: 20,
+
+            border: "1px solid #dee2e6",
+            color: "#ffb7ac",
+            padding: 10,
+            width: "80%",
+            margin: "auto",
+            textAlign: "center",
           }}
         >
           No chat available
