@@ -31,12 +31,12 @@ function ViewProfile() {
     isLoading,
   } = useSWR("/app_users/get_auth_user_info", fetcher);
 
-  const {display_name, profile_img, current_city, current_country, user_type} =
-    userData?.structured_app_user_info?.sub_header ?? {};
+  const {display_name, profile_img, current_city, current_country, sub_header} =
+    userData?.structured_app_user_info ?? {};
   let activeData;
   const {group_1, group_2, group_3, group_4} =
     userData?.structured_app_user_info?.app_user_detail ?? {};
-  console.log(profile_img, "profile_img");
+  console.log(sub_header, "profile_img");
 
   const [active, setActive] = useState(group_1?.title);
 
@@ -122,21 +122,26 @@ function ViewProfile() {
                 style={{
                   marginBottom: 0,
                 }}>
-                {display_name}
+                {sub_header[0]}
               </h2>
-
-              <p
-                style={{
-                  textAlign: "Center",
-                }}>
-                {/* <span className="short-description" style={{marginRight: 0}}>
-                  {user_type},
-                </span> */}
-                <span className="short-description">
-                  {current_city},{current_country}
-                </span>
-                {/* <span className="short-description">Age {user?.age}</span> */}
-              </p>
+              {sub_header.map((item, index) => {
+                if (index == 0) return;
+                return (
+                  <p
+                    style={{
+                      textAlign: "Center",
+                    }}>
+                    {/* <span className="short-description">
+              {singleData?.app_user?.designation}
+            </span>
+            <span className="short-description">
+              {singleData?.app_user?.current_city},
+              {singleData?.app_user?.current_country},
+            </span> */}
+                    <span className="short-description">{item}</span>
+                  </p>
+                );
+              })}
               <div className="" style={{width: "100%"}}>
                 <div className="tab  pt-3 d-flex justify-content-evenly">
                   <p
