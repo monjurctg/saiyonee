@@ -1,4 +1,5 @@
 import React from "react";
+import {useEffect} from "react";
 import {useState} from "react";
 import {useSelector} from "react-redux";
 import useSWR, {useSWRConfig} from "swr";
@@ -7,8 +8,21 @@ import fetcher from "../../utils/fetchData";
 
 import "./../../assets/css/viewProfile.scss";
 
+const Title = (title = "personal details") => {
+  const splitTitle = title?.split(" ");
+  console.log(splitTitle[0], title);
+
+  if (title) {
+    return (
+      <>
+        <span>{splitTitle[0] ? splitTitle[0] : " "}</span>
+        <br /> {splitTitle[1] ? splitTitle[1] : " "}
+      </>
+    );
+  }
+};
+
 function ViewProfile() {
-  const [active, setActive] = useState("personal");
   const {user} = useSelector((state) => state?.auth);
   const {mutate} = useSWRConfig();
   const {
@@ -24,7 +38,14 @@ function ViewProfile() {
     userData?.structured_app_user_info?.app_user_detail ?? {};
   console.log(profile_img, "profile_img");
 
-  if (active === "personal") {
+  const [active, setActive] = useState(group_1?.title);
+
+  useEffect(() => {
+    if (group_1?.title) {
+      setActive(group_1?.title);
+    }
+  }, [group_1?.title]);
+  if (active === group_1?.title) {
     activeData = (
       <div className="information-container">
         {group_1?.data.map((info, index) => (
@@ -47,7 +68,7 @@ function ViewProfile() {
         </div> */}
       </div>
     );
-  } else if (active === "Professional") {
+  } else if (active === group_2?.title) {
     activeData = (
       <div className="information-container">
         {group_2?.data.map((info, index) => (
@@ -62,10 +83,23 @@ function ViewProfile() {
         {/* LinkedIn Account Verified */}
       </div>
     );
-  } else if (active === "educational") {
+  } else if (active === group_3?.title) {
     activeData = (
       <div className="information-container">
         {group_3?.data.map((info, index) => (
+          <div className="info" key={index}>
+            <p className="fw-bold" style={{width: "60%"}}>
+              {info?.label}
+            </p>
+            <p style={{width: "40%"}}>{info?.value}</p>
+          </div>
+        ))}
+      </div>
+    );
+  } else if (active === group_4?.title) {
+    activeData = (
+      <div className="information-container">
+        {group_4?.data.map((info, index) => (
           <div className="info" key={index}>
             <p className="fw-bold" style={{width: "60%"}}>
               {info?.label}
@@ -106,36 +140,46 @@ function ViewProfile() {
               <div className="" style={{width: "100%"}}>
                 <div className="tab  pt-3 d-flex justify-content-evenly">
                   <p
-                    className={active === "personal" && "active"}
+                    className={active === group_1?.title && "active"}
                     style={{
                       cursor: "pointer",
                       color: "#7d8490f0",
-                      fontSize: 12,
+                      fontSize: 10,
                     }}
-                    onClick={() => setActive("personal")}>
-                    Personal
+                    onClick={() => setActive(group_1?.title)}>
+                    {Title(group_1?.title)}
                   </p>
 
                   <p
-                    className={active === "Professional" && "active"}
+                    className={active === group_2?.title && "active"}
                     style={{
                       cursor: "pointer",
                       color: "#7d8490f0",
-                      fontSize: 12,
+                      fontSize: 10,
                     }}
-                    onClick={() => setActive("Professional")}>
-                    Professional
+                    onClick={() => setActive(group_2?.title)}>
+                    {Title(group_2?.title)}
                   </p>
 
                   <p
-                    className={active === "educational" && "active"}
+                    className={active === group_3?.title && "active"}
                     style={{
                       cursor: "pointer",
                       color: "#7d8490f0",
-                      fontSize: 12,
+                      fontSize: 10,
                     }}
-                    onClick={() => setActive("educational")}>
-                    Educational
+                    onClick={() => setActive(group_3?.title)}>
+                    {Title(group_3?.title)}
+                  </p>
+                  <p
+                    className={active === group_4?.title && "active"}
+                    style={{
+                      cursor: "pointer",
+                      color: "#7d8490f0",
+                      fontSize: 10,
+                    }}
+                    onClick={() => setActive(group_4?.title)}>
+                    {Title(group_4?.title)}
                   </p>
                 </div>
               </div>
