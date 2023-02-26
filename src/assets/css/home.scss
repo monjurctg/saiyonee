@@ -651,11 +651,16 @@
 }
 
 .chat_body {
+
+  &:hover {
+    background: #f5f5f5;
+  }
   cursor: pointer;
   width: 380px;
   height: 80px;
   background: #ffffff;
   border-radius: 16px;
+  padding: 0px 8px;
 
   .no-image {
     font-size: 12px;
@@ -675,7 +680,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    color: #1f2937;
+    color: #ffb7ac;
     margin-bottom: 5px;
   }
 
