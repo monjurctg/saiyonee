@@ -10,9 +10,9 @@ import "./../../assets/css/viewProfile.scss";
 
 const Title = (title = "personal details") => {
   const splitTitle = title?.split(" ");
-  console.log(splitTitle[0], title);
+  // console.log(splitTitle[0], title);
 
-  if (title) {
+  if (splitTitle.length) {
     return (
       <>
         <span>{splitTitle[0] ? splitTitle[0] : " "}</span>
@@ -122,22 +122,15 @@ function ViewProfile() {
                 style={{
                   marginBottom: 0,
                 }}>
-                {sub_header[0]}
+                {profile_img ? sub_header[0] : ""}
               </h2>
-              {sub_header.map((item, index) => {
+              {sub_header?.map((item, index) => {
                 if (index == 0) return;
                 return (
                   <p
                     style={{
                       textAlign: "Center",
                     }}>
-                    {/* <span className="short-description">
-              {singleData?.app_user?.designation}
-            </span>
-            <span className="short-description">
-              {singleData?.app_user?.current_city},
-              {singleData?.app_user?.current_country},
-            </span> */}
                     <span className="short-description">{item}</span>
                   </p>
                 );
