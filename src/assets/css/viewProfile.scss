@@ -173,9 +173,20 @@
   position: fixed;
   bottom: 0px;
   padding: 15px;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
 
+  width: 420px;
+.send{
+  border: none;
+    padding: 10px;
+    background: #ffb7ac;
+    color: white;
+    font-size: 15px;
+    font-weight: 200;
+    border-radius: 5px;
+    align-self: flex-end;
+}
   .round-shape {
     width: 48px;
     height: 48px;
@@ -196,7 +207,7 @@
 
   input {
     width: 286px;
-    height: 56px;
+    min-height: 56px;
     /* left: 80px; */
     /* top: 764px; */
     background: #ffffff;

@@ -3,26 +3,37 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import UserServices from "../../services/userServices";
+import useSWR from "swr";
+import axios from "axios";
+import { getDate } from "../../utils/functions";
 
+const fetcher = (url) => axios.post(url).then((res) => res.data);
 const ChatIndex = () => {
-  const [data, setdata] = useState();
-  const [authUser, setauthUser] = useState();
-  console.log("data", data);
+  // const [data, setdata] = useState();
+  const { data, error, isLoading } = useSWR(
+    "/live_chat/message_directory",
+    fetcher
+  );
+  console.log("Sdata", data);
 
-  let getInbox = async () => {
-    const res = await UserServices.getInbox();
-    // console.log("res ,]msg", res.data);
-    setauthUser(res.data?.auth_user);
-    setdata(res.data?.matched_users);
-    return res;
-  };
-  useEffect(() => {
-    getInbox();
-  }, []);
+  console.log('getDate', getDate(data?.matched_users[0]?.latest_live_chat_message?.created_at))
+  // const [authUser, setauthUser] = useState();
+  // console.log("data", data);
+
+  // let getInbox = async () => {
+  //   const res = await UserServices.getInbox();
+  //   // console.log("res ,]msg", res.data);
+  //   setauthUser(res.data?.auth_user);
+  //   setdata(res.data?.matched_users);
+  //   return res;
+  // };
+  // useEffect(() => {
+  //   getInbox();
+  // }, []);
 
   let div = "";
-  if (data?.length > 0) {
-    div = data?.map((item) => (
+  if (data?.matched_users?.length > 0 && !isLoading) {
+    div = data?.matched_users?.map((item) => (
       <Link to={`/chat/room/${item?.latest_live_chat_message?.match_id}`}>
         <div
           className="chat_body mb-4"
@@ -76,7 +87,7 @@ const ChatIndex = () => {
               >
                 <p className="message">
                   {item?.latest_live_chat_message?.from_user?.id ===
-                    authUser?.id && <span>You:</span>}
+                    data?.auth_user?.id && <span>You:</span>}
                   {item?.latest_live_chat_message?.message}
                 </p>
                 <p
@@ -85,10 +96,7 @@ const ChatIndex = () => {
                     fontSize: 12,
                   }}
                 >
-                  •
-                  {moment(item?.latest_live_chat_message?.created_at).fromNow(
-                    true
-                  )}
+                  •{moment(getDate(item?.latest_live_chat_message?.created_at)).fromNow()}
                 </p>
               </div>
             </div>
@@ -96,7 +104,20 @@ const ChatIndex = () => {
         </div>
       </Link>
     ));
-  } else {
+  } else if (isLoading) {
+    div = (
+      <div>
+        <h1
+          style={{
+            textAlign: "center",
+            fontSize: 15,
+          }}
+        >
+          Loading...
+        </h1>
+      </div>
+    );
+  } else if (!isLoading && data?.matched_users?.length === 0) {
     div = (
       <div className="mb-4 text-center">
         <h5
