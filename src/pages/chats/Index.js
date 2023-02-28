@@ -39,6 +39,7 @@ const ChatIndex = () => {
           className="chat_body mb-4"
           style={{
             margin: "auto",
+            background: item?.new_message_available && "#ffb7ac36",
           }}
         >
           <div className="d-flex justify-content-around align-items-center">
@@ -75,7 +76,11 @@ const ChatIndex = () => {
                 width: "70%",
               }}
             >
-              <p className="name">
+              <p className="name"
+              style={{
+                fontWeight: item?.new_message_available ? "bold" : "normal",
+              }}
+              >
                 {item?.latest_live_chat_message?.to_user?.display_name}
               </p>
               <div
@@ -85,7 +90,12 @@ const ChatIndex = () => {
                   gap: 15,
                 }}
               >
-                <p className="message">
+                <p className="message"
+                 style={{
+                  fontWeight: item?.new_message_available ? "bold" : "normal",
+                  color: item?.new_message_available && "#000"
+                }}
+                >
                   {item?.latest_live_chat_message?.from_user?.id ===
                     data?.auth_user?.id && <span>You:</span>}
                   {item?.latest_live_chat_message?.message}
@@ -94,6 +104,8 @@ const ChatIndex = () => {
                   className="day"
                   style={{
                     fontSize: 12,
+                    fontWeight: item?.new_message_available ? "bold" : "normal",
+                    color: item?.new_message_available && "#000"
                   }}
                 >
                   •{moment(getDate(item?.latest_live_chat_message?.created_at)).fromNow()}
