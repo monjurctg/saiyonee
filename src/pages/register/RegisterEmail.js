@@ -73,7 +73,7 @@ function RegisterEmail() {
     if (password !== confirmPassword) {
       setErr({
         error: "confirm_password",
-        message: "Password and confirm Password does not match",
+        message: "Password and Confirm Password does not match",
       });
       return;
     }
