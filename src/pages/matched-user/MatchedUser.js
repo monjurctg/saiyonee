@@ -17,6 +17,7 @@ import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import fetcher from "../../utils/fetchData";
 import ProfileImage from "../../components/ProfileImage";
+import Loader from "../../components/Loader";
 
 const MatchedUser = () => {
   const [modal, setModal] = useState(false);
@@ -68,7 +69,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleMatchList(id);
-    // console.log(response, "response");
+    console.log(response, "response");
     if (response?.status === 200) {
       setUID(response.data.app_user.id);
       setLoading(false);
@@ -154,7 +155,7 @@ const MatchedUser = () => {
 
   const viewGallery = () => {
     // console.log(uID);
-    navigate(`/user-info/${uID}/gallery`);
+    navigate(`/user-info/${id}/gallery`);
   };
 
   useEffect(() => {
@@ -489,11 +490,15 @@ const MatchedUser = () => {
   return (
     <>
       <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
-        {route === "shortList"
-          ? userInfo2
-          : route === "home"
-          ? userInfo2
-          : userInfo}
+        {loading ? (
+          <div className="load">Loading...</div>
+        ) : route === "shortList" ? (
+          userInfo2
+        ) : route === "home" ? (
+          userInfo2
+        ) : (
+          userInfo
+        )}
       </HomeLayout>
       {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />

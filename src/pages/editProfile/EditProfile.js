@@ -52,6 +52,7 @@ const EditProfile = () => {
 
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
+      dispatch(setEditDisplayName(inputChange?.display_name));
       toastMsg.success("Profile edit successfully");
     } else {
       toastMsg.error(res.data.message);
@@ -141,7 +142,9 @@ const EditProfile = () => {
               id="inputHeightInches"
               style={{fontFamily: "Inter"}}
               value={inputChange?.display_name}
-              onChange={(e) => setInputChange({display_name: e.target.value})}
+              onChange={(e) =>
+                setInputChange({...inputChange, display_name: e.target.value})
+              }
               placeholder={"Form"}
               className="form-control border-0 rounded-1"
               aria-describedby="height_inches"
