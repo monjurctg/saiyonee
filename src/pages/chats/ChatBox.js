@@ -8,12 +8,15 @@ import msgWhite from "../../assets/imgs/msgWhite.png";
 import plus from "../../assets/imgs/plus.png";
 import ChatLayout from "../../components/layouts/ChatLayout";
 import UserServices from "../../services/userServices";
+import { AiOutlineSend } from "react-icons/ai";
 
 function ChatBox() {
   const { id } = useParams();
   // console.log('id', id)
   const [messageUser, setMessageUser] = useState();
-  const [userData, setuserData] = useState()
+  const [loading, setLoading] = useState(false);
+
+  const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
   const [scrollPos, setScrollPos] = useState();
   // console.log("scrollPos", scrollPos);
@@ -22,11 +25,14 @@ function ChatBox() {
   let getMessage = async (data) => {
     // console.log('data', data)
     if (!data) {
-      data = { match_id: id }
+      data = { match_id: id };
     }
 
     let res = await UserServices.getMessage(data);
-    console.log('messageData?.data?.chat_messages?.length', messageData?.data?.chat_messages?.length)
+    console.log(
+      "messageData?.data?.chat_messages?.length",
+      messageData?.data?.chat_messages?.length
+    );
     if (messageData?.data?.chat_messages?.length > 0) {
       let newMessage = res?.data?.data?.chat_messages[0];
       messageData?.data?.chat_messages.push(newMessage);
@@ -35,13 +41,13 @@ function ChatBox() {
       setmessageData(res.data);
     } else {
       setmessageData(res.data);
-      setuserData(res.data?.data?.other_user)
+      setuserData(res.data?.data?.other_user);
     }
     // console.log('res', res.data)
   };
   // console.log("messageData", userData);
   let scrollToBottomF = () => {
-    console.log('ss')
+    console.log("ss");
     // messagesEndRef.current.scrollTo({
     //   top: document.documentElement.scrollHeight,
     //   behavior: "smooth",
@@ -93,8 +99,9 @@ function ChatBox() {
     scrollToBottomF();
   }, [messageData]);
 
-  let sendMessages = async (e) => {
-    e.preventDefault();
+  let sendMessages = async () => {
+    // e.preventDefault();
+    setLoading(true);
     // console.log("ss");
     let data = {
       match_id: id,
@@ -102,6 +109,7 @@ function ChatBox() {
     };
     let res = await UserServices.message_users(data);
     if (res.status === 200) {
+      setLoading(false);
       setMessageUser("");
       getMessage();
     }
@@ -118,7 +126,8 @@ function ChatBox() {
               {
                 // backgroundImage: `url(${message})`,
               }
-            }>
+            }
+          >
             <p>{md?.message}</p>
           </div>
         </div>
@@ -132,7 +141,8 @@ function ChatBox() {
               {
                 // backgroundImage: `url(${msgWhite})`,
               }
-            }>
+            }
+          >
             <p>{md?.message}</p>
           </div>
         </div>
@@ -142,11 +152,11 @@ function ChatBox() {
 
   let footer = (
     <div className="chat-footer d-flex">
-      <div className="round-shape">
+      {/* <div className="round-shape">
         <img src={plus} alt="" />
-      </div>
+      </div> */}
 
-      <form onSubmit={sendMessages}>
+      <form>
         <input
           type="text"
           className="form-control"
@@ -155,6 +165,27 @@ function ChatBox() {
           onChange={(e) => setMessageUser(e.target.value)}
         />
       </form>
+      <button
+        className="send"
+        style={{
+          opacity: loading && "0.8",
+        }}
+        onClick={() => {
+          if (!loading) {
+          console.log('loading', loading)
+
+            sendMessages();
+          }
+        }}
+      >
+        {loading ? (
+          "Sending..."
+        ) : (
+          <>
+            Send <AiOutlineSend />
+          </>
+        )}
+      </button>
     </div>
   );
   return (
@@ -163,7 +194,8 @@ function ChatBox() {
         className="chat-body"
         id="chat-body"
         style={{ marginTop: 80 }}
-        ref={messagesEndRef}>
+        ref={messagesEndRef}
+      >
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
           <div>{showMessageFrom}</div>

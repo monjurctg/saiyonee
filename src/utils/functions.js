@@ -69,3 +69,11 @@ export const stoteRegisterValues = (data) => {
     window.localStorage.setItem("register", JSON.stringify(newData));
   } else window.localStorage.setItem("register", JSON.stringify(data));
 };
+
+
+export const getDate = (date) => {
+  console.log('date', date?.split(' ')[0]?.split('-')?.reverse()?.join('-'))
+  let d = new Date(date?.split(' ')[0]?.split('-')?.reverse()?.join('-'));
+  console.log('d', d)
+  return d.toDateString();
+}
