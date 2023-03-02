@@ -331,6 +331,43 @@ const MatchedUser = () => {
           url={singleData?.structured_app_user_info?.profile_img}
           gender={gender?.toLowerCase()?.trim() === "male" ? "female" : "male"}
         />
+        <div
+          className="like-btn"
+          style={{position: "relative", marginBottom: "20px"}}>
+          <div className="body-bottom">
+            <div className="items">
+              <div
+                className="item"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Dislike">
+                <img src="/img/dislike.svg" alt="" />
+              </div>
+              {/* <div
+                className="item"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Short list">
+                <img src="/img/task.svg" alt="" />
+              </div> */}
+              <div
+                className="item"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Super Like">
+                <img src="/img/rocket.svg" alt="" />
+              </div>
+              <div
+                className="item"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Like">
+                <img src="/img/like.svg" alt="" />
+              </div>
+              {/* <div></div> */}
+            </div>
+          </div>
+        </div>
         <h2 style={{fontSize: 28}}>
           {singleData?.structured_app_user_info?.sub_header[0]}
         </h2>

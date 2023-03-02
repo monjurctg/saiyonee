@@ -32,14 +32,14 @@ function App() {
   const route = useLocation();
 
   const dispatch = useDispatch();
-  const fetchPreviousPreference = useCallback(async () => {
+  const fetchPreviousPreference = async () => {
     const res = await PreferenceServices.getPreferenceData();
     if (res.status === 200) {
       dispatch(setPreviousPreference(res.data.profile_preferences));
     } else {
       console.log(res);
     }
-  }, [dispatch]);
+  };
 
   const fetchCurrentUser = async () => {
     const res = await UserServices.UserProfile();

@@ -204,18 +204,21 @@ function RegisterEmail() {
         {err?.error && <p className="text-primary">* {err?.message}</p>}
         <button
           onClick={onContinueClicked}
-          disabled={isLoading}
+          // disabled={isLoading}
           style={{
             height: 60,
           }}
           className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-          <strong
-            style={{
-              fontFamily: "Inter",
-            }}>
-            Continue
-          </strong>
-          {isLoading && <Loader />}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <strong
+              style={{
+                fontFamily: "Inter",
+              }}>
+              Continue
+            </strong>
+          )}
         </button>
       </div>
     </BasicLayout>
