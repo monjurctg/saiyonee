@@ -10,6 +10,7 @@ function QuestionLayout({
   title,
   loading,
   imageClick,
+  sloading,
   skipBtn,
 }) {
   // console.log("length", length);
@@ -65,7 +66,7 @@ function QuestionLayout({
               // (status === FetchStatus.LOADING ||
               // verifyingPreviousLogin ||
               //   isPrefetchingForms)
-              loading && (
+              sloading && (
                 <>
                   <i
                     className="spinner-border spinner-border-sm text-black"
