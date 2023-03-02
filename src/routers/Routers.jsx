@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import {setIsVarified} from "../redux/slices/authSlices";
-import {getToken} from "../utils/functions";
+import { setIsVarified } from "../redux/slices/authSlices";
+import { getToken } from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
@@ -66,13 +66,16 @@ import SocialLogin from "../pages/social/SocialLogin";
 import Register from "../pages/social-login/Register";
 import EmailVerication from "../pages/register/EmailVerication";
 import VerifyEmail from "../pages/VerifyEmail";
-import {useCallback} from "react";
+import { useCallback } from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery";
 
 function Routers() {
   // console.log("getToken()", getToken());
 
+  const { email } = useSelector((state) => state.auth);
+
+  console.log("email", email);
   if (getToken()) {
     setRouteToken(getToken());
   }
@@ -128,7 +131,8 @@ function Routers() {
         height: "100%",
 
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-      }}>
+      }}
+    >
       {loading ? (
         <div className="load">Loading...</div>
       ) : (
@@ -149,70 +153,84 @@ function Routers() {
           <Route element={<RegisterRoute />}>
             {/* register process routing */}
             <Route path="/register/email" element={<RegisterEmail />} />
-            <Route path="/register/usertype" element={<RegisterUserType />} />
             <Route path="/help" element={<Help />} />
+            {email && (
+              <>
+                <Route
+                  path="/register/usertype"
+                  element={<RegisterUserType />}
+                />
+                <Route
+                  path="register/personal-info"
+                  element={<PersonalInformation />}
+                />
+                <Route
+                  path="register/personalinfo/religion"
+                  element={<Religions />}
+                />
+                <Route
+                  path="register/personalinfo/marital_status"
+                  element={<MaritalStatus />}
+                />
+                {/* personal info route end */}
 
-            {/* personal info route start */}
-            <Route
-              path="register/personal-info"
-              element={<PersonalInformation />}
-            />
-            <Route
-              path="register/personalinfo/religion"
-              element={<Religions />}
-            />
-            <Route
-              path="register/personalinfo/marital_status"
-              element={<MaritalStatus />}
-            />
-            {/* personal info route end */}
+                {/* education type */}
+                <Route path="/register/education" element={<Education />} />
+                <Route
+                  path="/register/education/type1"
+                  element={<EducationTypes1 />}
+                />
+                <Route
+                  path="/register/education/type2"
+                  element={<EducationTypes2 />}
+                />
+                <Route
+                  path="/register/education/type3"
+                  element={<EducationType3 />}
+                />
+                <Route
+                  path="/register/education/type4"
+                  element={<EducationTypes4 />}
+                />
 
-            {/* education type */}
-            <Route path="/register/education" element={<Education />} />
-            <Route
-              path="/register/education/type1"
-              element={<EducationTypes1 />}
-            />
-            <Route
-              path="/register/education/type2"
-              element={<EducationTypes2 />}
-            />
-            <Route
-              path="/register/education/type3"
-              element={<EducationType3 />}
-            />
-            <Route
-              path="/register/education/type4"
-              element={<EducationTypes4 />}
-            />
+                {/* education type end */}
 
-            {/* education type end */}
+                {/* ocupation type */}
+                <Route path="register/ocupation" element={<Ocupation />} />
+                <Route
+                  path="register/ocupation/type"
+                  element={<OcupationTypes />}
+                />
 
-            {/* ocupation type */}
-            <Route path="register/ocupation" element={<Ocupation />} />
-            <Route
-              path="register/ocupation/type"
-              element={<OcupationTypes />}
-            />
+                <Route
+                  path="register/ocupation/industry"
+                  element={<Industry />}
+                />
 
-            <Route path="register/ocupation/industry" element={<Industry />} />
+                {/* ocupation route end */}
 
-            {/* ocupation route end */}
+                {/* location route  */}
 
-            {/* location route  */}
+                <Route path="/register/location" element={<Location />} />
+                <Route
+                  path="/register/location/country"
+                  element={<LocationCountry />}
+                />
 
-            <Route path="/register/location" element={<Location />} />
-            <Route
-              path="/register/location/country"
-              element={<LocationCountry />}
-            />
+                <Route
+                  path="/register/location/city"
+                  element={<LocationCity />}
+                />
 
-            <Route path="/register/location/city" element={<LocationCity />} />
+                {/* location route   end*/}
 
-            {/* location route   end*/}
-
-            <Route path="register/family_info" element={<FamilyInfo />} />
-            <Route path="register/varification" element={<Varification />} />
+                <Route path="register/family_info" element={<FamilyInfo />} />
+                <Route
+                  path="register/varification"
+                  element={<Varification />}
+                />
+              </>
+            )}
 
             {/* register process done */}
           </Route>
