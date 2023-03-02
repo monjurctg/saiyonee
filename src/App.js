@@ -66,7 +66,7 @@ function App() {
           language="EN"
           themeColor={"#ffb7ac"}
           bottomSpacing={80}
-          loggedInGreeting="Wellcome to saiyonee"
+          loggedInGreeting="Welcome to saiyonee"
           // loggedOutGreeting="loggedOutGreeting"
 
           greetingDialogDisplay={"hide"}

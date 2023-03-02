@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
-import {setCountry} from "../../redux/slices/authSlices";
+import {setCity, setCountry} from "../../redux/slices/authSlices";
 import {setEditProfileCountry} from "../../redux/slices/editProfileslice";
 import {setPreferenceCountry} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
@@ -33,6 +33,7 @@ function LocationCountry({module}) {
       return;
     } else {
       dispatch(setCountry(e.target.value));
+      dispatch(setCity("Select current city"));
       stoteRegisterValues({current_country: e.target.value});
 
       // setCurrentCity(undefined);

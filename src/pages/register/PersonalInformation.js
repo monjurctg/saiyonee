@@ -377,6 +377,7 @@ function PersonalInformation() {
               type="number"
               id="inputWeight"
               name="weight"
+              min={1}
               onFocus={() => setErr({})}
               value={state.weight}
               style={{fontFamily: "Inter"}}

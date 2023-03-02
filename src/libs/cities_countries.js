@@ -3167,7 +3167,7 @@ const Countries = {
     "Ystradgynlais",
     "Zeals",
   ],
-  "united states of america": [
+  "United States of America": [
     "Abbeville",
     "Abbeville",
     "Abbeville",

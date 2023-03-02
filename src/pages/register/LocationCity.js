@@ -17,7 +17,7 @@ function LocationCity({module}) {
   const {country, city: editProfileCity} = useSelector(
     (state) => state.editProfile
   );
-  console.log("country", editProfileCity);
+  // console.log("country", editProfileCity);
 
   const dispatch = useDispatch();
   const onCityChange = (e) => {
