@@ -306,12 +306,26 @@ function HomeLayout({
           </Link>
           <Link to={"/message"} style={{ cursor: "pointer" }}>
             <div
-              className={`text-center ${
-                data?.unread_messages && "glich"
-              } position-relative ${pathname === "/message" ? "active" : ""}`}
+              className={`text-center position-relative ${
+                pathname === "/message" ? "active" : ""
+              }`}
             >
               <img src="/img/message.svg" alt="" />
               <p>Message</p>
+              {data?.unread_messages && (
+                <p
+                  className="position-absolute"
+                  style={{
+                    top:pathname === "/message" ? 0: -10,
+                    right: 10,
+                    fontSize: 25,
+                    color: "#ffb7ac",
+                    margin: 0,
+                  }}
+                >
+                  •
+                </p>
+              )}
             </div>
           </Link>
           <Link to={"/settings"} style={{ cursor: "pointer" }}>
