@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import "./../../assets/css/editProfile.scss";
 import UserServices from "../../services/userServices";
 import InputLayOut from "../editProfile/InputLayOut";
+import {useParams} from "react-router-dom";
 
 const ViewGallery = () => {
   const [err, seterr] = useState(null);
@@ -19,11 +20,12 @@ const ViewGallery = () => {
   });
 
   const [data, setdata] = useState();
+  const {id} = useParams();
 
   async function fetchData() {
     const data = new FormData();
 
-    data.append(`app_user_id`, 1831);
+    data.append(`app_user_id`, id);
 
     const res = await UserServices.view_gallery(data);
     console.log("res.data", res.data.app_user_gallery_images);
