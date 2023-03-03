@@ -687,11 +687,13 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    /* identical to box height */
+    width: 128px;
+    color: #212529;
+    /* word-wrap: break-word; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-    /* Sub Text */
-
-    color: #6b7280;
   }
 
   .day {

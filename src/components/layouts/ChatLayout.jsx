@@ -52,7 +52,7 @@ function ChatLayout({ children, user }) {
             {user?.display_name}
           </p>
           <img
-            src={user?.thumbnail_img || demoProfile}
+            src={user?.thumbnail_img}
             alt=""
             style={{
               height: 58,

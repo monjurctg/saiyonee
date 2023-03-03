@@ -2,7 +2,6 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
-import UserServices from "../../services/userServices";
 import useSWR from "swr";
 import axios from "axios";
 import { getDate } from "../../utils/functions";
@@ -14,7 +13,7 @@ const ChatIndex = () => {
     "/live_chat/message_directory",
     fetcher
   );
-  console.log('getDate', getDate(data?.matched_users[0]?.latest_live_chat_message?.created_at))
+  // console.log('getDate', getDate(data?.matched_users[0]?.latest_live_chat_message?.created_at))
 
 
   let div = "";

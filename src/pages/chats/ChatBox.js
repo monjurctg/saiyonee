@@ -15,6 +15,9 @@ function ChatBox() {
   // console.log('id', id)
   const [messageUser, setMessageUser] = useState();
   const [loading, setLoading] = useState(false);
+  const [ploading, setPLoading] = useState(true);
+  console.log('ploading', ploading)
+
 
   const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
@@ -29,17 +32,16 @@ function ChatBox() {
     }
 
     let res = await UserServices.getMessage(data);
-    console.log(
-      "messageData?.data?.chat_messages?.length",
-      messageData?.data?.chat_messages?.length
-    );
+   
     if (messageData?.data?.chat_messages?.length > 0) {
+      setPLoading(false);
       let newMessage = res?.data?.data?.chat_messages[0];
       messageData?.data?.chat_messages.push(newMessage);
 
       // console.log("newMessage", newMessage);
       setmessageData(res.data);
     } else {
+      setPLoading(false);
       setmessageData(res.data);
       setuserData(res.data?.data?.other_user);
     }
@@ -120,6 +122,8 @@ function ChatBox() {
     if (md?.from_id === messageData?.data?.user.id)
       return (
         <div key={index} className="chat-body-inner-right">
+            
+
           <div
             className="write"
             style={
@@ -128,13 +132,22 @@ function ChatBox() {
               }
             }
           >
+            
             <p>{md?.message}</p>
           </div>
+          <p
+             style={{
+              fontSize:8,
+              marginBottom: 0,
+            }}
+            >{md?.created_at}</p>
         </div>
       );
     else {
       return (
         <div className="chat-body-inner-left">
+        
+
           <div
             className="write"
             style={
@@ -145,6 +158,12 @@ function ChatBox() {
           >
             <p>{md?.message}</p>
           </div>
+          <p
+            style={{
+              fontSize:8,
+              marginBottom: 0,
+            }}
+            >{md?.created_at}</p>
         </div>
       );
     }
@@ -156,7 +175,7 @@ function ChatBox() {
         <img src={plus} alt="" />
       </div> */}
 
-      <form>
+      <div>
         <input
           type="text"
           className="form-control"
@@ -164,7 +183,7 @@ function ChatBox() {
           value={messageUser}
           onChange={(e) => setMessageUser(e.target.value)}
         />
-      </form>
+      </div>
       <button
         className="send"
         style={{
@@ -188,7 +207,9 @@ function ChatBox() {
       </button>
     </div>
   );
+  
   return (
+   
     <ChatLayout user={userData}>
       <div
         className="chat-body"
@@ -196,6 +217,18 @@ function ChatBox() {
         style={{ marginTop: 80 }}
         ref={messagesEndRef}
       >
+        <div className="text-center">
+          <button
+            style={{
+              border: "none",
+              background: "#ffb7ac",
+              color: "white",
+              fontSize: 10,
+            }}
+          >
+            Load more
+          </button>
+        </div>
         {showMessageFrom}
         {/* <div className="chat-body-inner-right">
           <div>{showMessageFrom}</div>
@@ -209,7 +242,7 @@ function ChatBox() {
       {/* ////footer */}
       {footer}
     </ChatLayout>
-  );
+  )
 }
 
 export default ChatBox;

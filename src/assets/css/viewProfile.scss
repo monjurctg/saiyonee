@@ -92,7 +92,9 @@
     display: flex;
     justify-content: end;
     gap: 11px;
+    flex-direction: column;
     margin: 10px;
+    align-items: end;
 
     .write {
       background: #ffb7ac;
@@ -106,7 +108,7 @@
       p {
         margin: 0;
         font-size: 14px;
-        color: #1f2937;
+        color: #fff;
         font-weight: 400;
         /* width: 100%; */
         word-break: break-all;
@@ -123,6 +125,8 @@
     justify-content: start;
     gap: 11px;
     margin: 10px;
+    flex-direction: column;
+    align-items: baseline;
 
     .write {
       background: #fff;
@@ -185,7 +189,7 @@
     font-size: 15px;
     font-weight: 200;
     border-radius: 5px;
-    align-self: flex-end;
+    // align-self: flex-end;
 }
   .round-shape {
     width: 48px;
@@ -206,7 +210,7 @@
   }
 
   input {
-    width: 286px;
+    width: 300px;
     min-height: 56px;
     /* left: 80px; */
     /* top: 764px; */
