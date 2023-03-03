@@ -135,12 +135,15 @@ function Shortlisted() {
         ) : (
           <div
             style={{
-              minHeight: "50%",
+              minHeight: "30vh",
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
+              width: "50%",
+              margin: "0 auto",
+              textAlign: "center",
+              justifyContent: "center",
             }}>
-            <h1 
+            <h1
               style={{
                 fontSize: 20,
 
@@ -149,9 +152,9 @@ function Shortlisted() {
                 padding: 10,
                 width: "100%",
                 textAlign: "center",
-              }}
-            
-            >No data found</h1>
+              }}>
+              No data found
+            </h1>
           </div>
         )}
       </div>

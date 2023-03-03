@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AiOutlineDelete } from "react-icons/ai";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import {AiOutlineDelete} from "react-icons/ai";
 import ExploreServices from "../../services/exploreServices";
 import toastMsg from "../../utils/toastify";
-import useSWR, { useSWRConfig } from "swr";
-import { get_match_list } from "../../services/swrApi";
+import useSWR, {useSWRConfig} from "swr";
+import {get_match_list} from "../../services/swrApi";
 import fetcher from "../../utils/fetchData";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import ProfileImage from "../ProfileImage";
 
 function MatchList() {
-  // const [matchData, setMatchData] = useState([]);
-
-  // const [loading, setLoading] = useState(true);
-  const { user } = useSelector((state) => state.auth);
-  const { mutate } = useSWRConfig();
+  const {user} = useSelector((state) => state.auth);
+  const {mutate} = useSWRConfig();
   const {
     data: matchData,
     error: matchError,
@@ -44,7 +41,7 @@ function MatchList() {
     let data = new FormData();
     data.append("match_record_id", id);
     const res = await ExploreServices.unMatchUser(data);
-    // console.log(res, "res from unmatch user ");
+
     if (res.status === 200) {
       toastMsg.success("Unmatched successfully");
       // getShortisted();
@@ -109,8 +106,7 @@ function MatchList() {
                 fontWeight: 600,
                 fontStyle: "oblique",
                 textTransform: "capitalize",
-              }}
-            >
+              }}>
               {sl?.display_name}, {sl?.age}
             </h5>
           </Link>
@@ -126,21 +122,22 @@ function MatchList() {
           gap: 0,
           justifyContent:
             matchData?.matched_users.length > 1 ? "space-between" : "",
-        }}
-      >
+        }}>
         {isLoading ? (
           <div className="load">Loading...</div>
-        ) : !isLoading ? (
+        ) : matchData?.matched_users.length > 0 ? (
           matchList
         ) : (
           <div
             style={{
-              minHeight: "50%",
+              minHeight: "30vh",
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
-            }}
-          >
+              width: "50%",
+              margin: "0 auto",
+              textAlign: "center",
+              justifyContent: "center",
+            }}>
             <h1
               style={{
                 fontSize: 20,
@@ -150,8 +147,7 @@ function MatchList() {
                 padding: 10,
                 width: "100%",
                 textAlign: "center",
-              }}
-            >
+              }}>
               No data found
             </h1>
           </div>
