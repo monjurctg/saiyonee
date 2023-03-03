@@ -14,22 +14,8 @@ const ChatIndex = () => {
     "/live_chat/message_directory",
     fetcher
   );
-  console.log("Sdata", data);
-
   console.log('getDate', getDate(data?.matched_users[0]?.latest_live_chat_message?.created_at))
-  // const [authUser, setauthUser] = useState();
-  // console.log("data", data);
 
-  // let getInbox = async () => {
-  //   const res = await UserServices.getInbox();
-  //   // console.log("res ,]msg", res.data);
-  //   setauthUser(res.data?.auth_user);
-  //   setdata(res.data?.matched_users);
-  //   return res;
-  // };
-  // useEffect(() => {
-  //   getInbox();
-  // }, []);
 
   let div = "";
   if (data?.matched_users?.length > 0 && !isLoading) {
@@ -108,7 +94,7 @@ const ChatIndex = () => {
                     color: item?.new_message_available && "#000"
                   }}
                 >
-                  •{moment(getDate(item?.latest_live_chat_message?.created_at)).fromNow()}
+                  •{getDate(item?.latest_live_chat_message?.created_at)}
                 </p>
               </div>
             </div>

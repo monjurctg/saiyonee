@@ -70,10 +70,21 @@ export const stoteRegisterValues = (data) => {
   } else window.localStorage.setItem("register", JSON.stringify(data));
 };
 
-
 export const getDate = (date) => {
-  console.log('date', date?.split(' ')[0]?.split('-')?.reverse()?.join('-'))
-  let d = new Date(date?.split(' ')[0]?.split('-')?.reverse()?.join('-'));
-  console.log('d', d)
-  return d.toDateString();
-}
+  // console.log('date', date?.split(' ')[0]?.split('-')?.reverse()?.join('-'))
+  let todaysDate = new Date();
+  console.log('todaysDate', todaysDate)
+  let d = new Date(date?.split(" ")[0]?.split("-")?.reverse()?.join("-"));
+  // console.log('d', d.toDateString()?.split(' '))
+  let newArr = [
+    d.toDateString()?.split(" ")[0],
+    [
+      d.toDateString()?.split(" ")[1],
+      d.toDateString()?.split(" ")[2],
+      d.toDateString()?.split(" ")[3],
+    ],
+  ];
+  let newDate = newArr[0] + "," + newArr[1].join(" ");
+  console.log("newDate", newDate);
+  return newDate;
+};
