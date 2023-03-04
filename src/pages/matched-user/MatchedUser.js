@@ -21,6 +21,7 @@ import Loader from "../../components/Loader";
 
 const MatchedUser = () => {
   const [modal, setModal] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [singleData, setSingleData] = useState({});
 
@@ -33,7 +34,6 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
-  console.log(gender, "current user");
 
   // const {
   //   data: homeData,
@@ -157,6 +157,8 @@ const MatchedUser = () => {
     // console.log(uID);
     navigate(`/user-info/${id}/gallery`);
   };
+
+  const unMatched = () => {};
 
   useEffect(() => {
     console.log("hello route");
@@ -369,7 +371,7 @@ const MatchedUser = () => {
             </div>
           </div>
         </div>
-        <h2 style={{fontSize: 28}}>
+        <h2 style={{fontSize: 28, paddingTop: "20px"}}>
           {singleData?.structured_app_user_info?.sub_header[0]}
         </h2>
         {singleData?.structured_app_user_info?.sub_header.map((item, index) => {
@@ -483,6 +485,38 @@ const MatchedUser = () => {
         <button className="edit-btn" onClick={viewGallery}>
           View Gallery
         </button>
+      </div>
+
+      <div
+        className="buttons"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "30px",
+          position: "relative",
+          cursor: "pointer",
+        }}>
+        <button className="edit-btn" onClick={modalChange}>
+          Unmatch
+        </button>
+        <div className={`pop-up ${matchModal && "active-pop"} `}>
+          <div className="cancel" onClick={modalChange}>
+            X
+          </div>
+          <div className="unmatch-btns">
+            <button
+              className="edit-btn"
+              style={{width: "200px", height: "60px"}}>
+              Unmatch
+            </button>
+            <button
+              className="edit-btn"
+              style={{width: "200px", height: "60px"}}>
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

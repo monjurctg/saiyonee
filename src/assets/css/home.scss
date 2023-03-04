@@ -590,6 +590,39 @@
   }
 }
 
+.pop-up {
+  position: absolute;
+  height: 0px;
+  background-color: rgba(0, 0, 0, 0.301);
+  opacity: 0;
+  width: 100%;
+  overflow: none;
+  transition: all 0.4s ease-in-out;
+
+  .cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 50%;
+  }
+  .unmatch-btns {
+    display: flex;
+
+    align-items: center;
+    gap: 30px;
+    align-self: center;
+    flex-direction: column;
+  }
+}
+.active-pop {
+  height: 300px;
+  opacity: 1;
+}
+
 .modal-container {
   width: 100%;
   opacity: 0.5;
@@ -693,7 +726,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 
   .day {
