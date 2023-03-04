@@ -193,6 +193,7 @@ function ViewProfile() {
             </div>
           </div>
         </div>
+        <div style={{height: "100px"}}></div>
       </div>
     </HomeLayout>
   );

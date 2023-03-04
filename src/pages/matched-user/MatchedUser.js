@@ -71,9 +71,11 @@ const MatchedUser = () => {
     let response = await ExploreServices.getSingleMatchList(id);
     console.log(response, "response");
     if (response?.status === 200) {
-      setUID(response.data.app_user.id);
+      // setUID(response.data.app_user.id);
       setLoading(false);
       setSingleData(response.data);
+    } else {
+      setLoading(false);
     }
   }
   async function fetchLikedUser() {
@@ -157,8 +159,6 @@ const MatchedUser = () => {
     // console.log(uID);
     navigate(`/user-info/${id}/gallery`);
   };
-
-  const unMatched = () => {};
 
   useEffect(() => {
     console.log("hello route");
@@ -334,43 +334,46 @@ const MatchedUser = () => {
           url={singleData?.structured_app_user_info?.profile_img}
           gender={gender?.toLowerCase()?.trim() === "male" ? "female" : "male"}
         />
-        <div
-          className="like-btn"
-          style={{position: "relative", marginBottom: "20px"}}>
-          <div className="body-bottom">
-            <div className="items">
-              <div
-                className="item"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Dislike">
-                <img src="/img/dislike.svg" alt="" />
-              </div>
-              {/* <div
+        {["shortList", "like"].includes(route) && (
+          <div
+            className="like-btn"
+            style={{position: "relative", marginBottom: "20px"}}>
+            <div className="body-bottom">
+              <div className="items">
+                <div
+                  className="item"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Dislike">
+                  <img src="/img/dislike.svg" alt="" />
+                </div>
+                {/* <div
                 className="item"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Short list">
                 <img src="/img/task.svg" alt="" />
               </div> */}
-              <div
-                className="item"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Super Like">
-                <img src="/img/rocket.svg" alt="" />
+                <div
+                  className="item"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Super Like">
+                  <img src="/img/rocket.svg" alt="" />
+                </div>
+                <div
+                  className="item"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Like">
+                  <img src="/img/like.svg" alt="" />
+                </div>
+                {/* <div></div> */}
               </div>
-              <div
-                className="item"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Like">
-                <img src="/img/like.svg" alt="" />
-              </div>
-              {/* <div></div> */}
             </div>
           </div>
-        </div>
+        )}
+
         <h2 style={{fontSize: 28, paddingTop: "20px"}}>
           {singleData?.structured_app_user_info?.sub_header[0]}
         </h2>
@@ -486,53 +489,50 @@ const MatchedUser = () => {
           View Gallery
         </button>
       </div>
-
-      <div
-        className="buttons"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "30px",
-          position: "relative",
-          cursor: "pointer",
-        }}>
-        <button className="edit-btn" onClick={modalChange}>
-          Unmatch
-        </button>
-        <div className={`pop-up ${matchModal && "active-pop"} `}>
-          <div className="cancel" onClick={modalChange}>
-            X
-          </div>
-          <div className="unmatch-btns">
-            <button
-              className="edit-btn"
-              style={{width: "200px", height: "60px"}}>
-              Unmatch
-            </button>
-            <button
-              className="edit-btn"
-              style={{width: "200px", height: "60px"}}>
-              Cancel
-            </button>
+      {route === "match" && (
+        <div
+          className="buttons"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "30px",
+            position: "relative",
+            cursor: "pointer",
+          }}>
+          <button className="edit-btn" onClick={modalChange}>
+            Unmatch
+          </button>
+          <div
+            className={`pop-up ${
+              matchModal ? "active-pop" : "deactive-pop "
+            } `}>
+            <div
+              className="unmatch-btns"
+              style={{display: matchModal ? "flex" : "none"}}>
+              <button
+                className="edit-btn"
+                style={{width: "200px", height: "60px"}}>
+                Unmatch
+              </button>
+              <button
+                onClick={modalChange}
+                className="edit-btn"
+                style={{width: "200px", height: "60px"}}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      <div style={{height: "100px"}}></div>
     </div>
   );
 
   return (
     <>
       <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
-        {loading ? (
-          <div className="load">Loading...</div>
-        ) : route === "shortList" ? (
-          userInfo2
-        ) : route === "home" ? (
-          userInfo2
-        ) : (
-          userInfo
-        )}
+        {loading ? <div className="load">Loading...</div> : userInfo2}
       </HomeLayout>
       {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
         <img src={blur} alt="" />
