@@ -98,7 +98,7 @@ function ChatBox() {
       message: messageUser,
     };
     let res = await UserServices.message_users(data);
-    console.log("res", res.data?.errors?.message);
+    // console.log("res", res.data?.errors?.message);
 
     if (res.status === 200) {
       setLoading(false);
@@ -168,7 +168,7 @@ function ChatBox() {
         <img src={plus} alt="" />
       </div> */}
 
-      <div>
+      <div className="input">
         <input
           type="text"
           className="form-control"

@@ -183,8 +183,8 @@
   align-items: center;
 
   width: 420px;
-.send{
-  border: none;
+  .send {
+    border: none;
     padding: 10px;
     background: #ffb7ac;
     color: white;
@@ -192,7 +192,7 @@
     font-weight: 200;
     border-radius: 5px;
     // align-self: flex-end;
-}
+  }
   .round-shape {
     width: 48px;
     height: 48px;
@@ -234,6 +234,18 @@
   }
 }
 
+@media screen and (max-width: 468px) {
+  .chat-footer {
+    width: 100% !important;
+    .input{
+      width: 75% !important;
+      input{
+        width: 100% !important;
+      }
+    }
+  }
+}
+
 .logos {
   .viewProfile-no-active {
     padding-bottom: 10px;
@@ -257,7 +269,7 @@
   }
 }
 
-.glich{
+.glich {
   box-shadow: 0 0 9px 0px #dee2e6;
   border-radius: 17px;
   padding-top: 8px;
