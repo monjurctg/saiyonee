@@ -37,6 +37,30 @@ const ViewGallery = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  const Images = ({src}) => {
+    return (
+      <div
+        className="image-upload"
+        style={{
+          width: "40%",
+          height: 150,
+          margin: 0,
+        }}>
+        <img
+          src={src}
+          alt=""
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: "24px",
+            cursor: "pointer",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+      </div>
+    );
+  };
 
   return (
     <InputLayOut
@@ -46,183 +70,24 @@ const ViewGallery = () => {
       loading={loading}
       from={"gellary"}>
       <div
-        className="question mt-3 d-flex flex-wrap"
+        className="question  mt-3 d-flex flex-wrap"
         style={{
           gap: 20,
         }}>
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.profile_img ? (
-            <img
-              src={data?.profile_img}
-              alt=""
-              style={{
-                height: "140px",
-                width: "140px",
-                objectFit: "fill",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
+        {data?.profile_img && <Images src={data?.profile_img} />}
+        {data?.optional_img_1 && <Images src={data?.optional_img_1} />}
+        {data?.optional_img_2 && <Images src={data?.optional_img_2} />}
+        {data?.optional_img_3 && <Images src={data?.optional_img_3} />}
+        {data?.optional_img_4 && <Images src={data?.optional_img_4} />}
+        {data?.optional_img_5 && <Images src={data?.optional_img_5} />}
+        {!data?.profile_img &&
+          !data?.optional_img_1 &&
+          !data?.optional_img_2 &&
+          !data?.optional_img_3 &&
+          !data?.optional_img_4 &&
+          !data?.optional_img_5 && (
+            <h5 className="text-dark text-center">No Image</h5>
           )}
-        </div>
-
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.optional_img_1 ? (
-            <img
-              src={data?.optional_img_1}
-              alt=""
-              style={{
-                width: data?.optional_img_1 && "100%",
-                borderRadius: 24,
-                height: data?.optional_img_1 && "100%",
-                display: images?.optional_img_1 && "none",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
-          )}
-        </div>
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.optional_img_2 ? (
-            <img
-              src={data?.optional_img_2}
-              alt=""
-              style={{
-                width: data?.optional_img_2 && "100%",
-                borderRadius: 24,
-                height: data?.optional_img_2 && "100%",
-                display: images?.optional_img_2 && "none",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
-          )}
-        </div>
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.optional_img_3 ? (
-            <img
-              src={data?.optional_img_3}
-              alt=""
-              style={{
-                width: data?.optional_img_3 && "100%",
-                borderRadius: 24,
-                height: data?.optional_img_3 && "100%",
-                display: images?.optional_img_3 && "none",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
-          )}
-        </div>
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.optional_img_4 ? (
-            <img
-              src={data?.optional_img_4}
-              alt=""
-              style={{
-                width: data?.optional_img_4 && "100%",
-                borderRadius: 24,
-                height: data?.optional_img_4 && "100%",
-                display: images?.optional_img_4 && "none",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
-          )}
-        </div>
-        <div
-          className="image-upload"
-          style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
-          }}>
-          {data?.optional_img_5 ? (
-            <img
-              src={data?.optional_img_5}
-              alt=""
-              style={{
-                width: data?.optional_img_5 && "100%",
-                borderRadius: 24,
-                height: data?.optional_img_5 && "100%",
-                display: images?.optional_img_5 && "none",
-                cursor: "pointer",
-              }}
-            />
-          ) : (
-            <img
-              src="/img/no_image_available.svg"
-              alt=""
-              style={{
-                height: "100px",
-              }}
-            />
-          )}
-        </div>
       </div>
     </InputLayOut>
   );
