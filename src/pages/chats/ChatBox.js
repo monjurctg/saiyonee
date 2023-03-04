@@ -26,7 +26,7 @@ function ChatBox() {
   // console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
 
-  let getMessage = async (data) => {
+  let getMessage = async (data,sendBtn) => {
     // console.log('data', data)
     if (!data) {
       data = { match_id: id };
@@ -34,8 +34,10 @@ function ChatBox() {
 
     let res = await UserServices.getMessage(data);
    
-    if (messageData?.data?.chat_messages?.length > 0) {
+    if (messageData?.data?.chat_messages?.length > 0 && !sendBtn) {
+      console.log('second')
       if(res.res?.data?.data?.chat_messages?.length > 0){
+
         setloadMessage('Load more messages')
         let newMessage = res?.data?.data?.chat_messages[0];
         console.log('newMessage', newMessage)
@@ -50,6 +52,7 @@ function ChatBox() {
       // // setPLoading(false);
      
     } else {
+      console.log('first')
       setPLoading(false);
       setmessageData(res.data);
       setuserData(res.data?.data?.other_user);
@@ -97,7 +100,7 @@ function ChatBox() {
     if (res.status === 200) {
       setLoading(false);
       setMessageUser("");
-      getMessage();
+      getMessage({ match_id: id },true);
     }
     // console.log("res", res);
   };
