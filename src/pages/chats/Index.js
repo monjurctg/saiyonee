@@ -88,12 +88,14 @@ const ChatIndex = () => {
                 <p
                   className="day"
                   style={{
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: item?.new_message_available ? "bold" : "normal",
                     color: item?.new_message_available && "#000"
                   }}
                 >
-                  •{getDate(item?.latest_live_chat_message?.created_at)}
+                  {/* {getDate(item?.latest_live_chat_message?.created_at)} */}
+                    {item?.latest_live_chat_message?.created_at}
+
                 </p>
               </div>
             </div>

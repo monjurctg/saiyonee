@@ -16,6 +16,7 @@ function ChatBox() {
   const [messageUser, setMessageUser] = useState();
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(true);
+  const [loadMessage, setloadMessage] = useState('Load more messages')
   console.log('ploading', ploading)
 
 
@@ -34,12 +35,20 @@ function ChatBox() {
     let res = await UserServices.getMessage(data);
    
     if (messageData?.data?.chat_messages?.length > 0) {
-      setPLoading(false);
-      let newMessage = res?.data?.data?.chat_messages[0];
-      messageData?.data?.chat_messages.push(newMessage);
-
-      // console.log("newMessage", newMessage);
-      setmessageData(res.data);
+      if(res.res?.data?.data?.chat_messages?.length > 0){
+        setloadMessage('Load more messages')
+        let newMessage = res?.data?.data?.chat_messages[0];
+        console.log('newMessage', newMessage)
+        messageData?.data?.chat_messages.push(newMessage);
+  
+        // console.log("newMessage", newMessage);
+        setmessageData(res.data);
+      }else{
+        setloadMessage('No more messages')
+      }
+      // console.log('res', res)
+      // // setPLoading(false);
+     
     } else {
       setPLoading(false);
       setmessageData(res.data);
@@ -47,7 +56,6 @@ function ChatBox() {
     }
     // console.log('res', res.data)
   };
-  // console.log("messageData", userData);
   let scrollToBottomF = () => {
     console.log("ss");
     // messagesEndRef.current.scrollTo({
@@ -58,33 +66,13 @@ function ChatBox() {
   };
 
   useEffect(() => {
-    if (scrollPos == 0) {
-      console.log("first");
-      console.log(
-        "f",
-        messageData?.data?.chat_messages[
-          messageData?.data?.chat_messages.length - 1
-        ]?.id
-      );
-      getMessage({
-        match_id: id,
-        oldest_message_id:
-          messageData?.data?.chat_messages[
-            messageData?.data?.chat_messages.length - 1
-          ]?.id,
-      });
+    const container = messagesEndRef.current;
+    if (container) {
+      console.log('first', container.scrollTop, container.scrollHeight)
+      container.scrollTop = container.scrollHeight;
     }
-  }, [scrollPos]);
+  }, [messageData]);
 
-  useEffect(() => {
-    if (!messagesEndRef.current && !messageData) return;
-    const handleScroll = () => {
-      setScrollPos(messagesEndRef.current.scrollTop);
-    };
-    messagesEndRef.current.addEventListener("scroll", handleScroll);
-    return () =>
-      messagesEndRef?.current?.removeEventListener("scroll", handleScroll);
-  }, [messagesEndRef]);
 
   useEffect(() => {
     // scrollToBottom();
@@ -96,10 +84,6 @@ function ChatBox() {
     //     }
   }, []);
 
-  useEffect(() => {
-    // scrollToBottom();
-    scrollToBottomF();
-  }, [messageData]);
 
   let sendMessages = async () => {
     // e.preventDefault();
@@ -225,21 +209,25 @@ function ChatBox() {
               color: "white",
               fontSize: 10,
             }}
+
+            onClick={() => {
+              console.log("ss");
+              setloadMessage('Loading...')
+              getMessage({
+                match_id: id,
+                oldest_message_id:
+                  messageData?.data?.chat_messages[0
+                  ]?.id,
+              });
+            }}
+
           >
-            Load more
+            {loadMessage}
           </button>
         </div>
         {showMessageFrom}
-        {/* <div className="chat-body-inner-right">
-          <div>{showMessageFrom}</div>
-          {/* <img src={demoProfile} alt="" /> */}
-        {/* </div>
-        <div className="chat-body-inner-left">
-          <img src={demoProfile} alt="" />
-          <div>{showMessageTo}</div>
-        </div> */}
       </div>
-      {/* ////footer */}
+
       {footer}
     </ChatLayout>
   )
