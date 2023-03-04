@@ -42,7 +42,7 @@
 
 .explore_viewProfile {
   // background: #ffffff;
-  height: 70vh;
+  // height: 70vh;
   margin-bottom: 30px;
   overflow: auto;
   border-radius: 24px;
@@ -183,8 +183,8 @@
   align-items: center;
 
   width: 420px;
-.send{
-  border: none;
+  .send {
+    border: none;
     padding: 10px;
     background: #ffb7ac;
     color: white;
@@ -192,7 +192,7 @@
     font-weight: 200;
     border-radius: 5px;
     // align-self: flex-end;
-}
+  }
   .round-shape {
     width: 48px;
     height: 48px;
@@ -257,7 +257,7 @@
   }
 }
 
-.glich{
+.glich {
   box-shadow: 0 0 9px 0px #dee2e6;
   border-radius: 17px;
   padding-top: 8px;
