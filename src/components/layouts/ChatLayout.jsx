@@ -41,12 +41,15 @@ function ChatLayout({ children, user }) {
 
           <p
             style={{
-              fontWeight: 500,
+              fontWeight: 800,
               fontSize: 16,
               lineHeight: "24px",
               color: "#1F2937",
               marginBottom: 0,
-              marginRight: 15,
+              // marginRight: 15,
+              width:'40%',
+              textAlign:'center'
+
             }}
           >
             {user?.display_name}

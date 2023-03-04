@@ -76,7 +76,7 @@ UserServices.completion = () => {
 };
 
 UserServices.message_users = async (data) => {
-  const res = await axios.post("/live_chat/submit_chat_message", data);
+  const res = await axios.post("/live_chat/submit_chat_message", data).then((res) => res).catch((err) => err.response);
   return res;
 };
 

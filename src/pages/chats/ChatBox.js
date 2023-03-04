@@ -9,6 +9,7 @@ import plus from "../../assets/imgs/plus.png";
 import ChatLayout from "../../components/layouts/ChatLayout";
 import UserServices from "../../services/userServices";
 import { AiOutlineSend } from "react-icons/ai";
+import toastMsg from "../../utils/toastify";
 
 function ChatBox() {
   const { id } = useParams();
@@ -97,12 +98,17 @@ function ChatBox() {
       message: messageUser,
     };
     let res = await UserServices.message_users(data);
+    console.log("res", res.data?.errors?.message);
+
     if (res.status === 200) {
       setLoading(false);
       setMessageUser("");
       getMessage({ match_id: id },true);
+    }else{
+      setLoading(false);
+      setMessageUser("");
+      toastMsg.error(res.data?.errors?.message[0])
     }
-    // console.log("res", res);
   };
 
   let showMessageFrom = messageData?.data?.chat_messages.map((md, index) => {
