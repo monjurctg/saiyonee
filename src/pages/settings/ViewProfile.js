@@ -121,6 +121,7 @@ function ViewProfile() {
               <h2
                 style={{
                   marginBottom: 0,
+                  fontSize: "25px",
                 }}>
                 {profile_img ? sub_header[0] : ""}
               </h2>

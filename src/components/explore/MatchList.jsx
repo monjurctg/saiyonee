@@ -106,8 +106,9 @@ function MatchList() {
                 fontWeight: 600,
                 fontStyle: "oblique",
                 textTransform: "capitalize",
+                paddingBottom: "10px",
               }}>
-              {sl?.display_name}, {sl?.age}
+              {sl?.display_name?.slice(0, 15)}, {sl?.age}
             </h5>
           </Link>
         </div>
