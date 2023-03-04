@@ -79,7 +79,7 @@
 }
 
 .chat-body {
-  height: 60vh;
+  height: 70vh;
   overflow-y: scroll;
 
   img {
@@ -98,11 +98,12 @@
 
     .write {
       background: #ffb7ac;
-      min-width: 120px;
+      min-width: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 5px 15px;
+      max-width: 80%;
       border-radius: 5px;
 
       p {
@@ -129,12 +130,13 @@
     align-items: baseline;
 
     .write {
-      background: #fff;
-      min-width: 120px;
+      background: #dee2e6;
+      min-width: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 5px 15px;
+      max-width: 80%;
       border-radius: 5px;
 
       p {

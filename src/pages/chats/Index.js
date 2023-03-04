@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import useSWR from "swr";
 import axios from "axios";
+import ProfileImage from "../../components/ProfileImage";
 import { getDate } from "../../utils/functions";
 
 const fetcher = (url) => axios.post(url).then((res) => res.data);
@@ -14,7 +15,6 @@ const ChatIndex = () => {
     fetcher
   );
   // console.log('getDate', getDate(data?.matched_users[0]?.latest_live_chat_message?.created_at))
-
 
   let div = "";
   if (data?.matched_users?.length > 0 && !isLoading) {
@@ -27,44 +27,43 @@ const ChatIndex = () => {
             background: item?.new_message_available && "#ffb7ac36",
           }}
         >
-          <div className="d-flex justify-content-around align-items-center">
+          <div className="d-flex justify-content-around align-items-center"
+          style={{
+            padding: 10,
+          }}
+          >
             <div
               style={{
-                width: "30%",
+                width: "20%",
               }}
             >
-              {!item?.latest_live_chat_message?.to_user?.thumbnail_img ? (
-                <img
-                  src={item?.latest_live_chat_message?.to_user?.thumbnail_img}
-                  alt=""
-                  style={{
-                    width: 70,
-                    justifyContent: "center",
-                    display: "flex",
-                    alignItems: "center",
-                    height: 70,
-                    borderRadius: "50%",
-                    /* background: #ffb7ac36; */
-                    marginTop: 10,
-                    padding: 10,
-                  }}
-                />
-              ) : (
-                <p className="no-image" w>
+              <ProfileImage
+                style={{
+                  width: 58,
+                  height: 58,
+                  objectFit: "cover",
+                  border: "1px solid #ffb7ac",
+                  borderRadius: "50%",
+                }}
+                url={item?.latest_live_chat_message?.to_user?.thumbnail_img}
+                gender={item?.latest_live_chat_message?.to_user?.gender}
+              />
+              {/* <img src={item?.latest_live_chat_message?.to_user?.thumbnail_img} alt=''/> */}
+              {/* <p className="no-image" w>
                   image
-                </p>
-              )}
+                </p> */}
             </div>
             {/* <p className="no-image">image</p> */}
             <div
               style={{
-                width: "70%",
+                width: "80%",
               }}
             >
-              <p className="name"
-              style={{
-                fontWeight: item?.new_message_available ? "bold" : "normal",
-              }}
+              <p
+                className="name"
+                style={{
+                  fontWeight: item?.new_message_available ? "bold" : "normal",
+                }}
               >
                 {item?.latest_live_chat_message?.to_user?.display_name}
               </p>
@@ -75,11 +74,12 @@ const ChatIndex = () => {
                   gap: 15,
                 }}
               >
-                <p className="message"
-                 style={{
-                  fontWeight: item?.new_message_available ? "bold" : "normal",
-                  color: item?.new_message_available && "#000"
-                }}
+                <p
+                  className="message"
+                  style={{
+                    fontWeight: item?.new_message_available ? "bold" : "normal",
+                    color: item?.new_message_available && "#000",
+                  }}
                 >
                   {item?.latest_live_chat_message?.from_user?.id ===
                     data?.auth_user?.id && <span>You:</span>}
@@ -90,12 +90,11 @@ const ChatIndex = () => {
                   style={{
                     fontSize: 10,
                     fontWeight: item?.new_message_available ? "bold" : "normal",
-                    color: item?.new_message_available && "#000"
+                    color: item?.new_message_available && "#000",
                   }}
                 >
                   {/* {getDate(item?.latest_live_chat_message?.created_at)} */}
-                    {item?.latest_live_chat_message?.created_at}
-
+                  {item?.latest_live_chat_message?.created_at}
                 </p>
               </div>
             </div>
