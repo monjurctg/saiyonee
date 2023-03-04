@@ -15,6 +15,10 @@ function ChatBox() {
   // console.log('id', id)
   const [messageUser, setMessageUser] = useState();
   const [loading, setLoading] = useState(false);
+  const [ploading, setPLoading] = useState(true);
+  const [loadMessage, setloadMessage] = useState('Load more messages')
+  console.log('ploading', ploading)
+
 
   const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
@@ -29,23 +33,29 @@ function ChatBox() {
     }
 
     let res = await UserServices.getMessage(data);
-    console.log(
-      "messageData?.data?.chat_messages?.length",
-      messageData?.data?.chat_messages?.length
-    );
+   
     if (messageData?.data?.chat_messages?.length > 0) {
-      let newMessage = res?.data?.data?.chat_messages[0];
-      messageData?.data?.chat_messages.push(newMessage);
-
-      // console.log("newMessage", newMessage);
-      setmessageData(res.data);
+      if(res.res?.data?.data?.chat_messages?.length > 0){
+        setloadMessage('Load more messages')
+        let newMessage = res?.data?.data?.chat_messages[0];
+        console.log('newMessage', newMessage)
+        messageData?.data?.chat_messages.push(newMessage);
+  
+        // console.log("newMessage", newMessage);
+        setmessageData(res.data);
+      }else{
+        setloadMessage('No more messages')
+      }
+      // console.log('res', res)
+      // // setPLoading(false);
+     
     } else {
+      setPLoading(false);
       setmessageData(res.data);
       setuserData(res.data?.data?.other_user);
     }
     // console.log('res', res.data)
   };
-  // console.log("messageData", userData);
   let scrollToBottomF = () => {
     console.log("ss");
     // messagesEndRef.current.scrollTo({
@@ -56,33 +66,13 @@ function ChatBox() {
   };
 
   useEffect(() => {
-    if (scrollPos == 0) {
-      console.log("first");
-      console.log(
-        "f",
-        messageData?.data?.chat_messages[
-          messageData?.data?.chat_messages.length - 1
-        ]?.id
-      );
-      getMessage({
-        match_id: id,
-        oldest_message_id:
-          messageData?.data?.chat_messages[
-            messageData?.data?.chat_messages.length - 1
-          ]?.id,
-      });
+    const container = messagesEndRef.current;
+    if (container) {
+      console.log('first', container.scrollTop, container.scrollHeight)
+      container.scrollTop = container.scrollHeight;
     }
-  }, [scrollPos]);
+  }, [messageData]);
 
-  useEffect(() => {
-    if (!messagesEndRef.current && !messageData) return;
-    const handleScroll = () => {
-      setScrollPos(messagesEndRef.current.scrollTop);
-    };
-    messagesEndRef.current.addEventListener("scroll", handleScroll);
-    return () =>
-      messagesEndRef?.current?.removeEventListener("scroll", handleScroll);
-  }, [messagesEndRef]);
 
   useEffect(() => {
     // scrollToBottom();
@@ -94,10 +84,6 @@ function ChatBox() {
     //     }
   }, []);
 
-  useEffect(() => {
-    // scrollToBottom();
-    scrollToBottomF();
-  }, [messageData]);
 
   let sendMessages = async () => {
     // e.preventDefault();
@@ -120,6 +106,8 @@ function ChatBox() {
     if (md?.from_id === messageData?.data?.user.id)
       return (
         <div key={index} className="chat-body-inner-right">
+            
+
           <div
             className="write"
             style={
@@ -128,13 +116,22 @@ function ChatBox() {
               }
             }
           >
+            
             <p>{md?.message}</p>
           </div>
+          <p
+             style={{
+              fontSize:8,
+              marginBottom: 0,
+            }}
+            >{md?.created_at}</p>
         </div>
       );
     else {
       return (
         <div className="chat-body-inner-left">
+        
+
           <div
             className="write"
             style={
@@ -145,6 +142,12 @@ function ChatBox() {
           >
             <p>{md?.message}</p>
           </div>
+          <p
+            style={{
+              fontSize:8,
+              marginBottom: 0,
+            }}
+            >{md?.created_at}</p>
         </div>
       );
     }
@@ -156,7 +159,7 @@ function ChatBox() {
         <img src={plus} alt="" />
       </div> */}
 
-      <form>
+      <div>
         <input
           type="text"
           className="form-control"
@@ -164,7 +167,7 @@ function ChatBox() {
           value={messageUser}
           onChange={(e) => setMessageUser(e.target.value)}
         />
-      </form>
+      </div>
       <button
         className="send"
         style={{
@@ -188,7 +191,9 @@ function ChatBox() {
       </button>
     </div>
   );
+  
   return (
+   
     <ChatLayout user={userData}>
       <div
         className="chat-body"
@@ -196,20 +201,36 @@ function ChatBox() {
         style={{ marginTop: 80 }}
         ref={messagesEndRef}
       >
+        <div className="text-center">
+          <button
+            style={{
+              border: "none",
+              background: "#ffb7ac",
+              color: "white",
+              fontSize: 10,
+            }}
+
+            onClick={() => {
+              console.log("ss");
+              setloadMessage('Loading...')
+              getMessage({
+                match_id: id,
+                oldest_message_id:
+                  messageData?.data?.chat_messages[0
+                  ]?.id,
+              });
+            }}
+
+          >
+            {loadMessage}
+          </button>
+        </div>
         {showMessageFrom}
-        {/* <div className="chat-body-inner-right">
-          <div>{showMessageFrom}</div>
-          {/* <img src={demoProfile} alt="" /> */}
-        {/* </div>
-        <div className="chat-body-inner-left">
-          <img src={demoProfile} alt="" />
-          <div>{showMessageTo}</div>
-        </div> */}
       </div>
-      {/* ////footer */}
+
       {footer}
     </ChatLayout>
-  );
+  )
 }
 
 export default ChatBox;
