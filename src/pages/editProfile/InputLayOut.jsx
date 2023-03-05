@@ -25,7 +25,7 @@ function InputLayOut({
         // "#F9FAFB"
       }}>
       <div className=" d-flex flex-column max-width-mobile mx-auto">
-        <div className="container px-4">
+        <div className="container">
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-2 image-invert"

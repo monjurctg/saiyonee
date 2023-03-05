@@ -17,59 +17,16 @@ function MatchList() {
     error: matchError,
     isLoading,
   } = useSWR("/match_making/get_match_list", fetcher);
-  // const loading = !matchData && !matchError;
 
-  // let getShortisted = async () => {
-  //   setLoading(true);
-  //   let res = await ExploreServices.getMatchUsers();
-
-  //   if (res.status === 200) {
-  //     setMatchData(res.data.matched_users);
-  //     // console.log(res.data.matched_users, "matched_users");
-  //     setLoading(false);
-  //   } else {
-  //     // console.log(res);
-  //     // setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getShortisted();
-  // }, []);
-
-  const unmatchHandler = async (id) => {
-    let data = new FormData();
-    data.append("match_record_id", id);
-    const res = await ExploreServices.unMatchUser(data);
-
-    if (res.status === 200) {
-      toastMsg.success("Unmatched successfully");
-      // getShortisted();
-      mutate("/match_making/get_match_list");
-    }
-  };
-
-  // console.log(
-  //   "matchData?.matched_users.length > 1",
-  //   matchData?.matched_users.length
-  // );
-  // console.log(
-  //   "matchData?.matched_users.length > 1",
-  //   matchData?.matched_users.length > 1
-  // );
   let matchList =
     !isLoading &&
     matchData?.matched_users?.map((sl, index) => {
       return (
         <div className="explore-img" key={index}>
-          <div className="cross" onClick={() => unmatchHandler(sl?.match_id)}>
+          {/* <div className="cross" onClick={() => unmatchHandler(sl?.match_id)}>
             <img height={10} src="/img/cross.png" alt="" />
-            {/* <AiOutlineDelete style={{
-              height: 20,
-              width: 20,
-              color: "red",
-            }}/> */}
-          </div>
+           
+          </div> */}
 
           <Link to={`/user-info/match/${sl?.id}`}>
             {/* {sl?.thumbnail_img_url ? (

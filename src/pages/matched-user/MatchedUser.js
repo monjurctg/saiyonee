@@ -35,14 +35,6 @@ const MatchedUser = () => {
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
 
-  // const {
-  //   data: homeData,
-  //   error: homeError,
-  //   isLoading,
-  // } = useSWR(
-  //   "/app_users/get_home_page_single_user_info/",
-  //   ExploreServices.getSingleHomeuser(id)
-  // );
   let {group_1, group_2, group_3, group_4} =
     singleData?.structured_app_user_info?.app_user_detail ?? {};
 
@@ -109,7 +101,6 @@ const MatchedUser = () => {
         toastMsg.success(res.data.message);
         navigate(-1);
       } else {
-        console.log(res, "res from like");
         toastMsg.error(res.response.data.message, "hello");
       }
     } else if (task === "dislike") {
@@ -117,11 +108,9 @@ const MatchedUser = () => {
       if (res.status === 200) {
         toastMsg.success(res.data.message);
       } else {
-        console.log(res, "res from dislike");
+        // console.log(res, "res from dislike");
         toastMsg.error(res.response.data.message, "hello");
       }
-    } else if (task === "addShort_list") {
-      addShortlist(id);
     } else if (task === "supper_like_submit") {
       let data = new FormData();
 
@@ -138,20 +127,16 @@ const MatchedUser = () => {
     }
   };
 
-  const addShortlist = async (id) => {
+  const handleUnmatch = async (id) => {
     let data = new FormData();
+    data.append("match_record_id", id);
+    const res = await ExploreServices.unMatchUser(data);
 
-    data.append("shortlist_app_user_id", id);
-    console.log(id, "id");
-
-    const res = await ExploreServices.submitShortList(data);
     if (res.status === 200) {
-      toastMsg.success(res.data.message);
-      // getData();
-    } else {
-      console.log(res);
-
-      toastMsg.error(res.response.data.message);
+      toastMsg.success("Unmatched successfully");
+      navigate("/explore?Match-list");
+      dispatch(setMatchModal(false));
+      // getShortisted();
     }
   };
 
@@ -202,131 +187,6 @@ const MatchedUser = () => {
     </div>
   );
 
-  let userInfo = (
-    <div className="explore_viewProfile text-center">
-      <div className="content-container">
-        <ProfileImage
-          url={
-            singleData?.app_user?.profile_img ||
-            singleData?.app_user?.thumbnail_img_url
-          }
-          gender={singleData?.gender}
-        />
-        {/* <img className="user-img" src={singleData?.app_user?.profile_img} /> */}
-        <h2>{singleData?.app_user?.display_name}</h2>
-
-        <p
-          style={{
-            textAlign: "Center",
-          }}>
-          <span className="short-description">
-            {singleData?.app_user?.designation}
-          </span>
-          <span className="short-description">
-            {singleData?.app_user?.current_city},
-            {singleData?.app_user?.current_country},
-          </span>
-          <span className="short-description">
-            Age {singleData?.app_user?.age}
-          </span>
-        </p>
-        <h4
-          style={{
-            paddingLeft: 20,
-          }}>
-          Personal Details
-        </h4>
-
-        <p
-          style={{
-            color: "#000",
-
-            fontSize: "14px",
-          }}>
-          Name : {singleData?.app_user?.display_name}
-          <br />
-          Age :{singleData?.app_user?.age}
-          <br />
-          {/* Gender :{singleData?.app_user?.gender} */}
-          <br />
-          Height :{singleData?.app_user?.height_feet} feet{" "}
-          {singleData?.app_user?.height_inches} inches
-          <br />
-          Weight {singleData?.app_user?.weight}
-          <br />
-          Marital Status :{singleData?.app_user?.marital_status}
-          <br />
-          Marital Timing
-          <br />
-          Date of Birth :{singleData?.app_user?.date_of_birth}
-          {/* <br />
-      Blood group
-      <br />
-      Nationality
-      <br />
-      Mother Tongue
-      <br />
-      Physical Status
-    */}
-        </p>
-
-        <h4
-          style={{
-            paddingLeft: 20,
-          }}>
-          Professional Details
-        </h4>
-
-        <p
-          style={{
-            color: "#000",
-
-            fontSize: "14px",
-          }}>
-          Company Name
-          <br />
-          Position : Manager
-          <br />
-          Address : Lalmatia
-          <br />
-          LinkedIn Account Verified
-        </p>
-
-        <h4
-          style={{
-            paddingLeft: 20,
-          }}>
-          Educational qualification
-        </h4>
-
-        <p
-          style={{
-            color: "#000",
-
-            fontSize: "14px",
-          }}>
-          University :{singleData?.app_user?.education3_institution}
-          <br />
-          College : {singleData?.app_user?.education2_institution}
-          <br />
-          School :{singleData?.app_user?.education1_institution}
-        </p>
-      </div>
-
-      <div
-        className="buttons"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "30px",
-        }}>
-        <button className="edit-btn" onClick={viewGallery}>
-          View Gallery
-        </button>
-      </div>
-    </div>
-  );
   let userInfo2 = (
     <div className="explore_viewProfile text-center">
       <div className="content-container">
@@ -341,6 +201,7 @@ const MatchedUser = () => {
             <div className="body-bottom">
               <div className="items">
                 <div
+                  onClick={() => getActiveSlide("dislike", id)}
                   className="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -355,6 +216,7 @@ const MatchedUser = () => {
                 <img src="/img/task.svg" alt="" />
               </div> */}
                 <div
+                  onClick={() => getActiveSlide("supper_like_submit", id)}
                   className="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -362,6 +224,7 @@ const MatchedUser = () => {
                   <img src="/img/rocket.svg" alt="" />
                 </div>
                 <div
+                  onClick={() => getActiveSlide("like", id)}
                   className="item"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -511,6 +374,7 @@ const MatchedUser = () => {
               className="unmatch-btns"
               style={{display: matchModal ? "flex" : "none"}}>
               <button
+                onClick={() => handleUnmatch(singleData?.match_id)}
                 className="edit-btn"
                 style={{width: "200px", height: "60px"}}>
                 Unmatch
@@ -531,24 +395,9 @@ const MatchedUser = () => {
 
   return (
     <>
-      <HomeLayout tab={tab} footer={footer} match={singleData?.match_id}>
+      <HomeLayout footer={footer} match={singleData?.match_id}>
         {loading ? <div className="load">Loading...</div> : userInfo2}
       </HomeLayout>
-      {/* <div className={`modal-user ${matchModal ? "transit" : ""}`}>
-        <img src={blur} alt="" />
-        <div className="modal-div" style={{opacity: matchModal ? 1 : 0}}>
-          <div className=" texts">
-            <img src={cross} alt="" />
-            <p className="text">Unmatch user</p>
-          </div>
-
-          <button className="unmatch" onClick={modalChange}>
-            {" "}
-            Unmatch
-          </button>
-          <button className="cancel"> Cancel</button>
-        </div>
-      </div> */}
     </>
   );
 };
