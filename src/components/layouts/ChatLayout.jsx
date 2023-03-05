@@ -29,7 +29,7 @@ function ChatLayout({ children, user }) {
       >
         <div
           className="d-flex justify-content-between align-items-center"
-          style={{ gap: 55, marginTop: 20 }}
+          style={{marginTop: 20 }}
         >
           <div
             onClick={() => navigate(-1)}

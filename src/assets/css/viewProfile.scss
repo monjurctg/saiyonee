@@ -234,6 +234,18 @@
   }
 }
 
+@media screen and (max-width: 468px) {
+  .chat-footer {
+    width: 100% !important;
+    .input{
+      width: 75% !important;
+      input{
+        width: 100% !important;
+      }
+    }
+  }
+}
+
 .logos {
   .viewProfile-no-active {
     padding-bottom: 10px;
