@@ -44,7 +44,7 @@ const ViewGallery = () => {
       <div
         className="image-upload"
         style={{
-          width: "47%",
+          width: "45%",
           height: 170,
           margin: 0,
         }}>

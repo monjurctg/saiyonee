@@ -635,7 +635,7 @@
   height: 340px;
 
   top: 10px;
-  width: 100%;
+  width: 100% !important;
   background-color: #1f2937;
   .cross {
     width: 40px;
@@ -648,7 +648,7 @@
   }
 
   img {
-    width: 100%;
+    width: 100% !important;
     height: 300px;
     object-fit: cover;
     object-position: center;
@@ -686,6 +686,17 @@
 .card-title {
   font-size: 25px !important;
   font-family: "Inter" !important;
+}
+
+.position-abs {
+  position: absolute;
+  bottom: 0;
+  width: 420px;
+  @media screen and (max-width: 500px) {
+    .position-abs {
+      width: 100% !important;
+    }
+  }
 }
 
 .add-photos {
