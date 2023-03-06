@@ -373,18 +373,38 @@ const MatchedUser = () => {
             <div
               className="unmatch-btns"
               style={{display: matchModal ? "flex" : "none"}}>
-              <button
-                onClick={() => handleUnmatch(singleData?.match_id)}
-                className="edit-btn"
-                style={{width: "200px", height: "60px"}}>
-                Unmatch
-              </button>
-              <button
-                onClick={modalChange}
-                className="edit-btn"
-                style={{width: "200px", height: "60px"}}>
-                Cancel
-              </button>
+              <p className="text-dark">
+                Are you sure you want to unmatch this user?
+              </p>
+              <div className="d-flex g-4">
+                <button
+                  onClick={() => handleUnmatch(singleData?.match_id)}
+                  className=""
+                  style={{
+                    width: "110px",
+                    height: "40px",
+                    textAlign: "center",
+                    border: "none",
+                    background: "#ffb7ac",
+                    borderRadius: "30px",
+                  }}>
+                  Unmatch
+                </button>
+                <button
+                  onClick={modalChange}
+                  className=""
+                  style={{
+                    width: "110px",
+                    height: "40px",
+                    textAlign: "center",
+                    border: "none",
+                    background: "#ffb7ac",
+                    borderRadius: "30px",
+                    marginLeft: "20px",
+                  }}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
