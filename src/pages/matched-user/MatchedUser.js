@@ -373,7 +373,7 @@ const MatchedUser = () => {
             <div
               className="unmatch-btns"
               style={{display: matchModal ? "flex" : "none"}}>
-              <p className="text-dark">
+              <p className="text-dark fw-bold">
                 Are you sure you want to unmatch this user?
               </p>
               <div className="d-flex g-4">
