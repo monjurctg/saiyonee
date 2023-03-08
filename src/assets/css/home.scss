@@ -601,6 +601,8 @@
   overflow: none;
   padding-top: 40px;
   transition: all 0.6s ease-in-out;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
   margin-bottom: 50px;
 
@@ -621,6 +623,35 @@
     gap: 30px;
     align-self: center;
     flex-direction: column;
+  }
+}
+.img-modal-active {
+  display: block;
+}
+.img-modal-deactive {
+  display: none;
+}
+.img-modal {
+  height: 340px;
+
+  top: 10px;
+  width: 100% !important;
+  background-color: #1f2937;
+  .cross {
+    width: 40px;
+    color: white;
+    display: flex;
+    margin-top: 10px;
+
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  img {
+    width: 100% !important;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
   }
 }
 .active-pop {
@@ -655,6 +686,17 @@
 .card-title {
   font-size: 25px !important;
   font-family: "Inter" !important;
+}
+
+.position-abs {
+  position: absolute;
+  bottom: 0;
+  width: 420px;
+  @media screen and (max-width: 500px) {
+    .position-abs {
+      width: 100% !important;
+    }
+  }
 }
 
 .add-photos {

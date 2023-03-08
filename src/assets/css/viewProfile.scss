@@ -235,11 +235,14 @@
 }
 
 @media screen and (max-width: 468px) {
+  .position-abs {
+    width: 100% !important;
+  }
   .chat-footer {
     width: 100% !important;
-    .input{
+    .input {
       width: 75% !important;
-      input{
+      input {
         width: 100% !important;
       }
     }

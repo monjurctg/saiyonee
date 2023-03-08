@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import QuestionServices from "../../services/questionServices";
 import UserServices from "../../services/userServices";
@@ -7,15 +7,15 @@ import useSWR from "swr";
 
 import "./../../assets/css/settingsStyle.scss";
 import fetcher from "../../utils/fetchData";
-import { percentageSWR } from "../../services/swrApi";
+import {percentageSWR} from "../../services/swrApi";
 
 const Settings = () => {
   // const [profile, setprofile] = useState();
   // const [percentage, setpercentage] = useState(0);
 
   const [loading, setLoading] = useState(true);
-  const { data: profile, error: profileError } = useSWR("/user", fetcher);
-  const { data: percentage, error: percentageError } = useSWR(
+  const {data: profile, error: profileError} = useSWR("/user", fetcher);
+  const {data: percentage, error: percentageError} = useSWR(
     `/form_fields/calculate_profile_completion_precentage`,
     fetcher
   );
@@ -40,37 +40,10 @@ const Settings = () => {
     return left;
   };
 
-  // const Navigate = useNavigate();
-
-  // let userProfile = async () => {
-  //   let res = await UserServices.UserProfile();
-  // let percentageV = await UserServices.completion();
-  //   // console.log('percentage', percentage)
-  //   // console.log("res", res.data);
-  //   if (res.status === 200) {
-  //     setprofile(res.data);
-  //     setpercentage(percentageV.data?.percentage_completion);
-  //     setLoading(false);
-  //   }
-  // };
-  // useEffect(() => {
-  //   userProfile();
-  // }, []);
-
   return (
     <HomeLayout>
       {!profile ? (
-        <div
-          style={{
-            height: "70vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <div class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
+        <div className="load">Loading...</div>
       ) : (
         <div
           className="mt-3"
@@ -93,11 +66,11 @@ const Settings = () => {
             {/* {profile?.profile_img ? ( */}
             <div
               className="rounded-img"
-            // style={{
-            //   background: `conic-gradient(#ffb7ac  ${percentageCal(
-            //     percentage
-            //   )}deg,#dee2e6 33deg)`,
-            // }}
+              // style={{
+              //   background: `conic-gradient(#ffb7ac  ${percentageCal(
+              //     percentage
+              //   )}deg,#dee2e6 33deg)`,
+              // }}
             >
               {/* <input type={"range"}/> */}
               <img src={profile?.profile_img || "img/home.svg"} alt="" />
@@ -141,7 +114,6 @@ const Settings = () => {
                 }}>
                 {percentage?.percentage_completion + "%"}
               </p>
-
             </div>
           </div>
 
@@ -163,11 +135,11 @@ const Settings = () => {
             className="buttons justify-content-center">
             <button
               className="edit-btn"
-              style={{ width: "80%", marin: "0 auto", marginBottom: 10 }}>
+              style={{width: "80%", marin: "0 auto", marginBottom: 10}}>
               View Gallery
             </button>
           </Link>
-          <div style={{ height: 100 }}></div>
+          <div style={{height: 100}}></div>
         </div>
       )}
     </HomeLayout>

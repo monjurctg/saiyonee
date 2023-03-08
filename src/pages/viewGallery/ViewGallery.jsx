@@ -11,6 +11,8 @@ const ViewGallery = () => {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [imgModal, setImgModal] = useState(false);
+  const [modalImg, setModalIMg] = useState();
   const [images, setimages] = useState({
     optional_img_1: "",
     optional_img_2: "",
@@ -42,11 +44,15 @@ const ViewGallery = () => {
       <div
         className="image-upload"
         style={{
-          width: "40%",
-          height: 150,
+          width: "45%",
+          height: 170,
           margin: 0,
         }}>
         <img
+          onClick={() => {
+            setModalIMg(src);
+            setImgModal(true);
+          }}
           src={src}
           alt=""
           style={{
@@ -74,6 +80,20 @@ const ViewGallery = () => {
         style={{
           gap: 20,
         }}>
+        <div
+          className={` img-modal  ${
+            imgModal ? "img-modal-active" : "img-modal-deactive"
+          }`}>
+          <p
+            className="cross"
+            onClick={() => {
+              setImgModal(false);
+              setModalIMg("");
+            }}>
+            X
+          </p>
+          <img src={modalImg} />
+        </div>
         {data?.profile_img && <Images src={data?.profile_img} />}
         {data?.optional_img_1 && <Images src={data?.optional_img_1} />}
         {data?.optional_img_2 && <Images src={data?.optional_img_2} />}

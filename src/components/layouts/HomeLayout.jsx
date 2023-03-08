@@ -189,6 +189,7 @@ function HomeLayout({
         style={{
           background: background || "rgb(255, 255, 255)",
           position: "fixed",
+          zIndex: 99999,
           top: pathname === "home" ? 20 : 0,
           borderTopRightRadius: pathname === "home" ? 0 : 35,
           borderTopLeftRadius: pathname === "home" ? 0 : 35,
