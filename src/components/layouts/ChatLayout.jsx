@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 
-function ChatLayout({ children, user }) {
+function ChatLayout({ children, user, matchedTime }) {
   const navigate = useNavigate();
-  console.log("user", user);
+  console.log("matchedTime", matchedTime);
   return (
     <div
       //   className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative mt-2 mb-2"S
@@ -29,7 +29,7 @@ function ChatLayout({ children, user }) {
       >
         <div
           className="d-flex justify-content-between align-items-center"
-          style={{marginTop: 20 }}
+          style={{ marginTop: 20 }}
         >
           <div
             onClick={() => navigate(-1)}
@@ -47,12 +47,20 @@ function ChatLayout({ children, user }) {
               color: "#1F2937",
               marginBottom: 0,
               // marginRight: 15,
-              width:'40%',
-              textAlign:'center'
-
+              width: "40%",
+              textAlign: "center",
             }}
           >
             {user?.display_name}
+            <span
+              style={{
+                display: "block",
+                margin: -6,
+                fontSize: 10,
+              }}
+            >
+              {matchedTime}
+            </span>
           </p>
           <img
             src={user?.thumbnail_img}

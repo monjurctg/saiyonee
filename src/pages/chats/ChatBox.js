@@ -25,7 +25,7 @@ function ChatBox() {
   const [scrollPos, setScrollPos] = useState();
   // console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
-  console.log("messageData", messageData);
+  // console.log("messageData", messageData);
 
   let getMessage = async (data, sendBtn) => {
     // console.log('data', data)
@@ -40,7 +40,7 @@ function ChatBox() {
       if (res.res?.data?.data?.chat_messages?.length > 0) {
         setloadMessage("Load more messages");
         let newMessage = res?.data?.data?.chat_messages[0];
-        console.log("newMessage", newMessage);
+        // console.log("newMessage", newMessage);
         messageData?.data?.chat_messages.push(newMessage);
 
         // console.log("newMessage", newMessage);
@@ -108,7 +108,7 @@ function ChatBox() {
   };
 
   let showMessageFrom = messageData?.data?.chat_messages.map((md, index) => {
-    if (md?.from_id === messageData?.data?.user.id)
+    if (md?.from_id == messageData?.data?.user.id)
       return (
         <div key={index} className="chat-body-inner-right">
           <div
@@ -160,7 +160,9 @@ function ChatBox() {
   let footer =
     messageData?.match_active === false ? (
       <p style={{ color: "red", fontSize: 15, marginTop: 10,textAlign:"center" }}>
-        Match is not active
+        User has been unmatched at {
+          messageData?.unmatched_date
+        }
       </p>
     ) : (
       <div className="chat-footer d-flex">
@@ -203,7 +205,11 @@ function ChatBox() {
     );
 
   return (
-    <ChatLayout user={userData}>
+    <ChatLayout user={userData}
+    matchedTime={messageData?.unmatched_date}
+    
+    // matched_date
+    >
       <div
         className="chat-body"
         id="chat-body"
