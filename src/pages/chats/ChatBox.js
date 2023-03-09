@@ -17,43 +17,41 @@ function ChatBox() {
   const [messageUser, setMessageUser] = useState();
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(true);
-  const [loadMessage, setloadMessage] = useState('Load more messages')
-  console.log('ploading', ploading)
-
+  const [loadMessage, setloadMessage] = useState("Load more messages");
+  // console.log('ploading', ploading)
 
   const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
   const [scrollPos, setScrollPos] = useState();
   // console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
+  // console.log("messageData", messageData);
 
-  let getMessage = async (data,sendBtn) => {
+  let getMessage = async (data, sendBtn) => {
     // console.log('data', data)
     if (!data) {
       data = { match_id: id };
     }
 
     let res = await UserServices.getMessage(data);
-   
-    if (messageData?.data?.chat_messages?.length > 0 && !sendBtn) {
-      console.log('second')
-      if(res.res?.data?.data?.chat_messages?.length > 0){
 
-        setloadMessage('Load more messages')
+    if (messageData?.data?.chat_messages?.length > 0 && !sendBtn) {
+      // console.log('second')
+      if (res.res?.data?.data?.chat_messages?.length > 0) {
+        setloadMessage("Load more messages");
         let newMessage = res?.data?.data?.chat_messages[0];
-        console.log('newMessage', newMessage)
+        // console.log("newMessage", newMessage);
         messageData?.data?.chat_messages.push(newMessage);
-  
+
         // console.log("newMessage", newMessage);
         setmessageData(res.data);
-      }else{
-        setloadMessage('No more messages')
+      } else {
+        setloadMessage("No more messages");
       }
       // console.log('res', res)
       // // setPLoading(false);
-     
     } else {
-      console.log('first')
+      // console.log('first')
       setPLoading(false);
       setmessageData(res.data);
       setuserData(res.data?.data?.other_user);
@@ -72,11 +70,10 @@ function ChatBox() {
   useEffect(() => {
     const container = messagesEndRef.current;
     if (container) {
-      console.log('first', container.scrollTop, container.scrollHeight)
+      console.log("first", container.scrollTop, container.scrollHeight);
       container.scrollTop = container.scrollHeight;
     }
   }, [messageData]);
-
 
   useEffect(() => {
     // scrollToBottom();
@@ -87,7 +84,6 @@ function ChatBox() {
     //       clearInterval(interval);
     //     }
   }, []);
-
 
   let sendMessages = async () => {
     // e.preventDefault();
@@ -103,20 +99,18 @@ function ChatBox() {
     if (res.status === 200) {
       setLoading(false);
       setMessageUser("");
-      getMessage({ match_id: id },true);
-    }else{
+      getMessage({ match_id: id }, true);
+    } else {
       setLoading(false);
       setMessageUser("");
-      toastMsg.error(res.data?.errors?.message[0])
+      toastMsg.error(res.data?.errors?.message[0]);
     }
   };
 
   let showMessageFrom = messageData?.data?.chat_messages.map((md, index) => {
-    if (md?.from_id === messageData?.data?.user.id)
+    if (md?.from_id == messageData?.data?.user.id)
       return (
         <div key={index} className="chat-body-inner-right">
-            
-
           <div
             className="write"
             style={
@@ -125,22 +119,21 @@ function ChatBox() {
               }
             }
           >
-            
             <p>{md?.message}</p>
           </div>
           <p
-             style={{
-              fontSize:8,
+            style={{
+              fontSize: 8,
               marginBottom: 0,
             }}
-            >{md?.created_at}</p>
+          >
+            {md?.created_at}
+          </p>
         </div>
       );
     else {
       return (
         <div className="chat-body-inner-left">
-        
-
           <div
             className="write"
             style={
@@ -153,57 +146,70 @@ function ChatBox() {
           </div>
           <p
             style={{
-              fontSize:8,
+              fontSize: 8,
               marginBottom: 0,
             }}
-            >{md?.created_at}</p>
+          >
+            {md?.created_at}
+          </p>
         </div>
       );
     }
   });
 
-  let footer = (
-    <div className="chat-footer d-flex">
-      {/* <div className="round-shape">
+  let footer =
+    messageData?.match_active === false ? (
+      <p style={{ color: "red", fontSize: 15, marginTop: 10,textAlign:"center" }}>
+        User has been unmatched at {
+          messageData?.unmatched_date
+        }
+      </p>
+    ) : (
+      <div className="chat-footer d-flex">
+        {/* <div className="round-shape">
         <img src={plus} alt="" />
       </div> */}
 
-      <div className="input">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Type something..."
-          value={messageUser}
-          onChange={(e) => setMessageUser(e.target.value)}
-        />
-      </div>
-      <button
-        className="send"
-        style={{
-          opacity: loading && "0.8",
-        }}
-        onClick={() => {
-          if (!loading) {
-          console.log('loading', loading)
+        <div className="input">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Type something..."
+            value={messageUser}
+            onChange={(e) => setMessageUser(e.target.value)}
+          />
+        </div>
 
-            sendMessages();
-          }
-        }}
-      >
-        {loading ? (
-          "Sending..."
-        ) : (
-          <>
-            Send <AiOutlineSend />
-          </>
-        )}
-      </button>
-    </div>
-  );
-  
+        <button
+          className="send"
+          style={{
+            opacity: loading && "0.8",
+          }}
+          onClick={() => {
+            if (!loading) {
+              console.log("loading", loading);
+
+              sendMessages();
+            }
+          }}
+        >
+          {loading ? (
+            "Sending..."
+          ) : (
+            <>
+              Send <AiOutlineSend />
+            </>
+          )}
+        </button>
+      </div>
+    );
+
   return (
-   
-    <ChatLayout user={userData}>
+    <ChatLayout user={userData}
+    matchedTime={messageData?.unmatched_date}
+    
+    // matched_date
+    >
       <div
         className="chat-body"
         id="chat-body"
@@ -218,18 +224,14 @@ function ChatBox() {
               color: "white",
               fontSize: 10,
             }}
-
             onClick={() => {
               console.log("ss");
-              setloadMessage('Loading...')
+              setloadMessage("Loading...");
               getMessage({
                 match_id: id,
-                oldest_message_id:
-                  messageData?.data?.chat_messages[0
-                  ]?.id,
+                oldest_message_id: messageData?.data?.chat_messages[0]?.id,
               });
             }}
-
           >
             {loadMessage}
           </button>
@@ -239,7 +241,7 @@ function ChatBox() {
 
       {footer}
     </ChatLayout>
-  )
+  );
 }
 
 export default ChatBox;
