@@ -11,7 +11,11 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {getToken} from "../../utils/functions";
 import setRouteToken from "../../utils/tokenSet";
 import {useDispatch, useSelector} from "react-redux";
-import {set_is_ques} from "../../redux/slices/utilsSlice";
+import {
+  setFilterErrorMessage,
+  setFilterModalShow,
+  set_is_ques,
+} from "../../redux/slices/utilsSlice";
 import QuestionServices from "../../services/questionServices";
 import {setCurrentUser} from "../../redux/slices/authSlices";
 import PreferenceServices from "../../services/preferenceServices";
@@ -21,12 +25,19 @@ import toastMsg from "../../utils/toastify";
 function Index() {
   const [data, setData] = useState(null);
   const [likeSlide, setLikeSlide] = useState("");
+  const dispatch = useDispatch();
+
   // const [isLimited, setIslimited] = useState(false);
-  const [isFilterModalShow, setFilterModalShow] = useState(false);
-  const [filterErrorMessage, setFilterErrorMessage] = useState();
+  // const [isFilterModalShow, setFilterModalShow] = useState(false);
+  // const [filterErrorMessage, setFilterErrorMessage] = useState();
   // console.log('data in ', data)
+  const {filterErrorMessage, isFilterModalShow} = useSelector(
+    (state) => state.utils
+  );
+
   const [gettingUser, setgettingUser] = useState(false);
 
+  console.log(isFilterModalShow, "profile");
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
@@ -41,15 +52,15 @@ function Index() {
       setgettingUser(false);
 
       if (res?.data?.show_in_modal) {
-        setFilterErrorMessage(res?.data);
+        dispatch(setFilterErrorMessage(res?.data));
         // setIslimited(false);
-        setFilterModalShow(res?.data?.show_in_modal);
+        dispatch(setFilterModalShow(res?.data?.show_in_modal));
       }
       console.log(res.response.data.show_in_modal, "res from res.da");
       if (res.response.data.show_in_modal) {
         // setIslimited(true);
-        setFilterErrorMessage(res.response.data);
-        setFilterModalShow(res.response.data.show_in_modal);
+        dispatch(setFilterErrorMessage(res.response.data));
+        dispatch(setFilterModalShow(res.response.data.show_in_modal));
       } else {
         toastMsg.error(res.response.data.message);
       }
@@ -63,8 +74,6 @@ function Index() {
   if (getToken()) {
     setRouteToken(getToken());
   }
-
-  const dispatch = useDispatch();
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
@@ -195,7 +204,7 @@ function Index() {
 
           {filterErrorMessage?.show_go_to_home_button && (
             <div
-              onClick={() => setFilterModalShow(false)}
+              onClick={() => dispatch(setFilterModalShow(false))}
               style={{
                 color: "black",
                 // border: "1px solid gray",
@@ -227,11 +236,11 @@ function Index() {
       <Swipers
         // isLimited={isLimited}
         // setIslimited={setIslimited}
-        setFilterModalShow={setFilterModalShow}
+        // setFilterModalShow={setFilterModalShow}
         getData={getData}
         data={data}
         likeSlide={likeSlide}
-        setFilterErrorMessage={setFilterErrorMessage}
+        // setFilterErrorMessage={setFilterErrorMessage}
         setLikeSlide={setLikeSlide}
       />
     );

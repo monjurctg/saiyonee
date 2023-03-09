@@ -6,19 +6,24 @@ import toastMsg from "../../utils/toastify";
 import {Link, useNavigate} from "react-router-dom";
 import Explore from "../../pages/home/Explore";
 import ExploreServices from "../../services/exploreServices";
+import {useDispatch} from "react-redux";
+import {
+  setFilterErrorMessage,
+  setFilterModalShow,
+} from "../../redux/slices/utilsSlice";
 
 function Swipers({
   data,
   getData,
   likeSlide,
-  setFilterModalShow,
+
   setLikeSlide,
-  setFilterErrorMessage,
 }) {
   // console.log("data", data);
   const [submited, setSubmited] = useState(false);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
+  const dispatch = useDispatch();
 
   let getBoomData = async () => {
     let res = await UserServices.matched_users();
@@ -60,8 +65,8 @@ function Swipers({
       } else {
         getData();
         if (res.response.data.show_in_modal) {
-          setFilterErrorMessage(res.response.data);
-          setFilterModalShow(res.response.data.show_in_modal);
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -78,8 +83,8 @@ function Swipers({
         }, 2000);
       } else {
         if (res.response.data.show_in_modal) {
-          setFilterErrorMessage(res.response.data);
-          setFilterModalShow(res.response.data.show_in_modal);
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -99,8 +104,8 @@ function Swipers({
         console.log(res, "super like");
 
         if (res.response.data.show_in_modal) {
-          setFilterErrorMessage(res.response.data);
-          setFilterModalShow(res.response.data.show_in_modal);
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
         } else {
           toastMsg.error(res.response.data.message);
         }
@@ -121,8 +126,8 @@ function Swipers({
     } else {
       console.log("hello", res);
       if (res.response.data.show_in_modal) {
-        setFilterErrorMessage(res.response.data);
-        setFilterModalShow(res.response.data.show_in_modal);
+        dispatch(setFilterErrorMessage(res.response.data));
+        dispatch(setFilterModalShow(res.response.data.show_in_modal));
       } else {
         toastMsg.error(res.response.data.message);
       }

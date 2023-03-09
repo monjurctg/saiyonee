@@ -5,6 +5,8 @@ const initialState = {
   isProfileQuesionExist: null,
   isSelfieQuestionExist: null,
   matchModal: false,
+  filterErrorMessage: {},
+  isFilterModalShow: false,
 };
 
 const utilsSlice = createSlice({
@@ -23,8 +25,21 @@ const utilsSlice = createSlice({
     setMatchModal: (state, {payload}) => {
       state.matchModal = payload;
     },
+    setFilterModalShow: (state, {payload}) => {
+      state.isFilterModalShow = payload;
+    },
+    setFilterErrorMessage: (state, {payload}) => {
+      state.filterErrorMessage = payload;
+    },
   },
 });
 
-export const {set_is_image, set_is_ques, set_is_selfie,setMatchModal} = utilsSlice.actions;
+export const {
+  set_is_image,
+  set_is_ques,
+  set_is_selfie,
+  setMatchModal,
+  setFilterErrorMessage,
+  setFilterModalShow,
+} = utilsSlice.actions;
 export default utilsSlice.reducer;

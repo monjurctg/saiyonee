@@ -37,14 +37,15 @@ function InputLayOut({
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           style={{
-            height: "100vh",
+            minHeight: "70vh",
+            overflow: "auto",
           }}>
           <h1>{title}</h1>
 
           {children}
         </div>
 
-        <div className="container px-4 pt-2 position-abs">
+        <div className="container px-4 pt-2 ">
           {err && <p className="text-primary">* {err}</p>}
           {from !== "gellary" && (
             <button

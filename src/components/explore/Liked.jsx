@@ -41,16 +41,16 @@ function Liked({id}) {
   // }, []);
   // console.log('LikeData', LikeData)
 
-  let LikeList = ''
-  if(LikeData?.liked_by_users?.length > 0){
-    LikeList =  (LikeData?.liked_by_users).map((ll, index) => {
+  let LikeList = "";
+  if (LikeData?.liked_by_users?.length > 0) {
+    LikeList = (LikeData?.liked_by_users).map((ll, index) => {
       return (
         <div className="explore-img" key={index}>
           <div className="cross">
             {" "}
             <img height={15} src="/img/cross.png" alt="" />
           </div>
-          <Link to={`/user-info/like/${ll.id}`}>
+          <Link to={`/user-info/${id ? "supperLike" : "like"}/${ll.id}`}>
             {/* {ll?.thumbnail_img ? (
               <img
                 src={ll?.thumbnail_img}
@@ -75,15 +75,17 @@ function Liked({id}) {
               }}
               url={ll?.thumbnail_img_url}
               gender={
-                user?.gender?.toLowerCase()?.trim() === "male" ? "female" : "male"
+                user?.gender?.toLowerCase()?.trim() === "male"
+                  ? "female"
+                  : "male"
               }
             />
-  
+
             <h5
               style={{
                 fontSize: "14px",
                 paddingTop: "10px",
-  
+
                 color: "#000",
                 textAlign: "center",
               }}>
@@ -93,33 +95,33 @@ function Liked({id}) {
         </div>
       );
     });
-  }else if( !isLoading && LikeData?.liked_by_users?.length === 0){
-    LikeList = <div
-    style={{
-      minHeight: "30vh",
-      display: "flex",
-      alignItems: "center",
-      width: "50%",
-      margin: "0 auto",
-      textAlign: "center",
-      justifyContent: "center",
-    }}>
-    <h1
+  } else if (!isLoading && LikeData?.liked_by_users?.length === 0) {
+    LikeList = (
+      <div
         style={{
-          fontSize: 20,
-
-          border: "1px solid #dee2e6",
-          color: "#ffb7ac",
-          padding: 10,
-          width: "100%",
+          minHeight: "30vh",
+          display: "flex",
+          alignItems: "center",
+          width: "50%",
+          margin: "0 auto",
           textAlign: "center",
-        }}
-      >
-      No data found
-    </h1>
-  </div>
+          justifyContent: "center",
+        }}>
+        <h1
+          style={{
+            fontSize: 20,
+
+            border: "1px solid #dee2e6",
+            color: "#ffb7ac",
+            padding: 10,
+            width: "100%",
+            textAlign: "center",
+          }}>
+          No data found
+        </h1>
+      </div>
+    );
   }
- 
 
   return (
     <div className="mt-2">
@@ -130,8 +132,7 @@ function Liked({id}) {
           justifyContent:
             LikeList?.length <= 1 ? "space-between" : "space-around",
         }}>
-         {LikeList}
-        
+        {LikeList}
       </div>
     </div>
   );

@@ -11,7 +11,11 @@ import rocket from "../../assets/imgs/rocket.svg";
 import like from "../../assets/imgs/like.svg";
 import useSWR from "swr";
 import {useDispatch, useSelector} from "react-redux";
-import {setMatchModal} from "../../redux/slices/utilsSlice";
+import {
+  setFilterErrorMessage,
+  setFilterModalShow,
+  setMatchModal,
+} from "../../redux/slices/utilsSlice";
 import UserServices from "../../services/userServices";
 import toastMsg from "../../utils/toastify";
 import HomeLayout from "../../components/layouts/HomeLayout";
@@ -34,6 +38,16 @@ const MatchedUser = () => {
   const {matchModal} = useSelector((state) => state.utils);
   const navigate = useNavigate();
   const {gender} = useSelector((state) => state?.auth?.user);
+
+  const navigateTo = () => {
+    if (route === "like") {
+      navigate("/explore?Liked");
+    } else if (route === "shortList") {
+      navigate("/explore?Shortlist");
+    } else if (route === "supperLike") {
+      navigate("/explore?SuperLiked");
+    }
+  };
 
   let {group_1, group_2, group_3, group_4} =
     singleData?.structured_app_user_info?.app_user_detail ?? {};
@@ -70,14 +84,27 @@ const MatchedUser = () => {
       setLoading(false);
     }
   }
+
   async function fetchLikedUser() {
     setLoading(true);
 
-    let response = await ExploreServices.getSingleLiked(id);
-    // console.log(response, "response");
-    if (response.status === 200) {
+    try {
+      let res = await ExploreServices.getSingleLiked(id);
+      // console.log(response, "response");
+      if (res.status === 200) {
+        setLoading(false);
+        setSingleData(res?.data);
+      } else {
+        console.log(res, "res from like");
+
+        setLoading(false);
+        toastMsg.error(res.response.data.message);
+        navigateTo();
+      }
+    } catch (err) {
       setLoading(false);
-      setSingleData(response?.data);
+      toastMsg.error(err.response.message);
+      navigateTo();
     }
   }
 
@@ -99,17 +126,30 @@ const MatchedUser = () => {
       let res = await UserServices.like_user(id);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
-        navigate(-1);
+        navigate("/boom");
       } else {
-        toastMsg.error(res.response.data.message, "hello");
+        if (res.response.data.show_in_modal) {
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
+          navigate("/home");
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
+
+        // toastMsg.error(res.response.data.message, "hello");
       }
     } else if (task === "dislike") {
       let res = await UserServices.dislike_user(id);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
+        navigateTo();
       } else {
-        // console.log(res, "res from dislike");
-        toastMsg.error(res.response.data.message, "hello");
+        if (res.response.data.show_in_modal) {
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
       }
     } else if (task === "supper_like_submit") {
       let data = new FormData();
@@ -121,8 +161,12 @@ const MatchedUser = () => {
 
         // getData();
       } else {
-        toastMsg.error(res.error.message);
-        console.log(res, "res");
+        if (res.response.data.show_in_modal) {
+          dispatch(setFilterErrorMessage(res.response.data));
+          dispatch(setFilterModalShow(res.response.data.show_in_modal));
+        } else {
+          toastMsg.error(res.response.data.message);
+        }
       }
     }
   };
@@ -151,7 +195,7 @@ const MatchedUser = () => {
       fetchShortUser();
     } else if (route === "match") {
       fetchMatchUser();
-    } else if (route == "like") {
+    } else if (route == "like" || "supperLike") {
       fetchLikedUser();
     } else if (route === "home") {
       fetchHomeuser();
@@ -194,7 +238,7 @@ const MatchedUser = () => {
           url={singleData?.structured_app_user_info?.profile_img}
           gender={gender?.toLowerCase()?.trim() === "male" ? "female" : "male"}
         />
-        {["shortList", "like"].includes(route) && (
+        {["shortList", "like", "supperLike"].includes(route) && (
           <div
             className="like-btn"
             style={{position: "relative", marginBottom: "20px"}}>
