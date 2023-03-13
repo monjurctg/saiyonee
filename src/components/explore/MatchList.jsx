@@ -60,10 +60,6 @@ function MatchList() {
 
                 color: "#000",
                 textAlign: "center",
-                fontWeight: 600,
-                fontStyle: "oblique",
-                textTransform: "capitalize",
-                paddingBottom: "10px",
               }}>
               {sl?.display_name?.slice(0, 15)}, {sl?.age}
             </h5>
@@ -79,7 +75,9 @@ function MatchList() {
         style={{
           gap: 0,
           justifyContent:
-            matchData?.matched_users.length > 1 ? "space-between" : "",
+            matchData?.matched_users.length <= 1
+              ? "space-between"
+              : "space-around",
         }}>
         {isLoading ? (
           <div className="load">Loading...</div>
