@@ -195,10 +195,10 @@ const MatchedUser = () => {
       fetchShortUser();
     } else if (route === "match") {
       fetchMatchUser();
-    } else if (route == "like" || "supperLike") {
-      fetchLikedUser();
     } else if (route === "home") {
       fetchHomeuser();
+    } else if (route == "like" || "supperLike") {
+      fetchLikedUser();
     }
   }, [id, route]);
   let tab = (
