@@ -45,7 +45,11 @@ const ChatIndex = () => {
                   border: "1px solid #ffb7ac",
                   borderRadius: "50%",
                 }}
-                url={item?.latest_live_chat_message?.to_user?.thumbnail_img}
+                url={
+                  
+                  item?.latest_live_chat_message?.from_user?.id ==
+                  data?.auth_user?.id ? item?.latest_live_chat_message?.to_user?.thumbnail_img : item?.latest_live_chat_message?.from_user?.thumbnail_img
+                }
                 gender={item?.latest_live_chat_message?.to_user?.gender}
               />
               {/* <img src={item?.latest_live_chat_message?.to_user?.thumbnail_img} alt=''/> */}
@@ -65,7 +69,9 @@ const ChatIndex = () => {
                   fontWeight: item?.new_message_available ? "bold" : "normal",
                 }}
               >
-                {item?.latest_live_chat_message?.to_user?.display_name}
+                {
+                item?.latest_live_chat_message?.from_user?.id ==
+                data?.auth_user?.id ? item?.latest_live_chat_message?.to_user?.display_name : item?.latest_live_chat_message?.from_user?.display_name}
               </p>
               <div
                 className="d-flex"
