@@ -17,7 +17,7 @@ function App() {
     "multipart/form-data; charset=utf-8";
   axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-  axios.defaults.baseURL = "https://testingsaiyonee.betteraidbd.com/api";
+  axios.defaults.baseURL = "https://testing.saiyonee.com/api";
 
   // axios.defaults.headers.Authorization = getToken()  ? `Bearer ${getToken()}`: "";
 

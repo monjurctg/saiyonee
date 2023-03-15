@@ -19,7 +19,7 @@ export const initialRegState = {
   education3_institution: "",
   education3_major: "",
   education3_passing_year: "",
-  education4: "Select education",
+  education4: "",
   education4_institution: "",
   education4_major: "",
   education4_passing_year: "",
