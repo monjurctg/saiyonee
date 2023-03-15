@@ -72,7 +72,7 @@ function PersonalInformation() {
         setErr({
           error: "inc",
           message:
-            "Height cannot be less than 0 inches or greater than 12 inches",
+            "Height cannot be less than 0 inches or greater than 11 inches",
         });
         return;
       } else {

@@ -62,32 +62,32 @@ function Ocupation() {
       return;
     }
 
-    if (
-      (!employeeType?.includes(current_employment_type) && !employer_name) ||
-      !current_employment_type
-    ) {
-      setErr({
-        error: "employer_name",
-        message: "Employer cannot be blank",
-      });
-      return;
-    }
+    // if (
+    //   (!employeeType?.includes(current_employment_type) && !employer_name) ||
+    //   !current_employment_type
+    // ) {
+    //   setErr({
+    //     error: "employer_name",
+    //     message: "Employer cannot be blank",
+    //   });
+    //   return;
+    // }
 
-    if (!employeeType?.includes(current_employment_type) && !designation) {
-      setErr({
-        error: "designation",
-        message: "Designation cannot be blank",
-      });
-      return;
-    }
+    // if (!employeeType?.includes(current_employment_type) && !designation) {
+    //   setErr({
+    //     error: "designation",
+    //     message: "Designation cannot be blank",
+    //   });
+    //   return;
+    // }
 
-    if (!employeeType?.includes(current_employment_type) && !working_since) {
-      setErr({
-        error: "working_since",
-        message: "Working since is  mandatory",
-      });
-      return;
-    }
+    // if (!employeeType?.includes(current_employment_type) && !working_since) {
+    //   setErr({
+    //     error: "working_since",
+    //     message: "Working since is  mandatory",
+    //   });
+    //   return;
+    // }
 
     if (!socialToken) {
       let data = {
