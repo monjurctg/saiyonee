@@ -319,10 +319,10 @@ console.log('data now', data)
             <div
               onClick={() => navigate(`/user-info/home/${data?.id}`)}
               style={{
-                marginLeft: "75%",
-                marginTop: 18,
-                height: 25,
-                width: 70,
+                marginLeft: "63%",
+                marginTop: 30,
+                height: 35,
+                width: 130,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -339,7 +339,7 @@ console.log('data now', data)
                     style={{height: 20, width: 17}}
                   />
                 </span>
-                <span style={{fontSize: 12, marginLeft: 4}}>View</span>
+                <span style={{fontSize: 12, marginLeft: 4}}>View full profile</span>
               </div>
             </div>
           )}
