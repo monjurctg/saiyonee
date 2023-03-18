@@ -19,7 +19,7 @@ function Swipers({
 
   setLikeSlide,
 }) {
-  // console.log("data", data);
+  console.log("data in swiper", data);
   const [submited, setSubmited] = useState(false);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();

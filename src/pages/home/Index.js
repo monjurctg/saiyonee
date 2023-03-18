@@ -24,6 +24,7 @@ import toastMsg from "../../utils/toastify";
 
 function Index() {
   const [data, setData] = useState(null);
+  
   const [likeSlide, setLikeSlide] = useState("");
   const dispatch = useDispatch();
 
@@ -35,34 +36,40 @@ function Index() {
     (state) => state.utils
   );
 
+  console.log('data isFilterModalShow', isFilterModalShow)
+
   const [gettingUser, setgettingUser] = useState(false);
 
-  console.log(isFilterModalShow, "profile");
+  // console.log(isFilterModalShow, "profile");
   const navigate = useNavigate();
   let getData = async () => {
     setgettingUser(true);
     // setIslimited(false);
 
     let res = await UserServices.filter_users();
-
+    console.log('data response', res)
+    
     if (res.status === 200) {
+      console.log('data now in', res )
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
+      dispatch(setFilterModalShow(false));
     } else {
       setgettingUser(false);
+      console.log('data now else', res?.response )
 
       if (res?.data?.show_in_modal) {
         dispatch(setFilterErrorMessage(res?.data));
         // setIslimited(false);
         dispatch(setFilterModalShow(res?.data?.show_in_modal));
       }
-      console.log(res.response.data.show_in_modal, "res from res.da");
-      if (res.response.data.show_in_modal) {
+  
+      if (res?.response?.data?.show_in_modal) {
         // setIslimited(true);
         dispatch(setFilterErrorMessage(res.response.data));
         dispatch(setFilterModalShow(res.response.data.show_in_modal));
       } else {
-        toastMsg.error(res.response.data.message);
+        toastMsg.error(res?.response?.data?.message);
       }
     }
 
@@ -229,9 +236,10 @@ function Index() {
       </div>
     </div>
   );
-
+console.log('data now', data)
   let show = "";
   if (data && !gettingUser) {
+    console.log('data 1')
     show = (
       <Swipers
         // isLimited={isLimited}
@@ -245,6 +253,7 @@ function Index() {
       />
     );
   } else if (gettingUser) {
+    console.log('data 2')
     show = (
       <div
         className="d-flex justify-content-center align-items-center "
@@ -259,6 +268,7 @@ function Index() {
       </div>
     );
   } else if (data?.filtered_users?.length === 0 && !gettingUser) {
+    console.log('data 3')
     show = (
       <div
         style={{
