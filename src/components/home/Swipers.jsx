@@ -117,7 +117,7 @@ function Swipers({
     let data = new FormData();
 
     data.append("shortlist_app_user_id", id);
-    console.log(id, "id");
+    // console.log(id, "id");
 
     const res = await ExploreServices.submitShortList(data);
     if (res.status === 200) {

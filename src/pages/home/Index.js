@@ -330,6 +330,8 @@ console.log('data now', data)
                 borderRadius: 10,
                 zIndex: "999999",
                 cursor: "pointer",
+                position: "absolute",
+                bottom: 50,
               }}>
               <div className="d-flex  justify-content-around align-items-center">
                 <span>
