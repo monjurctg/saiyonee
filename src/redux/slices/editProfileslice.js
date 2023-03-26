@@ -12,6 +12,15 @@ const initialState = {
   age_to: "",
   height_feet: "",
   height_inches: "",
+  weight: "",
+  father_occupation: "",
+  mother_occupation: "",
+  number_of_brothers: "",
+  number_of_sisters: "",
+  passingYear1: "",
+  passingYear2: "",
+  education1: "",
+  education2: "",
 };
 
 const EditProfileSlice = createSlice({
@@ -37,19 +46,24 @@ const EditProfileSlice = createSlice({
     setEditProfileCity: (state, {payload}) => {
       state.city = payload;
     },
-    setEditProfileQuestion: (state, {payload}) => {
-      state.dynamicQuestion = payload;
-    },
-    setEditProfileHeight: (state, {payload}) => {
-      state.age_from = payload.age_from;
-      state.age_to = payload.age_to;
-      state.height_feet = payload.height_feet;
-      state.height_inches = payload.height_inches;
-    },
+
     setEditDisplayName: (state, {payload}) => {
       state.displayName = payload;
     },
-    setPreviousEditProfile: (state, {payload}) => {
+    setEdu1PassYear: (state, {payload}) => {
+      console.log(payload, "from set passing year redux");
+      state.passingYear1 = payload;
+    },
+    setEdu2PassYear: (state, {payload}) => {
+      state.passingYear2 = payload;
+    },
+    setEduTpe1: (state, {payload}) => {
+      state.education1 = payload;
+    },
+    setEduTpe2: (state, {payload}) => {
+      state.education2 = payload;
+    },
+    setEditProfile: (state, {payload}) => {
       state.age_from = payload.age_from ?? "";
       state.age_to = payload.age_to ?? "";
       state.displayName = payload.display_name ?? "";
@@ -59,18 +73,29 @@ const EditProfileSlice = createSlice({
       state.employType = payload.current_employment_type ?? "";
       state.religion = payload.religion ?? "";
       state.maritalStatus = payload.marital_status ?? "";
+      state.height_feet = payload.height_feet ?? "";
+      state.height_inches = payload.height_inches ?? "";
+      state.weight = payload.weight ?? "";
+      state.father_occupation = payload.father_occupation ?? "";
+      state.mother_occupation = payload.mother_occupation ?? "";
+      state.number_of_brothers = payload.number_of_brothers ?? "";
+      state.number_of_sisters = payload.number_of_sisters ?? "";
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },
 });
 
 export const {
+  setEdu1PassYear,
+  setEdu2PassYear,
+  setEduTpe1,
+  setEduTpe2,
   setEditProfileEmployType,
   setEditProfileGender,
   setEditProfileHeight,
   setEditProfileMaritalStatus,
   setEditProfileQuestion,
-  setPreviousEditProfile,
+  setEditProfile,
   setEditProfileReligion,
   setEmployType,
   setEditDisplayName,

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import EducationTypes1 from "../register/EducationTypes1";
 import LocationCity from "../register/LocationCity";
 import LocationCountry from "../register/LocationCountry";
 import Religions from "../register/Religions";
@@ -14,8 +15,8 @@ function EditProfileModule() {
       setActive(<Religions module="editProfile" />);
       return;
     }
-    if (module === "employ") {
-      // setActive(<OcupationTypes module="employ" />);
+    if (module === "edu1") {
+      setActive(<EducationTypes1 module="edu1" />);
       return;
     }
     if (module === "marital_status") {
@@ -30,6 +31,7 @@ function EditProfileModule() {
       setActive(<LocationCity module="eidt_profile_city" />);
       return;
     }
+
     // if (id) {
     //   setActive(<Questions id={id} />);
     //   return;

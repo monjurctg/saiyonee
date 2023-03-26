@@ -11,13 +11,15 @@ function LocationCity({module}) {
   const [searchedCity, setSearchedCity] = useState("");
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
-  const {current_city, current_country} = useSelector((state) => state.auth);
-  console.log("current_city", current_city);
+  const {current_city, current_country} = useSelector(
+    (state) => state.auth.user
+  );
+  // console.log("current_city", current_city);
 
   const {country, city: editProfileCity} = useSelector(
     (state) => state.editProfile
   );
-  // console.log("country", editProfileCity);
+  console.log("country hello ", current_country);
 
   const dispatch = useDispatch();
   const onCityChange = (e) => {
@@ -85,7 +87,7 @@ function LocationCity({module}) {
         </div> */}
         {(
           Countries[
-            module == "eidt_profile_city" ? country : current_country
+            module == "eidt_profile_city" && country ? country : current_country
           ] || []
         ).map(
           (city, i) =>

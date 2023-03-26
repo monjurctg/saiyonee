@@ -5,13 +5,16 @@ import {EDUCATION1_TYPES} from "../../constants/register_constants";
 import {setEducation1, setEducation1Other} from "../../redux/slices/authSlices";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function EducationTypes1() {
+function EducationTypes1({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {education1} = useSelector((state) => state.auth);
 
   const onTypeChange = (e) => {
     // console.log(e.target.value);
+    if (module === "edu1") {
+      alert("edu");
+    }
 
     if (e.target.value === "Other") {
       dispatch(setEducation1Other(true));
