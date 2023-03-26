@@ -12,7 +12,7 @@ function LocationCity({module}) {
   const onSearchChange = (e) => setSearchedCity(e.target.value);
 
   const {current_city, current_country} = useSelector(
-    (state) => state.auth.user
+    (state) => state.auth ?? {}
   );
   // console.log("current_city", current_city);
 

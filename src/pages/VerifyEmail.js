@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
-import {setToken} from "../utils/functions";
+import {getToken, setToken} from "../utils/functions";
 import toastMsg from "../utils/toastify";
 
 function VerifyEmail() {
@@ -17,7 +17,16 @@ function VerifyEmail() {
   const [err, setErr] = useState(null);
   // console.log('err', err?.message)
   const navigator = useNavigate();
+  if (verification_code) {
+    localStorage.setItem("code", verification_code);
+  }
 
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      navigator("/login");
+    }
+  }, []);
   let verify = useCallback(async () => {
     let res = await AuthServices.checkIsEmailVerification({
       code: verification_code,

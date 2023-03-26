@@ -1,7 +1,7 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {getToken} from "../utils/functions";
 
-function NotVarified() {
+function NotVarified({route}) {
   const isVerified = localStorage.getItem("isVarified");
   const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");

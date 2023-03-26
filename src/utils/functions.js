@@ -73,7 +73,7 @@ export const stoteRegisterValues = (data) => {
 export const getDate = (date) => {
   // console.log('date', date?.split(' ')[0]?.split('-')?.reverse()?.join('-'))
   let todaysDate = new Date();
-  console.log('todaysDate', todaysDate)
+  console.log("todaysDate", todaysDate);
   let d = new Date(date?.split(" ")[0]?.split("-")?.reverse()?.join("-"));
   // console.log('d', d.toDateString()?.split(' '))
   let newArr = [

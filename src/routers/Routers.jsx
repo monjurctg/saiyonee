@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -30,12 +30,12 @@ import Settings from "../pages/settings/Settings";
 import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import { setIsVarified } from "../redux/slices/authSlices";
-import { getToken } from "../utils/functions";
+import {setIsVarified} from "../redux/slices/authSlices";
+import {getToken} from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
 import SelfieVerification from "../pages/questions/SelfieVerification";
@@ -66,14 +66,14 @@ import SocialLogin from "../pages/social/SocialLogin";
 import Register from "../pages/social-login/Register";
 import EmailVerication from "../pages/register/EmailVerication";
 import VerifyEmail from "../pages/VerifyEmail";
-import { useCallback } from "react";
+import {useCallback} from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery";
 
 function Routers() {
   // console.log("getToken()", getToken());
 
-  const { email } = useSelector((state) => state.auth);
+  const {email} = useSelector((state) => state.auth);
 
   console.log("email", email);
   if (getToken()) {
@@ -131,8 +131,7 @@ function Routers() {
         height: "100%",
 
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
-      }}
-    >
+      }}>
       {loading ? (
         <div className="load">Loading...</div>
       ) : (
@@ -239,10 +238,12 @@ function Routers() {
           {/* not varified */}
           <Route element={<NotVarified />}>
             <Route path="/email-verification" element={<EmailVerication />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
+
             <Route path="/success" element={<RegSuccess />} />
             <Route path="/review" element={<RegSuccess />} />
           </Route>
+
+          <Route path="/verify-email" element={<VerifyEmail />} />
 
           <Route element={<PrivateRoute />}>
             <Route path="/question/image" element={<AddPhoto />} />

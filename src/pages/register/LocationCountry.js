@@ -33,7 +33,7 @@ function LocationCountry({module}) {
       return;
     } else {
       dispatch(setCountry(e.target.value));
-      dispatch(setCity("Select current city"));
+      dispatch(setCity(""));
       stoteRegisterValues({current_country: e.target.value});
 
       // setCurrentCity(undefined);

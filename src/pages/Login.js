@@ -39,10 +39,14 @@ function Login() {
       email: email,
       password: password,
     };
+    const code = localStorage.getItem("code");
 
     let formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
+    if (code) {
+      formData.append("code", code);
+    }
 
     let res = await AuthServices.login(formData);
     console.log("res", res.data);
@@ -56,6 +60,7 @@ function Login() {
       setloading(false);
       setErr(false);
       setToken(res.data.auth_token);
+      localStorage.setItem("code", "");
 
       console.log(res.data);
 
