@@ -34,7 +34,7 @@ function Boom() {
       getBoomData();
     }
   };
-  console.log("boomData", boomData);
+  // console.log("boomData", boomData);
   let show = "";
   if (boomData.length > 0) {
     show = (
@@ -100,7 +100,9 @@ function Boom() {
             fontWeight: 700,
             color: "#FFAEAE",
           }}>
+            <Link to={`/chat/room/${boomData[boomData.length -1]?.match_id}`}>
           Say Hi!
+            </Link>
         </button>
         <button
           className="mt-4"
@@ -134,7 +136,7 @@ function Boom() {
         <div
           className="vh-100 max-width-mobile mx-auto p-4"
           style={{background: "#FFB7AC", borderRadius: 35}}>
-          <div className="text-end">
+          {/* <div className="text-end">
             <Link to={"/home"}>
               <img
                 src={back}
@@ -142,7 +144,7 @@ function Boom() {
                 style={{width: "48px", height: "48px", cursor: "pointer"}}
               />
             </Link>
-          </div>
+          </div> */}
 
           <div className="pt-4 text-center">
             <img src={"img/logo.svg"} alt="logo" style={{height: 50}} />

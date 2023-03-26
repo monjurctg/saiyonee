@@ -178,7 +178,7 @@ function Preference() {
       });
     }
 
-    country.length > 0 && formd.append("current_country[]", [...country]);
+    // country.length > 0 && formd.append("current_country[]", [...country]);
     const res = await PreferenceServices.postPreference(formd);
     if (res.status === 200) {
       toastMsg.success("Preference set successfully");

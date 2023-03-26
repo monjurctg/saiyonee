@@ -46,6 +46,10 @@ function Liked({id}) {
     LikeList = (LikeData?.liked_by_users).map((ll, index) => {
       return (
         <div className="explore-img" key={index}>
+          {/* <div className="cross">
+            {" "}
+            <img height={15} src="/img/cross.png" alt="" />
+          </div> */}
           <Link to={`/user-info/${id ? "supperLike" : "like"}/${ll.id}`}>
             {/* {ll?.thumbnail_img ? (
               <img

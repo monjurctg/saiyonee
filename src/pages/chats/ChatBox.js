@@ -22,6 +22,7 @@ function ChatBox() {
 
   const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
+  console.log("messageData", messageData?.data?.chat_messages);
   const [scrollPos, setScrollPos] = useState();
   // console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
@@ -159,10 +160,15 @@ function ChatBox() {
 
   let footer =
     messageData?.match_active === false ? (
-      <p style={{ color: "red", fontSize: 15, marginTop: 10,textAlign:"center" }}>
-        User has been unmatched at {
-          messageData?.unmatched_date
-        }
+      <p
+        style={{
+          color: "red",
+          fontSize: 15,
+          marginTop: 10,
+          textAlign: "center",
+        }}
+      >
+        User has been unmatched at {messageData?.unmatched_date}
       </p>
     ) : (
       <div className="chat-footer d-flex">
@@ -205,10 +211,11 @@ function ChatBox() {
     );
 
   return (
-    <ChatLayout user={userData}
-    matchedTime={messageData?.unmatched_date}
-    
-    // matched_date
+    <ChatLayout
+      user={userData}
+      matchedTime={messageData?.unmatched_date}
+
+      // matched_date
     >
       <div
         className="chat-body"
@@ -216,26 +223,28 @@ function ChatBox() {
         style={{ marginTop: 80 }}
         ref={messagesEndRef}
       >
-        <div className="text-center">
-          <button
-            style={{
-              border: "none",
-              background: "#ffb7ac",
-              color: "white",
-              fontSize: 10,
-            }}
-            onClick={() => {
-              console.log("ss");
-              setloadMessage("Loading...");
-              getMessage({
-                match_id: id,
-                oldest_message_id: messageData?.data?.chat_messages[0]?.id,
-              });
-            }}
-          >
-            {loadMessage}
-          </button>
-        </div>
+        {messageData?.data?.chat_messages?.length > 10 && (
+          <div className="text-center">
+            <button
+              style={{
+                border: "none",
+                background: "#ffb7ac",
+                color: "white",
+                fontSize: 10,
+              }}
+              onClick={() => {
+                console.log("ss");
+                setloadMessage("Loading...");
+                getMessage({
+                  match_id: id,
+                  oldest_message_id: messageData?.data?.chat_messages[0]?.id,
+                });
+              }}
+            >
+              {loadMessage}
+            </button>
+          </div>
+        )}
         {showMessageFrom}
       </div>
 
