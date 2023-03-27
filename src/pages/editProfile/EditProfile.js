@@ -13,6 +13,7 @@ import {
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
 import toastMsg from "../../utils/toastify";
+import {setCurrentUser} from "../../redux/slices/authSlices";
 
 const EditProfile = () => {
   const [err, seterr] = useState(null);
@@ -31,13 +32,13 @@ const EditProfile = () => {
     mother_occupation,
     number_of_brothers,
     number_of_sisters,
-    passingYear1,
-    passingYear2,
-    eduType1,
-    eduType2,
-    education1_institution,
-    education1_major,
-    education1,
+    passingYear3,
+    passingYear4,
+    eduType3,
+    eduType4,
+    education3_institution,
+    education3_major,
+    education3,
   } = useSelector((state) => state.editProfile);
   const [year1Dropdown, setYear1Dropdown] = useState(false);
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
@@ -57,13 +58,16 @@ const EditProfile = () => {
     height_feet: height_feet ? height_feet : user?.height_feet,
     height_inches: height_inches ? height_inches : user?.height_feet,
     weight: weight ? weight : user?.weight,
-    education1_institution: education1_institution
-      ? education1_institution
-      : user?.education1_institution,
-    education1_major: education1_major
-      ? education1_major
-      : user?.education1_major,
-    education1: education1 ? education1 : user?.education1,
+    education3_institution: education3_institution
+      ? education3_institution
+      : user?.education3_institution,
+    education3_major: education3_major
+      ? education3_major
+      : user?.education3_major,
+    education3: education3 ? education3 : user?.education3,
+    education3_passing_year: passingYear3
+      ? passingYear3
+      : user?.education3_passing_year,
 
     father_occupation: father_occupation
       ? father_occupation
@@ -92,6 +96,13 @@ const EditProfile = () => {
     });
   };
 
+  const fetchCurrentUser = async () => {
+    const res = await UserServices.UserProfile();
+    if (res.status === 200) {
+      dispatch(setCurrentUser(res.data));
+      console.log(res.data);
+    }
+  };
   let onSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -103,20 +114,29 @@ const EditProfile = () => {
       current_country: inputChange.current_country
         ? inputChange.current_country
         : user.current_country ?? "",
-      profile_img: image ? image : user?.profile_img ? user?.profile_img : "",
+      education3: inputChange.education3 ?? "",
+      education3_major: inputChange?.education3_major ?? "",
+      education3_passing_year: inputChange?.education3_passing_year ?? "",
+      education3_institution: inputChange?.education3_institution ?? "",
+
       height_feet: inputChange?.height_feet ?? "",
       height_inches: inputChange?.height_inches ?? "",
       weight: inputChange?.weight ?? "",
-      number_of_brothers: number_of_brothers ?? "",
-      number_of_sisters: number_of_sisters ?? "",
-      father_occupation: father_occupation ?? "",
-      mother_occupation: mother_occupation ?? "",
+      number_of_brothers: inputChange?.number_of_brothers ?? "",
+      number_of_sisters: inputChange?.number_of_sisters ?? "",
+      father_occupation: inputChange?.father_occupation ?? "",
+      mother_occupation: inputChange?.mother_occupation ?? "",
     };
+    if (image) {
+      data.profile_img = image;
+    }
 
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
       dispatch(setEditDisplayName(inputChange?.display_name));
       toastMsg.success("Profile edit successfully");
+      setimage(false);
+      fetchCurrentUser();
     } else {
       toastMsg.error(res.data.message);
     }
@@ -138,7 +158,7 @@ const EditProfile = () => {
     }
   };
 
-  let education1_passing_year = 1;
+  let education3_passing_year = 1;
   // async function fetchData() {
   //   const data = new FormData();
   //   const res = await UserServices.UserProfile();
@@ -149,24 +169,25 @@ const EditProfile = () => {
   //   fetchData();
   // }, []);
 
-  let education1Element = (
+  let education3Element = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
         Change your Secondary Education Type
       </p>
       <div className="form-floating text-muted rounded-1">
         <Link
+          onClick={() => dispatch(setEditProfile(inputChange))}
           // onClick={onEducationSelectorClicked}
-          to={"/editProfile/edu1"}>
+          to={"/editProfile/edu3"}>
           <div
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education1" ? "2px solid red" : "",
+              border: err?.error == "education3" ? "2px solid red" : "",
             }}>
             <div className="col-10">
               <label className="form-check-label bg-white px-2 text-body">
-                {inputChange?.education1}
+                {inputChange?.education3}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">
@@ -186,14 +207,14 @@ const EditProfile = () => {
         className="form-floating my-4 text-muted  rounded-1"
         style={{
           fontFamily: "Inter",
-          border: err?.error == "education1_institution" ? "2px solid red" : "",
+          border: err?.error == "education3_institution" ? "2px solid red" : "",
         }}>
         <input
           // onFocus={() => setErr()}
           type="text"
           id="inputInstitution1"
-          name="education1_institution"
-          value={inputChange.education1_institution}
+          name="education3_institution"
+          value={inputChange.education3_institution}
           onChange={handleUserInputChange}
           className="form-control border-0 rounded-1"
           placeholder="institution1"
@@ -208,13 +229,14 @@ const EditProfile = () => {
         className="form-floating my-4 text-muted  rounded-1"
         style={{
           fontFamily: "Inter",
-          border: err?.error == "education1_major" ? "2px solid red" : "",
+          border: err?.error == "education3_major" ? "2px solid red" : "",
         }}>
         <input
           // onFocus={() => setErr()}
           type="text"
           id="inputMajor1"
-          value={inputChange.education1_major}
+          name="education3_major"
+          value={inputChange.education3_major}
           onChange={handleUserInputChange}
           className="form-control border-0 rounded-1"
           placeholder="major1"
@@ -238,7 +260,7 @@ const EditProfile = () => {
               aria-expanded={year1Dropdown ? "true" : "false"}
               onClick={toggleYear1Dropdown}
               onBlur={delayedYear1Dismiss}>
-              {passingYear1 ? passingYear1 : user?.education1_passing_year}
+              {passingYear3 ? passingYear3 : user?.education3_passing_year}
             </button>
             <ul
               data-bs-popper
@@ -253,7 +275,7 @@ const EditProfile = () => {
                       dispatch(setEdu1PassYear(year));
                     }}
                     className={`btn btn-primary py-3 dropdown-item${
-                      passingYear1 === year ? " " : ""
+                      passingYear3 === year ? " " : ""
                     }`}>
                     {year}
                   </div>
@@ -555,7 +577,7 @@ const EditProfile = () => {
           </div>
 
           {/* education 1 */}
-          {education1Element}
+          {education3Element}
 
           {countryElement}
           {cityElement}

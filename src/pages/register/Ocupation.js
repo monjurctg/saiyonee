@@ -180,7 +180,7 @@ function Ocupation() {
                     }}>
                     <div className="col-10">
                       <label className="form-check-label bg-white px-2 text-body">
-                        {industry ?? "Select current industry"}
+                        {industry ? industry : "Select Industry"}
                       </label>
                     </div>
                     <div className="col-2 d-flex justify-content-end pe-3">

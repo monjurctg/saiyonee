@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION1_TYPES} from "../../constants/register_constants";
 import {setEducation1, setEducation1Other} from "../../redux/slices/authSlices";
+
 import {stoteRegisterValues} from "../../utils/functions";
 
 function EducationTypes1({module}) {
@@ -12,9 +13,6 @@ function EducationTypes1({module}) {
 
   const onTypeChange = (e) => {
     // console.log(e.target.value);
-    if (module === "edu1") {
-      alert("edu");
-    }
 
     if (e.target.value === "Other") {
       dispatch(setEducation1Other(true));

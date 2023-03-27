@@ -24,7 +24,7 @@ export const initialRegState = {
   education4_major: "",
   education4_passing_year: "",
   current_employment_type: "",
-  industry: "Select Industry",
+  industry: "",
   working_since: "",
   employer_name: "",
   designation: "",

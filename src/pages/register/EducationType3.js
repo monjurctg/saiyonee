@@ -3,14 +3,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION3_TYPES} from "../../constants/register_constants";
 import {setEducation3, setEducation3Other} from "../../redux/slices/authSlices";
+import {setEduTpe3} from "../../redux/slices/editProfileslice";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function EducationType3() {
+function EducationType3({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {education3} = useSelector((state) => state.auth);
   const onTypeChange = (e) => {
+    if (module === "edu3") {
+      dispatch(setEduTpe3(e.target.value));
+    }
     if (e.target.value === "Other") {
       dispatch(setEducation3Other(true));
       dispatch(setEducation3(""));
