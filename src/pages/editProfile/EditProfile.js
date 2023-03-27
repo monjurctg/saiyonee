@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import UserServices from "../../services/userServices";
 import {useDispatch, useSelector} from "react-redux";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import {
   setEditDisplayName,
   setEditProfile,
+  setEditReligion,
   setEdu1PassYear,
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
@@ -19,6 +20,7 @@ const EditProfile = () => {
   const [err, seterr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {user} = useSelector((state) => state.auth);
   const {
@@ -39,6 +41,8 @@ const EditProfile = () => {
     education3_institution,
     education3_major,
     education3,
+    marital_status,
+    religion,
   } = useSelector((state) => state.editProfile);
   const [year1Dropdown, setYear1Dropdown] = useState(false);
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
@@ -82,6 +86,7 @@ const EditProfile = () => {
     number_of_sisters: number_of_sisters
       ? number_of_sisters
       : user?.number_of_sisters,
+    marital_status: marital_status ? marital_status : user?.marital_status,
   });
 
   const dispatch = useDispatch();
@@ -122,10 +127,12 @@ const EditProfile = () => {
       height_feet: inputChange?.height_feet ?? "",
       height_inches: inputChange?.height_inches ?? "",
       weight: inputChange?.weight ?? "",
+      religion: religion ? religion : user?.religion,
       number_of_brothers: inputChange?.number_of_brothers ?? "",
       number_of_sisters: inputChange?.number_of_sisters ?? "",
       father_occupation: inputChange?.father_occupation ?? "",
       mother_occupation: inputChange?.mother_occupation ?? "",
+      marital_status: inputChange?.marital_status ?? "",
     };
     if (image) {
       data.profile_img = image;
@@ -168,6 +175,67 @@ const EditProfile = () => {
   // useEffect(() => {
   //   fetchData();
   // }, []);
+  console.log(user?.religion, "religion");
+
+  const onMaritalStatusClicked = () => {
+    navigate("/editProfile/marital_status");
+    dispatch(setEditProfile(inputChange));
+    dispatch(setEditReligion(religion ? religion : user?.religion));
+  };
+
+  const onReligionSelectorClicked = () => {
+    navigate("/editProfile/religion");
+    dispatch(setEditProfile(inputChange));
+  };
+  let Religion = (
+    <>
+      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+        Change your Religion
+      </p>
+      <div onClick={onReligionSelectorClicked}>
+        <div
+          className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error == "religion" ? "2px solid red" : "",
+          }}>
+          <div className="col-10">
+            <label
+              className="form-check-label bg-white px-2 text-body"
+              style={{fontFamily: "Inter"}}>
+              {religion ? religion : user?.religion}
+            </label>
+          </div>
+          <div className="col-2 d-flex justify-content-end pe-3">
+            <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  let maritalStatus = (
+    <div onClick={onMaritalStatusClicked}>
+      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+        Change your marital staus
+      </p>
+      <div
+        className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+        style={{
+          fontFamily: "Inter",
+          border: err?.error == "marital_status" ? "2px solid red" : "",
+        }}>
+        <div className="col-10">
+          <label className="form-check-label bg-white px-2 text-body">
+            {inputChange.marital_status}
+          </label>
+        </div>
+        <div className="col-2 d-flex justify-content-end pe-3">
+          <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
+        </div>
+      </div>
+    </div>
+  );
 
   let education3Element = (
     <>
@@ -575,6 +643,9 @@ const EditProfile = () => {
               Number of Sisters
             </label>
           </div>
+
+          {maritalStatus}
+          {Religion}
 
           {/* education 1 */}
           {education3Element}

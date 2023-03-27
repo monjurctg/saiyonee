@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import EducationTypes3 from "../register/EducationType3";
 import LocationCity from "../register/LocationCity";
 import LocationCountry from "../register/LocationCountry";
+import MaritalStatus from "../register/MaritalStatus";
 import Religions from "../register/Religions";
 
 function EditProfileModule() {
@@ -12,7 +13,7 @@ function EditProfileModule() {
 
   useEffect(() => {
     if (module === "religion") {
-      setActive(<Religions module="editProfile" />);
+      setActive(<Religions module="edit_religion" />);
       return;
     }
     if (module === "edu3") {
@@ -20,7 +21,7 @@ function EditProfileModule() {
       return;
     }
     if (module === "marital_status") {
-      // setActive(<MaritalStatus module="marital_status" />);
+      setActive(<MaritalStatus module="marital_status_edit" />);
       return;
     }
     if (module === "country") {

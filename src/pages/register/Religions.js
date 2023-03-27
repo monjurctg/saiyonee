@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {RELIGION_TYPES} from "../../constants/register_constants";
 import {setReligion} from "../../redux/slices/authSlices";
+import {setEditReligion} from "../../redux/slices/editProfileslice";
 import {setPreferenceReligion} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -10,16 +11,24 @@ function Religions({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {religion: Religion} = useSelector((state) => state.auth);
+  const {religion: edit_religion} = useSelector((state) => state.editProfile);
+
   const {religion: preferenceReligion} = useSelector(
     (state) => state.preference
   );
+  console.log(edit_religion, " religion module");
 
   const [religion, set_religion] = useState(
     module === "preference" ? preferenceReligion : Religion
   );
   let onReligionChange = (e) => {
     set_religion(e.target.value);
-    console.log("module", module);
+    // console.log("module", module);
+    if (module === "edit_religion") {
+      dispatch(setEditReligion(e.target.value));
+      navigate(-1);
+      return;
+    }
 
     if (module == "preference") {
       dispatch(setPreferenceReligion(e.target.value));
@@ -68,7 +77,11 @@ function Religions({module}) {
                   className="form-check-input"
                   type="radio"
                   name="religion_type"
-                  checked={religion === religionType}
+                  checked={
+                    module === "edit_religion"
+                      ? edit_religion === religionType
+                      : religion === religionType
+                  }
                   onChange={onReligionChange}
                   value={religionType}
                   id={religionType}

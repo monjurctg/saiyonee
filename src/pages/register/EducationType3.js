@@ -11,6 +11,10 @@ function EducationType3({module}) {
   const dispatch = useDispatch();
 
   const {education3} = useSelector((state) => state.auth);
+  const {education3: edit_education3} = useSelector(
+    (state) => state.editProfile
+  );
+
   const onTypeChange = (e) => {
     if (module === "edu3") {
       dispatch(setEduTpe3(e.target.value));
@@ -73,7 +77,11 @@ function EducationType3({module}) {
                   className="form-check-input"
                   type="radio"
                   name="education3_type"
-                  checked={education3 === educationType}
+                  checked={
+                    module === "edu3"
+                      ? edit_education3 === educationType
+                      : education3 === educationType
+                  }
                   onChange={onTypeChange}
                   value={educationType}
                   id={educationType}

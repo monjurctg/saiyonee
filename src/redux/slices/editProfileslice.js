@@ -4,9 +4,10 @@ const initialState = {
   religion: "",
   employType: "",
   displayName: "",
-  maritalStatus: "",
+  marital_status: "",
   country: "",
   city: "",
+
   gender: "",
 
   height_feet: "",
@@ -33,9 +34,9 @@ const EditProfileSlice = createSlice({
     setEditProfileEmployType: (state, {payload}) => {
       state.employType = payload;
     },
-    setEditProfileMaritalStatus: (state, {payload}) => {
-      state.maritalStatus = payload;
-    },
+    // setEditProfileMaritalStatus: (state, {payload}) => {
+    //   state.maritalStatus = payload;
+    // },
     setEditProfileGender: (state, {payload}) => {
       state.gender = payload;
     },
@@ -45,7 +46,12 @@ const EditProfileSlice = createSlice({
     setEditProfileCity: (state, {payload}) => {
       state.city = payload;
     },
-
+    setEditMaritalStatus: (state, {payload}) => {
+      state.marital_status = payload;
+    },
+    setEditReligion: (state, {payload}) => {
+      state.religion = payload;
+    },
     setEditDisplayName: (state, {payload}) => {
       state.displayName = payload;
     },
@@ -85,6 +91,8 @@ const EditProfileSlice = createSlice({
 });
 
 export const {
+  setEditMaritalStatus,
+  setEditReligion,
   setEdu1PassYear,
   setEdu2PassYear,
   setEduTpe3,
@@ -92,7 +100,7 @@ export const {
   setEditProfileEmployType,
   setEditProfileGender,
   setEditProfileHeight,
-  setEditProfileMaritalStatus,
+  // setEditProfileMaritalStatus,
   setEditProfileQuestion,
   setEditProfile,
   setEditProfileReligion,

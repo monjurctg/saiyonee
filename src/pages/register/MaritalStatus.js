@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {MARITAL_STATUS_TYPES} from "../../constants/register_constants";
 import {setMaritalStatus} from "../../redux/slices/authSlices";
+import {setEditMaritalStatus} from "../../redux/slices/editProfileslice";
 import {setMaridStatus} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -13,11 +14,19 @@ function MaritalStatus({module}) {
   const {maritalStatus: preferenceMaritalStatus} = useSelector(
     (state) => state.preference
   );
+  const {marital_status: edit_marital_status} = useSelector(
+    (state) => state.editProfile
+  );
 
   const [marital_status, setMarital_status] = useState(
     module === "marital_status" ? preferenceMaritalStatus : maritalStatus
   );
   let onMaritalStatusChange = (e) => {
+    if (module === "marital_status_edit") {
+      dispatch(setEditMaritalStatus(e.target.value));
+      navigate(-1);
+      return;
+    }
     if (module === "marital_status") {
       dispatch(setMaridStatus(e.target.value));
       navigate(-1);
@@ -88,7 +97,11 @@ function MaritalStatus({module}) {
                   className="form-check-input"
                   type="radio"
                   name="marital_status_type"
-                  checked={marital_status === maritalStatusType}
+                  checked={
+                    module === "marital_status_edit"
+                      ? edit_marital_status === maritalStatusType
+                      : marital_status === maritalStatusType
+                  }
                   onChange={onMaritalStatusChange}
                   value={maritalStatusType}
                   id={maritalStatusType}
