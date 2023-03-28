@@ -46,7 +46,7 @@ function InputLayOut({
         </div>
 
         <div className="container px-4 pt-2 ">
-          {err && <p className="text-primary">* {err}</p>}
+          {err?.message && <p className="text-primary">* {err?.message}</p>}
           {from !== "gellary" && (
             <button
               style={{height: 60}}

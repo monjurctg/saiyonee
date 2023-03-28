@@ -20,7 +20,7 @@ function RegisterUserType() {
     if (!user_type) {
       setErr({
         error: "user type",
-        message: "Please Select a user type",
+        message: "Please select a user type",
       });
       return;
     }

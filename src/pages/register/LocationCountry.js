@@ -3,7 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {COUNTRIES} from "../../constants/register_constants";
 import {setCity, setCountry} from "../../redux/slices/authSlices";
-import {setEditProfileCountry} from "../../redux/slices/editProfileslice";
+import {
+  setEditProfileCity,
+  setEditProfileCountry,
+} from "../../redux/slices/editProfileslice";
 import {setPreferenceCountry} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
@@ -17,18 +20,21 @@ function LocationCountry({module}) {
   const {country: editProfileCountry} = useSelector(
     (state) => state.editProfile
   );
+  const {country} = useSelector((state) => state.auth.user);
   // const [current_country, setCurrentCountry] = useState("");
   // const [current_city, setCurrentCity] = useState("");
+  console.log(country, "monjurul alam");
 
   const {current_country} = useSelector((state) => state.auth);
   const onCountryChange = (e) => {
     // console.log('e', e)
-    if (module == "country") {
+    if (module === "country") {
       dispatch(setPreferenceCountry(e.target.value));
       // navigator(-1);
       // return;
-    } else if (module == "edit_profile_country") {
+    } else if (module === "edit_profile_country") {
       dispatch(setEditProfileCountry(e.target.value));
+      dispatch(setEditProfileCity("Select city"));
       navigator(-1);
       return;
     } else {

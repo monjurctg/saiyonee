@@ -8,7 +8,9 @@ import {useDispatch, useSelector} from "react-redux";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import {
   setEditDisplayName,
+  setEditMaritalStatus,
   setEditProfile,
+  setEditProfileCountry,
   setEditReligion,
   setEdu1PassYear,
 } from "../../redux/slices/editProfileslice";
@@ -17,7 +19,7 @@ import toastMsg from "../../utils/toastify";
 import {setCurrentUser} from "../../redux/slices/authSlices";
 
 const EditProfile = () => {
-  const [err, seterr] = useState(null);
+  const [err, setErr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -44,12 +46,15 @@ const EditProfile = () => {
     marital_status,
     religion,
   } = useSelector((state) => state.editProfile);
+
   const [year1Dropdown, setYear1Dropdown] = useState(false);
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
   const delayedYear1Dismiss = () =>
     setTimeout(() => setYear1Dropdown(false), 200);
 
   const [image, setimage] = useState(false);
+
+  // const [err, sestErr] = useState();
 
   const passingYears = Array.from(
     new Array(new Date().getFullYear() - 1990 + 1)
@@ -110,6 +115,69 @@ const EditProfile = () => {
   };
   let onSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !inputChange.display_name.trim() ||
+      inputChange.display_name.trim().length < 3
+    ) {
+      setErr({
+        error: "display_name",
+        message:
+          "Display name is required and length should be minimum 3 characters",
+      });
+      return;
+    } else if (
+      !inputChange.height_feet ||
+      inputChange.height_feet > 8 ||
+      inputChange.height_feet < 3
+    ) {
+      setErr({
+        error: "ft",
+        message: "Height cannot be less than 3 feet or greater than 8 feet",
+      });
+      return;
+    } else if (
+      !inputChange.height_inches ||
+      inputChange.height_inches >= 12 ||
+      inputChange.height_inches < 0
+    ) {
+      setErr({
+        error: "inc",
+        message:
+          "Height cannot be less than 0 inches or greater than 11 inches",
+      });
+      return;
+    }
+
+    if (city === "Select city") {
+      setErr({error: "city", message: "Plase select city"});
+      return;
+    }
+    if (
+      (inputChange.weight && inputChange.weight < 30) ||
+      inputChange.weight >= 181
+    ) {
+      setErr({
+        error: "weight",
+        message: "weight cannot be less than 30 kg or greater then 180 kg",
+      });
+      return;
+    }
+
+    // if (!religion || religion === "Select  relligion") {
+    //   setErr({
+    //     error: "religion",
+    //     message: "Please select Religion",
+    //   });
+    //   return;
+    // }
+    // if (!marital_status || marital_status === "Select marital status") {
+    //   setErr({
+    //     error: "marital_status",
+    //     message: "Please select marital status",
+    //   });
+    //   return;
+    // }
+
     const data = {
       display_name: inputChange.display_name ?? "",
 
@@ -156,9 +224,9 @@ const EditProfile = () => {
     let file = e.target.files[0];
     if (file) {
       if (file.size > 1000000) {
-        seterr("File size is too large");
+        setErr("File size is too large");
       } else {
-        seterr(null);
+        setErr(null);
         setlength(file.size);
         setimage(file);
       }
@@ -178,21 +246,29 @@ const EditProfile = () => {
   console.log(user?.religion, "religion");
 
   const onMaritalStatusClicked = () => {
-    navigate("/editProfile/marital_status");
     dispatch(setEditProfile(inputChange));
-    dispatch(setEditReligion(religion ? religion : user?.religion));
+    dispatch(
+      setEditMaritalStatus(
+        marital_status ? marital_status : user?.marital_status
+      )
+    );
+
+    // navigate("");
   };
 
   const onReligionSelectorClicked = () => {
-    navigate("/editProfile/religion");
     dispatch(setEditProfile(inputChange));
+    dispatch(setEditReligion(religion ? religion : user?.religion));
   };
   let Religion = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your Religion
+        Religion
       </p>
-      <div onClick={onReligionSelectorClicked}>
+      <Link
+        to={"/editProfile/religion"}
+        style={{cursor: "pointer"}}
+        onClick={onReligionSelectorClicked}>
         <div
           className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
           style={{
@@ -210,19 +286,21 @@ const EditProfile = () => {
             <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 
   let maritalStatus = (
     <div onClick={onMaritalStatusClicked}>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your marital staus
+        Marital staus
       </p>
-      <div
+      <Link
+        to={"/editProfile/marital_status"}
         className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
         style={{
           fontFamily: "Inter",
+          cursor: "pointer",
           border: err?.error == "marital_status" ? "2px solid red" : "",
         }}>
         <div className="col-10">
@@ -233,14 +311,14 @@ const EditProfile = () => {
         <div className="col-2 d-flex justify-content-end pe-3">
           <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
         </div>
-      </div>
+      </Link>
     </div>
   );
 
   let education3Element = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your Secondary Education Type
+        Undergraduate Education Type
       </p>
       <div className="form-floating text-muted rounded-1">
         <Link
@@ -269,7 +347,7 @@ const EditProfile = () => {
         </label> */}
       </div>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your Secondary Education Institute
+        Undergraduate Education Institute
       </p>
       <div
         className="form-floating my-4 text-muted  rounded-1"
@@ -291,7 +369,7 @@ const EditProfile = () => {
         {/* <label htmlFor="inputInstitution1">Enter candidate's institution</label> */}
       </div>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your Secondary Education Major
+        Undergraduate Education Major
       </p>
       <div
         className="form-floating my-4 text-muted  rounded-1"
@@ -359,11 +437,16 @@ const EditProfile = () => {
   let countryElement = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your current country
+        Current country
       </p>
       <Link
         to={"/editProfile/country"}
-        onClick={() => dispatch(setEditProfile(inputChange))}>
+        onClick={() => {
+          dispatch(setEditProfile(inputChange));
+          dispatch(
+            setEditProfileCountry(country ? country : user?.current_country)
+          );
+        }}>
         <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
           <div className="col-10">
             <label
@@ -386,10 +469,15 @@ const EditProfile = () => {
   let cityElement = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Change your current city
+        Current city
       </p>
       <Link to={"/editProfile/city"}>
-        <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
+        <div
+          className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+          style={{
+            fontFamily: "Inter",
+            border: err?.error === "city" ? "2px solid red" : "",
+          }}>
           <div className="col-10">
             <label
               className="form-check-label  bg-white px-2 text-body"
@@ -453,35 +541,34 @@ const EditProfile = () => {
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Display Name
+            Display Name
           </p>
           <div
             className="form-floating text-muted me-2 rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "age_from" ? "2px solid red" : "",
+
+              border: err?.error == "display_name" ? "2px solid red" : "",
             }}>
             <input
               type="text"
-              name="age_from"
+              name="display_name"
               id="inputHeightInches"
-              style={{fontFamily: "Inter"}}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange?.display_name}
               onChange={(e) =>
                 setInputChange({...inputChange, display_name: e.target.value})
               }
+              onFocus={() => setErr(null)}
               placeholder={"Form"}
               className="form-control border-0 rounded-1"
               aria-describedby="height_inches"
             />
-            <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
-              Display name
-            </label>
           </div>
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Height Feet & Inches
+            Height Feet & Inches
           </p>
 
           <div className="d-flex">
@@ -489,6 +576,7 @@ const EditProfile = () => {
               className="form-floating  text-muted me-2 rounded-1"
               style={{
                 fontFamily: "Inter",
+
                 border: err?.error == "ft" ? "2px solid red" : "",
               }}>
               <input
@@ -496,6 +584,7 @@ const EditProfile = () => {
                 id="inputHeightFeet"
                 name="height_feet"
                 min={1}
+                onFocus={() => setErr(null)}
                 style={{fontFamily: "Inter"}}
                 value={inputChange.height_feet}
                 onChange={handleUserInputChange}
@@ -517,6 +606,7 @@ const EditProfile = () => {
                 type="number"
                 name="height_inches"
                 min={0}
+                onFocus={() => setErr(null)}
                 id="inputHeightInches"
                 style={{fontFamily: "Inter"}}
                 value={inputChange.height_inches}
@@ -532,7 +622,7 @@ const EditProfile = () => {
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Weight
+            Weight
           </p>
 
           <div
@@ -546,7 +636,7 @@ const EditProfile = () => {
               id="inputWeight"
               name="weight"
               min={1}
-              // onFocus={() => setErr({})}
+              onFocus={() => setErr({})}
               value={inputChange.weight}
               style={{fontFamily: "Inter"}}
               onChange={handleUserInputChange}
@@ -562,7 +652,7 @@ const EditProfile = () => {
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Enter Father's Occupation
+            Father's Occupation
           </p>
 
           <div className="form-floating text-muted rounded-1">
@@ -572,18 +662,17 @@ const EditProfile = () => {
               id="inputFather"
               value={inputChange.father_occupation}
               onChange={handleUserInputChange}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               className="form-control border-0 rounded-1 text-start"
               // placeholder="50"
+
               aria-describedby="BrotherCount"
             />
-            <label htmlFor="inputBrothers" style={{fontFamily: "Inter"}}>
-              Enter Father's Occupation
-            </label>
           </div>
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Enter Mother's Occupation
+            Mother's Occupation
           </p>
 
           <div className="form-floating text-muted rounded-1">
@@ -595,22 +684,21 @@ const EditProfile = () => {
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1 text-start"
               // placeholder="50"
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               aria-describedby="BrotherCount"
             />
-            <label htmlFor="inputBrothers" style={{fontFamily: "Inter"}}>
-              Enter Mother's Occupation
-            </label>
           </div>
 
           <p
             className="text-muted text-start mt-4"
             style={{fontFamily: "Inter"}}>
-            Change your Number of Brothers
+            Number of Brothers
           </p>
 
           <div className="form-floating text-muted rounded-1">
             <input
               type="number"
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               name="number_of_brothers"
               id="inputBrotherCount"
               value={inputChange.number_of_brothers}
@@ -619,36 +707,29 @@ const EditProfile = () => {
               // placeholder="50"
               aria-describedby="BrotherCount"
             />
-            <label htmlFor="inputBrothers" style={{fontFamily: "Inter"}}>
-              Number of Brothers
-            </label>
           </div>
 
-          <p className="text-muted  text-start mb-2">
-            Change Your Number of sisters
-          </p>
+          <p className="text-muted  text-start mb-2">Number of sisters</p>
 
           <div className="form-floating text-muted rounded-1">
             <input
               type="number"
               name="number_of_sisters"
               id="inputSisterCount"
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange.number_of_sisters}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1  "
               // placeholder="50"
               aria-describedby="inputSisterCount"
             />
-            <label htmlFor="inputSister" style={{fontFamily: "Inter"}}>
-              Number of Sisters
-            </label>
           </div>
 
           {maritalStatus}
           {Religion}
 
           {/* education 1 */}
-          {education3Element}
+          {/* {education3Element} */}
 
           {countryElement}
           {cityElement}
