@@ -149,7 +149,7 @@ const EditProfile = () => {
     }
 
     if (city === "Select city") {
-      setErr({error: "city", message: "Plase select city"});
+      setErr({error: "city", message: "Please select city"});
       return;
     }
     if (
@@ -728,7 +728,7 @@ const EditProfile = () => {
           {maritalStatus}
           {Religion}
 
-          {/* education 1 */}
+          {/* education 3*/}
           {/* {education3Element} */}
 
           {countryElement}
