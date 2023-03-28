@@ -68,7 +68,7 @@ function PersonalInformation() {
       }
     }
     if (e.target.name === "height_inc") {
-      if (e.target.value > 12 || e.target.value < 0) {
+      if (e.target.value > 11 || e.target.value < 0) {
         setErr({
           error: "inc",
           message:
@@ -102,12 +102,23 @@ function PersonalInformation() {
   };
   // console.log(state.gender);
 
+  function validateAge(dateOfBirth) {
+    var today = new Date();
+    var birthDate = new Date(dateOfBirth);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    }
+
+    return age;
+  }
+
   const onContinueClicked = async () => {
     if (!state.full_name.trim() || state.full_name.trim().length < 6) {
       setErr({
         error: "name",
         message:
-          "Display name is required and length should be minimum 6 characters",
+          "Full name is required and length should be minimum 6 characters",
       });
       return;
     } else if (
@@ -126,7 +137,16 @@ function PersonalInformation() {
         message: "Please select male or female",
       });
       return;
-    } else if (!state.height_ft || state.height_ft > 8 || state.height_ft < 3) {
+    }
+    if (validateAge(state.date_of_birth) <= 18) {
+      setErr({
+        error: "dob",
+        message: "You must be 18 plus",
+      });
+      return;
+    }
+
+    if (!state.height_ft || state.height_ft > 8 || state.height_ft < 3) {
       setErr({
         error: "ft",
         message: "Height cannot be less than 3 feet or greater than 8 feet",
@@ -134,7 +154,7 @@ function PersonalInformation() {
       return;
     } else if (
       !state.height_inc ||
-      state.height_inc >= 12 ||
+      state.height_inc > 11 ||
       state.height_inc < 0
     ) {
       setErr({
@@ -217,7 +237,7 @@ function PersonalInformation() {
             className="form-floating my-3 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "name" ? "2px solid red" : "",
+              border: err?.error === "name" ? "2px solid red" : "",
             }}>
             <input
               type="text"
@@ -299,7 +319,7 @@ function PersonalInformation() {
             className="form-floating my-3 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "date_of_birth" ? "2px solid red" : "",
+              border: err?.error === "dob" ? "2px solid red" : "",
             }}>
             <input
               type="date"

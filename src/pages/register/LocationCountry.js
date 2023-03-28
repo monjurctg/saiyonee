@@ -16,16 +16,16 @@ function LocationCountry({module}) {
   const [searchedCountry, setSearchedCountry] = useState("");
   const onSearchChange = (e) => setSearchedCountry(e.target.value);
   const dispatch = useDispatch();
-  const {country: preferenceCountry} = useSelector((state) => state.preference);
-  const {country: editProfileCountry} = useSelector(
-    (state) => state.editProfile
-  );
-  const {country} = useSelector((state) => state.auth.user);
+  const {country: preferenceCountry} =
+    useSelector((state) => state.preference) ?? {};
+  const {country: editProfileCountry} =
+    useSelector((state) => state.editProfile) ?? {};
+  const {country} = useSelector((state) => state.auth?.user) ?? {};
   // const [current_country, setCurrentCountry] = useState("");
   // const [current_city, setCurrentCity] = useState("");
   console.log(country, "monjurul alam");
 
-  const {current_country} = useSelector((state) => state.auth);
+  const {current_country} = useSelector((state) => state.auth) ?? {};
   const onCountryChange = (e) => {
     // console.log('e', e)
     if (module === "country") {
