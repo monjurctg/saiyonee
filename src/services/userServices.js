@@ -38,6 +38,10 @@ UserServices.edit_user_info = async (data) => {
   const res = await axios.post("/app_user_edit", data);
   return res;
 };
+UserServices.app_user_gallery_edit = async (data) => {
+  const res = await axios.post("/app_user_gallery_edit", data);
+  return res;
+};
 
 UserServices.dislike_user = async (id) => {
   const res = await axios
@@ -76,7 +80,10 @@ UserServices.completion = () => {
 };
 
 UserServices.message_users = async (data) => {
-  const res = await axios.post("/live_chat/submit_chat_message", data).then((res) => res).catch((err) => err.response);
+  const res = await axios
+    .post("/live_chat/submit_chat_message", data)
+    .then((res) => res)
+    .catch((err) => err.response);
   return res;
 };
 

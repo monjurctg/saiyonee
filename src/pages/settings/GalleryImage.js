@@ -1,12 +1,12 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 // import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import UserServices from "../../services/userServices";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import InputLayOut from "../editProfile/InputLayOut";
 import toastMsg from "../../utils/toastify";
 
@@ -36,7 +36,7 @@ const GalleryImage = () => {
     if (file) {
       seterr(null);
       setlength(file.size);
-      setimages({ ...images, [e.target.name]: file });
+      setimages({...images, [e.target.name]: file});
     }
   };
 
@@ -67,7 +67,7 @@ const GalleryImage = () => {
       optional_img_4: images?.optional_img_4,
       optional_img_5: images?.optional_img_5,
     };
-    const res = await UserServices.edit_user_info(data);
+    const res = await UserServices.app_user_gallery_edit(data);
     if (res.status === 200) {
       toastMsg.success("Profile edit successfully");
       fetchData();
@@ -84,22 +84,19 @@ const GalleryImage = () => {
       onContinueClicked={onSubmit}
       length={length}
       title={"Image Gallery"}
-      loading={loading}
-    >
+      loading={loading}>
       <div
         className="question mt-3 d-flex flex-wrap"
         style={{
           gap: 20,
-        }}
-      >
+        }}>
         <div
           className="image-upload"
           style={{
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_1 ? (
             <img
               src={data?.optional_img_1}
@@ -144,7 +141,7 @@ const GalleryImage = () => {
             type="file"
             id="image1"
             name="optional_img_1"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
           />
         </div>
@@ -154,8 +151,7 @@ const GalleryImage = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_2 ? (
             <img
               src={data?.optional_img_2}
@@ -198,7 +194,7 @@ const GalleryImage = () => {
           <input
             type="file"
             id="image2"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
             name="optional_img_2"
           />
@@ -209,8 +205,7 @@ const GalleryImage = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_3 ? (
             <img
               src={data?.optional_img_3}
@@ -253,7 +248,7 @@ const GalleryImage = () => {
           <input
             type="file"
             id="image3"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
             name="optional_img_3"
           />
@@ -264,8 +259,7 @@ const GalleryImage = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_4 ? (
             <img
               src={data?.optional_img_4}
@@ -309,7 +303,7 @@ const GalleryImage = () => {
             type="file"
             id="image4"
             name="optional_img_4"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
           />
         </div>
@@ -319,8 +313,7 @@ const GalleryImage = () => {
             width: "40%",
             height: 150,
             margin: 0,
-          }}
-        >
+          }}>
           {data?.optional_img_5 ? (
             <img
               src={data?.optional_img_5}
@@ -363,7 +356,7 @@ const GalleryImage = () => {
           <input
             type="file"
             id="image5"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
             name="optional_img_5"
           />
