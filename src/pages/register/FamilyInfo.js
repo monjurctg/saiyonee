@@ -1,17 +1,17 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useLocation, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {setFamilyInformation} from "../../redux/slices/authSlices";
+import { setFamilyInformation } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
 
 function FamilyInfo() {
   let navigate = useNavigate();
   let socialToken = localStorage.getItem("social-token");
   const [loading, setLoading] = useState(false);
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
 
   const [err, setErr] = useState();
 
@@ -44,7 +44,7 @@ function FamilyInfo() {
     if (!familyInfo.father_occupation.trim()) {
       setErr({
         error: "father_occupation",
-        message: "Father's Occupation Can't Be Empty!",
+        message: "Father's Occupation cannot be blank!",
       });
       return;
     }
@@ -60,7 +60,7 @@ function FamilyInfo() {
     if (!familyInfo.mother_occupation.trim()) {
       setErr({
         error: "mother_occupation",
-        message: "Mother's Occupation Can't Be Empty!",
+        message: "Mother's Occupation cannot be blank!",
       });
       return;
     }
@@ -107,6 +107,22 @@ function FamilyInfo() {
   });
   const handleUserInputChange = (e) => {
     console.log("e.target.value", e.target.value);
+    const value = parseInt(e.target.value);
+    if (value < 0) {
+      if (e.target.name == "number_of_brothers") {
+        setErr({
+          error: "number_of_brothers",
+          message: `Number of borthers cannot be negative!`,
+        });
+        return;
+      } else if (e.target.name == "number_of_sisters") {
+        setErr({
+          error: "number_of_sisters",
+          message: `Number of sisters cannot be negative!`,
+        });
+        return;
+      }
+    }
     setFamilyInfo({
       ...familyInfo,
       [e.target.name]: e.target.value,
@@ -118,7 +134,8 @@ function FamilyInfo() {
       <RegisterLayout
         onContinueClicked={onContinueClicked}
         err={err}
-        loading={loading}>
+        loading={loading}
+      >
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate's Family Information</h1>
           <div
@@ -126,7 +143,8 @@ function FamilyInfo() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "father_occupation" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               onFocus={() => setErr({})}
               type="text"
@@ -148,7 +166,8 @@ function FamilyInfo() {
               fontFamily: "Inter",
               border:
                 err?.error == "father_home_district" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               onFocus={() => setErr({})}
               type="text"
@@ -169,7 +188,8 @@ function FamilyInfo() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "mother_occupation" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               type="text"
               id="inputMotherOccupation"
@@ -191,7 +211,8 @@ function FamilyInfo() {
               fontFamily: "Inter",
               border:
                 err?.error == "mother_home_district" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               type="text"
               name="mother_home_district"
@@ -209,7 +230,14 @@ function FamilyInfo() {
           </div>
 
           <p className="text-muted mt-5 mb-2">Number of brothers</p>
-          <div className="row">
+          <div
+            className="row rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border:
+                err?.error === "number_of_brothers" ? "2px solid red" : "",
+            }}
+          >
             <div className="col-2">
               <button
                 onClick={() => {
@@ -220,19 +248,22 @@ function FamilyInfo() {
                       parseInt(familyInfo.number_of_brothers) - 1,
                   });
                 }}
-                className="btn btn-primary w-100 rounded-1 shadow p-3">
+                className="btn btn-primary w-100 rounded-1 shadow p-3"
+              >
                 <strong>-</strong>
               </button>
             </div>
-            <div className="col-8 px-4">
+            <div className="col-8 px-4 rounded-1">
               <input
                 type="number"
                 name="number_of_brothers"
                 id="inputBrotherCount"
                 value={familyInfo.number_of_brothers}
                 onChange={handleUserInputChange}
+                onFocus={() => setErr({})}
                 className="form-control border-0 rounded-1 p-3 text-center"
                 // placeholder="50"
+                min="0"
                 aria-describedby="BrotherCount"
               />
             </div>
@@ -245,14 +276,20 @@ function FamilyInfo() {
                       parseInt(familyInfo.number_of_brothers) + 1,
                   })
                 }
-                className="btn btn-primary w-100 rounded-1 shadow p-3">
+                className="btn btn-primary w-100 rounded-1 shadow p-3"
+              >
                 <strong>+</strong>
               </button>
             </div>
           </div>
 
           <p className="text-muted mt-4 mb-2">Number of sisters</p>
-          <div className="row">
+          <div className="row rounded-1 "
+              style={{
+                fontFamily: "Inter",
+                border:
+                  err?.error === "number_of_sisters" ? "2px solid red" : "",
+              }}>
             <div className="col-2">
               <button
                 // onClick={decrementSisterCount}
@@ -264,19 +301,24 @@ function FamilyInfo() {
                       parseInt(familyInfo.number_of_sisters) - 1,
                   });
                 }}
-                className="btn btn-primary w-100 rounded-1 shadow p-3">
+                className="btn btn-primary w-100 rounded-1 shadow p-3"
+              >
                 <strong>-</strong>
               </button>
             </div>
-            <div className="col-8 px-4">
+            <div
+              className="col-8 px-4"
+            >
               <input
                 type="number"
                 name="number_of_sisters"
                 id="inputSisterCount"
+                onFocus={() => setErr({})}
                 value={familyInfo.number_of_sisters}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1 p-3 text-center"
-                placeholder="50"
+                // placeholder="50"
+                min="0"
                 aria-describedby="SisterCount"
               />
             </div>
@@ -289,7 +331,8 @@ function FamilyInfo() {
                       parseInt(familyInfo.number_of_sisters) + 1,
                   })
                 }
-                className="btn btn-primary w-100 rounded-1 shadow p-3">
+                className="btn btn-primary w-100 rounded-1 shadow p-3"
+              >
                 <strong>+</strong>
               </button>
             </div>
