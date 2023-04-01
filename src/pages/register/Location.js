@@ -20,7 +20,10 @@ function Location() {
   //   "check current country"
   // );
   const onContinueClicked = async () => {
-    if (current_country == "Select candidate's current country") {
+    if (
+      current_country === "Select candidate's current country" ||
+      !current_country.trim()
+    ) {
       setErr({
         error: "current_country",
         message: "Please select a country",
@@ -28,7 +31,10 @@ function Location() {
       return;
     }
 
-    if (current_city === "Select candidate's current city") {
+    if (
+      current_city === "Select candidate's current city" ||
+      !current_city.trim()
+    ) {
       setErr({
         error: "current_city",
         message: "Please select a city",

@@ -158,12 +158,14 @@ const MatchedUser = () => {
       let res = await ExploreServices.addSupperLike(data);
       if (res.status === 200) {
         toastMsg.success(res.data.message);
+        navigate("/boom");
 
         // getData();
       } else {
         if (res.response.data.show_in_modal) {
           dispatch(setFilterErrorMessage(res.response.data));
           dispatch(setFilterModalShow(res.response.data.show_in_modal));
+          navigate("/home");
         } else {
           toastMsg.error(res.response.data.message);
         }
