@@ -17,7 +17,6 @@ export const ID_TYPES = [
   "Green Card",
   "PR Card",
   "Residence Permit Card",
-  "National ID",
   "Passport",
   "Driving License",
   "Other",
@@ -84,7 +83,6 @@ export const INDUSTRY_TYPES = [
   "Defence",
   "Government Job",
 ];
-
 
 export const RELIGION_TYPES = [
   "Islam",

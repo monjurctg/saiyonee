@@ -153,7 +153,7 @@ function Varification() {
       } else {
         console.log("error");
         setLoading(false);
-        toastMsg.error(res.data.message);
+        toastMsg.error(Object.values(res?.data.errors)[0][0]);
       }
     } else {
       const res = await AuthServices.socialRegister(formd);

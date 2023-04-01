@@ -99,28 +99,26 @@ function Preference() {
   const onContinueClicked = async () => {
     console.log(maritalStatus);
 
-    if (state.age_to && (state.age_to > 255 || state.age_to < 17)) {
-      setErr({
-        error: "age_to",
-        message: "age to cannot be less than 18 year or greater than 255 year",
-      });
-      return;
-    } else if (
-      state.age_from &&
-      (state.age_from > 255 || state.age_from < 17)
-    ) {
+    if (state.age_from && (state.age_from > 255 || state.age_from < 18)) {
       setErr({
         error: "age_from",
-        message: "age rom cannot be less than 18 year or greater than 255 year",
+        message: "age rom cannot be less than 19 year or greater than 255 year",
+      });
+      return;
+    }
+    if (state.age_to && (state.age_to > 255 || state.age_to < 18)) {
+      setErr({
+        error: "age_to",
+        message: "age to cannot be less than 19 year or greater than 255 year",
       });
       return;
     } else if (
       state.height_feet &&
-      (state.height_feet > 15 || state.height_feet <= 2)
+      (state.height_feet > 8 || state.height_feet <= 2)
     ) {
       setErr({
         error: "ft",
-        message: "Height cannot be less than 3 feet or greater than 15 feet",
+        message: "Height cannot be less than 3 feet or greater than 8 feet",
       });
       return;
     } else if (
@@ -185,9 +183,10 @@ function Preference() {
       localStorage.setItem("preference", true);
       navigate("/home");
     } else {
-      toastMsg.error(res.data.message);
+      console.log(Object.values(res?.data.errors)[0][0], "error from preferce");
+      toastMsg.error(Object.values(res?.data.errors)[0][0]);
     }
-    console.log(res, "res");
+    // console.log(res, "res");
   };
   // const [form_filter_ids, setForm_filter] = useState({});
 
@@ -222,7 +221,7 @@ function Preference() {
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "age_from" ? "2px solid red" : "",
+            border: err?.error === "age_from" ? "2px solid red" : "",
           }}>
           <input
             type="number"
@@ -232,6 +231,8 @@ function Preference() {
             value={state.age_from}
             onChange={handleUserInputChange}
             placeholder={"From"}
+            min={19}
+            onFocus={() => setErr({})}
             className="form-control border-0 rounded-1"
             aria-describedby="height_inches"
           />
@@ -243,13 +244,14 @@ function Preference() {
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "age_to" ? "2px solid red" : "",
+            border: err?.error === "age_to" ? "2px solid red" : "",
           }}>
           <input
             type="number"
             id="inputHeightFeet"
-            min={0}
+            min={19}
             name="age_to"
+            onFocus={() => setErr({})}
             style={{fontFamily: "Inter"}}
             value={state.age_to}
             onChange={handleUserInputChange}
@@ -271,13 +273,14 @@ function Preference() {
           className="form-floating my-3 text-muted me-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "ft" ? "2px solid red" : "",
+            border: err?.error === "ft" ? "2px solid red" : "",
           }}>
           <input
             type="number"
             id="inputHeightFeet"
             name="height_feet"
-            min={1}
+            min={3}
+            onFocus={() => setErr({})}
             style={{fontFamily: "Inter"}}
             value={state.height_feet}
             onChange={handleUserInputChange}
@@ -293,12 +296,13 @@ function Preference() {
           className="form-floating my-3 text-muted ms-2 rounded-1"
           style={{
             fontFamily: "Inter",
-            border: err?.error == "inc" ? "2px solid red" : "",
+            border: err?.error === "inc" ? "2px solid red" : "",
           }}>
           <input
             type="number"
             name="height_inches"
             min={0}
+            onFocus={() => setErr({})}
             id="inputHeightInches"
             style={{fontFamily: "Inter"}}
             value={state.height_inches}

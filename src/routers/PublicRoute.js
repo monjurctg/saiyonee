@@ -20,6 +20,10 @@ function PublicRoute() {
   const emailVerified = localStorage.getItem("emailVerified");
   const isAlreadySetPreference = localStorage.getItem("preference");
 
+  // if (auth && isVarified === "false" && emailVerified === "false") {
+  //   return <Navigate to="/email-verification" state={{from: location}} />;
+  // }
+
   if (
     auth &&
     isVarified === "true" &&

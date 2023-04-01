@@ -10,7 +10,7 @@ export const initialRegState = {
   education1: "",
   education1_institution: "",
   education1_major: "",
-  education1_passing_year: 2014,
+  education1_passing_year: 2012,
   education2: "",
   education2_institution: "",
   education2_major: "",
