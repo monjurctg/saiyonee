@@ -88,8 +88,9 @@ function Liked({id}) {
 
                 color: "#000",
                 textAlign: "center",
-              }}>
-              {ll?.full_name}, {ll?.age}
+              }}
+            >
+              {ll?.full_name?.slice(0, 15)}, {ll?.age}
             </h5>
           </Link>
         </div>
