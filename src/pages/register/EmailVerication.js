@@ -25,6 +25,13 @@ function EmailVerication() {
     //   }
     // }
   };
+  const logout = () => {
+    // console.log("logout");
+    localStorage.clear();
+    window.location.reload();
+
+    navigate("/get-start");
+  };
   return (
     <>
       <div className="text-center min-vh-100 max-width-mobile mx-auto">

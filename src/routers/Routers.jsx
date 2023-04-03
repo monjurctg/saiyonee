@@ -236,9 +236,9 @@ function Routers() {
 
           {/* Sazid */}
           {/* not varified */}
+
           <Route element={<NotVarified />}>
             <Route path="/email-verification" element={<EmailVerication />} />
-
             <Route path="/success" element={<RegSuccess />} />
             <Route path="/review" element={<RegSuccess />} />
           </Route>
