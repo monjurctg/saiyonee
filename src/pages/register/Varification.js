@@ -104,7 +104,7 @@ function Varification() {
     education4_major: education4_major,
     education4_passing_year: education4_passing_year,
     current_employment_type: current_employment_type,
-    industry: industry,
+    employment_industry: industry,
     working_since: working_since,
     employer_name: employer_name,
     designation: designation,
@@ -213,7 +213,7 @@ function Varification() {
   };
   const handleImage2 = (e) => {
     dispatch(setVerificationImg2(e.target.files[0]));
-    setErr(!verification_img1 ? "Image1 is bla nk" : "");
+    setErr(!verification_img1 ? "Image1 is blank" : "");
   };
   const selectType = (idType) => {
     console.log(idType, "idType");
