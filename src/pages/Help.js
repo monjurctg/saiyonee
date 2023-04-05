@@ -99,14 +99,27 @@ function Help() {
 
     // console.log("data", data);
   };
+
   let subItem = (
-    <div
-      className="position-absolute d-flex flex-column justify-content-center align-items-center position-top"
-      onClick={() => navigate(-1)}>
-      {/* <LinkLogo /> */}
-      {/* <Link to={"/"}> */}
-      <img src="img/logo.svg" alt="" />
-      {/* </Link> */}
+    <div className="position-absolute container position-top mt-2">
+      <div className="row justify-content-center">
+        <div className="col-2 pr-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn btn-light rounded-circle shadow p-3 image-invert"
+            style={{ height: "58px", width: "58px" }}
+          >
+            <img src="/img/back-icon.svg" alt="back" />
+          </button>
+        </div>
+        <div className="col-8 d-flex justify-content-end">
+          {/* <LinkLogo /> */}
+          <Link to={"/"}>
+            <img src="/img/logo.svg" alt="" />
+          </Link>
+        </div>
+        <div className="col-2"></div>
+      </div>
     </div>
   );
   return (

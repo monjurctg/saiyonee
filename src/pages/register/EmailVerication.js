@@ -54,8 +54,15 @@ function EmailVerication() {
               </div>
               <button
                 className="btn btn-primary w-100 rounded shadow p-3 my-4"
-                onClick={onClickLogout}>
+                onClick={onClickLogout}
+              >
                 <strong>Resend Verification Link</strong>
+              </button>
+              <button
+                className="btn btn-primary w-100 rounded shadow p-3 mb-4"
+                onClick={logout}
+              >
+                <strong>Go to Home</strong>
               </button>
             </div>
           </div>
