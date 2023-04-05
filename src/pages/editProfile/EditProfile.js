@@ -13,6 +13,7 @@ import {
   setEditProfileCountry,
   setEditReligion,
   setEdu1PassYear,
+  setEdu4PassYear,
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
 import toastMsg from "../../utils/toastify";
@@ -45,15 +46,21 @@ const EditProfile = () => {
     education3,
     education4,
     education4_passing_year,
+    education4_institution,
     education4_major,
     marital_status,
     religion,
   } = useSelector((state) => state.editProfile);
 
   const [year1Dropdown, setYear1Dropdown] = useState(false);
+  const [year4Dropdown, setYear4Dropdown] = useState(false);
+
   const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
   const delayedYear1Dismiss = () =>
-    setTimeout(() => setYear1Dropdown(false), 200);
+    setTimeout(() => setYear1Dropdown(false), 400);
+  const toggleYear4Dropdown = () => setYear4Dropdown((dropdown) => !dropdown);
+  const delayedYear4Dismiss = () =>
+    setTimeout(() => setYear4Dropdown(false), 200);
 
   const [image, setimage] = useState(false);
 
@@ -88,6 +95,9 @@ const EditProfile = () => {
     education4_passing_year: education4_passing_year
       ? education4_passing_year
       : user?.education4_passing_year,
+    education4_institution: education4_institution
+      ? education4_institution
+      : user?.education4_institution,
 
     father_occupation: father_occupation
       ? father_occupation
@@ -200,9 +210,16 @@ const EditProfile = () => {
         : user.current_country ?? "",
       education3: inputChange.education3 ?? "",
       education3_major: inputChange?.education3_major ?? "",
-      education3_passing_year: inputChange?.education3_passing_year ?? "",
+      education3_passing_year: passingYear3
+        ? passingYear3
+        : inputChange?.education3_passing_year ?? "",
       education3_institution: inputChange?.education3_institution ?? "",
-
+      education4: inputChange.education3 ?? "",
+      education4_major: inputChange?.education4_major ?? "",
+      education4_passing_year: passingYear4
+        ? passingYear4
+        : inputChange.passingYear4 ?? "",
+      education4_institution: inputChange?.education3_institution ?? "",
       height_feet: inputChange?.height_feet ?? "",
       height_inches: inputChange?.height_inches ?? "",
       weight: inputChange?.weight ?? "",
@@ -244,7 +261,7 @@ const EditProfile = () => {
     }
   };
 
-  let education3_passing_year = 1;
+  // let education3_passing_year = 1;
   // async function fetchData() {
   //   const data = new FormData();
   //   const res = await UserServices.UserProfile();
@@ -459,7 +476,7 @@ const EditProfile = () => {
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education3" ? "2px solid red" : "",
+              border: err?.error === "education4" ? "2px solid red" : "",
             }}>
             <div className="col-10">
               <label className="form-check-label bg-white px-2 text-body">
@@ -518,7 +535,7 @@ const EditProfile = () => {
           placeholder="major1"
           aria-describedby="major1"
         />
-        <label htmlFor="inputMajor1">Enter major subject</label>
+        {/* <label htmlFor="inputMajor1">Enter major subject</label> */}
       </div>
 
       <div className="row my-4 px-2  rounded-1">
@@ -533,22 +550,22 @@ const EditProfile = () => {
               type="button"
               className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
               data-bs-toggle="dropdown"
-              aria-expanded={year1Dropdown ? "true" : "false"}
-              onClick={toggleYear1Dropdown}
-              onBlur={delayedYear1Dismiss}>
+              aria-expanded={year4Dropdown ? "true" : "false"}
+              onClick={toggleYear4Dropdown}
+              onBlur={delayedYear4Dismiss}>
               {passingYear4 ? passingYear4 : user?.education4_passing_year}
             </button>
             <ul
               data-bs-popper
               className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
-                year1Dropdown ? " show" : ""
+                year4Dropdown ? " show" : ""
               }`}
               style={{maxHeight: 200}}>
               {passingYears.map((year, i) => (
                 <li key={i}>
                   <div
                     onClick={() => {
-                      dispatch(setEdu1PassYear(year));
+                      dispatch(setEdu4PassYear(year));
                     }}
                     className={`btn btn-primary py-3 dropdown-item${
                       passingYear4 === year ? " " : ""
@@ -759,7 +776,7 @@ const EditProfile = () => {
             className="form-floating text-muted rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "weight" ? "2px solid red" : "",
+              border: err?.error === "weight" ? "2px solid red" : "",
             }}>
             <input
               type="number"
@@ -859,7 +876,9 @@ const EditProfile = () => {
           {Religion}
 
           {/* education 3*/}
-          {/* {education3Element} */}
+          {education3Element}
+
+          {education4Element}
 
           {countryElement}
           {cityElement}

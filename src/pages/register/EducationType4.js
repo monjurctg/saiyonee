@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION4_TYPES} from "../../constants/register_constants";
 import {setEducation4, setEducation4Other} from "../../redux/slices/authSlices";
+import {setEduTpe4} from "../../redux/slices/editProfileslice";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function EducationTypes4() {
+function EducationTypes4({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,6 +15,9 @@ function EducationTypes4() {
     if (e.target.value === "Other") {
       dispatch(setEducation4Other(true));
       dispatch(setEducation4(""));
+    } else if (module === "edu4") {
+      // dispatch(setEducation4Other(true));
+      dispatch(setEduTpe4(e.target.value));
     } else {
       dispatch(setEducation4Other(false));
       dispatch(setEducation4(e.target.value));

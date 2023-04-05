@@ -5,6 +5,7 @@ import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setGender,
   setHeight,
+  setMaridStatus,
   setpreferenceQuestion,
   setPreviousPreference,
 } from "../../redux/slices/preferenceSlice";
@@ -93,6 +94,7 @@ function Preference() {
 
   const clickButton = () => {
     dispatch(setHeight(state));
+    dispatch(setMaridStatus(maritalStatus ? maritalStatus : " "));
     onSelectClicked();
   };
 

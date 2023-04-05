@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import EducationTypes3 from "../register/EducationType3";
+import EducationTypes4 from "../register/EducationType4";
 import LocationCity from "../register/LocationCity";
 import LocationCountry from "../register/LocationCountry";
 import MaritalStatus from "../register/MaritalStatus";
@@ -18,6 +19,10 @@ function EditProfileModule() {
     }
     if (module === "edu3") {
       setActive(<EducationTypes3 module="edu3" />);
+      return;
+    }
+    if (module === "edu4") {
+      setActive(<EducationTypes4 module="edu4" />);
       return;
     }
     if (module === "marital_status") {

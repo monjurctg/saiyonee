@@ -7,9 +7,7 @@ const initialState = {
   marital_status: "",
   country: "",
   city: "",
-
   gender: "",
-
   height_feet: "",
   height_inches: "",
   weight: "",
@@ -59,13 +57,17 @@ const EditProfileSlice = createSlice({
       console.log(payload, "from set passing year redux");
       state.passingYear3 = payload;
     },
+    setEdu4PassYear: (state, {payload}) => {
+      console.log(payload, "from set passing year redux");
+      state.passingYear4 = payload;
+    },
     setEdu2PassYear: (state, {payload}) => {
       state.passingYear4 = payload;
     },
     setEduTpe3: (state, {payload}) => {
       state.education3 = payload;
     },
-    setEduTpe2: (state, {payload}) => {
+    setEduTpe4: (state, {payload}) => {
       state.education4 = payload;
     },
     setEditProfile: (state, {payload}) => {
@@ -94,9 +96,11 @@ export const {
   setEditMaritalStatus,
   setEditReligion,
   setEdu1PassYear,
+  setEdu4PassYear,
+
   setEdu2PassYear,
   setEduTpe3,
-  setEduTpe2,
+  setEduTpe4,
   setEditProfileEmployType,
   setEditProfileGender,
   setEditProfileHeight,
