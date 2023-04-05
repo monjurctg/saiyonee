@@ -8,6 +8,7 @@ import {setMaridStatus} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
 function MaritalStatus({module}) {
+  // console.log(module, "module");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {marital_status: maritalStatus} = useSelector((state) => state.auth);
@@ -30,13 +31,11 @@ function MaritalStatus({module}) {
     if (module === "marital_status") {
       dispatch(setMaridStatus(e.target.value));
       navigate(-1);
-
       return;
     }
 
     if (e.target.name === "select_marital") {
       setMarital_status("Select marital status");
-
       dispatch(setMaritalStatus("Select marital status"));
       navigate(-1);
       return;
@@ -78,6 +77,33 @@ function MaritalStatus({module}) {
               />
             </div>
           </div> */}
+          {module == "marital_status" && (
+            <div
+              // key={i}
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+              <div className="col-10">
+                <label
+                  // htmlFor={maritalStatusType}
+                  className="form-check-label bg-white w-100">
+                  <strong>
+                    {/* {maritalStatusType ? maritalStatusType : "None"} */}
+                    None
+                  </strong>
+                </label>
+              </div>
+              <div className="col-2">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="marital_status_type"
+                  checked={marital_status === " "}
+                  onChange={onMaritalStatusChange}
+                  value={" "}
+                  // id={maritalStatusType}
+                />
+              </div>
+            </div>
+          )}
 
           {MARITAL_STATUS_TYPES.map((maritalStatusType, i) => (
             <div

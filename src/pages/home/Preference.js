@@ -327,7 +327,9 @@ function Preference() {
                 className="form-check-label  bg-white px-2 text-body"
                 style={{fontFamily: "Inter", cursor: "pointer"}}>
                 {/* {religion} */}
-                {state.religion || preferenceReligion || "Select religion"}
+                {state.religion?.trim() ||
+                  preferenceReligion?.trim() ||
+                  "Select religion"}
               </label>
             </div>
 
@@ -368,8 +370,8 @@ function Preference() {
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {state.maritalStatus ||
-                  maritalStatus ||
+                {state.maritalStatus.trim() ||
+                  maritalStatus.trim() ||
                   "Select marital status"}
               </label>
             </div>

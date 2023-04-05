@@ -859,7 +859,7 @@ const EditProfile = () => {
           {Religion}
 
           {/* education 3*/}
-          {education3Element}
+          {/* {education3Element} */}
 
           {countryElement}
           {cityElement}

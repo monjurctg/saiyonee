@@ -56,6 +56,31 @@ function Religions({module}) {
         </div>
         <div className="container px-4 pb-2 overflow-auto">
           <h1>Religion</h1>
+          {module === "preference" && (
+            <div
+              // key={i}
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+              <div className="col-10">
+                <label
+                  // htmlFor={religionType}
+                  className="form-check-label bg-white w-100">
+                  <strong>None</strong>
+                </label>
+              </div>
+
+              <div className="col-2">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="religion_type"
+                  checked={religion === ""}
+                  onChange={onReligionChange}
+                  value={""}
+                  // id={religionType}
+                />
+              </div>
+            </div>
+          )}
           {RELIGION_TYPES.map((religionType, i) => (
             <div
               key={i}
