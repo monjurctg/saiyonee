@@ -138,7 +138,7 @@ function PersonalInformation() {
       });
       return;
     }
-    if (validateAge(state.date_of_birth) <= 18) {
+    if (!validateAge(state.date_of_birth)) {
       setErr({
         error: "dob",
         message: "You must be 18 plus",

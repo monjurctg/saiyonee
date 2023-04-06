@@ -90,12 +90,20 @@ export const getDate = (date) => {
 };
 
 export function validateAge(date) {
-  var today = new Date();
-  var birthDate = new Date(date);
-  var age = today.getFullYear() - birthDate.getFullYear();
-  var month = today.getMonth() - birthDate.getMonth();
-  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-  }
+  let today = new Date();
+  let birthDate = new Date(date);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let monthDiff = today.getMonth() - birthDate.getMonth();
 
-  return age;
+  // console.log(age);
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+    // return;
+  }
+  let isNineteenOrAbove = age > 19 || (age === 19 && monthDiff >= 0);
+  console.log(isNineteenOrAbove);
+  return isNineteenOrAbove;
 }
