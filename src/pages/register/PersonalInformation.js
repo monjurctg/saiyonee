@@ -5,7 +5,7 @@ import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {GENDER_TYPES} from "../../constants/register_constants";
 import {setPersonalInfo} from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import {stoteRegisterValues, validateAge} from "../../utils/functions";
 let scrollPos = 0;
 function PersonalInformation() {
   const {
@@ -102,16 +102,16 @@ function PersonalInformation() {
   };
   // console.log(state.gender);
 
-  function validateAge(dateOfBirth) {
-    var today = new Date();
-    var birthDate = new Date(dateOfBirth);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var month = today.getMonth() - birthDate.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-    }
+  // function validateAge(dateOfBirth) {
+  //   var today = new Date();
+  //   var birthDate = new Date(dateOfBirth);
+  //   var age = today.getFullYear() - birthDate.getFullYear();
+  //   var month = today.getMonth() - birthDate.getMonth();
+  //   if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+  //   }
 
-    return age;
-  }
+  //   return age;
+  // }
 
   const onContinueClicked = async () => {
     if (!state.full_name.trim() || state.full_name.trim().length < 6) {

@@ -88,3 +88,14 @@ export const getDate = (date) => {
   console.log("newDate", newDate);
   return newDate;
 };
+
+export function validateAge(date) {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+  }
+
+  return age;
+}
