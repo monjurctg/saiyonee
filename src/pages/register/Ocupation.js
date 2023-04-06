@@ -46,7 +46,7 @@ function Ocupation() {
     if (current_employment_type.length === 0) {
       setErr({
         error: "current_employment_type",
-        message: "Please select employment type",
+        message: "Please select Employment Type",
       });
       return;
     }
@@ -110,7 +110,8 @@ function Ocupation() {
       <RegisterLayout
         onContinueClicked={onContinueClicked}
         err={err}
-        loading={loading}>
+        loading={loading}
+      >
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>
@@ -123,7 +124,8 @@ function Ocupation() {
                   err?.error == "current_employment_type"
                     ? "2px solid red"
                     : "",
-              }}>
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {currentEmploymentTypeOther
@@ -144,14 +146,15 @@ function Ocupation() {
           </Link>
           {currentEmploymentTypeOther && (
             <div
-              className="form-floating my-4 text-muted"
+              className="form-floating my-4 text-muted rounded-1"
               style={{
                 fontFamily: "Inter",
                 border:
-                  err?.error == "{current_employment_type"
+                  err?.error == "current_employment_type"
                     ? "2px solid red"
                     : "",
-              }}>
+              }}
+            >
               <input
                 type="text"
                 id="inputEmploymentType"
@@ -162,7 +165,7 @@ function Ocupation() {
                 aria-describedby="employmentType"
               />
               <label htmlFor="inputEmploymentType">
-                Enter other employement type
+                Enter other employment type
               </label>
             </div>
           )}
@@ -177,7 +180,8 @@ function Ocupation() {
                     style={{
                       fontFamily: "Inter",
                       border: err?.error == "industry" ? "2px solid red" : "",
-                    }}>
+                    }}
+                  >
                     <div className="col-10">
                       <label className="form-check-label bg-white px-2 text-body">
                         {industry ? industry : "Select Industry"}
@@ -198,14 +202,15 @@ function Ocupation() {
                     fontFamily: "Inter",
                     border:
                       err?.error == "employer_name" ? "2px solid red" : "",
-                  }}>
+                  }}
+                >
                   <input
                     type="text"
                     id="inputEmployer"
                     value={employer_name}
                     onChange={(e) => {
                       dispatch(setEmployName(e.target.value));
-                      stoteRegisterValues({employer_name: e.target.value});
+                      stoteRegisterValues({ employer_name: e.target.value });
                     }}
                     //   onChange={onEmployerNameChanged}
                     className="form-control border-0 rounded-1"
@@ -221,14 +226,15 @@ function Ocupation() {
                   style={{
                     fontFamily: "Inter",
                     border: err?.error == "designation" ? "2px solid red" : "",
-                  }}>
+                  }}
+                >
                   <input
                     type="text"
                     id="inputDesignation"
                     value={designation}
                     onChange={(e) => {
                       dispatch(setDesignation(e.target.value));
-                      stoteRegisterValues({designation: e.target.value});
+                      stoteRegisterValues({ designation: e.target.value });
                     }}
                     className="form-control border-0 rounded-1"
                     placeholder="designation"
@@ -242,7 +248,8 @@ function Ocupation() {
                     fontFamily: "Inter",
                     border:
                       err?.error == "working_since" ? "2px solid red" : "",
-                  }}>
+                  }}
+                >
                   <input
                     type="date"
                     id="inputWorkingSinceDate"
@@ -259,7 +266,7 @@ function Ocupation() {
                       } else {
                         dispatch(setWorkingSince(e.target.value));
                         setErr("");
-                        stoteRegisterValues({working_since: e.target.value});
+                        stoteRegisterValues({ working_since: e.target.value });
                       }
                     }}
                     value={working_since}
