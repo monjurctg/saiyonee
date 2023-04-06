@@ -141,7 +141,7 @@ function PersonalInformation() {
     if (!validateAge(state.date_of_birth)) {
       setErr({
         error: "dob",
-        message: "You must be 18 plus",
+        message: "Your age must be 19 or 19 plus",
       });
       return;
     }
