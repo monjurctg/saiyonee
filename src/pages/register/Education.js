@@ -341,6 +341,9 @@ function Education() {
                       <div
                         onClick={() => {
                           dispatch(setPassingYear1(year));
+                          dispatch(setPassingYear2(null));
+                          dispatch(setPassingYear3(null));
+                          dispatch(setPassingYear4(null));
                           stoteRegisterValues({
                             education1_passing_year: year,
                           });
@@ -483,9 +486,8 @@ function Education() {
                   }`}
                   style={{ maxHeight: 200 }}
                 >
-                  {passingYears.map(
-                    (year, i) => {
-                      if (parseInt(year) > parseInt(education1_passing_year))
+                  {passingYears.map((year, i) => {
+                    if (parseInt(year) > parseInt(education1_passing_year))
                       return (
                         <li key={i}>
                           <div
@@ -494,6 +496,8 @@ function Education() {
                             }`}
                             onClick={() => {
                               dispatch(setPassingYear2(year));
+                              dispatch(setPassingYear3(null));
+                              dispatch(setPassingYear4(null));
                               stoteRegisterValues({
                                 education2_passing_year: year,
                               });
@@ -503,8 +507,7 @@ function Education() {
                           </div>
                         </li>
                       );
-                    }
-                  )}
+                  })}
                 </ul>
               </div>
             </div>
@@ -645,9 +648,10 @@ function Education() {
                               education3_passing_year === year ? " active" : ""
                             }`}
                             onClick={() => {
-                              dispatch(setPassingYear2(year));
+                              dispatch(setPassingYear3(year));
+                              dispatch(setPassingYear4(null));
                               stoteRegisterValues({
-                                education2_passing_year: year,
+                                education3_passing_year: year,
                               });
                             }}
                           >
@@ -775,9 +779,9 @@ function Education() {
                               education4_passing_year === year ? " active" : ""
                             }`}
                             onClick={() => {
-                              dispatch(setPassingYear2(year));
+                              dispatch(setPassingYear4(year));
                               stoteRegisterValues({
-                                education2_passing_year: year,
+                                education4_passing_year: year,
                               });
                             }}
                           >
