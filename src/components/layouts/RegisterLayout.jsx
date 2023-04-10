@@ -28,17 +28,12 @@ function RegisterLayout({
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-            }}
-          >
+            }}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
           {!helpN ? (
             <Link to={"/help"}>
-              <img
-                src={help}
-                alt=""
-                style={{ height: "45px", width: "45px" }}
-              />
+              <img src={help} alt="" style={{height: "40px", width: "40px"}} />
             </Link>
           ) : (
             <div></div>
@@ -56,11 +51,10 @@ function RegisterLayout({
             <Link to={"/register/email"}>Go back to Refill the Data</Link>
           )} */}
           <button
-            style={{ height: 60 }}
+            style={{height: 60}}
             onFocus={onFocus}
             onClick={onContinueClicked}
-            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1"
-          >
+            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
             {loading ? (
               <Loader />
             ) : (
