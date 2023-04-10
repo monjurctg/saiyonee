@@ -49,16 +49,17 @@ function RegSuccess() {
                   <h1 className="card-title" style={{fontSize: "30px"}}>
                     Congratulation!
                   </h1>
-                  <h5> You Have SuccessFully Registered</h5>
+                  {/* <h5> You Have SuccessFully Registered</h5> */}
                   <p className="card-text text-muted">
-                    Press Back to home button and Login again
+                    Your account has been created successfully. Please log in
+                    using your credentials to access your account.
                   </p>
                 </div>
               </div>
               <button
                 className="btn btn-primary w-100 rounded shadow p-3 my-4"
                 onClick={onClickLogout}>
-                <strong>Back to home</strong>
+                <strong>Log In </strong>
               </button>
             </div>
           </div>
