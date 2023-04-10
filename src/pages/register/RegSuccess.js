@@ -23,7 +23,7 @@ function RegSuccess() {
     let token = getToken();
     localStorage.removeItem("saiyonee_auth_token");
     localStorage.removeItem("isVarified");
-    navigate("/get-start");
+    navigate("/login");
     // if (token) {
     //   const res = await AuthServices.logout();
     //   if (res.status === 200) {
