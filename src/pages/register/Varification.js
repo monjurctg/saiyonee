@@ -141,14 +141,14 @@ function Varification() {
       setLoading(true);
       if (res.status === 200) {
         setToken(res.data.auth_token);
-        localStorage.setItem("isVarified", false);
-        localStorage.setItem("is_banned", false);
-        localStorage.setItem("regStart", false);
-        localStorage.setItem("emailVerified", false);
+        // localStorage.setItem("isVarified", false);
+        // localStorage.setItem("is_banned", false);
+        // localStorage.setItem("regStart", false);
+        // localStorage.setItem("emailVerified", false);
         setLoading(false);
 
         dispatch(setIsRegStart(false));
-        navigator("/email-verification");
+        navigator("/success");
         dispatch(regSuccessAction());
       } else {
         console.log("error");
