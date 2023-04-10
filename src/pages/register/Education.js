@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setEducation1,
@@ -21,7 +21,7 @@ import {
   setPassingYear4,
 } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import { stoteRegisterValues } from "../../utils/functions";
+import {stoteRegisterValues} from "../../utils/functions";
 
 let scrollPos = 0;
 
@@ -29,7 +29,7 @@ function Education() {
   const navigate = useNavigate();
   let socialToken = localStorage.getItem("social-token");
   const scrollContainerRef = useRef();
-  let { pathname } = useLocation();
+  let {pathname} = useLocation();
   const onEducationSelectorClicked = useCallback(() => {
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
@@ -38,7 +38,7 @@ function Education() {
   }, []);
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({ top: scrollPos });
+      scrollContainerRef.current?.scrollTo({top: scrollPos});
   }, [onEducationSelectorClicked]);
   const {
     education1Other,
@@ -97,7 +97,7 @@ function Education() {
 
   // console.log("passingYears", passingYears);
   let onContinueClicked = async () => {
-    if (!education1 || education1 == "Select education") {
+    if (!education1 || education1 === "Select education") {
       setErr({
         error: "education1",
         message: "Please select your Secondary Education",
@@ -124,7 +124,7 @@ function Education() {
       return;
     }
 
-    if (!education2 || education2 == "Select education") {
+    if (!education2 || education2 === "Select education") {
       setErr({
         error: "education2",
         message: "Please select your Higher Secondary Education",
@@ -208,27 +208,23 @@ function Education() {
       <RegisterLayout
         err={err}
         loading={loading}
-        onContinueClicked={onContinueClicked}
-      >
+        onContinueClicked={onContinueClicked}>
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          ref={scrollContainerRef}
-        >
+          ref={scrollContainerRef}>
           <h1 className="card-title">Candidate’s Educational Background</h1>
-          <h4 className="mt-5 mb-2" style={{ fontSize: "20px" }}>
+          <h4 className="mt-5 mb-2" style={{fontSize: "20px"}}>
             Secondary Education
           </h4>
           <Link
             onClick={onEducationSelectorClicked}
-            to={"/register/education/type1"}
-          >
+            to={"/register/education/type1"}>
             <div
               className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "education1" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education1Other
@@ -268,8 +264,7 @@ function Education() {
               fontFamily: "Inter",
               border:
                 err?.error == "education1_institution" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -277,7 +272,7 @@ function Education() {
               value={education1_institution}
               onChange={(e) => {
                 dispatch(setinstitution1(e.target.value));
-                stoteRegisterValues({ education1_institution: e.target.value });
+                stoteRegisterValues({education1_institution: e.target.value});
               }}
               className="form-control border-0 rounded-1"
               placeholder="institution1"
@@ -292,8 +287,7 @@ function Education() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "education1_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -302,7 +296,7 @@ function Education() {
               //   onChange={onMajor1Change}
               onChange={(e) => {
                 dispatch(setMajor1(e.target.value));
-                stoteRegisterValues({ education1_major: e.target.value });
+                stoteRegisterValues({education1_major: e.target.value});
               }}
               className="form-control border-0 rounded-1"
               placeholder="major1"
@@ -325,8 +319,7 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year1Dropdown ? "true" : "false"}
                   onClick={toggleYear1Dropdown}
-                  onBlur={delayedYear1Dismiss}
-                >
+                  onBlur={delayedYear1Dismiss}>
                   {education1_passing_year}
                 </button>
                 <ul
@@ -334,24 +327,19 @@ function Education() {
                   className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
                     year1Dropdown ? " show" : ""
                   }`}
-                  style={{ maxHeight: 200 }}
-                >
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => (
                     <li key={i}>
                       <div
                         onClick={() => {
                           dispatch(setPassingYear1(year));
-                          dispatch(setPassingYear2(null));
-                          dispatch(setPassingYear3(null));
-                          dispatch(setPassingYear4(null));
                           stoteRegisterValues({
                             education1_passing_year: year,
                           });
                         }}
                         className={`btn btn-primary py-3 dropdown-item${
                           education1_passing_year === year ? " " : ""
-                        }`}
-                      >
+                        }`}>
                         {year}
                       </div>
                     </li>
@@ -363,20 +351,18 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2" style={{ fontSize: "20px" }}>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
             Higher Secondary Education
           </h4>
           <Link
             onClick={onEducationSelectorClicked}
-            to={"/register/education/type2"}
-          >
+            to={"/register/education/type2"}>
             <div
               className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
-                border: err?.error == "education2" ? "2px solid red" : "",
-              }}
-            >
+                border: err?.error === "education2" ? "2px solid red" : "",
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education2Other
@@ -417,8 +403,7 @@ function Education() {
               fontFamily: "Inter",
               border:
                 err?.error == "education2_institution" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -426,7 +411,7 @@ function Education() {
               value={education2_institution}
               onChange={(e) => {
                 dispatch(setinstitution2(e.target.value));
-                stoteRegisterValues({ education2_institution: e.target.value });
+                stoteRegisterValues({education2_institution: e.target.value});
               }}
               // onChange={onInstitution2Change}
               className="form-control border-0 rounded-1"
@@ -442,8 +427,7 @@ function Education() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "education2_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -451,7 +435,7 @@ function Education() {
               value={education2_major}
               onChange={(e) => {
                 dispatch(setMajor2(e.target.value));
-                stoteRegisterValues({ education1_major: e.target.value });
+                stoteRegisterValues({education1_major: e.target.value});
               }}
               // onChange={onMajor2Change}
               className="form-control border-0 rounded-1"
@@ -475,8 +459,7 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year2Dropdown ? "true" : "false"}
                   onClick={toggleYear2Dropdown}
-                  onBlur={delayedYear2Dismiss}
-                >
+                  onBlur={delayedYear2Dismiss}>
                   {education2_passing_year}
                 </button>
                 <ul
@@ -484,8 +467,7 @@ function Education() {
                   className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
                     year2Dropdown ? " show" : ""
                   }`}
-                  style={{ maxHeight: 200 }}
-                >
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => {
                     if (parseInt(year) > parseInt(education1_passing_year))
                       return (
@@ -496,13 +478,10 @@ function Education() {
                             }`}
                             onClick={() => {
                               dispatch(setPassingYear2(year));
-                              dispatch(setPassingYear3(null));
-                              dispatch(setPassingYear4(null));
                               stoteRegisterValues({
                                 education2_passing_year: year,
                               });
-                            }}
-                          >
+                            }}>
                             {year}
                           </div>
                         </li>
@@ -515,20 +494,18 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2" style={{ fontSize: "20px" }}>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
             Graduate Education (Optional)
           </h4>
           <Link
             onClick={onEducationSelectorClicked}
-            to={"/register/education/type3"}
-          >
+            to={"/register/education/type3"}>
             <div
               className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "education3" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {education3Other
@@ -569,8 +546,7 @@ function Education() {
               fontFamily: "Inter",
               border:
                 err?.error == "education3_institution" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -578,7 +554,7 @@ function Education() {
               value={education3_institution}
               onChange={(e) => {
                 dispatch(setinstitution3(e.target.value));
-                stoteRegisterValues({ education3_institution: e.target.value });
+                stoteRegisterValues({education3_institution: e.target.value});
               }}
               // onChange={onInstitution3Change}
               className="form-control border-0 rounded-1"
@@ -595,8 +571,7 @@ function Education() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "education3_major" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               onFocus={() => setErr()}
               type="text"
@@ -604,7 +579,7 @@ function Education() {
               value={education3_major}
               onChange={(e) => {
                 dispatch(setMajor3(e.target.value));
-                stoteRegisterValues({ education3_major: e.target.value });
+                stoteRegisterValues({education3_major: e.target.value});
               }}
               // onChange={onMajor3Change}
               className="form-control border-0 rounded-1"
@@ -628,8 +603,7 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year3Dropdown ? "true" : "false"}
                   onClick={toggleYear3Dropdown}
-                  onBlur={delayedYear3Dismiss}
-                >
+                  onBlur={delayedYear3Dismiss}>
                   {education3_passing_year}
                 </button>
                 <ul
@@ -637,8 +611,7 @@ function Education() {
                   className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
                     year3Dropdown ? " show" : ""
                   }`}
-                  style={{ maxHeight: 200 }}
-                >
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => {
                     if (parseInt(year) > parseInt(education2_passing_year))
                       return (
@@ -648,13 +621,11 @@ function Education() {
                               education3_passing_year === year ? " active" : ""
                             }`}
                             onClick={() => {
-                              dispatch(setPassingYear3(year));
-                              dispatch(setPassingYear4(null));
+                              dispatch(setPassingYear2(year));
                               stoteRegisterValues({
-                                education3_passing_year: year,
+                                education2_passing_year: year,
                               });
-                            }}
-                          >
+                            }}>
                             {year}
                           </div>
                         </li>
@@ -667,13 +638,12 @@ function Education() {
 
           <br />
 
-          <h4 className="mt-4 mb-2" style={{ fontSize: "20px" }}>
+          <h4 className="mt-4 mb-2" style={{fontSize: "20px"}}>
             Postgraduate Education (Optional)
           </h4>
           <Link
             // onClick={onEducationSelectorClicked}
-            to={"/register/education/type4"}
-          >
+            to={"/register/education/type4"}>
             <div className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
@@ -717,7 +687,7 @@ function Education() {
               value={education4_institution}
               onChange={(e) => {
                 dispatch(setinstitution4(e.target.value));
-                stoteRegisterValues({ education4_institution: e.target.value });
+                stoteRegisterValues({education4_institution: e.target.value});
               }}
               // onChange={onInstitution4Change}
               className="form-control border-0 rounded-1"
@@ -735,7 +705,7 @@ function Education() {
               value={education4_major}
               onChange={(e) => {
                 dispatch(setMajor4(e.target.value));
-                stoteRegisterValues({ education4_major: e.target.value });
+                stoteRegisterValues({education4_major: e.target.value});
               }}
               // onChange={onMajor4Change}
               className="form-control border-0 rounded-1"
@@ -759,8 +729,7 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year4Dropdown ? "true" : "false"}
                   onClick={toggleYear4Dropdown}
-                  onBlur={delayedYear4Dismiss}
-                >
+                  onBlur={delayedYear4Dismiss}>
                   {education4_passing_year}
                 </button>
                 <ul
@@ -768,8 +737,7 @@ function Education() {
                   className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
                     year4Dropdown ? " show" : ""
                   }`}
-                  style={{ maxHeight: 200 }}
-                >
+                  style={{maxHeight: 200}}>
                   {passingYears.map((year, i) => {
                     if (parseInt(year) > parseInt(education3_passing_year))
                       return (
@@ -779,12 +747,11 @@ function Education() {
                               education4_passing_year === year ? " active" : ""
                             }`}
                             onClick={() => {
-                              dispatch(setPassingYear4(year));
+                              dispatch(setPassingYear2(year));
                               stoteRegisterValues({
-                                education4_passing_year: year,
+                                education2_passing_year: year,
                               });
-                            }}
-                          >
+                            }}>
                             {year}
                           </div>
                         </li>

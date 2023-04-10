@@ -51,8 +51,7 @@ function RegSuccess() {
                   </h1>
                   <h5> You Have SuccessFully Registered</h5>
                   <p className="card-text text-muted">
-                    Your informations is being reviewed.We will contact you by
-                    email soon.
+                    Press Back to home button and Login again
                   </p>
                 </div>
               </div>
