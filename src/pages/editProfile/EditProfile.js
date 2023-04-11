@@ -75,7 +75,7 @@ const EditProfile = () => {
     current_country: country ? country : user?.current_country,
     current_city: city ? city : user?.current_city,
     height_feet: height_feet ? height_feet : user?.height_feet,
-    height_inches: height_inches ? height_inches : user?.height_feet,
+    height_inches: height_inches ? height_inches : user?.height_inches,
     weight: weight ? weight : user?.weight,
     education3_institution: education3_institution
       ? education3_institution
@@ -465,7 +465,7 @@ const EditProfile = () => {
   let education4Element = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Undergraduate Education Type
+        Postgraduate Education Type
       </p>
       <div className="form-floating text-muted rounded-1">
         <Link
@@ -494,7 +494,7 @@ const EditProfile = () => {
         </label> */}
       </div>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Undergraduate Education Institute
+        Postgraduate Education Institute
       </p>
       <div
         className="form-floating my-4 text-muted  rounded-1"
@@ -516,7 +516,7 @@ const EditProfile = () => {
         {/* <label htmlFor="inputInstitution1">Enter candidate's institution</label> */}
       </div>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Undergraduate Education Major
+        Postgraduate Education Major
       </p>
       <div
         className="form-floating my-4 text-muted  rounded-1"
