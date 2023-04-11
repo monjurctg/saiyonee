@@ -98,9 +98,8 @@ function Shortlisted() {
 
               color: "#000",
               textAlign: "center",
-            }}
-          >
-            {sl?.display_name?.slice(0, 15)}, {sl?.app_user.age}
+            }}>
+            {sl?.app_user?.display_name?.slice(0, 20)}, {sl?.app_user.age}
           </h5>
         </Link>
         {/* <Link to={`/user-info/shortList/${sl.id}/${sl.app_user.id}`}>
