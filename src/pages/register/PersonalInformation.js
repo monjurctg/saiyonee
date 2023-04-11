@@ -32,6 +32,7 @@ function PersonalInformation() {
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState();
+  const [ageError, setAgeError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -138,10 +139,13 @@ function PersonalInformation() {
       });
       return;
     }
-    if (!validateAge(state.date_of_birth)) {
+    if (!validateAge(state.date_of_birth, state?.gender)) {
       setErr({
         error: "dob",
-        message: "Your age must be 19 or 19 plus",
+        message:
+          state?.gender.trim() === "Female".trim()
+            ? "Your age must be 18 or 18 plus"
+            : "Your age must be 21 or 21 plus",
       });
       return;
     }

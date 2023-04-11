@@ -89,7 +89,7 @@ export const getDate = (date) => {
   return newDate;
 };
 
-export function validateAge(date) {
+export function validateAge(date, gender) {
   let today = new Date();
   let birthDate = new Date(date);
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -103,7 +103,10 @@ export function validateAge(date) {
     age--;
     // return;
   }
-  let isNineteenOrAbove = age > 19 || (age === 19 && monthDiff >= 0);
-  console.log(isNineteenOrAbove);
-  return isNineteenOrAbove;
+  let isEligible =
+    gender.trim() === "Female"
+      ? age > 18 || (age === 18 && monthDiff >= 0)
+      : age > 21 || (age === 21 && monthDiff >= 0);
+  console.log(isEligible);
+  return isEligible;
 }

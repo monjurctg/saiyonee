@@ -10,6 +10,7 @@ function ProfileImage({url, gender, style}) {
   return (
     <>
       <img
+        alt=""
         style={{...style}}
         className="user-img"
         src={
