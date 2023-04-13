@@ -73,7 +73,7 @@ function Liked({id}) {
                 borderBottomRightRadius: 0,
                 borderBottomLeftRadius: 0,
               }}
-              url={ll?.thumbnail_img_url}
+              url={ll?.thumbnail_img}
               gender={
                 user?.gender?.toLowerCase()?.trim() === "male"
                   ? "female"
@@ -88,8 +88,7 @@ function Liked({id}) {
 
                 color: "#000",
                 textAlign: "center",
-              }}
-            >
+              }}>
               {ll?.full_name?.slice(0, 15)}, {ll?.age}
             </h5>
           </Link>

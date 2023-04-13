@@ -1,7 +1,7 @@
 /* eslint-disable */
 
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -18,7 +18,6 @@ function SelfieVerification() {
   //Sazid's edition extra
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const width = windowSize.current[0];
-
 
   const getImage = async () => {
     let res = await QuestionServices.getSelfieImage();
@@ -120,17 +119,16 @@ function SelfieVerification() {
             
           /> */}
 
-          {
-            width < 1024 &&
+          {width < 1024 && (
             <input
               type="file"
               id="image"
-              style={{ display: "none" }}
+              style={{display: "none"}}
               onChange={fileChange}
               accept="image/*"
               capture="camera"
             />
-          }
+          )}
         </div>
         <div className="mt-2">
           <h5
@@ -158,23 +156,30 @@ function SelfieVerification() {
           </p>
         </div>
 
-        {
-          width > 1023 &&
-          <span style={{
-            color: "red",
-            fontWeight: "bold",
-          }}>You need to have a webcam to complete this step </span>
-        }
+        {width > 1023 && (
+          <span
+            style={{
+              color: "red",
+              fontWeight: "bold",
+            }}>
+            You need to have a webcam to complete this step{" "}
+          </span>
+        )}
 
-        <p className="mt-3" style={{
-          color: "red",
-          fontSize: 15,
-          textAlign: "initial",
-          fontWeight: 600
-        }}>We will not make this public. it’s kept PRIVATE</p>
+        <p
+          className="mt-3"
+          style={{
+            color: "red",
+            fontSize: 15,
+            textAlign: "initial",
+            fontWeight: 600,
+          }}>
+          Selfie is required to verify a candidate's profile and consent. We
+          will not make it public, and other users will not see it
+        </p>
         {image2?.selfie_img && (
           <Link to={"/review/profile"}>
-            <p style={{ color: "#1F2937" }}>I will do it later</p>
+            <p style={{color: "#1F2937"}}>I will do it later</p>
           </Link>
         )}
       </div>
