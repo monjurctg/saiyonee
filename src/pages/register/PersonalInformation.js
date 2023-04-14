@@ -57,11 +57,23 @@ function PersonalInformation() {
 
   const handleUserInputChange = (e) => {
     // console.log("e.target.name", e.target.name);
+    // if (e.target.name === "height_ft") {
+    //   if (e.target.value > 8 || e.target.value < 3) {
+    //     setErr({
+    //       error: "ft",
+    //       message: "Height cannot be less than 3 feet or greater than 8 feet",
+    //     });
+    //     return;
+    //   } else {
+    //     setErr({});
+    //   }
+    // }
     if (e.target.name === "height_ft") {
-      if (e.target.value > 8 || e.target.value < 3) {
+      if (e.target.valle < 3 || e.target.value > 8) {
         setErr({
           error: "ft",
-          message: "Height cannot be less than 3 feet or greater than 8 feet",
+          message:
+            "Height cannot be less than 0 inches or greater than 11 inches",
         });
         return;
       } else {
@@ -80,7 +92,7 @@ function PersonalInformation() {
       }
     }
     if (e.target.name === "weight") {
-      if ((e.target.value < 30) || e.target.value >= 181) {
+      if (e.target.value < 30 || e.target.value >= 181) {
         setErr({
           error: "weight",
           message: "weight cannot be less than 30 kg or greater then 180 kg",
@@ -364,15 +376,14 @@ function PersonalInformation() {
               }}>
               <input
                 type="number"
-                id="inputHeightFeet"
                 name="height_ft"
+                id="inputHeightInches"
                 style={{fontFamily: "Inter"}}
                 value={state.height_ft}
                 onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
-                // placeholder={MIN_HEIGHT_FEET.toString()}
-                aria-describedby="height_feet"
+                // aria-describedby="height_inches"
               />
               <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
                 ft

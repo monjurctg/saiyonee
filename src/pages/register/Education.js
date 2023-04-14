@@ -28,6 +28,7 @@ let scrollPos = 0;
 function Education() {
   const navigate = useNavigate();
   let socialToken = localStorage.getItem("social-token");
+  const {date_of_birth} = useSelector((state) => state.auth);
   const scrollContainerRef = useRef();
   let {pathname} = useLocation();
   const onEducationSelectorClicked = useCallback(() => {
@@ -90,12 +91,14 @@ function Education() {
 
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
+  const dateOfBirthYear = new Date(date_of_birth).getFullYear() + 10;
 
   const passingYears = Array.from(
-    new Array(new Date().getFullYear() - 1990 + 1)
-  ).map((_, i) => 1990 + i);
+    new Array(new Date().getFullYear() - dateOfBirthYear + 1)
+  ).map((_, i) => dateOfBirthYear + i);
 
-  // console.log("passingYears", passingYears);
+  // alert(dateOfBirthYear);
+
   let onContinueClicked = async () => {
     if (!education1 || education1 === "Select education") {
       setErr({
@@ -334,9 +337,6 @@ function Education() {
                         onClick={() => {
                           dispatch(setPassingYear1(year));
                           setYear1Dropdown(false);
-                          stoteRegisterValues({
-                            education1_passing_year: year,
-                          });
                         }}
                         className={`btn btn-primary py-3 dropdown-item${
                           education1_passing_year === year ? " " : ""
