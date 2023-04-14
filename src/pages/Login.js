@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import BasicLayout from "../components/layouts/BasicLayout";
 import AuthServices from "../services/authServices";
@@ -111,6 +111,10 @@ function Login() {
     // console.log("data", data);
   };
 
+  const handleShowPass = () => {
+    setIsShowPass(!isShowPass);
+  };
+
   let subItem = (
     <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
@@ -177,7 +181,7 @@ function Login() {
                 border: err?.error == "password" ? "2px solid red" : "",
               }}>
               <input
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 id="inputPassword"
                 onFocus={() => setErr({})}
                 value={password}
@@ -194,6 +198,25 @@ function Login() {
                 }}>
                 Password
               </label>
+              <div
+                onClick={handleShowPass}
+                style={{
+                  position: "relative",
+                  bottom: "41px",
+                  left: "143px",
+                  width: "40px",
+                  height: "40px",
+                  margin: "0 auto",
+                  cursor: "pointer",
+                }}>
+                {isShowPass ? (
+                  <i class="fa-regular fa-eye"></i>
+                ) : (
+                  <i class="fa-regular fa-eye-slash"></i>
+                )}
+
+                {/* Icon */}
+              </div>
             </div>
             <div className="d-flex justify-content-end">
               <Link to="/forgot-pass">Forgot Password</Link>
