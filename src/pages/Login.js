@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
+  const [isShowPass, setIsShowPass] = useState(false);
 
   const navigate = useNavigate();
   const onChange = (e) => {

@@ -78,10 +78,10 @@ function Education() {
   const delayedYear2Dismiss = () =>
     setTimeout(() => setYear2Dropdown(false), 200);
 
-  const [year3Dropdown, setYearDropdown] = useState(false);
-  const toggleYear3Dropdown = () => setYearDropdown((dropdown) => !dropdown);
+  const [year3Dropdown, setYear3Dropdown] = useState(false);
+  const toggleYear3Dropdown = () => setYear3Dropdown((dropdown) => !dropdown);
   const delayedYear3Dismiss = () =>
-    setTimeout(() => setYearDropdown(false), 200);
+    setTimeout(() => setYear3Dropdown(false), 200);
 
   const [year4Dropdown, setYear4Dropdown] = useState(false);
   const toggleYear4Dropdown = () => setYear4Dropdown((dropdown) => !dropdown);
@@ -333,6 +333,7 @@ function Education() {
                       <div
                         onClick={() => {
                           dispatch(setPassingYear1(year));
+                          setYear1Dropdown(false);
                           stoteRegisterValues({
                             education1_passing_year: year,
                           });
@@ -402,7 +403,7 @@ function Education() {
             style={{
               fontFamily: "Inter",
               border:
-                err?.error == "education2_institution" ? "2px solid red" : "",
+                err?.error === "education2_institution" ? "2px solid red" : "",
             }}>
             <input
               onFocus={() => setErr()}
@@ -426,7 +427,7 @@ function Education() {
             className="form-floating my-4 text-muted  rounded-1"
             style={{
               fontFamily: "Inter",
-              border: err?.error == "education2_major" ? "2px solid red" : "",
+              border: err?.error === "education2_major" ? "2px solid red" : "",
             }}>
             <input
               onFocus={() => setErr()}
@@ -478,6 +479,7 @@ function Education() {
                             }`}
                             onClick={() => {
                               dispatch(setPassingYear2(year));
+                              setYear2Dropdown(false);
                               stoteRegisterValues({
                                 education2_passing_year: year,
                               });
@@ -622,6 +624,8 @@ function Education() {
                             }`}
                             onClick={() => {
                               dispatch(setPassingYear3(year));
+                              setYear3Dropdown(false);
+
                               // stoteRegisterValues({
                               //   education2_passing_year: year,
                               // });
@@ -705,6 +709,7 @@ function Education() {
               value={education4_major}
               onChange={(e) => {
                 dispatch(setMajor4(e.target.value));
+                setYear4Dropdown(false);
                 stoteRegisterValues({education4_major: e.target.value});
               }}
               // onChange={onMajor4Change}

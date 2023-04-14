@@ -56,7 +56,7 @@ function PersonalInformation() {
   console.log("date_of_birth", state.date_of_birth);
 
   const handleUserInputChange = (e) => {
-    console.log("e.target.name", e.target.name);
+    // console.log("e.target.name", e.target.name);
     if (e.target.name === "height_ft") {
       if (e.target.value > 8 || e.target.value < 3) {
         setErr({
@@ -67,8 +67,7 @@ function PersonalInformation() {
       } else {
         setErr({});
       }
-    }
-    if (e.target.name === "height_inc") {
+    } else if (e.target.name === "height_inc") {
       if (e.target.value > 11 || e.target.value < 0) {
         setErr({
           error: "inc",
@@ -101,6 +100,7 @@ function PersonalInformation() {
 
     navigate("/register/personalinfo/marital_status");
   };
+
   // console.log(state.gender);
 
   // function validateAge(dateOfBirth) {
