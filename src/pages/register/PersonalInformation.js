@@ -92,7 +92,7 @@ function PersonalInformation() {
       }
     }
     if (e.target.name === "weight") {
-      if (e.target.value < 30 || e.target.value >= 181) {
+      if (e.target.value < 29 || e.target.value > 180) {
         setErr({
           error: "weight",
           message: "weight cannot be less than 30 kg or greater then 180 kg",
@@ -422,13 +422,11 @@ function PersonalInformation() {
             }}>
             <input
               type="number"
-              id="inputWeight"
               name="weight"
-              min={29}
-              max={180}
-              onFocus={() => setErr({})}
-              value={state.weight}
+              id="inputWeight"
               style={{fontFamily: "Inter"}}
+              value={state.weight}
+              onFocus={() => setErr({})}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               aria-describedby="weight"
