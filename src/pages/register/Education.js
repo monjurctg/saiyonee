@@ -753,6 +753,7 @@ function Education() {
                             }`}
                             onClick={() => {
                               dispatch(setPassingYear4(year));
+                              setYear4Dropdown(false);
                               // stoteRegisterValues({
                               //   education2_passing_year: year,
                               // });

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
@@ -91,8 +91,7 @@ function AddPhoto() {
       length={length}
       title={"Add Profile Photo"}
       loading={loading}
-      sloading={sloading}
-    >
+      sloading={sloading}>
       <div className="question mt-3">
         <p className="text-start">
           Your profile will only be visible to other members, when you add a
@@ -112,8 +111,7 @@ function AddPhoto() {
               width: "70%",
               height: "40vh",
               margin: 0,
-            }}
-          >
+            }}>
             <img
               src="/img/plus-round.svg"
               alt=""
@@ -140,7 +138,7 @@ function AddPhoto() {
             <input
               type="file"
               id="image"
-              style={{ display: "none" }}
+              style={{display: "none"}}
               onChange={fileChange}
             />
           </div>
@@ -150,8 +148,7 @@ function AddPhoto() {
           <h4
             style={{
               marginTop: 20,
-            }}
-          >
+            }}>
             Instruction
           </h4>
           <p>- Upload a clear photo.</p>

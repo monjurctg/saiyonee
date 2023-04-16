@@ -6,6 +6,9 @@ function NotVarified({route}) {
   const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");
   const emailVerified = localStorage.getItem("emailVerified");
+  const profile_image = localStorage.getItem("profile_image");
+  const selfie_image = localStorage.getItem("selfie_image");
+
   const token = getToken();
 
   // d");

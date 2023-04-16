@@ -11,18 +11,6 @@ function PrivateRoute() {
   const emailVerified = localStorage.getItem("emailVerified");
   const profile_image = localStorage.getItem("profile_image");
   const selfie_image = localStorage.getItem("selfie_image");
-  console.log("emailVerified privatw", emailVerified);
-
-  // console.log(varification.ques.length);
-  console.log(
-    "hello private",
-    isVarified,
-    isBanned,
-    profile_image,
-    selfie_image,
-    emailVerified,
-    isAlreadySetPreference
-  );
 
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;

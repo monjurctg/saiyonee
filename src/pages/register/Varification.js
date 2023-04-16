@@ -135,6 +135,7 @@ function Varification() {
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
     });
+    setLoading(true);
     if (!socialToken) {
       const res = await AuthServices.register(formd);
       console.log("res", res);
@@ -157,7 +158,7 @@ function Varification() {
       }
     } else {
       const res = await AuthServices.socialRegister(formd);
-      setLoading(true);
+
       // console.log('res', res)
       if (res.status === 200) {
         setLoading(false);
