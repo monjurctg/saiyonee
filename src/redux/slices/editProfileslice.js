@@ -71,6 +71,10 @@ const EditProfileSlice = createSlice({
     },
     setEdu1PassYear: (state, {payload}) => {
       console.log(payload, "from set passing year redux");
+      state.passingYear1 = payload;
+    },
+    setEdu3PassYear: (state, {payload}) => {
+      console.log(payload, "from set passing year redux");
       state.passingYear3 = payload;
     },
     setEdu4PassYear: (state, {payload}) => {
@@ -78,7 +82,16 @@ const EditProfileSlice = createSlice({
       state.passingYear4 = payload;
     },
     setEdu2PassYear: (state, {payload}) => {
-      state.passingYear4 = payload;
+      state.passingYear2 = payload;
+    },
+    setEdu1PassYear: (state, {payload}) => {
+      state.passingYear1 = payload;
+    },
+    setEduTpe1: (state, {payload}) => {
+      state.education1 = payload;
+    },
+    setEduTpe2: (state, {payload}) => {
+      state.education2 = payload;
     },
     setEduTpe3: (state, {payload}) => {
       state.education3 = payload;
@@ -108,6 +121,12 @@ const EditProfileSlice = createSlice({
       state.phone_number = payload?.phone_number ?? "";
       state.education1_institution = payload.education1_institution ?? "";
       state.education1_major = payload.education1_major ?? "";
+      state.education2_institution = payload.education2_institution ?? "";
+      state.education2_major = payload.education2_major ?? "";
+      state.education3_institution = payload.education3_institution ?? "";
+      state.education3_major = payload.education3_major ?? "";
+      state.education4_institution = payload.education4_institution ?? "";
+      state.education4_major = payload.education_major ?? "";
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },
@@ -120,8 +139,12 @@ export const {
   setEdu4PassYear,
 
   setEdu2PassYear,
+  setEdu3PassYear,
   setEduTpe3,
   setEduTpe4,
+  setEduTpe1,
+  setEduTpe2,
+
   setEditProfileEmployType,
   setEditProfileGender,
   setEditProfileHeight,

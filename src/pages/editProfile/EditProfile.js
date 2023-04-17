@@ -13,6 +13,7 @@ import {
   setEditProfileCountry,
   setEditReligion,
   setEdu1PassYear,
+  setEdu3PassYear,
   setEdu4PassYear,
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
@@ -155,8 +156,10 @@ const EditProfile = () => {
 
   const fetchCurrentUser = async () => {
     const res = await UserServices.UserProfile();
+    setLoading(true);
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
+      setLoading(false);
       // console.log(res.data);
     }
   };
@@ -305,8 +308,6 @@ const EditProfile = () => {
     } else {
       toastMsg.error(res.data.message);
     }
-    // console.log(res, "edit res");
-    // console.log("inputs");
   };
 
   let fileChange = (e) => {
@@ -333,7 +334,7 @@ const EditProfile = () => {
   // useEffect(() => {
   //   fetchData();
   // }, []);
-  console.log(user?.religion, "religion");
+  // console.log(user?.religion, "religion");
 
   const onMaritalStatusClicked = () => {
     dispatch(setEditProfile(inputChange));
@@ -633,7 +634,7 @@ const EditProfile = () => {
                 <li key={i}>
                   <div
                     onClick={() => {
-                      dispatch(setEdu1PassYear(year));
+                      dispatch(setEdu3PassYear(year));
                     }}
                     className={`btn btn-primary py-3 dropdown-item${
                       passingYear3 === year ? " " : ""
