@@ -33,7 +33,8 @@ function EducationTypes4({module}) {
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{ height: "58px", width: "58px" }}
+          >
             <img src="/img/back-icon.svg" alt="back" />
           </div>
         </div>
@@ -61,12 +62,18 @@ function EducationTypes4({module}) {
           {EDUCATION4_TYPES.map((educationType, i) => (
             <div
               key={i}
-              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
+            >
               <div className="col-10">
                 <label
                   htmlFor={educationType}
-                  className="form-check-label bg-white w-100">
-                  <strong>{educationType}</strong>
+                  className="form-check-label bg-white w-100"
+                >
+                  {educationType === "" ? (
+                    <strong>None</strong>
+                  ) : (
+                    <strong>{educationType}</strong>
+                  )}
                 </label>
               </div>
               <div className="col-2">
