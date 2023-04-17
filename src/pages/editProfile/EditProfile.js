@@ -196,14 +196,14 @@ const EditProfile = () => {
     }
 
     if (!validateAge(inputChange.date_of_birth, user?.gender)) {
-      setErr({
-        error: "dob",
-        message:
-          user?.gender.trim() === "Female".trim()
-            ? "Your age must be 18 or 18 plus"
-            : "Your age must be 21 or 21 plus",
-      });
-      return;
+      // setErr({
+      //   error: "dob",
+      //   message:
+      //     user?.gender.trim() === "Female".trim()
+      //       ? "Your age must be 18 or 18 plus"
+      //       : "Your age must be 21 or 21 plus",
+      // });
+      // return;
     } else if (
       !inputChange.height_feet ||
       inputChange.height_feet > 8 ||
