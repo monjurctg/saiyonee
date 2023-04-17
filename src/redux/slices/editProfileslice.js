@@ -5,6 +5,9 @@ const initialState = {
   employType: "",
   displayName: "",
   marital_status: "",
+  date_of_birth: "",
+  phone_number: "",
+  full_name: "",
   country: "",
   city: "",
   gender: "",
@@ -17,8 +20,21 @@ const initialState = {
   number_of_sisters: "",
   passingYear3: "",
   passingYear4: "",
+  passingYear2: "",
+  passingYear1: "",
+
   education3: "",
+  education2: "",
+  education1: "",
   education4: "",
+  education4_major: "",
+  education4_institution: "",
+  education2_major: "",
+  education2_institution: "",
+  education3_major: "",
+  education3_institution: "",
+  education1_major: "",
+  education1_institution: "",
 };
 
 const EditProfileSlice = createSlice({
@@ -87,6 +103,11 @@ const EditProfileSlice = createSlice({
       state.mother_occupation = payload.mother_occupation ?? "";
       state.number_of_brothers = payload.number_of_brothers ?? "";
       state.number_of_sisters = payload.number_of_sisters ?? "";
+      state.date_of_birth = payload.date_of_birth ?? "";
+      state.full_name = payload?.full_name ?? "";
+      state.phone_number = payload?.phone_number ?? "";
+      state.education1_institution = payload.education1_institution ?? "";
+      state.education1_major = payload.education1_major ?? "";
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },
