@@ -94,6 +94,16 @@ const EditProfile = () => {
       dispatch(setCurrentUser(res.data));
       setLoading(false);
       // console.log(res.data);
+      const date = res.data.date_of_birth;
+      setTimeout(() => {
+        const day = date.split("-")[0];
+        const month = date.split("-")[1];
+        const year = date.split("-")[2];
+        console.log(day, month, year, "date");
+        let value = year + "-" + month + "-" + day;
+
+        document.getElementById("inputDateOfBirth").value = value;
+      }, 200);
     } else {
       setLoading(false);
     }
@@ -102,6 +112,7 @@ const EditProfile = () => {
   useEffect(() => {
     fetchCurrentUser();
   }, [fetchCurrentUser]);
+
   const [inputChange, setInputChange] = useState({
     display_name: displayName ? displayName : user?.display_name,
     full_name: full_name ? full_name : user?.full_name,
@@ -339,9 +350,6 @@ const EditProfile = () => {
   //   console.log(res.data);
   // }
 
-  useEffect(() => {
-    document.getElementById("inputDateOfBirth");
-  }, []);
   // console.log(user?.religion, "religion");
 
   const onMaritalStatusClicked = () => {
@@ -355,6 +363,7 @@ const EditProfile = () => {
     // navigate("");
   };
   // console.log(inputChange?.date_of_birth);
+  // const d =  new Date()
 
   const onReligionSelectorClicked = () => {
     dispatch(setEditProfile(inputChange));
@@ -875,24 +884,14 @@ const EditProfile = () => {
       </Link>
     </>
   );
-  const date = new Date(inputChange.date_of_birth);
-  const d =
-    date.getFullYear().toString() +
-    "-" +
-    (date?.getMonth()+1).toString() +
-    "-" +
-    date?.getDate().toString();
-  console.log(d);
-console.log(date.getDate(), date?.getFullYear(), date.getMonth());
-console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
+
   return (
     <InputLayOut
       err={err}
       onContinueClicked={onSubmit}
       length={length}
       title={"Edit Profile"}
-      loading={loading}
-    >
+      loading={loading}>
       <div className="question mt-3">
         <div className="image-upload mt-4">
           <img
@@ -921,7 +920,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
           <input
             type="file"
             id="image"
-            style={{ display: "none" }}
+            style={{display: "none"}}
             onChange={fileChange}
           />
         </div>
@@ -929,8 +928,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
         <div className="">
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Display Name
           </p>
           <div
@@ -939,16 +937,15 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               fontFamily: "Inter",
 
               border: err?.error == "display_name" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="text"
               name="display_name"
               id="inputHeightInches"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange?.display_name}
               onChange={(e) =>
-                setInputChange({ ...inputChange, display_name: e.target.value })
+                setInputChange({...inputChange, display_name: e.target.value})
               }
               onFocus={() => setErr(null)}
               placeholder={"Form"}
@@ -959,8 +956,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
 
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Full Name
           </p>
           <div
@@ -969,16 +965,15 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               fontFamily: "Inter",
 
               border: err?.error == "full_name" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="text"
               name="full_name"
               id="inputHeightInches"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange?.full_name}
               onChange={(e) =>
-                setInputChange({ ...inputChange, full_name: e.target.value })
+                setInputChange({...inputChange, full_name: e.target.value})
               }
               onFocus={() => setErr(null)}
               placeholder={"Form"}
@@ -989,8 +984,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
           {/* phone number */}
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Phone number
           </p>
           <div
@@ -999,16 +993,15 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               fontFamily: "Inter",
 
               border: err?.error == "full_name" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="text"
               name="phone_number"
               id="phone_number"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange?.phone_number}
               onChange={(e) =>
-                setInputChange({ ...inputChange, phone_number: e.target.value })
+                setInputChange({...inputChange, phone_number: e.target.value})
               }
               onFocus={() => setErr(null)}
               placeholder={"Form"}
@@ -1018,8 +1011,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
           </div>
           <p
             className="text-start  text-muted mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Enter Date of Birth
           </p>
 
@@ -1028,18 +1020,17 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
             style={{
               fontFamily: "Inter",
               border: err?.error === "dob" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="date"
-              style={{ fontFamily: "Inter" }}
+              style={{fontFamily: "Inter"}}
               name="date_of_birth"
               id="inputDateOfBirth"
               className="form-control border-0 rounded-1"
               onFocus={() => setErr({})}
               // aria-describedby="dateOfBirth"
               // value={"17-01-2000"}
-              value={date}
+              value={inputChange.date_of_birth}
               // value={`${date?.getFullYear()}-${date?.getMonth()}-${date?.getDate()}`}
               // value={`${date?.getFullYear()}-${date?.getMonth()}-${date?.getDate()}`}
               // value={inputChange.date_of_birth}
@@ -1049,8 +1040,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
 
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Height Feet & Inches
           </p>
 
@@ -1061,22 +1051,21 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
                 fontFamily: "Inter",
 
                 border: err?.error == "ft" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <input
                 type="number"
                 id="inputHeightFeet"
                 name="height_feet"
                 min={1}
                 onFocus={() => setErr(null)}
-                style={{ fontFamily: "Inter" }}
+                style={{fontFamily: "Inter"}}
                 value={inputChange.height_feet}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 // placeholder={MIN_HEIGHT_FEET.toString()}
                 aria-describedby="height_feet"
               />
-              <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
+              <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
                 ft
               </label>
             </div>
@@ -1085,32 +1074,27 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "inc" ? "2px solid red" : "",
-              }}
-            >
+              }}>
               <input
                 type="number"
                 name="height_inches"
                 min={0}
                 onFocus={() => setErr(null)}
                 id="inputHeightInches"
-                style={{ fontFamily: "Inter" }}
+                style={{fontFamily: "Inter"}}
                 value={inputChange.height_inches}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 aria-describedby="height_inches"
               />
-              <label
-                htmlFor="inputHeightInches"
-                style={{ fontFamily: "Inter" }}
-              >
+              <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
                 in
               </label>
             </div>
           </div>
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Weight
           </p>
 
@@ -1119,8 +1103,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
             style={{
               fontFamily: "Inter",
               border: err?.error === "weight" ? "2px solid red" : "",
-            }}
-          >
+            }}>
             <input
               type="number"
               id="inputWeight"
@@ -1128,12 +1111,12 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               min={1}
               onFocus={() => setErr({})}
               value={inputChange.weight}
-              style={{ fontFamily: "Inter" }}
+              style={{fontFamily: "Inter"}}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               aria-describedby="weight"
             />
-            <label htmlFor="inputWeight" style={{ fontFamily: "Inter" }}>
+            <label htmlFor="inputWeight" style={{fontFamily: "Inter"}}>
               KG
             </label>
           </div>
@@ -1141,8 +1124,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
           {/* family */}
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Father's Occupation
           </p>
 
@@ -1153,7 +1135,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               id="inputFather"
               value={inputChange.father_occupation}
               onChange={handleUserInputChange}
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               className="form-control border-0 rounded-1 text-start"
               // placeholder="50"
 
@@ -1162,8 +1144,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
           </div>
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Mother's Occupation
           </p>
 
@@ -1176,22 +1157,21 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1 text-start"
               // placeholder="50"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               aria-describedby="BrotherCount"
             />
           </div>
 
           <p
             className="text-muted text-start mt-4"
-            style={{ fontFamily: "Inter" }}
-          >
+            style={{fontFamily: "Inter"}}>
             Number of Brothers
           </p>
 
           <div className="form-floating text-muted rounded-1">
             <input
               type="number"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               name="number_of_brothers"
               id="inputBrotherCount"
               value={inputChange.number_of_brothers}
@@ -1209,7 +1189,7 @@ console.log(date.getDate(), "-", date?.getMonth(), "-", date?.getDate());
               type="number"
               name="number_of_sisters"
               id="inputSisterCount"
-              style={{ fontFamily: "Inter", paddingTop: 0, paddingBottom: 0 }}
+              style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
               value={inputChange.number_of_sisters}
               onChange={handleUserInputChange}
               className="form-control  border-0 rounded-1  "
