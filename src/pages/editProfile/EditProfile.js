@@ -85,7 +85,7 @@ const EditProfile = () => {
   const passingYears = Array.from(
     new Array(new Date().getFullYear() - 1990 + 1)
   ).map((_, i) => 1990 + i);
-  // console.log(user.profile_img);
+
   const dispatch = useDispatch();
   const fetchCurrentUser = useCallback(async () => {
     setLoading(true);
@@ -208,14 +208,14 @@ const EditProfile = () => {
     }
 
     if (!validateAge(inputChange.date_of_birth, user?.gender)) {
-      // setErr({
-      //   error: "dob",
-      //   message:
-      //     user?.gender.trim() === "Female".trim()
-      //       ? "Your age must be 18 or 18 plus"
-      //       : "Your age must be 21 or 21 plus",
-      // });
-      // return;
+      setErr({
+        error: "dob",
+        message:
+          user?.gender.trim() === "Female".trim()
+            ? "Your age must be 18 or 18 plus"
+            : "Your age must be 21 or 21 plus",
+      });
+      return;
     } else if (
       !inputChange.height_feet ||
       inputChange.height_feet > 8 ||
@@ -370,6 +370,7 @@ const EditProfile = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
   };
+
   let Religion = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
@@ -550,7 +551,7 @@ const EditProfile = () => {
                         }`}
                         onClick={() => {
                           dispatch(setEdu3PassYear(year));
-                          setYear2Dropdown(false);
+                          setyear3Dropdown(false);
                         }}>
                         {year}
                       </div>
