@@ -41,6 +41,7 @@ export const EDUCATION2_TYPES = [
   "Other",
 ];
 export const EDUCATION3_TYPES = [
+  "",
   "Honors",
   "Bachelor",
   "MBBS",
@@ -49,6 +50,7 @@ export const EDUCATION3_TYPES = [
   "Other",
 ];
 export const EDUCATION4_TYPES = [
+  "",
   "Masters",
   "MBA",
   "MD/ FCPS",

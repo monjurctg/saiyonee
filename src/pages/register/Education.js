@@ -322,7 +322,8 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year1Dropdown ? "true" : "false"}
                   onClick={toggleYear1Dropdown}
-                  onBlur={delayedYear1Dismiss}>
+                  // onBlur={delayedYear1Dismiss}
+                  >
                   {education1_passing_year}
                 </button>
                 <ul
@@ -460,7 +461,8 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year2Dropdown ? "true" : "false"}
                   onClick={toggleYear2Dropdown}
-                  onBlur={delayedYear2Dismiss}>
+                  // onBlur={delayedYear2Dismiss}
+                  >
                   {education2_passing_year}
                 </button>
                 <ul
@@ -605,7 +607,8 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year3Dropdown ? "true" : "false"}
                   onClick={toggleYear3Dropdown}
-                  onBlur={delayedYear3Dismiss}>
+                  // onBlur={delayedYear3Dismiss}
+                  >
                   {education3_passing_year}
                 </button>
                 <ul
@@ -734,7 +737,8 @@ function Education() {
                   data-bs-toggle="dropdown"
                   aria-expanded={year4Dropdown ? "true" : "false"}
                   onClick={toggleYear4Dropdown}
-                  onBlur={delayedYear4Dismiss}>
+                  // onBlur={delayedYear4Dismiss}
+                  >
                   {education4_passing_year}
                 </button>
                 <ul
