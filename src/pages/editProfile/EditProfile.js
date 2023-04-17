@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
@@ -85,11 +85,28 @@ const EditProfile = () => {
     new Array(new Date().getFullYear() - 1990 + 1)
   ).map((_, i) => 1990 + i);
   // console.log(user.profile_img);
+  const dispatch = useDispatch();
+  const fetchCurrentUser = useCallback(async () => {
+    setLoading(true);
+    const res = await UserServices.UserProfile();
+
+    if (res.status === 200) {
+      dispatch(setCurrentUser(res.data));
+      setLoading(false);
+      // console.log(res.data);
+    } else {
+      setLoading(false);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, [fetchCurrentUser]);
   const [inputChange, setInputChange] = useState({
     display_name: displayName ? displayName : user?.display_name,
     full_name: full_name ? full_name : user?.full_name,
     phone_number: phone_number ? phone_number : user?.phone_number,
-    date_of_birth: date_of_birth ? date_of_birth : user?.date_of_birth,
+    // date_of_birth: date_of_birth ? date_of_birth : user?.date_of_birth,
     current_country: country ? country : user?.current_country,
     current_city: city ? city : user?.current_city,
     height_feet: height_feet ? height_feet : user?.height_feet,
@@ -142,7 +159,6 @@ const EditProfile = () => {
     marital_status: marital_status ? marital_status : user?.marital_status,
   });
 
-  const dispatch = useDispatch();
   let imageClick = (e) => {
     e.preventDefault();
     document.getElementById("image").click();
@@ -154,15 +170,6 @@ const EditProfile = () => {
     });
   };
 
-  const fetchCurrentUser = async () => {
-    const res = await UserServices.UserProfile();
-    setLoading(true);
-    if (res.status === 200) {
-      dispatch(setCurrentUser(res.data));
-      setLoading(false);
-      // console.log(res.data);
-    }
-  };
   let onSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -306,7 +313,8 @@ const EditProfile = () => {
       setimage(false);
       fetchCurrentUser();
     } else {
-      toastMsg.error(res.data.message);
+      // console.log(res.response, "res");
+      toastMsg.error(Object.values(res?.response.data.errors)[0][0]);
     }
   };
 
@@ -331,9 +339,9 @@ const EditProfile = () => {
   //   console.log(res.data);
   // }
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    document.getElementById("inputDateOfBirth");
+  }, []);
   // console.log(user?.religion, "religion");
 
   const onMaritalStatusClicked = () => {
@@ -630,7 +638,7 @@ const EditProfile = () => {
                 year3Dropdown ? " show" : ""
               }`}
               style={{maxHeight: 200}}>
-              {passingYears.map((year, i) => (
+              {/* {passingYears.map((year, i) => (
                 <li key={i}>
                   <div
                     onClick={() => {
@@ -642,7 +650,24 @@ const EditProfile = () => {
                     {year}
                   </div>
                 </li>
-              ))}
+              ))} */}
+              {passingYears.map((year, i) => {
+                if (parseInt(year) > parseInt(user?.education2_passing_year))
+                  return (
+                    <li key={i}>
+                      <div
+                        className={`btn btn-primary py-3 dropdown-item${
+                          passingYear3 === year ? " active" : ""
+                        }`}
+                        onClick={() => {
+                          dispatch(setEdu3PassYear(year));
+                          setYear2Dropdown(false);
+                        }}>
+                        {year}
+                      </div>
+                    </li>
+                  );
+              })}
             </ul>
           </div>
         </div>
@@ -751,7 +776,7 @@ const EditProfile = () => {
                 year4Dropdown ? " show" : ""
               }`}
               style={{maxHeight: 200}}>
-              {passingYears.map((year, i) => (
+              {/* {passingYears.map((year, i) => (
                 <li key={i}>
                   <div
                     onClick={() => {
@@ -763,7 +788,24 @@ const EditProfile = () => {
                     {year}
                   </div>
                 </li>
-              ))}
+              ))} */}
+              {passingYears.map((year, i) => {
+                if (parseInt(year) > parseInt(user?.education3_passing_year))
+                  return (
+                    <li key={i}>
+                      <div
+                        className={`btn btn-primary py-3 dropdown-item${
+                          passingYear4 === year ? " active" : ""
+                        }`}
+                        onClick={() => {
+                          dispatch(setEdu4PassYear(year));
+                          setYear4Dropdown(false);
+                        }}>
+                        {year}
+                      </div>
+                    </li>
+                  );
+              })}
             </ul>
           </div>
         </div>
@@ -958,7 +1000,7 @@ const EditProfile = () => {
               aria-describedby="phone_number"
             />
           </div>
-          {/* <p
+          <p
             className="text-start  text-muted mt-4"
             style={{fontFamily: "Inter"}}>
             Enter Date of Birth
@@ -982,7 +1024,7 @@ const EditProfile = () => {
               value={inputChange.date_of_birth}
               onChange={handleUserInputChange}
             />
-          </div> */}
+          </div>
 
           <p
             className="text-muted text-start mt-4"

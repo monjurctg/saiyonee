@@ -35,7 +35,10 @@ UserServices.super_like_user = async (id) => {
 };
 
 UserServices.edit_user_info = async (data) => {
-  const res = await axios.post("/app_user_edit", data);
+  const res = await axios
+    .post("/app_user_edit", data)
+    .then((res) => res)
+    .catch((err) => err);
   return res;
 };
 UserServices.app_user_gallery_edit = async (data) => {

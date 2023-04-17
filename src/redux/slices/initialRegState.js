@@ -35,8 +35,9 @@ export const initialRegState = {
   marital_status: "Select marital status",
   current_country: "Select candidate's current country",
   current_city: "Select candidate's current city",
-  father_occupation: "",
+
   father_home_district: "",
+  father_occupation: "",
   mother_occupation: "",
   mother_home_district: "",
   number_of_brothers: 0,
