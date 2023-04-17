@@ -20,6 +20,7 @@ function RegisterEmail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isLoading, setisLoading] = useState(false);
+  const [isShowPass, setIsShowPass] = useState(false);
 
   const checkEmail = async () => {
     setisLoading(true);
@@ -81,6 +82,10 @@ function RegisterEmail() {
   };
   // console.log(err);
 
+  const handleShowPass = () => {
+    setIsShowPass(!isShowPass);
+  };
+
   let subItem = (
     <div className="position-absolute container position-top mt-2">
       <div className="row justify-content-center">
@@ -107,20 +112,23 @@ function RegisterEmail() {
     <BasicLayout subItem={subItem}>
       <div
         className="card border-0 bg-transparent flex-grow-1 overflow-auto"
-        style={{height: "40vh", marginTop: "-70px"}}>
+        style={{ height: "40vh", marginTop: "-70px" }}
+      >
         <div className="card-body bg-body rounded p-4 overflow-auto">
           <h1
             className="card-title mt-3"
             style={{
               fontFamily: "Inter",
-            }}>
+            }}
+          >
             Create an account
           </h1>
           <p
             className="card-text text-muted mt-3 mb-2"
             style={{
               fontFamily: "Inter",
-            }}>
+            }}
+          >
             Take a step towards finding someone awesome!
           </p>
           <div
@@ -128,7 +136,8 @@ function RegisterEmail() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "email" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               type="email"
               id="inputEmail"
@@ -143,7 +152,8 @@ function RegisterEmail() {
               htmlFor="inputEmail"
               style={{
                 fontFamily: "Inter",
-              }}>
+              }}
+            >
               Email ID
             </label>
           </div>
@@ -152,9 +162,10 @@ function RegisterEmail() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "password" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
-              type="password"
+              type={isShowPass ? "text" : "password"}
               id="inputPassword"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -167,21 +178,44 @@ function RegisterEmail() {
               htmlFor="inputPassword"
               style={{
                 fontFamily: "Inter",
-              }}>
+              }}
+            >
               Password
             </label>
+            <div
+              onClick={handleShowPass}
+              style={{
+                position: "absolute",
+                bottom: "16px",
+                right: "20px",
+                // left: "143px",
+                // width: "40px",
+                // height: "40px",
+                // margin: "0 auto",
+                cursor: "pointer",
+              }}
+            >
+              {isShowPass ? (
+                <i class="fa-regular fa-eye"></i>
+              ) : (
+                <i class="fa-regular fa-eye-slash"></i>
+              )}
+
+              {/* Icon */}
+            </div>
           </div>
           <div
             className="form-floating my-4 rounded-1 text-start text-muted"
             style={{
               fontFamily: "Inter",
               border: err?.error == "confirm_password" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               style={{
                 fontFamily: "Inter",
               }}
-              type="password"
+              type={isShowPass ? "text" : "password"}
               id="inputConfirmPassword"
               value={confirmPassword}
               onFocus={() => setErr({})}
@@ -194,13 +228,35 @@ function RegisterEmail() {
               htmlFor="inputConfirmPassword"
               style={{
                 fontFamily: "Inter",
-              }}>
+              }}
+            >
               Confirm Password
             </label>
+            <div
+              onClick={handleShowPass}
+              style={{
+                position: "absolute",
+                bottom: "16px",
+                right: "20px",
+                // left: "143px",
+                // width: "40px",
+                // height: "40px",
+                // margin: "0 auto",
+                cursor: "pointer",
+              }}
+            >
+              {isShowPass ? (
+                <i class="fa-regular fa-eye"></i>
+              ) : (
+                <i class="fa-regular fa-eye-slash"></i>
+              )}
+
+              {/* Icon */}
+            </div>
           </div>
         </div>
       </div>
-      <div className="container px-4 pb-4 pt-2" style={{height: "20vh"}}>
+      <div className="container px-4 pb-4 pt-2" style={{ height: "20vh" }}>
         {err?.error && <p className="text-primary">* {err?.message}</p>}
         <button
           onClick={onContinueClicked}
@@ -208,14 +264,16 @@ function RegisterEmail() {
           style={{
             height: 60,
           }}
-          className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
+          className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1"
+        >
           {isLoading ? (
             <Loader />
           ) : (
             <strong
               style={{
                 fontFamily: "Inter",
-              }}>
+              }}
+            >
               Continue
             </strong>
           )}
