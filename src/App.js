@@ -55,9 +55,7 @@ function App() {
   const fetchEditUser = async () => {
     const res = await UserServices.getEditData();
     if (res.status === 200) {
-      setTimeout(() => {
-        dispatch(setEditData(res.data));
-      }, 1000);
+      dispatch(setEditData(res.data));
 
       console.log(res.data);
     }
