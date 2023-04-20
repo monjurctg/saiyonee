@@ -11,6 +11,7 @@ import {setCurrentUser} from "./redux/slices/authSlices";
 import {getToken} from "./utils/functions";
 import {useCallback} from "react";
 import {MessengerChat} from "react-messenger-chat-plugin";
+import {setEditData} from "./redux/slices/utilsSlice";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
@@ -32,6 +33,7 @@ function App() {
   const route = useLocation();
 
   const dispatch = useDispatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPreviousPreference = async () => {
     const res = await PreferenceServices.getPreferenceData();
     if (res.status === 200) {
@@ -41,10 +43,22 @@ function App() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchCurrentUser = async () => {
     const res = await UserServices.UserProfile();
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
+      console.log(res.data);
+    }
+  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchEditUser = async () => {
+    const res = await UserServices.getEditData();
+    if (res.status === 200) {
+      setTimeout(() => {
+        dispatch(setEditData(res.data));
+      }, 1000);
+
       console.log(res.data);
     }
   };
@@ -54,8 +68,9 @@ function App() {
     if (token) {
       fetchPreviousPreference();
       fetchCurrentUser();
+      fetchEditUser();
     }
-  }, []);
+  }, [fetchCurrentUser, fetchEditUser, fetchPreviousPreference]);
 
   return (
     <>

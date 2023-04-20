@@ -145,7 +145,9 @@ function PersonalInformation() {
           "Full name is required and length should be minimum 6 characters",
       });
       return;
-    } else if (
+    }
+    
+    else if (
       !state.display_name.trim() ||
       state.display_name.trim().length < 3
     ) {

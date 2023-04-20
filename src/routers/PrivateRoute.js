@@ -1,10 +1,11 @@
-import {Navigate, Outlet, useLocation} from "react-router-dom";
+import {Navigate, Outlet, useLocation, useNavigate} from "react-router-dom";
 import {getToken} from "../utils/functions";
 
 function PrivateRoute() {
   // let auth = useAuth();
   let auth = getToken();
   let location = useLocation();
+  const route = useNavigate();
   const isVarified = localStorage.getItem("isVarified");
   const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");
@@ -12,6 +13,7 @@ function PrivateRoute() {
   const profile_image = localStorage.getItem("profile_image");
   const selfie_image = localStorage.getItem("selfie_image");
 
+  console.log(route.path, "route");
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
   } else if (

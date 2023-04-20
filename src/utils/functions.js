@@ -92,6 +92,7 @@ export const getDate = (date) => {
 export function validateAge(date, gender) {
   let today = new Date();
   let birthDate = new Date(date);
+
   let age = today.getFullYear() - birthDate.getFullYear();
   let monthDiff = today.getMonth() - birthDate.getMonth();
 

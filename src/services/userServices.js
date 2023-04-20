@@ -6,6 +6,13 @@ UserServices.UserProfile = async () => {
   const res = await axios.get("/user");
   return res;
 };
+UserServices.getEditData = async () => {
+  const res = await axios
+    .get("/app_user_edit_data")
+    .then((res) => res)
+    .catch((err) => err);
+  return res;
+};
 
 UserServices.filter_users = async () => {
   const res = await axios

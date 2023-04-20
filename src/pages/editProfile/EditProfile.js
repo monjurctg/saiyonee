@@ -22,6 +22,9 @@ import {setCurrentUser} from "../../redux/slices/authSlices";
 import {validateAge} from "../../utils/functions";
 import DateField from "../../components/DateField";
 import Education2 from "../../components/editProfile/Education2";
+import useSWR, {useSWRConfig} from "swr";
+import fetcher from "../../utils/fetchData";
+import {setEditData} from "../../redux/slices/utilsSlice";
 
 const EditProfile = () => {
   const [err, setErr] = useState(null);
@@ -29,7 +32,9 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const {user} = useSelector((state) => state.auth);
+  const {editData: user} = useSelector((state) => state.utils);
+  // const url = "/app_user_edit_data";
+  // const {data: user, isLoading: loading} = useSWR(url, fetcher);
   const {
     country,
     city,
@@ -66,17 +71,10 @@ const EditProfile = () => {
 
   const [year3Dropdown, setyear3Dropdown] = useState(false);
   const [year4Dropdown, setYear4Dropdown] = useState(false);
-  const [year2Dropdown, setYear2Dropdown] = useState(false);
-  const toggleYear2Dropdown = () => setYear2Dropdown((dropdown) => !dropdown);
-  const delayedYear2Dismiss = () =>
-    setTimeout(() => setYear2Dropdown(false), 200);
 
   const toggleyear3Dropdown = () => setyear3Dropdown((dropdown) => !dropdown);
-  const delayedYear1Dismiss = () =>
-    setTimeout(() => setyear3Dropdown(false), 400);
+
   const toggleYear4Dropdown = () => setYear4Dropdown((dropdown) => !dropdown);
-  const delayedYear4Dismiss = () =>
-    setTimeout(() => setYear4Dropdown(false), 200);
 
   const [image, setimage] = useState(false);
 
@@ -89,30 +87,15 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const fetchCurrentUser = useCallback(async () => {
     setLoading(true);
-    const res = await UserServices.UserProfile();
+    const res = await UserServices.getEditData();
 
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
       setLoading(false);
-      // console.log(res.data);
-      const date = res.data.date_of_birth;
-      setTimeout(() => {
-        const day = date.split("-")[0];
-        const month = date.split("-")[1];
-        const year = date.split("-")[2];
-        console.log(day, month, year, "date");
-        let value = year + "-" + month + "-" + day;
-
-        document.getElementById("inputDateOfBirth").value = value;
-      }, 200);
     } else {
       setLoading(false);
     }
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchCurrentUser();
-  }, [fetchCurrentUser]);
+  }, []);
 
   const [inputChange, setInputChange] = useState({
     display_name: displayName ? displayName : user?.display_name,
@@ -207,7 +190,12 @@ const EditProfile = () => {
       return;
     }
 
-    if (!validateAge(inputChange.date_of_birth, user?.gender)) {
+    if (
+      !validateAge(
+        inputChange.date_of_birth ?? user?.date_of_birth,
+        user?.gender
+      )
+    ) {
       setErr({
         error: "dob",
         message:
@@ -253,21 +241,6 @@ const EditProfile = () => {
       });
       return;
     }
-
-    // if (!religion || religion === "Select  relligion") {
-    //   setErr({
-    //     error: "religion",
-    //     message: "Please select Religion",
-    //   });
-    //   return;
-    // }
-    // if (!marital_status || marital_status === "Select marital status") {
-    //   setErr({
-    //     error: "marital_status",
-    //     message: "Please select marital status",
-    //   });
-    //   return;
-    // }
 
     const data = {
       display_name: inputChange.display_name ?? "",
@@ -344,15 +317,6 @@ const EditProfile = () => {
     }
   };
 
-  // let education3_passing_year = 1;
-  // async function fetchData() {
-  //   const data = new FormData();
-  //   const res = await UserServices.UserProfile();
-  //   console.log(res.data);
-  // }
-
-  // console.log(user?.religion, "religion");
-
   const onMaritalStatusClicked = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(
@@ -363,6 +327,7 @@ const EditProfile = () => {
 
     // navigate("");
   };
+
   // console.log(inputChange?.date_of_birth);
   // const d =  new Date()
 
@@ -825,7 +790,7 @@ const EditProfile = () => {
               name="display_name"
               id="inputHeightInches"
               style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
-              value={inputChange?.display_name}
+              value={inputChange?.display_name ?? user?.display_name}
               onChange={(e) =>
                 setInputChange({...inputChange, display_name: e.target.value})
               }
@@ -853,7 +818,7 @@ const EditProfile = () => {
               name="full_name"
               id="inputHeightInches"
               style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
-              value={inputChange?.full_name}
+              value={inputChange?.full_name ?? user?.full_name}
               onChange={(e) =>
                 setInputChange({...inputChange, full_name: e.target.value})
               }
@@ -881,7 +846,7 @@ const EditProfile = () => {
               name="phone_number"
               id="phone_number"
               style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
-              value={inputChange?.phone_number}
+              value={inputChange?.phone_number ?? user?.phone_number}
               onChange={(e) =>
                 setInputChange({...inputChange, phone_number: e.target.value})
               }
@@ -912,7 +877,7 @@ const EditProfile = () => {
               onFocus={() => setErr({})}
               // aria-describedby="dateOfBirth"
               // value={"17-01-2000"}
-              value={inputChange.date_of_birth}
+              value={inputChange.date_of_birth ?? user?.date_of_birth}
               // value={`${date?.getFullYear()}-${date?.getMonth()}-${date?.getDate()}`}
               // value={`${date?.getFullYear()}-${date?.getMonth()}-${date?.getDate()}`}
               // value={inputChange.date_of_birth}
@@ -941,7 +906,7 @@ const EditProfile = () => {
                 min={1}
                 onFocus={() => setErr(null)}
                 style={{fontFamily: "Inter"}}
-                value={inputChange.height_feet}
+                value={inputChange.height_feet ?? user?.height_feet}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 // placeholder={MIN_HEIGHT_FEET.toString()}
@@ -964,7 +929,7 @@ const EditProfile = () => {
                 onFocus={() => setErr(null)}
                 id="inputHeightInches"
                 style={{fontFamily: "Inter"}}
-                value={inputChange.height_inches}
+                value={inputChange.height_inches ?? user?.height_inches}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 aria-describedby="height_inches"
@@ -992,7 +957,7 @@ const EditProfile = () => {
               name="weight"
               min={1}
               onFocus={() => setErr({})}
-              value={inputChange.weight}
+              value={inputChange.weight ?? user?.weight}
               style={{fontFamily: "Inter"}}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"

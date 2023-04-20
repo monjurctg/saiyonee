@@ -2,6 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   isEmptyQuestion: null,
+  editData: null,
+
   isProfileQuesionExist: null,
   isSelfieQuestionExist: null,
   matchModal: false,
@@ -31,6 +33,9 @@ const utilsSlice = createSlice({
     setFilterErrorMessage: (state, {payload}) => {
       state.filterErrorMessage = payload;
     },
+    setEditData: (state, {payload}) => {
+      state.editData = payload;
+    },
   },
 });
 
@@ -41,5 +46,6 @@ export const {
   setMatchModal,
   setFilterErrorMessage,
   setFilterModalShow,
+  setEditData,
 } = utilsSlice.actions;
 export default utilsSlice.reducer;

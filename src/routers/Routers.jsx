@@ -56,6 +56,7 @@ import QuestionServices from "../services/questionServices";
 import MatchedUser from "./../pages/matched-user/MatchedUser";
 import ChatIndex from "../pages/chats/Index";
 import {
+  setEditData,
   set_is_image,
   set_is_ques,
   set_is_selfie,
@@ -69,6 +70,7 @@ import VerifyEmail from "../pages/VerifyEmail";
 import {useCallback} from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery";
+import UserServices from "../services/userServices";
 
 function Routers() {
   // console.log("getToken()", getToken());
