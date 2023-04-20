@@ -96,6 +96,22 @@ const EditProfile = () => {
       setLoading(false);
     }
   }, []);
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+  let fileChange = (e) => {
+    e.preventDefault();
+    let file = e.target.files[0];
+    if (file) {
+      if (file.size > 1000000) {
+        setErr("File size is too large");
+      } else {
+        setErr(null);
+        setlength(file.size);
+        setimage(file);
+      }
+    }
+  };
 
   const [inputChange, setInputChange] = useState({
     display_name: displayName ? displayName : user?.display_name,
@@ -296,24 +312,9 @@ const EditProfile = () => {
       dispatch(setEditDisplayName(inputChange?.display_name));
       toastMsg.success("Profile edit successfully");
       setimage(false);
-      fetchCurrentUser();
     } else {
       // console.log(res.response, "res");
       toastMsg.error(Object.values(res?.response.data.errors)[0][0]);
-    }
-  };
-
-  let fileChange = (e) => {
-    e.preventDefault();
-    let file = e.target.files[0];
-    if (file) {
-      if (file.size > 1000000) {
-        setErr("File size is too large");
-      } else {
-        setErr(null);
-        setlength(file.size);
-        setimage(file);
-      }
     }
   };
 
