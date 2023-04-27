@@ -47,7 +47,7 @@ function SelfieVerification() {
       getImage();
       setTimeout(() => {
         navigate("/preference");
-      }, 2000);
+      }, 1000);
     } else {
       toastMsg.error(res.data.message);
 
