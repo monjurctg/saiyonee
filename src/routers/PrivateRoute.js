@@ -20,13 +20,6 @@ function PrivateRoute() {
     auth &&
     isVarified === "false" &&
     isBanned === "false" &&
-    emailVerified === "false"
-  ) {
-    return <Navigate to="/email-verification" state={{from: location}} />;
-  } else if (
-    auth &&
-    isVarified === "false" &&
-    isBanned === "false" &&
     emailVerified === "true"
   ) {
     return <Navigate to="/success" state={{from: location}} />;

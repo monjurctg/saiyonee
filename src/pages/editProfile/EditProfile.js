@@ -89,6 +89,7 @@ const EditProfile = () => {
       setLoading(false);
     }
   }, [dispatch]);
+
   useEffect(() => {
     fetchCurrentUser();
   }, [fetchCurrentUser]);
@@ -589,7 +590,7 @@ const EditProfile = () => {
       title={"Edit Profile"}
       loading={loading}>
       <div className="question mt-3">
-        {/* <div className="image-upload mt-4">
+        <div className="image-upload mt-4">
           <img
             src="/img/plus-round.svg"
             alt=""
@@ -619,12 +620,11 @@ const EditProfile = () => {
             style={{display: "none"}}
             onChange={fileChange}
           />
-        </div> */}
-        <ImageUploader
-          handleFileChange={fileChange}
+        </div>
+        {/* <ImageUploader
           imageUrl={image ? URL.createObjectURL(image) : user?.profile_img}
-          onImageChange={imageClick}
-        />
+          onImageChange={fileChange}
+        /> */}
 
         <div className="">
           <EditInput

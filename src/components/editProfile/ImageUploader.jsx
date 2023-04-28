@@ -1,18 +1,18 @@
 import React, {useState} from "react";
 
-function ImageUploader({imageUrl, onImageChange, handleFileChange}) {
+function ImageUploader({imageUrl, onImageChange}) {
   const [fileInputKey, setFileInputKey] = useState(Date.now());
 
   const handleImageClick = () => {
     document.getElementById("imageInput").click();
   };
 
-  // const handleFileChange = (e) => {
-  //   if (e.target.files[0]) {
-  //     onImageChange(e.target.files[0]);
-  //   }
-  //   setFileInputKey(Date.now());
-  // };
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      onImageChange(e.target.files[0]);
+    }
+    setFileInputKey(Date.now());
+  };
 
   return (
     <div className="image-upload mt-4">
