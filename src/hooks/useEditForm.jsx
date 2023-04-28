@@ -50,22 +50,28 @@ const useEditForm = () => {
     height_inches: height_inches || user?.height_inches || "",
     weight: weight || user?.weight || "",
     education2: education2 || user?.education2 || "",
-    education2_institution: user?.education2_institution || "",
-    education2_major: user?.education2_major || "",
-    passingYear2: user?.passingYear2 || "",
-    education3: user?.education3 || "",
-    education3_institution: user?.education3_institution || "",
-    education3_major: user?.education3_major || "",
-    education3_passing_year: user?.education3_passing_year || "",
-    education4: user?.education4 || "",
-    education4_institution: user?.education4_institution || "",
-    education4_major: user?.education4_major || "",
-    education4_passing_year: user?.education4_passing_year || "",
-    father_occupation: user?.father_occupation || "",
-    mother_occupation: user?.mother_occupation || "",
-    number_of_brothers: user?.number_of_brothers || "",
-    number_of_sisters: user?.number_of_sisters || "",
-    marital_status: user?.marital_status || "",
+    education2_institution:
+      education2_institution || user?.education2_institution || "",
+    education2_major: education2_major || user?.education2_major || "",
+    education2_passing_year:
+      passingYear2 || user?.education2_passing_year || "",
+    education3: education3 || user?.education3 || "",
+    education3_institution:
+      education3_institution || user?.education3_institution || "",
+    education3_major: education3_major || user?.education3_major || "",
+    education3_passing_year:
+      passingYear3 || user?.education3_passing_year || "",
+    education4: education4 || user?.education4 || "",
+    education4_institution:
+      education4_institution || user?.education4_institution || "",
+    education4_major: education4_major || user?.education4_major || "",
+    education4_passing_year:
+      passingYear4 || user?.education4_passing_year || "",
+    father_occupation: father_occupation || user?.father_occupation || "",
+    mother_occupation: mother_occupation || user?.mother_occupation || "",
+    number_of_brothers: number_of_brothers || user?.number_of_brothers || "",
+    number_of_sisters: number_of_sisters || user?.number_of_sisters || "",
+    marital_status: marital_status || user?.marital_status || "",
   });
 
   const dispatch = useDispatch();
