@@ -23,18 +23,6 @@ function PublicRoute() {
   // if (auth && isVarified === "false" && emailVerified === "false") {
   //   return <Navigate to="/email-verification" state={{from: location}} />;
   // }
-  if (
-    auth &&
-    isVarified === "true" &&
-    isBanned === "false" &&
-    emailVerified === "true" &&
-    profile_image &&
-    selfie_image === "false"
-  ) {
-    return (
-      <Navigate to="/question/selfie-verification" state={{from: location}} />
-    );
-  }
 
   if (
     auth &&
@@ -70,6 +58,7 @@ function PublicRoute() {
     isVarified === "true" &&
     isBanned === "false" &&
     emailVerified === "true" &&
+    profile_image &&
     selfie_image === "false"
   ) {
     return (

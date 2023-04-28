@@ -97,13 +97,9 @@ const EditProfile = () => {
     e.preventDefault();
     let file = e.target.files[0];
     if (file) {
-      if (file.size > 1000000) {
-        setErr("File size is too large");
-      } else {
-        setErr(null);
-        setlength(file.size);
-        setimage(file);
-      }
+      setErr(null);
+      setlength(file.size);
+      setimage(file);
     }
   };
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import demoProfile from "../../assets/imgs/demoProfile.png";
 
-function ChatLayout({ children, user, matchedTime }) {
+function ChatLayout({children, matched_id, user, matchedTime}) {
   const navigate = useNavigate();
   console.log("matchedTime", matchedTime);
   return (
@@ -15,8 +15,7 @@ function ChatLayout({ children, user, matchedTime }) {
         height: "100vh",
 
         // "#F9FAFB"
-      }}
-    >
+      }}>
       <div
         className="logos pb-3  px-4"
         style={{
@@ -25,17 +24,14 @@ function ChatLayout({ children, user, matchedTime }) {
           top: 0,
           borderTopRightRadius: 35,
           borderTopLeftRadius: 35,
-        }}
-      >
+        }}>
         <div
           className="d-flex justify-content-between align-items-center"
-          style={{ marginTop: 20 }}
-        >
+          style={{marginTop: 20}}>
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 image-invert"
-            style={{ height: "58px", width: "58px" }}
-          >
+            style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
 
@@ -49,30 +45,30 @@ function ChatLayout({ children, user, matchedTime }) {
               // marginRight: 15,
               width: "40%",
               textAlign: "center",
-            }}
-          >
+            }}>
             {user?.display_name}
             <span
               style={{
                 display: "block",
                 margin: -6,
                 fontSize: 10,
-              }}
-            >
+              }}>
               {matchedTime}
             </span>
           </p>
-          <img
-            src={user?.thumbnail_img}
-            alt=""
-            style={{
-              height: 58,
-              width: 58,
-              border: "1px solid #ffb7ac",
-              borderRadius: "50%",
-              objectFit: "cover",
-            }}
-          />
+          <Link to={`/user-info/match/${matched_id}`}>
+            <img
+              src={user?.thumbnail_img}
+              alt=""
+              style={{
+                height: 58,
+                width: 58,
+                border: "1px solid #ffb7ac",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
+          </Link>
         </div>
       </div>
       {children}

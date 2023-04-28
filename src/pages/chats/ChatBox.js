@@ -52,9 +52,9 @@ function ChatBox() {
       // console.log('first')
       setPLoading(false);
       setmessageData(res.data);
+      // console.log("res from chat", res.data);
       setuserData(res.data?.data?.other_user);
     }
-    // console.log('res', res.data)
   };
   let scrollToBottomF = () => {
     console.log("ss");
@@ -205,9 +205,7 @@ function ChatBox() {
     <ChatLayout
       user={userData}
       matchedTime={messageData?.unmatched_date}
-
-      // matched_date
-    >
+      matched_id={userData?.id}>
       <div
         className="chat-body"
         id="chat-body"

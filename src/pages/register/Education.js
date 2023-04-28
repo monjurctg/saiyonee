@@ -126,6 +126,14 @@ function Education() {
 
       return;
     }
+    if (!education1_passing_year) {
+      setErr({
+        error: "education1_passing_year",
+        message: "Please select  Secondary Education passing year",
+      });
+
+      return;
+    }
 
     if (!education2 || education2 === "Select education") {
       setErr({
@@ -147,12 +155,21 @@ function Education() {
 
     if (!education2_major?.trim()) {
       setErr({
-        error: "education2_major",
+        error: "education2_passing_year",
         message: "Please enter your Higher Secondary Major",
       });
 
       return;
     }
+
+    // if (!education3_passing_year) {
+    //   setErr({
+    //     error: "education1_passing_year",
+    //     message: "Please select  Higher Secondary Major passing year",
+    //   });
+
+    //   return;
+    // }
 
     // if (!education3) {
     //   setErr({
@@ -323,7 +340,7 @@ function Education() {
                   aria-expanded={year1Dropdown ? "true" : "false"}
                   onClick={toggleYear1Dropdown}
                   // onBlur={delayedYear1Dismiss}
-                  >
+                >
                   {education1_passing_year}
                 </button>
                 <ul
@@ -462,7 +479,7 @@ function Education() {
                   aria-expanded={year2Dropdown ? "true" : "false"}
                   onClick={toggleYear2Dropdown}
                   // onBlur={delayedYear2Dismiss}
-                  >
+                >
                   {education2_passing_year}
                 </button>
                 <ul
@@ -608,7 +625,7 @@ function Education() {
                   aria-expanded={year3Dropdown ? "true" : "false"}
                   onClick={toggleYear3Dropdown}
                   // onBlur={delayedYear3Dismiss}
-                  >
+                >
                   {education3_passing_year}
                 </button>
                 <ul
@@ -738,7 +755,7 @@ function Education() {
                   aria-expanded={year4Dropdown ? "true" : "false"}
                   onClick={toggleYear4Dropdown}
                   // onBlur={delayedYear4Dismiss}
-                  >
+                >
                   {education4_passing_year}
                 </button>
                 <ul

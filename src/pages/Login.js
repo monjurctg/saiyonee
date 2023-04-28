@@ -91,10 +91,9 @@ function Login() {
         navigate("/success");
         return;
       } else {
-        navigate("/");
+        // navigate("/");
         // localStorage.setItem("isVarified", true);
-
-        // navigator("/question/1");
+        navigate("/question/1");
       }
       // localStorage.setItem("user", JSON.stringify(res.data.user));
       // window.location.href = "/";

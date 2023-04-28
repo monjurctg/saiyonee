@@ -47,7 +47,9 @@ function InputLayOut({
 
         <div className="container px-4 pt-2 ">
           {err?.message && <p className="text-primary">* {err?.message}</p>}
-          {from !== "gellary" && (
+          {from === "gellary" || from === "editGallery" ? (
+            <div></div>
+          ) : (
             <button
               style={{height: 60}}
               onClick={onContinueClicked}
