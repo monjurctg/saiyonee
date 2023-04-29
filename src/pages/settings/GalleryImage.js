@@ -100,13 +100,15 @@ const GalleryImage = () => {
         className="question mt-3 d-flex flex-wrap"
         style={{
           gap: 20,
+          margin: 20,
+          justifyContent: "space-between",
         }}>
         <div
           className="image-upload"
           style={{
-            width: "40%",
-            height: 150,
-            margin: 0,
+            width: "45%",
+            height: 170,
+            // margin: 20,
           }}>
           {data?.optional_img_1 ? (
             <img
@@ -160,8 +162,8 @@ const GalleryImage = () => {
         <div
           className="image-upload"
           style={{
-            width: "40%",
-            height: 150,
+            width: "45%",
+            height: 170,
             margin: 0,
           }}>
           {data?.optional_img_2 ? (
@@ -216,8 +218,8 @@ const GalleryImage = () => {
         <div
           className="image-upload"
           style={{
-            width: "40%",
-            height: 150,
+            width: "45%",
+            height: 170,
             margin: 0,
           }}>
           {data?.optional_img_3 ? (
@@ -272,8 +274,8 @@ const GalleryImage = () => {
         <div
           className="image-upload"
           style={{
-            width: "40%",
-            height: 150,
+            width: "45%",
+            height: 170,
             margin: 0,
           }}>
           {data?.optional_img_4 ? (
@@ -328,8 +330,8 @@ const GalleryImage = () => {
         <div
           className="image-upload"
           style={{
-            width: "40%",
-            height: 150,
+            width: "45%",
+            height: 170,
             margin: 0,
           }}>
           {data?.optional_img_5 ? (
