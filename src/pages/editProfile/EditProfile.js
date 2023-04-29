@@ -16,6 +16,9 @@ import {
   setEdu2PassYear,
   setEdu3PassYear,
   setEdu4PassYear,
+  setEduTpe1,
+  setEduTpe2,
+  setEduTpe3,
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
 import toastMsg from "../../utils/toastify";
@@ -58,6 +61,7 @@ const EditProfile = () => {
     passingYear2,
 
     education2,
+    education1,
     education3,
     education4,
     education4_passing_year,
@@ -216,7 +220,8 @@ const EditProfile = () => {
         ? passingYear2
         : inputChange.passingYear2 ?? "",
       education2_institution: inputChange?.education2_institution ?? "",
-      // education 2
+      // education 1
+
       education1: inputChange.education1 ?? "",
       education1_major: inputChange?.education1_major ?? "",
       education1_passing_year: passingYear1
@@ -265,6 +270,19 @@ const EditProfile = () => {
   const onReligionSelectorClicked = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
+  };
+  const onEdu1SelectorClicked = () => {
+    dispatch(setEditProfile(inputChange));
+    dispatch(setEduTpe1(education1 ? education1 : user?.education1));
+  };
+  const onEdu2SelectorClicked = () => {
+    dispatch(setEditProfile(inputChange));
+    dispatch(setEduTpe2(education2 ? education2 : user?.education2));
+  };
+  const onEdu3SelectorClicked = () => {
+    // alert("djkskjk");
+    dispatch(setEditProfile(inputChange));
+    dispatch(setEduTpe3(education3 ? education3 : user?.education3));
   };
 
   let Religion = (
@@ -324,6 +342,7 @@ const EditProfile = () => {
 
   let education3Element = (
     <EducationLayout
+      onEducationSelectorClicked={onEdu3SelectorClicked}
       to={"/editProfile/edu3"}
       inputChange={inputChange}
       err={err}
@@ -360,6 +379,7 @@ const EditProfile = () => {
 
   let education2Element = (
     <EducationLayout
+      onEducationSelectorClicked={onEdu2SelectorClicked}
       to={"/editProfile/edu2"}
       inputChange={inputChange}
       err={err}
@@ -396,6 +416,7 @@ const EditProfile = () => {
 
   let education1Element = (
     <EducationLayout
+      onEducationSelectorClicked={onEdu1SelectorClicked}
       to={"/editProfile/edu1"}
       inputChange={inputChange}
       err={err}

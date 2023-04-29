@@ -3,7 +3,16 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import {setEditProfile} from "../../redux/slices/editProfileslice";
 
-function EducationLayout({title, children, label, to, inputChange, err, type}) {
+function EducationLayout({
+  title,
+  children,
+  label,
+  to,
+  inputChange,
+  onEducationSelectorClicked,
+  err,
+  type,
+}) {
   const dispatch = useDispatch();
   return (
     <>
@@ -12,8 +21,8 @@ function EducationLayout({title, children, label, to, inputChange, err, type}) {
       </p>
       <div className="form-floating text-muted rounded-1">
         <Link
-          onClick={() => dispatch(setEditProfile(inputChange))}
-          // onClick={onEducationSelectorClicked}
+          //   onClick={() => dispatch(setEditProfile(inputChange))}
+          onClick={onEducationSelectorClicked}
           to={to}>
           <div
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"

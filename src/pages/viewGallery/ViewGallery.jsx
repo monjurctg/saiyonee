@@ -79,6 +79,8 @@ const ViewGallery = () => {
         className="question  mt-3 d-flex flex-wrap"
         style={{
           gap: 20,
+          margin: 20,
+          justifyContent: "space-between",
         }}>
         <div
           className={` img-modal  ${
