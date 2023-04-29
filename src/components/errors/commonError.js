@@ -2,7 +2,7 @@ import {validateAge} from "../../utils/functions";
 
 const errors = {};
 errors.validation = (setErr, inputChange, user, city) => {
-  console.log(inputChange.date_of_birth);
+  // console.log(inputChange.date_of_birth);
   //   alert(inputChange.date_of_birth);
   if (
     !inputChange.full_name.trim() ||
@@ -13,7 +13,7 @@ errors.validation = (setErr, inputChange, user, city) => {
       message:
         "Full name is required and length should be minimum 6 characters",
     });
-    return;
+    return true;
   }
   if (
     !inputChange.display_name.trim() ||
@@ -24,7 +24,7 @@ errors.validation = (setErr, inputChange, user, city) => {
       message:
         "Display name is required and length should be minimum 3 characters",
     });
-    return;
+    return true;
   }
 
   if (!validateAge(inputChange.date_of_birth, user?.gender)) {
@@ -35,7 +35,7 @@ errors.validation = (setErr, inputChange, user, city) => {
           ? "Your age must be 18 or 18 plus"
           : "Your age must be 21 or 21 plus",
     });
-    return;
+    return true;
   } else if (
     !inputChange.height_feet ||
     inputChange.height_feet > 8 ||
@@ -45,7 +45,7 @@ errors.validation = (setErr, inputChange, user, city) => {
       error: "ft",
       message: "Height cannot be less than 3 feet or greater than 8 feet",
     });
-    return;
+    return true;
   } else if (
     !inputChange.height_inches ||
     inputChange.height_inches >= 12 ||
@@ -55,12 +55,12 @@ errors.validation = (setErr, inputChange, user, city) => {
       error: "inc",
       message: "Height cannot be less than 0 inches or greater than 11 inches",
     });
-    return;
+    return true;
   }
 
   if (city === "Select city") {
     setErr({error: "city", message: "Please select city"});
-    return;
+    return true;
   }
   if (
     (inputChange.weight && inputChange.weight < 30) ||
@@ -70,7 +70,9 @@ errors.validation = (setErr, inputChange, user, city) => {
       error: "weight",
       message: "weight cannot be less than 30 kg or greater then 180 kg",
     });
-    return;
+    return true;
+  } else {
+    return false;
   }
 };
 
