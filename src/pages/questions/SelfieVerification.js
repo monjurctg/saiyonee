@@ -13,6 +13,8 @@ function SelfieVerification() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
   const navigate = useNavigate();
+  const isAlreadySetPreference = localStorage.getItem("preference");
+
   // console.log('image', image);
 
   //Sazid's edition extra
@@ -33,6 +35,11 @@ function SelfieVerification() {
       // if (res.data.images.selfie_img && !selfieEdit) {
       //   navigate("/preference");
       // }
+      if (isAlreadySetPreference === "true") {
+        navigate("/");
+      } else {
+        navigate("/preference");
+      }
     }
   };
 
@@ -45,6 +52,7 @@ function SelfieVerification() {
       seterr(false);
       toastMsg.success("Image uploaded successfully");
       getImage();
+
       setTimeout(() => {
         navigate("/preference");
       }, 2000);

@@ -263,8 +263,6 @@ const EditProfile = () => {
         marital_status ? marital_status : user?.marital_status
       )
     );
-
-    // navigate("");
   };
 
   const onReligionSelectorClicked = () => {

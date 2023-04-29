@@ -14,20 +14,21 @@ function AddPhoto() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
 
-  // console.log("image2", image, image2);
+  console.log("image2", image, image2);
 
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
-    // console.log("res", res.data.images);
+    console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
       setLoading(false);
+      // console.log("res", res.data.images);
       if (
         res.data.images.profile_img
         // && !isEdit
       ) {
         localStorage.setItem("profile_image", res.data.images.profile_img);
-        // navigate("/question/selfie-verification");
+        navigate("/question/selfie-verification");
       }
     }
   };
