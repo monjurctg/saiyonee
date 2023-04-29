@@ -13,6 +13,7 @@ import {
   setEditProfileCountry,
   setEditReligion,
   setEdu1PassYear,
+  setEdu2PassYear,
   setEdu3PassYear,
   setEdu4PassYear,
 } from "../../redux/slices/editProfileslice";
@@ -29,6 +30,8 @@ import EditInput from "../../components/editProfile/EditInput";
 import useEditForm from "../../hooks/useEditForm";
 import ImageUploader from "../../components/editProfile/ImageUploader";
 import PassingYearDropdown from "../../components/editProfile/PassingYearDropdown ";
+import EducationLayout from "../../components/layouts/EducationLayout";
+import InputWithLabel from "../../components/InputType/InputWithLabel";
 
 const EditProfile = () => {
   const [err, setErr] = useState(null);
@@ -42,16 +45,10 @@ const EditProfile = () => {
   const {
     country,
     city,
-    displayName,
-    height_inches,
-    height_feet,
-    weight,
-    father_occupation,
-    mother_occupation,
-    number_of_brothers,
-    number_of_sisters,
+
     passingYear3,
     passingYear4,
+    passingYear1,
 
     education3_institution,
     education3_major,
@@ -68,12 +65,14 @@ const EditProfile = () => {
     education4_major,
     marital_status,
     religion,
-    full_name,
-    phone_number,
     date_of_birth,
   } = useSelector((state) => state.editProfile);
 
   const [inputChange, handleUserInputChange] = useEditForm();
+  const dateOfBirthYear =
+    new Date(
+      date_of_birth ? date_of_birth : inputChange.date_of_birth
+    ).getFullYear() + 10;
 
   const [image, setimage] = useState(false);
 
@@ -216,7 +215,14 @@ const EditProfile = () => {
       education2_passing_year: passingYear2
         ? passingYear2
         : inputChange.passingYear2 ?? "",
-      education4_institution: inputChange?.education2_institution ?? "",
+      education2_institution: inputChange?.education2_institution ?? "",
+      // education 2
+      education1: inputChange.education1 ?? "",
+      education1_major: inputChange?.education1_major ?? "",
+      education1_passing_year: passingYear1
+        ? passingYear1
+        : inputChange.passingYear1 ?? "",
+      education1_institution: inputChange?.education1_institution ?? "",
 
       height_feet: inputChange?.height_feet ?? "",
       height_inches: inputChange?.height_inches ?? "",
@@ -317,36 +323,13 @@ const EditProfile = () => {
   );
 
   let education3Element = (
-    <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Undergraduate Education Type
-      </p>
-      <div className="form-floating text-muted rounded-1">
-        <Link
-          onClick={() => dispatch(setEditProfile(inputChange))}
-          // onClick={onEducationSelectorClicked}
-          to={"/editProfile/edu3"}>
-          <div
-            className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-            style={{
-              fontFamily: "Inter",
-              border: err?.error == "education3" ? "2px solid red" : "",
-            }}>
-            <div className="col-10">
-              <label className="form-check-label bg-white px-2 text-body">
-                {inputChange?.education3 ?? "  Undergraduate Education Type"}
-              </label>
-            </div>
-            <div className="col-2 d-flex justify-content-end pe-3">
-              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
-            </div>
-          </div>
-        </Link>
-        {/* 
-        <label style={{fontFamily: "Inter"}} htmlFor="">
-          Secondary Education Type
-        </label> */}
-      </div>
+    <EducationLayout
+      to={"/editProfile/edu3"}
+      inputChange={inputChange}
+      err={err}
+      label={inputChange.education3}
+      type={"education3"}
+      title="Undergraduate Education">
       <EditInput
         label=" Undergraduate Education Institute"
         name="education3_institution"
@@ -372,139 +355,107 @@ const EditProfile = () => {
         previousPassingYear={passingYear2 || user?.education2_passing_year}
         maxHeight={200}
       />
-    </>
+    </EducationLayout>
+  );
+
+  let education2Element = (
+    <EducationLayout
+      to={"/editProfile/edu2"}
+      inputChange={inputChange}
+      err={err}
+      label={inputChange.education2}
+      type={"education2"}
+      title="Higher Secondary  Education">
+      <EditInput
+        label=" Higher Secondary  Education Institute"
+        name="education2_institution"
+        value={inputChange.education2_institution}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education2_institution"}
+      />
+
+      <EditInput
+        label=" Higher Secondary  Education Major"
+        name="education2_major"
+        value={inputChange.education2_major}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education2_major"}
+      />
+
+      <PassingYearDropdown
+        passingYear={passingYear2}
+        onChange={(year) => dispatch(setEdu2PassYear(year))}
+        userPassingYear={user?.education2_passing_year}
+        previousPassingYear={passingYear1 || user?.education1_passing_year}
+        maxHeight={200}
+      />
+    </EducationLayout>
+  );
+
+  let education1Element = (
+    <EducationLayout
+      to={"/editProfile/edu1"}
+      inputChange={inputChange}
+      err={err}
+      label={inputChange.education1}
+      type={"education1"}
+      title=" Secondary  Education">
+      <EditInput
+        label="  Secondary  Education Institute"
+        name="education1_institution"
+        value={inputChange.education1_institution}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education1_institution"}
+      />
+
+      <EditInput
+        label="  Secondary  Education Major"
+        name="education1_major"
+        value={inputChange.education1_major}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education1_major"}
+      />
+
+      <PassingYearDropdown
+        passingYear={passingYear1}
+        onChange={(year) => dispatch(setEdu1PassYear(year))}
+        userPassingYear={user?.education1_passing_year}
+        previousPassingYear={dateOfBirthYear || user?.date_of_birth}
+        maxHeight={200}
+      />
+    </EducationLayout>
   );
 
   let education4Element = (
-    <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Postgraduate Education Type
-      </p>
-      <div className="form-floating text-muted rounded-1">
-        <Link
-          onClick={() => dispatch(setEditProfile(inputChange))}
-          // onClick={onEducationSelectorClicked}
-          to={"/editProfile/edu4"}>
-          <div
-            className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-            style={{
-              fontFamily: "Inter",
-              border: err?.error === "education4" ? "2px solid red" : "",
-            }}>
-            <div className="col-10">
-              <label className="form-check-label bg-white px-2 text-body">
-                {inputChange?.education4 ?? "Postgraduate Education Type"}
-              </label>
-            </div>
-            <div className="col-2 d-flex justify-content-end pe-3">
-              <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
-            </div>
-          </div>
-        </Link>
-        {/* 
-        <label style={{fontFamily: "Inter"}} htmlFor="">
-          Secondary Education Type
-        </label> */}
-      </div>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Postgraduate Education Institute
-      </p>
-      <div
-        className="form-floating my-4 text-muted  rounded-1"
-        style={{
-          fontFamily: "Inter",
-          border: err?.error == "education4_institution" ? "2px solid red" : "",
-        }}>
-        <input
-          // onFocus={() => setErr()}
-          type="text"
-          id="inputInstitution1"
-          name="education4_institution"
-          style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
-          value={inputChange.education4_institution}
-          onChange={handleUserInputChange}
-          className="form-control border-0 rounded-1"
-          placeholder="institution1"
-          aria-describedby="institution1"
-        />
-        {/* <label htmlFor="inputInstitution1">Enter candidate's institution</label> */}
-      </div>
+    <EducationLayout
+      to={"/editProfile/edu4"}
+      inputChange={inputChange}
+      err={err}
+      label={inputChange.education4}
+      type={"education4"}
+      title="Postgraduate Education">
+      <EditInput
+        label=" Postgraduate Education Institute"
+        name="education4_institution"
+        value={inputChange.education4_institution}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education4_institution"}
+      />
 
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
-        Postgraduate Education Major
-      </p>
-      <div
-        className="form-floating my-4 text-muted  rounded-1"
-        style={{
-          fontFamily: "Inter",
-          border: err?.error == "education4_major" ? "2px solid red" : "",
-        }}>
-        <input
-          // onFocus={() => setErr()}
-          type="text"
-          id="inputMajor1"
-          name="education4_major"
-          value={inputChange.education4_major}
-          style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
-          setErr={setErr}
-          onChange={handleUserInputChange}
-          className="form-control border-0 rounded-1"
-          placeholder="major1"
-          aria-describedby="major1"
-        />
-        {/* <label htmlFor="inputMajor1">Enter major subject</label> */}
-      </div>
+      <EditInput
+        label=" Postgraduate Education Major"
+        name="education4_major"
+        value={inputChange.education4_major}
+        type="text"
+        onChange={handleUserInputChange}
+        error={err?.error === "education4_major"}
+      />
 
-      {/* <div className="row my-4 px-2  rounded-1">
-        <div className="col-8 d-flex align-items-center">
-          <label className="form-check-label px-2 text-muted">
-            Select passing year
-          </label>
-        </div>
-        <div className="col-4">
-          <div className="dropup bg-white rounded-1">
-            <button
-              type="button"
-              className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
-              data-bs-toggle="dropdown"
-              aria-expanded={year4Dropdown ? "true" : "false"}
-              onClick={toggleYear4Dropdown}
-              // onBlur={delayedYear4Dismiss}
-            >
-              {passingYear4 ? passingYear4 : user?.education4_passing_year}
-            </button>
-            <ul
-              data-bs-popper
-              className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
-                year4Dropdown ? " show" : ""
-              }`}
-              style={{maxHeight: 200}}>
-              {passingYears.map((year, i) => {
-                if (
-                  parseInt(year) >
-                  parseInt(
-                    passingYear3 ? passingYear3 : user?.education3_passing_year
-                  )
-                )
-                  return (
-                    <li key={i}>
-                      <div
-                        className={`btn btn-primary py-3 dropdown-item${
-                          passingYear4 === year ? " active" : ""
-                        }`}
-                        onClick={() => {
-                          dispatch(setEdu4PassYear(year));
-                          setYear4Dropdown(false);
-                        }}>
-                        {year}
-                      </div>
-                    </li>
-                  );
-              })}
-            </ul>
-          </div>
-        </div>
-      </div> */}
       <PassingYearDropdown
         passingYear={passingYear4}
         onChange={(year) => dispatch(setEdu4PassYear(year))}
@@ -512,9 +463,8 @@ const EditProfile = () => {
         previousPassingYear={passingYear3 || user?.education3_passing_year}
         maxHeight={200}
       />
-    </>
+    </EducationLayout>
   );
-
   let countryElement = (
     <>
       <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
@@ -674,81 +624,46 @@ const EditProfile = () => {
           </p>
 
           <div className="d-flex">
-            <div
-              className="form-floating  text-muted me-2 rounded-1"
-              style={{
-                fontFamily: "Inter",
-
-                border: err?.error == "ft" ? "2px solid red" : "",
-              }}>
-              <input
-                type="number"
-                id="inputHeightFeet"
-                name="height_feet"
-                min={1}
-                onFocus={() => setErr(null)}
-                style={{fontFamily: "Inter"}}
-                value={inputChange.height_feet ?? user?.height_feet}
-                onChange={handleUserInputChange}
-                className="form-control border-0 rounded-1"
-                // placeholder={MIN_HEIGHT_FEET.toString()}
-                aria-describedby="height_feet"
-              />
-              <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
-                ft
-              </label>
-            </div>
-            <div
-              className="form-floating text-muted ms-2 rounded-1"
-              style={{
-                fontFamily: "Inter",
-                border: err?.error == "inc" ? "2px solid red" : "",
-              }}>
-              <input
-                type="number"
-                name="height_inches"
-                min={0}
-                onFocus={() => setErr(null)}
-                id="inputHeightInches"
-                style={{fontFamily: "Inter"}}
-                value={inputChange.height_inches ?? user?.height_inches}
-                onChange={handleUserInputChange}
-                className="form-control border-0 rounded-1"
-                aria-describedby="height_inches"
-              />
-              <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
-                in
-              </label>
-            </div>
-          </div>
-          <p
-            className="text-muted text-start mt-4"
-            style={{fontFamily: "Inter"}}>
-            Weight
-          </p>
-
-          <div
-            className="form-floating text-muted rounded-1"
-            style={{
-              fontFamily: "Inter",
-              border: err?.error === "weight" ? "2px solid red" : "",
-            }}>
-            <input
-              type="number"
-              id="inputWeight"
-              name="weight"
-              min={1}
+            <InputWithLabel
+              // label={" Weight"}
+              value={inputChange.height_feet}
               onFocus={() => setErr({})}
-              value={inputChange.weight ?? user?.weight}
-              style={{fontFamily: "Inter"}}
+              errorType={"ft"}
+              error={err}
+              type={"number"}
+              min={0}
+              name={"height_feet"}
+              underInputLabel={"ft"}
               onChange={handleUserInputChange}
-              className="form-control border-0 rounded-1"
-              aria-describedby="weight"
             />
-            <label htmlFor="inputWeight" style={{fontFamily: "Inter"}}>
-              KG
-            </label>
+            <div className="ms-2">
+              <InputWithLabel
+                // label={" Weight"}
+                value={inputChange.height_inches}
+                onFocus={() => setErr({})}
+                errorType={"inc"}
+                error={err}
+                type={"number"}
+                min={0}
+                name={"height_inches"}
+                underInputLabel={"in"}
+                onChange={handleUserInputChange}
+              />
+            </div>
           </div>
+
+          <InputWithLabel
+            label={" Weight"}
+            value={inputChange.weight}
+            onFocus={() => setErr({})}
+            errorType={"weight"}
+            error={err}
+            type={"number"}
+            min={1}
+            name={"weight"}
+            underInputLabel={"KG"}
+            onChange={handleUserInputChange}
+          />
 
           {/* family */}
 
@@ -796,21 +711,17 @@ const EditProfile = () => {
 
           {maritalStatus}
           {Religion}
-          {/* <Education2
-            passingYears={passingYears}
-            err={err}
-            inputChange={inputChange}
-            user={user}
-            handleUserInputChange={handleUserInputChange}
-          /> */}
+
+          {countryElement}
+          {cityElement}
+
+          {education1Element}
+          {education2Element}
 
           {/* education 3*/}
           {education3Element}
 
           {education4Element}
-
-          {countryElement}
-          {cityElement}
         </div>
       </div>
     </InputLayOut>

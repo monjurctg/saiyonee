@@ -22,9 +22,12 @@ const useEditForm = () => {
     education3_institution,
     education3_major,
     education2_institution,
+    education1_institution,
+    education1_major,
 
     education2_major,
     passingYear2,
+    education1,
 
     education2,
     education3,
@@ -65,6 +68,10 @@ const useEditForm = () => {
     education4_institution:
       education4_institution || user?.education4_institution || "",
     education4_major: education4_major || user?.education4_major || "",
+    education1: education1 || user?.education1 || "",
+    education1_institution:
+      education1_institution || user?.education1_institution || "",
+    education1_major: education1_major || user?.education1_major || "",
     education4_passing_year:
       passingYear4 || user?.education4_passing_year || "",
     father_occupation: father_occupation || user?.father_occupation || "",

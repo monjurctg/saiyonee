@@ -3,17 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {EDUCATION2_TYPES} from "../../constants/register_constants";
 import {setEducation2, setEducation2Other} from "../../redux/slices/authSlices";
+import {setEduTpe2} from "../../redux/slices/editProfileslice";
 import {stoteRegisterValues} from "../../utils/functions";
 
-function EducationTypes2() {
+function EducationTypes2({module}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {education2} = useSelector((state) => state.auth);
+  const {education2: edit_education2} = useSelector(
+    (state) => state.editProfile
+  );
   const onTypeChange = (e) => {
     if (e.target.value === "Other") {
       dispatch(setEducation2Other(true));
 
       dispatch(setEducation2(""));
+    }
+
+    if (module === "edu2") {
+      dispatch(setEduTpe2(e.target.value));
     } else {
       dispatch(setEducation2Other(false));
       dispatch(setEducation2(e.target.value));
@@ -69,7 +77,12 @@ function EducationTypes2() {
                   className="form-check-input"
                   type="radio"
                   name="education2_type"
-                  checked={education2 === educationType}
+                  checked={
+                    module === "edu2"
+                      ? edit_education2 === educationType
+                      : education2 === educationType
+                  }
+                  // checked={education2 === educationType}
                   onChange={onTypeChange}
                   value={educationType}
                   id={educationType}
