@@ -11,6 +11,9 @@ function EducationTypes4({module}) {
   const dispatch = useDispatch();
 
   const {education4} = useSelector((state) => state.auth);
+  const {education4: edit_education4} = useSelector(
+    (state) => state.editProfile
+  );
   const onTypeChange = (e) => {
     if (e.target.value === "Other") {
       dispatch(setEducation4Other(true));
@@ -33,8 +36,7 @@ function EducationTypes4({module}) {
           <div
             onClick={() => navigate(-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-4 image-invert"
-            style={{ height: "58px", width: "58px" }}
-          >
+            style={{height: "58px", width: "58px"}}>
             <img src="/img/back-icon.svg" alt="back" />
           </div>
         </div>
@@ -62,13 +64,11 @@ function EducationTypes4({module}) {
           {EDUCATION4_TYPES.map((educationType, i) => (
             <div
               key={i}
-              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
-            >
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1">
               <div className="col-10">
                 <label
                   htmlFor={educationType}
-                  className="form-check-label bg-white w-100"
-                >
+                  className="form-check-label bg-white w-100">
                   {educationType === "" ? (
                     <strong>None</strong>
                   ) : (
@@ -81,7 +81,12 @@ function EducationTypes4({module}) {
                   className="form-check-input"
                   type="radio"
                   name="education1_type"
-                  checked={education4 === educationType}
+                  // checked={education4 === educationType}
+                  checked={
+                    module === "edu4"
+                      ? edit_education4 === educationType
+                      : education4 === educationType
+                  }
                   onChange={onTypeChange}
                   value={educationType}
                   id={educationType}

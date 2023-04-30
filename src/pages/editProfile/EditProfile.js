@@ -19,6 +19,7 @@ import {
   setEduTpe1,
   setEduTpe2,
   setEduTpe3,
+  setEduTpe4,
 } from "../../redux/slices/editProfileslice";
 import {current} from "@reduxjs/toolkit";
 import toastMsg from "../../utils/toastify";
@@ -212,6 +213,11 @@ const EditProfile = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe3(education3 ? education3 : user?.education3));
   };
+  const onEdu4SelectorClicked = () => {
+    // alert("djkskjk");
+    dispatch(setEditProfile(inputChange));
+    dispatch(setEduTpe4(education4 ? education4 : user?.education4));
+  };
 
   let Religion = (
     <>
@@ -395,6 +401,7 @@ const EditProfile = () => {
   let education4Element = (
     <EducationLayout
       to={"/editProfile/edu4"}
+      onEducationSelectorClicked={onEdu4SelectorClicked}
       inputChange={inputChange}
       err={err}
       label={inputChange.education4}

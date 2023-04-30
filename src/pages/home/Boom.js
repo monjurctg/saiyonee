@@ -5,13 +5,13 @@ import back from "../../assets/imgs/Back.svg";
 import human1 from "../../assets/imgs/human1.svg";
 import human2 from "../../assets/imgs/human2.svg";
 import UserServices from "../../services/userServices";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
 function Boom() {
   const [boomData, setBoomData] = useState([]);
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
-  console.log('user', user)
+  console.log("user", user);
   let getBoomData = async () => {
     let res = await UserServices.getBoomUsers();
     // console.log("resmatched_user", res.data.matched_users.length);
@@ -40,7 +40,7 @@ function Boom() {
     show = (
       <div className="mt-5">
         <img
-          src={user?.thumbnail_img ?  user?.thumbnail_img  : human1}
+          src={user?.thumbnail_img ? user?.thumbnail_img : human1}
           alt=""
           style={{
             width: 112,
@@ -51,7 +51,9 @@ function Boom() {
         />
         <img
           src={
-            boomData?.length > 0 ? boomData[0]?.thumbnail_img_url : human2
+            boomData?.length > 0
+              ? boomData[boomData?.length - 1]?.thumbnail_img_url
+              : human2
           }
           alt=""
           style={{
@@ -59,7 +61,9 @@ function Boom() {
             height: 112,
             marginLeft: -22,
             objectFit: "cover",
-            borderRadius: boomData?.length > 0 && boomData[0]?.thumbnail_img_url &&
+            borderRadius:
+              boomData?.length > 0 &&
+              boomData[boomData?.length - 1]?.thumbnail_img_url &&
               "50%",
           }}
         />
@@ -73,11 +77,11 @@ function Boom() {
             color: "#1F2937",
           }}>
           You have matched with{" "}
-          <span style={{
-            fontWeight: 700,
-          }}>
-          {boomData[boomData.length -1]?.display_name}!
-
+          <span
+            style={{
+              fontWeight: 700,
+            }}>
+            {boomData[boomData.length - 1]?.display_name}!
           </span>
         </p>
 
@@ -100,9 +104,9 @@ function Boom() {
             fontWeight: 700,
             color: "#FFAEAE",
           }}>
-            <Link to={`/chat/room/${boomData[boomData.length -1]?.match_id}`}>
-          Say Hi!
-            </Link>
+          <Link to={`/chat/room/${boomData[boomData.length - 1]?.match_id}`}>
+            Say Hi!
+          </Link>
         </button>
         <button
           className="mt-4"
