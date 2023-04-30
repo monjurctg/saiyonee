@@ -28,6 +28,11 @@ function SelfieVerification() {
       if (res.data.images.selfie_img) {
         console.log("hello world selfie");
         localStorage.setItem("selfie_image", "true");
+        if (isAlreadySetPreference === "true") {
+          navigate("/");
+        } else {
+          navigate("/preference");
+        }
       } else {
         localStorage.setItem("selfie_image", "false");
       }
@@ -35,11 +40,6 @@ function SelfieVerification() {
       // if (res.data.images.selfie_img && !selfieEdit) {
       //   navigate("/preference");
       // }
-      if (isAlreadySetPreference === "true") {
-        navigate("/");
-      } else {
-        navigate("/preference");
-      }
     }
   };
 
