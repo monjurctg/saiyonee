@@ -662,6 +662,7 @@ const EditProfile = () => {
             name="number_of_brothers"
             type="number"
             setErr={setErr}
+            min={0}
             value={inputChange.number_of_brothers}
             onChange={handleUserInputChange}
             placeholder="Enter a number"
@@ -672,6 +673,7 @@ const EditProfile = () => {
             name="number_of_sisters"
             type="number"
             setErr={setErr}
+            min={0}
             value={inputChange.number_of_sisters}
             onChange={handleUserInputChange}
             placeholder="Enter a number"

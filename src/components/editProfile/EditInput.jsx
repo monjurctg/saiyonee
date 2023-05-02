@@ -10,6 +10,8 @@ const EditInput = ({
   error,
   setErr,
   label2,
+  min,
+  max,
 }) => {
   return (
     <>
@@ -24,6 +26,8 @@ const EditInput = ({
           style={{fontFamily: "Inter", paddingTop: 0, paddingBottom: 0}}
           onFocus={() => setErr({})}
           name={name}
+          min={min}
+          max={max}
           value={value}
           onChange={onChange}
           placeholder={placeholder}

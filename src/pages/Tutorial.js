@@ -51,7 +51,7 @@ function Tutorial() {
                     /> */}
                     <ReactPlayer
                       // playIcon={<button >Play</button>}
-                      url="/video/Post03.mp4"
+                      url="/video/wellcome.mp4"
                       width={"100%"}
                       height={"100%"}
                       controls={true}

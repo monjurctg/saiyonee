@@ -5,7 +5,7 @@ import PreferenceServices from "./services/preferenceServices";
 import {useDispatch} from "react-redux";
 import {setPreviousPreference} from "./redux/slices/preferenceSlice";
 import {useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import UserServices from "./services/userServices";
 import {setCurrentUser} from "./redux/slices/authSlices";
 import {getToken} from "./utils/functions";
@@ -32,6 +32,8 @@ function App() {
   // const access_token = getToken();
   const route = useLocation();
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPreviousPreference = async () => {
@@ -42,15 +44,37 @@ function App() {
       console.log(res);
     }
   };
+  const logout = () => {
+    // console.log("logout");
+    localStorage.clear();
+    window.location.reload();
+
+    navigate("/get-start");
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchCurrentUser = async () => {
-    const res = await UserServices.UserProfile();
-    if (res.status === 200) {
-      dispatch(setCurrentUser(res.data));
-      console.log(res.data);
+  const fetchCurrentUser = useCallback(async () => {
+    try {
+      const res = await UserServices.UserProfile();
+      if (res.status === 200) {
+        dispatch(setCurrentUser(res.data));
+        console.log(res.data);
+      }
+    } catch (err) {
+      // Check if the error is due to an expired token
+      if (err.response && err.response.status === 401) {
+        // Clear the token from local storage
+
+        logout();
+        // Redirect the user to the login page or show a logout message
+        // For example, using react-router-dom:
+        navigate("/login");
+      } else {
+        console.log(err);
+      }
     }
-  };
+  }, [dispatch, navigate]);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchEditUser = async () => {
     const res = await UserServices.getEditData();

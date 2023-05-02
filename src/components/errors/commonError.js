@@ -71,6 +71,21 @@ errors.validation = (setErr, inputChange, user, city) => {
       message: "weight cannot be less than 30 kg or greater then 180 kg",
     });
     return true;
+  }
+
+  if (inputChange.number_of_brothers && inputChange.number_of_brothers < 0) {
+    setErr({
+      error: "number_of_brothers",
+      message: "The number of brothers be greater than or equal to 0.",
+    });
+    return true;
+  }
+  if (inputChange.number_of_sisters && inputChange.number_of_sisters < 0) {
+    setErr({
+      error: "number_of_sisters",
+      message: "The number of sisters be greater than or equal to 0.",
+    });
+    return true;
   } else {
     return false;
   }
