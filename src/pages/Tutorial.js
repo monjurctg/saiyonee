@@ -37,7 +37,7 @@ function Tutorial() {
               <div className="card border-0 bg-transparent rounded shadow">
                 <div className="position-relative">
                   <ReactPlayer
-                    url="/video/Post03.mp4"
+                    url="/video/wellcome.mp4"
                     width={"100%"}
                     height={"210px"}
                     style={{objectFit: "cover"}}
