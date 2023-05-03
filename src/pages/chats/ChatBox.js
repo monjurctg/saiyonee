@@ -204,7 +204,7 @@ function ChatBox() {
   return (
     <ChatLayout
       user={userData}
-      matchedTime={messageData?.unmatched_date}
+      matchedTime={messageData?.matched_date}
       matched_id={userData?.id}>
       <div
         className="chat-body"
