@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import InputLayOut from "../editProfile/InputLayOut";
 import toastMsg from "../../utils/toastify";
 import ImageUpload from "../../components/gellary/ImageUpload";
+import Loader from "../../components/Loader";
 
 const GalleryImage = () => {
   const [err, seterr] = useState(null);
@@ -33,12 +34,13 @@ const GalleryImage = () => {
 
   let fileChange = (e) => {
     e.preventDefault();
+    setLoading(true)
 
     let file = e.target.files[0];
     if (file) {
       seterr(null);
       setlength(file.size);
-      console.log("hello");
+      // console.log("hello");
       setimages({...images, [e.target.name]: file});
       setTimeout(() => {
         onSubmit(e.target.name, file);
@@ -88,6 +90,21 @@ const GalleryImage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+
+  if(loading){
+return <InputLayOut>
+<div style={{display:"flex",justifyContent:"center",alignSelf:"center"}}>
+<Loader/>
+
+</div>
+    </InputLayOut>
+  }
+
+
+
+
+
   return (
     <InputLayOut
       err={err}
@@ -96,6 +113,8 @@ const GalleryImage = () => {
       title={"Image Gallery"}
       loading={loading}
       from={"editGallery"}>
+        
+       
       <div
         className="question mt-3 d-flex flex-wrap"
         style={{
@@ -142,7 +161,7 @@ const GalleryImage = () => {
               URL.createObjectURL(images?.optional_img_1)
             }
             alt=""
-            onClick={imageClick}
+            onClick={(e)=>imageClick(e,1)}
             style={{
               width: images?.optional_img_1 && "100%",
               borderRadius: 24,
