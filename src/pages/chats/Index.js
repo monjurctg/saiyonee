@@ -88,7 +88,7 @@ const ChatIndex = () => {
                   }}
                 >
                   {item?.latest_live_chat_message?.from_user?.id ===
-                    data?.auth_user?.id && <span>You:</span>}
+                    data?.auth_user?.id &&item?.latest_live_chat_message?.id && <span>You:</span>}
                   {item?.latest_live_chat_message?.message}
                 </p>
                 <p
