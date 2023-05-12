@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {Suspense, lazy, useEffect, useState} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -27,7 +28,7 @@ import Industry from "../pages/register/Industry";
 import LocationCountry from "../pages/register/LocationCountry";
 import LocationCity from "../pages/register/LocationCity";
 import Settings from "../pages/settings/Settings";
-import EditProfile from "../pages/editProfile/EditProfile";
+// import EditProfile from "../pages/editProfile/EditProfile";
 // import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
 import {useDispatch, useSelector} from "react-redux";
@@ -61,7 +62,7 @@ import {
   set_is_ques,
   set_is_selfie,
 } from "../redux/slices/utilsSlice";
-import EditProfileModule from "../pages/editProfile/EditProfileModule";
+// import EditProfileModule from "../pages/editProfile/EditProfileModule";
 import ChatBox from "../pages/chats/ChatBox";
 import SocialLogin from "../pages/social/SocialLogin";
 import Register from "../pages/social-login/Register";
@@ -71,6 +72,11 @@ import {useCallback} from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery";
 import UserServices from "../services/userServices";
+import Loader from "../components/Loader";
+let EditProfileModule = lazy(()=>import("../pages/editProfile/EditProfileModule"))
+let EditProfile =lazy(()=>import("../pages/editProfile/EditProfile")) ;
+
+
 
 function Routers() {
   // console.log("getToken()", getToken());
@@ -137,7 +143,10 @@ function Routers() {
       {loading ? (
         <div className="load">Loading...</div>
       ) : (
+        <Suspense fallback={<Loader/>}>
+
         <Routes>
+
           <Route element={<PublicRoute />}>
             <Route path="/" element={<Welcome />} />
             <Route path="/tutorial" element={<Tutorial />} />
@@ -257,16 +266,22 @@ function Routers() {
 
             <Route path="/preference" element={<Preference />} />
             <Route path="/preference/:module" element={<PreferenceModule />} />
+              
+           
+
+
             <Route
               path="/editProfile/:module"
               element={<EditProfileModule />}
-            />
+            /> 
+
+<Route path="/edit/profile" element={<EditProfile />} />
+           
 
             <Route path="/review/profile" element={<ReviewProfile />} />
 
             <Route path="/settings" element={<Settings />} />
 
-            <Route path="/edit/profile" element={<EditProfile />} />
             <Route path="/image/gallery" element={<GalleryImage />} />
 
             <Route path="/home" element={<Index />} />
@@ -286,7 +301,10 @@ function Routers() {
 
           {/* <Route path="/explore" element={<Explore />} /> */}
           <Route path="*" element={<NotFound />} />
+
         </Routes>
+        </Suspense>
+
       )}
     </div>
   );

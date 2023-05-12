@@ -61,10 +61,9 @@ function App() {
         console.log(res.data);
       }
     } catch (err) {
-      // Check if the error is due to an expired token
+      // Check if the error is due to an expired token 
       if (err.response && err.response.status === 401) {
         // Clear the token from local storage
-
         logout();
         // Redirect the user to the login page or show a logout message
         // For example, using react-router-dom:

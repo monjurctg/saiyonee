@@ -288,6 +288,8 @@ const EditProfile = () => {
         name="education3_institution"
         value={inputChange.education3_institution}
         type="text"
+        setErr={setErr}
+
         onChange={handleUserInputChange}
         error={err?.error === "education3_institution"}
       />
@@ -297,6 +299,8 @@ const EditProfile = () => {
         name="education3_major"
         value={inputChange.education3_major}
         type="text"
+        setErr={setErr}
+
         onChange={handleUserInputChange}
         error={err?.error === "education3_major"}
       />
@@ -325,6 +329,8 @@ const EditProfile = () => {
       type={"education2"}
       title="Higher Secondary  Education">
       <EditInput
+        setErr={setErr}
+
         label=" Higher Secondary  Education Institute"
         name="education2_institution"
         value={inputChange.education2_institution}
@@ -334,6 +340,8 @@ const EditProfile = () => {
       />
 
       <EditInput
+        setErr={setErr}
+
         label=" Higher Secondary  Education Major"
         name="education2_major"
         value={inputChange.education2_major}
@@ -366,6 +374,8 @@ const EditProfile = () => {
       type={"education1"}
       title=" Secondary  Education">
       <EditInput
+        setErr={setErr}
+
         label="  Secondary  Education Institute"
         name="education1_institution"
         value={inputChange.education1_institution}
@@ -375,6 +385,8 @@ const EditProfile = () => {
       />
 
       <EditInput
+        setErr={setErr}
+
         label="  Secondary  Education Major"
         name="education1_major"
         value={inputChange.education1_major}
@@ -408,6 +420,8 @@ const EditProfile = () => {
       type={"education4"}
       title="Postgraduate Education">
       <EditInput
+        setErr={setErr}
+
         label=" Postgraduate Education Institute"
         name="education4_institution"
         value={inputChange.education4_institution}
@@ -423,6 +437,7 @@ const EditProfile = () => {
         type="text"
         onChange={handleUserInputChange}
         error={err?.error === "education4_major"}
+        setErr={setErr}
       />
 
       <PassingYearDropdown
@@ -431,6 +446,7 @@ const EditProfile = () => {
         userPassingYear={user?.education4_passing_year}
         previousPassingYear={passingYear3 || user?.education3_passing_year}
         maxHeight={200}
+        
       />
     </EducationLayout>
   );
