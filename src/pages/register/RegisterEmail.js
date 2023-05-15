@@ -1,18 +1,21 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import BasicLayout from "../../components/layouts/BasicLayout";
 import Loader from "../../components/Loader";
-import {useCheckEmailMutation} from "../../redux/api/authApi";
-import {setIsRegStart, setRegEmail_Pass} from "../../redux/slices/authSlices";
+import { useCheckEmailMutation } from "../../redux/api/authApi";
+import { setIsRegStart, setRegEmail_Pass } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
+import RegInput from "../../components/InputType/RegInput";
 
 function RegisterEmail() {
   const [err, setErr] = useState();
-  const {email: Email, password: Password} = useSelector((state) => state.auth);
+  const { email: Email, password: Password } = useSelector(
+    (state) => state.auth
+  );
   // let success = true;
-  const [email, setemail] = useState(Email);
+  const [email, setEmail] = useState(Email);
   const [password, setPassword] = useState(Password);
   const [confirmPassword, setConfirmPassword] = useState("");
   // const [checkEmail, {isLoading, isSuccess, isError}] = useCheckEmailMutation();
@@ -24,12 +27,12 @@ function RegisterEmail() {
 
   const checkEmail = async () => {
     setisLoading(true);
-    const res = await AuthServices.checkIsEmailUnique({email});
+    const res = await AuthServices.checkIsEmailUnique({ email });
 
     if (res.status === 200) {
       setisLoading(false);
-      stoteRegisterValues({email, password, confirmPassword});
-      dispatch(setRegEmail_Pass({email, password, confirmPassword}));
+      stoteRegisterValues({ email, password, confirmPassword });
+      dispatch(setRegEmail_Pass({ email, password, confirmPassword }));
       navigate("/register/usertype");
     } else {
       setErr({
@@ -93,7 +96,8 @@ function RegisterEmail() {
           <button
             onClick={() => navigate(-1)}
             className="btn btn-light rounded-circle shadow p-3 image-invert"
-            style={{height: "58px", width: "58px"}}>
+            style={{ height: "58px", width: "58px" }}
+          >
             <img src="/img/back-icon.svg" alt="back" />
           </button>
         </div>
@@ -131,7 +135,7 @@ function RegisterEmail() {
           >
             Take a step towards finding someone awesome!
           </p>
-          <div
+          {/* <div
             className="form-floating my-4 rounded-1 text-start text-muted"
             style={{
               fontFamily: "Inter",
@@ -143,7 +147,7 @@ function RegisterEmail() {
               id="inputEmail"
               value={email}
               onFocus={() => setErr({})}
-              onChange={(e) => setemail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className="form-control border-0 rounded-1"
               placeholder="name@example.com"
               aria-describedby="email"
@@ -156,7 +160,19 @@ function RegisterEmail() {
             >
               Email ID
             </label>
-          </div>
+          </div> */}
+          <RegInput
+            type={"email"}
+            value={email}
+            fontFamily={"Inter"}
+            onFocus={() => setErr({})}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="name@example.com"
+            label={"Email ID"}
+            error={err}
+            errorType={"email"}
+            id={"email"}
+          />
           <div
             className="form-floating my-4 text-muted text-start rounded-1"
             style={{
