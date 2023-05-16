@@ -436,7 +436,7 @@ function PersonalInformation() {
           />
 
           <SelectOptionComponent
-            onClick={onReligionSelectorClicked}
+            onClick={onMaritalStatusClicked}
             label={" Select Candidate's marital status"}
             error={err}
             errorType={"marital_status"}
