@@ -1,17 +1,18 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import AuthServices from "../../services/authServices";
+import SelectOptionComponent from "../../components/InputType/SelectOptionComponent ";
 
 function Location() {
   let navigate = useNavigate();
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
   const [loading, setLoading] = useState(false);
 
   const [err, setErr] = useState();
 
-  const {current_city, current_country, email} = useSelector(
+  const { current_city, current_country, email } = useSelector(
     (state) => state.auth
   );
   let socialToken = localStorage.getItem("social-token");
@@ -66,11 +67,12 @@ function Location() {
       <RegisterLayout
         err={err}
         onContinueClicked={onContinueClicked}
-        loading={loading}>
+        loading={loading}
+      >
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Current Country and City</h1>
           <p className="text-muted mt-5 mb-2">Candidate's current country</p>
-          <Link to={"/register/location/country"}>
+          {/* <Link to={"/register/location/country"}>
             <div
               className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
@@ -90,15 +92,31 @@ function Location() {
                 />
               </div>
             </div>
-          </Link>
+          </Link> */}
+          <SelectOptionComponent
+            onClick={() => navigate("/register/location/country")}
+            label={"Candidate's current country"}
+            error={err}
+            errorType={"current_country"}
+            value={current_country ? current_country : "Select current country"}
+          />
+
           <p className="text-muted mt-5 mb-2">Candidate's current city</p>
-          <Link to={"/register/location/city"}>
+          <SelectOptionComponent
+            onClick={() => navigate("/register/location/city")}
+            label={"Candidate's current city"}
+            error={err}
+            errorType={"current_city"}
+            value={current_city ? current_city : "Select current city"}
+          />
+          {/* <Link to={"/register/location/city"}>
             <div
               className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "current_city" ? "2px solid red" : "",
-              }}>
+              }}
+            >
               <div className="col-10">
                 <label className="form-check-label bg-white px-2 text-body">
                   {current_city ? current_city : "Select current city"}
@@ -112,7 +130,7 @@ function Location() {
                 />
               </div>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </RegisterLayout>
     </>

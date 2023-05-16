@@ -7,7 +7,7 @@ const SelectOptionComponent = ({ label, value, errorType, onClick, error }) => {
         className={`row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2 ${
           error?.error === errorType ? "border-red" : ""
         }`}
-        style={{ fontFamily: "Inter" }}
+        style={{ fontFamily: "Inter", cursor: "pointer" }}
       >
         <div className="col-10">
           <label className="form-check-label bg-white px-2 text-body">
