@@ -1,4 +1,4 @@
-import React, {memo, useState} from "react";
+import React, { memo, useState } from "react";
 
 const PassingYearDropdown = ({
   passingYear,
@@ -6,6 +6,8 @@ const PassingYearDropdown = ({
   userPassingYear,
   previousPassingYear,
   maxHeight,
+  errorType,
+  error,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -23,7 +25,10 @@ const PassingYearDropdown = ({
   ).map((_, i) => 1990 + i);
 
   return (
-    <div className="row my-4 px-2  rounded-1">
+    <div
+      className="row my-4 px-2  rounded-1"
+      style={{ border: error?.error === errorType ? "1px solid red" : "" }}
+    >
       <div className="col-8 d-flex align-items-center">
         <label className="form-check-label px-2 text-muted">
           Select passing year
@@ -36,7 +41,8 @@ const PassingYearDropdown = ({
             className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
             data-bs-toggle="dropdown"
             aria-expanded={dropdownOpen ? "true" : "false"}
-            onClick={toggleDropdown}>
+            onClick={toggleDropdown}
+          >
             {passingYear ? passingYear : userPassingYear}
           </button>
           <ul
@@ -44,7 +50,8 @@ const PassingYearDropdown = ({
             className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
               dropdownOpen ? " show" : ""
             }`}
-            style={{maxHeight: maxHeight}}>
+            style={{ maxHeight: maxHeight }}
+          >
             {passingYears.map((year, i) => {
               if (parseInt(year) > parseInt(previousPassingYear)) {
                 return (
@@ -53,7 +60,8 @@ const PassingYearDropdown = ({
                       className={`btn btn-primary py-3 dropdown-item${
                         passingYear === year ? " active" : ""
                       }`}
-                      onClick={() => handleYearClick(year)}>
+                      onClick={() => handleYearClick(year)}
+                    >
                       {year}
                     </div>
                   </li>

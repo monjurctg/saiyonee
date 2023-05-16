@@ -72,21 +72,25 @@ function Education() {
   } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  // const [year1Dropdown, setYear1Dropdown] = useState(false);
-  // const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
-  // const delayedYear1Dismiss = () =>
-  //   setTimeout(() => setYear1Dropdown(false), 200);
+  const [year1Dropdown, setYear1Dropdown] = useState(false);
+  const toggleYear1Dropdown = () => setYear1Dropdown((dropdown) => !dropdown);
+  const delayedYear1Dismiss = () =>
+    setTimeout(() => setYear1Dropdown(false), 200);
 
-  // const [year2Dropdown, setYear2Dropdown] = useState(false);
-  // const toggleYear2Dropdown = () => setYear2Dropdown((dropdown) => !dropdown);
-  // const delayedYear2Dismiss = () =>
-  //   setTimeout(() => setYear2Dropdown(false), 200);
+  const [year2Dropdown, setYear2Dropdown] = useState(false);
+  const toggleYear2Dropdown = () => setYear2Dropdown((dropdown) => !dropdown);
+  const delayedYear2Dismiss = () =>
+    setTimeout(() => setYear2Dropdown(false), 200);
 
   const [year3Dropdown, setYear3Dropdown] = useState(false);
   const toggleYear3Dropdown = () => setYear3Dropdown((dropdown) => !dropdown);
+  const delayedYear3Dismiss = () =>
+    setTimeout(() => setYear3Dropdown(false), 200);
 
   const [year4Dropdown, setYear4Dropdown] = useState(false);
   const toggleYear4Dropdown = () => setYear4Dropdown((dropdown) => !dropdown);
+  const delayedYear4Dismiss = () =>
+    setTimeout(() => setYear4Dropdown(false), 200);
 
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -161,15 +165,6 @@ function Education() {
       return;
     }
 
-    if (!education2_passing_year) {
-      setErr({
-        error: "education2_passing_year",
-        message: "Please select Higher Secondary Education passing year",
-      });
-
-      return;
-    }
-
     // if (!education3_passing_year) {
     //   setErr({
     //     error: "education1_passing_year",
@@ -231,6 +226,9 @@ function Education() {
     }
   };
 
+  // education 1 testing
+  let user = {};
+
   let education1Element = (
     <EducationLayout
       // onEducationSelectorClicked={onEdu1SelectorClicked}
@@ -254,6 +252,7 @@ function Education() {
         onFocus={() => setErr({})}
         onChange={(e) => {
           dispatch(setinstitution1(e.target.value));
+          stoteRegisterValues({ education1_institution: e.target.value });
         }}
         placeholder="institution1"
         label={" Enter candidate's institution"}
@@ -269,11 +268,12 @@ function Education() {
         onFocus={() => setErr({})}
         onChange={(e) => {
           dispatch(setMajor1(e.target.value));
+          stoteRegisterValues({ education1_institution: e.target.value });
         }}
         placeholder="institution1"
-        label={" Enter major subject"}
+        label={" Enter candidate's institution"}
         error={err}
-        errorType={"education1_major"}
+        errorType={"education1_institution"}
         id={"inputInstitution1"}
       />
       {education1Other && (
@@ -293,172 +293,14 @@ function Education() {
 
       <PassingYearDropdown
         passingYear={education1_passing_year}
-        error={err}
-        errorType={"education1_passing_year"}
         onChange={(year) => {
           dispatch(setPassingYear1(year));
-          dispatch(setPassingYear2(""));
-          dispatch(setPassingYear3(""));
-          dispatch(setPassingYear4(""));
+          dispatch(setPassingYear2(" "));
+          dispatch(setPassingYear3("  "));
+          dispatch(setPassingYear4(" "));
         }}
         userPassingYear={education1_passing_year}
         previousPassingYear={dateOfBirthYear || date_of_birth}
-        maxHeight={200}
-      />
-    </EducationLayout>
-  );
-
-  let education2Element = (
-    <EducationLayout
-      // onEducationSelectorClicked={onEdu1SelectorClicked}
-      to={"/register/education/type2"}
-      err={err}
-      // label={inputChange.education1}
-      type={"education2"}
-      label={
-        education2Other
-          ? "Other"
-          : education2
-          ? education2
-          : "Select Higher Secondary Education"
-      }
-      title=" Higher Secondary Education"
-    >
-      <RegInput
-        type={"text"}
-        value={education2_institution}
-        fontFamily={"Inter"}
-        onFocus={() => setErr({})}
-        onChange={(e) => {
-          dispatch(setinstitution2(e.target.value));
-        }}
-        placeholder="institution2"
-        label={" Enter candidate's institution"}
-        error={err}
-        errorType={"education2_institution"}
-        id={"inputInstitution2"}
-      />
-
-      <RegInput
-        type={"text"}
-        value={education2_major}
-        fontFamily={"Inter"}
-        onFocus={() => setErr({})}
-        onChange={(e) => {
-          dispatch(setMajor2(e.target.value));
-        }}
-        placeholder="institution"
-        label={" Enter major subject"}
-        error={err}
-        errorType={"education1_major"}
-        id={"inputInstitution1"}
-      />
-
-      {education2Other && (
-        <div className="form-floating my-4 text-muted">
-          <input
-            type="text"
-            id="inputEducation2"
-            value={education2}
-            onChange={(e) => dispatch(setEducation2(e.target.value))}
-            // onChange={onEducation2Change}
-            className="form-control border-0 rounded-1"
-            placeholder="education2"
-            aria-describedby="education2"
-          />
-          <label htmlFor="inputEducation2">Enter degree</label>
-        </div>
-      )}
-
-      <PassingYearDropdown
-        passingYear={education2_passing_year}
-        error={err}
-        errorType={"education2_passing_year"}
-        onChange={(year) => {
-          dispatch(setPassingYear2(year));
-          dispatch(setPassingYear3(""));
-          dispatch(setPassingYear4(""));
-        }}
-        userPassingYear={education2_passing_year}
-        previousPassingYear={education1_passing_year}
-        maxHeight={200}
-      />
-    </EducationLayout>
-  );
-
-  let education3Element = (
-    <EducationLayout
-      // onEducationSelectorClicked={onEdu1SelectorClicked}
-      to={"/register/education/type3"}
-      err={err}
-      // label={inputChange.education1}
-      type={"education3"}
-      label={
-        education3Other
-          ? "Other"
-          : education3
-          ? education3
-          : "Select graduate education"
-      }
-      title=" Graduate Education"
-    >
-      <RegInput
-        type={"text"}
-        value={education3_institution}
-        fontFamily={"Inter"}
-        onFocus={() => setErr({})}
-        onChange={(e) => {
-          dispatch(setinstitution3(e.target.value));
-        }}
-        placeholder="institution3"
-        label={" Enter candidate's institution"}
-        error={err}
-        errorType={"education3_institution"}
-        id={"inputInstitution3"}
-      />
-
-      <RegInput
-        type={"text"}
-        value={education3_major}
-        fontFamily={"Inter"}
-        onFocus={() => setErr({})}
-        onChange={(e) => {
-          dispatch(setMajor3(e.target.value));
-        }}
-        placeholder="institution"
-        label={" Enter major subject"}
-        error={err}
-        errorType={"education3_major"}
-        id={"inputInstitution3"}
-      />
-
-      {education2Other && (
-        <div className="form-floating my-4 text-muted">
-          <input
-            type="text"
-            id="inputEducation2"
-            value={education2}
-            onChange={(e) => dispatch(setEducation2(e.target.value))}
-            // onChange={onEducation2Change}
-            className="form-control border-0 rounded-1"
-            placeholder="education2"
-            aria-describedby="education2"
-          />
-          <label htmlFor="inputEducation2">Enter degree</label>
-        </div>
-      )}
-
-      <PassingYearDropdown
-        passingYear={education2_passing_year}
-        error={err}
-        errorType={"education2_passing_year"}
-        onChange={(year) => {
-          dispatch(setPassingYear3(year));
-          // dispatch(setPassingYear3(""));
-          dispatch(setPassingYear4(""));
-        }}
-        userPassingYear={education3_passing_year}
-        previousPassingYear={education2_passing_year}
         maxHeight={200}
       />
     </EducationLayout>
@@ -477,18 +319,316 @@ function Education() {
         >
           <h1 className="card-title">Candidate’s Educational Background</h1>
 
-          <h4 className="mt-4 mb-2" style={{ fontSize: "20px" }}>
+          {/*           
+          <h4 className="mt-5 mb-2" style={{ fontSize: "20px" }}>
             Secondary Education
           </h4>
+          <Link
+            onClick={onEducationSelectorClicked}
+            to={"/register/education/type1"}
+          >
+            <div
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error == "education1" ? "2px solid red" : "",
+              }}
+            >
+              <div className="col-10">
+                <label className="form-check-label bg-white px-2 text-body">
+                  {education1Other
+                    ? "Other"
+                    : education1
+                    ? education1
+                    : "Select secondary education"}
+                </label>
+              </div>
+              <div className="col-2 d-flex justify-content-end pe-3">
+                <img
+                  src="/img/back-icon.svg"
+                  alt="next"
+                  className="rotate-180"
+                />
+              </div>
+            </div>
+          </Link> */}
 
+          {/* <div
+            className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border:
+                err?.error == "education1_institution" ? "2px solid red" : "",
+            }}
+          >
+            <input
+              onFocus={() => setErr()}
+              type="text"
+              id="inputInstitution1"
+              value={education1_institution}
+              onChange={(e) => {
+                dispatch(setinstitution1(e.target.value));
+                stoteRegisterValues({ education1_institution: e.target.value });
+              }}
+              className="form-control border-0 rounded-1"
+              placeholder="institution1"
+              aria-describedby="institution1"
+            />
+            <label htmlFor="inputInstitution1">
+              Enter candidate's institution
+            </label>
+          </div> */}
+          {/* <RegInput
+            type={"text"}
+            value={education1_institution}
+            fontFamily={"Inter"}
+            onFocus={() => setErr({})}
+            onChange={(e) => {
+              dispatch(setinstitution1(e.target.value));
+              stoteRegisterValues({ education1_institution: e.target.value });
+            }}
+            placeholder="institution1"
+            label={" Enter candidate's institution"}
+            error={err}
+            errorType={"education1_institution"}
+            id={"inputInstitution1"}
+          /> */}
+          {/* <div
+            className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error == "education1_major" ? "2px solid red" : "",
+            }}
+          >
+            <input
+              onFocus={() => setErr()}
+              type="text"
+              id="inputMajor1"
+              value={education1_major}
+              //   onChange={onMajor1Change}
+              onChange={(e) => {
+                dispatch(setMajor1(e.target.value));
+                stoteRegisterValues({ education1_major: e.target.value });
+              }}
+              className="form-control border-0 rounded-1"
+              placeholder="major1"
+              aria-describedby="major1"
+            />
+            <label htmlFor="inputMajor1">Enter major subject</label>
+          </div> */}
+
+          {/* <RegInput
+            type={"text"}
+            value={education1_major}
+            fontFamily={"Inter"}
+            onFocus={() => setErr({})}
+            onChange={(e) => {
+              dispatch(setMajor1(e.target.value));
+              stoteRegisterValues({ education1_major: e.target.value });
+            }}
+            placeholder="institution1"
+            label={" Enter major subject"}
+            error={err}
+            errorType={"education1_major"}
+            id={"inputInstitution1"}
+          /> */}
+          {/* 
+          <div className="row my-4 px-2  rounded-1">
+            <div className="col-8 d-flex align-items-center">
+              <label className="form-check-label px-2 text-muted">
+                Select passing year
+              </label>
+            </div>
+            <div className="col-4">
+              <div className="dropup bg-white rounded-1">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
+                  data-bs-toggle="dropdown"
+                  aria-expanded={year1Dropdown ? "true" : "false"}
+                  onClick={toggleYear1Dropdown}
+                  // onBlur={delayedYear1Dismiss}
+                >
+                  {education1_passing_year}
+                </button>
+                <ul
+                  data-bs-popper
+                  className={`dropdown-menu dropdown-menu-end w-100 text-end overflow-scroll shadow border-0 p-2${
+                    year1Dropdown ? " show" : ""
+                  }`}
+                  style={{ maxHeight: 200 }}
+                >
+                  {passingYears.map((year, i) => (
+                    <li key={i}>
+                      <div
+                        onClick={() => {
+                          dispatch(setPassingYear1(year));
+                          setYear1Dropdown(false);
+                        }}
+                        className={`btn btn-primary py-3 dropdown-item${
+                          education1_passing_year === year ? " " : ""
+                        }`}
+                      >
+                        {year}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div> */}
           {education1Element}
 
-          {/* <br /> */}
+          <br />
 
           <h4 className="mt-4 mb-2" style={{ fontSize: "20px" }}>
             Higher Secondary Education
           </h4>
-          {education2Element}
+          <Link
+            onClick={onEducationSelectorClicked}
+            to={"/register/education/type2"}
+          >
+            <div
+              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
+              style={{
+                fontFamily: "Inter",
+                border: err?.error === "education2" ? "2px solid red" : "",
+              }}
+            >
+              <div className="col-10">
+                <label className="form-check-label bg-white px-2 text-body">
+                  {education2Other
+                    ? "Other"
+                    : education2
+                    ? education2
+                    : "Select higher secondary education"}
+                </label>
+              </div>
+              <div className="col-2 d-flex justify-content-end pe-3">
+                <img
+                  src="/img/back-icon.svg"
+                  alt="next"
+                  className="rotate-180"
+                />
+              </div>
+            </div>
+          </Link>
+
+          {education2Other && (
+            <div className="form-floating my-4 text-muted">
+              <input
+                type="text"
+                id="inputEducation2"
+                value={education2}
+                onChange={(e) => dispatch(setEducation2(e.target.value))}
+                // onChange={onEducation2Change}
+                className="form-control border-0 rounded-1"
+                placeholder="education2"
+                aria-describedby="education2"
+              />
+              <label htmlFor="inputEducation2">Enter degree</label>
+            </div>
+          )}
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border:
+                err?.error === "education2_institution" ? "2px solid red" : "",
+            }}
+          >
+            <input
+              onFocus={() => setErr()}
+              type="text"
+              id="inputInstitution2"
+              value={education2_institution}
+              onChange={(e) => {
+                dispatch(setinstitution2(e.target.value));
+                stoteRegisterValues({ education2_institution: e.target.value });
+              }}
+              // onChange={onInstitution2Change}
+              className="form-control border-0 rounded-1"
+              placeholder="institution2"
+              aria-describedby="institution2"
+            />
+            <label htmlFor="inputInstitution2">
+              Enter candidate's institution
+            </label>
+          </div>
+          <div
+            className="form-floating my-4 text-muted  rounded-1"
+            style={{
+              fontFamily: "Inter",
+              border: err?.error === "education2_major" ? "2px solid red" : "",
+            }}
+          >
+            <input
+              onFocus={() => setErr()}
+              type="text"
+              id="inputMajor2"
+              value={education2_major}
+              onChange={(e) => {
+                dispatch(setMajor2(e.target.value));
+                stoteRegisterValues({ education1_major: e.target.value });
+              }}
+              // onChange={onMajor2Change}
+              className="form-control border-0 rounded-1"
+              placeholder="major2"
+              aria-describedby="major2"
+            />
+            <label htmlFor="inputMajor2">Enter candidate's major subject</label>
+          </div>
+          <div className="row my-4 px-2">
+            <div className="col-8 d-flex align-items-center">
+              <label className="form-check-label px-2 text-muted">
+                Select your passing year
+              </label>
+            </div>
+
+            <div className="col-4">
+              <div className="dropup bg-white rounded-1">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary shadow-2 py-3 dropdown-toggle w-100 rounded-1 border-0"
+                  data-bs-toggle="dropdown"
+                  aria-expanded={year2Dropdown ? "true" : "false"}
+                  onClick={toggleYear2Dropdown}
+                  // onBlur={delayedYear2Dismiss}
+                >
+                  {education2_passing_year}
+                </button>
+                <ul
+                  data-bs-popper
+                  className={`dropdown-menu dropdown-menu-end text-end w-100 overflow-scroll shadow border-0 p-2${
+                    year2Dropdown ? " show" : ""
+                  }`}
+                  style={{ maxHeight: 200 }}
+                >
+                  {passingYears.map((year, i) => {
+                    if (parseInt(year) > parseInt(education1_passing_year))
+                      return (
+                        <li key={i}>
+                          <div
+                            className={`btn btn-primary py-3 dropdown-item${
+                              education2_passing_year === year ? " active" : ""
+                            }`}
+                            onClick={() => {
+                              dispatch(setPassingYear2(year));
+                              setYear2Dropdown(false);
+                              stoteRegisterValues({
+                                education2_passing_year: year,
+                              });
+                            }}
+                          >
+                            {year}
+                          </div>
+                        </li>
+                      );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
 
           <br />
 

@@ -1,7 +1,7 @@
 import React from "react";
-import {useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
-import {setEditProfile} from "../../redux/slices/editProfileslice";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { setEditProfile } from "../../redux/slices/editProfileslice";
 
 function EducationLayout({
   title,
@@ -16,20 +16,22 @@ function EducationLayout({
   const dispatch = useDispatch();
   return (
     <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+      <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         {title} Type
       </p>
       <div className="form-floating text-muted rounded-1">
         <Link
           //   onClick={() => dispatch(setEditProfile(inputChange))}
           onClick={onEducationSelectorClicked}
-          to={to}>
+          to={to}
+        >
           <div
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
             style={{
               fontFamily: "Inter",
               border: err?.error == type ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <div className="col-10">
               <label className="form-check-label bg-white px-2 text-body">
                 {label ?? ` ${title} Type`}

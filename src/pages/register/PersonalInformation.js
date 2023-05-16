@@ -7,6 +7,7 @@ import { setPersonalInfo } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
 import { stoteRegisterValues, validateAge } from "../../utils/functions";
 import RegInput from "../../components/InputType/RegInput";
+import SelectOptionComponent from "../../components/InputType/SelectOptionComponent ";
 let scrollPos = 0;
 function PersonalInformation() {
   const {
@@ -124,19 +125,6 @@ function PersonalInformation() {
 
     navigate("/register/personalinfo/marital_status");
   };
-
-  // console.log(state.gender);
-
-  // function validateAge(dateOfBirth) {
-  //   var today = new Date();
-  //   var birthDate = new Date(dateOfBirth);
-  //   var age = today.getFullYear() - birthDate.getFullYear();
-  //   var month = today.getMonth() - birthDate.getMonth();
-  //   if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-  //   }
-
-  //   return age;
-  // }
 
   const onContinueClicked = async () => {
     if (!state.full_name.trim() || state.full_name.trim().length < 6) {
@@ -263,37 +251,6 @@ function PersonalInformation() {
             Name must match with government issued ID card
           </p>
 
-          {/* <div
-            className="form-floating my-3 text-muted rounded-1"
-            style={{
-              fontFamily: "Inter",
-              border: err?.error === "name" ? "2px solid red" : "",
-            }}>
-            <input
-              type="text"
-              name="full_name"
-              id="inputRealName"
-              onFocus={() => setErr({})}
-              style={{fontFamily: "Inter"}}
-              value={state.full_name}
-              onChange={handleUserInputChange}
-              className="form-control border-0 rounded-1 shadow-2"
-              placeholder="realName"
-              aria-describedby="realName"
-            />
-            <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Full Name
-              <span
-                style={{
-                  fontSize: `12px`,
-                  fontFamily: "Inter",
-                  fontWeight: "bold",
-                  marginLeft: "5px",
-                }}>
-                (Not Visible to public)
-              </span>
-            </label>
-          </div> */}
           <RegInput
             type={"text"}
             value={state.full_name}
@@ -324,40 +281,7 @@ function PersonalInformation() {
           <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             App display name
           </p>
-          {/* <div
-            className="form-floating my-3 text-muted rounded-1 "
-            style={{
-              fontFamily: "Inter",
-              border: err?.error == "display_name" ? "2px solid red" : "",
-            }}
-          >
-            <input
-              type="text"
-              name="display_name"
-              id="inputRealName"
-              onFocus={() => setErr({})}
-              style={{ fontFamily: "Inter" }}
-              value={state.display_name}
-              onChange={handleUserInputChange}
-              className="form-control border-0 rounded-1 shadow-2"
-              placeholder="realName"
-              aria-describedby="realName"
-            />
-            <label htmlFor="inputRealName" style={{ fontFamily: "Inter" }}>
-              Display Name
-              <span
-                style={{
-                  fontSize: `12px`,
-                  fontFamily: "Inter",
-                  fontWeight: "bold",
-                  // marginLeft: "30%"
-                  marginLeft: "5px",
-                }}
-              >
-                ( Visible to public)
-              </span>
-            </label>
-          </div> */}
+
           <RegInput
             type={"text"}
             value={state.display_name}
@@ -503,69 +427,22 @@ function PersonalInformation() {
             </label>
           </div>
 
-          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
-            Select Candidate's religion
-          </p>
-          <div onClick={onReligionSelectorClicked}>
-            <div
-              className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-              style={{
-                fontFamily: "Inter",
-                border: err?.error == "religion" ? "2px solid red" : "",
-              }}
-            >
-              <div className="col-10">
-                <label
-                  className="form-check-label bg-white px-2 text-body"
-                  style={{ fontFamily: "Inter" }}
-                >
-                  {religion ? religion : "Select  religion"}
-                </label>
-              </div>
-              <div className="col-2 d-flex justify-content-end pe-3">
-                <img
-                  src="/img/back-icon.svg"
-                  alt="next"
-                  className="rotate-180"
-                />
-              </div>
-            </div>
-          </div>
-          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
-            Select Candidate's marital status
-          </p>
-          <div onClick={onMaritalStatusClicked}>
-            <div
-              className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-              style={{
-                fontFamily: "Inter",
-                border: err?.error == "marital_status" ? "2px solid red" : "",
-              }}
-            >
-              <div className="col-10">
-                <label className="form-check-label bg-white px-2 text-body">
-                  {marital_status ?? "Select Marital Status"}
-                </label>
-              </div>
-              <div className="col-2 d-flex justify-content-end pe-3">
-                <img
-                  src="/img/back-icon.svg"
-                  alt="next"
-                  className="rotate-180"
-                />
-              </div>
-            </div>
-          </div>
+          <SelectOptionComponent
+            onClick={onReligionSelectorClicked}
+            label={"   Select Candidate's religion"}
+            error={err}
+            errorType={"religion"}
+            value={religion ? religion : "Select  religion"}
+          />
+
+          <SelectOptionComponent
+            onClick={onReligionSelectorClicked}
+            label={" Select Candidate's marital status"}
+            error={err}
+            errorType={"marital_status"}
+            value={marital_status ?? "Select Marital Status"}
+          />
         </div>
-        {/* <div className="container px-4 pb-4 pt-2">
-          {err?.error && <p className="text-primary">* {err?.message}</p>}
-          <button
-            onClick={onContinueClicked}
-            style={{height: 60}}
-            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong style={{fontFamily: "Inter"}}>Continue</strong>
-          </button>
-        </div> */}
       </RegisterLayout>
     </>
   );
