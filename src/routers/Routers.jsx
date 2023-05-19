@@ -4,7 +4,7 @@ import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
-import Education from "../pages/register/Education";
+// import Education from "../pages/register/Education";
 import FamilyInfo from "../pages/register/FamilyInfo";
 import Location from "../pages/register/Location";
 import Ocupation from "../pages/register/Ocupation";
@@ -18,7 +18,6 @@ import Varification from "../pages/register/Varification";
 import RegSuccess from "../pages/register/RegSuccess";
 import Religions from "../pages/register/Religions";
 import MaritalStatus from "../pages/register/MaritalStatus";
-import Index from "../pages/home/Index";
 import EducationTypes1 from "../pages/register/EducationTypes1";
 import EducationTypes2 from "../pages/register/EducationTypes2";
 import EducationTypes4 from "../pages/register/EducationType4";
@@ -47,14 +46,12 @@ import PublicRoute from "./PublicRoute";
 
 import PreferenceModule from "../pages/home/PreferenceModule";
 
-import ViewProfile from "../pages/settings/ViewProfile";
 import Boom from "../pages/home/Boom";
 import ForgotPass from "../pages/forgotPass/ForgotPass";
 import ResetPass from "../pages/forgotPass/ResetPass";
 import Success from "../pages/forgotPass/Success";
 import Help from "../pages/Help";
 import QuestionServices from "../services/questionServices";
-import MatchedUser from "./../pages/matched-user/MatchedUser";
 import ChatIndex from "../pages/chats/Index";
 import {
   setEditData,
@@ -70,9 +67,14 @@ import EmailVerication from "../pages/register/EmailVerication";
 import VerifyEmail from "../pages/VerifyEmail";
 import {useCallback} from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
-import ViewGallery from "../pages/viewGallery/ViewGallery";
+import ViewGallery from "../pages/viewGallery/ViewGallery"; 
 import UserServices from "../services/userServices";
 import Loader from "../components/Loader";
+
+let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
+let Index = lazy(()=>import("../pages/home/Index"))
+let ViewProfile = lazy(()=>import("../pages/settings/ViewProfile"))
+let Education = lazy(()=>import("../pages/register/Education"))
 let EditProfileModule = lazy(()=>import("../pages/editProfile/EditProfileModule"))
 let EditProfile =lazy(()=>import("../pages/editProfile/EditProfile")) ;
 
@@ -143,7 +145,7 @@ function Routers() {
       {loading ? (
         <div className="load">Loading...</div>
       ) : (
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<div>Loading...</div>}>
 
         <Routes>
 
