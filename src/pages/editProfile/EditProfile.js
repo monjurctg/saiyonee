@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserServices from "../../services/userServices";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import HomeLayout from "../../components/layouts/HomeLayout";
 import {
   setEditDisplayName,
@@ -21,15 +21,15 @@ import {
   setEduTpe3,
   setEduTpe4,
 } from "../../redux/slices/editProfileslice";
-import {current} from "@reduxjs/toolkit";
+import { current } from "@reduxjs/toolkit";
 import toastMsg from "../../utils/toastify";
-import {setCurrentUser} from "../../redux/slices/authSlices";
-import {validateAge} from "../../utils/functions";
+import { setCurrentUser } from "../../redux/slices/authSlices";
+import { validateAge } from "../../utils/functions";
 import DateField from "../../components/DateField";
 import Education2 from "../../components/editProfile/Education2";
-import useSWR, {useSWRConfig} from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import fetcher from "../../utils/fetchData";
-import {setEditData} from "../../redux/slices/utilsSlice";
+import { setEditData } from "../../redux/slices/utilsSlice";
 import EditInput from "../../components/editProfile/EditInput";
 import useEditForm from "../../hooks/useEditForm";
 import ImageUploader from "../../components/editProfile/ImageUploader";
@@ -44,7 +44,7 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const {editData: user} = useSelector((state) => state.utils);
+  const { editData: user } = useSelector((state) => state.utils);
   // const url = "/app_user_edit_data";
   // const {data: user, isLoading: loading} = useSWR(url, fetcher);
   const {
@@ -188,6 +188,9 @@ const EditProfile = () => {
   };
 
   const onMaritalStatusClicked = () => {
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) return;
+    navigate("/editProfile/marital_status");
     dispatch(setEditProfile(inputChange));
     dispatch(
       setEditMaritalStatus(
@@ -221,23 +224,26 @@ const EditProfile = () => {
 
   let Religion = (
     <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+      <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Religion
       </p>
       <Link
         to={"/editProfile/religion"}
-        style={{cursor: "pointer"}}
-        onClick={onReligionSelectorClicked}>
+        style={{ cursor: "pointer" }}
+        onClick={onReligionSelectorClicked}
+      >
         <div
           className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
           style={{
             fontFamily: "Inter",
             border: err?.error == "religion" ? "2px solid red" : "",
-          }}>
+          }}
+        >
           <div className="col-10">
             <label
               className="form-check-label bg-white px-2 text-body"
-              style={{fontFamily: "Inter"}}>
+              style={{ fontFamily: "Inter" }}
+            >
               {religion ? religion : user?.religion}
             </label>
           </div>
@@ -251,17 +257,18 @@ const EditProfile = () => {
 
   let maritalStatus = (
     <div onClick={onMaritalStatusClicked}>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+      <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Marital staus
       </p>
-      <Link
-        to={"/editProfile/marital_status"}
+      <li
+        to={""}
         className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
         style={{
           fontFamily: "Inter",
           cursor: "pointer",
           border: err?.error == "marital_status" ? "2px solid red" : "",
-        }}>
+        }}
+      >
         <div className="col-10">
           <label className="form-check-label bg-white px-2 text-body">
             {inputChange.marital_status}
@@ -270,7 +277,7 @@ const EditProfile = () => {
         <div className="col-2 d-flex justify-content-end pe-3">
           <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
         </div>
-      </Link>
+      </li>
     </div>
   );
 
@@ -282,14 +289,14 @@ const EditProfile = () => {
       err={err}
       label={inputChange.education3}
       type={"education3"}
-      title="Undergraduate Education">
+      title="Undergraduate Education"
+    >
       <EditInput
         label=" Undergraduate Education Institute"
         name="education3_institution"
         value={inputChange.education3_institution}
         type="text"
         setErr={setErr}
-
         onChange={handleUserInputChange}
         error={err?.error === "education3_institution"}
       />
@@ -300,7 +307,6 @@ const EditProfile = () => {
         value={inputChange.education3_major}
         type="text"
         setErr={setErr}
-
         onChange={handleUserInputChange}
         error={err?.error === "education3_major"}
       />
@@ -327,10 +333,10 @@ const EditProfile = () => {
       err={err}
       label={inputChange.education2}
       type={"education2"}
-      title="Higher Secondary  Education">
+      title="Higher Secondary  Education"
+    >
       <EditInput
         setErr={setErr}
-
         label=" Higher Secondary  Education Institute"
         name="education2_institution"
         value={inputChange.education2_institution}
@@ -341,7 +347,6 @@ const EditProfile = () => {
 
       <EditInput
         setErr={setErr}
-
         label=" Higher Secondary  Education Major"
         name="education2_major"
         value={inputChange.education2_major}
@@ -372,10 +377,10 @@ const EditProfile = () => {
       err={err}
       label={inputChange.education1}
       type={"education1"}
-      title=" Secondary  Education">
+      title=" Secondary  Education"
+    >
       <EditInput
         setErr={setErr}
-
         label="  Secondary  Education Institute"
         name="education1_institution"
         value={inputChange.education1_institution}
@@ -386,7 +391,6 @@ const EditProfile = () => {
 
       <EditInput
         setErr={setErr}
-
         label="  Secondary  Education Major"
         name="education1_major"
         value={inputChange.education1_major}
@@ -418,10 +422,10 @@ const EditProfile = () => {
       err={err}
       label={inputChange.education4}
       type={"education4"}
-      title="Postgraduate Education">
+      title="Postgraduate Education"
+    >
       <EditInput
         setErr={setErr}
-
         label=" Postgraduate Education Institute"
         name="education4_institution"
         value={inputChange.education4_institution}
@@ -446,13 +450,12 @@ const EditProfile = () => {
         userPassingYear={user?.education4_passing_year}
         previousPassingYear={passingYear3 || user?.education3_passing_year}
         maxHeight={200}
-        
       />
     </EducationLayout>
   );
   let countryElement = (
     <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+      <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Current country
       </p>
       <Link
@@ -462,12 +465,14 @@ const EditProfile = () => {
           dispatch(
             setEditProfileCountry(country ? country : user?.current_country)
           );
-        }}>
+        }}
+      >
         <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
           <div className="col-10">
             <label
               className="form-check-label  bg-white px-2 text-body"
-              style={{fontFamily: "Inter", cursor: "pointer"}}>
+              style={{ fontFamily: "Inter", cursor: "pointer" }}
+            >
               {inputChange?.current_country
                 ? inputChange?.current_country
                 : "Select country"}
@@ -484,7 +489,7 @@ const EditProfile = () => {
 
   let cityElement = (
     <>
-      <p className="text-muted text-start mt-4" style={{fontFamily: "Inter"}}>
+      <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Current city
       </p>
       <Link to={"/editProfile/city"}>
@@ -493,11 +498,13 @@ const EditProfile = () => {
           style={{
             fontFamily: "Inter",
             border: err?.error === "city" ? "2px solid red" : "",
-          }}>
+          }}
+        >
           <div className="col-10">
             <label
               className="form-check-label  bg-white px-2 text-body"
-              style={{fontFamily: "Inter", cursor: "pointer"}}>
+              style={{ fontFamily: "Inter", cursor: "pointer" }}
+            >
               {/* {religion} */}
               {inputChange.current_city
                 ? inputChange.current_city
@@ -519,7 +526,8 @@ const EditProfile = () => {
       onContinueClicked={onSubmit}
       length={length}
       title={"Edit Profile"}
-      loading={loading}>
+      loading={loading}
+    >
       <div className="question mt-3">
         <div className="image-upload mt-4">
           <img
@@ -548,7 +556,7 @@ const EditProfile = () => {
           <input
             type="file"
             id="image"
-            style={{display: "none"}}
+            style={{ display: "none" }}
             onChange={fileChange}
           />
         </div>
@@ -604,7 +612,8 @@ const EditProfile = () => {
 
           <p
             className="text-muted text-start mt-4"
-            style={{fontFamily: "Inter"}}>
+            style={{ fontFamily: "Inter" }}
+          >
             Height Feet & Inches
           </p>
 
@@ -709,6 +718,8 @@ const EditProfile = () => {
           {education3Element}
 
           {education4Element}
+
+          <div style={{ height: "200px" }}></div>
         </div>
       </div>
     </InputLayOut>

@@ -6,6 +6,7 @@ import RegisterLayout from "../../components/layouts/RegisterLayout";
 import { setFamilyInformation } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
 import { stoteRegisterValues } from "../../utils/functions";
+import RegInput from "../../components/InputType/RegInput";
 
 function FamilyInfo() {
   let navigate = useNavigate();
@@ -138,7 +139,7 @@ function FamilyInfo() {
       >
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate's Family Information</h1>
-          <div
+          {/* <div
             className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
@@ -159,8 +160,34 @@ function FamilyInfo() {
             <label htmlFor="inputFatherOccupation">
               Enter Father's Occupation
             </label>
-          </div>
-          <div
+          </div> */}
+          <RegInput
+            onFocus={() => setErr({})}
+            type="text"
+            errorType={"father_occupation"}
+            error={err}
+            id="inputFatherOccupation"
+            name="father_occupation"
+            value={familyInfo.father_occupation}
+            onChange={handleUserInputChange}
+            fontFamily={"Inter"}
+            placeholder="occupation"
+            label={"  Enter Father's Occupation"}
+          />
+          <RegInput
+            onFocus={() => setErr({})}
+            type="text"
+            errorType={"father_occupation"}
+            error={err}
+            id="inputFatherOccupation"
+            name="father_home_district"
+            value={familyInfo.father_home_district}
+            onChange={handleUserInputChange}
+            fontFamily={"Inter"}
+            placeholder="homedistrict"
+            label={" Enter Father's Home District"}
+          />
+          {/* <div
             className="form-floating my-4 text-muted rounded-1"
             style={{
               fontFamily: "Inter",
@@ -182,7 +209,7 @@ function FamilyInfo() {
             <label htmlFor="inputFatherHomeDistrict">
               Enter Father's Home District
             </label>
-          </div>
+          </div> */}
           <div
             className="form-floating my-4 text-muted rounded-1"
             style={{
@@ -284,12 +311,13 @@ function FamilyInfo() {
           </div>
 
           <p className="text-muted mt-4 mb-2">Number of sisters</p>
-          <div className="row rounded-1 "
-              style={{
-                fontFamily: "Inter",
-                border:
-                  err?.error === "number_of_sisters" ? "2px solid red" : "",
-              }}>
+          <div
+            className="row rounded-1 "
+            style={{
+              fontFamily: "Inter",
+              border: err?.error === "number_of_sisters" ? "2px solid red" : "",
+            }}
+          >
             <div className="col-2">
               <button
                 // onClick={decrementSisterCount}
@@ -306,9 +334,7 @@ function FamilyInfo() {
                 <strong>-</strong>
               </button>
             </div>
-            <div
-              className="col-8 px-4"
-            >
+            <div className="col-8 px-4">
               <input
                 type="number"
                 name="number_of_sisters"

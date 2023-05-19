@@ -1,11 +1,13 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
-import {GENDER_TYPES} from "../../constants/register_constants";
-import {setPersonalInfo} from "../../redux/slices/authSlices";
+import { GENDER_TYPES } from "../../constants/register_constants";
+import { setPersonalInfo } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues, validateAge} from "../../utils/functions";
+import { stoteRegisterValues, validateAge } from "../../utils/functions";
+import RegInput from "../../components/InputType/RegInput";
+import SelectOptionComponent from "../../components/InputType/SelectOptionComponent ";
 let scrollPos = 0;
 function PersonalInformation() {
   const {
@@ -37,7 +39,7 @@ function PersonalInformation() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
   const scrollContainerRef = useRef();
 
   let socialToken = localStorage.getItem("social-token");
@@ -50,7 +52,7 @@ function PersonalInformation() {
   // }, []);
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      scrollContainerRef.current?.scrollTo({top: scrollPos});
+      scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onEducationSelectorClicked]);
 
   console.log("date_of_birth", state.date_of_birth);
@@ -124,19 +126,6 @@ function PersonalInformation() {
     navigate("/register/personalinfo/marital_status");
   };
 
-  // console.log(state.gender);
-
-  // function validateAge(dateOfBirth) {
-  //   var today = new Date();
-  //   var birthDate = new Date(dateOfBirth);
-  //   var age = today.getFullYear() - birthDate.getFullYear();
-  //   var month = today.getMonth() - birthDate.getMonth();
-  //   if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-  //   }
-
-  //   return age;
-  // }
-
   const onContinueClicked = async () => {
     if (!state.full_name.trim() || state.full_name.trim().length < 6) {
       setErr({
@@ -145,9 +134,7 @@ function PersonalInformation() {
           "Full name is required and length should be minimum 6 characters",
       });
       return;
-    }
-    
-    else if (
+    } else if (
       !state.display_name.trim() ||
       state.display_name.trim().length < 3
     ) {
@@ -252,96 +239,91 @@ function PersonalInformation() {
       <RegisterLayout
         err={err}
         onContinueClicked={onContinueClicked}
-        loading={loading}>
+        loading={loading}
+      >
         <div
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          ref={scrollContainerRef}>
+          ref={scrollContainerRef}
+        >
           <h1 className="card-title">Bride/Groom Information</h1>
 
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Name must match with government issued ID card
           </p>
 
-          <div
-            className="form-floating my-3 text-muted rounded-1"
-            style={{
-              fontFamily: "Inter",
-              border: err?.error === "name" ? "2px solid red" : "",
-            }}>
-            <input
-              type="text"
-              name="full_name"
-              id="inputRealName"
-              onFocus={() => setErr({})}
-              style={{fontFamily: "Inter"}}
-              value={state.full_name}
-              onChange={handleUserInputChange}
-              className="form-control border-0 rounded-1 shadow-2"
-              placeholder="realName"
-              aria-describedby="realName"
-            />
-            <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Full Name
-              <span
-                style={{
-                  fontSize: `12px`,
-                  fontFamily: "Inter",
-                  fontWeight: "bold",
-                  marginLeft: "5px",
-                }}>
-                (Not Visible to public)
-              </span>
-            </label>
-          </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <RegInput
+            type={"text"}
+            value={state.full_name}
+            name={"full_name"}
+            fontFamily={"Inter"}
+            onFocus={() => setErr({})}
+            onChange={handleUserInputChange}
+            placeholder="Real Name"
+            label={
+              <div>
+                Full Name
+                <span
+                  style={{
+                    fontSize: `12px`,
+                    fontFamily: "Inter",
+                    fontWeight: "bold",
+                    marginLeft: "5px",
+                  }}
+                >
+                  (Not Visible to public)
+                </span>
+              </div>
+            }
+            error={err}
+            errorType={"name"}
+            id={"inputRealName"}
+          />
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             App display name
           </p>
-          <div
-            className="form-floating my-3 text-muted rounded-1 "
-            style={{
-              fontFamily: "Inter",
-              border: err?.error == "display_name" ? "2px solid red" : "",
-            }}>
-            <input
-              type="text"
-              name="display_name"
-              id="inputRealName"
-              onFocus={() => setErr({})}
-              style={{fontFamily: "Inter"}}
-              value={state.display_name}
-              onChange={handleUserInputChange}
-              className="form-control border-0 rounded-1 shadow-2"
-              placeholder="realName"
-              aria-describedby="realName"
-            />
-            <label htmlFor="inputRealName" style={{fontFamily: "Inter"}}>
-              Display Name
-              <span
-                style={{
-                  fontSize: `12px`,
-                  fontFamily: "Inter",
-                  fontWeight: "bold",
-                  // marginLeft: "30%"
-                  marginLeft: "5px",
-                }}>
-                ( Visible to public)
-              </span>
-            </label>
-          </div>
+
+          <RegInput
+            type={"text"}
+            value={state.display_name}
+            name={"display_name"}
+            fontFamily={"Inter"}
+            onFocus={() => setErr({})}
+            onChange={handleUserInputChange}
+            placeholder="Real Name"
+            errorType={"display_name"}
+            label={
+              <div>
+                Display Name
+                <span
+                  style={{
+                    fontSize: `12px`,
+                    fontFamily: "Inter",
+                    fontWeight: "bold",
+                    marginLeft: "5px",
+                  }}
+                >
+                  (Not Visible to public)
+                </span>
+              </div>
+            }
+            error={err}
+            id={"inputRealName"}
+          />
           <div className="d-flex my-4">
             {GENDER_TYPES.map((g, i) => (
               <button
                 key={i}
-                style={{fontFamily: "Inter", height: 60}}
-                onClick={() => setState({...state, gender: g})}
+                style={{ fontFamily: "Inter", height: 60 }}
+                onClick={() => setState({ ...state, gender: g })}
                 className={`btn btn-${
                   g === state.gender ? "" : "outline-"
-                }primary w-100 rounded shadow p-3 my-2 ms-2 fw-semibold`}>
+                }primary w-100 rounded shadow p-3 my-2 ms-2 fw-semibold`}
+              >
                 {g}
               </button>
             ))}
           </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Enter Date of Birth
           </p>
           <div
@@ -349,10 +331,11 @@ function PersonalInformation() {
             style={{
               fontFamily: "Inter",
               border: err?.error === "dob" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               type="date"
-              style={{fontFamily: "Inter"}}
+              style={{ fontFamily: "Inter" }}
               name="date_of_birth"
               id="inputDateOfBirth"
               className="form-control border-0 rounded-1"
@@ -362,11 +345,11 @@ function PersonalInformation() {
               //               {date_of_birth.toISOString().substring(0, 10)}
               onChange={handleUserInputChange}
             />
-            <label htmlFor="inputDateOfBirth" style={{fontFamily: "Inter"}}>
+            <label htmlFor="inputDateOfBirth" style={{ fontFamily: "Inter" }}>
               Date of birth
             </label>
           </div>
-          <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4 mb-1" style={{ fontFamily: "Inter" }}>
             What's Candidate's height?
           </p>
           <div className="d-flex">
@@ -375,19 +358,20 @@ function PersonalInformation() {
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "ft" ? "2px solid red" : "",
-              }}>
+              }}
+            >
               <input
                 type="number"
                 name="height_ft"
                 id="inputHeightInches"
-                style={{fontFamily: "Inter"}}
+                style={{ fontFamily: "Inter" }}
                 value={state.height_ft}
                 onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 // aria-describedby="height_inches"
               />
-              <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
+              <label htmlFor="inputHeightFeet" style={{ fontFamily: "Inter" }}>
                 ft
               </label>
             </div>
@@ -396,24 +380,28 @@ function PersonalInformation() {
               style={{
                 fontFamily: "Inter",
                 border: err?.error == "inc" ? "2px solid red" : "",
-              }}>
+              }}
+            >
               <input
                 type="number"
                 name="height_inc"
                 id="inputHeightInches"
-                style={{fontFamily: "Inter"}}
+                style={{ fontFamily: "Inter" }}
                 value={state.height_inc}
                 onFocus={() => setErr({})}
                 onChange={handleUserInputChange}
                 className="form-control border-0 rounded-1"
                 aria-describedby="height_inches"
               />
-              <label htmlFor="inputHeightInches" style={{fontFamily: "Inter"}}>
+              <label
+                htmlFor="inputHeightInches"
+                style={{ fontFamily: "Inter" }}
+              >
                 in
               </label>
             </div>
           </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
+          <p className="text-muted mt-4" style={{ fontFamily: "Inter" }}>
             Select Candidate's weight (optional)
           </p>
           <div
@@ -421,83 +409,40 @@ function PersonalInformation() {
             style={{
               fontFamily: "Inter",
               border: err?.error == "weight" ? "2px solid red" : "",
-            }}>
+            }}
+          >
             <input
               type="number"
               name="weight"
               id="inputWeight"
-              style={{fontFamily: "Inter"}}
+              style={{ fontFamily: "Inter" }}
               value={state.weight}
               onFocus={() => setErr({})}
               onChange={handleUserInputChange}
               className="form-control border-0 rounded-1"
               aria-describedby="weight"
             />
-            <label htmlFor="inputWeight" style={{fontFamily: "Inter"}}>
+            <label htmlFor="inputWeight" style={{ fontFamily: "Inter" }}>
               KG
             </label>
           </div>
 
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
-            Select Candidate's religion
-          </p>
-          <div onClick={onReligionSelectorClicked}>
-            <div
-              className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-              style={{
-                fontFamily: "Inter",
-                border: err?.error == "religion" ? "2px solid red" : "",
-              }}>
-              <div className="col-10">
-                <label
-                  className="form-check-label bg-white px-2 text-body"
-                  style={{fontFamily: "Inter"}}>
-                  {religion ? religion : "Select  religion"}
-                </label>
-              </div>
-              <div className="col-2 d-flex justify-content-end pe-3">
-                <img
-                  src="/img/back-icon.svg"
-                  alt="next"
-                  className="rotate-180"
-                />
-              </div>
-            </div>
-          </div>
-          <p className="text-muted mt-4" style={{fontFamily: "Inter"}}>
-            Select Candidate's marital status
-          </p>
-          <div onClick={onMaritalStatusClicked}>
-            <div
-              className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
-              style={{
-                fontFamily: "Inter",
-                border: err?.error == "marital_status" ? "2px solid red" : "",
-              }}>
-              <div className="col-10">
-                <label className="form-check-label bg-white px-2 text-body">
-                  {marital_status ?? "Select Marital Status"}
-                </label>
-              </div>
-              <div className="col-2 d-flex justify-content-end pe-3">
-                <img
-                  src="/img/back-icon.svg"
-                  alt="next"
-                  className="rotate-180"
-                />
-              </div>
-            </div>
-          </div>
+          <SelectOptionComponent
+            onClick={onReligionSelectorClicked}
+            label={"   Select Candidate's religion"}
+            error={err}
+            errorType={"religion"}
+            value={religion ? religion : "Select  religion"}
+          />
+
+          <SelectOptionComponent
+            onClick={onMaritalStatusClicked}
+            label={" Select Candidate's marital status"}
+            error={err}
+            errorType={"marital_status"}
+            value={marital_status ?? "Select Marital Status"}
+          />
         </div>
-        {/* <div className="container px-4 pb-4 pt-2">
-          {err?.error && <p className="text-primary">* {err?.message}</p>}
-          <button
-            onClick={onContinueClicked}
-            style={{height: 60}}
-            className="btn btn-primary w-100 rounded shadow p-3 mb-2 mt-1">
-            <strong style={{fontFamily: "Inter"}}>Continue</strong>
-          </button>
-        </div> */}
       </RegisterLayout>
     </>
   );

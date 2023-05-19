@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
 import {
   setCurrentEmplyType,
@@ -9,11 +9,13 @@ import {
   setWorkingSince,
 } from "../../redux/slices/authSlices";
 import AuthServices from "../../services/authServices";
-import {stoteRegisterValues} from "../../utils/functions";
+import { stoteRegisterValues } from "../../utils/functions";
+import SelectOptionComponent from "../../components/InputType/SelectOptionComponent ";
+import RegInput from "../../components/InputType/RegInput";
 
 function Ocupation() {
   const [err, setErr] = useState();
-  let {pathname} = useLocation();
+  let { pathname } = useLocation();
   let socialToken = localStorage.getItem("social-token");
   const [loading, setLoading] = useState(false);
   const [employeeType, setemployeeType] = useState([
@@ -105,6 +107,14 @@ function Ocupation() {
       navigate("/register/location");
     }
   };
+  const onOcupationClick = () => {
+    navigate("/register/ocupation/type");
+  };
+
+  const onIndustriClick = () => {
+    navigate("/register/ocupation/industry");
+  };
+
   return (
     <>
       <RegisterLayout
@@ -115,35 +125,21 @@ function Ocupation() {
         <div className="container px-4 pb-2 flex-grow-1 overflow-auto">
           <h1 className="card-title">Candidate’s Professional Background</h1>
           <p className="text-muted mt-5 mb-2">Current Employment type</p>
-          <Link to={"/register/ocupation/type"}>
-            <div
-              className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
-              style={{
-                fontFamily: "Inter",
-                border:
-                  err?.error == "current_employment_type"
-                    ? "2px solid red"
-                    : "",
-              }}
-            >
-              <div className="col-10">
-                <label className="form-check-label bg-white px-2 text-body">
-                  {currentEmploymentTypeOther
-                    ? "Other"
-                    : current_employment_type
-                    ? current_employment_type
-                    : "Select current employment type"}
-                </label>
-              </div>
-              <div className="col-2 d-flex justify-content-end pe-3">
-                <img
-                  src="/img/back-icon.svg"
-                  alt="next"
-                  className="rotate-180"
-                />
-              </div>
-            </div>
-          </Link>
+
+          <SelectOptionComponent
+            onClick={onOcupationClick}
+            label={" Select Current Employment type<"}
+            error={err}
+            errorType={"current_employment_type"}
+            value={
+              currentEmploymentTypeOther
+                ? "Other"
+                : current_employment_type
+                ? current_employment_type
+                : "Select current employment type"
+            }
+          />
+
           {currentEmploymentTypeOther && (
             <div
               className="form-floating my-4 text-muted rounded-1"
@@ -174,7 +170,7 @@ function Ocupation() {
             current_employment_type !== "Student" && (
               <>
                 <p className="text-muted mt-5 mb-2">Industry</p>
-                <Link to={"/register/ocupation/industry"}>
+                {/* <Link to={"/register/ocupation/industry"}>
                   <div
                     className="row my-4 align-items-center bg-white px-2 py-4 rounded-1"
                     style={{
@@ -195,8 +191,16 @@ function Ocupation() {
                       />
                     </div>
                   </div>
-                </Link>
-                <div
+                </Link> */}
+
+                <SelectOptionComponent
+                  onClick={onIndustriClick}
+                  label={"Industry"}
+                  error={err}
+                  errorType={"industry"}
+                  value={industry ? industry : "Select Industry"}
+                />
+                {/* <div
                   className="form-floating my-4 text-muted rounded-1"
                   style={{
                     fontFamily: "Inter",
@@ -220,8 +224,23 @@ function Ocupation() {
                   <label htmlFor="inputEmployer">
                     Enter your organization name
                   </label>
-                </div>
-                <div
+                </div> */}
+                <RegInput
+                  type={"text"}
+                  value={employer_name}
+                  name={"employer_name"}
+                  fontFamily={"Inter"}
+                  onFocus={() => setErr({})}
+                  onChange={(e) => {
+                    dispatch(setEmployName(e.target.value));
+                  }}
+                  placeholder="Real Name"
+                  label={" Enter your organization name"}
+                  error={err}
+                  errorType={"employer_name"}
+                  id={"employer_name"}
+                />
+                {/* <div
                   className="form-floating my-4 text-muted  rounded-1"
                   style={{
                     fontFamily: "Inter",
@@ -241,7 +260,22 @@ function Ocupation() {
                     aria-describedby="designation"
                   />
                   <label htmlFor="inputDesignation">Enter designation</label>
-                </div>
+                </div> */}
+                <RegInput
+                  type={"text"}
+                  value={designation}
+                  name={"designation"}
+                  fontFamily={"Inter"}
+                  onFocus={() => setErr({})}
+                  onChange={(e) => {
+                    dispatch(setDesignation(e.target.value));
+                  }}
+                  placeholder="designation"
+                  label={"Enter designation"}
+                  error={err}
+                  errorType={"designation"}
+                  id={"designation"}
+                />
                 <div
                   className="form-floating my-3 text-muted rounded-1"
                   style={{
