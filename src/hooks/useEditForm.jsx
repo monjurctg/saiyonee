@@ -1,10 +1,13 @@
-import {useCallback, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setEditData} from "../redux/slices/utilsSlice";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setEditData, setIsEditNotSave } from "../redux/slices/utilsSlice";
 import UserServices from "../services/userServices";
+import { setEditProfile } from "../redux/slices/editProfileslice";
+import { useNavigate } from "react-router-dom";
+import errors from "../components/errors/commonError";
 
 const useEditForm = () => {
-  const {editData: user} = useSelector((state) => state.utils);
+  const { editData: user } = useSelector((state) => state.utils);
   const {
     country,
     city,
@@ -85,11 +88,27 @@ const useEditForm = () => {
 
   const handleUserInputChange = useCallback(
     (event) => {
-      const {name, value} = event.target;
-      setInputChange({...inputChange, [name]: value});
+      const { name, value } = event.target;
+      dispatch(setIsEditNotSave(true))
+      
+     
+      setInputChange({ ...inputChange, [name]: value });
     },
     [inputChange]
   );
+  const navigate = useNavigate();
+
+  //   const handlePopstate = (event) => {
+  //     if (event.target.location.pathname === "/settings") {
+  //       // console.log(inputChange);
+  //       setTimeout(() => {
+  //         dispatch(setEditProfile(inputChange));
+
+  //       }, 1000)
+  //   };
+  // }
+
+  
 
   return [inputChange, handleUserInputChange];
 };

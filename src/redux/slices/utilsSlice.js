@@ -9,6 +9,7 @@ const initialState = {
   matchModal: false,
   filterErrorMessage: {},
   isFilterModalShow: false,
+  isEditNotSave:true
 };
 
 const utilsSlice = createSlice({
@@ -36,6 +37,11 @@ const utilsSlice = createSlice({
     setEditData: (state, {payload}) => {
       state.editData = payload;
     },
+    setIsEditNotSave: (state, {payload}) => {
+      state.isEditNotSave = payload;
+    },
+     
+
   },
 });
 
@@ -46,6 +52,6 @@ export const {
   setMatchModal,
   setFilterErrorMessage,
   setFilterModalShow,
-  setEditData,
+  setEditData,setIsEditNotSave
 } = utilsSlice.actions;
 export default utilsSlice.reducer;

@@ -38,7 +38,7 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchPreviousPreference = async () => {
     const res = await PreferenceServices.getPreferenceData();
-    if (res.status === 200) {
+    if (res?.status === 200) {
       dispatch(setPreviousPreference(res.data.profile_preferences));
     } else {
       // console.log(res);
@@ -56,7 +56,7 @@ function App() {
   const fetchCurrentUser = useCallback(async () => {
     try {
       const res = await UserServices.UserProfile();
-      if (res.status === 200) {
+      if (res?.status === 200) {
         dispatch(setCurrentUser(res.data));
         // console.log(res.data);
       }
@@ -77,7 +77,7 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchEditUser = async () => {
     const res = await UserServices.getEditData();
-    if (res.status === 200) {
+    if (res?.status === 200) {
       dispatch(setEditData(res.data));
 
       // console.log(res.data);

@@ -29,7 +29,7 @@ import DateField from "../../components/DateField";
 import Education2 from "../../components/editProfile/Education2";
 import useSWR, { useSWRConfig } from "swr";
 import fetcher from "../../utils/fetchData";
-import { setEditData } from "../../redux/slices/utilsSlice";
+import { setEditData, setIsEditNotSave } from "../../redux/slices/utilsSlice";
 import EditInput from "../../components/editProfile/EditInput";
 import useEditForm from "../../hooks/useEditForm";
 import ImageUploader from "../../components/editProfile/ImageUploader";
@@ -97,7 +97,16 @@ const EditProfile = () => {
 
   useEffect(() => {
     fetchCurrentUser();
+    // dispatch(setIsEditNotSave(true))?
   }, [fetchCurrentUser]);
+
+  // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     dispatch(setIsEditNotSave(false))
+
+  //   },4000)
+  // },[])
+
   let fileChange = (e) => {
     e.preventDefault();
     let file = e.target.files[0];
@@ -187,20 +196,6 @@ const EditProfile = () => {
     }
   };
 
-  useEffect(() => {
-    const handlePopstate = (event) => {
-      // Handle back button press event here
-      //console.log('Back button pressed',event);
-      alert("back button press ")
-
-    };
-
-    window.addEventListener('popstate', handlePopstate);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopstate);
-    };
-  }, []);
   const onMaritalStatusClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
@@ -235,7 +230,41 @@ const EditProfile = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe4(education4 ? education4 : user?.education4));
   };
-  
+
+
+  const handlePopstate = (event) => {
+      window.history.pushState(null, document.title, window.location.href);
+    if (event.target.location.pathname === "/settings") {
+      // const leavePage = window.confirm("you want to go ahead ?");
+    
+      // window.removeEventListener("popstate", handlePopstate);
+
+        // window.history.back();
+        window.location.reload()
+      
+    }
+  };
+
+  window.addEventListener("popstate", handlePopstate);
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const handlePopstate = (event) => {
+  //     if (event.target.location.pathname === "/settings") {
+  //       const leavePage = window.confirm("Do you want to go ahead?");
+  //       if (leavePage) {
+  //         window.location.reload();
+  //       } else {
+
+  //         navigate("/edit/profile");
+  //       }
+  //     }
+  //   };
+  //   window.addEventListener("popstate", handlePopstate);
+  //   return () => {
+  //     window.removeEventListener("popstate", handlePopstate);
+  //   };
+  // }, []);
 
   let Religion = (
     <>
@@ -337,7 +366,6 @@ const EditProfile = () => {
         previousPassingYear={passingYear2 || user?.education2_passing_year}
         maxHeight={200}
         errorType={"edu3_passing_year"}
-
       />
     </EducationLayout>
   );
@@ -383,7 +411,6 @@ const EditProfile = () => {
         previousPassingYear={passingYear1 || user?.education1_passing_year}
         maxHeight={200}
         errorType={"edu2_passing_year"}
-
       />
     </EducationLayout>
   );
@@ -466,7 +493,6 @@ const EditProfile = () => {
 
       <PassingYearDropdown
         errorType={"edu4_passing_year"}
-
         passingYear={passingYear4}
         onChange={(year) => dispatch(setEdu4PassYear(year))}
         userPassingYear={user?.education4_passing_year}
