@@ -83,7 +83,7 @@ function RegisterEmail() {
     }
     checkEmail();
   };
-  // console.log(err);
+  //console.log(err);
 
   const handleShowPass = () => {
     setIsShowPass(!isShowPass);

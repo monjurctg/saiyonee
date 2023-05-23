@@ -12,7 +12,7 @@ import Religions from "../register/Religions";
 function EditProfileModule() {
   const {module} = useParams();
   const [active, setActive] = useState(<h1>404</h1>);
-  console.log(module);
+  //console.log(module);
 
   useEffect(() => {
     if (module === "religion") {

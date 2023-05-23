@@ -32,13 +32,13 @@ const ResetPass = () => {
       formData.append(key, data[key]);
     });
     const res = await AuthServices.resetPassword(formData);
-    console.log(res, "Res");
+    //console.log(res, "Res");
 
     if (res.status === 200) {
       toastMsg.success(res?.data.message);
       navigate("/login");
     } else {
-      // console.log(res, "Res");
+      //console.log(res, "Res");
 
       toastMsg.error(res?.data.message);
     }

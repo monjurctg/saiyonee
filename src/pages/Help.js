@@ -15,7 +15,7 @@ function Help() {
   const [message, setMessage] = useState("");
 
   const [err, setErr] = useState(null);
-  console.log("err", err);
+  // console.log("err", err);
 
   const onChange = (e) => {
     const {name, value} = e.target;

@@ -20,14 +20,14 @@ function SocialLogin() {
   // const registration_completed = searchParams.get("registration_completed");
   // const is_banned = searchParams.get("is_banned");
   // const is_verified = searchParams.get("is_verified");
-  console.log("google_token", google_token);
+  //console.log("google_token", google_token);
   let sendToken = async (google_token) => {
     setlaoding(true);
     let res = await AuthServices.socialAppUserToken({
       driver: driver,
       token: google_token,
     });
-    // console.log('res', res)
+    //console.log('res', res)
     if (res.status === 200) {
       setlaoding(false);
       if(res?.data?.registration_completed ){
@@ -41,14 +41,14 @@ function SocialLogin() {
         navigate("/register/usertype");
       }
 
-      // console.log("res", res);
+      //console.log("res", res);
     } else {
       setlaoding(false);
       toastMsg.error(res?.data?.message);
       navigate("/get-start");
     }
 
-    console.log("res", res);
+    //console.log("res", res);
   };
   useEffect(() => {
     if (google_token) {

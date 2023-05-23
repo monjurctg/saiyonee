@@ -10,23 +10,23 @@ import toastMsg from "../../utils/toastify";
 
 function ChatBox() {
   const {id} = useParams();
-  // console.log('id', id)
+  //console.log('id', id)
   const [messageUser, setMessageUser] = useState();
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(true);
   const [loadMessage, setloadMessage] = useState("Load more messages");
-  // console.log('ploading', ploading)
+  //console.log('ploading', ploading)
 
   const [userData, setuserData] = useState();
   const [messageData, setmessageData] = useState([]);
-  console.log("messageData", messageData?.data?.chat_messages);
+  //console.log("messageData", messageData?.data?.chat_messages);
   const [scrollPos, setScrollPos] = useState();
-  // console.log("scrollPos", scrollPos);
+  //console.log("scrollPos", scrollPos);
   const messagesEndRef = useRef(null);
-  // console.log("messageData", messageData);
+  //console.log("messageData", messageData);
 
   let getMessage = async (data, sendBtn) => {
-    // console.log('data', data)
+    //console.log('data', data)
     if (!data) {
       data = {match_id: id};
     }
@@ -34,30 +34,30 @@ function ChatBox() {
     let res = await UserServices.getMessage(data);
 
     if (messageData?.data?.chat_messages?.length > 0 && !sendBtn) {
-      // console.log('second')
+      //console.log('second')
       if (res.res?.data?.data?.chat_messages?.length > 0) {
         setloadMessage("Load more messages");
         let newMessage = res?.data?.data?.chat_messages[0];
-        // console.log("newMessage", newMessage);
+        //console.log("newMessage", newMessage);
         messageData?.data?.chat_messages.push(newMessage);
 
-        // console.log("newMessage", newMessage);
+        //console.log("newMessage", newMessage);
         setmessageData(res.data);
       } else {
         setloadMessage("No more messages");
       }
-      // console.log('res', res)
+      //console.log('res', res)
       // // setPLoading(false);
     } else {
-      // console.log('first')
+      //console.log('first')
       setPLoading(false);
       setmessageData(res.data);
-      // console.log("res from chat", res.data);
+      //console.log("res from chat", res.data);
       setuserData(res.data?.data?.other_user);
     }
   };
   let scrollToBottomF = () => {
-    console.log("ss");
+    //console.log("ss");
     // messagesEndRef.current.scrollTo({
     //   top: document.documentElement.scrollHeight,
     //   behavior: "smooth",
@@ -68,7 +68,7 @@ function ChatBox() {
   useEffect(() => {
     const container = messagesEndRef.current;
     if (container) {
-      console.log("first", container.scrollTop, container.scrollHeight);
+      //console.log("first", container.scrollTop, container.scrollHeight);
       container.scrollTop = container.scrollHeight;
     }
   }, [messageData]);
@@ -86,13 +86,13 @@ function ChatBox() {
   let sendMessages = async () => {
     // e.preventDefault();
     setLoading(true);
-    // console.log("ss");
+    //console.log("ss");
     let data = {
       match_id: id,
       message: messageUser,
     };
     let res = await UserServices.message_users(data);
-    // console.log("res", res.data?.errors?.message);
+    //console.log("res", res.data?.errors?.message);
 
     if (res.status === 200) {
       setLoading(false);
@@ -163,7 +163,7 @@ function ChatBox() {
         User has been unmatched at {messageData?.unmatched_date}
       </p>
     ) : (
-      <div className="chat-footer d-flex">
+      <div className="chat-footer">
         {/* <div className="round-shape">
         <img src={plus} alt="" />
       </div> */}
@@ -185,7 +185,7 @@ function ChatBox() {
           }}
           onClick={() => {
             if (!loading) {
-              console.log("loading", loading);
+              //console.log("loading", loading);
 
               sendMessages();
             }
@@ -221,7 +221,7 @@ function ChatBox() {
                 fontSize: 10,
               }}
               onClick={() => {
-                console.log("ss");
+                //console.log("ss");
                 setloadMessage("Loading...");
                 getMessage({
                   match_id: id,

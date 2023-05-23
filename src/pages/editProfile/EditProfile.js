@@ -182,11 +182,25 @@ const EditProfile = () => {
       toastMsg.success("Profile edit successfully");
       setimage(false);
     } else {
-      // console.log(res.response, "res");
+      //console.log(res.response, "res");
       toastMsg.error(Object.values(res?.response.data.errors)[0][0]);
     }
   };
 
+  useEffect(() => {
+    const handlePopstate = (event) => {
+      // Handle back button press event here
+      //console.log('Back button pressed',event);
+      alert("back button press ")
+
+    };
+
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, []);
   const onMaritalStatusClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
@@ -221,6 +235,7 @@ const EditProfile = () => {
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe4(education4 ? education4 : user?.education4));
   };
+  
 
   let Religion = (
     <>
@@ -321,6 +336,8 @@ const EditProfile = () => {
         userPassingYear={user?.education3_passing_year}
         previousPassingYear={passingYear2 || user?.education2_passing_year}
         maxHeight={200}
+        errorType={"edu3_passing_year"}
+
       />
     </EducationLayout>
   );
@@ -365,6 +382,8 @@ const EditProfile = () => {
         userPassingYear={user?.education2_passing_year}
         previousPassingYear={passingYear1 || user?.education1_passing_year}
         maxHeight={200}
+        errorType={"edu2_passing_year"}
+
       />
     </EducationLayout>
   );
@@ -410,6 +429,7 @@ const EditProfile = () => {
         userPassingYear={user?.education1_passing_year}
         previousPassingYear={dateOfBirthYear || user?.date_of_birth}
         maxHeight={200}
+        errorType={"edu1_passing_year"}
       />
     </EducationLayout>
   );
@@ -445,6 +465,8 @@ const EditProfile = () => {
       />
 
       <PassingYearDropdown
+        errorType={"edu4_passing_year"}
+
         passingYear={passingYear4}
         onChange={(year) => dispatch(setEdu4PassYear(year))}
         userPassingYear={user?.education4_passing_year}

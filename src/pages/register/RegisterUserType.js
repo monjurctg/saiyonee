@@ -16,7 +16,7 @@ function RegisterUserType() {
     set_user_type(e.target.value);
   };
   const onClickNext = () => {
-    // console.log("first");
+    //console.log("first");
     if (!user_type) {
       setErr({
         error: "user type",
@@ -29,7 +29,7 @@ function RegisterUserType() {
     navigate("/register/personal-info");
   };
 
-  // console.log("err in type", err);
+  //console.log("err in type", err);
   return (
     <>
       <RegisterLayout

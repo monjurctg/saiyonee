@@ -10,7 +10,7 @@ function Question() {
   const profile_image = localStorage.getItem("profile_image");
   const selfie_image = localStorage.getItem("selfie_image");
   const isAlreadySetPreference = localStorage.getItem("preference");
-  // console.log('first')
+  // //console.log('first')
   const navigate = useNavigate();
   let {id} = useParams();
   const [inputs, setInputs] = useState({
@@ -20,17 +20,17 @@ function Question() {
     form_field_id: "",
     text_input: "",
   });
-  console.log("id", id);
+  //console.log("id", id);
 
   const [question, setquestion] = useState("");
   const [loading, setLoading] = useState(true);
 
   let getQuestions = async () => {
     let res = await QuestionServices.getQuestions();
-    // console.log("res", res.data.form_field_questions);
-    console.log("res", res);
+    // //console.log("res", res.data.form_field_questions);
+    //console.log("res", res);
     if (res.status === 200) {
-      console.log("res", res);
+      //console.log("res", res);
       seterr(false);
       setLoading(false);
       setlength(res.data.form_field_questions.length);
@@ -58,25 +58,25 @@ function Question() {
     getQuestions();
   }, [id]);
 
-  // console.log(question);
+  // //console.log(question);
 
   let inputChange = (e) => {
     let {name, value} = e.target;
     if (name === "user_checked") {
       let arr = inputs.user_checked;
-      // console.log("value", value);
+      // //console.log("value", value);
 
-      console.log(
-        "arr.includes(value)",
-        arr.filter((i) => i === value)
-      );
+      // console.log(
+      //   "arr.includes(value)",
+      //   arr.filter((i) => i === value)
+      // );
       if (arr.filter((i) => i == value) > 0) {
         arr = arr.filter((item) => item !== value);
-        //   console.log('[...new Set(chars)]', [...new Set(arr)])
-        // console.log('arr', arr)
+        //   //console.log('[...new Set(chars)]', [...new Set(arr)])
+        // //console.log('arr', arr)
       } else {
         arr.push(value);
-        // console.log('arr2', arr)
+        // //console.log('arr2', arr)
       }
       setInputs({...inputs, user_checked: arr});
     } else if (name === "user_radio") {
@@ -85,7 +85,7 @@ function Question() {
       setInputs({...inputs, [name]: value});
     }
   };
-  // console.log('inputs', inputs)
+  // //console.log('inputs', inputs)
   let field = "";
   if (question?.field_type === "text" || question?.field_type === "textarea") {
     field = (
@@ -135,13 +135,13 @@ function Question() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // console.log('type of ', typeof inputs.user_checked[0] )
+    // //console.log('type of ', typeof inputs.user_checked[0] )
     let formData = new FormData();
     formData.append("form_field_id", question?.id);
     inputs.text_input && formData.append("text_input", inputs.text_input);
 
     // formdata.append('user_input[]', data
-    // console.log("inputs.user_checked", inputs.user_checked);
+    // //console.log("inputs.user_checked", inputs.user_checked);
     // inputs.user_checked.length > 0 ?
     if (inputs.user_checked.length > 0) {
       for (let i = 0; i < inputs.user_checked.length; i++) {
@@ -151,13 +151,13 @@ function Question() {
     // inputs.user_checked.map(user=>(
     // formData.append("user_input[]", [...inputs.user_checked]);
 
-    // console.log('inputs.user_radio', inputs.user_radio)
+    // //console.log('inputs.user_radio', inputs.user_radio)
     inputs.user_radio.length > 0 &&
       formData.append("user_input", inputs.user_radio);
 
     // document.getElementById("user_checked").checked = false;
 
-    console.log("id,length", length - 1);
+    //console.log("id,length", length - 1);
     // navigate(
     //   length-1 > 0 ? `/question/${parseInt(id) + 1}` : `/question/image`
     // );
@@ -165,7 +165,7 @@ function Question() {
     if (res.status === 200) {
       inputs.user_checked.length > 0 &&
         inputs.user_checked.map((user, key) => {
-          // console.log(
+          // //console.log(
           //   'document.getElementById("user_checked"+key)',
           //   document.getElementById("user_checked" + key).checked
           // );
@@ -187,7 +187,7 @@ function Question() {
       setLoading(false);
     }
 
-    // console.log("data", formData);
+    // //console.log("data", formData);
   };
   return (
     <QuestionLayout

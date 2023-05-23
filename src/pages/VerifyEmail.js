@@ -10,7 +10,7 @@ function VerifyEmail() {
   let token = localStorage.getItem("saiyonee_auth_token");
   const [searchParams] = useSearchParams();
   // console.log('saiyonee_auth_token', token)
-  console.log("searchParams", searchParams.get("code"));
+  // console.log("searchParams", searchParams.get("code"));
   const verification_code = searchParams.get("code");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ function VerifyEmail() {
     let res = await AuthServices.checkIsEmailVerification({
       code: verification_code,
     });
-    console.log("res", res);
+    // console.log("res", res);
     if (res.status === 200) {
       localStorage.setItem("emailVerified", true);
       toastMsg.success(res.data?.message);
@@ -39,7 +39,7 @@ function VerifyEmail() {
     } else {
       toastMsg.error(res.data.message);
       navigator("/email-verification");
-      console.log(res);
+      // console.log(res);
     }
     //   setToken(res.data?.token);
     //   localStorage.setItem("isVarified", true);
@@ -107,7 +107,7 @@ function VerifyEmail() {
     formData.append("password_confirmation", data.password_confirmation);
 
     let res = await AuthServices.checkIsEmailVerification(formData);
-    console.log("res", res.data);
+    // console.log("res", res.data);
     if (res.status === 200) {
       setloading(false);
       setErr(false);
@@ -129,7 +129,7 @@ function VerifyEmail() {
       // window.location.href = "/";
     } else {
       setloading(false);
-      console.log("res.data", res.data.message);
+      // console.log("res.data", res.data.message);
       setErr({
         error: "email",
         message: res.data.message,

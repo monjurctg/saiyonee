@@ -16,7 +16,7 @@ function EducationTypes1({module}) {
   );
 
   const onTypeChange = (e) => {
-    // console.log(e.target.value);
+    //console.log(e.target.value);
 
     if (e.target.value === "Other") {
       dispatch(setEducation1Other(true));
@@ -32,7 +32,7 @@ function EducationTypes1({module}) {
     }
     navigate(-1);
   };
-  // console.log(education1);
+  //console.log(education1);
 
   return (
     <>

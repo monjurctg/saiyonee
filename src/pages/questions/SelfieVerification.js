@@ -15,7 +15,7 @@ function SelfieVerification() {
   const navigate = useNavigate();
   const isAlreadySetPreference = localStorage.getItem("preference");
 
-  // console.log('image', image);
+  //console.log('image', image);
 
   //Sazid's edition extra
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
@@ -26,7 +26,7 @@ function SelfieVerification() {
 
     if (res.status === 200) {
       if (res.data.images.selfie_img) {
-        console.log("hello world selfie");
+        //console.log("hello world selfie");
         localStorage.setItem("selfie_image", "true");
         if (isAlreadySetPreference === "true") {
           navigate("/");
@@ -47,7 +47,7 @@ function SelfieVerification() {
     let data = new FormData();
     data.append("selfie_img", value);
     let res = await QuestionServices.submitSelfiePhoto(data);
-    console.log("ressadasdasda", res);
+    //console.log("ressadasdasda", res);
     if (res.status === 200) {
       seterr(false);
       toastMsg.success("Image uploaded successfully");
@@ -69,12 +69,12 @@ function SelfieVerification() {
   let fileChange = (e) => {
     e.preventDefault();
     let file = e.target.files[0];
-    // console.log('file', file)
+    //console.log('file', file)
     if (file) {
       if (file.size > 100000000) {
         seterr("File size is too large");
       } else {
-        // console.log('file', file)
+        //console.log('file', file)
         seterr(null);
         setlength(file.size);
         setimage(file);
@@ -83,9 +83,9 @@ function SelfieVerification() {
     }
   };
   let imageClick = (e) => {
-    // console.log("e", e);
+    //console.log("e", e);
     // e.preventDefault();
-    // console.log(' document.getElementById("image")',  document.getElementById("image").click())
+    //console.log(' document.getElementById("image")',  document.getElementById("image").click())
     document.getElementById("image").click();
   };
   return (

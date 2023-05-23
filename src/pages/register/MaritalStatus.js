@@ -8,7 +8,7 @@ import {setMaridStatus} from "../../redux/slices/preferenceSlice";
 import {stoteRegisterValues} from "../../utils/functions";
 
 function MaritalStatus({module}) {
-  // console.log(module, "module");
+  //console.log(module, "module");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {marital_status: maritalStatus} = useSelector((state) => state.auth);

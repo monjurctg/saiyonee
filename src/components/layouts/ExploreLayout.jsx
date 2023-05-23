@@ -6,7 +6,7 @@ function ExploreLayout({children, background, tab, footer}) {
 
   const navigate = useNavigate();
   const {route} = useParams();
-  console.log("route", route);
+  // console.log("route", route);
 
   const logout = () => {
     // console.log("logout");

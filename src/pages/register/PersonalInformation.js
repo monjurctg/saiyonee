@@ -55,10 +55,10 @@ function PersonalInformation() {
       scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onEducationSelectorClicked]);
 
-  console.log("date_of_birth", state.date_of_birth);
+  //console.log("date_of_birth", state.date_of_birth);
 
   const handleUserInputChange = (e) => {
-    // console.log("e.target.name", e.target.name);
+    //console.log("e.target.name", e.target.name);
     // if (e.target.name === "height_ft") {
     //   if (e.target.value > 8 || e.target.value < 3) {
     //     setErr({
@@ -109,7 +109,7 @@ function PersonalInformation() {
       [e.target.name]: e.target.value,
     });
   };
-  // console.log('state', state)
+  //console.log('state', state)
   const onReligionSelectorClicked = () => {
     dispatch(setPersonalInfo(state));
     setErr({});
@@ -216,7 +216,7 @@ function PersonalInformation() {
       setLoading(true);
 
       let res = await AuthServices.checkPage(data);
-      // console.log('res', res)
+      //console.log('res', res)
       if (res.status === 200) {
         dispatch(setPersonalInfo(state));
         setLoading(false);

@@ -40,7 +40,7 @@ AuthServices.sendVerificationLink = async () => {
   return res;
 }
 AuthServices.register = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/ApiRegister";
   let res = axios
     .post(url, data)
@@ -49,7 +49,7 @@ AuthServices.register = async (data) => {
   return res;
 };
 AuthServices.socialRegister = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let socialToken = localStorage.getItem("social-token"); 
   const config = {
     headers: { Authorization: `Bearer ${socialToken}` }
@@ -63,7 +63,7 @@ AuthServices.socialRegister = async (data) => {
 };
 
 AuthServices.login = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/ApiLogin";
   let res = axios
     .post(url, data)
@@ -82,7 +82,7 @@ AuthServices.checkPage = async (data) => {
 };
 
 AuthServices.checkVarified = async () => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/check_verified";
   let res = axios
     .get(url)
@@ -92,7 +92,7 @@ AuthServices.checkVarified = async () => {
 };
 
 AuthServices.logout = async () => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/ApiLogout";
   let res = axios
     .post(url)
@@ -102,7 +102,7 @@ AuthServices.logout = async () => {
 };
 
 AuthServices.socialAppUserToken = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/social_login/retrieve_app_user_from_token";
 
   let res = axios
@@ -112,7 +112,7 @@ AuthServices.socialAppUserToken = async (data) => {
   return res;
 };
 AuthServices.forgotPassword = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/forgot_password";
   let res = axios
     .post(url, data)
@@ -122,7 +122,7 @@ AuthServices.forgotPassword = async (data) => {
 };
 
 AuthServices.resetPassword = async (data) => {
-  // console.log('data', data)
+  //console.log('data', data)
   let url = "/reset_password";
   let res = axios
     .post(url, data)

@@ -6,7 +6,7 @@ function ProfileImage({url, gender, style}) {
   let f = "Female";
   let m = "male";
 
-  console.log(gender?.toLowerCase?.trim);
+  // //console.log(gender?.toLowerCase?.trim);
   return (
     <>
       <img

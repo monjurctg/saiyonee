@@ -28,7 +28,7 @@ function Liked({id}) {
 
   //   if (res.status === 200) {
   //     setLikeData(res.data.liked_by_users);
-  //     // console.log(res.data);
+  //     console.log(res.data);
   //     setLoading(false);
   //   } else {
   //     console.log(res);

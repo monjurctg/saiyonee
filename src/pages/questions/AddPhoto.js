@@ -14,15 +14,15 @@ function AddPhoto() {
   const [image, setimage] = useState(null);
   const [image2, setimage2] = useState(null);
 
-  console.log("image2", image, image2);
+  //console.log("image2", image, image2);
 
   const getImage = async () => {
     let res = await QuestionServices.getProfileImage();
-    console.log("res", res.data.images);
+    //console.log("res", res.data.images);
     if (res.status === 200) {
       setimage2(res.data.images.profile_img);
       setLoading(false);
-      // console.log("res", res.data.images);
+      //console.log("res", res.data.images);
       if (
         res.data.images.profile_img
         // && !isEdit
@@ -49,7 +49,7 @@ function AddPhoto() {
       let data = new FormData();
       data.append("profile_img", image);
       let res = await QuestionServices.submitProfilePhoto(data);
-      // console.log("ressdddddd", res);
+      //console.log("ressdddddd", res);
       if (res.status === 200) {
         setSLoading(false);
 
@@ -72,12 +72,12 @@ function AddPhoto() {
   let fileChange = (e) => {
     e.preventDefault();
     let file = e.target.files[0];
-    // console.log('file', file)
+    //console.log('file', file)
     if (file) {
       if (file.size > 10000000) {
         seterr("File size is too large");
       } else {
-        // console.log('file', file)
+        //console.log('file', file)
         setimage2(null);
         seterr(null);
         setlength(file.size);

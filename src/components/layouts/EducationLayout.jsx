@@ -34,7 +34,7 @@ function EducationLayout({
           >
             <div className="col-10">
               <label className="form-check-label bg-white px-2 text-body">
-                {label ?? ` ${title} Type`}
+                {label ?label: ` ${title} Type`}
               </label>
             </div>
             <div className="col-2 d-flex justify-content-end pe-3">

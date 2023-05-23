@@ -82,7 +82,7 @@ const authSlice = createSlice({
       state.verification_img1 = payload;
     },
     setVerificationImg2: (state, {payload}) => {
-      // console.log('payload', payload)
+      //console.log('payload', payload)
       state.verification_img2 = payload;
     },
 
@@ -123,7 +123,7 @@ const authSlice = createSlice({
 
     // passing year
     setPassingYear1: (state, {payload}) => {
-      console.log(payload, "year");
+      //console.log(payload, "year");
       state.education1_passing_year = payload;
     },
     setPassingYear2: (state, {payload}) => {

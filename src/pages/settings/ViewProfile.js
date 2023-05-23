@@ -10,7 +10,7 @@ import "./../../assets/css/viewProfile.scss";
 
 const Title = (title = "personal details") => {
   const splitTitle = title?.split(" ");
-  // console.log(splitTitle[0], title);
+  //console.log(splitTitle[0], title);
 
   if (splitTitle.length) {
     return (
@@ -36,7 +36,7 @@ function ViewProfile() {
   let activeData;
   const {group_1, group_2, group_3, group_4} =
     userData?.structured_app_user_info?.app_user_detail ?? {};
-  console.log(sub_header, "profile_img");
+  //console.log(sub_header, "profile_img");
 
   const [active, setActive] = useState(group_1?.title);
 

@@ -12,7 +12,7 @@ function NotVarified({route}) {
   const token = getToken();
 
   // d");
-  console.log("not varified", isVerified, emailVerified);
+  //console.log("not varified", isVerified, emailVerified);
   // let auth = getToken()
   let location = useLocation();
   if (!token) {

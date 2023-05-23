@@ -25,7 +25,7 @@ function FamilyInfo() {
     number_of_sisters,
     email,
   } = useSelector((state) => state.auth);
-  console.log("first", father_occupation);
+  //console.log("first", father_occupation);
   let onContinueClicked = async () => {
     // if (!familyInfo.father_occupation.trim())
     //   setErr(" Father's occupation cannot be blank");
@@ -107,7 +107,7 @@ function FamilyInfo() {
     number_of_sisters: number_of_sisters,
   });
   const handleUserInputChange = (e) => {
-    console.log("e.target.value", e.target.value);
+    //console.log("e.target.value", e.target.value);
     const value = parseInt(e.target.value);
     if (value < 0) {
       if (e.target.name == "number_of_brothers") {

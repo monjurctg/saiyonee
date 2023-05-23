@@ -4,7 +4,7 @@ import demoProfile from "../../assets/imgs/demoProfile.png";
 
 function ChatLayout({children, matched_id, user, matchedTime}) {
   const navigate = useNavigate();
-  console.log("matchedTime", matchedTime);
+  // console.log("matchedTime", matchedTime);
   return (
     <div
       //   className="vh-100 max-width-mobile mx-auto d-flex flex-column pt-5 px-4 rounded-top rounded-bottom position-relative mt-2 mb-2"S

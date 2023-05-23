@@ -23,11 +23,11 @@ function LocationCountry({module}) {
   const {country} = useSelector((state) => state.auth?.user) ?? {};
   // const [current_country, setCurrentCountry] = useState("");
   // const [current_city, setCurrentCity] = useState("");
-  console.log(country, "monjurul alam");
+  //console.log(country, "monjurul alam");
 
   const {current_country} = useSelector((state) => state.auth) ?? {};
   const onCountryChange = (e) => {
-    // console.log('e', e)
+    //console.log('e', e)
     if (module === "country") {
       dispatch(setPreferenceCountry(e.target.value));
       // navigator(-1);
@@ -46,7 +46,7 @@ function LocationCountry({module}) {
       navigator(-1);
     }
   };
-  // console.log(preferenceCountry.includes("bangladesh"));
+  //console.log(preferenceCountry.includes("bangladesh"));
 
   return (
     <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">

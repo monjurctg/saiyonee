@@ -27,7 +27,7 @@ const GalleryImage = () => {
   const [data, setdata] = useState();
 
   let imageClick = (e, id) => {
-    console.log("id", id);
+    //console.log("id", id);
     e.preventDefault();
     document.getElementById(`image${id}`).click();
   };
@@ -40,7 +40,7 @@ const GalleryImage = () => {
     if (file) {
       seterr(null);
       setlength(file.size);
-      // console.log("hello");
+      //console.log("hello");
       setimages({...images, [e.target.name]: file});
       setTimeout(() => {
         onSubmit(e.target.name, file);
@@ -48,20 +48,20 @@ const GalleryImage = () => {
     }
   };
 
-  //   console.log('images', images)
+  //   //console.log('images', images)
 
   async function fetchData() {
     const res = await UserServices.UserProfile();
-    // console.log('res.data', res.data)
+    //console.log('res.data', res.data)
     if (res.status === 200) {
       setdata(res.data);
     }
-    // console.log(res.data);
+    //console.log(res.data);
   }
   const onSubmit = async (name, file) => {
     // e.preventDefault();
     setLoading(true);
-    console.log(images, "imgs");
+    //console.log(images, "imgs");
     let data = {
       [name]: file,
       // optional_img_1: images?.optional_img_1,

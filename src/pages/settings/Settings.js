@@ -21,7 +21,7 @@ const Settings = () => {
   );
 
   const isLoading = !profile && !profileError;
-  console.log(profile, isLoading, percentage, "swr");
+  //console.log(profile, isLoading, percentage, "swr");
 
   let percentageCal = (value) => {
     let left = 0;

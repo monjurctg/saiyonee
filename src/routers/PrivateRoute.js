@@ -13,7 +13,7 @@ function PrivateRoute() {
   const profile_image = localStorage.getItem("profile_image");
   const selfie_image = localStorage.getItem("selfie_image");
 
-  console.log(route.path, "route");
+  //console.log(route.path, "route");
   if (!auth) {
     return <Navigate to="/get-start" state={{from: location}} />;
   } else if (

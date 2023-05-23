@@ -4,7 +4,7 @@ import AuthServices from "../../services/authServices";
 import {getToken} from "../../utils/functions";
 
 function RegSuccess() {
-  console.log("first");
+  //console.log("first");
 
   const navigate = useNavigate();
   // let token = getToken();
@@ -14,7 +14,7 @@ function RegSuccess() {
   //   let token = getToken();
   //   let isVarified = localStorage.getItem("isVarified");
   //   if (token && isVarified == 0) {
-  //     console.log("ok");
+  //     //console.log("ok");
   //   } else {
   //     navigate("/get-start");
   //   }
@@ -29,7 +29,7 @@ function RegSuccess() {
     //   if (res.status === 200) {
 
     //   } else {
-    //     console.log(res);
+    //     //console.log(res);
     //   }
     // }
   };

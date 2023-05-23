@@ -85,7 +85,7 @@ function Routers() {
 
   const {email} = useSelector((state) => state.auth);
 
-  console.log("email", email);
+  // console.log("email", email);
   if (getToken()) {
     setRouteToken(getToken());
   }

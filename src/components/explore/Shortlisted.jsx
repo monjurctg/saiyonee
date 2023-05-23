@@ -11,7 +11,7 @@ function Shortlisted() {
   // const [sortListData, setSortListData] = useState([]);
   const [loading, setLoading] = useState(false);
   const {user} = useSelector((state) => state.auth);
-  console.log(user.gender);
+  // console.log(user.gender);
 
   const {mutate} = useSWRConfig();
   const {
@@ -26,10 +26,10 @@ function Shortlisted() {
 
   //   if (res.status === 200) {
   //     setSortListData(res.data.shortlisted_users);
-  //     // console.log(res.data);
+  //     console.log(res.data);
   //     setLoading(false);
   //   } else {
-  //     // console.log(res);
+  //     console.log(res);
   //     // setLoading(false);
   //   }
   // };
@@ -39,7 +39,7 @@ function Shortlisted() {
   // }, []);
 
   const removeShortList = async (id) => {
-    console.log("click");
+    // console.log("click");
     let data = new FormData();
 
     data.append("shortlist_id", id);
@@ -54,7 +54,7 @@ function Shortlisted() {
       // console.log(res, "res");
     }
   };
-  console.log("first", sortListData);
+  // console.log("first", sortListData);
   let shortList = (sortListData?.shortlisted_users || []).map((sl, index) => {
     return (
       <div className="explore-img" key={index}>

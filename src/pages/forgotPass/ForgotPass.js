@@ -40,7 +40,7 @@ const ForgotPass = () => {
 
     const res = await AuthServices.forgotPassword(formData);
     if (res.status === 200) {
-      console.log(res, "res success");
+      //console.log(res, "res success");
       toastMsg.success(res.data.message);
       navigate("/reset-pass");
     } else {

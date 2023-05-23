@@ -50,9 +50,9 @@ function Login() {
     }
 
     let res = await AuthServices.login(formData);
-    console.log("res", res.data);
+    // console.log("res", res.data);
     if (!res) {
-      console.log("res", res.data);
+      // console.log("res", res.data);
       setErr({error: "", message: "Server Error"});
       setloading(false);
       return;
@@ -63,7 +63,7 @@ function Login() {
       setToken(res.data.auth_token);
       localStorage.setItem("code", "");
 
-      console.log(res.data);
+      // console.log(res.data);
 
       localStorage.setItem("preference", res.data.profile_preference_exists);
       localStorage.setItem("isVarified", res.data.is_verified);
@@ -80,7 +80,7 @@ function Login() {
       );
 
       if (!res.data.email_verified) {
-        console.log(res.data.email_verified, "login");
+        // console.log(res.data.email_verified, "login");
         navigate("/email-verification");
         return;
       } else if (
@@ -99,7 +99,7 @@ function Login() {
       // window.location.href = "/";
     } else {
       setloading(false);
-      console.log("res.data", res.data.message);
+      // console.log("res.data", res.data.message);
       setErr({
         error: "email",
         message: res.data.message,

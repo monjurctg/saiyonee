@@ -40,9 +40,9 @@ function Ocupation() {
     working_since,
     email,
   } = useSelector((state) => state.auth);
-  // console.log("current_employment_type", employeeType?.includes(current_employment_type));
+  //console.log("current_employment_type", employeeType?.includes(current_employment_type));
 
-  // console.log('current_employment_type',current_employment_type !==  ("Unemployed" && "Student"))
+  //console.log('current_employment_type',current_employment_type !==  ("Unemployed" && "Student"))
 
   let onContinueClicked = async () => {
     if (current_employment_type.length === 0) {

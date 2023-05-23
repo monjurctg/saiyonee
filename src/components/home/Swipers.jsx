@@ -19,7 +19,7 @@ function Swipers({
 
   setLikeSlide,
 }) {
-  console.log("data in swiper", data);
+  // console.log("data in swiper", data);
   const [submited, setSubmited] = useState(false);
   const navigate = useNavigate();
   const [boomData, setBoomData] = useState();
@@ -101,7 +101,7 @@ function Swipers({
 
         getData();
       } else {
-        console.log(res, "super like");
+        // console.log(res, "super like");
 
         if (res.response.data.show_in_modal) {
           dispatch(setFilterErrorMessage(res.response.data));
@@ -124,7 +124,7 @@ function Swipers({
       toastMsg.success(res.data.message);
       getData();
     } else {
-      console.log("hello", res);
+      // console.log("hello", res);
       if (res.response.data.show_in_modal) {
         dispatch(setFilterErrorMessage(res.response.data));
         dispatch(setFilterModalShow(res.response.data.show_in_modal));

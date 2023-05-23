@@ -41,7 +41,7 @@ function App() {
     if (res.status === 200) {
       dispatch(setPreviousPreference(res.data.profile_preferences));
     } else {
-      console.log(res);
+      // console.log(res);
     }
   };
   const logout = () => {
@@ -58,7 +58,7 @@ function App() {
       const res = await UserServices.UserProfile();
       if (res.status === 200) {
         dispatch(setCurrentUser(res.data));
-        console.log(res.data);
+        // console.log(res.data);
       }
     } catch (err) {
       // Check if the error is due to an expired token 
@@ -69,7 +69,7 @@ function App() {
         // For example, using react-router-dom:
         navigate("/login");
       } else {
-        console.log(err);
+        // console.log(err);
       }
     }
   }, [dispatch, navigate]);
@@ -80,7 +80,7 @@ function App() {
     if (res.status === 200) {
       dispatch(setEditData(res.data));
 
-      console.log(res.data);
+      // console.log(res.data);
     }
   };
 

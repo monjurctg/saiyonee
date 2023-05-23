@@ -32,7 +32,7 @@ function EducationType3({ module }) {
     }
     navigate(-1);
   };
-  console.log(education3);
+  //console.log(education3);
   return (
     <>
       <div className="vh-100 d-flex flex-column max-width-mobile mx-auto">

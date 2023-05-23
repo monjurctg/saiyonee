@@ -10,7 +10,7 @@ function RegisterRoute() {
   const isBanned = localStorage.getItem("is_banned");
   const isAlreadySetPreference = localStorage.getItem("preference");
   const emailVerified = localStorage.getItem("emailVerified");
-  console.log("emailVerified privatw", emailVerified);
+  //console.log("emailVerified privatw", emailVerified);
   const {isRegStart} = useSelector((state) => state.auth);
   let location = useLocation();
   const token = getToken();

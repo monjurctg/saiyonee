@@ -30,11 +30,11 @@ const ViewGallery = () => {
     data.append(`app_user_id`, id);
 
     const res = await UserServices.view_gallery(data);
-    console.log("res.data", res.data.app_user_gallery_images);
+    //console.log("res.data", res.data.app_user_gallery_images);
     if (res.status === 200) {
       setdata(res.data.app_user_gallery_images);
     }
-    // console.log(res.data);
+    //console.log(res.data);
   }
   useEffect(() => {
     fetchData();

@@ -8,7 +8,7 @@ function PublicRoute() {
   // let auth = useAuth();
   const {isEmptyQuestion, isProfileQuesionExist, isSelfieQuestionExist} =
     useSelector((state) => state.utils);
-  console.log(isEmptyQuestion, "question");
+  //console.log(isEmptyQuestion, "question");
   let auth = getToken();
   let location = useLocation();
   const isVarified = localStorage.getItem("isVarified");
@@ -129,7 +129,7 @@ function PublicRoute() {
   //   isBanned === "false" &&
   //   isAlreadySetPreference === "true"
   // ) {
-  //   console.log("hello publick", isAlreadySetPreference);
+  //   //console.log("hello publick", isAlreadySetPreference);
   //   return <Navigate to="/home" state={{from: location}} />;
   // }
 

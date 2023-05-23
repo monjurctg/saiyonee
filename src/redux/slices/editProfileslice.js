@@ -70,15 +70,15 @@ const EditProfileSlice = createSlice({
       state.displayName = payload;
     },
     setEdu1PassYear: (state, {payload}) => {
-      console.log(payload, "from set passing year redux");
+      //console.log(payload, "from set passing year redux");
       state.passingYear1 = payload;
     },
     setEdu3PassYear: (state, {payload}) => {
-      console.log(payload, "from set passing year redux");
+      //console.log(payload, "from set passing year redux");
       state.passingYear3 = payload;
     },
     setEdu4PassYear: (state, {payload}) => {
-      console.log(payload, "from set passing year redux");
+      //console.log(payload, "from set passing year redux");
       state.passingYear4 = payload;
     },
     setEdu2PassYear: (state, {payload}) => {

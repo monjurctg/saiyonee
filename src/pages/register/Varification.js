@@ -130,7 +130,7 @@ function Varification() {
 
   let onContinueClicked = async () => {
     let d = JSON.stringify(window.localStorage.getItem("register"));
-    // console.log('d', d)
+    //console.log('d', d)
     let formd = new FormData();
     Object.keys(data).map((key) => {
       formd.append(key, data[key]);
@@ -138,7 +138,7 @@ function Varification() {
     setLoading(true);
     if (!socialToken) {
       const res = await AuthServices.register(formd);
-      console.log("res", res);
+      //console.log("res", res);
       setLoading(true);
       if (res.status === 200) {
         setToken(res.data.auth_token);
@@ -152,14 +152,14 @@ function Varification() {
         navigator("/success");
         dispatch(regSuccessAction());
       } else {
-        console.log("error");
+        //console.log("error");
         setLoading(false);
         toastMsg.error(Object.values(res?.data.errors)[0][0]);
       }
     } else {
       const res = await AuthServices.socialRegister(formd);
 
-      // console.log('res', res)
+      //console.log('res', res)
       if (res.status === 200) {
         setLoading(false);
         setToken(localStorage.setItem("social-token", res?.data?.auth_token));
@@ -179,14 +179,14 @@ function Varification() {
         // dispatch(regSuccessAction());
       } else {
         setLoading(false);
-        console.log("error");
+        //console.log("error");
         toastMsg.error(res.data.message);
       }
     }
   };
 
   useEffect(() => {
-    // console.log(verification_img1.name, "verification_img1.name");
+    //console.log(verification_img1.name, "verification_img1.name");
     if (verification_img1.name) {
       if (verification_img2.name || verification_type !== "National ID") {
         setErr("");
@@ -217,7 +217,7 @@ function Varification() {
     setErr(!verification_img1 ? "Image1 is blank" : "");
   };
   const selectType = (idType) => {
-    console.log(idType, "idType");
+    //console.log(idType, "idType");
 
     dispatch(setVerificationType(idType));
   };

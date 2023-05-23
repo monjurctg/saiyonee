@@ -11,7 +11,7 @@ function InputLayOut({
   from,
 }) {
   let { pathname } = useLocation();
-  console.log(from, "from");
+  //console.log(from, "from");
 
   const navigate = useNavigate();
   return (

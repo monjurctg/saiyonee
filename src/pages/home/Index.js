@@ -36,7 +36,7 @@ function Index() {
     (state) => state.utils
   );
 
-  console.log('data isFilterModalShow', isFilterModalShow)
+  // console.log('data isFilterModalShow', isFilterModalShow)
 
   const [gettingUser, setgettingUser] = useState(false);
 
@@ -47,16 +47,16 @@ function Index() {
     // setIslimited(false);
 
     let res = await UserServices.filter_users();
-    console.log('data response', res)
+    // console.log('data response', res)
     
     if (res.status === 200) {
-      console.log('data now in', res )
+      // console.log('data now in', res )
       setgettingUser(false);
       setData(res.data?.filtered_users[0]);
       dispatch(setFilterModalShow(false));
     } else {
       setgettingUser(false);
-      console.log('data now else', res?.response )
+      // console.log('data now else', res?.response )
 
       if (res?.data?.show_in_modal) {
         dispatch(setFilterErrorMessage(res?.data));
@@ -156,7 +156,7 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    console.log(likeSlide, "likeSlide");
+    // console.log(likeSlide, "likeSlide");
   }, [likeSlide]);
 
   const noUser = (
@@ -236,10 +236,10 @@ function Index() {
       </div>
     </div>
   );
-console.log('data now', data)
+// console.log('data now', data)
   let show = "";
   if (data && !gettingUser) {
-    console.log('data 1')
+    // console.log('data 1')
     show = (
       <Swipers
         // isLimited={isLimited}
@@ -253,7 +253,7 @@ console.log('data now', data)
       />
     );
   } else if (gettingUser) {
-    console.log('data 2')
+    // console.log('data 2')
     show = (
       <div
         className="d-flex justify-content-center align-items-center "
@@ -268,7 +268,7 @@ console.log('data now', data)
       </div>
     );
   } else if (data?.filtered_users?.length === 0 && !gettingUser) {
-    console.log('data 3')
+    // console.log('data 3')
     show = (
       <div
         style={{

@@ -22,7 +22,7 @@ function Questions({id}) {
 
   let back = () => {
     const filterData = dynamicQuesAns.filter((ids) => ids.split("-")[0] != id);
-    console.log(filterData, "filter");
+    // console.log(filterData, "filter");
     if (filterData.length > 0) {
       // console.log("hello");
       dispatch(updatePreerenceQAns(filterData));

@@ -41,23 +41,27 @@ function Preference() {
     country: country,
     employType: employType,
   });
-  // console.log(state, "state");
+  //console.log(state, "state");
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleUserInputChange = (e) => {
+    
+    
+     if (e.target.name === "age_from" && state.age_to < e.target.value) {
+      setErr({
+        error: "age_from",
+        message: "From can not be bigger than To",
+      });
+    } 
     if (e.target.name === "age_to" && state.age_from > e.target.value) {
       setErr({
         error: "age_to",
         message: "To can not be smaller than From",
       });
-    } else if (e.target.name === "age_from" && state.age_to < e.target.value) {
-      setErr({
-        error: "age_from",
-        message: "From can not be bigger than To",
-      });
-    } else if (
+    } 
+    else if (
       e.target.name === "age_from" &&
       (e.target.value > 255 || e.target.value < 19)
     ) {
@@ -79,7 +83,7 @@ function Preference() {
       e.target.name === "height_feet" &&
       (e.target.value > 8 || e.target.value <= 2)
     ) {
-      console.log("height problem");
+      //console.log("height problem");
       setErr({
         error: "ft",
         message: "Height cannot be less than 3 feet or greater than 8 feet",
@@ -112,7 +116,7 @@ function Preference() {
       // dispatch(setpreferenceQuestion(res.data.filters));
     } else {
     }
-    // console.log(res, "profile preference res");
+    //console.log(res, "profile preference res");
   };
 
   const scrollContainerRef = useRef();
@@ -136,7 +140,7 @@ function Preference() {
   };
 
   const onContinueClicked = async () => {
-    console.log(maritalStatus);
+    //console.log(maritalStatus);
     if (state.age_from > state.age_to) {
       setErr({
         error: "age_to",
@@ -177,7 +181,7 @@ function Preference() {
       state.height_inches &&
       (state.height_inches < 0 || state.height_inches > 11)
     ) {
-      console.log(state.height_inches, "incs");
+      //console.log(state.height_inches, "incs");
       setErr({
         error: "inc",
         message:
@@ -235,10 +239,10 @@ function Preference() {
       localStorage.setItem("preference", true);
       navigate("/home");
     } else {
-      console.log(Object.values(res?.data.errors)[0][0], "error from preferce");
+      //console.log(Object.values(res?.data.errors)[0][0], "error from preferce");
       toastMsg.error(Object.values(res?.data.errors)[0][0]);
     }
-    // console.log(res, "res");
+    //console.log(res, "res");
   };
   // const [form_filter_ids, setForm_filter] = useState({});
 

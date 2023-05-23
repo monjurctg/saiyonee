@@ -12,7 +12,7 @@ function EmailVerication() {
     if (res.status === 200) {
       toastMsg.success(res.data?.message);
     }
-    console.log("res", res);
+    //console.log("res", res);
     // localStorage.removeItem("saiyonee_auth_token");
     // localStorage.removeItem("isVarified");
     // navigate("/get-start");
@@ -21,12 +21,12 @@ function EmailVerication() {
     //   if (res.status === 200) {
 
     //   } else {
-    //     console.log(res);
+    //     //console.log(res);
     //   }
     // }
   };
   const logout = () => {
-    // console.log("logout");
+    //console.log("logout");
     localStorage.clear();
     window.location.reload();
 

@@ -16,14 +16,14 @@ function Religions({module}) {
   const {religion: preferenceReligion} = useSelector(
     (state) => state.preference
   );
-  console.log(edit_religion, " religion module");
+  //console.log(edit_religion, " religion module");
 
   const [religion, set_religion] = useState(
     module === "preference" ? preferenceReligion : Religion
   );
   let onReligionChange = (e) => {
     set_religion(e.target.value);
-    // console.log("module", module);
+    //console.log("module", module);
     if (module === "edit_religion") {
       dispatch(setEditReligion(e.target.value));
       navigate(-1);
@@ -41,7 +41,7 @@ function Religions({module}) {
 
     navigate(-1);
   };
-  // console.log(religion);
+  //console.log(religion);
 
   return (
     <>

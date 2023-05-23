@@ -29,7 +29,7 @@ const MatchedUser = () => {
   const [loading, setLoading] = useState(false);
   const [singleData, setSingleData] = useState({});
 
-  // console.log(gender, "gender");
+  //console.log(gender, "gender");
   const {id, appId, route} = useParams();
   //sazid
   const [uID, setUID] = useState();
@@ -52,20 +52,20 @@ const MatchedUser = () => {
   let {group_1, group_2, group_3, group_4} =
     singleData?.structured_app_user_info?.app_user_detail ?? {};
 
-  // console.log(homeData, homeError, isLoading, "group_1 group_2");
+  //console.log(homeData, homeError, isLoading, "group_1 group_2");
 
   let modalChange = () => {
-    console.log("matchModal", matchModal);
+    //console.log("matchModal", matchModal);
     if (matchModal === true) dispatch(setMatchModal(false));
     else dispatch(setMatchModal(true));
   };
 
-  console.log(id, route, "dfdk");
+  //console.log(id, route, "dfdk");
   async function fetchShortUser() {
     setLoading(true);
 
     let response = await ExploreServices.getSingleShortList(id);
-    // console.log(response, "response");
+    //console.log(response, "response");
     if (response?.status === 200) {
       setLoading(false);
       setSingleData(response.data);
@@ -75,7 +75,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleMatchList(id);
-    console.log(response, "response");
+    //console.log(response, "response");
     if (response?.status === 200) {
       // setUID(response.data.app_user.id);
       setLoading(false);
@@ -90,12 +90,12 @@ const MatchedUser = () => {
 
     try {
       let res = await ExploreServices.getSingleLiked(id);
-      // console.log(response, "response");
+      //console.log(response, "response");
       if (res.status === 200) {
         setLoading(false);
         setSingleData(res?.data);
       } else {
-        console.log(res, "res from like");
+        //console.log(res, "res from like");
 
         setLoading(false);
         toastMsg.error(res.response.data.message);
@@ -112,7 +112,7 @@ const MatchedUser = () => {
     setLoading(true);
 
     let response = await ExploreServices.getSingleHomeuser(id);
-    // console.log(response, "response");
+    //console.log(response, "response");
     if (response.status === 200) {
       setLoading(false);
       setSingleData(response.data);
@@ -187,12 +187,12 @@ const MatchedUser = () => {
   };
 
   const viewGallery = () => {
-    // console.log(uID);
+    //console.log(uID);
     navigate(`/user-info/${id}/gallery`);
   };
 
   useEffect(() => {
-    console.log("hello route");
+    //console.log("hello route");
     if (route === "shortList") {
       fetchShortUser();
     } else if (route === "match") {

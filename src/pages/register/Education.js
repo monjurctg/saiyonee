@@ -25,6 +25,7 @@ import { stoteRegisterValues } from "../../utils/functions";
 import RegInput from "../../components/InputType/RegInput";
 import EducationLayout from "../../components/layouts/EducationLayout";
 import PassingYearDropdown from "../../components/editProfile/PassingYearDropdown ";
+import { setEdu1PassYear } from "../../redux/slices/editProfileslice";
 
 let scrollPos = 0;
 
@@ -96,7 +97,12 @@ function Education() {
     new Array(new Date().getFullYear() - dateOfBirthYear + 1)
   ).map((_, i) => dateOfBirthYear + i);
 
-  // alert(dateOfBirthYear);
+  //dis alert(dateOfBirthYear);
+  useEffect(()=>{
+ dispatch(setEdu1PassYear(dateOfBirthYear))
+//  console.log(dateOfBirthYear)
+
+  },[])
 
   let onContinueClicked = async () => {
     if (!education1 || education1 === "Select education") {

@@ -20,7 +20,7 @@ function HomeLayout({
 
   let url = "/app_users/filter_users";
   const {data, error, isLoading} = useSWR(url, fetcher);
-  console.log("data?.unread_messages", data?.unread_messages);
+  // console.log("data?.unread_messages", data?.unread_messages);
   // console.log('pathname in ', pathname ===)
   const navigate = useNavigate();
   // const history = useRouter();

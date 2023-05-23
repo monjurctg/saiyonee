@@ -11,12 +11,12 @@ function Boom() {
   const [boomData, setBoomData] = useState([]);
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth);
-  console.log("user", user);
+  //console.log("user", user);
   let getBoomData = async () => {
     let res = await UserServices.getBoomUsers();
-    // console.log("resmatched_user", res.data.matched_users.length);
+    //console.log("resmatched_user", res.data.matched_users.length);
     if (res?.data?.matched_users.length > 0) {
-      // console.log(res?.data?.matched_users, "res?.data?.matched_users");
+      //console.log(res?.data?.matched_users, "res?.data?.matched_users");
       setBoomData(res?.data?.matched_users);
     } else {
       navigate("/home");
@@ -34,7 +34,7 @@ function Boom() {
       getBoomData();
     }
   };
-  // console.log("boomData", boomData);
+  //console.log("boomData", boomData);
   let show = "";
   if (boomData.length > 0) {
     show = (

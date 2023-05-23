@@ -14,18 +14,18 @@ function LocationCity({module}) {
   const {current_city, current_country} = useSelector(
     (state) => state.auth ?? {}
   );
-  // console.log("current_city", current_city);
+  //console.log("current_city", current_city);
 
   const {country, city: editProfileCity} = useSelector(
     (state) => state.editProfile
   );
-  console.log("country hello ", current_country);
+  //console.log("country hello ", current_country);
 
   const dispatch = useDispatch();
   const onCityChange = (e) => {
-    console.log("e", e);
+    //console.log("e", e);
     if (module == "eidt_profile_city") {
-      console.log(module);
+      //console.log(module);
       dispatch(setEditProfileCity(e.target.value));
       navigate(-1);
       return;
