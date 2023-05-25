@@ -74,7 +74,7 @@ const ViewGallery = () => {
       length={length}
       title={"Image Gallery"}
       loading={loading}
-      from={"gellary"}>
+      from={"gallery"}>
       <div
         className="question  mt-3 d-flex flex-wrap"
         style={{

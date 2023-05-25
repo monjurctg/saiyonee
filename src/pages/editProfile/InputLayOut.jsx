@@ -55,7 +55,7 @@ function InputLayOut({
           {err?.message && (
             <p
               className="text-primary"
-              style={{ backgroundColor: "#FFFFFFFF" }}
+              style={{ backgroundColor: "#FFFFFFFF",minHeight:50,alignSelf:"center" }}
             >
               * {err?.message}
             </p>

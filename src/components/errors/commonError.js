@@ -1,9 +1,10 @@
 import {validateAge} from "../../utils/functions";
 
-const errors = {};
+const   errors = {};
 errors.validation = (setErr, inputChange, user, city) => {
   // console.log(inputChange.date_of_birth);
   //   alert(inputChange.date_of_birth);
+// console.log(inputChange.phone_number.trim(),"phone")
   if (
     !inputChange.full_name.trim() ||
     inputChange.full_name.trim().length < 6
@@ -13,7 +14,7 @@ errors.validation = (setErr, inputChange, user, city) => {
       message:
         "Full name is required and length should be minimum 6 characters",
     });
-    return true;
+    return true; 
   }
   if (
     !inputChange.display_name.trim() ||
@@ -58,12 +59,12 @@ errors.validation = (setErr, inputChange, user, city) => {
     return true;
   }
 
-  if (city === "Select city") {
+  else if (city === "Select city") {
     setErr({error: "city", message: "Please select city"});
     return true;
   }
-  if (
-    (inputChange.weight && inputChange.weight < 30) ||
+ else  if (
+    (!inputChange.weight && inputChange.weight < 30) ||
     inputChange.weight >= 181
   ) {
     setErr({
@@ -72,15 +73,22 @@ errors.validation = (setErr, inputChange, user, city) => {
     });
     return true;
   }
-
-  if (inputChange.number_of_brothers && inputChange.number_of_brothers < 0) {
+  else if (!inputChange.number_of_brothers && inputChange.number_of_brothers < 0) {
     setErr({
       error: "number_of_brothers",
       message: "The number of brothers be greater than or equal to 0.",
     });
     return true;
   }
-  if (inputChange.number_of_sisters && inputChange.number_of_sisters < 0) {
+
+ else  if (!inputChange.phone_number.trim() ) {
+    setErr({
+      error: "phone_number",
+      message: "Phone number can not be empty",
+    });
+    return true;
+  }
+  else if (!inputChange.number_of_sisters && inputChange.number_of_sisters < 0) {
     setErr({
       error: "number_of_sisters",
       message: "The number of sisters be greater than or equal to 0.",
