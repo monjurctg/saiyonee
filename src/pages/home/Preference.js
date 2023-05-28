@@ -49,37 +49,42 @@ function Preference() {
   const handleUserInputChange = (e) => {
     
     
-     if (e.target.name === "age_from" && state.age_to < e.target.value) {
-      setErr({
-        error: "age_from",
-        message: "From can not be bigger than To",
-      });
-    } 
-    if (e.target.name === "age_to" && state.age_from > e.target.value) {
+   
+    if (e.target.name === "age_to" && state?.age_from &&  state?.age_from > e.target.value) {
       setErr({
         error: "age_to",
         message: "To can not be smaller than From",
       });
     } 
-    else if (
-      e.target.name === "age_from" &&
-      (e.target.value > 255 || e.target.value < 19)
-    ) {
+    if (e.target.name === "age_from" && state?.age_to && state?.age_to < e.target.value) {
       setErr({
         error: "age_from",
-        message: "age rom cannot be less than 19 year or greater than 255 year",
+        message: "From can not be bigger than To",
       });
-      // return;
-    } else if (
-      e.target.name === "age_to" &&
-      (e.target.value > 255 || e.target.value < 19)
-    ) {
-      setErr({
-        error: "age_to",
-        message: "age to cannot be less than 19 year or greater than 255 year",
-      });
-      // return;
-    } else if (
+    } 
+    
+    // else if (
+    //   e.target.name === "age_from" &&
+    //   (e.target.value > 255 || e.target.value < 19)
+    // ) {
+    //   setErr({
+    //     error: "age_from",
+    //     message: "age from cannot be less than 19 year or greater than 255 year",
+    //   });
+    //   // return;
+    // } else if (
+    //   e.target.name === "age_to" &&
+    //   (e.target.value > 255 || e.target.value < 19)
+    // ) {
+    //   setErr({
+    //     error: "age_to",
+    //     message: "age to cannot be less than 19 year or greater than 255 year",
+    //   });
+    //   // return;
+    // }
+    
+    
+    else if (
       e.target.name === "height_feet" &&
       (e.target.value > 8 || e.target.value <= 2)
     ) {
@@ -133,7 +138,8 @@ function Preference() {
       scrollContainerRef.current?.scrollTo({top: scrollPos});
   }, [onSelectClicked]);
 
-  const clickButton = () => {
+  const clickButton = (path) => {
+    navigate(path)
     dispatch(setHeight(state));
     dispatch(setMaridStatus(maritalStatus ? maritalStatus : " "));
     onSelectClicked();
@@ -302,7 +308,20 @@ function Preference() {
             fontFamily: "Inter",
             border: err?.error === "age_to" ? "2px solid red" : "",
           }}>
-          <input
+             <input
+            type="number"
+            id="inputHeightFeet"
+            name="age_to"
+            style={{fontFamily: "Inter"}}
+            value={state.age_to}
+            onChange={handleUserInputChange}
+            placeholder={"To"}
+            // min={19}
+            onFocus={() => setErr({})}
+            className="form-control border-0 rounded-1"
+            // aria-describedby="height_inches"
+          />
+          {/* <input
             type="number"
             id="inputHeightFeet"
             min={19}
@@ -314,7 +333,7 @@ function Preference() {
             className="form-control border-0 rounded-1"
             placeholder={"To"}
             aria-describedby="height_feet"
-          />
+          /> */}
           <label htmlFor="inputHeightFeet" style={{fontFamily: "Inter"}}>
             To
           </label>
@@ -338,7 +357,7 @@ function Preference() {
             min={3}
             onFocus={() => setErr({})}
             style={{fontFamily: "Inter"}}
-            value={state.height_feet}
+            value={state?.height_feet}
             onChange={handleUserInputChange}
             className="form-control border-0 rounded-1"
             // placeholder={MIN_HEIGHT_FEET.toString()}
@@ -376,7 +395,7 @@ function Preference() {
         Select religion
       </p>
       <div>
-        <Link onClick={clickButton} to="/preference/religion">
+        <div onClick={()=>clickButton("/preference/religion")} >
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
@@ -393,7 +412,7 @@ function Preference() {
               <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
             </div>
           </div>
-        </Link>
+        </div>
       </div>
       {/* <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
         Select employment type
@@ -419,15 +438,15 @@ function Preference() {
         Select marital status
       </p>
       <div>
-        <Link to="/preference/marital_status" onClick={clickButton}>
+        <div onClick={()=>clickButton("/preference/marital_status")}>
           <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
             <div className="col-10">
               <label
                 className="form-check-label bg-white px-2 text-body"
                 style={{fontFamily: "Inter"}}>
                 {/* {religion} */}
-                {state.maritalStatus.trim() ||
-                  maritalStatus.trim() ||
+                {state?.maritalStatus?.trim() ||
+                  maritalStatus?.trim() ||
                   "Select marital status"}
               </label>
             </div>
@@ -435,7 +454,7 @@ function Preference() {
               <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
             </div>
           </div>
-        </Link>
+        </div>
       </div>
 
       {/* <p className="text-muted mt-4 mb-1" style={{fontFamily: "Inter"}}>
@@ -481,9 +500,9 @@ function Preference() {
                 {question.label}
               </p>
               <div>
-                <Link
-                  onClick={clickButton}
-                  to={`/preference/dynamic-${question.id}`}>
+                <div
+                  onClick={()=>clickButton(`/preference/dynamic-${question.id}`)}
+                  >
                   <div className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2">
                     <div className="col-10">
                       <label
@@ -502,7 +521,7 @@ function Preference() {
                       />
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
             </div>
           ))}

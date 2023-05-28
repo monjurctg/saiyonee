@@ -4,7 +4,7 @@ const   errors = {};
 errors.validation = (setErr, inputChange, user, city) => {
   // console.log(inputChange.date_of_birth);
   //   alert(inputChange.date_of_birth);
-// console.log(inputChange.phone_number.trim(),"phone")
+console.log(!inputChange.education1_institution.trim(),"phone")
   if (
     !inputChange.full_name.trim() ||
     inputChange.full_name.trim().length < 6
@@ -64,7 +64,7 @@ errors.validation = (setErr, inputChange, user, city) => {
     return true;
   }
  else  if (
-    (!inputChange.weight && inputChange.weight < 30) ||
+    (!inputChange.weight || inputChange.weight < 30) ||
     inputChange.weight >= 181
   ) {
     setErr({
@@ -73,7 +73,15 @@ errors.validation = (setErr, inputChange, user, city) => {
     });
     return true;
   }
-  else if (!inputChange.number_of_brothers && inputChange.number_of_brothers < 0) {
+  else  if (!inputChange.phone_number.trim() ) {
+    setErr({
+      error: "phone_number",
+      message: "Phone number can not be empty",
+    });
+    return true;
+  }
+
+  else if (!inputChange.number_of_brothers || inputChange.number_of_brothers < 0) {
     setErr({
       error: "number_of_brothers",
       message: "The number of brothers be greater than or equal to 0.",
@@ -81,22 +89,43 @@ errors.validation = (setErr, inputChange, user, city) => {
     return true;
   }
 
- else  if (!inputChange.phone_number.trim() ) {
-    setErr({
-      error: "phone_number",
-      message: "Phone number can not be empty",
-    });
-    return true;
-  }
-  else if (!inputChange.number_of_sisters && inputChange.number_of_sisters < 0) {
+ 
+  else if (!inputChange.number_of_sisters || inputChange.number_of_sisters < 0) {
     setErr({
       error: "number_of_sisters",
       message: "The number of sisters be greater than or equal to 0.",
     });
     return true;
-  } else {
+  } 
+
+  else if (!inputChange.education1_institution.trim()) {
+    // console.log("hello from institu")
+    setErr({
+      error: "education1_institution",
+      message: "Secondary  Education Institute can not be empty",
+    });
+    return true;
+  } 
+
+  else if (!inputChange.education1_major.trim() ) {
+    setErr({
+      error: "education1_major",
+      message: "Secondary  Education Major can not be empty",
+    });
+    return true;
+  } 
+  
+  
+  
+  
+  else {
     return false;
   }
+  
+  
+  
+  
+
 };
 
 export default errors;

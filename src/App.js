@@ -3,7 +3,7 @@ import Routers from "./routers/Routers";
 import axios from "axios";
 import PreferenceServices from "./services/preferenceServices";
 import {useDispatch} from "react-redux";
-import {setPreviousPreference} from "./redux/slices/preferenceSlice";
+// import {setPreviousPreference} from "./redux/slices/preferenceSlice";
 import {useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import UserServices from "./services/userServices";
@@ -36,14 +36,7 @@ function App() {
 
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchPreviousPreference = async () => {
-    const res = await PreferenceServices.getPreferenceData();
-    if (res?.status === 200) {
-      dispatch(setPreviousPreference(res.data.profile_preferences));
-    } else {
-      // console.log(res);
-    }
-  };
+ 
   const logout = () => {
     // console.log("logout");
     localStorage.clear();
@@ -87,11 +80,11 @@ function App() {
   useEffect(() => {
     const token = getToken();
     if (token) {
-      fetchPreviousPreference();
+      // fetchPreviousPreference();
       fetchCurrentUser();
       fetchEditUser();
     }
-  }, [fetchCurrentUser, fetchEditUser, fetchPreviousPreference]);
+  }, [fetchCurrentUser, fetchEditUser]);
 
   return (
     <>

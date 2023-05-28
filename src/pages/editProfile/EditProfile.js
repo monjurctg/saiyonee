@@ -209,39 +209,64 @@ const EditProfile = () => {
   };
 
   const onReligionSelectorClicked = () => {
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) return;
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
   };
   const onEdu1SelectorClicked = () => {
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) {
+      return;
+    }
+    navigate("/editProfile/edu1");
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe1(education1 ? education1 : user?.education1));
   };
   const onEdu2SelectorClicked = () => {
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) {
+      return;
+    }
+    navigate("/editProfile/edu2");
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe2(education2 ? education2 : user?.education2));
   };
   const onEdu3SelectorClicked = () => {
     // alert("djkskjk");
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) {
+      return;
+    }
+    navigate("/editProfile/edu3");
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe3(education3 ? education3 : user?.education3));
   };
   const onEdu4SelectorClicked = () => {
     // alert("djkskjk");
+    let error = errors.validation(setErr, inputChange, user, city);
+    if (error) {
+      return;
+    }
+    navigate("/editProfile/edu4");
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe4(education4 ? education4 : user?.education4));
   };
 
-
   const handlePopstate = (event) => {
-      window.history.pushState(null, document.title, window.location.href);
+    window.history.pushState(null, document.title, window.location.href);
     if (event.target.location.pathname === "/settings") {
       // const leavePage = window.confirm("you want to go ahead ?");
-    
+
       // window.removeEventListener("popstate", handlePopstate);
 
-        // window.history.back();
-        window.location.reload()
-      
+      // window.history.back();
+      window.location.reload();
     }
   };
 
@@ -328,7 +353,7 @@ const EditProfile = () => {
   let education3Element = (
     <EducationLayout
       onEducationSelectorClicked={onEdu3SelectorClicked}
-      to={"/editProfile/edu3"}
+      // to={"/editProfile/edu3"}
       inputChange={inputChange}
       err={err}
       label={inputChange.education3}
@@ -373,7 +398,7 @@ const EditProfile = () => {
   let education2Element = (
     <EducationLayout
       onEducationSelectorClicked={onEdu2SelectorClicked}
-      to={"/editProfile/edu2"}
+      // to={""}
       inputChange={inputChange}
       err={err}
       label={inputChange.education2}
@@ -418,7 +443,7 @@ const EditProfile = () => {
   let education1Element = (
     <EducationLayout
       onEducationSelectorClicked={onEdu1SelectorClicked}
-      to={"/editProfile/edu1"}
+      // to={"/editProfile/edu1"}
       inputChange={inputChange}
       err={err}
       label={inputChange.education1}
@@ -463,7 +488,7 @@ const EditProfile = () => {
 
   let education4Element = (
     <EducationLayout
-      to={"/editProfile/edu4"}
+      // to={"/editProfile/edu4"}
       onEducationSelectorClicked={onEdu4SelectorClicked}
       inputChange={inputChange}
       err={err}
@@ -575,6 +600,7 @@ const EditProfile = () => {
       length={length}
       title={"Edit Profile"}
       loading={loading}
+      backNavigate={"/settings"}
     >
       <div className="question mt-3">
         <div className="image-upload mt-4">

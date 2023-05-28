@@ -14,6 +14,7 @@ function HomeLayout({
   mTop,
   search,
   match,
+  backNavigation
 }) {
   let {pathname} = useLocation();
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function HomeLayout({
     if (search === "?Match-list") {
       navigate("/home");
     } else {
-      navigate(-1);
+      navigate(backNavigation?backNavigation:-1);
     }
   };
 

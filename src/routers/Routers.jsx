@@ -70,6 +70,8 @@ import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery"; 
 import UserServices from "../services/userServices";
 import Loader from "../components/Loader";
+import { setPreviousPreference } from "../redux/slices/preferenceSlice";
+import PreferenceServices from "../services/preferenceServices";
 
 let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
 let Index = lazy(()=>import("../pages/home/Index"))
@@ -95,6 +97,16 @@ function Routers() {
 
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+
+
+  const fetchPreviousPreference =useCallback( async () => {
+    const res = await PreferenceServices.getPreferenceData();
+    if (res?.status === 200) {
+      dispatch(setPreviousPreference(res.data.profile_preferences));
+    } else {
+      // console.log(res);
+    }
+  },[]); 
   const getCondition = useCallback(async () => {
     const token = getToken();
 
@@ -128,6 +140,7 @@ function Routers() {
 
   useEffect(() => {
     getCondition();
+    fetchPreviousPreference()
   }, []);
 
   // setTimeout(() => {

@@ -9,6 +9,7 @@ function InputLayOut({
   title,
   loading,
   from,
+  backNavigate
 }) {
   let { pathname } = useLocation();
   //console.log(from, "from");
@@ -28,7 +29,7 @@ function InputLayOut({
       <div className=" d-flex flex-column max-width-mobile mx-auto">
         <div className="container">
           <div
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(backNavigate?backNavigate:-1)}
             className="btn btn-primary rounded-circle shadow p-3 mb-2 image-invert"
             style={{ height: "58px", width: "58px" }}
           >

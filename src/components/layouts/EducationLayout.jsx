@@ -20,10 +20,10 @@ function EducationLayout({
         {title} Type
       </p>
       <div className="form-floating text-muted rounded-1">
-        <Link
+        <div
           //   onClick={() => dispatch(setEditProfile(inputChange))}
           onClick={onEducationSelectorClicked}
-          to={to}
+          // to={to}
         >
           <div
             className="row my-4 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
@@ -41,7 +41,7 @@ function EducationLayout({
               <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
             </div>
           </div>
-        </Link>
+        </div>
         {/* 
       <label style={{fontFamily: "Inter"}} htmlFor="">
         Secondary Education Type

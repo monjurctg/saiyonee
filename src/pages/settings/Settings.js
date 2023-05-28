@@ -41,7 +41,7 @@ const Settings = () => {
   };
 
   return (
-    <HomeLayout>
+    <HomeLayout  backNavigation={"/home"} >
       {!profile ? (
         <div className="load">Loading...</div>
       ) : (
