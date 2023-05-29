@@ -97,6 +97,22 @@ console.log(!inputChange.education1_institution.trim(),"phone")
     });
     return true;
   } 
+  else if (!inputChange.father_occupation.trim()) {
+    // console.log("hello from institu")
+    setErr({
+      error: "father_occupation",
+      message: "Father occupation can not be empty",
+    });
+    return true;
+  } 
+  else if (!inputChange.mother_occupation.trim()) {
+    // console.log("hello from institu")
+    setErr({
+      error: "mother_occupation",
+      message: "Mother occupation can not be empty",
+    });
+    return true;
+  } 
 
   else if (!inputChange.education1_institution.trim()) {
     // console.log("hello from institu")

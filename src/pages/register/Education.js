@@ -35,7 +35,8 @@ function Education() {
   const { date_of_birth } = useSelector((state) => state.auth);
   const scrollContainerRef = useRef();
   let { pathname } = useLocation();
-  const onEducationSelectorClicked = useCallback(() => {
+  const onEducationSelectorClicked = useCallback((path) => {
+    navigate(path)
     scrollPos = scrollContainerRef.current?.scrollTop;
   }, []);
   const resetScroll = useCallback(() => {
@@ -239,8 +240,8 @@ function Education() {
 
   let education1Element = (
     <EducationLayout
-      onEducationSelectorClicked={onEducationSelectorClicked}
-      to={"/register/education/type1"}
+      onEducationSelectorClicked={()=>onEducationSelectorClicked("/register/education/type1")}
+      // to={""}
       err={err}
       // label={inputChange.education1}
       type={"education1"}
@@ -300,12 +301,14 @@ function Education() {
       <PassingYearDropdown
         passingYear={education1_passing_year}
         error={err}
+        setErr={setErr}
+
         errorType={"education1_passing_year"}
         onChange={(year) => {
           dispatch(setPassingYear1(year));
-          dispatch(setPassingYear2(""));
-          dispatch(setPassingYear3(""));
-          dispatch(setPassingYear4(""));
+          dispatch(setPassingYear2(" "));
+          dispatch(setPassingYear3(" "));
+          dispatch(setPassingYear4(" "));
         }}
         userPassingYear={education1_passing_year}
         previousPassingYear={dateOfBirthYear || date_of_birth}
@@ -316,8 +319,8 @@ function Education() {
 
   let education2Element = (
     <EducationLayout
-      onEducationSelectorClicked={onEducationSelectorClicked}
-      to={"/register/education/type2"}
+    onEducationSelectorClicked={()=>onEducationSelectorClicked("/register/education/type2")}
+      // to={"/register/education/type2"}
       err={err}
       // label={inputChange.education1}
       type={"education2"}
@@ -385,6 +388,7 @@ function Education() {
           dispatch(setPassingYear3(""));
           dispatch(setPassingYear4(""));
         }}
+        setErr={setErr}
         userPassingYear={education2_passing_year}
         previousPassingYear={education1_passing_year}
         maxHeight={200}
@@ -394,8 +398,8 @@ function Education() {
 
   let education3Element = (
     <EducationLayout
-      onEducationSelectorClicked={onEducationSelectorClicked}
-      to={"/register/education/type3"}
+    onEducationSelectorClicked={()=>onEducationSelectorClicked("/register/education/type3")}
+      // to={"/register/education/type3"}
       err={err}
       // label={inputChange.education1}
       type={"education3"}
@@ -463,6 +467,8 @@ function Education() {
           // dispatch(setPassingYear3(""));
           dispatch(setPassingYear4(""));
         }}
+        setErr={setErr}
+
         userPassingYear={education3_passing_year}
         previousPassingYear={education2_passing_year}
         maxHeight={200}
@@ -472,8 +478,8 @@ function Education() {
 
   let education4Element = (
     <EducationLayout
-      onEducationSelectorClicked={onEducationSelectorClicked}
-      to={"/register/education/type4"}
+    onEducationSelectorClicked={()=>onEducationSelectorClicked("/register/education/type4")}
+      // to={"/register/education/type4"}
       err={err}
       // label={inputChange.education1}
       type={"education4"}
@@ -544,6 +550,8 @@ function Education() {
         userPassingYear={education4_passing_year}
         previousPassingYear={education3_passing_year}
         maxHeight={200}
+        setErr={setErr}
+
       />
     </EducationLayout>
   );
