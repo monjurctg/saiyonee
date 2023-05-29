@@ -168,7 +168,7 @@ function Education() {
       return;
     }
 
-    if (!education2_passing_year) {
+    if (education2_passing_year==" ") {
       setErr({
         error: "education2_passing_year",
         message: "Please select Higher Secondary Education passing year",
