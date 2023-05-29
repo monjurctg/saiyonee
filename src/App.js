@@ -12,6 +12,7 @@ import {getToken} from "./utils/functions";
 import {useCallback} from "react";
 import {MessengerChat} from "react-messenger-chat-plugin";
 import {setEditData} from "./redux/slices/utilsSlice";
+import { setEditProfile } from "./redux/slices/editProfileslice";
 function App() {
   axios.defaults.headers["Accept"] = "application/json";
   axios.defaults.headers.post["Content-Type"] =
@@ -68,23 +69,15 @@ function App() {
   }, [dispatch, navigate]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchEditUser = async () => {
-    const res = await UserServices.getEditData();
-    if (res?.status === 200) {
-      dispatch(setEditData(res.data));
-
-      // console.log(res.data);
-    }
-  };
-
+ 
   useEffect(() => {
     const token = getToken();
     if (token) {
       // fetchPreviousPreference();
       fetchCurrentUser();
-      fetchEditUser();
+      // fetchEditUser();
     }
-  }, [fetchCurrentUser, fetchEditUser]);
+  }, [fetchCurrentUser]);
 
   return (
     <>

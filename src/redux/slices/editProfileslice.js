@@ -29,6 +29,7 @@ const initialState = {
   education4: "",
   education4_major: "",
   education4_institution: "",
+  // education4_major,
   education2_major: "",
   education2_institution: "",
   education3_major: "",
@@ -100,33 +101,48 @@ const EditProfileSlice = createSlice({
       state.education4 = payload;
     },
     setEditProfile: (state, {payload}) => {
-      state.age_from = payload.age_from ?? "";
-      state.age_to = payload.age_to ?? "";
-      state.displayName = payload.display_name ?? "";
-      state.city = payload.city ?? "";
-      state.height_feet = payload.height_feet ?? "";
-      state.height_inches = payload.height_inches ?? "";
-      state.employType = payload.current_employment_type ?? "";
-      state.religion = payload.religion ?? "";
-      state.maritalStatus = payload.marital_status ?? "";
-      state.height_feet = payload.height_feet ?? "";
-      state.height_inches = payload.height_inches ?? "";
-      state.weight = payload.weight ?? "";
-      state.father_occupation = payload.father_occupation ?? "";
-      state.mother_occupation = payload.mother_occupation ?? "";
-      state.number_of_brothers = payload.number_of_brothers ?? "";
-      state.number_of_sisters = payload.number_of_sisters ?? "";
-      state.date_of_birth = payload.date_of_birth ?? "";
-      state.full_name = payload?.full_name ?? "";
-      state.phone_number = payload?.phone_number ?? "";
-      state.education1_institution = payload.education1_institution ?? "";
-      state.education1_major = payload.education1_major ?? "";
-      state.education2_institution = payload.education2_institution ?? "";
-      state.education2_major = payload.education2_major ?? "";
-      state.education3_institution = payload.education3_institution ?? "";
-      state.education3_major = payload.education3_major ?? "";
-      state.education4_institution = payload.education4_institution ?? "";
-      state.education4_major = payload.education_major ?? "";
+      state.age_from = payload.age_from ;
+      state.age_to = payload.age_to ;
+      state.displayName = payload.display_name ;
+      state.city = payload.current_city 
+      state.country = payload.current_country;
+      state.height_feet = payload.height_feet 
+      state.height_inches = payload.height_inches 
+      state.employType = payload.current_employment_type 
+      state.religion = payload.religion 
+      state.marital_status = payload.marital_status 
+      state.height_feet = payload.height_feet 
+      state.height_inches = payload.height_inches 
+      state.weight = payload.weight 
+      state.father_occupation = payload.father_occupation 
+      state.mother_occupation = payload.mother_occupation 
+      state.number_of_brothers = payload.number_of_brothers 
+      state.number_of_sisters = payload.number_of_sisters 
+      state.date_of_birth = payload.date_of_birth 
+      state.full_name = payload?.full_name 
+      state.phone_number = payload?.phone_number 
+      state.education1=payload.education1
+      state.education2=payload.education2
+
+      state.education3=payload.education3
+      state.passingYear1=payload.education1_passing_year
+      state.passingYear2=payload.education2_passing_year
+
+      state.passingYear3=payload.education3_passing_year
+      state.passingYear4=payload.education4_passing_year
+
+
+
+      state.education4=payload.education4
+
+      state.education1_institution = payload.education1_institution 
+      state.education1_major = payload.education1_major 
+      state.education2_institution = payload.education2_institution 
+      state.education2_major = payload.education2_major 
+      state.education3_institution = payload.education3_institution 
+      state.education3_major = payload.education3_major 
+      state.education4_institution = payload.education4_institution 
+      state.education4_major = payload.education4_major 
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },

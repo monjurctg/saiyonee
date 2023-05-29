@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import InputLayOut from "./InputLayOut";
 
 import "./../../assets/css/editProfile.scss";
@@ -10,6 +10,7 @@ import {
   setEditDisplayName,
   setEditMaritalStatus,
   setEditProfile,
+  setEditProfileCity,
   setEditProfileCountry,
   setEditReligion,
   setEdu1PassYear,
@@ -43,6 +44,7 @@ const EditProfile = () => {
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const fieldRef = useRef(null);
 
   const { editData: user } = useSelector((state) => state.utils);
   // const url = "/app_user_edit_data";
@@ -96,7 +98,7 @@ const EditProfile = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    fetchCurrentUser();
+    // fetchCurrentUser();
     // dispatch(setIsEditNotSave(true))?
   }, [fetchCurrentUser]);
 
@@ -106,6 +108,10 @@ const EditProfile = () => {
 
   //   },4000)
   // },[])
+
+  const scrollIntoView = () => {
+    fieldRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   let fileChange = (e) => {
     e.preventDefault();
@@ -127,46 +133,45 @@ const EditProfile = () => {
 
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
+    if(passingYear2==" "){
+      // alert("Select Higher Secondary passing year")
+      setErr({
+        error: "edu2_passing_year",
+        message:
+          "Select Higher Secondary  Education passing year ",
+      });
+      return
+
+    }
 
     const data = {
-      display_name: inputChange.display_name ?? "",
+      display_name: inputChange.display_name,
       full_name: inputChange.full_name,
 
       current_city: inputChange.current_city
-        ? inputChange.current_city
-        : user.current_city ?? "",
-      current_country: inputChange.current_country
-        ? inputChange.current_country
-        : user.current_country ?? "",
-      education3: inputChange.education3 ?? "",
-      education3_major: inputChange?.education3_major ?? "",
-      education3_passing_year: passingYear3
-        ? passingYear3
-        : inputChange?.education3_passing_year ?? "",
-      education3_institution: inputChange?.education3_institution ?? "",
+        ,
+      current_country: inputChange.current_country,
+      education3: inputChange.education3,
+      education3_major: inputChange?.education3_major,
+      education3_passing_year:passingYear3?passingYear3: inputChange?.education3_passing_year ,
+      education3_institution: inputChange?.education3_institution ,
 
       // education 4
-      education4: inputChange.education4 ?? "",
-      education4_major: inputChange?.education4_major ?? "",
-      education4_passing_year: passingYear4
-        ? passingYear4
-        : inputChange.passingYear4 ?? "",
-      education4_institution: inputChange?.education3_institution ?? "",
+      education4: inputChange.education4 ,
+      education4_major: inputChange?.education4_major ,
+      education4_passing_year:passingYear4?passingYear4: inputChange.education4_passing_year,
+      education4_institution: inputChange?.education3_institution,
 
       // education 2
-      education2: inputChange.education2 ?? "",
-      education2_major: inputChange?.education2_major ?? "",
-      education2_passing_year: passingYear2
-        ? passingYear2
-        : inputChange.passingYear2 ?? "",
-      education2_institution: inputChange?.education2_institution ?? "",
+      education2: inputChange.education2 ,
+      education2_major: inputChange?.education2_major ,
+      education2_passing_year:passingYear2?passingYear2: inputChange.passingYear2,
+      education2_institution: inputChange?.education2_institution ,
       // education 1
 
       education1: inputChange.education1 ?? "",
       education1_major: inputChange?.education1_major ?? "",
-      education1_passing_year: passingYear1
-        ? passingYear1
-        : inputChange.passingYear1 ?? "",
+      education1_passing_year:passingYear1?passingYear1:  inputChange.passingYear1,
       education1_institution: inputChange?.education1_institution ?? "",
 
       height_feet: inputChange?.height_feet ?? "",
@@ -211,7 +216,7 @@ const EditProfile = () => {
   const onReligionSelectorClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
-
+    navigate("/editProfile/religion");
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
   };
@@ -244,7 +249,7 @@ const EditProfile = () => {
     navigate("/editProfile/edu3");
 
     dispatch(setEditProfile(inputChange));
-    dispatch(setEduTpe3(education3 ? education3 : user?.education3));
+    dispatch(setEduTpe3(education3 ??" " ));
   };
   const onEdu4SelectorClicked = () => {
     // alert("djkskjk");
@@ -255,7 +260,7 @@ const EditProfile = () => {
     navigate("/editProfile/edu4");
 
     dispatch(setEditProfile(inputChange));
-    dispatch(setEduTpe4(education4 ? education4 : user?.education4));
+    dispatch(setEduTpe4(education4 ?? " "));
   };
 
   const handlePopstate = (event) => {
@@ -296,8 +301,8 @@ const EditProfile = () => {
       <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Religion
       </p>
-      <Link
-        to={"/editProfile/religion"}
+      <div
+        // to={""}
         style={{ cursor: "pointer" }}
         onClick={onReligionSelectorClicked}
       >
@@ -320,7 +325,7 @@ const EditProfile = () => {
             <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 
@@ -390,6 +395,8 @@ const EditProfile = () => {
         userPassingYear={user?.education3_passing_year}
         previousPassingYear={passingYear2 || user?.education2_passing_year}
         maxHeight={200}
+        setErr={setErr}
+
         errorType={"edu3_passing_year"}
       />
     </EducationLayout>
@@ -429,9 +436,11 @@ const EditProfile = () => {
         passingYear={passingYear2}
         onChange={(year) => {
           dispatch(setEdu2PassYear(year));
-          dispatch(setEdu3PassYear("  "));
+          dispatch(setEdu3PassYear(" "));
           dispatch(setEdu4PassYear(" "));
         }}
+        setErr={setErr}
+
         userPassingYear={user?.education2_passing_year}
         previousPassingYear={passingYear1 || user?.education1_passing_year}
         maxHeight={200}
@@ -472,10 +481,11 @@ const EditProfile = () => {
 
       <PassingYearDropdown
         passingYear={passingYear1}
+        setErr={setErr}
         onChange={(year) => {
           dispatch(setEdu1PassYear(year));
           dispatch(setEdu2PassYear(" "));
-          dispatch(setEdu3PassYear("  "));
+          dispatch(setEdu3PassYear(" "));
           dispatch(setEdu4PassYear(" "));
         }}
         userPassingYear={user?.education1_passing_year}
@@ -523,6 +533,7 @@ const EditProfile = () => {
         userPassingYear={user?.education4_passing_year}
         previousPassingYear={passingYear3 || user?.education3_passing_year}
         maxHeight={200}
+        setErr={setErr}
       />
     </EducationLayout>
   );
@@ -531,10 +542,14 @@ const EditProfile = () => {
       <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Current country
       </p>
-      <Link
-        to={"/editProfile/country"}
+      <div
+        // to={""}
         onClick={() => {
+          let error = errors.validation(setErr, inputChange, user, city);
+          if (error) return;
+          navigate("/editProfile/country");
           dispatch(setEditProfile(inputChange));
+
           dispatch(
             setEditProfileCountry(country ? country : user?.current_country)
           );
@@ -556,7 +571,7 @@ const EditProfile = () => {
             <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 
@@ -565,7 +580,19 @@ const EditProfile = () => {
       <p className="text-muted text-start mt-4" style={{ fontFamily: "Inter" }}>
         Current city
       </p>
-      <Link to={"/editProfile/city"}>
+      <div  onClick={() => {
+          // let error = errors.validation(setErr, inputChange, user, city);
+          // if (error) return;
+          navigate("/editProfile/city");
+          dispatch(setEditProfile(inputChange));
+          dispatch(
+            setEditProfileCountry(country ? country : user?.current_country)
+          );
+
+          dispatch(
+            setEditProfileCity(city ? city : user?.current_city)
+          );
+        }}>
         <div
           className="row my-3 align-items-center bg-white px-2 py-4 rounded-1 shadow-2"
           style={{
@@ -589,7 +616,7 @@ const EditProfile = () => {
             <img src="/img/back-icon.svg" alt="next" className="rotate-180" />
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 

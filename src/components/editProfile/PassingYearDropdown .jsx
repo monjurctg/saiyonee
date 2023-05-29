@@ -8,6 +8,7 @@ const PassingYearDropdown = ({
   maxHeight,
   errorType,
   error,
+  setErr
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -42,6 +43,7 @@ const PassingYearDropdown = ({
             data-bs-toggle="dropdown"
             aria-expanded={dropdownOpen ? "true" : "false"}
             onClick={toggleDropdown}
+            onFocus={()=>setErr({})}
           >
             {passingYear ? passingYear : userPassingYear}
           </button>

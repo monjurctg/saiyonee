@@ -72,6 +72,7 @@ import UserServices from "../services/userServices";
 import Loader from "../components/Loader";
 import { setPreviousPreference } from "../redux/slices/preferenceSlice";
 import PreferenceServices from "../services/preferenceServices";
+import { setEditProfile } from "../redux/slices/editProfileslice";
 
 let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
 let Index = lazy(()=>import("../pages/home/Index"))
@@ -136,11 +137,25 @@ function Routers() {
     // console.log(true, "path");
   } else {
     localStorage.setItem("regStart", false);
+
   }
+
+  const fetchEditUser = async () => {
+    const res = await UserServices.getEditData();
+    if (res?.status === 200) {
+      dispatch(setEditData(res.data));
+      dispatch(setEditProfile(res.data))
+      // console.log(res.data,"edit data")
+
+      // console.log(res.data);
+    }
+  };
+
 
   useEffect(() => {
     getCondition();
     fetchPreviousPreference()
+    fetchEditUser()
   }, []);
 
   // setTimeout(() => {

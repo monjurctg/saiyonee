@@ -1,7 +1,7 @@
 import {validateAge} from "../../utils/functions";
 
 const   errors = {};
-errors.validation = (setErr, inputChange, user, city) => {
+errors. validation = (setErr, inputChange, user, city) => {
   // console.log(inputChange.date_of_birth);
   //   alert(inputChange.date_of_birth);
 console.log(!inputChange.education1_institution.trim(),"phone")
@@ -111,6 +111,23 @@ console.log(!inputChange.education1_institution.trim(),"phone")
     setErr({
       error: "education1_major",
       message: "Secondary  Education Major can not be empty",
+    });
+    return true;
+  } 
+
+  else if (!inputChange.education2_institution.trim()) {
+    // console.log("hello from institu")
+    setErr({
+      error: "education2_institution",
+      message: " Higher Secondary  Education Institute can not be empty",
+    });
+    return true;
+  } 
+
+  else if (!inputChange.education2_major.trim() ) {
+    setErr({
+      error: "education2_major",
+      message: "Higher  Secondary  Education Major can not be empty",
     });
     return true;
   } 
