@@ -73,7 +73,7 @@ const EditProfile = () => {
     education4_major,
     marital_status,
     religion,
-    date_of_birth,
+    date_of_birth,profile_img
   } = useSelector((state) => state.editProfile);
 
   const [inputChange, handleUserInputChange] = useEditForm();
@@ -85,17 +85,19 @@ const EditProfile = () => {
   const [image, setimage] = useState(false);
 
   const dispatch = useDispatch();
-  const fetchCurrentUser = useCallback(async () => {
+  const fetchCurrentUser = async () => {
     setLoading(true);
     const res = await UserServices.getEditData();
 
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
+      dispatch(setEditProfile(res.data))
       setLoading(false);
+      setimage(false)
     } else {
       setLoading(false);
     }
-  }, [dispatch]);
+  };
 
   useEffect(() => {
     // fetchCurrentUser();
@@ -192,9 +194,10 @@ const EditProfile = () => {
 
     const res = await UserServices.edit_user_info(data);
     if (res.status === 200) {
-      dispatch(setEditDisplayName(inputChange?.display_name));
+      // dispatch(setEditDisplayName(inputChange?.display_name));
+      fetchCurrentUser()
       toastMsg.success("Profile edit successfully");
-      setimage(false);
+      // setimage(false);
     } else {
       //console.log(res.response, "res");
       toastMsg.error(Object.values(res?.response.data.errors)[0][0]);
@@ -636,13 +639,13 @@ const EditProfile = () => {
             alt=""
             onClick={imageClick}
             style={{
-              display: (image || user?.profile_img) && "none",
+              display: (image || profile_img) && "none",
               cursor: "pointer",
             }}
           />
 
           <img
-            src={image ? URL.createObjectURL(image) : user?.profile_img}
+            src={image ? URL.createObjectURL(image) : profile_img}
             alt=""
             onClick={imageClick}
             style={{

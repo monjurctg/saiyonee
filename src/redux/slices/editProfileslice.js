@@ -22,7 +22,6 @@ const initialState = {
   passingYear4: "",
   passingYear2: "",
   passingYear1: "",
-
   education3: "",
   education2: "",
   education1: "",
@@ -36,6 +35,7 @@ const initialState = {
   education3_institution: "",
   education1_major: "",
   education1_institution: "",
+  profile_img:""
 };
 
 const EditProfileSlice = createSlice({
@@ -143,6 +143,7 @@ const EditProfileSlice = createSlice({
       state.education3_major = payload.education3_major 
       state.education4_institution = payload.education4_institution 
       state.education4_major = payload.education4_major 
+      state.profile_img=payload.profile_img
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },
