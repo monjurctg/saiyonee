@@ -12,6 +12,7 @@ import {
   setEditProfile,
   setEditProfileCity,
   setEditProfileCountry,
+  setEditProfileImage,
   setEditReligion,
   setEdu1PassYear,
   setEdu2PassYear,
@@ -92,6 +93,8 @@ const EditProfile = () => {
     if (res.status === 200) {
       dispatch(setCurrentUser(res.data));
       dispatch(setEditProfile(res.data))
+      dispatch(setEditProfileImage(res?.data?.profile_img))
+
       setLoading(false);
       setimage(false)
     } else {
@@ -122,6 +125,7 @@ const EditProfile = () => {
       setErr(null);
       setlength(file.size);
       setimage(file);
+      dispatch(setEditProfileImage(URL.createObjectURL(file)))
     }
   };
 
@@ -645,7 +649,7 @@ const EditProfile = () => {
           />
 
           <img
-            src={image ? URL.createObjectURL(image) : profile_img}
+            src={image ? URL.createObjectURL(image):profile_img}
             alt=""
             onClick={imageClick}
             style={{

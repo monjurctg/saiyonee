@@ -100,6 +100,9 @@ const EditProfileSlice = createSlice({
     setEduTpe4: (state, {payload}) => {
       state.education4 = payload;
     },
+    setEditProfileImage:(state,{payload})=>{
+state.profile_img=payload
+    },
     setEditProfile: (state, {payload}) => {
       state.age_from = payload.age_from ;
       state.age_to = payload.age_to ;
@@ -143,7 +146,7 @@ const EditProfileSlice = createSlice({
       state.education3_major = payload.education3_major 
       state.education4_institution = payload.education4_institution 
       state.education4_major = payload.education4_major 
-      state.profile_img=payload.profile_img
+      // state.profile_img=payload.profile_img
       // state.country = payload.current_country.map((c) => [...state.country, c]);
     },
   },
@@ -174,6 +177,6 @@ export const {
   updatePreerenceQAns,
   setMaridStatus,
   setEditProfileCity,
-  setEditProfileCountry,
+  setEditProfileCountry,setEditProfileImage
 } = EditProfileSlice.actions;
 export default EditProfileSlice.reducer;

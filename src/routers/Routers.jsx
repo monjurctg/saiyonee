@@ -72,7 +72,7 @@ import UserServices from "../services/userServices";
 import Loader from "../components/Loader";
 import { setPreviousPreference } from "../redux/slices/preferenceSlice";
 import PreferenceServices from "../services/preferenceServices";
-import { setEditProfile } from "../redux/slices/editProfileslice";
+import { setEditProfile, setEditProfileImage } from "../redux/slices/editProfileslice";
 
 let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
 let Index = lazy(()=>import("../pages/home/Index"))
@@ -145,6 +145,7 @@ function Routers() {
     if (res?.status === 200) {
       dispatch(setEditData(res.data));
       dispatch(setEditProfile(res.data))
+      dispatch(setEditProfileImage(res?.data?.profile_img))
       // console.log(res.data,"edit data")
 
       // console.log(res.data);
