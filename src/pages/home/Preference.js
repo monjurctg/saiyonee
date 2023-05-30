@@ -147,14 +147,14 @@ function Preference() {
 
   const onContinueClicked = async () => {
     //console.log(maritalStatus);
-    if (state.age_from > state.age_to) {
+    if (state.age_from && state.age_to && state.age_from > state.age_to) {
       setErr({
         error: "age_to",
         message: "To can not be smaller than From",
       });
       return;
     }
-    if (state.age_to < state.age_from) {
+    if (state.age_to && state.age_from && state.age_to < state.age_from) {
       setErr({
         error: "age_from",
         message: "From can not be bigger than To",
