@@ -665,7 +665,7 @@
     /* height: 300px; */
     object-fit: contain;
     object-position: center center;
-    width: 100%!important;
+    width: 100% !important;
   }
 }
 .active-pop {
@@ -838,13 +838,13 @@
   align-items: center;
 }
 
-
 // skeleton
 .main-skeleton {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 20px;
   // background-color: #FFFFFFFF;
   box-shadow: rgba(241, 239, 239, 0.884) 0px 5px 15px;
 }
@@ -852,20 +852,17 @@
 .skeleton-animation {
   width: 400px;
   height: 100%;
-  padding: 20px;
-margin-top: 19px;
+ 
+  margin-top: 19px;
 
-border-radius: 20px;
-  background-color: #fcededde;
+  border-radius: 20px;
+  background-color: #f1e4e4de;
   animation: skeleton-pulse 1s infinite alternate;
-}
-
-@media screen and (max-width:420px) {
-  .skeleton-animation:{
+  @media screen and (max-width: 420px) {
     width: 100%;
   }
-  
 }
+
 @keyframes skeleton-pulse {
   0% {
     opacity: 0.5;
