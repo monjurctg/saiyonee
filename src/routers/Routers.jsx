@@ -73,6 +73,7 @@ import Loader from "../components/Loader";
 import { setPreviousPreference } from "../redux/slices/preferenceSlice";
 import PreferenceServices from "../services/preferenceServices";
 import { setEditProfile, setEditProfileImage } from "../redux/slices/editProfileslice";
+import MainSkeleton from "../components/loader/MainSkeleton";
 
 let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
 let Index = lazy(()=>import("../pages/home/Index"))
@@ -172,9 +173,9 @@ function Routers() {
         background: location.pathname === "/register/email" ? "" : "#e9ecef3b",
       }}>
       {loading ? (
-        <div className="load">Loading...</div>
+         <MainSkeleton/>
       ) : (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<MainSkeleton/>}>
 
         <Routes>
 
