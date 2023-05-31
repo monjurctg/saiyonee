@@ -854,11 +854,18 @@
   height: 100%;
   padding: 20px;
 margin-top: 19px;
+
 border-radius: 20px;
   background-color: #fcededde;
   animation: skeleton-pulse 1s infinite alternate;
 }
 
+@media screen and (max-width:420px) {
+  .skeleton-animation:{
+    width: 100%;
+  }
+  
+}
 @keyframes skeleton-pulse {
   0% {
     opacity: 0.5;
