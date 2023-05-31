@@ -100,7 +100,7 @@ const useEditForm = () => {
   //   };
   // }
 
-  return [inputChange, handleUserInputChange];
+  return [inputChange, handleUserInputChange,setInputChange];
 };
 
 export default useEditForm;

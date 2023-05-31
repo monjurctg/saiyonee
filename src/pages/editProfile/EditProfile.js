@@ -77,7 +77,7 @@ const EditProfile = () => {
     date_of_birth,profile_img
   } = useSelector((state) => state.editProfile);
 
-  const [inputChange, handleUserInputChange] = useEditForm();
+  const [inputChange, handleUserInputChange,setInputChange] = useEditForm();
   const dateOfBirthYear =
     new Date(
       date_of_birth ? date_of_birth : inputChange.date_of_birth
@@ -396,6 +396,7 @@ const EditProfile = () => {
         passingYear={passingYear3}
         onChange={(year) => {
           dispatch(setEdu3PassYear(year));
+          setInputChange({...inputChange,education3_passing_year:year})
 
           dispatch(setEdu4PassYear(" "));
         }}
@@ -443,6 +444,7 @@ const EditProfile = () => {
         passingYear={passingYear2}
         onChange={(year) => {
           dispatch(setEdu2PassYear(year));
+          setInputChange({...inputChange,education2_passing_year:year})
           dispatch(setEdu3PassYear(" "));
           dispatch(setEdu4PassYear(" "));
         }}
@@ -491,6 +493,7 @@ const EditProfile = () => {
         setErr={setErr}
         onChange={(year) => {
           dispatch(setEdu1PassYear(year));
+          setInputChange({...inputChange,education1_passing_year:year})
           dispatch(setEdu2PassYear(" "));
           dispatch(setEdu3PassYear(" "));
           dispatch(setEdu4PassYear(" "));
@@ -536,7 +539,10 @@ const EditProfile = () => {
       <PassingYearDropdown
         errorType={"edu4_passing_year"}
         passingYear={passingYear4}
-        onChange={(year) => dispatch(setEdu4PassYear(year))}
+        onChange={(year) => {
+          setInputChange({...inputChange,education4_passing_year:year})
+          dispatch(setEdu4PassYear(year))}}
+        
         userPassingYear={user?.education4_passing_year}
         previousPassingYear={passingYear3 || user?.education3_passing_year}
         maxHeight={200}
