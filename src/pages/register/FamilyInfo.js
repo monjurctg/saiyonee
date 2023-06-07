@@ -177,7 +177,7 @@ function FamilyInfo() {
           <RegInput
             onFocus={() => setErr({})}
             type="text"
-            errorType={"father_occupation"}
+            errorType={"father_home_district"}
             error={err}
             id="inputFatherOccupation"
             name="father_home_district"
