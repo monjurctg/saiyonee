@@ -93,8 +93,8 @@ const GalleryImage = () => {
 
 
   if(loading){
-return <InputLayOut>
-<div style={{display:"flex",justifyContent:"center",alignSelf:"center"}}>
+return <InputLayOut from={"gallery"}>
+<div style={{display:"flex",justifyContent:"center",alignSelf:"center",justifySelf:"center"}}>
 <Loader/>
 
 </div>
@@ -112,7 +112,7 @@ return <InputLayOut>
       length={length}
       title={"Image Gallery"}
       loading={loading}
-      from={"editGallery"}>
+      from={"gallery"}>
         
        
       <div
