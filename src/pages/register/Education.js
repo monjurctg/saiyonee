@@ -42,6 +42,9 @@ function Education() {
   const resetScroll = useCallback(() => {
     scrollPos = 0;
   }, []);
+
+
+  
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
       scrollContainerRef.current?.scrollTo({ top: scrollPos });
@@ -556,6 +559,7 @@ function Education() {
       />
     </EducationLayout>
   );
+
 
   return (
     <>

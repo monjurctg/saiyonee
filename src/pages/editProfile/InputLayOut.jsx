@@ -18,16 +18,16 @@ function InputLayOut({
   const navigate = useNavigate();
   return (
     <div
-      className="mx-auto max-width-mobile pt-4 "
+      className="vh-100 d-flex flex-column max-width-mobile mx-auto "
       style={{
         background: "#F9FAFB",
         borderRadius: 35,
-        height: "100vh",
+        // height: "100vh",
 
         // "#F9FAFB"
       }}
     >
-      <div className=" d-flex flex-column max-width-mobile mx-auto">
+      <div className=" d-flex flex-column max-width-mobile mx-auto vh-100">
         <div className="container">
           <div
             onClick={() => navigate(backNavigate?backNavigate:-1)}

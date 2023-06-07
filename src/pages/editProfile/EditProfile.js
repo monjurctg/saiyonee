@@ -45,7 +45,7 @@ const EditProfile = () => {
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const fieldRef = useRef();
+  const scrollContainerRef = useRef();
 
   const { editData: user } = useSelector((state) => state.utils);
   // const url = "/app_user_edit_data";
@@ -114,14 +114,14 @@ const EditProfile = () => {
 
   const scrollIntoView = useCallback((path) => {
     navigate(path)
-    scrollPos = fieldRef.current?.scrollTop; 
+    scrollPos = scrollContainerRef.current?.scrollTop; 
+    scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, []);
 
   useEffect(() => {
     if (typeof scrollPos !== "undefined")
-      fieldRef.current?.scrollTo({ top: scrollPos });
+      scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [scrollIntoView]);
-
   // alert(scrollPos)
 
   let fileChange = (e) => {
@@ -219,7 +219,7 @@ const EditProfile = () => {
   const onMaritalStatusClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
-   
+    scrollPos = scrollContainerRef.current?.scrollTop; 
     scrollIntoView("/editProfile/marital_status")
 
     dispatch(setEditProfile(inputChange));
@@ -650,7 +650,8 @@ const EditProfile = () => {
       </div>
     </>
   );
-
+ 
+  console.log(scrollPos)
   return (
     <InputLayOut
       err={err}
@@ -663,7 +664,7 @@ const EditProfile = () => {
     >
       
       <div
-      ref={fieldRef}
+      ref={scrollContainerRef}
           className="container px-4 pb-2 flex-grow-1 overflow-auto"
           // style={{
           //   minHeight: "100vh",
