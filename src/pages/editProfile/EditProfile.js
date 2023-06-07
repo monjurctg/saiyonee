@@ -121,13 +121,7 @@ const EditProfile = () => {
       fieldRef.current?.scrollTo({ top: scrollPos });
   }, [scrollIntoView]);
 
-
-
-
-  // useEffect(() => {
-  //   if (typeof scrollPos !== "undefined")
-  //   fieldRef.current?.scrollTo({ top: scrollPos });
-  // }, [scrollIntoView]);
+  // alert(scrollPos)
 
   let fileChange = (e) => {
     e.preventDefault();
@@ -160,6 +154,8 @@ const EditProfile = () => {
       return
 
     }
+
+
 
     const data = {
       display_name: inputChange.display_name,
