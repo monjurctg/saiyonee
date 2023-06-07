@@ -230,6 +230,8 @@ const EditProfile = () => {
     dispatch(setEditReligion(religion ? religion : user?.religion));
   };
   const onEdu1SelectorClicked = () => {
+    scrollIntoView()
+
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
@@ -240,6 +242,8 @@ const EditProfile = () => {
     dispatch(setEduTpe1(education1 ? education1 : user?.education1));
   };
   const onEdu2SelectorClicked = () => {
+    scrollIntoView()
+
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
@@ -251,6 +255,8 @@ const EditProfile = () => {
   };
   const onEdu3SelectorClicked = () => {
     // alert("djkskjk");
+    scrollIntoView()
+
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
@@ -262,6 +268,8 @@ const EditProfile = () => {
   };
   const onEdu4SelectorClicked = () => {
     // alert("djkskjk");
+    scrollIntoView()
+
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
