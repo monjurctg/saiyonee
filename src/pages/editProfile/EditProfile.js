@@ -659,9 +659,19 @@ const EditProfile = () => {
       title={"Edit Profile"}
       loading={loading}
       backNavigate={"/settings"}
-      ref={fieldRef}
+    
     >
-      <div className="question mt-3" >
+      
+      <div
+      ref={fieldRef}
+          className="container px-4 pb-2 flex-grow-1 overflow-auto"
+          // style={{
+          //   minHeight: "100vh",
+          //   overflow: "auto",
+          // }}
+        
+        >
+     <div className="question mt-3" >
         <div className="image-upload mt-4">
           <img
             src="/img/plus-round.svg"
@@ -855,6 +865,9 @@ const EditProfile = () => {
           <div style={{ height: "200px" }}></div>
         </div>
       </div>
+
+        </div>
+ 
     </InputLayOut>
   );
 };

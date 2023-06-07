@@ -37,20 +37,12 @@ function InputLayOut({
             <img src="/img/back-icon.svg" alt="back" />
           </div>
         </div>
+        <h1 className="container px-4">{title}</h1>
 
-        <div
-          className="container px-4 pb-2 flex-grow-1 overflow-auto"
-          style={{
-            minHeight: "100vh",
-            overflow: "auto",
-          }}
-          ref={ref}
-        >
-          <h1>{title}</h1>
+        
 
           {children}
-        </div>
-
+      
         <div
           className="container px-4  mx-auto max-width-mobile  "
           style={{ position: "fixed", bottom: 0 }}
