@@ -115,7 +115,7 @@ const EditProfile = () => {
   // },[])
 
   const scrollIntoView = () => {
-    fieldRef.current.scrollIntoView({ behavior: 'smooth' });
+    fieldRef?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   let fileChange = (e) => {
@@ -210,6 +210,7 @@ const EditProfile = () => {
 
   const onMaritalStatusClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
+    scrollIntoView()
     if (error) return;
     navigate("/editProfile/marital_status");
     dispatch(setEditProfile(inputChange));
@@ -223,6 +224,7 @@ const EditProfile = () => {
   const onReligionSelectorClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
+    scrollIntoView()
     navigate("/editProfile/religion");
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
