@@ -39,7 +39,7 @@ import PassingYearDropdown from "../../components/editProfile/PassingYearDropdow
 import EducationLayout from "../../components/layouts/EducationLayout";
 import InputWithLabel from "../../components/InputType/InputWithLabel";
 import errors from "../../components/errors/commonError";
-
+let scrollPos = 0;
 const EditProfile = () => {
   const [err, setErr] = useState(null);
   const [length, setlength] = useState(0);
@@ -116,6 +116,7 @@ const EditProfile = () => {
 
   const scrollIntoView = () => {
     fieldRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    fieldRef.current?.scrollTo({ top: scrollPos });
   };
 
   let fileChange = (e) => {
