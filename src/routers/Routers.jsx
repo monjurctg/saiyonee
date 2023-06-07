@@ -4,12 +4,10 @@ import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import GetStarted from "../pages/GetStart";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
-// import Education from "../pages/register/Education";
 import FamilyInfo from "../pages/register/FamilyInfo";
 import Location from "../pages/register/Location";
 import Ocupation from "../pages/register/Ocupation";
 import PersonalInformation from "../pages/register/PersonalInformation";
-
 import RegisterEmail from "../pages/register/RegisterEmail";
 import RegisterUserType from "../pages/register/RegisterUserType";
 import Tutorial from "../pages/Tutorial";
@@ -24,17 +22,13 @@ import EducationTypes4 from "../pages/register/EducationType4";
 import EducationType3 from "../pages/register/EducationType3";
 import OcupationTypes from "../pages/register/OcupationTypes";
 import Industry from "../pages/register/Industry";
-import LocationCountry from "../pages/register/LocationCountry";
-import LocationCity from "../pages/register/LocationCity";
+
 import Settings from "../pages/settings/Settings";
-// import EditProfile from "../pages/editProfile/EditProfile";
-// import Explore from "../pages/Explore";
 import Welcome from "../pages/Welcome";
 import {useDispatch, useSelector} from "react-redux";
 import Question from "../pages/questions/Question";
 import RegisterRoute from "./RegisterRoute";
 import NotVarified from "./NotVarified";
-import {setIsVarified} from "../redux/slices/authSlices";
 import {getToken} from "../utils/functions";
 import setRouteToken from "../utils/tokenSet";
 import AddPhoto from "../pages/questions/AddPhoto";
@@ -55,9 +49,7 @@ import QuestionServices from "../services/questionServices";
 import ChatIndex from "../pages/chats/Index";
 import {
   setEditData,
-  set_is_image,
   set_is_ques,
-  set_is_selfie,
 } from "../redux/slices/utilsSlice";
 // import EditProfileModule from "../pages/editProfile/EditProfileModule";
 import ChatBox from "../pages/chats/ChatBox";
@@ -69,18 +61,19 @@ import {useCallback} from "react";
 import GalleryImage from "../pages/settings/GalleryImage";
 import ViewGallery from "../pages/viewGallery/ViewGallery"; 
 import UserServices from "../services/userServices";
-import Loader from "../components/Loader";
 import { setPreviousPreference } from "../redux/slices/preferenceSlice";
 import PreferenceServices from "../services/preferenceServices";
 import { setEditProfile, setEditProfileImage } from "../redux/slices/editProfileslice";
 import MainSkeleton from "../components/loader/MainSkeleton";
-
 let MatchedUser = lazy(()=>import("./../pages/matched-user/MatchedUser"))
 let Index = lazy(()=>import("../pages/home/Index"))
 let ViewProfile = lazy(()=>import("../pages/settings/ViewProfile"))
 let Education = lazy(()=>import("../pages/register/Education"))
 let EditProfileModule = lazy(()=>import("../pages/editProfile/EditProfileModule"))
 let EditProfile =lazy(()=>import("../pages/editProfile/EditProfile")) ;
+let LocationCountry =lazy(()=>import("../pages/register/LocationCountry")) ;
+let LocationCity =lazy(()=>import("../pages/register/LocationCity")) ;
+
 
 
 
@@ -153,7 +146,7 @@ function Routers() {
     }
   };
 
-
+ 
   useEffect(() => {
     getCondition();
     fetchPreviousPreference()

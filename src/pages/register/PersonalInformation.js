@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterLayout from "../../components/layouts/RegisterLayout";
@@ -34,9 +34,10 @@ function PersonalInformation() {
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState();
-  const [ageError, setAgeError] = useState("");
-
   const dispatch = useDispatch();
+  const[religonError,setReligionError]=useState("")
+  const[maritalError,setMaritalError]=useState("")
+
 
   const navigate = useNavigate();
   let { pathname } = useLocation();
@@ -50,7 +51,7 @@ function PersonalInformation() {
   // const resetScroll = useCallback(() => {
   //   scrollPos = 0;
   // }, []);
-  useEffect(() => {
+  useMemo(() => {
     if (typeof scrollPos !== "undefined")
       scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onEducationSelectorClicked]);
@@ -188,6 +189,10 @@ function PersonalInformation() {
       return;
     }
     if (!religion || religion === "Select  relligion") {
+      setReligionError({
+        error: "religion",
+        message: "Please select Religion",
+      });
       setErr({
         error: "religion",
         message: "Please select Religion",
@@ -196,6 +201,10 @@ function PersonalInformation() {
     }
     if (!marital_status || marital_status === "Select marital status") {
       setErr({
+        error: "marital_status",
+        message: "Please select marital status",
+      });
+      setMaritalError({
         error: "marital_status",
         message: "Please select marital status",
       });
@@ -427,19 +436,21 @@ function PersonalInformation() {
             </label>
           </div>
 
+        
           <SelectOptionComponent
+            label={" Select Candidate's religion"}
+            value={religion ? religion : "Select religion"}
             onClick={onReligionSelectorClicked}
-            label={"   Select Candidate's religion"}
-            error={err}
             errorType={"religion"}
-            value={religion ? religion : "Select  religion"}
+            error={religonError}
           />
 
           <SelectOptionComponent
             onClick={onMaritalStatusClicked}
             label={" Select Candidate's marital status"}
-            error={err}
+          
             errorType={"marital_status"}
+            error={maritalError}
             value={marital_status ?? "Select Marital Status"}
           />
         </div>

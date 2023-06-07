@@ -12,6 +12,7 @@ import {getToken} from "../../utils/functions";
 import setRouteToken from "../../utils/tokenSet";
 import {useDispatch, useSelector} from "react-redux";
 import {
+  setEditData,
   setFilterErrorMessage,
   setFilterModalShow,
   set_is_ques,
@@ -21,6 +22,7 @@ import {setCurrentUser} from "../../redux/slices/authSlices";
 import PreferenceServices from "../../services/preferenceServices";
 import {setPreviousPreference} from "../../redux/slices/preferenceSlice";
 import toastMsg from "../../utils/toastify";
+import { setEditProfile, setEditProfileImage } from "../../redux/slices/editProfileslice";
 
 function Index() {
   const [data, setData] = useState(null);
@@ -92,6 +94,19 @@ function Index() {
       // console.log(res.data);
     }
   };
+  const fetchEditUser = async () => {
+    const res = await UserServices.getEditData();
+    if (res?.status === 200) {
+      dispatch(setEditData(res.data));
+      dispatch(setEditProfile(res.data))
+      dispatch(setEditProfileImage(res?.data?.profile_img))
+      // console.log(res.data,"edit data")
+
+      // console.log(res.data);
+    }
+  };
+
+ 
   const fetchPreviousPreference = useCallback(async () => {
     const res = await PreferenceServices.getPreferenceData();
     if (res.status === 200) {
@@ -141,6 +156,7 @@ function Index() {
 
   useEffect(() => {
     getCondition();
+    fetchEditUser()
   }, []);
 
   const getBoomData = useCallback(async () => {
