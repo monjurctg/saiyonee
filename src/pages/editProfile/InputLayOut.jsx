@@ -44,7 +44,7 @@ function InputLayOut({
             minHeight: "100vh",
             overflow: "auto",
           }}
-          ref={ref?ref:""}
+          ref={ref}
         >
           <h1>{title}</h1>
 
