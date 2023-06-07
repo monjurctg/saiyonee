@@ -659,8 +659,9 @@ const EditProfile = () => {
       title={"Edit Profile"}
       loading={loading}
       backNavigate={"/settings"}
+      ref={fieldRef}
     >
-      <div className="question mt-3" ref={fieldRef}>
+      <div className="question mt-3" >
         <div className="image-upload mt-4">
           <img
             src="/img/plus-round.svg"

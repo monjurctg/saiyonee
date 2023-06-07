@@ -9,7 +9,8 @@ function InputLayOut({
   title,
   loading,
   from,
-  backNavigate
+  backNavigate,
+  ref
 }) {
   let { pathname } = useLocation();
   //console.log(from, "from");
@@ -43,6 +44,7 @@ function InputLayOut({
             minHeight: "100vh",
             overflow: "auto",
           }}
+          ref={ref?ref:""}
         >
           <h1>{title}</h1>
 
