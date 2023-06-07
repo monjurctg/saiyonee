@@ -129,10 +129,10 @@ const EditProfile = () => {
 
 
   useEffect(() => {
-    if (typeof scrollPos !== "undefined") {
-      fieldRef.current?.scrollTo({ top: scrollPos });
-    }
-  }, [scrollPos]);
+  if (typeof scrollPos !== "undefined") {
+    fieldRef.current?.scrollTo({ top: scrollPos });
+  }
+}, [scrollPos]);
 
   // useEffect(() => {
   //   if (typeof scrollPos !== "undefined")
@@ -673,7 +673,7 @@ const EditProfile = () => {
       loading={loading}
       backNavigate={"/settings"}
     >
-      <div className="question mt-3">
+      <div className="question mt-3" ref={fieldRef}>
         <div className="image-upload mt-4">
           <img
             src="/img/plus-round.svg"
