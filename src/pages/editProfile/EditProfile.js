@@ -39,7 +39,7 @@ import PassingYearDropdown from "../../components/editProfile/PassingYearDropdow
 import EducationLayout from "../../components/layouts/EducationLayout";
 import InputWithLabel from "../../components/InputType/InputWithLabel";
 import errors from "../../components/errors/commonError";
-let scrollPos = 0;
+// let scrollPos = 0;
 const EditProfile = () => {
   const [err, setErr] = useState(null);
   const [length, setlength] = useState(0);
@@ -76,6 +76,13 @@ const EditProfile = () => {
     religion,
     date_of_birth,profile_img
   } = useSelector((state) => state.editProfile);
+  const [scrollPos, setScrollPos] = useState(undefined);
+
+
+
+// Usage example
+
+
 
   const [inputChange, handleUserInputChange,setInputChange] = useEditForm();
   const dateOfBirthYear =
@@ -114,10 +121,23 @@ const EditProfile = () => {
   //   },4000)
   // },[])
 
+  
+
   const scrollIntoView = () => {
-    fieldRef?.current?.scrollIntoView({ behavior: 'smooth' });
-    fieldRef.current?.scrollTo({ top: scrollPos });
+    setScrollPos(fieldRef.current?.scrollTop);
   };
+
+
+  useEffect(() => {
+    if (typeof scrollPos !== "undefined") {
+      fieldRef.current?.scrollTo({ top: scrollPos });
+    }
+  }, [scrollPos]);
+
+  // useEffect(() => {
+  //   if (typeof scrollPos !== "undefined")
+  //   fieldRef.current?.scrollTo({ top: scrollPos });
+  // }, [scrollIntoView]);
 
   let fileChange = (e) => {
     e.preventDefault();
