@@ -112,7 +112,8 @@ const EditProfile = () => {
 
   
 
-  const scrollIntoView = useCallback(() => {
+  const scrollIntoView = useCallback((path) => {
+    navigate(path)
     scrollPos = fieldRef.current?.scrollTop; 
   }, []);
 
@@ -217,9 +218,10 @@ const EditProfile = () => {
 
   const onMaritalStatusClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
-    scrollIntoView()
     if (error) return;
-    navigate("/editProfile/marital_status");
+   
+    scrollIntoView("/editProfile/marital_status")
+
     dispatch(setEditProfile(inputChange));
     dispatch(
       setEditMaritalStatus(
@@ -231,58 +233,57 @@ const EditProfile = () => {
   const onReligionSelectorClicked = () => {
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) return;
-    scrollIntoView()
-    navigate("/editProfile/religion");
+   
+    scrollIntoView("/editProfile/religion")
+
     dispatch(setEditProfile(inputChange));
     dispatch(setEditReligion(religion ? religion : user?.religion));
   };
   const onEdu1SelectorClicked = () => {
-    scrollIntoView()
+
 
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
     }
-    navigate("/editProfile/edu1");
 
+    scrollIntoView("/editProfile/edu1")
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe1(education1 ? education1 : user?.education1));
   };
   const onEdu2SelectorClicked = () => {
-    scrollIntoView()
+   
 
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
     }
-    navigate("/editProfile/edu2");
-
+    
+    scrollIntoView("/editProfile/edu2")
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe2(education2 ? education2 : user?.education2));
   };
   const onEdu3SelectorClicked = () => {
-    // alert("djkskjk");
-    scrollIntoView()
+  
 
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
     }
-    navigate("/editProfile/edu3");
-
+    
+    scrollIntoView("/editProfile/edu3")
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe3(education3 ??" " ));
   };
   const onEdu4SelectorClicked = () => {
-    // alert("djkskjk");
-    scrollIntoView()
+   
 
     let error = errors.validation(setErr, inputChange, user, city);
     if (error) {
       return;
     }
-    navigate("/editProfile/edu4");
-
+  
+    scrollIntoView("/editProfile/edu4")
     dispatch(setEditProfile(inputChange));
     dispatch(setEduTpe4(education4 ?? " "));
   };
