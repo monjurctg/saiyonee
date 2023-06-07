@@ -97,7 +97,7 @@ function Login() {
       }
       // localStorage.setItem("user", JSON.stringify(res.data.user));
       // window.location.href = "/";
-    } else {
+    } else { 
       setloading(false);
       // console.log("res.data", res.data.message);
       setErr({

@@ -46,6 +46,7 @@ function Education() {
     if (typeof scrollPos !== "undefined")
       scrollContainerRef.current?.scrollTo({ top: scrollPos });
   }, [onEducationSelectorClicked]);
+  
   const {
     education1Other,
     education2Other,
