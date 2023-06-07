@@ -39,13 +39,13 @@ import PassingYearDropdown from "../../components/editProfile/PassingYearDropdow
 import EducationLayout from "../../components/layouts/EducationLayout";
 import InputWithLabel from "../../components/InputType/InputWithLabel";
 import errors from "../../components/errors/commonError";
-// let scrollPos = 0;
+let scrollPos = 0;
 const EditProfile = () => {
   const [err, setErr] = useState(null);
   const [length, setlength] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const fieldRef = useRef(null);
+  const fieldRef = useRef();
 
   const { editData: user } = useSelector((state) => state.utils);
   // const url = "/app_user_edit_data";
@@ -76,7 +76,7 @@ const EditProfile = () => {
     religion,
     date_of_birth,profile_img
   } = useSelector((state) => state.editProfile);
-  const [scrollPos, setScrollPos] = useState(undefined);
+  // const [scrollPos, setScrollPos] = useState(undefined);
 
 
 
@@ -109,30 +109,20 @@ const EditProfile = () => {
     }
   };
 
-  useEffect(() => {
-    // fetchCurrentUser();
-    // dispatch(setIsEditNotSave(true))?
-  }, [fetchCurrentUser]);
-
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     dispatch(setIsEditNotSave(false))
-
-  //   },4000)
-  // },[])
 
   
 
-  const scrollIntoView = () => {
-    setScrollPos(fieldRef.current?.scrollTop);
-  };
-
+  const scrollIntoView = useCallback(() => {
+    scrollPos = fieldRef.current?.scrollTop; 
+  }, []);
 
   useEffect(() => {
-  if (typeof scrollPos !== "undefined") {
-    fieldRef.current?.scrollTo({ top: scrollPos });
-  }
-}, [scrollPos]);
+    if (typeof scrollPos !== "undefined")
+      fieldRef.current?.scrollTo({ top: scrollPos });
+  }, [scrollIntoView]);
+
+
+
 
   // useEffect(() => {
   //   if (typeof scrollPos !== "undefined")
