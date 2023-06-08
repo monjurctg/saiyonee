@@ -90,6 +90,9 @@ setLoading(false)
     //console.log(' document.getElementById("image")',  document.getElementById("image").click())
     document.getElementById("image").click();
   };
+  if(loading){
+    return <div className="load">Loading.....</div>
+  }
   return (
     <QuestionLayout
       imageClick={imageClick}
