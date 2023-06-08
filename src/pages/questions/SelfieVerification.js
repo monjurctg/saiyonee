@@ -22,9 +22,11 @@ function SelfieVerification() {
   const width = windowSize.current[0];
 
   const getImage = async () => {
+    setLoading(true)
     let res = await QuestionServices.getSelfieImage();
 
     if (res.status === 200) {
+      setLoading(false)
       if (res.data.images.selfie_img) {
         //console.log("hello world selfie");
         localStorage.setItem("selfie_image", "true");
@@ -41,12 +43,16 @@ function SelfieVerification() {
       //   navigate("/preference");
       // }
     }
+    else{
+      setLoading(false)
+    }
   };
 
   let submitImage = async (value) => {
+    setLoading(true)
     let data = new FormData();
     data.append("selfie_img", value);
-    setLoading(true)
+    
     let res = await QuestionServices.submitSelfiePhoto(data);
     //console.log("ressadasdasda", res);
     if (res.status === 200) {
