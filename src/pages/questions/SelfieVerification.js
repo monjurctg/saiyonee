@@ -98,7 +98,7 @@ setLoading(false)
     document.getElementById("image").click();
   };
   if(loading){
-    <MainSkeleton/>
+  return  <MainSkeleton/>
   }
   return (
     <QuestionLayout
