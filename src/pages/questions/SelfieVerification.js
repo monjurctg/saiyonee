@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import QuestionLayout from "../../components/layouts/QuestionLayout";
 import QuestionServices from "../../services/questionServices";
 import toastMsg from "../../utils/toastify";
+import MainSkeleton from "../../components/loader/MainSkeleton";
 
 function SelfieVerification() {
   const [err, seterr] = useState(null);
@@ -97,7 +98,7 @@ setLoading(false)
     document.getElementById("image").click();
   };
   if(loading){
-    return <div className="load">Loading.....</div>
+    <MainSkeleton/>
   }
   return (
     <QuestionLayout
@@ -108,6 +109,7 @@ setLoading(false)
       length={length}
       title={"Candidate's Selfie (optional)"}
       loading={loading}>
+        
       <div className="question mt-3">
         <p
           style={{
