@@ -149,7 +149,7 @@ const onPrevious = ()=>{
             <h5 className="text-dark text-center">No Image</h5>
           )}
       </div>
-      <div
+      {/* <div
         className="mx-auto max-width-mobile pt-4"
         style={{
           position: "fixed",
@@ -182,7 +182,7 @@ const onPrevious = ()=>{
           
           </div>
         </div>
-      </div>
+      </div> */}
     </InputLayOut>
   );
 };
