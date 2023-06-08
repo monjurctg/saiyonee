@@ -46,19 +46,21 @@ function SelfieVerification() {
   let submitImage = async (value) => {
     let data = new FormData();
     data.append("selfie_img", value);
+    setLoading(true)
     let res = await QuestionServices.submitSelfiePhoto(data);
     //console.log("ressadasdasda", res);
     if (res.status === 200) {
       seterr(false);
       toastMsg.success("Image uploaded successfully");
       getImage();
-
-      setTimeout(() => {
-        navigate("/preference");
-      }, 2000);
+      setLoading(false)
+      navigate("/preference");
+      // setTimeout(() => {
+       
+      // }, 2000);
     } else {
       toastMsg.error(res.data.message);
-
+setLoading(false)
       seterr(res.data.message);
     }
   };
